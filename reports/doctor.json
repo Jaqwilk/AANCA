@@ -1,0 +1,131 @@
+{
+  "captured_at_utc": "2026-08-18T18:34:12.207Z",
+  "cuda": {
+    "available": true,
+    "cudnn_version": 91002,
+    "device_count": 1,
+    "functional_test": {
+      "attempted": true,
+      "error": null,
+      "finite_gradient": true,
+      "success": true
+    }
+  },
+  "dataset": {
+    "pannuke_detected": true,
+    "paths_checked": [
+      {
+        "exists": true,
+        "file_count": 15,
+        "file_count_truncated": false,
+        "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\raw\\pannuke"
+      }
+    ],
+    "setup_instructions": "C:\\Users\\NATAN\\Documents\\AANCA\\DATASET_SETUP.md",
+    "status": "present_unverified",
+    "verified": false
+  },
+  "disk": {
+    "free_bytes": 43281154048,
+    "free_gib": 40.31,
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA",
+    "total_bytes": 1000080404480,
+    "total_gib": 931.4,
+    "used_bytes": 956799250432,
+    "used_gib": 891.09
+  },
+  "git": {
+    "available": true,
+    "branch": "master",
+    "captured_at_utc": "2026-08-18T18:34:12.387Z",
+    "commit": null,
+    "dirty": true,
+    "status_porcelain": "?? .env.example\n?? .gitignore\n?? AGENTS.md\n?? CAPSULE_DESIGN.md\n?? DATASET_SETUP.md\n?? DECISIONS.md\n?? ETHICS_AND_LIMITATIONS.md\n?? MVP_SCOPE.md\n?? PLAN.md\n?? PRE_REGISTRATION.md\n?? README.md\n?? SPEC.md\n?? STATUS.md\n?? artifacts/checkpoints/.gitkeep\n?? artifacts/duplicate_audit/pannuke_duplicate_audit.json\n?? artifacts/embeddings/.gitkeep\n?? artifacts/figures/.gitkeep\n?? artifacts/predictions/.gitkeep\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/.immutable.json\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/AMENDMENT.md\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/PRE_REGISTRATION_FROZEN.md\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/amendment_evidence.json\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/confirmatory_frozen.yaml\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/primary_frozen.yaml\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/sha256_manifest.json\n?? artifacts/preregistration_amendments/20260719T011146.248393Z/source_tree_manifest.json\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/.immutable.json\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/AMENDMENT.md\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/PRE_REGISTRATION_FROZEN.md\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/amendment_evidence.json\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/confirmatory_frozen.yaml\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/primary_frozen.yaml\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/sha256_manifest.json\n?? artifacts/preregistration_amendments/20260727T133947.089370Z/source_tree_manifest.json\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/.immutable.json\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/AMENDMENT.md\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/PRE_REGISTRATION_FROZEN.md\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/amendment_evidence.json\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/confirmatory_frozen.yaml\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/primary_frozen.yaml\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/sha256_manifest.json\n?? artifacts/preregistration_amendments/20260727T170413.080954Z/source_tree_manifest.json\n?? artifacts/preregistrations/20260719T002902.432341Z/.immutable.json\n?? artifacts/preregistrations/20260719T002902.432341Z/AMENDMENT_POLICY.md\n?? artifacts/preregistrations/20260719T002902.432341Z/PRE_REGISTRATION_FROZEN.md\n?? artifacts/preregistrations/20260719T002902.432341Z/confirmatory_frozen.yaml\n?? artifacts/preregistrations/20260719T002902.432341Z/duplicate_audit.json\n?? artifacts/preregistrations/20260719T002902.432341Z/freeze_evidence.json\n?? artifacts/preregistrations/20260719T002902.432341Z/git_state.json\n?? artifacts/preregistrations/20260719T002902.432341Z/governance_tree_manifest.json\n?? artifacts/preregistrations/20260719T002902.432341Z/pathology_encoder_availability.json\n?? artifacts/preregistrations/20260719T002902.432341Z/pilot_derived_primary_parameters.json\n?? artifacts/preregistrations/20260719T002902.432341Z/pilot_integrity_evidence.json\n?? artifacts/preregistrations/20260719T002902.432341Z/pilot_post_seal_verification.json\n?? artifacts/preregistrations/20260719T002902.432341Z/primary_frozen.yaml\n?? artifacts/preregistrations/20260719T002902.432341Z/raw_dataset_checksums.csv\n?? artifacts/preregistrations/20260719T002902.432341Z/representation_independence.json\n?? artifacts/preregistrations/20260719T002902.432341Z/sha256_manifest.json\n?? artifacts/preregistrations/20260719T002902.432341Z/source_tree_manifest.json\n?? artifacts/process_observations/20260726T185709.6378333Z_pid20792_cli_receipt.json\n?? artifacts/process_observations/20260727T110704.4225163Z_primary_orphan_boot_receipt.json\n?? artifacts/provenance/pannuke_patch_hashes.csv\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_overlay_grid.png\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/artifact_manifest.json\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc.json\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc.md\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc_instances.csv\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc_overlay_selection.json\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc_overlays.png\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_qc/pannuke_mask_qc_patches.csv\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_validation.json\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/pannuke_validation.md\n?? artifacts/qa/pannuke_baseline_20260730T052711.9477865Z/report/raw_files_sha256.csv\n?? artifacts/qc_independent/pannuke_cross_channel_duplicate_ids.csv\n?? artifacts/qc_independent/pannuke_fold_metrics.csv\n?? artifacts/qc_independent/pannuke_independent_qc.py\n?? artifacts/qc_independent/pannuke_input_inventory.csv\n?? artifacts/qc_independent/pannuke_overlap_class_metrics.csv\n?? artifacts/qc_independent/pannuke_overlap_class_pairs.csv\n?? artifacts/qc_independent/pannuke_overlap_touching_instances.csv\n?? artifacts/qc_independent/pannuke_patch_qc.csv\n?? artifacts/qc_independent/pannuke_qc_summary.json\n?? artifacts/qc_independent/pannuke_zip_members.csv\n?? artifacts/rankings/.gitkeep\n?? artifacts/recovery_control/prepare_recovery_amendment_once.py\n?? artifacts/review_packages/.gitkeep\n?? artifacts/runs/.gitkeep\n?? artifacts/runs/registry.csv\n?? artifacts/runs/run_dispositions.anchor.json\n?? artifacts/runs/run_dispositions.jsonl\n?? capsule_bootstrap.py\n?? capsule_builder.py\n?? capsule_policy.json\n?? configs/confirmatory.yaml\n?? configs/confirmatory_frozen.yaml\n?? configs/confirmatory_resource_bounded_amended.yaml\n?? configs/external_validation.yaml\n?? configs/pilot.yaml\n?? configs/primary.yaml\n?? configs/primary_frozen.yaml\n?? configs/smoke.yaml\n?? configs/smoke_zero.yaml\n?? data/interim/.gitkeep\n?? data/manifests/.gitkeep\n?? data/manifests/pannuke/pannuke_manifest_summary.csv\n?? data/manifests/pannuke/pannuke_pilot_development_manifest.parquet.metadata.json\n?? data/manifests/pannuke_acquisition.json\n?? data/processed/.gitkeep\n?? data/raw/.gitkeep\n?? data/raw/nucls/.gitkeep\n?? data/raw/pannuke/.gitkeep\n?? data/synthetic/.gitkeep\n?? demo/README.md\n?? entry_contract.json\n?? notebooks/README.md\n?? pyproject.toml\n?? references/references.bib\n?? reports/corruption_auditor_independence.md\n?? reports/cross_fold_duplicates.md\n?? reports/doctor.json\n?? reports/environment_initial.txt\n?? reports/external_validation_protocol.md\n?? reports/figures/cross_fold_duplicate_candidates.png\n?? reports/final_validation.md\n?? reports/geometric_audit_future_work.md\n?? reports/hardware.json\n?? reports/imagenet_resnet18_smoke.md\n?? reports/literature_matrix.csv\n?? reports/literature_review.md\n?? reports/m7_full_cache_preflight.json\n?? reports/pannuke_acquisition_verification.json\n?? reports/pannuke_disconnected_instance_preflight.md\n?? reports/pannuke_qc/artifact_manifest.json\n?? reports/pannuke_qc/pannuke_mask_qc.json\n?? reports/pannuke_qc/pannuke_mask_qc.md\n?? reports/pannuke_qc/pannuke_mask_qc_instances.csv\n?? reports/pannuke_qc/pannuke_mask_qc_overlay_selection.json\n?? reports/pannuke_qc/pannuke_mask_qc_overlays.png\n?? reports/pannuke_qc/pannuke_mask_qc_patches.csv\n?? reports/pannuke_validation.json\n?? reports/pannuke_validation.md\n?? reports/pathology_encoder_availability.json\n?? reports/pilot_derived_primary_parameters.json\n?? reports/representation_independence.json\n?? reports/search_log.md\n?? reports/synthetic_smoke_summary.md\n?? src/histo_audit/__init__.py\n?? src/histo_audit/__main__.py\n?? src/histo_audit/auditing/__init__.py\n?? src/histo_audit/auditing/ensemble.py\n?? src/histo_audit/auditing/neighbours.py\n?? src/histo_audit/auditing/scores.py\n?? src/histo_audit/cli.py\n?? src/histo_audit/config.py\n?? src/histo_audit/corruption/__init__.py\n?? src/histo_audit/corruption/controlled.py\n?? src/histo_audit/cross_validation/__init__.py\n?? src/histo_audit/cross_validation/image_oof.py\n?? src/histo_audit/cross_validation/oof.py\n?? src/histo_audit/data/__init__.py\n?? src/histo_audit/data/duplicates.py\n?? src/histo_audit/data/manifest.py\n?? src/histo_audit/data/splitting.py\n?? src/histo_audit/data/synthetic.py\n?? src/histo_audit/data/targets.py\n?? src/histo_audit/doctor.py\n?? src/histo_audit/evaluation/__init__.py\n?? src/histo_audit/evaluation/restoration.py\n?? src/histo_audit/experiment/__init__.py\n?? src/histo_audit/experiment/confirmatory_cli_inputs.py\n?? src/histo_audit/experiment/confirmatory_completion.py\n?? src/histo_audit/experiment/confirmatory_core.py\n?? src/histo_audit/experiment/confirmatory_memory_workspace.py\n?? src/histo_audit/experiment/confirmatory_runner.py\n?? src/histo_audit/experiment/confirmatory_statistics.py\n?? src/histo_audit/experiment/evidence.py\n?? src/histo_audit/experiment/m7_config_finalization.py\n?? src/histo_audit/experiment/original_confirmatory_preflight.py\n?? src/histo_audit/experiment/original_confirmatory_resume.py\n?? src/histo_audit/experiment/original_confirmatory_runner_core.py\n?? src/histo_audit/experiment/pannuke_confirmatory_inputs.py\n?? src/histo_audit/experiment/pannuke_primary_inputs.py\n?? src/histo_audit/experiment/pilot.py\n?? src/histo_audit/experiment/pilot_derived_parameters.py\n?? src/histo_audit/experiment/pilot_postseal.py\n?? src/histo_audit/experiment/primary_completion.py\n?? src/histo_audit/experiment/primary_core.py\n?? src/histo_audit/experiment/primary_recovery.py\n?? src/histo_audit/experiment/primary_recovery_runner.py\n?? src/histo_audit/experiment/primary_runner.py\n?? src/histo_audit/experiment/primary_statistics.py\n?? src/histo_audit/experiment/reference_groups.py\n?? src/histo_audit/experiment/representation_independence.py\n?? src/histo_audit/experiment/resource_bounded_checkpoint_execution.py\n?? src/histo_audit/experiment/resource_bounded_resume.py\n?? src/histo_audit/experiment/resource_bounded_runner.py\n?? src/histo_audit/experiment/smoke.py\n?? src/histo_audit/experiment/study_contracts.py\n?? src/histo_audit/external_validation/__init__.py\n?? src/histo_audit/external_validation/eligibility.py\n?? src/histo_audit/external_validation/pannuke_assets.py\n?? src/histo_audit/external_validation/review_package.py\n?? src/histo_audit/external_validation/validation.py\n?? src/histo_audit/models/__init__.py\n?? src/histo_audit/models/cnn.py\n?? src/histo_audit/models/mlp.py\n?? src/histo_audit/mvp_demo.py\n?? src/histo_audit/pannuke/__init__.py\n?? src/histo_audit/pannuke/acquisition.py\n?? src/histo_audit/pannuke/discovery.py\n?? src/histo_audit/pannuke/duplicates.py\n?? src/histo_audit/pannuke/exceptions.py\n?? src/histo_audit/pannuke/io.py\n?? src/histo_audit/pannuke/manifest.py\n?? src/histo_audit/pannuke/models.py\n?? src/histo_audit/pannuke/publication.py\n?? src/histo_audit/pannuke/qc.py\n?? src/histo_audit/pannuke/qc_reporting.py\n?? src/histo_audit/pannuke/validation.py\n?? src/histo_audit/reporting/__init__.py\n?? src/histo_audit/reporting/builder.py\n?? src/histo_audit/reporting/evidence_figures.py\n?? src/histo_audit/reporting/figures.py\n?? src/histo_audit/reporting/reconciliation.py\n?? src/histo_audit/reporting/smoke_runner.py\n?? src/histo_audit/reporting/synthetic_duplicates.py\n?? src/histo_audit/representations/__init__.py\n?? src/histo_audit/representations/cache_provenance.py\n?? src/histo_audit/representations/eligibility.py\n?? src/histo_audit/representations/engineered.py\n?? src/histo_audit/representations/imagenet.py\n?? src/histo_audit/representations/pannuke.py\n?? src/histo_audit/representations/pannuke_chunked.py\n?? src/histo_audit/representations/pathology.py\n?? src/histo_audit/statistics/__init__.py\n?? src/histo_audit/statistics/review.py\n?? src/histo_audit/utils/run_tracking.py\n?? src/histo_audit/workflows/__init__.py\n?? src/histo_audit/workflows/lifecycle_qualification.py\n?? src/histo_audit/workflows/original_audit.py\n?? src/histo_audit/workflows/original_confirmatory_capsule_authority.py\n?? src/histo_audit/workflows/original_confirmatory_capsule_entry.py\n?? src/histo_audit/workflows/original_confirmatory_capsule_terminal.py\n?? src/histo_audit/workflows/original_confirmatory_technical_authority_publication_v1.py\n?? src/histo_audit/workflows/original_confirmatory_technical_authority_review_producer_v1.py\n?? src/histo_audit/workflows/original_confirmatory_technical_authority_v1.py\n?? src/histo_audit/workflows/preregistration.py\n?? src/histo_audit/workflows/preregistration_amendment.py\n?? src/histo_audit/workflows/resource_authority_d_replacement_controller.py\n?? src/histo_audit/workflows/resource_authority_d_replacement_v2_controller.py\n?? src/histo_audit/workflows/study_gates.py\n?? src/histo_audit/workflows/tracked_original_audit.py\n?? tests/carrier_import_guard.py\n?? tests/conftest.py\n?? tests/test_anchored_wof_copy.py\n?? tests/test_capsule_builder.py\n?? tests/test_capsule_builder_hardening.py\n?? tests/test_codex_handoff_authority.py\n?? tests/test_confirmatory_cli_inputs.py\n?? tests/test_confirmatory_cnn.py\n?? tests/test_confirmatory_completion.py\n?? tests/test_confirmatory_core.py\n?? tests/test_confirmatory_filesystem_completion.py\n?? tests/test_confirmatory_image_oof.py\n?? tests/test_confirmatory_indexed_execution.py\n?? tests/test_confirmatory_runner.py\n?? tests/test_confirmatory_statistics.py\n?? tests/test_corruption.py\n?? tests/test_doctor_cli.py\n?? tests/test_duplicates.py\n?? tests/test_ensemble_disagreement.py\n?? tests/test_execution_source_identity.py\n?? tests/test_external_eligibility.py\n?? tests/test_fixed_hybrid_ablations.py\n?? tests/test_full_cache_disk_gate.py\n?? tests/test_generic_oof.py\n?? tests/test_lifecycle_qualification.py\n?? tests/test_m7_config_finalization.py\n?? tests/test_mlp_training_controls.py\n?? tests/test_mvp_demo.py\n?? tests/test_neighbours.py\n?? tests/test_oof_auditing.py\n?? tests/test_original_audit_upstream.py\n?? tests/test_original_confirmatory_capsule_authority_v1.py\n?? tests/test_original_confirmatory_capsule_entry_v1.py\n?? tests/test_original_confirmatory_capsule_terminal_v1.py\n?? tests/test_original_confirmatory_preflight.py\n?? tests/test_original_confirmatory_runner_core.py\n?? tests/test_original_confirmatory_technical_authority_main_cli_v1.py\n?? tests/test_original_confirmatory_technical_authority_publication_workflow_v1.py\n?? tests/test_original_confirmatory_technical_authority_review_producer_v1.py\n?? tests/test_original_confirmatory_technical_authority_v1.py\n?? tests/test_pannuke_acquisition.py\n?? tests/test_pannuke_chunked_cache.py\n?? tests/test_pannuke_cli_m5.py\n?? tests/test_pannuke_confirmatory_inputs.py\n?? tests/test_pannuke_confirmatory_inputs_memory.py\n?? tests/test_pannuke_duplicate_preflight.py\n?? tests/test_pannuke_gate.py\n?? tests/test_pannuke_manifest_qc.py\n?? tests/test_pannuke_pilot.py\n?? tests/test_pannuke_primary_inputs.py\n?? tests/test_pannuke_publication_read_toctou.py\n?? tests/test_pannuke_publication_reads.py\n?? tests/test_pannuke_qc.py\n?? tests/test_pannuke_qc_reporting.py\n?? tests/test_pannuke_representations.py\n?? tests/test_pannuke_reviewer_assets.py\n?? tests/test_pilot_derived_parameters.py\n?? tests/test_pilot_postseal_cli.py\n?? tests/test_preregistration_amendment.py\n?? tests/test_preregistration_amendment_cli.py\n?? tests/test_preregistration_import_order.py\n?? tests/test_preregistration_safety.py\n?? tests/test_primary_completion.py\n?? tests/test_primary_integration_fixture.py\n?? tests/test_primary_recovery.py\n?? tests/test_primary_recovery_cli.py\n?? tests/test_primary_recovery_confirmatory_gate.py\n?? tests/test_primary_recovery_runner.py\n?? tests/test_primary_recovery_stage.py\n?? tests/test_primary_recovery_statistics.py\n?? tests/test_primary_runner.py\n?? tests/test_primary_statistics.py\n?? tests/test_primary_statistics_cross_scenario.py\n?? tests/test_q20_e23_spec52_carrier.py\n?? tests/test_reference_groups.py\n?? tests/test_representation_cache_provenance.py\n?? tests/test_representation_independence_builder.py\n?? tests/test_representations_external.py\n?? tests/test_resource_authority_d_replacement_controller.py\n?? tests/test_resource_authority_d_replacement_v2_classifier.py\n?? tests/test_resource_authority_d_replacement_v2_cli.py\n?? tests/test_resource_authority_d_replacement_v2_fresh_security.py\n?? tests/test_resource_authority_d_replacement_v2_preflight_authorization.py\n?? tests/test_resource_authority_d_replacement_v2_public_e2e.py\n?? tests/test_resource_authority_d_replacement_v2_terminal_security.py\n?? tests/test_resource_authority_d_replacement_v2_transaction_e2e.py\n?? tests/test_resource_authority_d_schema_v3_lifecycle.py\n?? tests/test_resource_bounded_authority_gate.py\n?? tests/test_resource_bounded_authority_successor.py\n?? tests/test_resource_bounded_checkpoint_execution.py\n?? tests/test_resource_bounded_cli.py\n?? tests/test_resource_bounded_confirmatory_contract.py\n?? tests/test_resource_bounded_resume.py\n?? tests/test_resource_bounded_runner.py\n?? tests/test_resource_bounded_runner_execution.py\n?? tests/test_resource_bounded_runner_workspace.py\n?? tests/test_run_dispositions.py\n?? tests/test_run_tracking.py\n?? tests/test_smoke.py\n?? tests/test_stage_cache_provenance_publication.py\n?? tests/test_stage_cli.py\n?? tests/test_statistics_restoration.py\n?? tests/test_study_contracts.py\n?? tests/test_study_contracts_strict_m7.py\n?? tests/test_study_gate_frozen_identity.py\n?? tests/test_synthetic_data.py\n?? tests/test_workflow_stage_apis.py\n?? uv.lock"
+  },
+  "gpu": {
+    "devices": [
+      {
+        "compute_capability": [
+          8,
+          9
+        ],
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 4070",
+        "vram_total_bytes": 12878086144,
+        "vram_total_mib": 12281.5
+      }
+    ],
+    "nvidia_smi": {
+      "available": true,
+      "devices": [
+        {
+          "driver_version": "551.78",
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 4070",
+          "vram_total_mib": 12282.0
+        }
+      ],
+      "error": null,
+      "return_code": 0
+    }
+  },
+  "os": {
+    "machine": "AMD64",
+    "platform": "Windows-10-10.0.19044-SP0",
+    "release": "10",
+    "system": "Windows",
+    "version": "10.0.19044"
+  },
+  "packages": {
+    "cleanlab": "2.9.0",
+    "histo-audit": "0.1.0",
+    "jinja2": "3.1.6",
+    "matplotlib": "3.11.0",
+    "numpy": "2.5.1",
+    "pandas": "2.3.3",
+    "pillow": "12.3.0",
+    "psutil": "7.2.2",
+    "pyarrow": "23.0.1",
+    "pyyaml": "6.0.3",
+    "scikit-image": "0.26.0",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0",
+    "torch": "2.12.1+cu126",
+    "torchvision": "0.27.1+cu126",
+    "typer": "0.27.0"
+  },
+  "project_root": "C:\\Users\\NATAN\\Documents\\AANCA",
+  "python": {
+    "executable": "C:\\Users\\NATAN\\Documents\\AANCA\\.venv\\Scripts\\python.exe",
+    "implementation": "CPython",
+    "version": "3.12.3",
+    "version_full": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]"
+  },
+  "pytorch": {
+    "cuda_available": true,
+    "cuda_build": "12.6",
+    "installed": true,
+    "version": "2.12.1+cu126"
+  },
+  "ram": {
+    "available_bytes": 17394180096,
+    "available_gib": 16.2,
+    "source": "psutil",
+    "total_bytes": 34088464384,
+    "total_gib": 31.75
+  },
+  "schema_version": 1,
+  "vram": {
+    "maximum_total_mib": 12281.5,
+    "source": "pytorch",
+    "total_mib_by_device": [
+      12281.5
+    ]
+  },
+  "write_access": {
+    "error": null,
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA",
+    "probe_removed": true,
+    "writable": true
+  }
+}

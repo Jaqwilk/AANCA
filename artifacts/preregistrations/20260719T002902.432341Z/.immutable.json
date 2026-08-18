@@ -1,0 +1,8 @@
+{
+  "amendment_only": true,
+  "artifact_root_sha256": "d2f1f3dec19021e7216630b53297035e705b6c407c3b5d84118ce7637411dd65",
+  "freeze_timestamp_utc": "2026-07-19T00:29:02.432341Z",
+  "schema_version": 1,
+  "sha256_manifest_sha256": "f223b6edd8364c90c476e13c9e3e3c14718418dfdc9938f2752492e65ee83101",
+  "status": "frozen"
+}

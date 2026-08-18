@@ -1,0 +1,107 @@
+{
+  "affected_analyses": [
+    "primary_frozen_feature_benchmark_all_registered_cells",
+    "primary_restoration_analysis",
+    "primary_registered_statistics",
+    "confirmatory_primary_dependency_gate"
+  ],
+  "affected_hypotheses": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7"
+  ],
+  "after": {
+    "confirmatory_config": {
+      "file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "9a4afcad586ba445ec41a3a2413ae8f8efa6a422c22e6d148d7bb6a4a2014307",
+      "root_sha256": "c0850f54e88483c1df76a4c8836343f667a7a1adbf2d05d571990cd6119cf532",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "amendment_timestamp_utc": "2026-07-19T01:11:46.248393Z",
+  "analysis_dispositions": [
+    {
+      "amended_primary_claim_allowed": true,
+      "analysis": "primary_frozen_feature_benchmark_all_registered_cells",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_before_outcome_inspection"
+    },
+    {
+      "amended_primary_claim_allowed": true,
+      "analysis": "primary_restoration_analysis",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_before_outcome_inspection"
+    },
+    {
+      "amended_primary_claim_allowed": true,
+      "analysis": "primary_registered_statistics",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_before_outcome_inspection"
+    },
+    {
+      "amended_primary_claim_allowed": true,
+      "analysis": "confirmatory_primary_dependency_gate",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_before_outcome_inspection"
+    }
+  ],
+  "authority_kind": "preregistration_amendment",
+  "before": {
+    "confirmatory_config": {
+      "file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "8bbd5bb939ffc6fb69c903dd7386c13bdc56b1cad271d11cb4ed0c5de263f8a1",
+      "root_sha256": "454c02f237a95532d959c6f06da6dd69fee0f23c9011ea361b6f4ac378155f43",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "chain_depth": 1,
+  "outcomes_inspected": false,
+  "outcomes_inspected_at_utc": null,
+  "overwrite_policy": "immutable successor; never overwrite parent or peer",
+  "parent": {
+    "artifact_root_sha256": "d2f1f3dec19021e7216630b53297035e705b6c407c3b5d84118ce7637411dd65",
+    "authority_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\preregistrations\\20260719T002902.432341Z",
+    "authority_kind": "base_freeze",
+    "chain_depth": 0,
+    "sha256_manifest_sha256": "f223b6edd8364c90c476e13c9e3e3c14718418dfdc9938f2752492e65ee83101"
+  },
+  "reason": "Correct freeze-evidence schema-v3 adapter contract drift and bind source-only amendment execution to the verified base freeze record before outcome inspection.",
+  "schema_version": 1,
+  "snapshots": {
+    "confirmatory_config": "confirmatory_frozen.yaml",
+    "execution_source": "source_tree_manifest.json",
+    "preregistration": "PRE_REGISTRATION_FROZEN.md",
+    "primary_config": "primary_frozen.yaml",
+    "report": "AMENDMENT.md"
+  }
+}

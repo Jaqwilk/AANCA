@@ -1,0 +1,813 @@
+audit:
+  cleanlab_failure_policy: missing_with_recorded_blocker
+  fixed_hybrid:
+    components:
+    - self_confidence
+    - nearest_neighbour_disagreement
+    weights:
+    - 0.5
+    - 0.5
+  methods:
+  - self_confidence
+  - negative_log_likelihood
+  - prediction_margin
+  - predictive_entropy
+  - cleanlab
+  - nearest_neighbour_disagreement
+  - fixed_hybrid
+  nearest_neighbour:
+    exclude_same_group: true
+    k: 7
+    metric: cosine
+  primary_method: self_confidence
+calibration:
+  enabled: false
+  fit_labels_policy: observed_reference_validation_labels_only
+  method: none
+  parameters: {}
+  reporting: calibrated_and_uncalibrated
+  seed: 233
+  source: reference_validation_only
+classifiers:
+  multinomial_logistic_regression:
+    class_weight: balanced
+    class_weight_label_source: observed_development_labels_only
+    fit_label_source: observed_development_labels_only
+    l2: 0.01
+    max_iter: 400
+    model_seed: 227
+  small_mlp:
+    amp: true
+    amp_dtype: float16
+    batch_size: 64
+    dropout: 0.1
+    early_stopping_min_delta: 0.0
+    early_stopping_patience: null
+    epochs: 30
+    fit_label_source: observed_development_labels_only
+    gradient_accumulation_steps: 1
+    hidden_dimensions:
+    - 64
+    learning_rate: 0.001
+    minimum_batch_size: 1
+    model_seed: 229
+    weight_decay: 0.0001
+corruption:
+  clean_reference:
+    id: clean_reference_cell
+    mechanism: symmetric_random_corruption
+    parameters: {}
+    rate: 0.0
+    seed: 404
+  mechanisms:
+    confusion_targeted_corruption:
+      transition_matrix:
+      - - 0.0
+        - 0.13590033975084936
+        - 0.3114382785956965
+        - 0.1143827859569649
+        - 0.43827859569648925
+      - - 0.11691542288557213
+        - 0.0
+        - 0.23383084577114427
+        - 0.2263681592039801
+        - 0.4228855721393035
+      - - 0.344
+        - 0.2784
+        - 0.0
+        - 0.0736
+        - 0.304
+      - - 0.2638888888888889
+        - 0.4861111111111111
+        - 0.2222222222222222
+        - 0.0
+        - 0.027777777777777776
+      - - 0.4087403598971722
+        - 0.26735218508997427
+        - 0.3059125964010283
+        - 0.017994858611825194
+        - 0.0
+    group_conditional_corruption:
+      default_weight: 0.6795918743737025
+      grouping_field: tissue_type
+      weights_by_value:
+        Adrenal_gland: 1.0
+        Bile-duct: 0.6221625801755902
+        Bladder: 0.4827071629213483
+        Breast: 0.7740885942931048
+        Cervix: 0.5083850410867012
+        Colon: 0.7693324520819563
+        Esophagus: 0.4320735444330949
+        HeadNeck: 0.7671200473092844
+        Kidney: 0.6053713346122226
+        Liver: 0.8550026752273943
+        Lung: 0.6762703337246353
+        Ovarian: 0.5372740595994138
+        Pancreatic: 0.41691306918982846
+        Prostate: 0.673852254817225
+        Skin: 0.6767244586650792
+        Stomach: 0.3645222233270359
+        Testis: 0.5069662921348315
+        Thyroid: 0.7704325073110666
+        Uterus: 0.6337078651685394
+    instance_dependent_corruption:
+      auditor_representation_families:
+      - engineered
+      - imagenet
+      generator_representation: morphology_only_v1
+      independence_matrix_path: reports/representation_independence.json
+      independence_matrix_sha256: 846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7
+      independence_status: per_representation_matrix
+    symmetric_random_corruption: {}
+  rates:
+  - 0.05
+  - 0.1
+  - 0.2
+  rounding_policy: round_half_up
+  seeds:
+  - 404
+  - 405
+  - 406
+data:
+  analysis_manifest_authority:
+    analysis_eligible_sample_count: 188333
+    analysis_eligible_sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    canonical_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  class_order:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  development_official_folds:
+  - 1
+  - 2
+  exclusions:
+    border_instance: retain_with_flag
+    cross_class_overlap_touching: exclude_with_reason_touches_cross_class_overlap
+    disconnected_instance_id: retain_with_flag
+    duplicates: flag_without_automatic_deletion
+    malformed_or_structurally_invalid_mask: fail_closed_at_dataset_gate
+    missing_required_data: fail_closed_at_dataset_gate
+    positive_background_conflict_touching: retain_with_qc_flag_no_class_arbitration
+    void_pixels: retain_as_unlabeled_void
+  final_test_fold: 3
+  fold_assignment_labels: pre_corruption_label
+  group_unit: source_patch_id
+  reference_group_selection_algorithm: deterministic_group_greedy_class_distribution_v1
+  reference_validation_fraction_groups: 0.1
+  source: pannuke
+  split_seed: 223
+evaluation:
+  primary_metric: average_precision
+  primary_review_budget: 0.05
+  random_review_repeats: 100
+  random_review_seed: 419
+  secondary_review_budgets:
+  - 0.01
+  - 0.1
+  - 0.2
+  subgroup_min_corruptions: 10
+  subgroup_min_samples: 100
+experiment_name: primary_frozen_feature_benchmark
+oof:
+  n_splits: 5
+  no_nucleus_level_fallback: true
+  split_kind: stratified_group
+pilot_derived_parameters:
+  path: reports/pilot_derived_primary_parameters.json
+  producer_id: pilot_derived_primary_parameters_v1
+  schema_version: 1
+  sha256: 8380b963a02b7ea4451039e9e5b37600809b22c689734202664522bdeda6113b
+  source_pilot_artifact_root_sha256: 37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666
+  source_pilot_run_id: 20260718T143216.354310Z_pannuke_pilot_c7797330e0
+representations:
+- cache_provenance:
+    cache_file_sha256: a4abe0cbb3d8ba4afc02f52e045af97a256c8e69ae70455294fc17aa5b752d32
+    cache_recipe_sha256: c56e9df0390f495673911f0f22e3de4369a3ca75d81056e540f8957c971698fa
+    dataset_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_id: engineered_target_features_v1
+    encoder_implementation_sha256: f1b337c672c50004e87e92956a5bb851ae60ab44a9f9a56f8f37563bad8ea1b2
+    preprocessing_sha256: 894d95124b7e2ba4f45a363391042b2d5a21259aab9a0bc8213977384b7771dc
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    status: available
+    weights_sha256: 2f1b1c78fc25dcea7a9b0d3d6544417a85f28b973f8f17e970a530e394d09d69
+  classifiers:
+  - multinomial_logistic_regression
+  family: engineered
+  generator_independence:
+    independence_matrix_sha256: 846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7
+    status: circularity_risk
+  id: engineered_target_features
+  input_variant: context_rgb
+  required: true
+- cache_provenance:
+    cache_file_sha256: 04cd2e0315f0a3c4270473af27aa1ca7d2a8df78268423186b3ad1bd5552e68b
+    cache_recipe_sha256: 0aeccea7d7a485cec32d672eedea002be5494e3b417ae4bec874b103fcc214b9
+    dataset_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_id: resnet18_imagenet1k_v1
+    encoder_implementation_sha256: 715fdb6822d1fe113391cf050c4854b12741b62a3e473c07e0385bca3dd05d3f
+    preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    status: available
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+  classifiers:
+  - multinomial_logistic_regression
+  - small_mlp
+  family: imagenet
+  generator_independence:
+    independence_matrix_sha256: 846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7
+    status: verified_independent
+  id: imagenet_resnet18_context
+  input_variant: context_rgb
+  required: true
+- cache_provenance:
+    cache_file_sha256: 585b6ccace8130c911d7300e86ffe74e7b28f71fcd81fd2e3e62da5c1def9d79
+    cache_recipe_sha256: 762d71836c446678d0230311aa0201785ca3702765d843adfb274e0ae63cc153
+    dataset_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_id: resnet18_imagenet1k_v1
+    encoder_implementation_sha256: 715fdb6822d1fe113391cf050c4854b12741b62a3e473c07e0385bca3dd05d3f
+    preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    status: available
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+  classifiers:
+  - multinomial_logistic_regression
+  - small_mlp
+  family: imagenet
+  generator_independence:
+    independence_matrix_sha256: 846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7
+    status: verified_independent
+  id: imagenet_resnet18_highlighted
+  input_variant: target_highlighted_rgb
+  required: true
+- availability_audit_sha256: 5e568cf29e489d8948bfcd33feae5b292cb48837eb4c93754202a565778a6e4a
+  cache_provenance:
+    cache_file_sha256: null
+    cache_recipe_sha256: d84f444e34341d0ee739cb8504ba94612010f15b1836993d36249d490855060f
+    dataset_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_id: availability_selected_pathology_encoder
+    encoder_implementation_sha256: null
+    preprocessing_sha256: null
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    status: unavailable_optional
+    weights_sha256: null
+  classifiers:
+  - multinomial_logistic_regression
+  family: pathology
+  generator_independence:
+    independence_matrix_sha256: 846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7
+    status: unavailable_optional
+  id: pathology_encoder_optional
+  input_variant: context_rgb
+  required: false
+restoration:
+  downstream_comparisons:
+  - comparison_id: audit_guided_minus_random_macro_f1
+    direction: method_a_minus_method_b
+    method_a: audit_guided_restoration
+    method_b: random_review_restoration
+    metric: macro_f1
+  enabled_cells:
+  - primary_0027_8531672acd3c
+  include_reference_validation_in_training: true
+  random_repeats: 100
+  random_seed: 433
+  ranking_method: self_confidence
+  required_experiments:
+  - uncorrupted_reference_baseline
+  - corrupted_observed_baseline
+  - random_review_restoration
+  - audit_guided_restoration
+  review_budget: 0.05
+schema_version: 2
+statistics:
+  bootstrap_seed: 431
+  cross_cell_comparisons:
+  - comparison_id: h3_symmetric_minus_confusion_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h3_symmetric_minus_instance_dependent_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h3_symmetric_minus_confusion_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h3_symmetric_minus_instance_dependent_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h3_symmetric_minus_confusion_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h3_symmetric_minus_instance_dependent_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h3_mechanism_hardness
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h7_highlighted_minus_context_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h7_target_indication
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_highlighted
+      seed: 404
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h7_highlighted_minus_context_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h7_target_indication
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_highlighted
+      seed: 405
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h7_highlighted_minus_context_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h7_target_indication
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_highlighted
+      seed: 406
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h6_pathology_minus_imagenet_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h6_encoder_family
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: pathology_encoder_optional
+      seed: 404
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h6_pathology_minus_imagenet_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h6_encoder_family
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: pathology_encoder_optional
+      seed: 405
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h6_pathology_minus_imagenet_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h6_encoder_family
+    method_a: self_confidence
+    method_b: self_confidence
+    metric: average_precision
+    selector_a:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: pathology_encoder_optional
+      seed: 406
+    selector_b:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  exploratory_multiple_comparison_correction: holm
+  holm_families:
+  - h1_method_vs_random
+  - h3_mechanism_hardness
+  - h5_fixed_hybrid
+  - h6_encoder_family
+  - h7_target_indication
+  method_vs_random_comparisons:
+  - comparison_id: h1_self_confidence_minus_random_symmetric_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h1_self_confidence_minus_random_symmetric_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h1_self_confidence_minus_random_symmetric_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h1_self_confidence_minus_random_confusion_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h1_self_confidence_minus_random_confusion_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h1_self_confidence_minus_random_confusion_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h1_self_confidence_minus_random_group_conditional_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h1_self_confidence_minus_random_group_conditional_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h1_self_confidence_minus_random_group_conditional_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h1_self_confidence_minus_random_instance_dependent_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h1_self_confidence_minus_random_instance_dependent_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h1_self_confidence_minus_random_instance_dependent_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h1_method_vs_random
+    method_a: self_confidence
+    method_b: random_review
+    metric: average_precision
+    review_budget: 0.05
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  paired_group_bootstrap_iterations: 2000
+  within_cell_comparisons:
+  - comparison_id: h5_hybrid_minus_self_confidence_symmetric_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h5_hybrid_minus_self_confidence_symmetric_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h5_hybrid_minus_self_confidence_symmetric_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: symmetric_random_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h5_hybrid_minus_self_confidence_confusion_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h5_hybrid_minus_self_confidence_confusion_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h5_hybrid_minus_self_confidence_confusion_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h5_hybrid_minus_self_confidence_group_conditional_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h5_hybrid_minus_self_confidence_group_conditional_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h5_hybrid_minus_self_confidence_group_conditional_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: group_conditional_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+  - comparison_id: h5_hybrid_minus_self_confidence_instance_dependent_seed_404
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 404
+  - comparison_id: h5_hybrid_minus_self_confidence_instance_dependent_seed_405
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 405
+  - comparison_id: h5_hybrid_minus_self_confidence_instance_dependent_seed_406
+    direction: method_a_minus_method_b
+    holm_family: h5_fixed_hybrid
+    method_a: fixed_hybrid
+    method_b: self_confidence
+    metric: average_precision
+    selector:
+      classifier_id: multinomial_logistic_regression
+      mechanism: instance_dependent_corruption
+      rate: 0.1
+      representation_id: imagenet_resnet18_context
+      seed: 406
+status: READY_FOR_FREEZE

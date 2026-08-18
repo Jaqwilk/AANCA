@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "histo-audit"
+version = "0.1.0"
+description = "Reproducible auditing of potentially inconsistent nucleus class annotations"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Research prototype; dataset and pretrained-weight licences remain separate" }
+authors = [{ name = "University research project" }]
+dependencies = [
+  "cleanlab>=2.7,<3",
+  "imagehash>=4.3,<5",
+  "jinja2>=3.1,<4",
+  "matplotlib>=3.9,<4",
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "pillow>=10.4,<13",
+  "psutil>=6,<8",
+  "pyarrow>=17,<24",
+  "pyyaml>=6,<7",
+  "scikit-image>=0.24,<0.27",
+  "scikit-learn>=1.6,<2",
+  "scipy>=1.14,<2",
+  "torch==2.12.1",
+  "torchvision==0.27.1",
+  "typer>=0.12,<1",
+]
+
+[project.scripts]
+histo-audit = "histo_audit.cli:app"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.11,<2",
+  "pandas-stubs>=2.2,<3",
+  "pytest>=8.3,<10",
+  "pytest-cov>=5,<8",
+  "ruff>=0.6,<1",
+  "types-pyyaml>=6,<7",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/histo_audit"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["data", "artifacts", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+# This independently admitted authority is byte-pinned. It remains covered by
+# `ruff check`, but formatter rewrites would invalidate its frozen SHA-256.
+exclude = ["src/histo_audit/workflows/original_confirmatory_capsule_authority.py"]
+
+[tool.mypy]
+python_version = "3.12"
+packages = ["histo_audit"]
+mypy_path = "src"
+check_untyped_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+exclude = ["data/", "artifacts/"]

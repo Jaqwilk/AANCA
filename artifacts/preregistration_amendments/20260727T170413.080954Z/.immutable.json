@@ -1,0 +1,9 @@
+{
+  "amendment_only": true,
+  "amendment_timestamp_utc": "2026-07-27T17:04:13.080954Z",
+  "artifact_root_sha256": "57f9345eb78e700267916a059f23c550aa60b606125a5420e2c51152268d8627",
+  "authority_kind": "preregistration_amendment",
+  "schema_version": 1,
+  "sha256_manifest_sha256": "4f8db0571252a851645b13fa523c8d53914d7939c7178e43d8319f84fa560156",
+  "status": "amended"
+}

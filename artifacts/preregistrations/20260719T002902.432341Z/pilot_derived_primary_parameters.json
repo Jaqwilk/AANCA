@@ -1,0 +1,259 @@
+{
+  "audit_pool": {
+    "feature_array_sha256": "dd89090f7713412d350892004ee6b7ce2ef5e60cba852cadbe95dcf91d695787",
+    "group_count": 225,
+    "group_sequence_sha256": "d515e0ef07a525551d821d8fadd787b4928946ee52709be040c61cb4f9909dbd",
+    "pre_corruption_label_sequence_sha256": "5d456bdcfe12b84522f314df022f2752bda88a62384892c573c8055a29d246b3",
+    "sample_count": 5481,
+    "sample_sequence_sha256": "710f05990dff420732606eb7ce1ae1f2320be5f9194419a6cb62ce767b8ff8d0",
+    "tissue_count": 19,
+    "tissue_sequence_sha256": "ce8eeeeac82fd0f1da231e1e2e7593db23d6986da1c3264aedb586e410787e16"
+  },
+  "class_order": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "clean_group_oof": {
+    "class_weight": "balanced_from_clean_development_audit_labels",
+    "classifier": "multinomial_logistic_regression",
+    "clean_oof_error_count": 2351,
+    "clean_oof_error_rate": 0.4289363254880496,
+    "confusion_matrix_rows_true_columns_predicted": [
+      [
+        1334,
+        119,
+        274,
+        100,
+        386
+      ],
+      [
+        46,
+        569,
+        93,
+        90,
+        169
+      ],
+      [
+        214,
+        173,
+        832,
+        45,
+        189
+      ],
+      [
+        18,
+        34,
+        15,
+        85,
+        1
+      ],
+      [
+        158,
+        103,
+        118,
+        6,
+        310
+      ]
+    ],
+    "fit_scope": "development_audit_pool_only",
+    "fold_ids_sha256": "2ecf3c5e4040a9220ed3f52fa2f555b3be2165708c5aa29bd26df9b1e42f5df6",
+    "l2": 0.01,
+    "label_source": "pre_corruption_label",
+    "max_iter": 400,
+    "model_seed": 227,
+    "n_splits": 5,
+    "predicted_labels_sha256": "2d6d0f8c11766df30a2ad1436a9be183513c8f1e908abe56751643516f83e945",
+    "probabilities_sha256": "21221f4afa41f5dc642036355328ca46b582696b3562c0f81d89a8458b92918e",
+    "split_seed": 223,
+    "splitter_class_name": "sklearn.model_selection.StratifiedGroupKFold",
+    "splitter_fallback_reason": null,
+    "splitter_fallback_status": "not_used"
+  },
+  "confusion_targeted_corruption": {
+    "clinical_realism_claim": false,
+    "derivation": "zero diagonal; add one pseudo-count to every off-diagonal clean-OOF confusion count; normalise each row",
+    "pseudocount": 1.0,
+    "transition_matrix": [
+      [
+        0.0,
+        0.13590033975084936,
+        0.3114382785956965,
+        0.1143827859569649,
+        0.43827859569648925
+      ],
+      [
+        0.11691542288557213,
+        0.0,
+        0.23383084577114427,
+        0.2263681592039801,
+        0.4228855721393035
+      ],
+      [
+        0.344,
+        0.2784,
+        0.0,
+        0.0736,
+        0.304
+      ],
+      [
+        0.2638888888888889,
+        0.4861111111111111,
+        0.2222222222222222,
+        0.0,
+        0.027777777777777776
+      ],
+      [
+        0.4087403598971722,
+        0.26735218508997427,
+        0.3059125964010283,
+        0.017994858611825194,
+        0.0
+      ]
+    ]
+  },
+  "group_conditional_corruption": {
+    "default_weight": 0.6795918743737025,
+    "derivation": "Beta(1,1)-smoothed clean-OOF error rate per tissue, divided by the maximum tissue rate; default is the pooled smoothed rate on the same scale",
+    "grouping_field": "tissue_type",
+    "tissue_evidence": {
+      "Adrenal_gland": {
+        "beta_1_1_smoothed_error_rate": 0.6312056737588653,
+        "clean_oof_error_count": 88,
+        "sample_count": 139
+      },
+      "Bile-duct": {
+        "beta_1_1_smoothed_error_rate": 0.39271255060728744,
+        "clean_oof_error_count": 96,
+        "sample_count": 245
+      },
+      "Bladder": {
+        "beta_1_1_smoothed_error_rate": 0.3046875,
+        "clean_oof_error_count": 38,
+        "sample_count": 126
+      },
+      "Breast": {
+        "beta_1_1_smoothed_error_rate": 0.48860911270983215,
+        "clean_oof_error_count": 814,
+        "sample_count": 1666
+      },
+      "Cervix": {
+        "beta_1_1_smoothed_error_rate": 0.3208955223880597,
+        "clean_oof_error_count": 42,
+        "sample_count": 132
+      },
+      "Colon": {
+        "beta_1_1_smoothed_error_rate": 0.4856070087609512,
+        "clean_oof_error_count": 387,
+        "sample_count": 797
+      },
+      "Esophagus": {
+        "beta_1_1_smoothed_error_rate": 0.2727272727272727,
+        "clean_oof_error_count": 68,
+        "sample_count": 251
+      },
+      "HeadNeck": {
+        "beta_1_1_smoothed_error_rate": 0.4842105263157895,
+        "clean_oof_error_count": 45,
+        "sample_count": 93
+      },
+      "Kidney": {
+        "beta_1_1_smoothed_error_rate": 0.3821138211382114,
+        "clean_oof_error_count": 93,
+        "sample_count": 244
+      },
+      "Liver": {
+        "beta_1_1_smoothed_error_rate": 0.5396825396825397,
+        "clean_oof_error_count": 67,
+        "sample_count": 124
+      },
+      "Lung": {
+        "beta_1_1_smoothed_error_rate": 0.42686567164179107,
+        "clean_oof_error_count": 142,
+        "sample_count": 333
+      },
+      "Ovarian": {
+        "beta_1_1_smoothed_error_rate": 0.3391304347826087,
+        "clean_oof_error_count": 38,
+        "sample_count": 113
+      },
+      "Pancreatic": {
+        "beta_1_1_smoothed_error_rate": 0.2631578947368421,
+        "clean_oof_error_count": 29,
+        "sample_count": 112
+      },
+      "Prostate": {
+        "beta_1_1_smoothed_error_rate": 0.4253393665158371,
+        "clean_oof_error_count": 93,
+        "sample_count": 219
+      },
+      "Skin": {
+        "beta_1_1_smoothed_error_rate": 0.4271523178807947,
+        "clean_oof_error_count": 128,
+        "sample_count": 300
+      },
+      "Stomach": {
+        "beta_1_1_smoothed_error_rate": 0.23008849557522124,
+        "clean_oof_error_count": 77,
+        "sample_count": 337
+      },
+      "Testis": {
+        "beta_1_1_smoothed_error_rate": 0.32,
+        "clean_oof_error_count": 23,
+        "sample_count": 73
+      },
+      "Thyroid": {
+        "beta_1_1_smoothed_error_rate": 0.4863013698630137,
+        "clean_oof_error_count": 70,
+        "sample_count": 144
+      },
+      "Uterus": {
+        "beta_1_1_smoothed_error_rate": 0.4,
+        "clean_oof_error_count": 13,
+        "sample_count": 33
+      }
+    },
+    "weights_by_value": {
+      "Adrenal_gland": 1.0,
+      "Bile-duct": 0.6221625801755902,
+      "Bladder": 0.4827071629213483,
+      "Breast": 0.7740885942931048,
+      "Cervix": 0.5083850410867012,
+      "Colon": 0.7693324520819563,
+      "Esophagus": 0.4320735444330949,
+      "HeadNeck": 0.7671200473092844,
+      "Kidney": 0.6053713346122226,
+      "Liver": 0.8550026752273943,
+      "Lung": 0.6762703337246353,
+      "Ovarian": 0.5372740595994138,
+      "Pancreatic": 0.41691306918982846,
+      "Prostate": 0.673852254817225,
+      "Skin": 0.6767244586650792,
+      "Stomach": 0.3645222233270359,
+      "Testis": 0.5069662921348315,
+      "Thyroid": 0.7704325073110666,
+      "Uterus": 0.6337078651685394
+    }
+  },
+  "producer_id": "pilot_derived_primary_parameters_v1",
+  "producer_source_sha256": "6c1c2cf98d68e70509751d5fc6468823859ae8ff28c48157ee922bc850488a24",
+  "schema_version": 1,
+  "source_pilot": {
+    "artifact_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+    "crop_cache_sha256": "e5d292b5f35576879e92b2aff55b5878db217c61a632456d79ec5c08ea76c618",
+    "crop_sidecar_sha256": "264ed11cce3d88826594e4f0aa8fa5b501d426c780af4b30aa2feb8973cedf24",
+    "development_official_folds": [
+      1,
+      2
+    ],
+    "final_reference_policy": "no final-fold sample identifier, label, representation, or outcome read",
+    "highlighted_embedding_cache_sha256": "4ec71cc0a0f5793ef36172e3b74aa835d734853d8d530183cc743cfd461a77c4",
+    "highlighted_embedding_sidecar_sha256": "6541b46a188ef5366e8831f36486e58d0b99f9bb9e6bef4acedf3ca38571783b",
+    "immutable_marker_sha256": "9f392bef4fe6b548b6e5c516356cef472d51702c091e4f10be5cdb4b81c0daa8",
+    "metrics_sha256": "5c3a14d83595078149d3436bb10340f6f1c9a43ae02bfc3dd4d2f36c037fd8e0",
+    "run_id": "20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+    "selection_record_sha256": "7e4b990c0d75e41f85b2b3e620c4e7a049ed92c3a1b46c80949fb1437d00d504"
+  }
+}

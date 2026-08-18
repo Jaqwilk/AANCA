@@ -1,0 +1,261 @@
+{
+  "amendment_policy": "AMENDMENT_POLICY.md",
+  "completion_stage_enabled": "PRE_REGISTRATION_FROZEN",
+  "confirmatory_config": {
+    "frozen_before_primary_outcomes": true,
+    "frozen_file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+    "frozen_path": "C:\\Users\\NATAN\\Documents\\AANCA\\configs\\confirmatory_frozen.yaml",
+    "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+    "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\configs\\confirmatory.yaml"
+  },
+  "dataset": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\raw\\pannuke",
+    "sha256": "5647b4837fdaeb1281a5af0623f24aab1361263d3041549d012c8c5697fb31ed"
+  },
+  "duplicate_audit": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\duplicate_audit\\pannuke_duplicate_audit.json",
+    "required_two_signal_gate_complete": true,
+    "sha256": "2a24d0f637bbf47e215f276e38d30b6bd65f1d312caa1b5b285ca5c00540612e",
+    "snapshot": "duplicate_audit.json"
+  },
+  "execution_source_tree": {
+    "artifact_count": 94,
+    "root_sha256": "454c02f237a95532d959c6f06da6dd69fee0f23c9011ea361b6f4ac378155f43",
+    "schema_version": 3,
+    "scope": [
+      "src/**",
+      "configs/**",
+      "pyproject.toml",
+      "uv.lock"
+    ],
+    "scope_kind": "execution_source",
+    "snapshot": "source_tree_manifest.json"
+  },
+  "freeze_timestamp_utc": "2026-07-19T00:29:02.432341Z",
+  "git": {
+    "available": true,
+    "branch": "master",
+    "captured_at_utc": "2026-07-19T00:29:53.998Z",
+    "commit": null,
+    "dirty": true,
+    "status_porcelain": "?? .env.example\n?? .gitignore\n?? AGENTS.md\n?? DATASET_SETUP.md\n?? DECISIONS.md\n?? ETHICS_AND_LIMITATIONS.md\n?? PLAN.md\n?? PRE_REGISTRATION.md\n?? README.md\n?? SPEC.md\n?? STATUS.md\n?? artifacts/checkpoints/.gitkeep\n?? artifacts/duplicate_audit/pannuke_duplicate_audit.json\n?? artifacts/embeddings/.gitkeep\n?? artifacts/figures/.gitkeep\n?? artifacts/predictions/.gitkeep\n?? artifacts/provenance/pannuke_patch_hashes.csv\n?? artifacts/qc_independent/pannuke_cross_channel_duplicate_ids.csv\n?? artifacts/qc_independent/pannuke_fold_metrics.csv\n?? artifacts/qc_independent/pannuke_independent_qc.py\n?? artifacts/qc_independent/pannuke_input_inventory.csv\n?? artifacts/qc_independent/pannuke_overlap_class_metrics.csv\n?? artifacts/qc_independent/pannuke_overlap_class_pairs.csv\n?? artifacts/qc_independent/pannuke_overlap_touching_instances.csv\n?? artifacts/qc_independent/pannuke_patch_qc.csv\n?? artifacts/qc_independent/pannuke_qc_summary.json\n?? artifacts/qc_independent/pannuke_zip_members.csv\n?? artifacts/rankings/.gitkeep\n?? artifacts/review_packages/.gitkeep\n?? artifacts/runs/.gitkeep\n?? artifacts/runs/registry.csv\n?? artifacts/runs/run_dispositions.anchor.json\n?? artifacts/runs/run_dispositions.jsonl\n?? configs/confirmatory.yaml\n?? configs/external_validation.yaml\n?? configs/pilot.yaml\n?? configs/primary.yaml\n?? configs/smoke.yaml\n?? configs/smoke_zero.yaml\n?? data/interim/.gitkeep\n?? data/manifests/.gitkeep\n?? data/manifests/pannuke/pannuke_manifest_summary.csv\n?? data/manifests/pannuke/pannuke_pilot_development_manifest.parquet.metadata.json\n?? data/manifests/pannuke_acquisition.json\n?? data/processed/.gitkeep\n?? data/raw/.gitkeep\n?? data/raw/nucls/.gitkeep\n?? data/raw/pannuke/.gitkeep\n?? data/synthetic/.gitkeep\n?? demo/README.md\n?? notebooks/README.md\n?? pyproject.toml\n?? references/references.bib\n?? reports/corruption_auditor_independence.md\n?? reports/cross_fold_duplicates.md\n?? reports/doctor.json\n?? reports/environment_initial.txt\n?? reports/external_validation_protocol.md\n?? reports/figures/cross_fold_duplicate_candidates.png\n?? reports/final_validation.md\n?? reports/geometric_audit_future_work.md\n?? reports/hardware.json\n?? reports/imagenet_resnet18_smoke.md\n?? reports/literature_matrix.csv\n?? reports/literature_review.md\n?? reports/m7_full_cache_preflight.json\n?? reports/pannuke_acquisition_verification.json\n?? reports/pannuke_disconnected_instance_preflight.md\n?? reports/pannuke_qc/artifact_manifest.json\n?? reports/pannuke_qc/pannuke_mask_qc.json\n?? reports/pannuke_qc/pannuke_mask_qc.md\n?? reports/pannuke_qc/pannuke_mask_qc_instances.csv\n?? reports/pannuke_qc/pannuke_mask_qc_overlay_selection.json\n?? reports/pannuke_qc/pannuke_mask_qc_overlays.png\n?? reports/pannuke_qc/pannuke_mask_qc_patches.csv\n?? reports/pannuke_validation.json\n?? reports/pannuke_validation.md\n?? reports/pathology_encoder_availability.json\n?? reports/pilot_derived_primary_parameters.json\n?? reports/representation_independence.json\n?? reports/search_log.md\n?? reports/synthetic_smoke_summary.md\n?? src/histo_audit/__init__.py\n?? src/histo_audit/__main__.py\n?? src/histo_audit/auditing/__init__.py\n?? src/histo_audit/auditing/ensemble.py\n?? src/histo_audit/auditing/neighbours.py\n?? src/histo_audit/auditing/scores.py\n?? src/histo_audit/cli.py\n?? src/histo_audit/config.py\n?? src/histo_audit/corruption/__init__.py\n?? src/histo_audit/corruption/controlled.py\n?? src/histo_audit/cross_validation/__init__.py\n?? src/histo_audit/cross_validation/image_oof.py\n?? src/histo_audit/cross_validation/oof.py\n?? src/histo_audit/data/__init__.py\n?? src/histo_audit/data/duplicates.py\n?? src/histo_audit/data/manifest.py\n?? src/histo_audit/data/splitting.py\n?? src/histo_audit/data/synthetic.py\n?? src/histo_audit/data/targets.py\n?? src/histo_audit/doctor.py\n?? src/histo_audit/evaluation/__init__.py\n?? src/histo_audit/evaluation/restoration.py\n?? src/histo_audit/experiment/__init__.py\n?? src/histo_audit/experiment/confirmatory_completion.py\n?? src/histo_audit/experiment/confirmatory_core.py\n?? src/histo_audit/experiment/confirmatory_runner.py\n?? src/histo_audit/experiment/confirmatory_statistics.py\n?? src/histo_audit/experiment/evidence.py\n?? src/histo_audit/experiment/m7_config_finalization.py\n?? src/histo_audit/experiment/pannuke_confirmatory_inputs.py\n?? src/histo_audit/experiment/pannuke_primary_inputs.py\n?? src/histo_audit/experiment/pilot.py\n?? src/histo_audit/experiment/pilot_derived_parameters.py\n?? src/histo_audit/experiment/pilot_postseal.py\n?? src/histo_audit/experiment/primary_completion.py\n?? src/histo_audit/experiment/primary_core.py\n?? src/histo_audit/experiment/primary_runner.py\n?? src/histo_audit/experiment/primary_statistics.py\n?? src/histo_audit/experiment/reference_groups.py\n?? src/histo_audit/experiment/representation_independence.py\n?? src/histo_audit/experiment/smoke.py\n?? src/histo_audit/experiment/study_contracts.py\n?? src/histo_audit/external_validation/__init__.py\n?? src/histo_audit/external_validation/eligibility.py\n?? src/histo_audit/external_validation/pannuke_assets.py\n?? src/histo_audit/external_validation/review_package.py\n?? src/histo_audit/external_validation/validation.py\n?? src/histo_audit/models/__init__.py\n?? src/histo_audit/models/cnn.py\n?? src/histo_audit/models/mlp.py\n?? src/histo_audit/pannuke/__init__.py\n?? src/histo_audit/pannuke/acquisition.py\n?? src/histo_audit/pannuke/discovery.py\n?? src/histo_audit/pannuke/duplicates.py\n?? src/histo_audit/pannuke/exceptions.py\n?? src/histo_audit/pannuke/io.py\n?? src/histo_audit/pannuke/manifest.py\n?? src/histo_audit/pannuke/models.py\n?? src/histo_audit/pannuke/publication.py\n?? src/histo_audit/pannuke/qc.py\n?? src/histo_audit/pannuke/qc_reporting.py\n?? src/histo_audit/pannuke/validation.py\n?? src/histo_audit/reporting/__init__.py\n?? src/histo_audit/reporting/builder.py\n?? src/histo_audit/reporting/evidence_figures.py\n?? src/histo_audit/reporting/figures.py\n?? src/histo_audit/reporting/reconciliation.py\n?? src/histo_audit/reporting/smoke_runner.py\n?? src/histo_audit/reporting/synthetic_duplicates.py\n?? src/histo_audit/representations/__init__.py\n?? src/histo_audit/representations/cache_provenance.py\n?? src/histo_audit/representations/eligibility.py\n?? src/histo_audit/representations/engineered.py\n?? src/histo_audit/representations/imagenet.py\n?? src/histo_audit/representations/pannuke.py\n?? src/histo_audit/representations/pannuke_chunked.py\n?? src/histo_audit/representations/pathology.py\n?? src/histo_audit/statistics/__init__.py\n?? src/histo_audit/statistics/review.py\n?? src/histo_audit/utils/run_tracking.py\n?? src/histo_audit/workflows/__init__.py\n?? src/histo_audit/workflows/original_audit.py\n?? src/histo_audit/workflows/preregistration.py\n?? src/histo_audit/workflows/preregistration_amendment.py\n?? src/histo_audit/workflows/study_gates.py\n?? src/histo_audit/workflows/tracked_original_audit.py\n?? tests/conftest.py\n?? tests/test_confirmatory_cnn.py\n?? tests/test_confirmatory_completion.py\n?? tests/test_confirmatory_core.py\n?? tests/test_confirmatory_filesystem_completion.py\n?? tests/test_confirmatory_image_oof.py\n?? tests/test_confirmatory_runner.py\n?? tests/test_confirmatory_statistics.py\n?? tests/test_corruption.py\n?? tests/test_doctor_cli.py\n?? tests/test_duplicates.py\n?? tests/test_ensemble_disagreement.py\n?? tests/test_execution_source_identity.py\n?? tests/test_external_eligibility.py\n?? tests/test_fixed_hybrid_ablations.py\n?? tests/test_full_cache_disk_gate.py\n?? tests/test_generic_oof.py\n?? tests/test_m7_config_finalization.py\n?? tests/test_mlp_training_controls.py\n?? tests/test_neighbours.py\n?? tests/test_oof_auditing.py\n?? tests/test_original_audit_upstream.py\n?? tests/test_pannuke_acquisition.py\n?? tests/test_pannuke_chunked_cache.py\n?? tests/test_pannuke_cli_m5.py\n?? tests/test_pannuke_confirmatory_inputs.py\n?? tests/test_pannuke_duplicate_preflight.py\n?? tests/test_pannuke_gate.py\n?? tests/test_pannuke_manifest_qc.py\n?? tests/test_pannuke_pilot.py\n?? tests/test_pannuke_primary_inputs.py\n?? tests/test_pannuke_qc.py\n?? tests/test_pannuke_qc_reporting.py\n?? tests/test_pannuke_representations.py\n?? tests/test_pannuke_reviewer_assets.py\n?? tests/test_pilot_derived_parameters.py\n?? tests/test_pilot_postseal_cli.py\n?? tests/test_preregistration_amendment.py\n?? tests/test_preregistration_amendment_cli.py\n?? tests/test_preregistration_import_order.py\n?? tests/test_preregistration_safety.py\n?? tests/test_primary_completion.py\n?? tests/test_primary_integration_fixture.py\n?? tests/test_primary_runner.py\n?? tests/test_primary_statistics.py\n?? tests/test_primary_statistics_cross_scenario.py\n?? tests/test_reference_groups.py\n?? tests/test_representation_cache_provenance.py\n?? tests/test_representation_independence_builder.py\n?? tests/test_representations_external.py\n?? tests/test_run_dispositions.py\n?? tests/test_run_tracking.py\n?? tests/test_smoke.py\n?? tests/test_stage_cache_provenance_publication.py\n?? tests/test_stage_cli.py\n?? tests/test_statistics_restoration.py\n?? tests/test_study_contracts.py\n?? tests/test_study_contracts_strict_m7.py\n?? tests/test_study_gate_frozen_identity.py\n?? tests/test_synthetic_data.py\n?? tests/test_workflow_stage_apis.py\n?? uv.lock"
+  },
+  "governance_tree": {
+    "artifact_count": 9,
+    "root_sha256": "0e16c71b5e906403f3d5c3989400d7203042595663d51343b677139bbdccc1d8",
+    "schema_version": 1,
+    "scope": [
+      ".gitignore",
+      "AGENTS.md",
+      "SPEC.md",
+      "PLAN.md",
+      "STATUS.md",
+      "PRE_REGISTRATION.md",
+      "DATASET_SETUP.md",
+      "DECISIONS.md",
+      "ETHICS_AND_LIMITATIONS.md"
+    ],
+    "scope_kind": "governance_snapshot",
+    "snapshot": "governance_tree_manifest.json"
+  },
+  "governance_tree_root_sha256": "0e16c71b5e906403f3d5c3989400d7203042595663d51343b677139bbdccc1d8",
+  "manifest": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_nucleus_manifest.parquet",
+    "sha256": "7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e"
+  },
+  "overwrite_policy": "never overwrite; amendments require new timestamped artifacts",
+  "pathology_encoder_availability_audit": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\reports\\pathology_encoder_availability.json",
+    "sha256": "5e568cf29e489d8948bfcd33feae5b292cb48837eb4c93754202a565778a6e4a",
+    "snapshot": "pathology_encoder_availability.json"
+  },
+  "pilot": {
+    "artifact_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+    "audit_evidence_reconciliation_sha256": "612537177f321c89f1ef04eb2615f34d2d89254286338b89574151b1ad453211",
+    "dataset_sha256": "5647b4837fdaeb1281a5af0623f24aab1361263d3041549d012c8c5697fb31ed",
+    "duplicate_audit_sha256": "2a24d0f637bbf47e215f276e38d30b6bd65f1d312caa1b5b285ca5c00540612e",
+    "final_reference_privacy_reconciliation_sha256": "29c3cd5e900410954a80a682800a86d73744360c3a17ef22f0e895d34859c8f0",
+    "integrity_registry_record_present": true,
+    "manifest_sha256": "7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e",
+    "post_seal_verification": {
+      "audit_reconciliation": {
+        "cleanlab": {
+          "api_path": "cleanlab.rank.get_label_quality_scores + cleanlab.filter.find_label_issues",
+          "available": true,
+          "csv_sha256": "27d7d92c059cd796f09c3b7cc7c81c2462449641bc7f4aefb68921f8e330aa4b",
+          "error": null,
+          "issue_count": 2292,
+          "npz_sha256": "25b37b795251dcac394d414a9ef4e229de7748836c5b4efbadc4db9153de2136",
+          "package_version": "2.9.0",
+          "suggested_labels_available": false
+        },
+        "neighbours": {
+          "csv_sha256": "7da8a88ceabf87eba60226dddecd1c37c05f54fb4516315ff169d3cf4567306d",
+          "edge_count": 38367,
+          "npz_sha256": "216e60b2ac7c170a36c997f98f1b25f5f878ddc8aa8bfeb5a4e57d1f5d583410",
+          "query_count": 5481,
+          "same_group_exclusion_verified": true
+        },
+        "sample_count": 5481,
+        "sample_order_sha256": "710f05990dff420732606eb7ce1ae1f2320be5f9194419a6cb62ce767b8ff8d0",
+        "status": "passed"
+      },
+      "automatic_withdrawal_performed": false,
+      "byte_identity": {
+        "development_manifest": {
+          "byte_identical": true,
+          "run_path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0\\development_manifest_view.parquet",
+          "sha256": "8107e1ddc033b08f03d3f351b5993ec1fd7a188677ee4c2afc0e4cbfe8432ef8",
+          "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet"
+        },
+        "gate_certificate": {
+          "byte_identical": true,
+          "run_path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0\\pre_pilot_gate_certificate.json",
+          "sha256": "347f734c2355cd5009d631e959c077fe430adcad7e3997fe1306280004e90146",
+          "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet.metadata.json"
+        }
+      },
+      "disposition": {
+        "anchor_sha256": "ea29ec96e3ab449bb44809114f9c1cc321291dd41c90f1442514f819b5282fed",
+        "eligible": true,
+        "ledger_sha256": "c7ee7d5a6a4f27c64b6c8b9f7d3af05d3405e014262f48463ce66b86a6121f07",
+        "matching_withdrawal_record_count": 0,
+        "verified_record_count": 2
+      },
+      "fixed_m6_protocol": {
+        "class_order": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "classifier": "multinomial_logistic_regression",
+        "corruption": {
+          "mechanism": "symmetric_random_corruption",
+          "rate": 0.1,
+          "seed": 404
+        },
+        "development_official_folds": [
+          1,
+          2
+        ],
+        "final_reference_official_fold": 3,
+        "group_unit": "source_patch",
+        "oof_fold_count": 5,
+        "protocol": "fixed_real_pannuke_m6_pilot_v1",
+        "reference_validation_group_fraction": 0.1,
+        "representation": "official_imagenet_resnet18_target_highlighted_rgb",
+        "required_audit_methods": [
+          "self_confidence",
+          "cleanlab",
+          "nearest_neighbour_disagreement"
+        ],
+        "required_restoration_conditions_present": true,
+        "status": "passed"
+      },
+      "format_aware_privacy": {
+        "exact_sealed_file_set_scanned": true,
+        "final_reference_official_fold": 3,
+        "npz_array_count": 77,
+        "npz_file_count": 6,
+        "parquet_file_count": 1,
+        "parquet_row_count": 123090,
+        "policy": "final_reference_identity_and_outcome_nonpublication_v1",
+        "scanned_file_count": 36,
+        "status": "passed",
+        "text_file_count": 29
+      },
+      "integrity": {
+        "artifact_manifest_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+        "artifact_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+        "registry_record_present": true,
+        "valid": true
+      },
+      "oof_and_corruption": {
+        "complete_once_coverage": true,
+        "corruption_label_separation_exact": true,
+        "exact_corruption_count": 548,
+        "final_reference_outcomes_unavailable": true,
+        "fold_count": 5,
+        "group_count": 225,
+        "group_overlap_count": 0,
+        "probability_sum_maximum_error": 4.440892098500626e-16,
+        "sample_count": 5481,
+        "status": "passed"
+      },
+      "policy": "read_only_pilot_post_seal_verification_v1",
+      "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+      "run_id": "20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+      "schema_version": 1,
+      "scientific_stage_eligible": true,
+      "sealed_run_unchanged": true,
+      "status": "passed",
+      "terminology": {
+        "non_diagnostic_limitation_present": true,
+        "present_in_metrics": true,
+        "present_in_report": true,
+        "required_terms": [
+          "potentially inconsistent annotation",
+          "recommended for expert review"
+        ]
+      }
+    },
+    "post_seal_verification_semantic_sha256": "7ea9180315ef7c8a838c2bf6e29338fee1f5cf1ce0234b9b66dfad6cab0839bb",
+    "resolved_config_sha256": "69b81b46d346b057ada0c47a9f2ef1d386029361589723672b4829027da4b93d",
+    "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+    "run_id": "20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+    "status": "completed"
+  },
+  "pilot_derived_parameters": {
+    "canonical_path": "reports/pilot_derived_primary_parameters.json",
+    "producer_id": "pilot_derived_primary_parameters_v1",
+    "producer_source_sha256": "6c1c2cf98d68e70509751d5fc6468823859ae8ff28c48157ee922bc850488a24",
+    "resolved_path": "C:\\Users\\NATAN\\Documents\\AANCA\\reports\\pilot_derived_primary_parameters.json",
+    "schema_version": 1,
+    "sha256": "8380b963a02b7ea4451039e9e5b37600809b22c689734202664522bdeda6113b",
+    "snapshot": "pilot_derived_primary_parameters.json",
+    "snapshot_sha256": "8380b963a02b7ea4451039e9e5b37600809b22c689734202664522bdeda6113b",
+    "source_pilot_artifact_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+    "source_pilot_run_id": "20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+    "strict_semantic_validation_passed": true
+  },
+  "pilot_external_byte_identity_authorities": {
+    "development_manifest_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet",
+    "development_manifest_sha256": "8107e1ddc033b08f03d3f351b5993ec1fd7a188677ee4c2afc0e4cbfe8432ef8",
+    "gate_certificate_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet.metadata.json",
+    "gate_certificate_sha256": "347f734c2355cd5009d631e959c077fe430adcad7e3997fe1306280004e90146",
+    "post_seal_verification_semantic_sha256": "7ea9180315ef7c8a838c2bf6e29338fee1f5cf1ce0234b9b66dfad6cab0839bb",
+    "post_seal_verification_snapshot": "pilot_post_seal_verification.json",
+    "post_seal_verification_snapshot_sha256": "7ffb4d58f7a5d8876a1a569dbc7eeed0e95f1c25ad4f808b5a63d3bc66909b5f"
+  },
+  "preregistration": {
+    "sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+    "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\PRE_REGISTRATION.md"
+  },
+  "primary_config": {
+    "frozen_file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+    "frozen_path": "C:\\Users\\NATAN\\Documents\\AANCA\\configs\\primary_frozen.yaml",
+    "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+    "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\configs\\primary.yaml"
+  },
+  "raw_dataset_checksum_manifest": {
+    "exact_dataset_reconciliation": true,
+    "parsed_record_count": 22,
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\raw_files_sha256.csv",
+    "reconciled_inventory_record_count": 22,
+    "reconciled_inventory_sha256": "83e3eb7c4460c7c368a9bf70d49c3117f229f694daaa062456ba9f714c75651a",
+    "sha256": "7f9a58eb682d04572478b6266f08265ea23294851b942c23f454e0b6de7aedfd",
+    "snapshot": "raw_dataset_checksums.csv"
+  },
+  "representation_independence": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA\\reports\\representation_independence.json",
+    "schema_version": 2,
+    "scope": "every available frozen primary representation",
+    "sha256": "846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7",
+    "snapshot": "representation_independence.json",
+    "strict_semantic_validation_passed": true
+  },
+  "schema_version": 3,
+  "source_tree_root_sha256": "454c02f237a95532d959c6f06da6dd69fee0f23c9011ea361b6f4ac378155f43"
+}

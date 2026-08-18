@@ -1,0 +1,49 @@
+schema_version: 1
+experiment_name: synthetic_smoke
+software_validation_only: true
+seed:
+  python: 1729
+  numpy: 1729
+  torch: 1729
+  cuda: 1729
+  dataloader: 1729
+  dataset: 101
+  split: 202
+  model: 303
+  corruption: 404
+  random_review: 505
+  bootstrap: 606
+data:
+  source: synthetic
+  classes: 5
+  groups: 60
+  samples_per_group: 5
+  image_size: 64
+  final_test_fraction_groups: 0.2
+  reference_validation_fraction_groups: 0.1
+corruption:
+  mechanism: symmetric_random_corruption
+  rate: 0.10
+  rounding: half_up
+representation:
+  primary: target_colour_statistics
+  auditor: target_colour_statistics
+model:
+  classifier: multinomial_logistic_regression
+  class_weight: balanced_from_observed_labels
+  oof_splits: 5
+audit:
+  methods: [self_confidence, negative_log_likelihood, prediction_margin, predictive_entropy, cleanlab, nearest_neighbour_disagreement, fixed_hybrid]
+  nearest_neighbours: 10
+  hybrid_components: [self_confidence, prediction_margin, nearest_neighbour_disagreement]
+  cleanlab_optional: true
+evaluation:
+  primary_metric: average_precision
+  review_budgets: [0.01, 0.05, 0.10, 0.20]
+  random_review_repeats: 100
+  bootstrap_iterations: 200
+  subgroup_min_samples: 100
+  subgroup_min_corruptions: 10
+restoration:
+  review_budget: 0.05
+  experiment_names: [uncorrupted_reference_baseline, corrupted_observed_baseline, random_review_restoration, audit_guided_restoration]

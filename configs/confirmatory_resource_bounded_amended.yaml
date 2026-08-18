@@ -1,0 +1,341 @@
+schema_version: 3
+experiment_name: confirmatory_resource_bounded_study
+status: READY_FOR_AMENDMENT
+execution_profile: resource_bounded_confirmatory_v1
+analysis_disposition: amended_or_exploratory
+original_confirmatory_claim_allowed: false
+completion_stage: null
+
+data:
+  source: pannuke
+  analysis_manifest_authority:
+    canonical_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    analysis_eligible_sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    analysis_eligible_sample_count: 188333
+  official_folds: [1, 2, 3]
+  group_unit: source_patch_id
+  reference_validation_fraction_groups: 0.1
+  reference_group_selection_algorithm: deterministic_group_greedy_class_distribution_v1
+  split_seed: 223
+  fold_assignment_labels: pre_corruption_label
+
+corruption:
+  cells:
+    - id: clean_reference_cell
+      mechanism: symmetric_random_corruption
+      rate: 0.0
+      seed: 404
+      parameters: {}
+    - id: confusion_targeted_ten_percent
+      mechanism: confusion_targeted_corruption
+      rate: 0.1
+      seed: 404
+      parameters:
+        transition_matrix:
+          - [0.0, 0.13590033975084936, 0.3114382785956965, 0.1143827859569649, 0.43827859569648925]
+          - [0.11691542288557213, 0.0, 0.23383084577114427, 0.2263681592039801, 0.4228855721393035]
+          - [0.344, 0.2784, 0.0, 0.0736, 0.304]
+          - [0.2638888888888889, 0.4861111111111111, 0.2222222222222222, 0.0, 0.027777777777777776]
+          - [0.4087403598971722, 0.26735218508997427, 0.3059125964010283, 0.017994858611825194, 0.0]
+
+scenarios:
+  - id: cnn_context_rgb
+    representation_id: cnn_context_rgb_pixels
+    cache_provenance_id: cnn_context_rgb_cache
+    family: cnn
+    input_variant: context_rgb
+    encoder: resnet18_imagenet1k_v1
+    classifier: cnn_softmax_head
+    required: true
+  - id: imagenet_frozen_logistic
+    representation_id: imagenet_resnet18_context_embeddings
+    cache_provenance_id: imagenet_context_embedding_cache
+    family: imagenet_frozen
+    input_variant: context_rgb
+    encoder: resnet18_imagenet1k_v1
+    classifier: multinomial_logistic_regression
+    required: true
+  - id: imagenet_frozen_target_highlighted_logistic
+    representation_id: imagenet_target_highlighted_embeddings
+    cache_provenance_id: imagenet_target_highlighted_embedding_cache
+    family: imagenet_frozen
+    input_variant: target_highlighted_rgb
+    encoder: resnet18_imagenet1k_v1
+    classifier: multinomial_logistic_regression
+    required: true
+  - id: imagenet_frozen_context_morphometrics_logistic
+    representation_id: imagenet_context_embeddings_plus_target_morphometrics
+    cache_provenance_id: imagenet_context_morphometrics_cache
+    family: imagenet_frozen
+    input_variant: context_rgb_plus_target_morphometrics
+    encoder: resnet18_imagenet1k_v1_plus_target_morphometrics_v1
+    classifier: multinomial_logistic_regression
+    required: true
+
+cache_provenance:
+  - id: cnn_context_rgb_cache
+    representation_id: cnn_context_rgb_pixels
+    status: available
+    cache_file_sha256: null
+    sidecar_semantic_sha256: cf74379bab82d41be0df6cf047f8d365c5beb8854d34e7e69e22b2be403756b9
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_identifier: resnet18_imagenet1k_v1
+    encoder_metadata_sha256: 088ba0bb700eec4c71e495f125735f7d512cf5f5d476b02a0cd1a25336f0df98
+    weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+    preprocessing_identifier: confirmatory_context_rgb_224_v1
+    preprocessing_sha256: e7c2aa3a5013f31580386ee88441c820be0836039e6d38933b61ae359301586b
+    input_variant: context_rgb
+  - id: imagenet_context_embedding_cache
+    representation_id: imagenet_resnet18_context_embeddings
+    status: available
+    cache_file_sha256: null
+    sidecar_semantic_sha256: 195cac1a2073d9d7974e71fbc485637f661c9db485ff53db78721021689ae618
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_identifier: resnet18_imagenet1k_v1
+    encoder_metadata_sha256: 3bd09b4b9fc5f7c3db3dd689142d244d43a240d759a5dd87b06867a45322eb83
+    weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+    preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official
+    preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+    input_variant: context_rgb
+  - id: imagenet_target_highlighted_embedding_cache
+    representation_id: imagenet_target_highlighted_embeddings
+    status: available
+    cache_file_sha256: null
+    sidecar_semantic_sha256: efefa0cc0194f3b571cd82cce19fe3e61e963ded63ba172dcf2abce9c226f81e
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_identifier: resnet18_imagenet1k_v1
+    encoder_metadata_sha256: c16c073407fd80f647091e24cf78e15511acebcb3493402bb32ee9f678b9384c
+    weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+    preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official
+    preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+    input_variant: target_highlighted_rgb
+  - id: imagenet_context_morphometrics_cache
+    representation_id: imagenet_context_embeddings_plus_target_morphometrics
+    status: available
+    cache_file_sha256: null
+    sidecar_semantic_sha256: 531a730ba54f6d1d6bd6447f3f8b336cd8b36184a73e32e2aaa7edec5d4421ee
+    sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+    encoder_identifier: resnet18_imagenet1k_v1_plus_target_morphometrics_v1
+    encoder_metadata_sha256: 82823b9f88ef26c5435343c2285cde00b4bf3e69637965728d0bd6adf69259fc
+    weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+    weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+    preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official_plus_target_morphometrics_v1
+    preprocessing_sha256: 2f4fd326a41de765474177579925eab95a70075258de2aa791fbe7dd8f1c5465
+    input_variant: context_rgb_plus_target_morphometrics
+
+model_seeds: [303]
+
+training:
+  optimizer: adamw
+  input_size: 224
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  max_epochs: 4
+  early_stopping_patience: 2
+  early_stopping_min_delta: 0.0001
+  early_stopping_source: reference_validation_only
+  initial_batch_size: 128
+  minimum_batch_size: 1
+  gradient_accumulation_steps: 2
+  class_weight: balanced
+  oom_policy: halve_batch_and_retry_same_samples
+  amp: true
+  amp_dtype: float16
+  checkpoint_resume: true
+  cuda_required: true
+
+oof:
+  n_splits: 5
+  split_kind: stratified_group
+  no_nucleus_level_fallback: true
+
+original_audit_selection:
+  scenario_id: imagenet_frozen_logistic
+  representation_id: imagenet_resnet18_context_embeddings
+  model_seed: 303
+  risk_method: self_confidence
+  n_splits: 5
+  classifier:
+    id: multinomial_logistic_regression
+    parameters:
+      l2: 0.01
+      max_iter: 400
+      class_weight: balanced
+  cache_provenance_id: imagenet_context_embedding_cache
+
+ensemble:
+  members:
+    - scenario_id: imagenet_frozen_logistic
+      model_seed: 303
+    - scenario_id: imagenet_frozen_target_highlighted_logistic
+      model_seed: 303
+    - scenario_id: imagenet_frozen_context_morphometrics_logistic
+      model_seed: 303
+  primary_risk: mean_pairwise_js_divergence
+  secondary_risks:
+    - predictive_entropy_of_mean
+    - variation_ratio
+
+fixed_hybrid:
+  components:
+    - self_confidence
+    - ensemble_disagreement
+  weights: [0.5, 0.5]
+  drop_one_ablations:
+    - self_confidence
+    - ensemble_disagreement
+
+restoration:
+  scenario_id: imagenet_frozen_target_highlighted_logistic
+  model_seed: 303
+  representation_id: imagenet_target_highlighted_embeddings
+  ranking_method: fixed_hybrid
+  review_budget: 0.05
+  random_repeats: 100
+  random_seed: 443
+  conditions:
+    - uncorrupted_reference_baseline
+    - corrupted_observed_baseline
+    - random_review_restoration
+    - audit_guided_restoration
+
+statistics:
+  paired_group_bootstrap_iterations: 2000
+  bootstrap_seed: 439
+  holm_families:
+    - target_representation_family
+    - ranking_method_family
+    - model_family
+  preregistered_paired_comparisons:
+    - comparison_id: highlighted_frozen_minus_context_frozen
+      metric: average_precision
+      operand_a:
+        scenario_id: imagenet_frozen_target_highlighted_logistic
+        representation_id: imagenet_target_highlighted_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: target_representation_family
+    - comparison_id: context_morphometrics_minus_context_frozen
+      metric: average_precision
+      operand_a:
+        scenario_id: imagenet_frozen_context_morphometrics_logistic
+        representation_id: imagenet_context_embeddings_plus_target_morphometrics
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: target_representation_family
+    - comparison_id: ensemble_disagreement_minus_self_confidence
+      metric: average_precision
+      operand_a:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: ensemble_disagreement
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: ranking_method_family
+    - comparison_id: fixed_hybrid_minus_drop_self_confidence
+      metric: average_precision
+      operand_a:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: fixed_hybrid
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: hybrid_drop_self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: ranking_method_family
+    - comparison_id: fixed_hybrid_minus_drop_ensemble_disagreement
+      metric: average_precision
+      operand_a:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: fixed_hybrid
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: hybrid_drop_ensemble_disagreement
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: ranking_method_family
+    - comparison_id: cnn_context_minus_imagenet_context
+      metric: average_precision
+      operand_a:
+        scenario_id: cnn_context_rgb
+        representation_id: cnn_context_rgb_pixels
+        classifier_id: cnn_softmax_head
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      operand_b:
+        scenario_id: imagenet_frozen_logistic
+        representation_id: imagenet_resnet18_context_embeddings
+        classifier_id: multinomial_logistic_regression
+        risk_id: self_confidence
+        model_seed: matched
+        outer_fold: all_matched
+        corruption_cell: confusion_targeted_ten_percent
+      direction: method_a_minus_method_b
+      holm_family: model_family
+
+fold_rotation:
+  enabled: true
+  feasibility_rule: all_five_classes_in_each_development_training_partition
+  aggregate_policy: report_each_rotation_and_descriptive_fold_mean

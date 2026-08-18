@@ -1,0 +1,54 @@
+schema_version: 1
+experiment_name: pannuke_pilot
+configuration_role: fixed_pilot_protocol
+seed:
+  split: 223
+  model: 227
+  corruption: 404
+data:
+  source: pannuke
+  require_all_five_positive_classes: true
+  one_outer_split: true
+  development_official_folds: [1, 2]
+  final_test_fold: 3
+  final_reference_access_policy: metadata_only_until_preregistration_freeze
+  group_unit: strongest_verified_or_source_patch
+  reference_validation_fraction_groups: 0.10
+  subset_policy: fixed_deterministic_group_sample_documented_in_run
+  development_group_limit: 250
+  final_group_limit: null
+  selection_seed: 211
+corruption:
+  mechanism: symmetric_random_corruption
+  rate: 0.10
+  seeds: [404]
+representation:
+  encoder: official_imagenet_resnet18
+  input: target_highlighted_rgb
+  weight_identifier: IMAGENET1K_V1
+  crop_output_size: 64
+  crop_padding: 8
+  context_brightness: 0.45
+  batch_size: 16
+model:
+  classifier: multinomial_logistic_regression
+  oof_splits: 5
+  split_seed: 223
+  seed: 227
+  l2: 0.01
+  max_iter: 400
+audit:
+  methods: [self_confidence, cleanlab, nearest_neighbour_disagreement]
+  neighbour_k: 7
+  neighbour_metric: cosine
+evaluation:
+  downstream_evaluation_partition: reference_validation
+  review_budgets: [0.01, 0.05, 0.10, 0.20]
+  restoration_budget: 0.05
+  restoration_ranking: self_confidence
+  random_review_repeats: 100
+  random_review_seed: 419
+  downstream_random_repeats: 20
+gate:
+  requires_verified_dataset: true
+  must_complete_before_preregistration_freeze: true

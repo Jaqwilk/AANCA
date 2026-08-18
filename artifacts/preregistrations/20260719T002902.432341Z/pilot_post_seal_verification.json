@@ -1,0 +1,124 @@
+{
+  "audit_reconciliation": {
+    "cleanlab": {
+      "api_path": "cleanlab.rank.get_label_quality_scores + cleanlab.filter.find_label_issues",
+      "available": true,
+      "csv_sha256": "27d7d92c059cd796f09c3b7cc7c81c2462449641bc7f4aefb68921f8e330aa4b",
+      "error": null,
+      "issue_count": 2292,
+      "npz_sha256": "25b37b795251dcac394d414a9ef4e229de7748836c5b4efbadc4db9153de2136",
+      "package_version": "2.9.0",
+      "suggested_labels_available": false
+    },
+    "neighbours": {
+      "csv_sha256": "7da8a88ceabf87eba60226dddecd1c37c05f54fb4516315ff169d3cf4567306d",
+      "edge_count": 38367,
+      "npz_sha256": "216e60b2ac7c170a36c997f98f1b25f5f878ddc8aa8bfeb5a4e57d1f5d583410",
+      "query_count": 5481,
+      "same_group_exclusion_verified": true
+    },
+    "sample_count": 5481,
+    "sample_order_sha256": "710f05990dff420732606eb7ce1ae1f2320be5f9194419a6cb62ce767b8ff8d0",
+    "status": "passed"
+  },
+  "automatic_withdrawal_performed": false,
+  "byte_identity": {
+    "development_manifest": {
+      "byte_identical": true,
+      "run_path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0\\development_manifest_view.parquet",
+      "sha256": "8107e1ddc033b08f03d3f351b5993ec1fd7a188677ee4c2afc0e4cbfe8432ef8",
+      "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet"
+    },
+    "gate_certificate": {
+      "byte_identical": true,
+      "run_path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0\\pre_pilot_gate_certificate.json",
+      "sha256": "347f734c2355cd5009d631e959c077fe430adcad7e3997fe1306280004e90146",
+      "source_path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet.metadata.json"
+    }
+  },
+  "disposition": {
+    "anchor_sha256": "ea29ec96e3ab449bb44809114f9c1cc321291dd41c90f1442514f819b5282fed",
+    "eligible": true,
+    "ledger_sha256": "c7ee7d5a6a4f27c64b6c8b9f7d3af05d3405e014262f48463ce66b86a6121f07",
+    "matching_withdrawal_record_count": 0,
+    "verified_record_count": 2
+  },
+  "fixed_m6_protocol": {
+    "class_order": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "classifier": "multinomial_logistic_regression",
+    "corruption": {
+      "mechanism": "symmetric_random_corruption",
+      "rate": 0.1,
+      "seed": 404
+    },
+    "development_official_folds": [
+      1,
+      2
+    ],
+    "final_reference_official_fold": 3,
+    "group_unit": "source_patch",
+    "oof_fold_count": 5,
+    "protocol": "fixed_real_pannuke_m6_pilot_v1",
+    "reference_validation_group_fraction": 0.1,
+    "representation": "official_imagenet_resnet18_target_highlighted_rgb",
+    "required_audit_methods": [
+      "self_confidence",
+      "cleanlab",
+      "nearest_neighbour_disagreement"
+    ],
+    "required_restoration_conditions_present": true,
+    "status": "passed"
+  },
+  "format_aware_privacy": {
+    "exact_sealed_file_set_scanned": true,
+    "final_reference_official_fold": 3,
+    "npz_array_count": 77,
+    "npz_file_count": 6,
+    "parquet_file_count": 1,
+    "parquet_row_count": 123090,
+    "policy": "final_reference_identity_and_outcome_nonpublication_v1",
+    "scanned_file_count": 36,
+    "status": "passed",
+    "text_file_count": 29
+  },
+  "integrity": {
+    "artifact_manifest_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+    "artifact_root_sha256": "37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666",
+    "registry_record_present": true,
+    "valid": true
+  },
+  "oof_and_corruption": {
+    "complete_once_coverage": true,
+    "corruption_label_separation_exact": true,
+    "exact_corruption_count": 548,
+    "final_reference_outcomes_unavailable": true,
+    "fold_count": 5,
+    "group_count": 225,
+    "group_overlap_count": 0,
+    "probability_sum_maximum_error": 4.440892098500626e-16,
+    "sample_count": 5481,
+    "status": "passed"
+  },
+  "policy": "read_only_pilot_post_seal_verification_v1",
+  "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+  "run_id": "20260718T143216.354310Z_pannuke_pilot_c7797330e0",
+  "schema_version": 1,
+  "scientific_stage_eligible": true,
+  "sealed_run_unchanged": true,
+  "status": "passed",
+  "terminology": {
+    "non_diagnostic_limitation_present": true,
+    "present_in_metrics": true,
+    "present_in_report": true,
+    "required_terms": [
+      "potentially inconsistent annotation",
+      "recommended for expert review"
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "acquisition_manifest_path": "data/manifests/pannuke_acquisition.json",
+  "acquisition_manifest_sha256": "837fd4692ca94df4bc9dfa929bc84b1bb4dbdcbd1858c90c247bb76b0b197111",
+  "all_archive_crc_checks_passed": true,
+  "all_archive_path_safety_checks_passed": true,
+  "all_extracted_files_match_archive_member_crc32": true,
+  "archive_count": 3,
+  "archive_crc_failed_member_count": 0,
+  "dataset": "PanNuke",
+  "extracted_document_count": 9,
+  "extracted_npy_count": 9,
+  "git_safety": {
+    "git_status_visible_raw_paths": [
+      "?? data/raw/pannuke/.gitkeep"
+    ],
+    "ignored_raw_file_count": 21,
+    "ignored_raw_paths": [
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/images/fold1/images.npy",
+        "path": "data/raw/pannuke/Fold 1/images/fold1/images.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/images/fold1/types.npy",
+        "path": "data/raw/pannuke/Fold 1/images/fold1/types.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/masks/by-nc-sa.md",
+        "path": "data/raw/pannuke/Fold 1/masks/by-nc-sa.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/masks/fold1/masks.npy",
+        "path": "data/raw/pannuke/Fold 1/masks/fold1/masks.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/masks/README.md",
+        "path": "data/raw/pannuke/Fold 1/masks/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 1/README.md",
+        "path": "data/raw/pannuke/Fold 1/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/images/fold2/images.npy",
+        "path": "data/raw/pannuke/Fold 2/images/fold2/images.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/images/fold2/types.npy",
+        "path": "data/raw/pannuke/Fold 2/images/fold2/types.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/masks/by-nc-sa.md",
+        "path": "data/raw/pannuke/Fold 2/masks/by-nc-sa.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/masks/fold2/masks.npy",
+        "path": "data/raw/pannuke/Fold 2/masks/fold2/masks.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/masks/README.md",
+        "path": "data/raw/pannuke/Fold 2/masks/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 2/README.md",
+        "path": "data/raw/pannuke/Fold 2/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/images/fold3/images.npy",
+        "path": "data/raw/pannuke/Fold 3/images/fold3/images.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/images/fold3/types.npy",
+        "path": "data/raw/pannuke/Fold 3/images/fold3/types.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/masks/by-nc-sa.md",
+        "path": "data/raw/pannuke/Fold 3/masks/by-nc-sa.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/masks/fold3/masks.npy",
+        "path": "data/raw/pannuke/Fold 3/masks/fold3/masks.npy"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/masks/README.md",
+        "path": "data/raw/pannuke/Fold 3/masks/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/Fold 3/README.md",
+        "path": "data/raw/pannuke/Fold 3/README.md"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/fold_1.zip",
+        "path": "data/raw/pannuke/fold_1.zip"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/fold_2.zip",
+        "path": "data/raw/pannuke/fold_2.zip"
+      },
+      {
+        "git_check_ignore": ".gitignore:24:data/raw/**\tdata/raw/pannuke/fold_3.zip",
+        "path": "data/raw/pannuke/fold_3.zip"
+      }
+    ],
+    "raw_release_file_count": 21,
+    "status": "passed",
+    "trackable_provenance_paths": [
+      "data/manifests/pannuke_acquisition.json",
+      "reports/pannuke_acquisition_verification.json"
+    ],
+    "tracked_raw_file_count": 0
+  },
+  "raw_release_is_immutable": true,
+  "rejected_unsafe_archive_member_path_count": 0,
+  "schema_version": 2,
+  "scientific_stage_advanced": false,
+  "scope": "acquisition_provenance_only",
+  "status": "passed",
+  "verification_completed_at_utc": "2026-07-17T23:46:29.495Z",
+  "verification_duration_seconds": 86.65434,
+  "verification_timestamp_utc": "2026-07-17T23:45:00.282Z"
+}

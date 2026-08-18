@@ -1,0 +1,390 @@
+{
+  "affected_analyses": [
+    "resource_bounded_confirmatory_sensitivity",
+    "confirmatory_fold_rotation",
+    "confirmatory_ranking_statistics",
+    "confirmatory_restoration_analysis",
+    "confirmatory_model_representation_comparisons",
+    "confirmatory_checkpoint_successor_lineage",
+    "confirmatory_completion_and_m9_eligibility"
+  ],
+  "affected_hypotheses": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7"
+  ],
+  "after": {
+    "confirmatory_config": {
+      "file_sha256": "783968e8afc132cca0c877aadf953fc68d3c35f606021b3a97ed380478dbad4a",
+      "semantic_sha256": "1c9a41b92dabbeafbb92b1bc8aced158337046fc1d6e056b011f6a27b98e8298",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "03bcc6020e3be5a22fe257c45820e4e8ebece3ce471c2b6cecff0e3e9419fc66",
+      "root_sha256": "1179f91725a3027c0397e87691774377bbd4ba5469d588390c72b0b88515547b",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "amendment_purpose": "resource_bounded_confirmatory_execution",
+  "amendment_timestamp_utc": "2026-07-27T17:04:13.080954Z",
+  "analysis_dispositions": [
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "resource_bounded_confirmatory_sensitivity",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_fold_rotation",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_ranking_statistics",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_restoration_analysis",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_model_representation_comparisons",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_checkpoint_successor_lineage",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_completion_and_m9_eligibility",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    }
+  ],
+  "authority_kind": "preregistration_amendment",
+  "before": {
+    "confirmatory_config": {
+      "file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "0f5e33259962c5b8f2bf5e3c11a776bdfbf280f6e3cded906e1222e89e1a4df2",
+      "root_sha256": "ba7fb4c8336c4f9ba138fcda16019dc31bec7e5cc3e8b846e643d6dd0332601b",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "chain_depth": 3,
+  "confirmatory_storage_policy": {
+    "canonical_relative_path_template": "cells/{cell_id}/checkpoints/fold_{fold_id:02d}.pt",
+    "link_policy": "regular_file_no_symlink_no_junction_no_hardlink",
+    "policy": "single_canonical_checkpoint_copy_v1",
+    "retained_copy_count": 1,
+    "schema_version": 1,
+    "scientific_effect": "storage_only_no_model_data_split_seed_prediction_metric_restoration_or_estimand_change",
+    "scope": "one_checkpoint_per_completed_cnn_cell_oof_fold",
+    "verification_policy": "size_sha256_fold_evidence_checkpoint_manifest_postseal_exact_set"
+  },
+  "outcomes_inspected": true,
+  "outcomes_inspected_at_utc": "2026-07-27T10:57:07.000000Z",
+  "overwrite_policy": "immutable successor; never overwrite parent or peer",
+  "parent": {
+    "artifact_root_sha256": "4d368d3f49852ecf7678215a5a64c2617067cc0581d353af33460f46ec67f88a",
+    "authority_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\preregistration_amendments\\20260727T133947.089370Z",
+    "authority_kind": "preregistration_amendment",
+    "chain_depth": 2,
+    "sha256_manifest_sha256": "b5efc656f074b2933138b1a623de24e099bea9e7e2b75edc8e484d22ca176d10"
+  },
+  "reason": "Authorize the fixed resource_bounded_confirmatory_v1 sensitivity/feasibility profile using operational resource constraints only after outcome exposure; preserve the sealed recovered primary and original frozen confirmatory definition, and prohibit original-confirmatory, completion-stage, and M9 claims.",
+  "resource_bounded_confirmatory_authorization": {
+    "analysis_disposition": "amended_or_exploratory",
+    "completion_stage": null,
+    "execution_source_delta": {
+      "allowlisted_changes": [
+        {
+          "after": {
+            "sha256": "783968e8afc132cca0c877aadf953fc68d3c35f606021b3a97ed380478dbad4a",
+            "size_bytes": 13994
+          },
+          "before": null,
+          "change_kind": "added",
+          "path": "configs/confirmatory_resource_bounded_amended.yaml"
+        },
+        {
+          "after": {
+            "sha256": "9bf46462fcade6cb3ffca685093a328ef73841038cef4d6b039e4c2c31903369",
+            "size_bytes": 145072
+          },
+          "before": {
+            "sha256": "c13034451ed691f4d433f79e99a8fcf3155c5593bb21baea92bb0973338d6ba0",
+            "size_bytes": 127141
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/cli.py"
+        },
+        {
+          "after": {
+            "sha256": "b95ae5b3f5b1bd7e44a8477f3042df3c8290eddb94875830ed70ff35bc027c5d",
+            "size_bytes": 11106
+          },
+          "before": {
+            "sha256": "a51a30d2100ba3336a681a204877bfc04a4db49e8f5eaf44b4040197da7d78c8",
+            "size_bytes": 8864
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/experiment/__init__.py"
+        },
+        {
+          "after": {
+            "sha256": "c10400470ad7f3c4957ef2ceffcde4bf86c55595ec6addb7e8f38698c1b23cdf",
+            "size_bytes": 33642
+          },
+          "before": null,
+          "change_kind": "added",
+          "path": "src/histo_audit/experiment/confirmatory_cli_inputs.py"
+        },
+        {
+          "after": {
+            "sha256": "d22a7b061b82796a318abff061ba7828003084af8f2184e174fdca89fc0011a0",
+            "size_bytes": 180695
+          },
+          "before": {
+            "sha256": "c5863485b272c1a158354b3133446924c0f69339d8f2af938278f533f1d45ee7",
+            "size_bytes": 174820
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/experiment/confirmatory_completion.py"
+        },
+        {
+          "after": {
+            "sha256": "71854b3f1b21e5190c3bdb5e299e7b9dbd4bcc57e53d293c1b975a1c54f80546",
+            "size_bytes": 118857
+          },
+          "before": {
+            "sha256": "e3101d7189f690752bf39b83dd1415e5e6fd63737528b7da38613f6a3e6f5cb8",
+            "size_bytes": 112774
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/experiment/confirmatory_core.py"
+        },
+        {
+          "after": {
+            "sha256": "52e12eecbbec749ae9f973afecfb3cb2e862a112cf98863fcef9990df3b42c79",
+            "size_bytes": 128334
+          },
+          "before": {
+            "sha256": "db59d29341c2fc80c94df73afaf2377888262a486c7e4caed2ac95375797c1e6",
+            "size_bytes": 117322
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/experiment/confirmatory_runner.py"
+        },
+        {
+          "after": {
+            "sha256": "426130b2d24525992a41fc1a113740a6b413e880eba9f9d5684d84334e23af59",
+            "size_bytes": 50742
+          },
+          "before": null,
+          "change_kind": "added",
+          "path": "src/histo_audit/experiment/resource_bounded_resume.py"
+        },
+        {
+          "after": {
+            "sha256": "776c112be7debc93843edd936a977daac6c8235e4ba253bd3261b3ce92fed9f0",
+            "size_bytes": 93368
+          },
+          "before": null,
+          "change_kind": "added",
+          "path": "src/histo_audit/experiment/resource_bounded_runner.py"
+        },
+        {
+          "after": {
+            "sha256": "ab8a55eeb077076ff948113d11422f2c7786e5558ac3feb18567e4acd22df452",
+            "size_bytes": 127813
+          },
+          "before": {
+            "sha256": "824560dd34430e324951127b6927f988f6be66b4d0abb7de0f0f28f936cd75df",
+            "size_bytes": 117486
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/experiment/study_contracts.py"
+        },
+        {
+          "after": {
+            "sha256": "61a6c3c53965703c6dc4b4bf53b78a0ec773c28fbd4a0d713da79d69abe87766",
+            "size_bytes": 72201
+          },
+          "before": {
+            "sha256": "a9a346f504e23b404e5a09ff9a9e2d99bed23a3f80f9329cbefef16f8fd47031",
+            "size_bytes": 71855
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/models/cnn.py"
+        },
+        {
+          "after": {
+            "sha256": "1c27fe448bde578ebaf193b91658fbbda8993c82c982313e0f857fc3bdb7554e",
+            "size_bytes": 2975
+          },
+          "before": {
+            "sha256": "5b9c540a624c407d782619f5968eee5d8f8994514a71e40e4347318caf5cdd00",
+            "size_bytes": 1542
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/workflows/__init__.py"
+        },
+        {
+          "after": {
+            "sha256": "eb6d4559b56263dfeeea70b12c4662bdbf14a0dc7f53310a77292645114ee6eb",
+            "size_bytes": 64066
+          },
+          "before": null,
+          "change_kind": "added",
+          "path": "src/histo_audit/workflows/lifecycle_qualification.py"
+        },
+        {
+          "after": {
+            "sha256": "d28a75668e72242f511c4032a03bca2b12d6c9f466a3bdf0e612eacb770a9fbd",
+            "size_bytes": 197794
+          },
+          "before": {
+            "sha256": "8d85aa8cb68e181e65171c9ea39820c6b301607a01b2fb0cf5f2cf45358f3d2e",
+            "size_bytes": 141479
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/workflows/preregistration_amendment.py"
+        },
+        {
+          "after": {
+            "sha256": "cffd861a51707ff37768dda0314fd4be9f410cd7b75ce841b7af590d03bc8471",
+            "size_bytes": 140942
+          },
+          "before": {
+            "sha256": "0a4887edb0f2b3abe9a9025c61dbb8db005becdbfd6e58e49cf99551426640d5",
+            "size_bytes": 112123
+          },
+          "change_kind": "modified",
+          "path": "src/histo_audit/workflows/study_gates.py"
+        }
+      ],
+      "delta_sha256": "7abd9e1627728c4ce89f59cc6162283ec8963468816db6c64849fff1a5ec290e",
+      "parent_manifest_sha256": "0f5e33259962c5b8f2bf5e3c11a776bdfbf280f6e3cded906e1222e89e1a4df2",
+      "parent_root_sha256": "ba7fb4c8336c4f9ba138fcda16019dc31bec7e5cc3e8b846e643d6dd0332601b",
+      "policy": "exact_nonempty_resource_execution_source_delta_v1",
+      "resource_manifest_sha256": "03bcc6020e3be5a22fe257c45820e4e8ebece3ce471c2b6cecff0e3e9419fc66",
+      "resource_root_sha256": "1179f91725a3027c0397e87691774377bbd4ba5469d588390c72b0b88515547b"
+    },
+    "historical_primary": {
+      "artifact_manifest_sha256": "9abff1b2f0e745a50b3aa1922d3d725bb629276f6090c32e9b423fea82d0e0ce",
+      "artifact_root_sha256": "8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4",
+      "completion_evidence_sha256": "77a02877f9882a608968303e077963abdfbcfabdc997424cfaceadf0df86349c",
+      "experiment_name": "pannuke_primary_orphan_recovery",
+      "primary_execution_gate_sha256": "7bff23bace66436d191df9f3fe4b92f4db8caf391e019dc9864c650fc1fc0ae7",
+      "recovery_authorization_sha256": "e571ca2eb345439e541e715bae59cc5a19bc75d87a5e7f63878889a0894e2732",
+      "recovery_evidence_sha256": "3f937dac3dc2788131dafc84ce35ae7fda4a24a35bcf437ee14827169b8ccaf1",
+      "registration_authority": {
+        "artifact_root_sha256": "4d368d3f49852ecf7678215a5a64c2617067cc0581d353af33460f46ec67f88a",
+        "chain_depth": 2,
+        "directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\preregistration_amendments\\20260727T133947.089370Z",
+        "kind": "preregistration_amendment",
+        "sha256_manifest_sha256": "b5efc656f074b2933138b1a623de24e099bea9e7e2b75edc8e484d22ca176d10"
+      },
+      "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260727T133947.089370Z_pannuke_primary_orphan_recovery",
+      "run_id": "20260727T133947.089370Z_pannuke_primary_orphan_recovery",
+      "stage_attestation_record_sha256": "5af827544502fbdf688a73916ec58b5dac0984c5a682a33ce6dfc97538228871",
+      "stage_attestation_verification_sha256": "e19f17b14a375e8e048e1d2fc3060c19831e4259c8311831d88f75753024c768",
+      "terminal_status": "completed"
+    },
+    "original_confirmatory_claim_allowed": false,
+    "outcome_use_policy": "resource_constraints_only_no_outcome_value_selection_tuning_or_exclusion",
+    "outcomes_inspected": true,
+    "policy": "post_outcome_resource_bounded_confirmatory_execution_v1",
+    "primary_mutation_allowed": false,
+    "primary_rebinding_allowed": false,
+    "purpose": "resource_bounded_confirmatory_execution",
+    "resource_capacity_policy": {
+      "amp_dtype": "float16",
+      "amp_required": true,
+      "cuda_device_index": 0,
+      "cuda_required": true,
+      "cuda_smoke_finite_required": true,
+      "cuda_smoke_forward_backward_required": true,
+      "cuda_smoke_input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "cuda_smoke_max_peak_allocated_bytes": 536870912,
+      "cudnn_required": true,
+      "fixed_safety_margin_bytes": 10737418240,
+      "implicit_weight_download_allowed": false,
+      "max_active_atomic_temp_checkpoints": 1,
+      "max_epochs": 4,
+      "minimum_available_ram_bytes_before_data": 17179869184,
+      "minimum_available_ram_bytes_before_tracker": 12884901888,
+      "minimum_free_bytes_before_tracker": 23622320128,
+      "minimum_free_vram_bytes": 8589934592,
+      "minimum_total_ram_bytes": 32212254720,
+      "minimum_total_vram_bytes": 10737418240,
+      "official_weight_identifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "official_weight_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "planned_cnn_cells": 6,
+      "planned_cnn_fold_checkpoints": 30,
+      "planned_required_cells": 24,
+      "policy": "resource_bounded_confirmatory_capacity_v2",
+      "projected_stable_run_bytes": 12884901888,
+      "schema_version": 2
+    },
+    "resource_profile": {
+      "experiment_name": "pannuke_resource_bounded_confirmatory",
+      "parent_confirmatory_config_file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "parent_confirmatory_config_semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "profile_id": "resource_bounded_confirmatory_v1",
+      "resource_confirmatory_config_file_sha256": "783968e8afc132cca0c877aadf953fc68d3c35f606021b3a97ed380478dbad4a",
+      "resource_confirmatory_config_semantic_sha256": "1c9a41b92dabbeafbb92b1bc8aced158337046fc1d6e056b011f6a27b98e8298"
+    },
+    "schema_version": 1,
+    "study_outcome_eligible": false
+  },
+  "schema_version": 4,
+  "snapshots": {
+    "confirmatory_config": "confirmatory_frozen.yaml",
+    "execution_source": "source_tree_manifest.json",
+    "preregistration": "PRE_REGISTRATION_FROZEN.md",
+    "primary_config": "primary_frozen.yaml",
+    "report": "AMENDMENT.md"
+  }
+}

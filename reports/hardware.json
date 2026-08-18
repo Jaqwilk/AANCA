@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "capture_started_at": "2026-07-17T15:22:00.5402654+02:00",
+  "capture_completed_at": "2026-07-17T15:23:48.5895131+02:00",
+  "timezone": "Europe/Warsaw",
+  "inspection_policy": {
+    "software_installed": false,
+    "global_settings_changed": false,
+    "whole_drive_dataset_search_performed": false
+  },
+  "os": {
+    "caption": "Microsoft Windows 10 Enterprise LTSC",
+    "version": "10.0.19044",
+    "build": "19044",
+    "architecture": "64-bit",
+    "powershell_version": "5.1.19041.5737",
+    "last_boot_at": "2026-07-17T13:57:42.5000000+02:00"
+  },
+  "project": {
+    "path": "C:\\Users\\NATAN\\Documents\\AANCA",
+    "exists": true,
+    "write_access": true,
+    "write_access_evidence": "The reports directory was created successfully and environment_initial.txt plus hardware.json were written there.",
+    "windows_identity": "3VILOS20\\NATAN",
+    "acl_owner": "BUILTIN\\Administratorzy"
+  },
+  "git": {
+    "installed": true,
+    "version": "2.52.0.windows.1",
+    "is_repository": true,
+    "repository_root": "C:/Users/NATAN/Documents/AANCA",
+    "status_snapshot": "## No commits yet on master",
+    "status_exit_code": 0,
+    "local_user_name_configured": false,
+    "local_user_email_configured": false,
+    "global_user_name_configured": false,
+    "global_user_email_configured": false,
+    "effective_user_name_configured": false,
+    "effective_user_email_configured": false,
+    "git_author_ident_resolves": false,
+    "git_author_ident_exit_code": 128,
+    "identity_was_modified": false
+  },
+  "computer": {
+    "manufacturer": "ASUS",
+    "model": "System Product Name"
+  },
+  "cpu": {
+    "name": "13th Gen Intel(R) Core(TM) i7-13700K",
+    "physical_cores": 16,
+    "logical_processors": 24
+  },
+  "memory": {
+    "installed_physical_bytes": 34088464384,
+    "installed_physical_gib": 31.75,
+    "os_visible_kib": 33289516,
+    "os_visible_gib": 31.75,
+    "free_kib_at_snapshot": 20296500,
+    "free_gib_at_snapshot": 19.36
+  },
+  "storage": [
+    {
+      "device_id": "C:",
+      "volume_name": "DeltaOS",
+      "size_bytes": 1000080404480,
+      "size_gib": 931.4,
+      "free_bytes_at_snapshot": 69362036736,
+      "free_gib_at_snapshot": 64.6
+    }
+  ],
+  "gpu": {
+    "nvidia_smi_available": true,
+    "nvidia_smi_path": "C:\\Windows\\system32\\nvidia-smi.exe",
+    "nvidia_smi_version": "551.78",
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 4070",
+        "driver_mode": "WDDM",
+        "pci_bus_id": "00000000:01:00.0",
+        "driver_version": "551.78",
+        "vram_total_mib": 12282,
+        "vram_total_gib": 11.99,
+        "vram_free_mib_at_snapshot": 11683,
+        "vram_free_gib_at_snapshot": 11.41
+      }
+    ]
+  },
+  "cuda": {
+    "driver_reported_compatibility_version": "12.4",
+    "driver_reported_value_is_installed_toolkit": false,
+    "cuda_path_environment_variable": null,
+    "nvcc_found": false,
+    "standalone_toolkit_detected": false
+  },
+  "python": {
+    "launcher_path": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe",
+    "python3_command_found": false,
+    "project_venv_interpreter_present_at_snapshot": false,
+    "installations": [
+      {
+        "version": "3.12.3",
+        "executable": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "launcher_default": true,
+        "on_path_as_python": true,
+        "pip_version": "26.0.1"
+      },
+      {
+        "version": "3.10.11",
+        "executable": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "launcher_default": false,
+        "on_path_as_python": false,
+        "pip_version": "23.0.1"
+      }
+    ],
+    "package_managers": {
+      "uv": {
+        "found": true,
+        "version": "0.11.15",
+        "path": "C:\\Users\\NATAN\\.local\\bin\\uv.exe"
+      },
+      "pip": {
+        "found": true,
+        "version_for_path_python": "26.0.1"
+      },
+      "conda": { "found": false },
+      "mamba": { "found": false },
+      "micromamba": { "found": false },
+      "poetry": { "found": false },
+      "pdm": { "found": false },
+      "pipx": { "found": false }
+    }
+  },
+  "pytorch": {
+    "selected_interpreter": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "installed": true,
+    "version": "2.11.0+cpu",
+    "pip_distribution_version": "2.11.0",
+    "installation_path": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages",
+    "compiled_cuda_runtime": null,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "cudnn_version": null,
+    "build_kind": "cpu-only",
+    "cpu_tensor_matmul_and_backward": {
+      "executed": true,
+      "exit_code": 0,
+      "loss_finite": true,
+      "gradient_finite": true
+    },
+    "gpu_tensor_matmul_and_backward": {
+      "executed": false,
+      "reason": "torch.cuda.is_available() returned false because the installed build is CPU-only"
+    },
+    "other_interpreters": [
+      {
+        "python_version": "3.10.11",
+        "torch_installed": false,
+        "probe_error": "ModuleNotFoundError: No module named 'torch'"
+      }
+    ]
+  },
+  "dataset": {
+    "name": "PanNuke",
+    "available_in_checked_locations": false,
+    "pannuke_root_environment_variable": null,
+    "workspace_candidate": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\raw\\pannuke",
+    "workspace_candidate_exists": false,
+    "bounded_search_roots": [
+      "C:\\Users\\NATAN\\Documents"
+    ],
+    "bounded_search_max_depth": 5,
+    "matching_directory_count": 0,
+    "matching_file_or_signature_count": 0,
+    "signature_filenames_checked": [
+      "images.npy",
+      "masks.npy",
+      "types.npy"
+    ],
+    "search_limitation": "The search was intentionally bounded and did not scan the entire drive. Absence elsewhere is not established."
+  },
+  "evidence_commands": [
+    "Get-CimInstance Win32_OperatingSystem",
+    "Get-CimInstance Win32_ComputerSystem",
+    "Get-CimInstance Win32_Processor",
+    "Get-CimInstance Win32_LogicalDisk -Filter \"DriveType=3\"",
+    "git --version",
+    "git rev-parse --show-toplevel",
+    "git status --short --branch",
+    "git config --local --get user.name",
+    "git config --local --get user.email",
+    "git config --global --get user.name",
+    "git config --global --get user.email",
+    "git config --show-origin --get user.name",
+    "git config --show-origin --get user.email",
+    "git var GIT_AUTHOR_IDENT",
+    "Get-Command python,python3,py -All",
+    "py -0p",
+    "python --version",
+    "python -m pip --version",
+    "uv --version",
+    "Get-Command nvidia-smi",
+    "nvidia-smi",
+    "nvidia-smi --query-gpu=index,name,driver_version,memory.total,memory.free,pci.bus_id --format=csv,noheader,nounits",
+    "Get-CimInstance Win32_VideoController",
+    "Get-Command nvcc",
+    "$env:CUDA_PATH",
+    "per-interpreter importlib/PyTorch probe",
+    "selected-interpreter 32x32 tensor multiplication and backward pass",
+    "Test-Path $env:PANNUKE_ROOT when set",
+    "Test-Path .\\data\\raw\\pannuke -PathType Container",
+    "bounded Get-ChildItem searches under C:\\Users\\NATAN\\Documents with -Depth 5"
+  ]
+}

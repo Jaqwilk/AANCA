@@ -1,0 +1,16 @@
+fold_id,class_index,class_name,total_instance_keys,overlap_affected_instance_keys,overlap_affected_distinct_numeric_id_values
+1,0,neoplastic,26201,122,110
+1,1,inflammatory,10820,141,132
+1,2,connective_soft_tissue,16388,169,149
+1,3,dead,967,6,6
+1,4,non_neoplastic_epithelial,8842,33,31
+2,0,neoplastic,22731,102,94
+2,1,inflammatory,10631,145,133
+2,2,connective_soft_tissue,16756,188,166
+2,3,dead,884,4,4
+2,4,non_neoplastic_epithelial,8870,26,26
+3,0,neoplastic,28471,130,118
+3,1,inflammatory,10825,148,135
+3,2,connective_soft_tissue,17441,166,146
+3,3,dead,1057,11,11
+3,4,non_neoplastic_epithelial,8860,20,19

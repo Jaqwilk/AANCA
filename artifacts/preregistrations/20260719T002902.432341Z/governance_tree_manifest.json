@@ -1,0 +1,75 @@
+{
+  "artifact_count": 9,
+  "artifacts": [
+    {
+      "path": ".gitignore",
+      "sha256": "e650a15943e4418ee8ca3eb47b1e418e79a71a625483ddf2217d1ae13c482f26",
+      "size_bytes": 1357
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "416c5e71a04be65574bdf6a8bba8da6c9d71e3d0e747f9c9ce327ba9adf6ba8c",
+      "size_bytes": 1998
+    },
+    {
+      "path": "DATASET_SETUP.md",
+      "sha256": "d0ae67cf9b906028a1a92b1ab24390616a6a8d99418fe8d63ae9f1ddf389f0f4",
+      "size_bytes": 8097
+    },
+    {
+      "path": "DECISIONS.md",
+      "sha256": "cc2a041529d94317febca8c19eec0db5493e6fbef5bab2463626d285450dca45",
+      "size_bytes": 56477
+    },
+    {
+      "path": "ETHICS_AND_LIMITATIONS.md",
+      "sha256": "0bebe8eebcd28d8cc8c6b7bdf15666f902f706df45dee77f649babd7e49b7ca8",
+      "size_bytes": 2363
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "f17afc34c24152936350d34c9f5bc45fa44e48512e3d2db36026ee2453fade5f",
+      "size_bytes": 16781
+    },
+    {
+      "path": "PRE_REGISTRATION.md",
+      "sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "size_bytes": 32538
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0",
+      "size_bytes": 11275
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "738b735c0c49b1296bb22c3877091ff1cae2549d61a8ebf20cd2773334e29c5b",
+      "size_bytes": 61238
+    }
+  ],
+  "governance_files": [
+    ".gitignore",
+    "AGENTS.md",
+    "SPEC.md",
+    "PLAN.md",
+    "STATUS.md",
+    "PRE_REGISTRATION.md",
+    "DATASET_SETUP.md",
+    "DECISIONS.md",
+    "ETHICS_AND_LIMITATIONS.md"
+  ],
+  "root_sha256": "0e16c71b5e906403f3d5c3989400d7203042595663d51343b677139bbdccc1d8",
+  "schema_version": 1,
+  "scope": [
+    ".gitignore",
+    "AGENTS.md",
+    "SPEC.md",
+    "PLAN.md",
+    "STATUS.md",
+    "PRE_REGISTRATION.md",
+    "DATASET_SETUP.md",
+    "DECISIONS.md",
+    "ETHICS_AND_LIMITATIONS.md"
+  ],
+  "scope_kind": "governance_snapshot"
+}

@@ -1,0 +1,88 @@
+{
+  "artifact_count": 15,
+  "artifact_root_sha256": "d2f1f3dec19021e7216630b53297035e705b6c407c3b5d84118ce7637411dd65",
+  "artifacts": [
+    {
+      "path": "AMENDMENT_POLICY.md",
+      "sha256": "91dfac398453d6409b4d1757551bbec6a4b1e75486ffee5b4c43560f7da12428",
+      "size_bytes": 533
+    },
+    {
+      "path": "PRE_REGISTRATION_FROZEN.md",
+      "sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "size_bytes": 32538
+    },
+    {
+      "path": "confirmatory_frozen.yaml",
+      "sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "size_bytes": 16099
+    },
+    {
+      "path": "duplicate_audit.json",
+      "sha256": "2a24d0f637bbf47e215f276e38d30b6bd65f1d312caa1b5b285ca5c00540612e",
+      "size_bytes": 250987
+    },
+    {
+      "path": "freeze_evidence.json",
+      "sha256": "1ab0bdc9818a0246f4ef8445b32000c2dbf4287c981bc831f894c7c5a0d2af49",
+      "size_bytes": 21669
+    },
+    {
+      "path": "git_state.json",
+      "sha256": "997609767f58d07aabb452b1194ff632c33d934f24a2cdb66dc2282401447f7d",
+      "size_bytes": 9538
+    },
+    {
+      "path": "governance_tree_manifest.json",
+      "sha256": "348170ea59ef55fa955270ebc2c7de8d1165feed9debc33e7910b28aaf4c622d",
+      "size_bytes": 1990
+    },
+    {
+      "path": "pathology_encoder_availability.json",
+      "sha256": "5e568cf29e489d8948bfcd33feae5b292cb48837eb4c93754202a565778a6e4a",
+      "size_bytes": 5167
+    },
+    {
+      "path": "pilot_derived_primary_parameters.json",
+      "sha256": "8380b963a02b7ea4451039e9e5b37600809b22c689734202664522bdeda6113b",
+      "size_bytes": 8036
+    },
+    {
+      "path": "pilot_integrity_evidence.json",
+      "sha256": "aaa87e35be7fd78a914402a647544511335ffd150f55ed99339fd60324643ce3",
+      "size_bytes": 5962
+    },
+    {
+      "path": "pilot_post_seal_verification.json",
+      "sha256": "7ffb4d58f7a5d8876a1a569dbc7eeed0e95f1c25ad4f808b5a63d3bc66909b5f",
+      "size_bytes": 4622
+    },
+    {
+      "path": "primary_frozen.yaml",
+      "sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "size_bytes": 28497
+    },
+    {
+      "path": "raw_dataset_checksums.csv",
+      "sha256": "7f9a58eb682d04572478b6266f08265ea23294851b942c23f454e0b6de7aedfd",
+      "size_bytes": 2290
+    },
+    {
+      "path": "representation_independence.json",
+      "sha256": "846f421284de381401761a8dc4ceb108d3f3f2a0eece379706be7f7a512789c7",
+      "size_bytes": 5022
+    },
+    {
+      "path": "source_tree_manifest.json",
+      "sha256": "8bbd5bb939ffc6fb69c903dd7386c13bdc56b1cad271d11cb4ed0c5de263f8a1",
+      "size_bytes": 17325
+    }
+  ],
+  "excluded_paths": [
+    ".immutable.json",
+    "sha256_manifest.json"
+  ],
+  "freeze_timestamp_utc": "2026-07-19T00:29:02.432341Z",
+  "root_digest_algorithm": "sha256(canonical-json-artifact-records)",
+  "schema_version": 1
+}

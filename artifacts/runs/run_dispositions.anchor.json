@@ -1,0 +1,8 @@
+{
+  "chain_algorithm": "sha256(canonical-json-record-with-previous-head)",
+  "head_record_sha256": "467b8e8a265a30fdc06951231f37f72678a49b7f08877bcb3dbc8291183cf12a",
+  "ledger_filename": "run_dispositions.jsonl",
+  "ledger_sha256": "c7ee7d5a6a4f27c64b6c8b9f7d3af05d3405e014262f48463ce66b86a6121f07",
+  "record_count": 2,
+  "schema_version": 1
+}

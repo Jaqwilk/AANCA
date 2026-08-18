@@ -1,0 +1,17 @@
+schema_version: 1
+experiment_name: external_validation_package
+status: optional_not_executed
+blinded_expert_review:
+  top_ranked_count: 100
+  random_count: 100
+  mix_seed: 707
+  hide_ranking_source: true
+  anonymise_sample_ids: true
+  show_model_suggestion_initially: false
+  display: [full_source_patch, target_crop, target_contour]
+  response_options: [annotation_supported, probably_inconsistent, ambiguous, insufficient_context, exclude_technical]
+external_multirater:
+  dataset: nucls_or_responsibly_mapped_alternative
+  require_verified_mapping: true
+  preserve_individual_raters: true
+  keep_sources_disjoint: true

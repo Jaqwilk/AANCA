@@ -1,0 +1,411 @@
+cache_provenance:
+- cache_file_sha256: null
+  encoder_identifier: resnet18_imagenet1k_v1
+  encoder_metadata_sha256: 1bdf887e023dd11b1522a1199c2ff636014184331aa32b24e8180abc2fef74c0
+  id: cnn_context_rgb_cache
+  input_variant: context_rgb
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  preprocessing_identifier: confirmatory_context_rgb_224_v1
+  preprocessing_sha256: 9412f339697b3c52a1ff7a5750803669185f4af45bbaa334b5342fe90d044c0c
+  representation_id: cnn_context_rgb_pixels
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  sidecar_semantic_sha256: cf74379bab82d41be0df6cf047f8d365c5beb8854d34e7e69e22b2be403756b9
+  status: available
+  weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+  weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+- cache_file_sha256: null
+  encoder_identifier: resnet18_imagenet1k_v1_zero_init_fourth_channel
+  encoder_metadata_sha256: b4411c665ee4fcb6a3ccf5de84b1c1082cfe0f3750be950b1bd66c19b8203be7
+  id: cnn_context_target_mask_cache
+  input_variant: context_rgb_plus_binary_target_mask
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  preprocessing_identifier: confirmatory_context_rgb_plus_target_mask_224_v1
+  preprocessing_sha256: 3dbdbde9a01f601308f23d714bf123962f3d54c29818c662b334924b10676489
+  representation_id: cnn_context_target_mask_pixels
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  sidecar_semantic_sha256: cf74379bab82d41be0df6cf047f8d365c5beb8854d34e7e69e22b2be403756b9
+  status: available
+  weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+  weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+- cache_file_sha256: null
+  encoder_identifier: resnet18_imagenet1k_v1
+  encoder_metadata_sha256: 3bd09b4b9fc5f7c3db3dd689142d244d43a240d759a5dd87b06867a45322eb83
+  id: imagenet_context_embedding_cache
+  input_variant: context_rgb
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official
+  preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+  representation_id: imagenet_resnet18_context_embeddings
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  sidecar_semantic_sha256: 195cac1a2073d9d7974e71fbc485637f661c9db485ff53db78721021689ae618
+  status: available
+  weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+  weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+- cache_file_sha256: null
+  encoder_identifier: resnet18_imagenet1k_v1
+  encoder_metadata_sha256: c16c073407fd80f647091e24cf78e15511acebcb3493402bb32ee9f678b9384c
+  id: imagenet_target_highlighted_embedding_cache
+  input_variant: target_highlighted_rgb
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official
+  preprocessing_sha256: 4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c
+  representation_id: imagenet_target_highlighted_embeddings
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  sidecar_semantic_sha256: efefa0cc0194f3b571cd82cce19fe3e61e963ded63ba172dcf2abce9c226f81e
+  status: available
+  weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+  weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+- cache_file_sha256: null
+  encoder_identifier: resnet18_imagenet1k_v1_plus_target_morphometrics_v1
+  encoder_metadata_sha256: 82823b9f88ef26c5435343c2285cde00b4bf3e69637965728d0bd6adf69259fc
+  id: imagenet_context_morphometrics_cache
+  input_variant: context_rgb_plus_target_morphometrics
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  preprocessing_identifier: torchvision_resnet18_imagenet1k_v1_official_plus_target_morphometrics_v1
+  preprocessing_sha256: 2f4fd326a41de765474177579925eab95a70075258de2aa791fbe7dd8f1c5465
+  representation_id: imagenet_context_embeddings_plus_target_morphometrics
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  sidecar_semantic_sha256: 531a730ba54f6d1d6bd6447f3f8b336cd8b36184a73e32e2aaa7edec5d4421ee
+  status: available
+  weight_identifier: ResNet18_Weights.IMAGENET1K_V1
+  weights_sha256: f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec
+- blocker_evidence_sha256: 5e568cf29e489d8948bfcd33feae5b292cb48837eb4c93754202a565778a6e4a
+  encoder_identifier: availability_selected_pathology_encoder
+  id: pathology_context_embedding_cache
+  input_variant: context_rgb
+  manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  representation_id: pathology_context_embeddings
+  sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+  status: unavailable_with_frozen_blocker
+corruption:
+  cells:
+  - id: clean_reference_cell
+    mechanism: symmetric_random_corruption
+    parameters: {}
+    rate: 0.0
+    seed: 404
+  - id: confusion_targeted_ten_percent
+    mechanism: confusion_targeted_corruption
+    parameters:
+      transition_matrix:
+      - - 0.0
+        - 0.13590033975084936
+        - 0.3114382785956965
+        - 0.1143827859569649
+        - 0.43827859569648925
+      - - 0.11691542288557213
+        - 0.0
+        - 0.23383084577114427
+        - 0.2263681592039801
+        - 0.4228855721393035
+      - - 0.344
+        - 0.2784
+        - 0.0
+        - 0.0736
+        - 0.304
+      - - 0.2638888888888889
+        - 0.4861111111111111
+        - 0.2222222222222222
+        - 0.0
+        - 0.027777777777777776
+      - - 0.4087403598971722
+        - 0.26735218508997427
+        - 0.3059125964010283
+        - 0.017994858611825194
+        - 0.0
+    rate: 0.1
+    seed: 404
+data:
+  analysis_manifest_authority:
+    analysis_eligible_sample_count: 188333
+    analysis_eligible_sample_order_sha256: 2b95c283b0a76d6eada176a7cd72b7fd322f2663a1d87b929cb1559687da8d26
+    canonical_manifest_sha256: 7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e
+  fold_assignment_labels: pre_corruption_label
+  group_unit: source_patch_id
+  official_folds:
+  - 1
+  - 2
+  - 3
+  reference_group_selection_algorithm: deterministic_group_greedy_class_distribution_v1
+  reference_validation_fraction_groups: 0.1
+  source: pannuke
+  split_seed: 223
+ensemble:
+  members:
+  - model_seed: 303
+    scenario_id: cnn_context_rgb
+  - model_seed: 304
+    scenario_id: cnn_context_rgb
+  - model_seed: 305
+    scenario_id: cnn_context_rgb
+  primary_risk: mean_pairwise_js_divergence
+  secondary_risks:
+  - predictive_entropy_of_mean
+  - variation_ratio
+experiment_name: confirmatory_study
+fixed_hybrid:
+  components:
+  - self_confidence
+  - ensemble_disagreement
+  drop_one_ablations:
+  - self_confidence
+  - ensemble_disagreement
+  weights:
+  - 0.5
+  - 0.5
+fold_rotation:
+  aggregate_policy: report_each_rotation_and_descriptive_fold_mean
+  enabled: true
+  feasibility_rule: all_five_classes_in_each_development_training_partition
+model_seeds:
+- 303
+- 304
+- 305
+oof:
+  n_splits: 5
+  no_nucleus_level_fallback: true
+  split_kind: stratified_group
+original_audit_selection:
+  cache_provenance_id: imagenet_context_embedding_cache
+  classifier:
+    id: multinomial_logistic_regression
+    parameters:
+      class_weight: balanced
+      l2: 0.01
+      max_iter: 400
+  model_seed: 303
+  n_splits: 5
+  representation_id: imagenet_resnet18_context_embeddings
+  risk_method: self_confidence
+  scenario_id: imagenet_frozen_logistic
+restoration:
+  conditions:
+  - uncorrupted_reference_baseline
+  - corrupted_observed_baseline
+  - random_review_restoration
+  - audit_guided_restoration
+  model_seed: 303
+  random_repeats: 100
+  random_seed: 443
+  ranking_method: fixed_hybrid
+  representation_id: imagenet_target_highlighted_embeddings
+  review_budget: 0.05
+  scenario_id: imagenet_frozen_target_highlighted_logistic
+scenarios:
+- cache_provenance_id: cnn_context_rgb_cache
+  classifier: cnn_softmax_head
+  encoder: resnet18_imagenet1k_v1
+  family: cnn
+  id: cnn_context_rgb
+  input_variant: context_rgb
+  representation_id: cnn_context_rgb_pixels
+  required: true
+- cache_provenance_id: cnn_context_target_mask_cache
+  classifier: cnn_softmax_head
+  encoder: resnet18_imagenet1k_v1_zero_init_fourth_channel
+  family: cnn
+  id: cnn_context_target_mask
+  input_variant: context_rgb_plus_binary_target_mask
+  representation_id: cnn_context_target_mask_pixels
+  required: true
+- cache_provenance_id: imagenet_context_embedding_cache
+  classifier: multinomial_logistic_regression
+  encoder: resnet18_imagenet1k_v1
+  family: imagenet_frozen
+  id: imagenet_frozen_logistic
+  input_variant: context_rgb
+  representation_id: imagenet_resnet18_context_embeddings
+  required: true
+- cache_provenance_id: imagenet_target_highlighted_embedding_cache
+  classifier: multinomial_logistic_regression
+  encoder: resnet18_imagenet1k_v1
+  family: imagenet_frozen
+  id: imagenet_frozen_target_highlighted_logistic
+  input_variant: target_highlighted_rgb
+  representation_id: imagenet_target_highlighted_embeddings
+  required: true
+- cache_provenance_id: imagenet_context_morphometrics_cache
+  classifier: multinomial_logistic_regression
+  encoder: resnet18_imagenet1k_v1_plus_target_morphometrics_v1
+  family: imagenet_frozen
+  id: imagenet_frozen_context_morphometrics_logistic
+  input_variant: context_rgb_plus_target_morphometrics
+  representation_id: imagenet_context_embeddings_plus_target_morphometrics
+  required: true
+- availability_audit_sha256: 5e568cf29e489d8948bfcd33feae5b292cb48837eb4c93754202a565778a6e4a
+  cache_provenance_id: pathology_context_embedding_cache
+  classifier: multinomial_logistic_regression
+  encoder: availability_selected_pathology_encoder
+  family: pathology_frozen
+  id: pathology_frozen_logistic
+  input_variant: context_rgb
+  representation_id: pathology_context_embeddings
+  required: false
+schema_version: 2
+statistics:
+  bootstrap_seed: 439
+  holm_families:
+  - target_representation_family
+  - ranking_method_family
+  - encoder_family
+  paired_group_bootstrap_iterations: 2000
+  preregistered_paired_comparisons:
+  - comparison_id: target_mask_cnn_minus_context_cnn
+    direction: method_a_minus_method_b
+    holm_family: target_representation_family
+    metric: average_precision
+    operand_a:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_target_mask_pixels
+      risk_id: self_confidence
+      scenario_id: cnn_context_target_mask
+    operand_b:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: self_confidence
+      scenario_id: cnn_context_rgb
+  - comparison_id: highlighted_frozen_minus_context_frozen
+    direction: method_a_minus_method_b
+    holm_family: target_representation_family
+    metric: average_precision
+    operand_a:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: imagenet_target_highlighted_embeddings
+      risk_id: self_confidence
+      scenario_id: imagenet_frozen_target_highlighted_logistic
+    operand_b:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: imagenet_resnet18_context_embeddings
+      risk_id: self_confidence
+      scenario_id: imagenet_frozen_logistic
+  - comparison_id: context_morphometrics_minus_context_frozen
+    direction: method_a_minus_method_b
+    holm_family: target_representation_family
+    metric: average_precision
+    operand_a:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: imagenet_context_embeddings_plus_target_morphometrics
+      risk_id: self_confidence
+      scenario_id: imagenet_frozen_context_morphometrics_logistic
+    operand_b:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: imagenet_resnet18_context_embeddings
+      risk_id: self_confidence
+      scenario_id: imagenet_frozen_logistic
+  - comparison_id: ensemble_disagreement_minus_self_confidence
+    direction: method_a_minus_method_b
+    holm_family: ranking_method_family
+    metric: average_precision
+    operand_a:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: ensemble_disagreement
+      scenario_id: cnn_context_rgb
+    operand_b:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: self_confidence
+      scenario_id: cnn_context_rgb
+  - comparison_id: fixed_hybrid_minus_drop_self_confidence
+    direction: method_a_minus_method_b
+    holm_family: ranking_method_family
+    metric: average_precision
+    operand_a:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: fixed_hybrid
+      scenario_id: cnn_context_rgb
+    operand_b:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: hybrid_drop_self_confidence
+      scenario_id: cnn_context_rgb
+  - comparison_id: fixed_hybrid_minus_drop_ensemble_disagreement
+    direction: method_a_minus_method_b
+    holm_family: ranking_method_family
+    metric: average_precision
+    operand_a:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: fixed_hybrid
+      scenario_id: cnn_context_rgb
+    operand_b:
+      classifier_id: cnn_softmax_head
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: cnn_context_rgb_pixels
+      risk_id: hybrid_drop_ensemble_disagreement
+      scenario_id: cnn_context_rgb
+  - comparison_id: pathology_minus_imagenet_context
+    direction: method_a_minus_method_b
+    holm_family: encoder_family
+    metric: average_precision
+    operand_a:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: pathology_context_embeddings
+      risk_id: self_confidence
+      scenario_id: pathology_frozen_logistic
+    operand_b:
+      classifier_id: multinomial_logistic_regression
+      corruption_cell: confusion_targeted_ten_percent
+      model_seed: matched
+      outer_fold: all_matched
+      representation_id: imagenet_resnet18_context_embeddings
+      risk_id: self_confidence
+      scenario_id: imagenet_frozen_logistic
+status: READY_FOR_FREEZE
+training:
+  amp: true
+  amp_dtype: float16
+  checkpoint_resume: true
+  class_weight: balanced
+  cuda_required: true
+  early_stopping_min_delta: 0.0001
+  early_stopping_patience: 10
+  early_stopping_source: reference_validation_only
+  gradient_accumulation_steps: 2
+  initial_batch_size: 128
+  input_size: 224
+  learning_rate: 0.0001
+  max_epochs: 100
+  minimum_batch_size: 1
+  oom_policy: halve_batch_and_retry_same_samples
+  optimizer: adamw
+  weight_decay: 0.0001

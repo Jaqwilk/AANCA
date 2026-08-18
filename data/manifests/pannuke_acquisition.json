@@ -1,0 +1,636 @@
+{
+  "acquisition": {
+    "download_performed_by_this_software": false,
+    "extraction_performed_by_this_software": false,
+    "method": "manual_download_from_official_warwick_page",
+    "raw_root": "data/raw/pannuke",
+    "verification_completed_at_utc": "2026-07-17T23:46:29.495Z",
+    "verification_duration_seconds": 86.65434,
+    "verification_method": "local_streaming_sha256_zip_crc32_safe_member_paths_and_extracted_npy_inventory",
+    "verification_timestamp_utc": "2026-07-17T23:45:00.282Z"
+  },
+  "archives": [
+    {
+      "checksum_provenance": "locally_computed_not_publisher_provided",
+      "fold": 1,
+      "local_last_write_time_utc": "2026-07-17T20:06:50.419Z",
+      "member_count": 11,
+      "member_inventory": [
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 1",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 1094,
+          "crc32": "eb078a77",
+          "is_directory": false,
+          "path": "Fold 1/README.md",
+          "size_bytes": 2146
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 1/masks",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 5612,
+          "crc32": "45776983",
+          "is_directory": false,
+          "path": "Fold 1/masks/by-nc-sa.md",
+          "size_bytes": 19089
+        },
+        {
+          "compressed_size_bytes": 608,
+          "crc32": "80ac17ea",
+          "is_directory": false,
+          "path": "Fold 1/masks/README.md",
+          "size_bytes": 1253
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 1/masks/fold1",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 36288630,
+          "crc32": "6a3f7bb3",
+          "is_directory": false,
+          "path": "Fold 1/masks/fold1/masks.npy",
+          "size_bytes": 8355053696
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 1/images",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 1/images/fold1",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 1094,
+          "crc32": "5cf6c60a",
+          "is_directory": false,
+          "path": "Fold 1/images/fold1/types.npy",
+          "size_bytes": 138240
+        },
+        {
+          "compressed_size_bytes": 663976101,
+          "crc32": "9e43a330",
+          "is_directory": false,
+          "path": "Fold 1/images/fold1/images.npy",
+          "size_bytes": 4177526912
+        }
+      ],
+      "member_inventory_sha256": "a7ef49adaecddf8bb30182186ee317cc9d4c83cdaa0dc983cb4b48de8e6264dd",
+      "path": "data/raw/pannuke/fold_1.zip",
+      "path_safety_status": "passed",
+      "rejected_duplicate_or_case_alias_count": 0,
+      "rejected_symbolic_link_count": 0,
+      "rejected_unsafe_member_path_count": 0,
+      "sha256": "6e19ad380300e8ce9480f9ab6a14cc91fa4b6a511609b40e3d70bdf9c881ed0b",
+      "size_bytes": 700275281,
+      "uncompressed_size_bytes": 12532741336,
+      "zip_crc_failed_member_count": 0,
+      "zip_crc_status": "passed"
+    },
+    {
+      "checksum_provenance": "locally_computed_not_publisher_provided",
+      "fold": 2,
+      "local_last_write_time_utc": "2026-07-17T20:08:07.518Z",
+      "member_count": 11,
+      "member_inventory": [
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 2",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 1082,
+          "crc32": "28b64d6c",
+          "is_directory": false,
+          "path": "Fold 2/README.md",
+          "size_bytes": 2127
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 2/images",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 2/images/fold2",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 624854625,
+          "crc32": "3389d7ce",
+          "is_directory": false,
+          "path": "Fold 2/images/fold2/images.npy",
+          "size_bytes": 3968336000
+        },
+        {
+          "compressed_size_bytes": 1078,
+          "crc32": "da961669",
+          "is_directory": false,
+          "path": "Fold 2/images/fold2/types.npy",
+          "size_bytes": 131324
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 2/masks",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 5612,
+          "crc32": "45776983",
+          "is_directory": false,
+          "path": "Fold 2/masks/by-nc-sa.md",
+          "size_bytes": 19089
+        },
+        {
+          "compressed_size_bytes": 619,
+          "crc32": "9ec24c49",
+          "is_directory": false,
+          "path": "Fold 2/masks/README.md",
+          "size_bytes": 1270
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 2/masks/fold2",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 33977394,
+          "crc32": "2a2c5c72",
+          "is_directory": false,
+          "path": "Fold 2/masks/fold2/masks.npy",
+          "size_bytes": 7936671872
+        }
+      ],
+      "member_inventory_sha256": "b9358a0d464cfdd59acd4c501874c93c5c51303dd5b7e91a293cc11f34e9298a",
+      "path": "data/raw/pannuke/fold_2.zip",
+      "path_safety_status": "passed",
+      "rejected_duplicate_or_case_alias_count": 0,
+      "rejected_symbolic_link_count": 0,
+      "rejected_unsafe_member_path_count": 0,
+      "sha256": "5bc540cc509f64b5f5a274d6e5a245527dbd3e6d3155d43555115c5d54709b07",
+      "size_bytes": 658842552,
+      "uncompressed_size_bytes": 11905161682,
+      "zip_crc_failed_member_count": 0,
+      "zip_crc_status": "passed"
+    },
+    {
+      "checksum_provenance": "locally_computed_not_publisher_provided",
+      "fold": 3,
+      "local_last_write_time_utc": "2026-07-17T19:59:27.130Z",
+      "member_count": 11,
+      "member_inventory": [
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 3",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 1094,
+          "crc32": "5f6e6372",
+          "is_directory": false,
+          "path": "Fold 3/README.md",
+          "size_bytes": 2146
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 3/images",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 3/images/fold3",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 680861887,
+          "crc32": "1d472bd8",
+          "is_directory": false,
+          "path": "Fold 3/images/fold3/images.npy",
+          "size_bytes": 4281335936
+        },
+        {
+          "compressed_size_bytes": 1084,
+          "crc32": "e45dfded",
+          "is_directory": false,
+          "path": "Fold 3/images/fold3/types.npy",
+          "size_bytes": 141672
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 3/masks",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 5612,
+          "crc32": "45776983",
+          "is_directory": false,
+          "path": "Fold 3/masks/by-nc-sa.md",
+          "size_bytes": 19089
+        },
+        {
+          "compressed_size_bytes": 608,
+          "crc32": "80ac17ea",
+          "is_directory": false,
+          "path": "Fold 3/masks/README.md",
+          "size_bytes": 1253
+        },
+        {
+          "compressed_size_bytes": 0,
+          "crc32": "00000000",
+          "is_directory": true,
+          "path": "Fold 3/masks/fold3",
+          "size_bytes": 0
+        },
+        {
+          "compressed_size_bytes": 37097427,
+          "crc32": "dd14a425",
+          "is_directory": false,
+          "path": "Fold 3/masks/fold3/masks.npy",
+          "size_bytes": 8562671744
+        }
+      ],
+      "member_inventory_sha256": "10778bfd8c7f0d4cf85a62e4acbbcd1bb8e34007b925e0b88f18e4cd61398899",
+      "path": "data/raw/pannuke/fold_3.zip",
+      "path_safety_status": "passed",
+      "rejected_duplicate_or_case_alias_count": 0,
+      "rejected_symbolic_link_count": 0,
+      "rejected_unsafe_member_path_count": 0,
+      "sha256": "c14d372981c42f611ebc80afad01702b89cad8c1b3089daa31931cf5a4b1a39d",
+      "size_bytes": 717969882,
+      "uncompressed_size_bytes": 12844171840,
+      "zip_crc_failed_member_count": 0,
+      "zip_crc_status": "passed"
+    }
+  ],
+  "citation_requirement": {
+    "evidence": "release README requests citation of both PanNuke publications",
+    "local_readme_evidence": [
+      {
+        "fold": 1,
+        "path": "data/raw/pannuke/Fold 1/README.md",
+        "role": "fold_readme",
+        "sha256": "822161f414a8dceda0eeadac17256b2a9f24e33ddc01bbb2c8da49e2dc6c0667"
+      },
+      {
+        "fold": 1,
+        "path": "data/raw/pannuke/Fold 1/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876"
+      },
+      {
+        "fold": 2,
+        "path": "data/raw/pannuke/Fold 2/README.md",
+        "role": "fold_readme",
+        "sha256": "959c804b969013fca21362f33a547db7edc7775a96355f99714217ac0144ebdb"
+      },
+      {
+        "fold": 2,
+        "path": "data/raw/pannuke/Fold 2/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "26e1c75af0d0129ec6ae786d2aca0b05b9bd4cf22c9036d9239d6f04e7d465ed"
+      },
+      {
+        "fold": 3,
+        "path": "data/raw/pannuke/Fold 3/README.md",
+        "role": "fold_readme",
+        "sha256": "9ddb68726215fb117406f23c6cb9018f589b7893d7e92aaf25745f577b69d336"
+      },
+      {
+        "fold": 3,
+        "path": "data/raw/pannuke/Fold 3/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876"
+      }
+    ],
+    "reference_keys": [
+      "gamper2019pannuke",
+      "gamper2020pannukeextension"
+    ],
+    "required": true
+  },
+  "dataset": "PanNuke",
+  "extracted_document_inventory": [
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/README.md",
+      "crc32": "eb078a77",
+      "fold": 1,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 1/README.md",
+      "role": "fold_readme",
+      "sha256": "822161f414a8dceda0eeadac17256b2a9f24e33ddc01bbb2c8da49e2dc6c0667",
+      "size_bytes": 2146
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/masks/by-nc-sa.md",
+      "crc32": "45776983",
+      "fold": 1,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 1/masks/by-nc-sa.md",
+      "role": "masks_license_text",
+      "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+      "size_bytes": 19089
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/masks/README.md",
+      "crc32": "80ac17ea",
+      "fold": 1,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 1/masks/README.md",
+      "role": "masks_readme",
+      "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876",
+      "size_bytes": 1253
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/README.md",
+      "crc32": "28b64d6c",
+      "fold": 2,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 2/README.md",
+      "role": "fold_readme",
+      "sha256": "959c804b969013fca21362f33a547db7edc7775a96355f99714217ac0144ebdb",
+      "size_bytes": 2127
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/masks/by-nc-sa.md",
+      "crc32": "45776983",
+      "fold": 2,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 2/masks/by-nc-sa.md",
+      "role": "masks_license_text",
+      "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+      "size_bytes": 19089
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/masks/README.md",
+      "crc32": "9ec24c49",
+      "fold": 2,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 2/masks/README.md",
+      "role": "masks_readme",
+      "sha256": "26e1c75af0d0129ec6ae786d2aca0b05b9bd4cf22c9036d9239d6f04e7d465ed",
+      "size_bytes": 1270
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/README.md",
+      "crc32": "5f6e6372",
+      "fold": 3,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 3/README.md",
+      "role": "fold_readme",
+      "sha256": "9ddb68726215fb117406f23c6cb9018f589b7893d7e92aaf25745f577b69d336",
+      "size_bytes": 2146
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/masks/by-nc-sa.md",
+      "crc32": "45776983",
+      "fold": 3,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 3/masks/by-nc-sa.md",
+      "role": "masks_license_text",
+      "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+      "size_bytes": 19089
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/masks/README.md",
+      "crc32": "80ac17ea",
+      "fold": 3,
+      "kind": "documentation",
+      "path": "data/raw/pannuke/Fold 3/masks/README.md",
+      "role": "masks_readme",
+      "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876",
+      "size_bytes": 1253
+    }
+  ],
+  "extracted_document_inventory_sha256": "0ec42cbd8ed01ab1bbeb474e5b3089c935672c4cebac3bc86ce6ab8460c031da",
+  "extracted_file_inventory_sha256": "a193c0e9e8a019a13010385b73d696ccdbb3576dbaaa635c5c87344309e497e8",
+  "extracted_npy_inventory": [
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/images/fold1/images.npy",
+      "crc32": "9e43a330",
+      "fold": 1,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 1/images/fold1/images.npy",
+      "role": "images",
+      "sha256": "32b7de139650ecc07907072cb2cc45de69cd5e51b8252bd69eff271554ec324b",
+      "size_bytes": 4177526912
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/masks/fold1/masks.npy",
+      "crc32": "6a3f7bb3",
+      "fold": 1,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 1/masks/fold1/masks.npy",
+      "role": "masks",
+      "sha256": "31d9817cd3cddef742157f79d53eb80e37844a30b2b44c8c98825b476b4245b2",
+      "size_bytes": 8355053696
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 1/images/fold1/types.npy",
+      "crc32": "5cf6c60a",
+      "fold": 1,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 1/images/fold1/types.npy",
+      "role": "types",
+      "sha256": "64746d127bc28e88be6fdc4639af4f21a91fb1fda00e68869ea5fe61a574f615",
+      "size_bytes": 138240
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/images/fold2/images.npy",
+      "crc32": "3389d7ce",
+      "fold": 2,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 2/images/fold2/images.npy",
+      "role": "images",
+      "sha256": "ff0c1b68b1f1019b78a2e70d04b04326d1c5334d65b8aed31f50f6835a61d61d",
+      "size_bytes": 3968336000
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/masks/fold2/masks.npy",
+      "crc32": "2a2c5c72",
+      "fold": 2,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 2/masks/fold2/masks.npy",
+      "role": "masks",
+      "sha256": "e8e8c8c1406c0368befb617bea52ec23b623f8196e4d46e4e6eb893446ae03af",
+      "size_bytes": 7936671872
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 2/images/fold2/types.npy",
+      "crc32": "da961669",
+      "fold": 2,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 2/images/fold2/types.npy",
+      "role": "types",
+      "sha256": "8a960439d4dbe09b762f2c5ba81ee0476dd4ab2e6007a9c246ede30d0327356c",
+      "size_bytes": 131324
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/images/fold3/images.npy",
+      "crc32": "1d472bd8",
+      "fold": 3,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 3/images/fold3/images.npy",
+      "role": "images",
+      "sha256": "cc9112bd54e4cf49d8cf3886163196263ef5dfe3341e6967940c6bd976ad7bf9",
+      "size_bytes": 4281335936
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/masks/fold3/masks.npy",
+      "crc32": "dd14a425",
+      "fold": 3,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 3/masks/fold3/masks.npy",
+      "role": "masks",
+      "sha256": "79c36441a2fc8ff3a01404cd059a6c36bce3b8343838f3a5961f6f6dff15fa4c",
+      "size_bytes": 8562671744
+    },
+    {
+      "archive_member_crc32_match": true,
+      "archive_member_path": "Fold 3/images/fold3/types.npy",
+      "crc32": "e45dfded",
+      "fold": 3,
+      "kind": "npy",
+      "path": "data/raw/pannuke/Fold 3/images/fold3/types.npy",
+      "role": "types",
+      "sha256": "b8f0b3b5b0cf9e4024c939c8b1bc6333745f1e6827f6f15cd3a635e8546ec736",
+      "size_bytes": 141672
+    }
+  ],
+  "extracted_npy_inventory_sha256": "d4e9c13f0c3f6f47e9715829add14fa86c75bea7e1914212457d7f3ca9ff7923",
+  "immutable_raw_policy": {
+    "archives_retained_unchanged": true,
+    "automatic_source_annotation_modification_forbidden": true,
+    "derived_outputs_must_be_outside_raw_root": true,
+    "extracted_arrays_retained_unchanged": true,
+    "git_tracking_for_raw_release_forbidden": true
+  },
+  "license": {
+    "local_evidence": [
+      {
+        "fold": 1,
+        "path": "data/raw/pannuke/Fold 1/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557"
+      },
+      {
+        "fold": 2,
+        "path": "data/raw/pannuke/Fold 2/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557"
+      },
+      {
+        "fold": 3,
+        "path": "data/raw/pannuke/Fold 3/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557"
+      }
+    ],
+    "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
+    "project_use": "research_noncommercial",
+    "scope_readme_evidence": [
+      {
+        "fold": 1,
+        "path": "data/raw/pannuke/Fold 1/README.md",
+        "role": "fold_readme",
+        "sha256": "822161f414a8dceda0eeadac17256b2a9f24e33ddc01bbb2c8da49e2dc6c0667"
+      },
+      {
+        "fold": 1,
+        "path": "data/raw/pannuke/Fold 1/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876"
+      },
+      {
+        "fold": 2,
+        "path": "data/raw/pannuke/Fold 2/README.md",
+        "role": "fold_readme",
+        "sha256": "959c804b969013fca21362f33a547db7edc7775a96355f99714217ac0144ebdb"
+      },
+      {
+        "fold": 2,
+        "path": "data/raw/pannuke/Fold 2/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "26e1c75af0d0129ec6ae786d2aca0b05b9bd4cf22c9036d9239d6f04e7d465ed"
+      },
+      {
+        "fold": 3,
+        "path": "data/raw/pannuke/Fold 3/README.md",
+        "role": "fold_readme",
+        "sha256": "9ddb68726215fb117406f23c6cb9018f589b7893d7e92aaf25745f577b69d336"
+      },
+      {
+        "fold": 3,
+        "path": "data/raw/pannuke/Fold 3/masks/README.md",
+        "role": "masks_readme",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876"
+      }
+    ],
+    "scope_statement": "each release README explicitly applies CC BY-NC-SA 4.0 to the masks directory and its contents",
+    "spdx_id": "CC-BY-NC-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  },
+  "raw_release_read_only_verification": {
+    "metadata_snapshot_sha256": "96a69d3a45b8c89e42b98250dd6353757fc9c80da669e22c717306af995d1004",
+    "pre_post_path_size_mtime_match": true,
+    "regular_file_count": 22,
+    "status": "passed"
+  },
+  "release": "official_three_fold_release",
+  "schema_version": 2,
+  "source": {
+    "official_url": "https://warwick.ac.uk/fac/cross_fac/tia/data/pannuke/",
+    "publisher": "University of Warwick Tissue Image Analytics",
+    "source_kind": "official_publisher_download_page"
+  }
+}

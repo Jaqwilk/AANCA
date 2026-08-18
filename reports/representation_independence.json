@@ -1,0 +1,80 @@
+{
+  "entries": {
+    "engineered_target_features": {
+      "auditor": {
+        "family": "engineered",
+        "feature_artifact_hash": "3dfd5b8545eaaf970a0f728e344b0b10e3996eb35886ad3dea8a310f75cf92c6",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "f1b337c672c50004e87e92956a5bb851ae60ab44a9f9a56f8f37563bad8ea1b2",
+        "preprocessing_hash": "894d95124b7e2ba4f45a363391042b2d5a21259aab9a0bc8213977384b7771dc",
+        "representation_name": "engineered_target_features",
+        "weights_hash": "2f1b1c78fc25dcea7a9b0d3d6544417a85f28b973f8f17e970a530e394d09d69"
+      },
+      "generator": {
+        "family": "morphology",
+        "feature_artifact_hash": "dd80abb822b5b414636738064b4cc5b89807fbd3ef4cacba619b052a047b6b82",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "f1b337c672c50004e87e92956a5bb851ae60ab44a9f9a56f8f37563bad8ea1b2",
+        "preprocessing_hash": "894d95124b7e2ba4f45a363391042b2d5a21259aab9a0bc8213977384b7771dc",
+        "representation_name": "morphology_only_v1",
+        "weights_hash": "2f1b1c78fc25dcea7a9b0d3d6544417a85f28b973f8f17e970a530e394d09d69"
+      },
+      "independence_matrix_hash": "43d0b19346a3624bd5a07a059a0005537f1ec61a4b4c1fd2f432acbf0fee54b2",
+      "matrix_decision": "not_independent",
+      "matrix_reason": "The engineered auditor contains the exact morphology_only_v1 generator columns; instance-dependent results are circularity_risk.",
+      "matrix_version": "pannuke_primary_representation_independence_v2",
+      "schema_version": 1
+    },
+    "imagenet_resnet18_context": {
+      "auditor": {
+        "family": "imagenet",
+        "feature_artifact_hash": "62b4027c302d3e5048bf81eaf72975fcbfb0da76945d4eb0ef91051789596e65",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "715fdb6822d1fe113391cf050c4854b12741b62a3e473c07e0385bca3dd05d3f",
+        "preprocessing_hash": "4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c",
+        "representation_name": "imagenet_resnet18_context",
+        "weights_hash": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+      },
+      "generator": {
+        "family": "morphology",
+        "feature_artifact_hash": "dd80abb822b5b414636738064b4cc5b89807fbd3ef4cacba619b052a047b6b82",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "f1b337c672c50004e87e92956a5bb851ae60ab44a9f9a56f8f37563bad8ea1b2",
+        "preprocessing_hash": "894d95124b7e2ba4f45a363391042b2d5a21259aab9a0bc8213977384b7771dc",
+        "representation_name": "morphology_only_v1",
+        "weights_hash": "2f1b1c78fc25dcea7a9b0d3d6544417a85f28b973f8f17e970a530e394d09d69"
+      },
+      "independence_matrix_hash": "de17c7835bc7da6885770375212d3faf7e665b7f2cac1ead17da20b5e56d7582",
+      "matrix_decision": "verified_independent",
+      "matrix_reason": "The frozen context-RGB ResNet representation does not consume the engineered morphology_only_v1 feature vector used by the generator.",
+      "matrix_version": "pannuke_primary_representation_independence_v2",
+      "schema_version": 1
+    },
+    "imagenet_resnet18_highlighted": {
+      "auditor": {
+        "family": "imagenet",
+        "feature_artifact_hash": "48efd3e554e09db79908bb9c36db036d30aa64a8ca77080c0623bb926c071dcb",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "715fdb6822d1fe113391cf050c4854b12741b62a3e473c07e0385bca3dd05d3f",
+        "preprocessing_hash": "4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c",
+        "representation_name": "imagenet_resnet18_highlighted",
+        "weights_hash": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+      },
+      "generator": {
+        "family": "morphology",
+        "feature_artifact_hash": "dd80abb822b5b414636738064b4cc5b89807fbd3ef4cacba619b052a047b6b82",
+        "fitted_data_hash": "566ca4a1e689efb4811b369c7c5fd75b6822f32b23cfc3081d7c5665f2d5fa0f",
+        "implementation_hash": "f1b337c672c50004e87e92956a5bb851ae60ab44a9f9a56f8f37563bad8ea1b2",
+        "preprocessing_hash": "894d95124b7e2ba4f45a363391042b2d5a21259aab9a0bc8213977384b7771dc",
+        "representation_name": "morphology_only_v1",
+        "weights_hash": "2f1b1c78fc25dcea7a9b0d3d6544417a85f28b973f8f17e970a530e394d09d69"
+      },
+      "independence_matrix_hash": "4117b92f63c9af63bc2889358d43ba0ac6863267b564ce4b27df50585c12e53d",
+      "matrix_decision": "verified_independent",
+      "matrix_reason": "The frozen target-highlighted ResNet representation does not consume the engineered morphology_only_v1 feature vector used by the generator.",
+      "matrix_version": "pannuke_primary_representation_independence_v2",
+      "schema_version": 1
+    }
+  },
+  "schema_version": 2
+}

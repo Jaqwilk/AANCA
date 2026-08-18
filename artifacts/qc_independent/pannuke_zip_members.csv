@@ -1,0 +1,34 @@
+archive,member,normalized_member,is_directory,compression_method,compressed_size_bytes,uncompressed_size_bytes,crc32,encrypted,is_symlink,path_safe,path_safety_reasons,duplicate_name_types,extracted_relative_path,extracted_size_crc_match
+fold_1.zip,Fold 1/,Fold 1/,True,0,0,0,00000000,False,False,True,,,,
+fold_1.zip,Fold 1/README.md,Fold 1/README.md,False,8,1094,2146,eb078a77,False,False,True,,,data/raw/pannuke/Fold 1/README.md,True
+fold_1.zip,Fold 1/masks/,Fold 1/masks/,True,0,0,0,00000000,False,False,True,,,,
+fold_1.zip,Fold 1/masks/by-nc-sa.md,Fold 1/masks/by-nc-sa.md,False,8,5612,19089,45776983,False,False,True,,,data/raw/pannuke/Fold 1/masks/by-nc-sa.md,True
+fold_1.zip,Fold 1/masks/README.md,Fold 1/masks/README.md,False,8,608,1253,80ac17ea,False,False,True,,,data/raw/pannuke/Fold 1/masks/README.md,True
+fold_1.zip,Fold 1/masks/fold1/,Fold 1/masks/fold1/,True,0,0,0,00000000,False,False,True,,,,
+fold_1.zip,Fold 1/masks/fold1/masks.npy,Fold 1/masks/fold1/masks.npy,False,8,36288630,8355053696,6a3f7bb3,False,False,True,,,data/raw/pannuke/Fold 1/masks/fold1/masks.npy,True
+fold_1.zip,Fold 1/images/,Fold 1/images/,True,0,0,0,00000000,False,False,True,,,,
+fold_1.zip,Fold 1/images/fold1/,Fold 1/images/fold1/,True,0,0,0,00000000,False,False,True,,,,
+fold_1.zip,Fold 1/images/fold1/types.npy,Fold 1/images/fold1/types.npy,False,8,1094,138240,5cf6c60a,False,False,True,,,data/raw/pannuke/Fold 1/images/fold1/types.npy,True
+fold_1.zip,Fold 1/images/fold1/images.npy,Fold 1/images/fold1/images.npy,False,8,663976101,4177526912,9e43a330,False,False,True,,,data/raw/pannuke/Fold 1/images/fold1/images.npy,True
+fold_2.zip,Fold 2/,Fold 2/,True,0,0,0,00000000,False,False,True,,,,
+fold_2.zip,Fold 2/README.md,Fold 2/README.md,False,8,1082,2127,28b64d6c,False,False,True,,,data/raw/pannuke/Fold 2/README.md,True
+fold_2.zip,Fold 2/images/,Fold 2/images/,True,0,0,0,00000000,False,False,True,,,,
+fold_2.zip,Fold 2/images/fold2/,Fold 2/images/fold2/,True,0,0,0,00000000,False,False,True,,,,
+fold_2.zip,Fold 2/images/fold2/images.npy,Fold 2/images/fold2/images.npy,False,8,624854625,3968336000,3389d7ce,False,False,True,,,data/raw/pannuke/Fold 2/images/fold2/images.npy,True
+fold_2.zip,Fold 2/images/fold2/types.npy,Fold 2/images/fold2/types.npy,False,8,1078,131324,da961669,False,False,True,,,data/raw/pannuke/Fold 2/images/fold2/types.npy,True
+fold_2.zip,Fold 2/masks/,Fold 2/masks/,True,0,0,0,00000000,False,False,True,,,,
+fold_2.zip,Fold 2/masks/by-nc-sa.md,Fold 2/masks/by-nc-sa.md,False,8,5612,19089,45776983,False,False,True,,,data/raw/pannuke/Fold 2/masks/by-nc-sa.md,True
+fold_2.zip,Fold 2/masks/README.md,Fold 2/masks/README.md,False,8,619,1270,9ec24c49,False,False,True,,,data/raw/pannuke/Fold 2/masks/README.md,True
+fold_2.zip,Fold 2/masks/fold2/,Fold 2/masks/fold2/,True,0,0,0,00000000,False,False,True,,,,
+fold_2.zip,Fold 2/masks/fold2/masks.npy,Fold 2/masks/fold2/masks.npy,False,8,33977394,7936671872,2a2c5c72,False,False,True,,,data/raw/pannuke/Fold 2/masks/fold2/masks.npy,True
+fold_3.zip,Fold 3/,Fold 3/,True,0,0,0,00000000,False,False,True,,,,
+fold_3.zip,Fold 3/README.md,Fold 3/README.md,False,8,1094,2146,5f6e6372,False,False,True,,,data/raw/pannuke/Fold 3/README.md,True
+fold_3.zip,Fold 3/images/,Fold 3/images/,True,0,0,0,00000000,False,False,True,,,,
+fold_3.zip,Fold 3/images/fold3/,Fold 3/images/fold3/,True,0,0,0,00000000,False,False,True,,,,
+fold_3.zip,Fold 3/images/fold3/images.npy,Fold 3/images/fold3/images.npy,False,8,680861887,4281335936,1d472bd8,False,False,True,,,data/raw/pannuke/Fold 3/images/fold3/images.npy,True
+fold_3.zip,Fold 3/images/fold3/types.npy,Fold 3/images/fold3/types.npy,False,8,1084,141672,e45dfded,False,False,True,,,data/raw/pannuke/Fold 3/images/fold3/types.npy,True
+fold_3.zip,Fold 3/masks/,Fold 3/masks/,True,0,0,0,00000000,False,False,True,,,,
+fold_3.zip,Fold 3/masks/by-nc-sa.md,Fold 3/masks/by-nc-sa.md,False,8,5612,19089,45776983,False,False,True,,,data/raw/pannuke/Fold 3/masks/by-nc-sa.md,True
+fold_3.zip,Fold 3/masks/README.md,Fold 3/masks/README.md,False,8,608,1253,80ac17ea,False,False,True,,,data/raw/pannuke/Fold 3/masks/README.md,True
+fold_3.zip,Fold 3/masks/fold3/,Fold 3/masks/fold3/,True,0,0,0,00000000,False,False,True,,,,
+fold_3.zip,Fold 3/masks/fold3/masks.npy,Fold 3/masks/fold3/masks.npy,False,8,37097427,8562671744,dd14a425,False,False,True,,,data/raw/pannuke/Fold 3/masks/fold3/masks.npy,True

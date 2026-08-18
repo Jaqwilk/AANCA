@@ -1,0 +1,38 @@
+{
+  "evidence": {
+    "files_written_after_boot": 0,
+    "latest_run_file_relative_path": "primary_statistics_manifest.json",
+    "latest_run_file_write_utc": "2026-07-21T03:04:00.6859554Z",
+    "matching_live_processes": [],
+    "process_id_20792_present": false,
+    "source_process_receipt_path": "artifacts/process_observations/20260726T185709.6378333Z_pid20792_cli_receipt.json",
+    "source_process_receipt_sha256": "28767a0b1a14d28aa5d055484c9de2ec0d8fad728abad4f797f67af99b24c151",
+    "status_sha256": "fb78d223d43ac84ffd844280a83bc6350a8e6ae9db074f912866943fe6c7feeb"
+  },
+  "host_interruption": {
+    "event_id": 12,
+    "event_provider": "Microsoft-Windows-Kernel-General",
+    "event_record_id": 113247,
+    "event_time_utc": "2026-07-27T10:37:05.1520822Z",
+    "last_boot_time_local": "2026-07-27T12:37:04.5000000+02:00",
+    "last_boot_time_utc": "2026-07-27T10:37:04.5000000Z",
+    "timezone": "Europe/Warsaw"
+  },
+  "limitations": [
+    "This host receipt proves a reboot and the absence of the recorded process at observation time; it does not fabricate a terminal run seal.",
+    "The unsealed source run remains read-only and ineligible until a separately authorized recovery creates and verifies a new sealed run."
+  ],
+  "observation_kind": "windows_restart_interrupted_primary_orphan_receipt_v1",
+  "observation_timestamp_utc": "2026-07-27T11:07:04.4225163Z",
+  "run": {
+    "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "run_id": "20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "status_at_observation": "running",
+    "terminal_artifacts_absent": [
+      ".immutable.json",
+      "artifact_manifest.json",
+      "failure.json"
+    ]
+  },
+  "schema_version": 1
+}

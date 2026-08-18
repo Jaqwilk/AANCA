@@ -1,0 +1,62 @@
+{
+  "limitations": [
+    "WMI command-line observation does not prove absence of in-process monkeypatching",
+    "receipt is corroborating operational evidence, not a fresh semantic statistics recomputation"
+  ],
+  "observation_kind": "live_windows_process_cli_receipt_v1",
+  "observation_timestamp_utc": "2026-07-26T18:57:09.6378333Z",
+  "parent_process": {
+    "command_line": "\"C:\\Users\\NATAN\\Documents\\AANCA\\.venv\\Scripts\\python.exe\" -m histo_audit experiment primary --project-root . --freeze-dir artifacts\\preregistration_amendments\\20260719T011146.248393Z --dataset data\\raw\\pannuke --manifest data\\manifests\\pannuke\\pannuke_nucleus_manifest.parquet --duplicate-audit artifacts\\duplicate_audit\\pannuke_duplicate_audit.json --pathology-encoder-audit reports\\pathology_encoder_availability.json --primary-config artifacts\\preregistration_amendments\\20260719T011146.248393Z\\primary_frozen.yaml --confirmatory-config artifacts\\preregistration_amendments\\20260719T011146.248393Z\\confirmatory_frozen.yaml",
+    "executable_path": "C:\\Users\\NATAN\\Documents\\AANCA\\.venv\\Scripts\\python.exe",
+    "executable_sha256": "864530d708039551a2c672ddd65e5900fbc08b0981479679723a5b468f8082bc",
+    "pid": 9476,
+    "start_time_utc": "2026-07-19T01:23:55.3492311Z"
+  },
+  "process": {
+    "command_line": "\"C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -m histo_audit experiment primary --project-root . --freeze-dir artifacts\\preregistration_amendments\\20260719T011146.248393Z --dataset data\\raw\\pannuke --manifest data\\manifests\\pannuke\\pannuke_nucleus_manifest.parquet --duplicate-audit artifacts\\duplicate_audit\\pannuke_duplicate_audit.json --pathology-encoder-audit reports\\pathology_encoder_availability.json --primary-config artifacts\\preregistration_amendments\\20260719T011146.248393Z\\primary_frozen.yaml --confirmatory-config artifacts\\preregistration_amendments\\20260719T011146.248393Z\\confirmatory_frozen.yaml",
+    "executable_path": "C:\\Users\\NATAN\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "executable_sha256": "15b41a488c356c0e331facdea6c836a6cec021f12d5fde9844e7ca4a1aa0361a",
+    "parent_pid": 9476,
+    "pid": 20792,
+    "start_time_utc": "2026-07-19T01:23:55.3543959Z"
+  },
+  "run": {
+    "primary_execution_gate_sha256": "7fc5ba21d4ba79fd4a05cd0ba09add8aed35269c8ff697fafbb720f7dee8d3c5",
+    "run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "run_id": "20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "source_records": [
+      {
+        "path": "src/histo_audit/cli.py",
+        "sha256": "2130def47c79b223bff6ade9f25e6d8baff9419f242e7600309f15a0e9849f2f",
+        "size_bytes": 111844
+      },
+      {
+        "path": "src/histo_audit/experiment/primary_completion.py",
+        "sha256": "81670eadbee7f8ea4902c8c4a3cfdc778fcd64a98b449c48a1f06ace9b2968c8",
+        "size_bytes": 84226
+      },
+      {
+        "path": "src/histo_audit/experiment/primary_runner.py",
+        "sha256": "5c0722d59714596d6a2d0dacc0522d6d708e44184c6a238378fcd65e9177efd6",
+        "size_bytes": 38900
+      },
+      {
+        "path": "src/histo_audit/experiment/primary_statistics.py",
+        "sha256": "3ac82d6d0f7b5aa9219b31dc506a6075400bd08c38c6da30bbaa1d4c469dc929",
+        "size_bytes": 54023
+      },
+      {
+        "path": "src/histo_audit/utils/run_tracking.py",
+        "sha256": "59f007bf6819ff8b39da3c5018e46f6a1a41f0a01e5e0a3449a88520ed562920",
+        "size_bytes": 92113
+      }
+    ],
+    "source_tree_manifest_sha256": "9a4afcad586ba445ec41a3a2413ae8f8efa6a422c22e6d148d7bb6a4a2014307",
+    "source_tree_root_sha256": "c0850f54e88483c1df76a4c8836343f667a7a1adbf2d05d571990cd6119cf532",
+    "status_at_observation": "running",
+    "status_sha256": "fb78d223d43ac84ffd844280a83bc6350a8e6ae9db074f912866943fe6c7feeb",
+    "terminal_artifacts_present": false
+  },
+  "schema_version": 1,
+  "trust_model": "trusted_local_process_no_dependency_injection_import_hook_hotpatch_or_concurrent_writer"
+}

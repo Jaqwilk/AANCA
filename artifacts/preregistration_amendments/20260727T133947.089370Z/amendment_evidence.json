@@ -1,0 +1,163 @@
+{
+  "affected_analyses": [
+    "primary_frozen_feature_benchmark_all_registered_cells",
+    "primary_restoration_analysis",
+    "primary_registered_statistics",
+    "confirmatory_primary_dependency_gate",
+    "confirmatory_single_copy_checkpoint_storage",
+    "primary_orphan_recovery_execution_lineage"
+  ],
+  "affected_hypotheses": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7"
+  ],
+  "after": {
+    "confirmatory_config": {
+      "file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "0f5e33259962c5b8f2bf5e3c11a776bdfbf280f6e3cded906e1222e89e1a4df2",
+      "root_sha256": "ba7fb4c8336c4f9ba138fcda16019dc31bec7e5cc3e8b846e643d6dd0332601b",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "amendment_timestamp_utc": "2026-07-27T13:39:47.089370Z",
+  "analysis_dispositions": [
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "primary_frozen_feature_benchmark_all_registered_cells",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "primary_restoration_analysis",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "primary_registered_statistics",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_primary_dependency_gate",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "confirmatory_single_copy_checkpoint_storage",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    },
+    {
+      "amended_primary_claim_allowed": false,
+      "analysis": "primary_orphan_recovery_execution_lineage",
+      "original_unamended_primary_claim_allowed": false,
+      "registration_status": "amended_or_exploratory"
+    }
+  ],
+  "authority_kind": "preregistration_amendment",
+  "before": {
+    "confirmatory_config": {
+      "file_sha256": "4bfe26c15e326387f301eff2d78bf10c20eab6f37458f44263211808af269009",
+      "semantic_sha256": "ff2ce8d5043813b08db23efe797abe444ba6b6bde292810a094d78757f74460b",
+      "snapshot": "confirmatory_frozen.yaml"
+    },
+    "execution_source": {
+      "manifest_sha256": "9a4afcad586ba445ec41a3a2413ae8f8efa6a422c22e6d148d7bb6a4a2014307",
+      "root_sha256": "c0850f54e88483c1df76a4c8836343f667a7a1adbf2d05d571990cd6119cf532",
+      "snapshot": "source_tree_manifest.json"
+    },
+    "preregistration": {
+      "file_sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "snapshot": "PRE_REGISTRATION_FROZEN.md"
+    },
+    "primary_config": {
+      "file_sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "semantic_sha256": "c9949769ed8ab28514925ed2574958146b319d4ff848423559e0568c308cba15",
+      "snapshot": "primary_frozen.yaml"
+    }
+  },
+  "chain_depth": 2,
+  "confirmatory_storage_policy": {
+    "canonical_relative_path_template": "cells/{cell_id}/checkpoints/fold_{fold_id:02d}.pt",
+    "link_policy": "regular_file_no_symlink_no_junction_no_hardlink",
+    "policy": "single_canonical_checkpoint_copy_v1",
+    "retained_copy_count": 1,
+    "schema_version": 1,
+    "scientific_effect": "storage_only_no_model_data_split_seed_prediction_metric_restoration_or_estimand_change",
+    "scope": "one_checkpoint_per_completed_cnn_cell_oof_fold",
+    "verification_policy": "size_sha256_fold_evidence_checkpoint_manifest_postseal_exact_set"
+  },
+  "outcomes_inspected": true,
+  "outcomes_inspected_at_utc": "2026-07-27T10:57:07.000000Z",
+  "overwrite_policy": "immutable successor; never overwrite parent or peer",
+  "parent": {
+    "artifact_root_sha256": "962ab8b5110d062a314591f6144e0f94bebf68239f9ae8b014e2635eaf42031f",
+    "authority_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\preregistration_amendments\\20260719T011146.248393Z",
+    "authority_kind": "preregistration_amendment",
+    "chain_depth": 1,
+    "sha256_manifest_sha256": "f82f4b86d7cdce416108d68d72b6b71b2c4a8f8f1e6744de55962493efce0d53"
+  },
+  "primary_recovery_authorization": {
+    "analysis_disposition": "amended_or_exploratory",
+    "expected_primary_execution_gate_sha256": "7fc5ba21d4ba79fd4a05cd0ba09add8aed35269c8ff697fafbb720f7dee8d3c5",
+    "expected_restoration_readback_root_sha256": "8ad17315d8e90ac8702477a0cf1e7d8a29479eb1282a3055009e164d52713d1d",
+    "expected_source_filesystem_readback_root_sha256": "7ce192b40d241fd2c8b394c1e03905d51a5c654b1373646a5324768a08cc4039",
+    "expected_source_snapshot_root_sha256": "bc224f73960792a495e03e5039c075c0061ee3d86cce095afb21a91a061cc027",
+    "expected_source_tree_manifest_sha256": "9a4afcad586ba445ec41a3a2413ae8f8efa6a422c22e6d148d7bb6a4a2014307",
+    "expected_source_tree_root_sha256": "c0850f54e88483c1df76a4c8836343f667a7a1adbf2d05d571990cd6119cf532",
+    "expected_statistics_manifest_sha256": "2d3c8115d371d7bbe55df3a0af83f28a875ec463823c0b07e0086efe1623318f",
+    "expected_status_sha256": "fb78d223d43ac84ffd844280a83bc6350a8e6ae9db074f912866943fe6c7feeb",
+    "interruption_evidence": {
+      "event_id": 12,
+      "kind": "host_reboot",
+      "last_boot_at_utc": "2026-07-27T10:37:04.5000000Z",
+      "observed_at_utc": "2026-07-27T11:07:04.4225163Z",
+      "process_active": false,
+      "process_checked_at_utc": "2026-07-27T11:07:04.4225163Z",
+      "receipt_path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\process_observations\\20260727T110704.4225163Z_primary_orphan_boot_receipt.json",
+      "receipt_sha256": "2cb53b1efe1ab6441ff9fa6b93c929fb7a5395bd52a20556a3149366fc46d8cc",
+      "source_process_id": 20792
+    },
+    "limitation": "control_flow_and_content_addressed_inheritance_not_fresh_semantic_recomputation",
+    "outcome_inspection_at_utc": "2026-07-27T10:57:07.000000Z",
+    "outcomes_inspected": true,
+    "policy": "interrupted_unsealed_primary_recovery_v1",
+    "reason": "Authorize zero-training recovery of the host-reboot-interrupted unsealed primary after accidental outcome exposure, preserving every frozen scientific method and classifying the recovered analyses as amended_or_exploratory.",
+    "schema_version": 1,
+    "scientific_method_changes": [],
+    "source_run_directory": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "source_run_id": "20260719T012712.600409Z_pannuke_primary_frozen_feature_benchmark_f0ed2d1a3f",
+    "trust_assumption": "trusted_local_process_no_dependency_injection_import_hook_hotpatch_or_concurrent_writer"
+  },
+  "reason": "Authorize zero-training recovery of the host-reboot-interrupted unsealed primary after accidental outcome exposure, preserving every frozen scientific method and classifying the recovered analyses as amended_or_exploratory.",
+  "schema_version": 3,
+  "snapshots": {
+    "confirmatory_config": "confirmatory_frozen.yaml",
+    "execution_source": "source_tree_manifest.json",
+    "preregistration": "PRE_REGISTRATION_FROZEN.md",
+    "primary_config": "primary_frozen.yaml",
+    "report": "AMENDMENT.md"
+  }
+}

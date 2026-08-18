@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "ed85278970ad74026511c547fbe04ab88f0c3849f412b0a3289346dff0f23128",
+      "size_bytes": 1332
+    },
+    {
+      "path": "evidence.json",
+      "sha256": "8206bfb7b8afcbc88d4fbfca46e75bcf240aa4a88adc5974740488bfc33c0892",
+      "size_bytes": 25955
+    },
+    {
+      "path": "index.html",
+      "sha256": "675e593624beb91654dbb56922edb6295dfc2de5d89689dc031027081f127aec",
+      "size_bytes": 127833
+    },
+    {
+      "path": "pannuke_mask_qc_overlays.png",
+      "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a",
+      "size_bytes": 3188071
+    }
+  ],
+  "manifest_root_sha256": "5ac192ce5ef5c16482e1ba08d87a1bea85f7f2d909aeff2438ea44f284daa930",
+  "policy": "aanca_presentation_complete_h1_h7_selected_source_readback_v2",
+  "schema_version": 2
+}

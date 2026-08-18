@@ -1,0 +1,44 @@
+{
+  "amendment_timestamp_utc": "2026-07-27T17:04:13.080954Z",
+  "artifact_count": 6,
+  "artifact_root_sha256": "57f9345eb78e700267916a059f23c550aa60b606125a5420e2c51152268d8627",
+  "artifacts": [
+    {
+      "path": "AMENDMENT.md",
+      "sha256": "e2aca95871edaa0fc44abdcabe9ee8b9c1170a50d2ab884860e1d43acf803552",
+      "size_bytes": 6834
+    },
+    {
+      "path": "PRE_REGISTRATION_FROZEN.md",
+      "sha256": "7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b",
+      "size_bytes": 32538
+    },
+    {
+      "path": "amendment_evidence.json",
+      "sha256": "c2531787116e125bdb46e862f6803429c72e5d4766d5127f2cefa693e320912a",
+      "size_bytes": 16677
+    },
+    {
+      "path": "confirmatory_frozen.yaml",
+      "sha256": "783968e8afc132cca0c877aadf953fc68d3c35f606021b3a97ed380478dbad4a",
+      "size_bytes": 13994
+    },
+    {
+      "path": "primary_frozen.yaml",
+      "sha256": "0b11c1cccb47e954274511577d5ca02fbf7f84b04d8d7cb0ed1880fc70cb1fd9",
+      "size_bytes": 28497
+    },
+    {
+      "path": "source_tree_manifest.json",
+      "sha256": "03bcc6020e3be5a22fe257c45820e4e8ebece3ce471c2b6cecff0e3e9419fc66",
+      "size_bytes": 18678
+    }
+  ],
+  "authority_kind": "preregistration_amendment",
+  "excluded_paths": [
+    ".immutable.json",
+    "sha256_manifest.json"
+  ],
+  "root_digest_algorithm": "sha256(canonical-json-artifact-records)",
+  "schema_version": 1
+}

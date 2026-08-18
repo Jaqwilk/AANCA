@@ -1,0 +1,324 @@
+{
+  "development_manifest_view_metadata": {
+    "canonical_manifest_class_free_eligibility_sha256": "2d19c10a2b4cfc2785dc4a4721a31b7619d3bf5ae8c448ab9ec80640fd6c041d",
+    "canonical_manifest_sha256": "7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e",
+    "contains_final_reference_class_labels": false,
+    "contains_final_reference_sample_ids": false,
+    "derivation_policy": "complete_canonical_development_rows_selected_by_official_fold",
+    "development_class_free_eligibility_sha256": "8c3845cca419e49172357d05022a7f7589d2e9138f34b811498b54a7398c121d",
+    "excluded_official_folds": [
+      3
+    ],
+    "included_official_folds": [
+      1,
+      2
+    ],
+    "manifest_eligible_instance_count": 122154,
+    "manifest_eligible_sample_ids_sha256": "c189eb4ca920f9487116bc3ae4e9952238508f7ceea01b768ad38992a66ca7fe",
+    "manifest_excluded_instance_count": 936,
+    "manifest_excluded_sample_ids_sha256": "7a535678c0502f1e342f468e45eb1f43dee388b383b551aa30802e6cf0d41d73",
+    "manifest_instance_count": 123090,
+    "schema_version": 1,
+    "scope": "development_official_folds_only",
+    "semantic_sha256": "626f37091d4f858d19d77035e8a28222e2d94cdd765bfe1f189ed991b9d741b2",
+    "source_annotations_modified": false
+  },
+  "development_validation_view": {
+    "class_mapping": {
+      "class_names": [
+        "neoplastic",
+        "inflammatory",
+        "connective_soft_tissue",
+        "dead",
+        "non_neoplastic_epithelial"
+      ],
+      "source": "https://github.com/TissueImageAnalytics/PanNuke-metrics/tree/c00014d766ca1be142b81bea19d9ef4315cde65a",
+      "source_note": "Default positive-channel order documented by the official PanNuke metrics repository README at pinned archived commit c00014d766ca1be142b81bea19d9ef4315cde65a; re-verify this evidence before a frozen study.",
+      "source_revision": "c00014d766ca1be142b81bea19d9ef4315cde65a",
+      "verified": true
+    },
+    "contains_final_reference_class_labels": false,
+    "contains_final_reference_file_paths_and_integrity_hashes": true,
+    "contains_final_reference_patch_or_instance_qc": false,
+    "contains_final_reference_sample_ids": false,
+    "contains_final_reference_semantic_fold_descriptors": false,
+    "development_official_fold_ids": [
+      1,
+      2
+    ],
+    "expected_official_fold_ids": [
+      1,
+      2,
+      3
+    ],
+    "final_reference_official_fold_id": 3,
+    "final_reference_raw_access": "byte_level_integrity_only",
+    "folds": [
+      {
+        "fold_id": 1,
+        "image_channel_axis": 3,
+        "image_path": "Fold 1/images/fold1/images.npy",
+        "mask_channel_axis": 3,
+        "mask_path": "Fold 1/masks/fold1/masks.npy",
+        "tissue_path": "Fold 1/images/fold1/types.npy"
+      },
+      {
+        "fold_id": 2,
+        "image_channel_axis": 3,
+        "image_path": "Fold 2/images/fold2/images.npy",
+        "mask_channel_axis": 3,
+        "mask_path": "Fold 2/masks/fold2/masks.npy",
+        "tissue_path": "Fold 2/images/fold2/types.npy"
+      }
+    ],
+    "qc_policy": {
+      "complete_policy_sha256": "d0aaaef5c48a157b9f3c4b1840a111dda2a8a9390df235963eb1418bf8ee2642",
+      "disconnected_instance_ids_are_fatal": false,
+      "source_masks_modified": false
+    },
+    "raw_file_inventory": [
+      {
+        "file_kind": "file",
+        "fold_id": null,
+        "relative_path": ".gitkeep",
+        "sha256": "55fbcbe801a5bee5a90bac5de5e3202cbad9e1e7546745cf15eadd2990f0efb7",
+        "size_bytes": 82
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 1,
+        "relative_path": "Fold 1/README.md",
+        "sha256": "822161f414a8dceda0eeadac17256b2a9f24e33ddc01bbb2c8da49e2dc6c0667",
+        "size_bytes": 2146
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 1,
+        "relative_path": "Fold 1/images/fold1/images.npy",
+        "sha256": "32b7de139650ecc07907072cb2cc45de69cd5e51b8252bd69eff271554ec324b",
+        "size_bytes": 4177526912
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 1,
+        "relative_path": "Fold 1/images/fold1/types.npy",
+        "sha256": "64746d127bc28e88be6fdc4639af4f21a91fb1fda00e68869ea5fe61a574f615",
+        "size_bytes": 138240
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 1,
+        "relative_path": "Fold 1/masks/README.md",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876",
+        "size_bytes": 1253
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 1,
+        "relative_path": "Fold 1/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+        "size_bytes": 19089
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 1,
+        "relative_path": "Fold 1/masks/fold1/masks.npy",
+        "sha256": "31d9817cd3cddef742157f79d53eb80e37844a30b2b44c8c98825b476b4245b2",
+        "size_bytes": 8355053696
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 2,
+        "relative_path": "Fold 2/README.md",
+        "sha256": "959c804b969013fca21362f33a547db7edc7775a96355f99714217ac0144ebdb",
+        "size_bytes": 2127
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 2,
+        "relative_path": "Fold 2/images/fold2/images.npy",
+        "sha256": "ff0c1b68b1f1019b78a2e70d04b04326d1c5334d65b8aed31f50f6835a61d61d",
+        "size_bytes": 3968336000
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 2,
+        "relative_path": "Fold 2/images/fold2/types.npy",
+        "sha256": "8a960439d4dbe09b762f2c5ba81ee0476dd4ab2e6007a9c246ede30d0327356c",
+        "size_bytes": 131324
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 2,
+        "relative_path": "Fold 2/masks/README.md",
+        "sha256": "26e1c75af0d0129ec6ae786d2aca0b05b9bd4cf22c9036d9239d6f04e7d465ed",
+        "size_bytes": 1270
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 2,
+        "relative_path": "Fold 2/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+        "size_bytes": 19089
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 2,
+        "relative_path": "Fold 2/masks/fold2/masks.npy",
+        "sha256": "e8e8c8c1406c0368befb617bea52ec23b623f8196e4d46e4e6eb893446ae03af",
+        "size_bytes": 7936671872
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 3,
+        "relative_path": "Fold 3/README.md",
+        "sha256": "9ddb68726215fb117406f23c6cb9018f589b7893d7e92aaf25745f577b69d336",
+        "size_bytes": 2146
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 3,
+        "relative_path": "Fold 3/images/fold3/images.npy",
+        "sha256": "cc9112bd54e4cf49d8cf3886163196263ef5dfe3341e6967940c6bd976ad7bf9",
+        "size_bytes": 4281335936
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 3,
+        "relative_path": "Fold 3/images/fold3/types.npy",
+        "sha256": "b8f0b3b5b0cf9e4024c939c8b1bc6333745f1e6827f6f15cd3a635e8546ec736",
+        "size_bytes": 141672
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 3,
+        "relative_path": "Fold 3/masks/README.md",
+        "sha256": "40c496eccea58d74bddf4a4b8674366c21e3b2b53c62cd12777eaa09e811b876",
+        "size_bytes": 1253
+      },
+      {
+        "file_kind": "md",
+        "fold_id": 3,
+        "relative_path": "Fold 3/masks/by-nc-sa.md",
+        "sha256": "3e976176dec037ecb34de78f6b67040dee8d015915d702854c6c8b2308fcb557",
+        "size_bytes": 19089
+      },
+      {
+        "file_kind": "npy",
+        "fold_id": 3,
+        "relative_path": "Fold 3/masks/fold3/masks.npy",
+        "sha256": "79c36441a2fc8ff3a01404cd059a6c36bce3b8343838f3a5961f6f6dff15fa4c",
+        "size_bytes": 8562671744
+      },
+      {
+        "file_kind": "archive",
+        "fold_id": 1,
+        "relative_path": "fold_1.zip",
+        "sha256": "6e19ad380300e8ce9480f9ab6a14cc91fa4b6a511609b40e3d70bdf9c881ed0b",
+        "size_bytes": 700275281
+      },
+      {
+        "file_kind": "archive",
+        "fold_id": 2,
+        "relative_path": "fold_2.zip",
+        "sha256": "5bc540cc509f64b5f5a274d6e5a245527dbd3e6d3155d43555115c5d54709b07",
+        "size_bytes": 658842552
+      },
+      {
+        "file_kind": "archive",
+        "fold_id": 3,
+        "relative_path": "fold_3.zip",
+        "sha256": "c14d372981c42f611ebc80afad01702b89cad8c1b3089daa31931cf5a4b1a39d",
+        "size_bytes": 717969882
+      }
+    ],
+    "raw_file_inventory_sha256": "51634109b6a0c2db34e54c437fa950dc624d0cae458a84e4cf4f92f1e15478d0",
+    "release_complete": true,
+    "root": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\raw\\pannuke",
+    "schema_version": 1,
+    "semantic_sha256": "c4b6acb1bc7ae9f8f2fcfcd600dc2e0187ae70fa9340c2f395a8a014c7d91cad"
+  },
+  "global_class_free_eligibility": {
+    "bound_fields": [
+      "official_fold",
+      "group_id",
+      "primary_eligible",
+      "confirmatory_eligible",
+      "cross_class_overlap_touching",
+      "qc_exclusion_reason",
+      "instance_count"
+    ],
+    "contains_class_labels": false,
+    "contains_sample_ids": false,
+    "cross_class_overlap_exclusion_reason": "touches_cross_class_overlap",
+    "eligibility_policy": "one_identical_primary_and_confirmatory_instance_mask",
+    "final_reference_sample_or_class_columns_read": false,
+    "manifest_class_free_eligibility_sha256": "2d19c10a2b4cfc2785dc4a4721a31b7619d3bf5ae8c448ab9ec80640fd6c041d",
+    "manifest_eligible_instance_count": 188333,
+    "manifest_excluded_instance_count": 1411,
+    "manifest_instance_count": 189744,
+    "manifest_sha256": "7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e",
+    "schema_version": 1,
+    "scope": "complete_manifest_class_free_eligibility",
+    "semantic_sha256": "592de3057a6a905a574174aa3bc5d7a928b40578f89990b3059fd8583f6b59b5",
+    "source_annotations_modified": false,
+    "support_by_official_fold": [
+      {
+        "eligible_instance_count": 62747,
+        "excluded_instance_count": 471,
+        "group_count": 2540,
+        "instance_count": 63218,
+        "official_fold": 1
+      },
+      {
+        "eligible_instance_count": 59407,
+        "excluded_instance_count": 465,
+        "group_count": 2410,
+        "instance_count": 59872,
+        "official_fold": 2
+      },
+      {
+        "eligible_instance_count": 66179,
+        "excluded_instance_count": 475,
+        "group_count": 2608,
+        "instance_count": 66654,
+        "official_fold": 3
+      }
+    ]
+  },
+  "materialization_boundary": "pre_pilot_before_run_creation",
+  "policy": "pre_pilot_privacy_gate_v1",
+  "privacy_contract": {
+    "contains_final_reference_file_paths_and_integrity_hashes": true,
+    "final_reference_class_labels_published": false,
+    "final_reference_patch_or_instance_qc_published": false,
+    "final_reference_raw_access": "byte_level_integrity_only",
+    "final_reference_sample_ids_published": false,
+    "opaque_source_sha256_verified": true,
+    "pilot_final_reference_scope": "class_free_integrity_metadata_only",
+    "pilot_parses_full_validation_json": false,
+    "pilot_semantically_decodes_canonical_sample_or_class_columns": false
+  },
+  "schema_version": 1,
+  "semantic_sha256": "31992bfe2d22cca601d0397f7b191749d8fc5a94dc74c47d0c70c7ffaa1d18d5",
+  "source_annotations_modified": false,
+  "source_evidence": {
+    "canonical_manifest": {
+      "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_nucleus_manifest.parquet",
+      "sha256": "7bf0ed664da19103c0f1119623789bc9be3f23189dabef3920bc8bd1f8c49d9e"
+    },
+    "development_manifest_view": {
+      "path": "C:\\Users\\NATAN\\Documents\\AANCA\\data\\manifests\\pannuke\\pannuke_pilot_development_manifest.parquet",
+      "sha256": "8107e1ddc033b08f03d3f351b5993ec1fd7a188677ee4c2afc0e4cbfe8432ef8"
+    },
+    "duplicate_audit_json": {
+      "path": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\duplicate_audit\\pannuke_duplicate_audit.json",
+      "sha256": "2a24d0f637bbf47e215f276e38d30b6bd65f1d312caa1b5b285ca5c00540612e"
+    },
+    "validation_json": {
+      "path": "C:\\Users\\NATAN\\Documents\\AANCA\\reports\\pannuke_validation.json",
+      "sha256": "094497f43e2ee0bd5dabddcd01f8c934657f130450a66f46600311451d36bc4a"
+    }
+  },
+  "status": "complete"
+}
