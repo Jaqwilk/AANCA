@@ -1,116 +1,402 @@
-# Automated Auditing of Nucleus Class Annotations
+<h1 align="center">AANCA</h1>
 
-This repository implements a reproducible university research workflow for detecting and prioritising **potentially inconsistent** nucleus class annotations. The controlled benchmark records intentional label corruptions, evaluates group-safe out-of-fold risk rankings at fixed review budgets, and measures simulated restoration utility. It is not a diagnostic tool and does not declare source annotations medically wrong.
+<p align="center"><strong>Automated Auditing of Nucleus Class Annotations</strong></p>
+
+<p align="center">
+A reproducible, group-safe research workflow for ranking nucleus class annotations
+that may warrant expert review—without changing source labels.
+</p>
+
+<p align="center">
+  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
+  <img alt="Presentation status: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
+  <img alt="Scientific status: PRIMARY_STUDY_COMPLETE" src="https://img.shields.io/badge/science-PRIMARY__STUDY__COMPLETE-238636">
+  <img alt="Research only, non-diagnostic" src="https://img.shields.io/badge/use-research_only_%7C_non--diagnostic-C2410C">
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#evidence-at-a-glance">Evidence</a> ·
+  <a href="#how-it-works">Method</a> ·
+  <a href="#command-line-interface">CLI</a> ·
+  <a href="#documentation-map">Documentation</a> ·
+  <a href="#scope-ethics-and-limitations">Limitations</a>
+</p>
+
+![AANCA presentation showing immutable source annotations and a ranked expert-review queue](output/playwright/aanca-final-hero-v2.png)
+
+<p align="center"><em>Conceptual workflow illustration from the static presentation; not benchmark data.</em></p>
+
+> [!IMPORTANT]
+> AANCA is a university research prototype, not a diagnostic system or medical
+> device. A high score means only `potentially inconsistent annotation` and
+> `recommended for expert review`. Model disagreement does not prove that an
+> annotation or a pathologist is wrong, and the software never modifies source
+> annotations automatically.
+
+## Overview
+
+AANCA asks a focused data-quality question:
+
+> Can an automated, source-group-safe audit rank intentionally corrupted nucleus
+> class labels more efficiently than random review, and does restoring the
+> highest-ranked injected corruptions improve downstream classification?
+
+The repository implements the complete controlled workflow around that question:
+verified PanNuke ingestion, anomaly-safe mask quality control, immutable label
+provenance, controlled corruption, group-safe out-of-fold (OOF) predictions,
+multiple annotation-risk scores, fixed-budget review simulation, paired
+group-bootstrap statistics, restoration experiments, sealed evidence, and a
+checksum-verifiable static presentation.
+
+The project is deliberately an **auditing and prioritisation system**. It is not a
+nucleus detector, segmentation repair tool, clinical classifier, or automatic
+relabelling system.
 
 ## Current status
 
-The presentation MVP is `DEMO_COMPLETE` as of 2026-08-18. Its scientific
-result boundary remains `PRIMARY_STUDY_COMPLETE`: the accepted PanNuke primary
-completed 185/185 required cells with zero required failures and saved all 36
-statistical comparisons. The result is explicitly
-`amended_or_exploratory`; confirmatory, expert review and external validation
-are not claimed. Presentation schema v2 includes the complete H2 subgroup
-summary, the adverse H4 downstream result, all 36 H1/H3/H5/H6/H7 comparisons,
-and an explicit warning that the three registered instance-dependent seeds
-produced byte-identical rankings and OOF predictions and are not independent
-replications. See `MVP_SCOPE.md` and `STATUS.md` for exact evidence.
+| Area | Current state |
+| --- | --- |
+| Presentation | `DEMO_COMPLETE` — static, responsive, checksum-verifiable MVP |
+| Scientific boundary | `PRIMARY_STUDY_COMPLETE` |
+| Primary matrix | 185/185 required cells completed; 0 required failures |
+| Optional primary cells | 37 pathology-encoder cells skipped under the frozen availability rule |
+| Statistical output | 36 registered H1/H3/H5/H6/H7 comparisons; 2,000 group-bootstrap iterations where applicable |
+| Analysis disposition | `amended_or_exploratory` because outcomes had been inspected before recovery finalisation |
+| Not claimed | `CONFIRMATORY_COMPLETE`, `EXTERNAL_VALIDATION_READY`, or `EXTERNAL_VALIDATION_COMPLETE` |
 
-Accepted sealed primary:
+The accepted primary run is
+`20260727T133947.089370Z_pannuke_primary_orphan_recovery`. Its full run directory
+is intentionally local and ignored by Git; the compact checked-in presentation
+contains a machine-readable, checksum-bound evidence snapshot.
 
-- `artifacts/runs/20260727T133947.089370Z_pannuke_primary_orphan_recovery`
+See [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
+[`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
+exact boundary and saved evidence.
 
-## Open or reproduce the MVP
+## Evidence at a glance
 
-Open `artifacts/mvp_demo/index.html` in any browser. The English presentation is
-authored by Natan Smogór and dated 18 August 2026. The package is static and does
-not need a server or GPU. It uses a restrained Linear-inspired visual system,
-compact Inter typography and an interactive Three.js hero in which source
-nucleus contours remain fixed while review evidence is copied into a ranked
-expert-review queue. The hero is a conceptual workflow, not microscopy or
-benchmark data; reduced-motion mode shows its final state without animation.
-The page also includes GSAP and ScrollTrigger motion, a five-stage method
-narrative, evidence-bound H2/H4/forest charts, the complete filterable comparison
-table, mobile navigation and print styles. Every plotted value is rendered from the
-checksum-verified evidence package; no benchmark value is illustrative or
-generated. Core content and controls remain usable with local font fallbacks if
-the network is unavailable; the pinned GSAP 3.15.0 and Three.js 0.185.1 visual
-enhancements load from jsDelivr when a network is available.
+The values below are read from the checked-in MVP evidence package. They measure
+recovery of **injected label changes**, not validation of naturally occurring
+annotation inconsistencies.
 
-```powershell
+| Registered result | Saved evidence |
+| --- | --- |
+| H1 — self-confidence vs random review | Average-precision difference ranged from **+0.036206 to +0.301884** across 12 mechanism/seed comparisons |
+| H2 — subgroup heterogeneity | 32,760 reported class/tissue/mechanism/rate rows; descriptive variation was substantial and is not an omnibus causal test |
+| H3 — corruption difficulty | Instance-dependent corruption was markedly harder than symmetric corruption in the registered comparisons |
+| H4 — downstream restoration | **Adverse to the hypothesis:** audit-guided minus random-review macro F1 = **−0.002156**, 95% group-bootstrap interval **[−0.002859, −0.001393]** |
+| H5 — fixed hybrid | Average-precision gain over self-confidence ranged from **+0.020983 to +0.065502** across 12 comparisons |
+| H6 — pathology representation | No result: the optional encoder did not satisfy every frozen access, licence, reproducibility, hardware, and smoke-test gate |
+| H7 — explicit target indication | Differences ranged from **−0.005371 to +0.002997**; the saved comparisons do not show a consistent benefit |
+
+Three registered instance-dependent seeds produced byte-identical rankings and OOF
+predictions. They are retained for auditability but represent **one deterministic
+realisation, not three independent replications**.
+
+The primary study produced 2,288 sealed artifacts and retained neutral, adverse,
+missing, and unavailable outcomes. Detailed comparison rows, intervals, adjusted
+p-values, subgroup ranges, hashes, and the H4 restoration record are available in
+[the evidence package](artifacts/mvp_demo/evidence.json).
+
+## How it works
+
+~~~mermaid
+flowchart LR
+    A["Verified local PanNuke release"] --> B["Immutable QC and nucleus manifest"]
+    B --> C["Official-fold and group-safe partitioning"]
+    C -->|"Development groups"| D["Controlled corruption of audit pool only"]
+    D --> E["Independent representations and probabilistic models"]
+    E --> F["Group-safe OOF probabilities"]
+    F --> G["Risk scores and fixed review budgets"]
+    G --> H["Injected-corruption ranking and restoration evaluation"]
+    C -->|"Untouched official fold"| T["Uncorrupted final reference test<br/>unavailable for tuning"]
+    T --> H
+    H --> I["Sealed machine-readable artifacts"]
+    I --> J["Static evidence-bound presentation"]
+~~~
+
+### Core safeguards
+
+- **Group-safe splitting:** `group_id` is at least the source patch; individual
+  nuclei are never randomly split across train and holdout.
+- **Untouched final reference:** the primary final fold remains uncorrupted and
+  unavailable for tuning, method selection, calibration, or review-budget choice.
+- **OOF-only primary scoring:** every audited sample is scored by a model that did
+  not train on that sample or any member of its source group.
+- **Immutable label lineage:** `pre_corruption_label`, `observed_label`,
+  `is_injected_corruption`, and corruption metadata remain separate.
+- **Representation independence:** instance-dependent corruption and its auditor
+  use independently assessed feature spaces; circular cases are labelled
+  `circularity_risk` and excluded from confirmatory claims.
+- **Fixed review budgets:** guided and random review use identical integer budgets.
+- **Fail-closed evidence:** missing Cleanlab output, unavailable encoders, failed
+  cells, or insufficient subgroup support remain explicit—nothing is fabricated.
+- **No source mutation:** raw masks, source manifests, and source annotations are
+  never rewritten.
+
+### Audit signals
+
+| Signal | Role |
+| --- | --- |
+| Self-confidence | `1 - P(observed_label)`; primary annotation-risk score |
+| Negative log-likelihood | Penalises low probability assigned to the observed class |
+| Prediction margin | Compares the strongest alternative with the observed class |
+| Predictive entropy | Ambiguity baseline |
+| Cleanlab | Label-quality signal computed only from group-safe OOF probabilities |
+| Fold-safe neighbours | Disagreement with valid reference groups while excluding the sample and its source group |
+| Fixed hybrid | Equal-weight percentile combination of complementary registered signals |
+| Ensemble disagreement | Reserved for the deferred confirmatory design |
+
+## Quick start
+
+### 1. Open the checked-in presentation
+
+The static MVP needs no server, model execution, dataset, or GPU:
+
+~~~powershell
+git clone https://github.com/Jaqwilk/AANCA.git
+Set-Location AANCA
+Start-Process .\artifacts\mvp_demo\index.html
+~~~
+
+Core content works with local fallbacks. Pinned Three.js and GSAP enhancements load
+from jsDelivr when network access is available.
+
+### 2. Verify the presentation package
+
+The reference development environment uses Python 3.12 and
+[`uv`](https://docs.astral.sh/uv/):
+
+~~~powershell
+uv sync --dev
 .venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
-```
+~~~
 
-To reproduce it, choose a new empty output directory because the command never
-overwrites an existing package:
+A valid package reports a closed five-file allowlist with matching checksums,
+`DEMO_COMPLETE` presentation status, and `PRIMARY_STUDY_COMPLETE` scientific
+status.
 
-```powershell
-.venv\Scripts\python.exe -m histo_audit demo build --project-root . `
-  --run-dir artifacts\runs\20260727T133947.089370Z_pannuke_primary_orphan_recovery `
-  --qc-bundle reports\pannuke_qc --output-dir artifacts\mvp_demo_rebuild
-```
+### 3. Run the deterministic software smoke path
 
-## Scientific guardrails
+~~~powershell
+.venv\Scripts\python.exe -m histo_audit doctor
+.venv\Scripts\python.exe -m histo_audit data generate-synthetic --config configs\smoke.yaml
+.venv\Scripts\python.exe -m histo_audit experiment smoke
+.venv\Scripts\python.exe -m histo_audit experiment smoke --config configs\smoke_zero.yaml
+~~~
 
-- The minimum split unit is the source patch (`group_id`), never an individual nucleus.
-- One official outer fold remains an untouched, uncorrupted final reference test.
-- Model-based primary audit scores are computed only from group-safe OOF predictions.
-- `pre_corruption_label` and `observed_label` remain permanently separate.
-- Injected-corruption results and exploratory original-label rankings are reported separately.
-- Every reported experiment metric must come from an immutable run artifact.
+Synthetic success validates the software pipeline only. It must not be described
+as real-data, primary, confirmatory, expert-reviewed, or clinical validation.
 
-Read `SPEC.md`, `PLAN.md`, `STATUS.md`, `PRE_REGISTRATION.md`, and `ETHICS_AND_LIMITATIONS.md` before changing experiments.
+### Platform note
 
-## Windows setup (PowerShell)
+The committed lock selects PyTorch 2.12.1 and torchvision 0.27.1 from the CUDA 12.6
+index for the reference Windows/NVIDIA workstation. CPU-only, macOS, Linux, or
+different accelerator environments should resolve an appropriate platform-specific
+PyTorch source using the official selector; installing a system CUDA Toolkit is not
+a substitute for resolving compatible wheels.
 
-```powershell
-uv sync --dev
-.venv\Scripts\python -m histo_audit doctor
-.venv\Scripts\python -m histo_audit data generate-synthetic --config configs\smoke.yaml
-.venv\Scripts\python -m histo_audit experiment smoke
-.venv\Scripts\python -m histo_audit experiment smoke --config configs\smoke_zero.yaml
-.venv\Scripts\python -m pytest
-.venv\Scripts\ruff check .
-.venv\Scripts\ruff format --check .
-.venv\Scripts\mypy src
-```
+## PanNuke data
 
-The checked-in dependency definition selects the current official PyTorch 2.12.1 CUDA 12.6 wheels. NVIDIA documents minor-version compatibility across CUDA 12.x for this driver range; the resolved build is retained only after an actual local CUDA forward/backward test. It does not require a system CUDA Toolkit. If hardware changes, re-run `doctor` and re-resolve the PyTorch index from current official guidance.
+PanNuke binaries are **not distributed through this repository**. Obtain the release
+legitimately from the
+[official University of Warwick source](https://warwick.ac.uk/fac/cross_fac/tia/data/pannuke/),
+review its terms, and keep it immutable. The project never downloads from an
+unverified mirror or bypasses access controls.
 
-## macOS/Linux setup
+After placing a lawful local copy, set `PANNUKE_ROOT` and run the gated inspectors:
 
-The CUDA-specific `tool.uv.sources` entry targets this Windows/NVIDIA workstation. On a CPU-only or non-NVIDIA system, create a platform-specific lock using the official PyTorch selector rather than installing a CUDA Toolkit. Commands otherwise use POSIX activation/paths:
+~~~powershell
+$env:PANNUKE_ROOT = (Resolve-Path 'data\raw\pannuke').Path
 
-```bash
-uv sync --dev
-.venv/bin/python -m histo_audit doctor
-.venv/bin/python -m histo_audit experiment smoke
-.venv/bin/python -m pytest
-.venv/bin/ruff check .
-.venv/bin/ruff format --check .
-.venv/bin/mypy src
-```
+.venv\Scripts\python.exe -m histo_audit data validate-pannuke --project-root . --root $env:PANNUKE_ROOT --max-samples-per-fold 100000 --max-overlay-patches 24
+.venv\Scripts\python.exe -m histo_audit data build-manifest --project-root . --root $env:PANNUKE_ROOT --batch-rows 4096
+.venv\Scripts\python.exe -m histo_audit data audit-duplicates --project-root . --root $env:PANNUKE_ROOT --embedding-device cuda
+~~~
 
-## Required CLI surface
+The validator inspects actual shapes, dtypes, class channels, supplied background,
+voids, cross-class overlaps, instance identities, and raw-file hashes. Similarity
+candidates remain review-only and never trigger automatic deletion or reassignment.
+See [`DATASET_SETUP.md`](DATASET_SETUP.md) for the complete acquisition and licence
+gate.
 
-The project exposes `doctor`; synthetic generation; PanNuke
-validation/manifest/duplicate inspection; representation extraction; smoke and
-pilot experiments; hard-gated primary and confirmatory stage commands;
-preregistration freeze; original-label audit; external review-package creation;
-report building; and the static `demo build/verify` surface. Deferred commands
-remain fail-closed and are not part of the MVP acceptance path.
+## Reproducibility and evidence
 
-## Data and results
+AANCA treats reproducibility as part of the scientific method rather than as a
+post-processing step:
 
-Dataset binaries, local embeddings, and generated runs are ignored by Git. The
-small canonical `artifacts/mvp_demo` package is the deliberate exception so a
-reviewer receives the presentation and its checksum manifest. See
-`DATASET_SETUP.md` for the acquisition gate. Every run is written under
-`artifacts/runs/<run_id>/` and appended to `artifacts/runs/registry.csv`;
-completed runs are never silently overwritten.
+- `uv.lock` fixes the resolved Python dependency graph.
+- YAML configs separate synthetic, pilot, frozen primary, confirmatory, and external
+  validation definitions.
+- Every tracked run receives a unique ID, registry record, configuration identity,
+  provenance metadata, and immutable artifact manifest.
+- Completed artifacts are sealed and verified by SHA-256; overwrite is rejected.
+- Statistical comparisons resample complete source groups identically across
+  operands.
+- Reports and the static demo read machine-readable artifacts instead of embedding
+  hand-entered benchmark values.
+- Raw data, full run directories, embeddings, checkpoints, and predictions remain
+  outside Git; small reviewable evidence and manifests are committed deliberately.
+- Negative, neutral, missing, optional, and adverse outcomes are preserved.
 
-Current evidence and the exact MVP verification command are in `STATUS.md`.
-The PanNuke validator intentionally fails closed if it cannot establish all
-three official folds and their actual semantic structure. Dataset licensing
-remains separate: local release evidence applies CC BY-NC-SA 4.0 explicitly to
-the `masks/` directory, while this project independently restricts all PanNuke
-use to non-commercial research and requires both PanNuke citations.
+To verify the checked-in MVP:
+
+~~~powershell
+.venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
+~~~
+
+To rebuild it on the original research workspace, use a new output directory; the
+builder refuses to overwrite an existing package:
+
+~~~powershell
+.venv\Scripts\python.exe -m histo_audit demo build --project-root . --run-dir artifacts\runs\20260727T133947.089370Z_pannuke_primary_orphan_recovery --qc-bundle reports\pannuke_qc --output-dir artifacts\mvp_demo_rebuild
+~~~
+
+This rebuild requires the full locally retained sealed run and QC bundle, which are
+not fully distributed in Git.
+
+## Command-line interface
+
+Run `python -m histo_audit --help` for the authoritative command tree.
+
+| Command group | Purpose |
+| --- | --- |
+| `doctor` | Record environment, hardware, CUDA, package, disk, and data availability |
+| `data` | Generate synthetic data; verify, validate, inspect duplicates, and manifest PanNuke |
+| `representations` | Extract target crops, engineered features, and frozen ResNet embeddings |
+| `experiment` | Run immutable smoke, pilot, primary-recovery, and governed study workflows |
+| `preregistration` | Freeze, amend, and verify immutable analysis authorities |
+| `audit` | Rank unmodified original labels using group-safe OOF evidence |
+| `external` | Build blinded external-review packages when eligibility gates are satisfied |
+| `report` | Build sourced Markdown and static HTML from strict metrics JSON |
+| `demo` | Build or verify the static presentation MVP |
+
+Real-data study commands are intentionally hard-gated. The original confirmatory
+study, original-label audit execution, genuine expert review, and external validation
+remain deferred; an implemented command is not evidence that a stage has run.
+
+## Repository layout
+
+~~~text
+AANCA/
+├── src/histo_audit/
+│   ├── data/                 # manifests, grouping, duplicates, synthetic data
+│   ├── pannuke/              # acquisition, semantic validation, QC, publication
+│   ├── representations/      # crops, morphometrics, ImageNet features
+│   ├── corruption/           # controlled immutable label corruption
+│   ├── cross_validation/     # group-safe OOF prediction
+│   ├── auditing/             # annotation-risk scores and neighbours
+│   ├── statistics/           # review metrics and group bootstrap
+│   ├── evaluation/           # controlled restoration experiments
+│   ├── experiment/           # tracked study runners and gates
+│   ├── reporting/            # evidence-backed reports and figures
+│   └── workflows/            # frozen/governed execution authorities
+├── configs/                  # smoke, pilot, primary, confirmatory, external
+├── tests/                    # unit, integration, security, lifecycle, and CLI tests
+├── reports/                  # compact QC, provenance, literature, and validation evidence
+├── artifacts/mvp_demo/       # checked-in five-file static presentation package
+├── references/               # bibliographic records
+├── data/                     # ignored raw/interim/processed data roots
+└── *.md                      # scientific governance and handoff documents
+~~~
+
+## Documentation map
+
+| Document | Purpose |
+| --- | --- |
+| [`SPEC.md`](SPEC.md) | Frozen scientific terminology, hypotheses, leakage rules, and completion vocabulary |
+| [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md) | Exact primary and confirmatory analysis definition |
+| [`PLAN.md`](PLAN.md) | Milestones, gates, acceptance criteria, and deferred work |
+| [`STATUS.md`](STATUS.md) | Executed commands, evidence, blockers, and current handoff |
+| [`DECISIONS.md`](DECISIONS.md) | Append-only rationale and operational decision history |
+| [`MVP_SCOPE.md`](MVP_SCOPE.md) | Reduced presentation boundary and acceptance checks |
+| [`DATASET_SETUP.md`](DATASET_SETUP.md) | PanNuke acquisition, integrity, QC, and licence gate |
+| [`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md) | Non-diagnostic scope, scientific limits, and responsible language |
+| [`CAPSULE_DESIGN.md`](CAPSULE_DESIGN.md) | Advanced governed execution-capsule architecture |
+| [`references/references.bib`](references/references.bib) | Project bibliography, including both required PanNuke citations |
+
+Read the first four documents before changing experiment code or scientific claims.
+
+## Scope, ethics, and limitations
+
+AANCA currently evaluates class-label consistency for **already segmented nucleus
+instances**. It does not evaluate missing nuclei, merged or split instances, contour
+quality, diagnosis, prognosis, treatment, patient outcomes, or deployment safety.
+
+Key limitations include:
+
+- Controlled corruption provides an objective software benchmark but may differ
+  materially from natural ambiguity, annotator variation, and biological boundaries.
+- Source-patch separation prevents local group leakage but does not establish
+  patient- or whole-slide independence unless reliable identifiers exist.
+- Model probabilities, class imbalance, tissue shift, representation choice, crop
+  failures, and calibration can change audit rankings.
+- PanNuke labels are quality-controlled reference annotations, not guaranteed
+  biological truth.
+- External multi-rater or blinded expert validation is still required before making
+  claims about naturally occurring annotation inconsistency.
+- Human disagreement and insufficient context must be preserved rather than forced
+  into a single truth.
+- Nothing in this repository supports clinical use or patient-level decisions.
+
+The complete policy is in
+[`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md).
+
+## Roadmap
+
+Completed evidence stages:
+
+- `PIPELINE_COMPLETE`
+- `PILOT_COMPLETE`
+- `PRE_REGISTRATION_FROZEN`
+- `PRIMARY_STUDY_COMPLETE`
+- `DEMO_COMPLETE`
+
+Explicitly deferred:
+
+- the unchanged original confirmatory matrix;
+- real original-label audit execution;
+- a blinded expert-review package backed by eligible real audit evidence;
+- genuine expert or multi-rater evaluation;
+- external domain validation.
+
+Accordingly, `CONFIRMATORY_COMPLETE`, `EXTERNAL_VALIDATION_READY`, and
+`EXTERNAL_VALIDATION_COMPLETE` are not claimed.
+
+## Development and validation
+
+Before submitting a change:
+
+~~~powershell
+.venv\Scripts\python.exe -m pytest
+.venv\Scripts\ruff.exe check .
+.venv\Scripts\ruff.exe format --check .
+.venv\Scripts\mypy.exe src
+.venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
+~~~
+
+Mandatory scientific invariants live in [`AGENTS.md`](AGENTS.md) and
+[`SPEC.md`](SPEC.md). Material changes must update the corresponding evidence in
+`STATUS.md` and rationale in `DECISIONS.md`. A failed mandatory gate stops
+advancement.
+
+## Data terms, software licence, and citation
+
+Dataset files and pretrained weights retain their own licences and access terms. The
+local PanNuke release evidence explicitly applies CC BY-NC-SA 4.0 to the `masks/`
+directory; it does not establish identical licence scope for every release file.
+This project additionally restricts PanNuke use to non-commercial research and
+requires both PanNuke works identified as `gamper2019pannuke` and
+`gamper2020pannukeextension` in
+[`references/references.bib`](references/references.bib).
+
+This repository does not currently include a standalone general-purpose open-source
+`LICENSE` file. Do not assume rights beyond the research-prototype statement in
+[`pyproject.toml`](pyproject.toml) and the applicable licences of datasets,
+dependencies, and pretrained weights.
+
+## Author
+
+University research prototype. Presentation release by **Natan Smogór**, dated
+18 August 2026.
