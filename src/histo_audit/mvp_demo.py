@@ -1862,7 +1862,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
   <div class="nav-shell">
     <a class="brand" href="#top" aria-label="AANCA — back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Result</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
   </div>
 </header>
 
@@ -2006,7 +2006,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
     <div class="section-heading reveal"><p class="section-kicker">Preregistered questions · H1-H7</p><h2>What the study actually learned.</h2><p class="section-deck">All seven questions remain visible together: supportive, qualified, adverse, neutral and unavailable. Across the 36 preregistered comparison entries, <strong>__REPORTED__</strong> have numeric results and <strong>__UNAVAILABLE__</strong> remain explicitly unavailable.</p></div>
     <div class="figure-width reveal"><div class="hypothesis-ledger">__HYPOTHESIS_LEDGER__</div></div>
     <div class="section-heading reveal" style="margin-top:var(--section-space)"><p class="section-kicker">Comparison atlas</p><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
-    <div class="wide-width reveal"><div class="forest-plot" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons">__FOREST_PLOT__</div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
+    <div class="wide-width reveal"><div class="forest-plot" role="group" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons">__FOREST_PLOT__</div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
   </section>
 
   <section class="section" id="subgroups">
@@ -2059,7 +2059,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
     <div class="wide-width reveal">
       <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete H1 / H3 / H5 / H6 / H7 comparison table</span><span>__REPORTED__ reported · __UNAVAILABLE__ unavailable</span></div>
         <div class="table-tools"><label>Hypothesis<select id="filter-hypothesis"><option value="ALL">All hypotheses</option><option>H1</option><option>H3</option><option>H5</option><option>H6</option><option>H7</option></select></label><label>Status<select id="filter-status"><option value="ALL">All statuses</option><option value="reported">Reported</option><option value="not_available_frozen_optional_cell">Unavailable</option></select></label><label>Search<input id="filter-search" type="search" placeholder="Name, seed or comparison ID"></label><span class="table-count" id="table-count">__COMPARISONS__ / __COMPARISONS__ rows</span></div>
-        <div class="table-wrap"><table id="comparison-table"><colgroup><col style="width:7%"><col style="width:35%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:10%"><col style="width:7%"></colgroup><thead><tr><th>Hypothesis</th><th>Comparison</th><th>Status</th><th style="text-align:right">Δ AP</th><th style="text-align:right">95% bootstrap CI</th><th style="text-align:right">Holm-adjusted p</th><th style="text-align:right">Iterations</th></tr></thead><tbody>__COMPARISON_ROWS__</tbody></table></div>
+        <div class="table-wrap" role="region" aria-label="Complete comparison results" tabindex="0"><table id="comparison-table"><colgroup><col style="width:7%"><col style="width:35%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:10%"><col style="width:7%"></colgroup><thead><tr><th>Hypothesis</th><th>Comparison</th><th>Status</th><th style="text-align:right">Δ AP</th><th style="text-align:right">95% bootstrap CI</th><th style="text-align:right">Holm-adjusted p</th><th style="text-align:right">Iterations</th></tr></thead><tbody>__COMPARISON_ROWS__</tbody></table></div>
       </div>
       <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
       <div class="provenance" style="margin-top:64px">
@@ -2292,7 +2292,7 @@ def _render_forest_plot_v3(comparisons: list[dict[str, Any]]) -> str:
                 '<div class="forest-row is-unavailable">'
                 f'<span class="forest-label" title="{html.escape(comparison_id)}">'
                 f"{html.escape(label)}</span>"
-                '<span class="forest-track forest-track-empty" aria-label="Result unavailable">'
+                '<span class="forest-track forest-track-empty">'
                 "<span>Unavailable by frozen design</span></span>"
                 '<span class="forest-value">—</span></div>'
             )
@@ -2375,7 +2375,7 @@ def _render_h4_chart_v3(h4: dict[str, Any]) -> str:
     zero_position = _position_percent(0.0, diff_lower, diff_upper)
     repetitions = _require_exact_int(h4["random_repetitions"], role="H4 repetitions")
     return (
-        '<div class="h4-chart" aria-label="Complete registered H4 downstream result">'
+        '<div class="h4-chart" role="group" aria-label="Complete registered H4 downstream result">'
         '<div class="chart-title-row"><div><span class="chart-label">Downstream outcome</span>'
         "<h3>Macro-F1 after equal-budget label restoration</h3></div>"
         '<span class="axis-warning">Truncated axis</span></div>'
@@ -3128,11 +3128,15 @@ _MVP_SCRIPT_V3 = r"""
 
 
 _MVP_THREE_SCRIPT_V3 = r"""
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js';
-
 const canvas = document.getElementById('hero-canvas');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const disableCanvas = () => {
+  canvas.hidden = true;
+  canvas.dataset.renderer = 'unavailable';
+  canvas.dataset.animationState = 'unavailable';
+};
 
+import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js').then(THREE => {
 try {
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -3583,8 +3587,9 @@ try {
   canvas.dataset.renderer = 'threejs-review-queue';
   canvas.dataset.story = 'immutable-source-ranked-review';
 } catch (_error) {
-  canvas.hidden = true;
+  disableCanvas();
 }
+}).catch(disableCanvas);
 """
 
 
@@ -3593,6 +3598,7 @@ _MVP_CSS_V4 = (
     + r"""
 /* Professor-facing editorial release: centered reading rhythm + cumulative method story. */
 :root {
+  --ink-tertiary: #7b8089;
   --prose: 780px;
   --editorial: 860px;
   --figure: 1160px;
@@ -3603,20 +3609,21 @@ body { font-size: 16px; line-height: 1.68; }
 .site-header { height: 60px; border: 0; background: rgba(1,1,2,.82); backdrop-filter: blur(20px) saturate(125%); will-change: transform; }
 .site-header.is-scrolled { border: 0; }
 .nav-shell { height: 60px; }
-.brand { gap: 9px; font-size: 14px; }
+.brand { min-height: 44px; gap: 9px; font-size: 14px; }
 .brand-mark { position: relative; z-index: 2; width: 19px; height: 19px; flex: 0 0 19px; }
 .brand-word-clip { display: block; width: 51px; overflow: hidden; }
 .brand-label { display: block; transform-origin: left center; }
 .nav-links { gap: 25px; }
-.nav-links a { font-size: 12px; letter-spacing: .01em; }
+.nav-links a { min-height: 44px; display: inline-flex; align-items: center; font-size: 12px; letter-spacing: .01em; }
 .nav-links a::after { display: none; }
 .nav-links a.is-active { color: var(--accent-hover); }
 .reading-progress { display: none !important; }
-.menu-button { border-color: var(--line-strong); }
+.menu-button { min-width: 44px; min-height: 44px; border-color: var(--line-strong); }
 
 .hero { min-height: min(900px,100svh); padding-top: 60px; border: 0; }
 .hero::after { content: ""; position: absolute; left: 50%; bottom: 0; width: min(640px,calc(100% - 48px)); height: 1px; background: var(--line); transform: translateX(-50%); }
 #hero-canvas { inset: 60px 0 0; height: calc(100% - 60px); }
+#hero-canvas[hidden] { display: none !important; }
 .hero-shell { min-height: calc(min(900px,100svh) - 60px); grid-template-columns: minmax(0,1.03fr) minmax(360px,.97fr); }
 .hero-copy { max-width: 680px; padding: 86px 0 100px; }
 .hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
@@ -3654,6 +3661,8 @@ h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spac
 .journey { position: relative; height: 540vh; scroll-margin-top: 60px; }
 .journey::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
 .journey-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 72px 0 44px; }
+html:not(.motion-enhanced) .journey { height: auto; padding: var(--section-space) 0; }
+html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
 .journey-grid { width: min(var(--wide),calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(560px,1.12fr) minmax(360px,.88fr); gap: clamp(52px,6vw,92px); align-items: center; }
 .journey-visual { min-width: 0; }
 .journey-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -3678,7 +3687,7 @@ h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spac
 .journey-step small { display: block; margin-bottom: 4px; color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 .journey-step h3 { margin: 0 0 5px; font-size: 14px; font-weight: 600; letter-spacing: -.012em; }
 .journey-step p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.52; }
-.motion-enhanced .journey-step { opacity: .2; }
+.motion-enhanced .journey-step { opacity: 1; }
 .journey-step.is-active { opacity: 1 !important; }
 .journey-step.is-active::before, .journey-step.is-active small { color: var(--accent-hover); }
 
@@ -3705,8 +3714,12 @@ h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spac
 .qc-preview { position: relative; max-height: 760px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
 .qc-preview::after { display: none; }
 .qc-preview img { border: 0; border-radius: 0; }
+.qc-toolbar a { min-height: 40px; display: inline-flex; align-items: center; }
 .table-wrap { scrollbar-color: var(--line-strong) var(--surface-1); }
+.table-wrap:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
 .table-tools { border-top: 0; }
+input, select { min-height: 44px; }
+.provenance a, .usage-note a { min-height: 28px; display: inline-flex; align-items: center; }
 
 .repo-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; }
 .repo-card { position: relative; padding: clamp(28px,4vw,48px); border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
@@ -3715,7 +3728,7 @@ h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spac
 .repo-icon { width: 40px; height: 40px; color: var(--ink); }
 .repo-path { display: block; color: var(--ink-tertiary); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 .repo-title { display: block; margin-top: 3px; color: var(--ink); font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
-.repo-link { min-height: 40px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--surface-2); font-size: 12px; font-weight: 550; text-decoration: none; }
+.repo-link { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--surface-2); font-size: 12px; font-weight: 550; text-decoration: none; }
 .repo-description { max-width: 760px; margin: 30px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.7; }
 .repo-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
 .repo-tags span { padding: 5px 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-subtle); font: 400 10px var(--mono); }
@@ -3736,6 +3749,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
 .footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
 .footer-column h3 { margin: 0 0 15px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .footer-column p, .footer-column a { display: block; margin: 0 0 8px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.footer-column a { min-height: 32px; display: flex; align-items: center; margin-bottom: 0; }
 .footer-column a:hover { color: var(--ink); }
 .footer-bottom { display: flex; justify-content: space-between; gap: 32px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
 .footer-bottom span { max-width: 560px; }
@@ -3749,10 +3763,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .usage-grid { grid-template-columns: 1fr 1fr; }
   .repo-command:last-child { grid-column: 1 / -1; }
 }
-@media (max-width: 900px) {
-  .hero { min-height: 850px; }
-  .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
-  .hero-copy { padding-top: 122px; }
+@media (max-width: 1200px) {
   .journey { height: auto; padding: var(--section-space) 0; }
   .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
   .journey-grid { grid-template-columns: 1fr; }
@@ -3761,6 +3772,11 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .journey-copy .display, .journey-intro { max-width: 680px; }
   .journey-step, .motion-enhanced .journey-step { opacity: 1 !important; }
   .journey-stage-group, .journey-connector { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+}
+@media (max-width: 900px) {
+  .hero { min-height: 850px; }
+  .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
+  .hero-copy { padding-top: 122px; }
   .hypothesis-ledger { grid-template-columns: 1fr; }
   .hypothesis-row:last-child { grid-column: auto; }
   .footer-grid { grid-template-columns: 1.25fr repeat(2,1fr); }
@@ -3795,12 +3811,14 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .hypothesis-row { min-height: 0; }
   .hypothesis-row-head { grid-template-columns: 38px 1fr; }
   .hypothesis-result { grid-column: 1 / -1; max-width: none; text-align: left; }
-  .metric-axis, .range-axis { font-size: 8px; }
+  .metric-axis, .range-axis { font-size: 10px; }
   .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
   .qc-preview { max-height: 620px; }
   .footer-grid { grid-template-columns: 1fr; gap: 34px; }
   .footer-column:last-child { grid-column: auto; }
+  .footer-column a { min-height: 44px; }
   .footer-bottom { flex-direction: column; }
+  #comparison-table td[data-label="Comparison"] .comparison-id { grid-column: 2; margin-top: -4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transform: none !important; }
@@ -3918,7 +3936,7 @@ _MVP_SCRIPT_V4 = r"""
     journeyGroups.forEach((group, index) => {
       group.classList.toggle('is-active', index === next);
       group.classList.toggle('is-complete', index < next);
-      if (motionAvailable && window.innerWidth > 900) {
+      if (motionAvailable && window.innerWidth > 1200) {
         gsapEngine.to(group, {
           autoAlpha: index === next ? 1 : index < next ? .56 : .035,
           x: index > next ? (index % 2 ? 30 : -30) : 0,
@@ -3931,7 +3949,7 @@ _MVP_SCRIPT_V4 = r"""
     });
     journeyConnectors.forEach((connector, index) => {
       const visible = index < next;
-      if (motionAvailable && window.innerWidth > 900) {
+      if (motionAvailable && window.innerWidth > 1200) {
         gsapEngine.to(connector, {
           strokeDashoffset: visible ? 0 : 1,
           opacity: visible ? .9 : .08,
@@ -3957,7 +3975,7 @@ _MVP_SCRIPT_V4 = r"""
       onUpdate: self => setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress),
       onLeaveBack: () => setJourneyStage(0, 0),
     });
-    const mobileJourney = window.matchMedia('(max-width: 900px)');
+    const mobileJourney = window.matchMedia('(max-width: 1200px)');
     const syncJourneyMode = () => {
       if (mobileJourney.matches) setJourneyStage(4, 1);
       else setJourneyStage(activeJourneyStage < 0 ? 0 : activeJourneyStage);
@@ -4007,14 +4025,14 @@ _MVP_SCRIPT_V4 = r"""
         scrollTrigger: {trigger: chart, start: 'top 84%', once: true},
       });
     });
-    document.querySelectorAll('.spec-card, .reading-card, .hypothesis-row, .repo-command, .rule').forEach((card, index) => {
+    document.querySelectorAll('.spec-card, .reading-card, .repo-command, .rule').forEach((card, index) => {
       gsapEngine.from(card, {
         y: 18,
         autoAlpha: 0,
         duration: .62,
         delay: Math.min(index % 5, 4) * .035,
         ease: 'power2.out',
-        scrollTrigger: {trigger: card, start: 'top 91%', once: true},
+        scrollTrigger: {trigger: card, start: 'top 102%', once: true},
       });
     });
     document.querySelectorAll('main section[id]').forEach(section => {

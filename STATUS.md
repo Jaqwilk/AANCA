@@ -10108,3 +10108,64 @@ and supervisor before the one authorized Q replacement write.
   `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
   No implementation, dataset, source annotation, label, metric, accepted-run file or
   frozen scientific rule changed.
+
+## 2026-08-19 - Final presentation frontend audit and responsive hardening
+
+- Re-audited the canonical professor-facing article in a real Chromium browser at
+  1440, 1280, 1201, 1200, 1101, 1024, 768, 390 and 320 CSS pixels. Every tested
+  viewport retained zero document-wide horizontal overflow. The full article,
+  evidence table, footer, mobile menu and long labels remained readable without
+  clipping or overlap.
+- Raised the pinned serpentine method breakpoint to widths above 1200 px. At and
+  below 1200 px the same five-stage explanation now uses a complete static flow,
+  avoiding a compressed two-column composition while retaining all source-label,
+  corruption, OOF, ranking and expert-review stages.
+- Made both GSAP and Three.js progressive enhancements. If GSAP is blocked, the
+  article no longer reserves several empty viewports for a pin that cannot run. If
+  Three.js cannot load or WebGL creation fails, the decorative hero canvas is
+  removed cleanly and the HTML explanation remains complete. Reduced-motion mode
+  likewise exposes the whole method without pinned scrolling.
+- Corrected the mobile comparison-ID placement, the `Results` navigation label,
+  late card-reveal threshold and hypothesis-card animation that could leave a gray
+  blank strip. Increased small axis text, kept inactive method explanations fully
+  readable and raised tertiary-copy contrast without changing the restrained visual
+  hierarchy.
+- Improved keyboard and assistive-technology behaviour: navigation, filters, the
+  repository action and mobile footer links meet the intended touch-target sizes;
+  the horizontally scrollable results table is a labelled focusable region; the H4
+  chart and forest plot have explicit group semantics; unsupported labels were
+  removed from unavailable decorative tracks; and focus remains visible.
+- Exercised directional header hide/show, animated AANCA wordmark reveal, mobile
+  menu open/close/Escape with focus return, skip-link navigation, active-section
+  navigation, all hypothesis/status/search filter combinations, lazy QC loading,
+  the Three.js pause/resume loop and complete reduced-motion behaviour. Normal
+  browser execution produced zero console errors or warnings. The deliberate
+  blocked-CDN run produced only the expected resource failures and retained the
+  complete static article.
+- Browser-injected Axe 4.10.3 reported **zero automated accessibility violations**
+  in both the normal desktop and reduced-motion layouts. This is recorded as an
+  automated audit result, not as a claim of formal WCAG certification.
+- Replaced the three retained audit captures with the reviewed release state:
+  `output/playwright/aanca-full-layout-audit-20260819.png` (stitched from bounded
+  browser segments to avoid Chromium's very-tall-page capture limit),
+  `output/playwright/aanca-mobile-layout-audit-20260819.png` and
+  `output/playwright/aanca-reduced-motion-audit-20260819.png`. Visual inspection
+  found consistent spacing, typography, icon alignment and section rhythm.
+- Moved 99 transient browser records, bounded screenshot segments and intermediate
+  demo builds (25,305,525 bytes) out of the workspace to the recoverable cleanup
+  copy at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA-cleanup-backup-20260819T0400\frontend-audit-final-transients`.
+  No Playwright cache or unselected QA iteration remains in the project folder.
+- Both presentation verifiers report `status=valid`, file count 5, presentation
+  status `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE` and manifest
+  root `05d3a8f62ae1f8a0b276661416126317cc86ca169bac6f61519eddd1d28b4992`.
+  Focused MVP regression passed **6/6 in 44.64 s**. The complete suite passed
+  **2,393 tests with one expected Windows skip and zero failures in 1,099.90 s**;
+  Ruff check, Ruff format check and `git diff --check` also passed.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No evidence value, metric, dataset, label, accepted run or frozen scientific rule
+  changed.

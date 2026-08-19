@@ -5721,3 +5721,28 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - This decision changes repository hygiene and retained presentation QA only. It does
   not change implementation behaviour, scientific values, datasets, annotations,
   accepted-run artifacts, frozen authorities or completion status.
+
+## 2026-08-19 - Keep presentation motion readable, bounded and optional
+
+- Use the pinned, serpentine benchmark narrative only above 1200 CSS pixels, where
+  the diagram and explanatory column both retain their intended proportions. At
+  smaller widths, render the identical five-stage sequence as one complete static
+  composition instead of compressing the desktop choreography.
+- Treat the `motion-enhanced` state as an explicit capability gate. Without GSAP,
+  without Three.js, with reduced motion, or after WebGL failure, the document must
+  preserve its natural height, complete explanation, navigation and evidence. A
+  blocked animation dependency must never create empty scroll distance or hidden
+  research content.
+- Keep inactive method copy at readable contrast and communicate the active stage
+  through accent colour and diagram emphasis. Do not use low text opacity as the
+  primary stage indicator in a professor-facing research article.
+- Apply minimum interaction geometry to primary navigation, form controls, mobile
+  footer links and repository actions. Label scrollable evidence regions and complex
+  result graphics semantically, while leaving decorative or unavailable tracks out
+  of the accessibility tree unless they convey unique information.
+- Preserve the existing low-power, visibility-aware Three.js loop and GSAP scroll
+  rhythm. These effects support orientation and polish; they are not prerequisites
+  for understanding, verifying or presenting the study.
+- This decision changes presentation behaviour and accessibility only. It does not
+  alter evidence, metrics, hypotheses, annotations, accepted-run artifacts, frozen
+  authorities or scientific completion status.

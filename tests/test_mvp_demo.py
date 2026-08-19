@@ -360,10 +360,13 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "18 August 2026" in html
     assert "gsap@3.15.0" in html
     assert "three@0.185.1" in html
+    assert "import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')" in html
     assert "DEMO_COMPLETE" not in html
     assert "PRIMARY_STUDY_COMPLETE" not in html
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' in html
+    assert "#hero-canvas[hidden]" in html
+    assert ">Results</a>" in html
     assert "Source annotations stay fixed" in html
     assert "Conceptual workflow · not benchmark data" in html
     assert "threejs-review-queue" in html
@@ -382,6 +385,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<div class="reading-progress"' not in html
     assert "<details" not in html
     assert 'class="forest-plot"' in html
+    assert 'role="group" aria-label="Complete registered H4 downstream result"' in html
     assert 'id="filter-hypothesis"' in html
     assert "prefers-reduced-motion" in html
     assert "document.addEventListener('visibilitychange', syncRenderLoop)" in html
@@ -391,6 +395,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
     assert "python scripts/present_demo.py" in html
     assert ".journey-stage-group, .journey-connector, .journey-step" in html
+    assert "html:not(.motion-enhanced) .journey" in html
+    assert 'role="region" aria-label="Complete comparison results" tabindex="0"' in html
     assert "stroke-dashoffset: 0 !important" in html
     assert verify_mvp_presentation(artifacts.output_directory)["status"] == "valid"
     assert source_hashes == {
