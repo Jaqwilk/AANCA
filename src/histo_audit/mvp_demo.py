@@ -3928,10 +3928,8 @@ _MVP_SCRIPT_V4 = r"""
   const journeyGroups = [...document.querySelectorAll('.journey-stage-group')];
   const journeyConnectors = [...document.querySelectorAll('.journey-connector')];
   const journeySteps = [...document.querySelectorAll('[data-journey-copy]')];
-  let activeJourneyStage = -1;
   const setJourneyStage = (active, progress = 1) => {
     const next = Math.max(0, Math.min(4, active));
-    activeJourneyStage = next;
     journey.dataset.activeStage = String(next);
     journeyGroups.forEach((group, index) => {
       group.classList.toggle('is-active', index === next);
@@ -3968,17 +3966,24 @@ _MVP_SCRIPT_V4 = r"""
     root.classList.add('motion-enhanced', 'gsap-ready');
     journeyConnectors.forEach(connector => gsapEngine.set(connector, {strokeDashoffset: 1, opacity: .08}));
     setJourneyStage(0, 0);
-    scrollEngine.create({
+    const mobileJourney = window.matchMedia('(max-width: 1200px)');
+    const journeyTrigger = scrollEngine.create({
       trigger: journey,
       start: 'top top',
       end: 'bottom bottom',
-      onUpdate: self => setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress),
-      onLeaveBack: () => setJourneyStage(0, 0),
+      onUpdate: self => {
+        if (mobileJourney.matches) setJourneyStage(4, 1);
+        else setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress);
+      },
+      onLeaveBack: () => setJourneyStage(mobileJourney.matches ? 4 : 0, mobileJourney.matches ? 1 : 0),
     });
-    const mobileJourney = window.matchMedia('(max-width: 1200px)');
     const syncJourneyMode = () => {
       if (mobileJourney.matches) setJourneyStage(4, 1);
-      else setJourneyStage(activeJourneyStage < 0 ? 0 : activeJourneyStage);
+      else {
+        scrollEngine.refresh();
+        const progress = Math.max(0, Math.min(1, journeyTrigger.progress));
+        setJourneyStage(Math.min(4, Math.floor(progress * 4.9999)), progress);
+      }
     };
     mobileJourney.addEventListener('change', syncJourneyMode);
     syncJourneyMode();
@@ -4364,6 +4369,12 @@ python scripts/present_demo.py --verify-only
 
 After installing the full research environment, the equivalent commands are
 `uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
+
+To share the presentation without repository access, compress and send this entire
+directory. The reviewer should extract every file and open `index.html`. Do not send
+only `index.html`: the QC image, machine-readable evidence and checksum manifest are
+separate files in the same package. Repository links require reviewer access when
+the GitHub repository is private.
 
 Author: Natan Smogór. Released: 18 August 2026.
 

@@ -5746,3 +5746,19 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - This decision changes presentation behaviour and accessibility only. It does not
   alter evidence, metrics, hypotheses, annotations, accepted-run artifacts, frozen
   authorities or scientific completion status.
+
+## 2026-08-19 - Synchronise responsive story state and make reviewer hand-off explicit
+
+- When the viewport crosses the 1200 px method breakpoint, refresh ScrollTrigger and
+  recompute the active desktop stage from current trigger progress. Never carry the
+  tablet layout's intentionally complete stage-five state into a newly pinned
+  desktop sequence.
+- Keep the checked presentation package as the unit of private hand-off. A reviewer
+  receiving files must receive the whole `artifacts/mvp_demo` directory because its
+  HTML, QC image, evidence, package notes and checksum manifest are interdependent.
+- Do not infer authority to make the GitHub repository public or invite a reviewer.
+  If the repository remains private, document the two valid owner-controlled paths:
+  grant the reviewer access or send the complete verified package as an archive.
+- This decision changes responsive presentation state and hand-off documentation
+  only. It does not alter evidence, metrics, hypotheses, source annotations,
+  accepted-run artifacts, frozen authorities or scientific completion status.

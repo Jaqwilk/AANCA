@@ -22,6 +22,12 @@ python scripts/present_demo.py --verify-only
 After installing the full research environment, the equivalent commands are
 `uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
 
+To share the presentation without repository access, compress and send this entire
+directory. The reviewer should extract every file and open `index.html`. Do not send
+only `index.html`: the QC image, machine-readable evidence and checksum manifest are
+separate files in the same package. Repository links require reviewer access when
+the GitHub repository is private.
+
 Author: Natan Smogór. Released: 18 August 2026.
 
 The responsive presentation is written in English and uses pinned GSAP and

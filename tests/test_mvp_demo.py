@@ -334,6 +334,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
 
     evidence = json.loads(artifacts.evidence_path.read_text(encoding="utf-8"))
     html = artifacts.html_path.read_text(encoding="utf-8")
+    readme = artifacts.readme_path.read_text(encoding="utf-8")
     assert evidence["presentation_status"] == "DEMO_COMPLETE"
     assert evidence["scientific_status"] == "PRIMARY_STUDY_COMPLETE"
     assert evidence["analysis_disposition"] == "amended_or_exploratory"
@@ -394,8 +395,11 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'fetchpriority="low" width="1512" height="3840"' in html
     assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
     assert "python scripts/present_demo.py" in html
+    assert "Repository links require reviewer access" in readme
     assert ".journey-stage-group, .journey-connector, .journey-step" in html
     assert "html:not(.motion-enhanced) .journey" in html
+    assert "const journeyTrigger = scrollEngine.create" in html
+    assert "Math.min(1, journeyTrigger.progress)" in html
     assert 'role="region" aria-label="Complete comparison results" tabindex="0"' in html
     assert "stroke-dashoffset: 0 !important" in html
     assert verify_mvp_presentation(artifacts.output_directory)["status"] == "valid"

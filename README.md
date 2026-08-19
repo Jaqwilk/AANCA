@@ -201,7 +201,19 @@ A valid package reports a closed five-file allowlist with matching checksums,
 status. After `uv sync --dev`, the equivalent full-CLI commands are
 `uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
 
-### 3. Run the deterministic software smoke path
+### 3. Hand the presentation to a reviewer
+
+If the repository remains private, either grant the reviewer GitHub access or send
+the complete `artifacts\mvp_demo` directory as one archive. The reviewer should
+extract every file and open `index.html`; sending only the HTML file would omit the
+QC image, machine-readable evidence and checksum manifest. Repository links inside
+the article follow the repository visibility configured on GitHub.
+
+~~~powershell
+Compress-Archive -Path artifacts\mvp_demo -DestinationPath AANCA-presentation.zip
+~~~
+
+### 4. Run the deterministic software smoke path
 
 The full research workflow uses Python 3.12 and
 [`uv`](https://docs.astral.sh/uv/):

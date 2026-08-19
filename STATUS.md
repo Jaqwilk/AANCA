@@ -10169,3 +10169,51 @@ and supervisor before the one authorized Q replacement write.
   `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
   No evidence value, metric, dataset, label, accepted run or frozen scientific rule
   changed.
+
+## 2026-08-19 - Final reviewer-readiness acceptance pass
+
+- Repeated the release acceptance from the published `main` commit in a fresh local
+  server and isolated Chromium sessions. The standard-library launcher verified and
+  served the package without the ML environment. Desktop and mobile execution
+  retained 36 comparison rows, seven hypothesis summaries, 13 article sections,
+  zero broken images, zero duplicate IDs and zero horizontal overflow.
+- Re-exercised the animated header and wordmark, mobile menu with Escape focus
+  return, active navigation, evidence filtering, the visibility-aware Three.js loop,
+  reduced motion and a deliberate block of every CDN/font request. Normal execution
+  produced zero console messages. Reduced motion exposed every reveal and all five
+  method stages. The blocked-CDN fallback hid the unavailable canvas, retained all
+  36 rows and all five method stages, and reserved no dead pinned-scroll space.
+- Found and fixed one release edge case: resizing from the static tablet layout to
+  the pinned desktop layout could retain stage five as active even at the beginning
+  of the article. Breakpoint transitions now refresh ScrollTrigger geometry and
+  derive the active stage from the current trigger progress. Browser readback passed
+  in both directions: 1200 px selects the complete static sequence and returning to
+  1440 px at the top selects stage one.
+- Axe 4.10.3 reported **zero automated violations** after the fix in both normal
+  motion (39 passed rules) and reduced motion (54 passed rules). The normal run left
+  24 animated colour-contrast nodes for manual review; prior visual inspection and
+  explicit computed-style checks found no release-blocking contrast issue. This is
+  an automated audit result, not a claim of formal WCAG certification.
+- Added a reviewer hand-off path to the root and packaged READMEs. If GitHub remains
+  private, the complete `artifacts/mvp_demo` directory must be archived and sent;
+  `index.html` must not be separated from its QC image, evidence and manifest.
+  GitHub API readback confirms `Jaqwilk/AANCA` is currently `PRIVATE`, so a professor
+  must be invited or receive the complete package. Repository visibility was not
+  changed implicitly.
+- Moved all 24 release-smoke logs and intermediate builds (10,304,369 bytes) out of
+  the workspace to the recoverable cleanup tree under
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA-cleanup-backup-20260819T0400\frontend-audit-final-transients\reviewer-readiness`.
+  No unselected release-smoke output remains in the project folder.
+- The regenerated five-file package verifies as `DEMO_COMPLETE` with scientific
+  status `PRIMARY_STUDY_COMPLETE` and manifest root
+  `28890dd1658cdf9f3c90dba402b136b1b81336905be3d3243b403e392ed0bcb3`.
+  Full regression passed **2,393 tests with one expected Windows skip and zero
+  failures in 1,101.81 s**. The focused post-documentation MVP regression passed
+  **6/6 in 5.03 s**; Ruff check, Ruff format check and `git diff --check` passed.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No metric, evidence value, experiment, annotation, dataset, accepted run or frozen
+  scientific rule changed.
