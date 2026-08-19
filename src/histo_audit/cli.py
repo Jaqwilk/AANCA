@@ -35,7 +35,7 @@ preregistration_app = typer.Typer(help="Preregistration freeze and provenance co
 audit_app = typer.Typer(help="Exploratory original-label auditing commands.")
 external_app = typer.Typer(help="External-validation package commands.")
 report_app = typer.Typer(help="Machine-readable-artifact-backed reporting.")
-demo_app = typer.Typer(help="Build and verify the static presentation MVP.")
+demo_app = typer.Typer(help="Build, verify, and locally serve the static presentation MVP.")
 
 # Both public PanNuke CLI paths must reproduce the immutable canonical validation
 # evidence before doing any downstream work.  Keep these limits at the CLI boundary:
@@ -683,6 +683,87 @@ def verify_mvp_demo_command(
     except Exception as exc:
         _failure(f"MVP demo verification failed: {type(exc).__name__}: {exc}")
     typer.echo(json.dumps(result, indent=2))
+
+
+@demo_app.command("serve")
+def serve_mvp_demo_command(
+    output_directory: Annotated[
+        Path,
+        typer.Option(
+            "--output-dir",
+            file_okay=False,
+            dir_okay=True,
+            exists=True,
+            help="Existing static-demo directory; checksums are verified before serving.",
+        ),
+    ] = Path("artifacts/mvp_demo"),
+    host: Annotated[
+        str,
+        typer.Option(
+            "--host",
+            help="Bind address. The loopback default keeps the presentation local.",
+        ),
+    ] = "127.0.0.1",
+    port: Annotated[
+        int,
+        typer.Option(
+            "--port",
+            min=0,
+            max=65_535,
+            help="TCP port; use 0 to select an available port automatically.",
+        ),
+    ] = 8000,
+    open_browser: Annotated[
+        bool,
+        typer.Option("--open/--no-open", help="Open the verified presentation in a browser."),
+    ] = True,
+) -> None:
+    """Verify, serve, and optionally open the checked-in presentation."""
+
+    from histo_audit.mvp_demo import create_mvp_http_server
+
+    try:
+        server, verification = create_mvp_http_server(
+            output_directory,
+            host=host,
+            port=port,
+        )
+    except Exception as exc:
+        _failure(f"MVP demo server failed: {type(exc).__name__}: {exc}")
+
+    bound_port = int(server.server_address[1])
+    browser_host = "127.0.0.1" if host == "0.0.0.0" else host
+    url = f"http://{browser_host}:{bound_port}/"
+    typer.echo(
+        json.dumps(
+            {
+                "status": "verified_and_serving",
+                "presentation_status": verification["presentation_status"],
+                "scientific_status": verification["scientific_status"],
+                "manifest_root_sha256": verification["manifest_root_sha256"],
+                "url": url,
+            },
+            indent=2,
+        )
+    )
+    if open_browser:
+        import webbrowser
+
+        try:
+            if not webbrowser.open(url, new=2):
+                typer.echo(f"Browser launch was not confirmed; open {url} manually.", err=True)
+        except Exception as exc:
+            typer.echo(
+                f"Browser launch failed ({type(exc).__name__}); open {url} manually.",
+                err=True,
+            )
+    typer.echo("Press Ctrl+C to stop the local presentation server.")
+    try:
+        server.serve_forever(poll_interval=0.25)
+    except KeyboardInterrupt:
+        typer.echo("\nPresentation server stopped.")
+    finally:
+        server.server_close()
 
 
 @data_app.command("generate-synthetic")

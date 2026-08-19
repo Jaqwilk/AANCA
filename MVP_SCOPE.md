@@ -66,6 +66,7 @@ scope. Deferred code and historical evidence remain preserved.
 .venv\Scripts\ruff.exe check .
 .venv\Scripts\ruff.exe format --check .
 .venv\Scripts\mypy.exe src
+python scripts\present_demo.py --verify-only
 .venv\Scripts\python.exe -m histo_audit demo build --project-root . `
   --run-dir artifacts\runs\20260727T133947.089370Z_pannuke_primary_orphan_recovery `
   --qc-bundle reports\pannuke_qc --output-dir artifacts\mvp_demo_rebuild

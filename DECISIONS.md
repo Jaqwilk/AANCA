@@ -5603,5 +5603,62 @@ Decisions are conservative, reversible where possible, and amended rather than s
   as progressive enhancement, render a static completed queue when reduced motion
   is requested, and keep the mobile composition below the hero copy without
   horizontal overflow.
+- In reduced-motion mode, show every method-story step and every workflow stage at
+  full opacity. Motion preference must never make earlier explanatory content look
+  unavailable or subordinate to the final step.
 - This is a presentation-only change. It does not alter evidence, metrics,
   experiments, source annotations, frozen authorities or the accepted primary run.
+
+## 2026-08-19 - Adopt a professor-facing editorial article and cumulative benchmark story
+
+- Present AANCA as a long-form English research article with a centered reading
+  column, restrained display type, generous chapter spacing and wide evidence
+  figures. The interaction rhythm may be informed by Anthropic's recursive
+  self-improvement article, but the visual language, diagrams and scientific copy
+  remain specific to AANCA and the supplied Linear-style design rules.
+- Explain the benchmark as one cumulative five-stage serpentine sequence rather
+  than five independent stacked cards. On desktop, a pinned split view keeps the
+  growing diagram beside the active explanation; on mobile, reduced motion and
+  print, all stages remain statically visible and readable.
+- Hide the header on downward scrolling and restore it after any deliberate upward
+  movement. When it returns, reveal the AANCA wordmark from the persistent mark.
+  Remove the reading-progress rule beneath navigation; retain only active-section
+  colour as orientation.
+- Keep the complete H1-H7 interpretation, seed identities, QC evidence and 36-row
+  comparison table visible without disclosure controls. State explicitly that 33
+  comparison entries are numeric and three H6 entries are unavailable, and refresh
+  ScrollTrigger geometry whenever filters change the table height.
+- Include a repository card, three progressively deeper usage paths and a
+  line-separated footer covering author, release, scientific boundary, responsible
+  use, evidence links, licence limits and dataset terms. The root and packaged
+  READMEs must describe the same presentation and verification workflow.
+- Use GSAP and Three.js only as progressive enhancement. Core interpretation,
+  navigation, evidence, responsive layout, reduced-motion layout and print output
+  must remain usable without animation or network-loaded modules.
+- This is a presentation and documentation decision only. It does not change any
+  hypothesis, metric, annotation, accepted-run artifact, frozen authority or
+  scientific completion stage.
+
+## 2026-08-19 - Adopt dependency-free and visibility-aware presentation delivery
+
+- Keep the existing CLI architecture because measured warm help and verification
+  startup are already small; avoid a broad import refactor without a demonstrated
+  bottleneck.
+- Add `scripts/present_demo.py` as the default presentation path. It must use only
+  Python's standard library, verify the closed package before serving, bind to
+  `127.0.0.1` by default, support browser-free and verification-only operation,
+  and allow port `0` for automatic free-port selection. Retain `histo-audit demo
+  serve` as the equivalent command for an installed research environment.
+- Require both verifiers to match the manifest records against the exact unique
+  four-file payload allowlist before trusting any record hash. A correct file
+  count alone is insufficient because duplicate record paths could otherwise
+  leave one allowed file unchecked.
+- Pause the Three.js render loop whenever the hero is outside the viewport or the
+  browser tab is hidden. Use a low-power WebGL preference, cap high-density pixel
+  ratios, honour data-saving and reduced-motion preferences, lazily decode the
+  large QC image with explicit dimensions, preconnect the pinned CDN, and coalesce
+  table-triggered ScrollTrigger refreshes.
+- Keep generated QA iterations out of new Git commits while retaining the selected
+  professor-release captures referenced by the project. Optimisation must not
+  alter evidence, metrics, labels, frozen authorities, the accepted run or the
+  scientific completion boundary.

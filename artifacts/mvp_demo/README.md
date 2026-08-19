@@ -1,7 +1,26 @@
 # AANCA presentation MVP
 
-Open `index.html` in a browser. The package was generated from selected,
-checksum-verified sources in the accepted run `20260727T133947.089370Z_pannuke_primary_orphan_recovery`.
+The package was generated from selected, checksum-verified sources in the accepted
+run `20260727T133947.089370Z_pannuke_primary_orphan_recovery`. From the repository root, the recommended presentation
+command is:
+
+```powershell
+python scripts/present_demo.py
+```
+
+This standard-library launcher requires no project dependency installation. It
+verifies the closed package before serving it on `127.0.0.1` and opens the article
+in the default browser. No model run, dataset, or GPU is required. Use `--no-open`
+in headless environments and `--port 0` to select a free port.
+
+For verification without a browser or server, run:
+
+```powershell
+python scripts/present_demo.py --verify-only
+```
+
+After installing the full research environment, the equivalent commands are
+`uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
 
 Author: Natan Smogór. Released: 18 August 2026.
 
@@ -9,6 +28,8 @@ The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,
 tables and scientific interpretation remain available when motion is reduced;
 network access is only needed for the optional web fonts and animation libraries.
+The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
+pixel ratio, and respects reduced-motion and data-saving preferences.
 
 Scientific status: `PRIMARY_STUDY_COMPLETE`. Presentation status:
 `DEMO_COMPLETE`. The primary analysis is permanently labelled
@@ -23,3 +44,8 @@ the complete H2 subgroup summary, the byte-identical instance-dependent seed
 disclosure, and all 36 saved H1/H3/H5/H6/H7 comparisons. P-values shown in the
 HTML are explicitly labelled one-sided and Holm-adjusted. `manifest.json` binds
 every other file in this package.
+
+Of the 36 preregistered comparison entries, 33 contain numeric results and the
+three H6 entries remain explicitly unavailable under the frozen encoder gate.
+Source code, setup guidance, specifications, tests, and the complete documentation
+map are available at <https://github.com/Jaqwilk/AANCA>.

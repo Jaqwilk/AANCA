@@ -23,7 +23,7 @@ that may warrant expert review—without changing source labels.
   <a href="#scope-ethics-and-limitations">Limitations</a>
 </p>
 
-![AANCA presentation showing immutable source annotations and a ranked expert-review queue](output/playwright/aanca-final-hero-v2.png)
+![AANCA presentation showing immutable source annotations and a ranked expert-review queue](output/playwright/aanca-professor-release-hero.png)
 
 <p align="center"><em>Conceptual workflow illustration from the static presentation; not benchmark data.</em></p>
 
@@ -61,7 +61,7 @@ relabelling system.
 | Scientific boundary | `PRIMARY_STUDY_COMPLETE` |
 | Primary matrix | 185/185 required cells completed; 0 required failures |
 | Optional primary cells | 37 pathology-encoder cells skipped under the frozen availability rule |
-| Statistical output | 36 registered H1/H3/H5/H6/H7 comparisons; 2,000 group-bootstrap iterations where applicable |
+| Statistical output | 36 preregistered H1/H3/H5/H6/H7 entries: 33 numeric results and 3 explicitly unavailable H6 entries; 2,000 group-bootstrap iterations where applicable |
 | Analysis disposition | `amended_or_exploratory` because outcomes had been inspected before recovery finalisation |
 | Not claimed | `CONFIRMATORY_COMPLETE`, `EXTERNAL_VALIDATION_READY`, or `EXTERNAL_VALIDATION_COMPLETE` |
 
@@ -73,6 +73,26 @@ contains a machine-readable, checksum-bound evidence snapshot.
 See [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
 exact boundary and saved evidence.
+
+### Presentation experience
+
+The checked-in article is designed for both a research presentation and a close
+technical reading. Its English narrative uses a centered editorial column, a
+scroll-driven five-stage serpentine explanation of the benchmark, and visible
+evidence panels that never require disclosure clicks. The H1–H7 ledger preserves
+supportive, qualified, adverse, neutral, and unavailable outcomes together; the
+dense comparison table becomes stacked records on narrow screens and can be
+filtered by hypothesis, status, or free text.
+
+GSAP coordinates the directional header, logo reveal, section transitions, chart
+marks, and cumulative method story. Three.js renders the conceptual source-patch
+to review-queue scene in the hero. Responsive and reduced-motion layouts retain
+the complete scientific content without depending on those enhancements.
+
+Runtime work is visibility-aware: the WebGL render loop pauses outside the hero
+and while the browser tab is hidden, high-density rendering is capped, and the
+large QC image is lazily decoded with explicit dimensions. These optimisations
+reduce background CPU/GPU work and layout shift without changing any evidence.
 
 ## Evidence at a glance
 
@@ -150,40 +170,47 @@ flowchart LR
 
 ## Quick start
 
-### 1. Open the checked-in presentation
+### 1. Verify and open the checked-in presentation
 
-The static MVP needs no server, model execution, dataset, or GPU:
+The recommended launcher uses only Python's standard library: it verifies every
+package checksum, starts a loopback-only local server, and opens the article. It
+does not install the ML environment, run a model, or need a dataset or GPU:
 
 ~~~powershell
 git clone https://github.com/Jaqwilk/AANCA.git
 Set-Location AANCA
-Start-Process .\artifacts\mvp_demo\index.html
+python .\scripts\present_demo.py
 ~~~
 
-Core content works with local fallbacks. Pinned Three.js and GSAP enhancements load
-from jsDelivr when network access is available.
+Use `--no-open` for a headless session or `--port 0` to choose an available port.
+The server binds to `127.0.0.1` by default. Directly opening
+`artifacts\mvp_demo\index.html` remains a zero-server fallback; pinned Three.js and
+GSAP enhancements load from jsDelivr when network access is available.
 
-### 2. Verify the presentation package
+### 2. Verify the presentation package without opening it
 
-The reference development environment uses Python 3.12 and
-[`uv`](https://docs.astral.sh/uv/):
+The same dependency-free launcher can verify the closed package for CI or review:
 
 ~~~powershell
-uv sync --dev
-.venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
+python .\scripts\present_demo.py --verify-only
 ~~~
 
 A valid package reports a closed five-file allowlist with matching checksums,
 `DEMO_COMPLETE` presentation status, and `PRIMARY_STUDY_COMPLETE` scientific
-status.
+status. After `uv sync --dev`, the equivalent full-CLI commands are
+`uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
 
 ### 3. Run the deterministic software smoke path
 
+The full research workflow uses Python 3.12 and
+[`uv`](https://docs.astral.sh/uv/):
+
 ~~~powershell
-.venv\Scripts\python.exe -m histo_audit doctor
-.venv\Scripts\python.exe -m histo_audit data generate-synthetic --config configs\smoke.yaml
-.venv\Scripts\python.exe -m histo_audit experiment smoke
-.venv\Scripts\python.exe -m histo_audit experiment smoke --config configs\smoke_zero.yaml
+uv sync --dev
+uv run histo-audit doctor
+uv run histo-audit data generate-synthetic --config configs\smoke.yaml
+uv run histo-audit experiment smoke
+uv run histo-audit experiment smoke --config configs\smoke_zero.yaml
 ~~~
 
 Synthetic success validates the software pipeline only. It must not be described
@@ -243,14 +270,14 @@ post-processing step:
 To verify the checked-in MVP:
 
 ~~~powershell
-.venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
+python .\scripts\present_demo.py --verify-only
 ~~~
 
 To rebuild it on the original research workspace, use a new output directory; the
 builder refuses to overwrite an existing package:
 
 ~~~powershell
-.venv\Scripts\python.exe -m histo_audit demo build --project-root . --run-dir artifacts\runs\20260727T133947.089370Z_pannuke_primary_orphan_recovery --qc-bundle reports\pannuke_qc --output-dir artifacts\mvp_demo_rebuild
+uv run histo-audit demo build --project-root . --run-dir artifacts\runs\20260727T133947.089370Z_pannuke_primary_orphan_recovery --qc-bundle reports\pannuke_qc --output-dir artifacts\mvp_demo_rebuild
 ~~~
 
 This rebuild requires the full locally retained sealed run and QC bundle, which are
@@ -270,7 +297,7 @@ Run `python -m histo_audit --help` for the authoritative command tree.
 | `audit` | Rank unmodified original labels using group-safe OOF evidence |
 | `external` | Build blinded external-review packages when eligibility gates are satisfied |
 | `report` | Build sourced Markdown and static HTML from strict metrics JSON |
-| `demo` | Build or verify the static presentation MVP |
+| `demo` | Build, checksum-verify, or locally serve the static presentation MVP |
 
 Real-data study commands are intentionally hard-gated. The original confirmatory
 study, original-label audit execution, genuine expert review, and external validation
@@ -293,6 +320,7 @@ AANCA/
 │   ├── reporting/            # evidence-backed reports and figures
 │   └── workflows/            # frozen/governed execution authorities
 ├── configs/                  # smoke, pilot, primary, confirmatory, external
+├── scripts/present_demo.py   # dependency-free verified local presentation launcher
 ├── tests/                    # unit, integration, security, lifecycle, and CLI tests
 ├── reports/                  # compact QC, provenance, literature, and validation evidence
 ├── artifacts/mvp_demo/       # checked-in five-file static presentation package

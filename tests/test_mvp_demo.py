@@ -4,14 +4,22 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
+import sys
 from pathlib import Path
+from threading import Thread
 from typing import Any
+from urllib.request import urlopen
 
 import pytest
 from typer.testing import CliRunner
 
 from histo_audit.cli import app
-from histo_audit.mvp_demo import build_mvp_presentation, verify_mvp_presentation
+from histo_audit.mvp_demo import (
+    build_mvp_presentation,
+    create_mvp_http_server,
+    verify_mvp_presentation,
+)
 
 
 def _canonical_sha256(value: Any) -> str:
@@ -362,12 +370,28 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "immutable-source-ranked-review" in html
     assert "SOURCE PATCH" in html
     assert "REVIEW QUEUE" in html
-    assert 'class="story"' in html
+    assert 'class="journey story"' in html
+    assert 'class="journey-connector"' in html
+    assert "One controlled question, unfolded step by step" in html
+    assert "Saved performance estimates varied across contexts" in html
+    assert "The design limits outcome-informed model selection" in html
+    assert "33 reported · 3 unavailable" in html
+    assert "github.com/Jaqwilk/AANCA" in html
+    assert "View repository" in html
+    assert 'class="brand-label"' in html
+    assert '<div class="reading-progress"' not in html
+    assert "<details" not in html
     assert 'class="forest-plot"' in html
     assert 'id="filter-hypothesis"' in html
     assert "prefers-reduced-motion" in html
-    assert ".story-step { opacity: 1 !important; }" in html
-    assert ".workflow-panel [data-stage] { opacity: 1 !important;" in html
+    assert "document.addEventListener('visibilitychange', syncRenderLoop)" in html
+    assert "canvas.dataset.animationState = 'paused'" in html
+    assert "powerPreference: 'low-power'" in html
+    assert 'fetchpriority="low" width="1512" height="3840"' in html
+    assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
+    assert "python scripts/present_demo.py" in html
+    assert ".journey-stage-group, .journey-connector, .journey-step" in html
+    assert "stroke-dashoffset: 0 !important" in html
     assert verify_mvp_presentation(artifacts.output_directory)["status"] == "valid"
     assert source_hashes == {
         path: hashlib.sha256(path.read_bytes()).hexdigest() for path in source_hashes
@@ -393,6 +417,82 @@ def test_verify_mvp_rejects_tampering(tmp_path: Path) -> None:
     artifacts.html_path.write_text("tampered", encoding="utf-8")
     with pytest.raises(ValueError, match="differs from its seal"):
         verify_mvp_presentation(artifacts.output_directory)
+
+
+def test_verify_mvp_rejects_duplicate_manifest_paths(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    artifacts = build_mvp_presentation(
+        project_root=tmp_path,
+        run_directory=run,
+        qc_bundle_directory=qc,
+        output_directory=Path("artifacts/mvp_demo"),
+    )
+    manifest = json.loads(artifacts.manifest_path.read_text(encoding="utf-8"))
+    manifest["files"][0] = dict(manifest["files"][1])
+    manifest["manifest_root_sha256"] = _canonical_sha256(manifest["files"])
+    _write_json(artifacts.manifest_path, manifest)
+
+    with pytest.raises(ValueError, match="record allowlist differs"):
+        verify_mvp_presentation(artifacts.output_directory)
+
+
+def test_verified_mvp_http_server_serves_only_the_closed_package(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    artifacts = build_mvp_presentation(
+        project_root=tmp_path,
+        run_directory=run,
+        qc_bundle_directory=qc,
+        output_directory=Path("artifacts/mvp_demo"),
+    )
+    server, verification = create_mvp_http_server(
+        artifacts.output_directory,
+        host="127.0.0.1",
+        port=0,
+    )
+    thread = Thread(target=server.serve_forever, kwargs={"poll_interval": 0.05}, daemon=True)
+    thread.start()
+    try:
+        port = int(server.server_address[1])
+        with urlopen(f"http://127.0.0.1:{port}/", timeout=5) as response:
+            payload = response.read()
+            assert response.status == 200
+        assert payload.startswith(b"<!doctype html>")
+        assert verification["status"] == "valid"
+        assert verification["file_count"] == 5
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+    assert not thread.is_alive()
+
+
+def test_standalone_presentation_launcher_needs_no_project_import(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    artifacts = build_mvp_presentation(
+        project_root=tmp_path,
+        run_directory=run,
+        qc_bundle_directory=qc,
+        output_directory=Path("artifacts/mvp_demo"),
+    )
+    launcher = Path(__file__).resolve().parents[1] / "scripts" / "present_demo.py"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            str(launcher),
+            "--verify-only",
+            "--output-dir",
+            str(artifacts.output_directory),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert '"status": "valid"' in result.stdout
+    assert artifacts.manifest_root_sha256 in result.stdout
 
 
 def test_mvp_cli_build_and_verify(tmp_path: Path) -> None:

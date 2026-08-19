@@ -91,6 +91,7 @@ def test_required_command_tree_is_visible() -> None:
     root_help = runner.invoke(app, ["--help"])
     experiment_help = runner.invoke(app, ["experiment", "--help"])
     data_help = runner.invoke(app, ["data", "--help"])
+    demo_help = runner.invoke(app, ["demo", "--help"])
 
     assert root_help.exit_code == 0
     for command in (
@@ -115,6 +116,9 @@ def test_required_command_tree_is_visible() -> None:
         "build-manifest",
     ):
         assert command in data_help.output
+    assert demo_help.exit_code == 0
+    for command in ("build", "verify", "serve"):
+        assert command in demo_help.output
 
 
 def test_real_data_command_fails_with_clear_gate(tmp_path: Path) -> None:

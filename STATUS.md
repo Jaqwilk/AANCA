@@ -9756,6 +9756,38 @@ and supervisor before the one authorized Q replacement write.
   artifacts\mvp_demo`, then open `artifacts\mvp_demo\index.html` and reload the
   browser tab.
 
+## 2026-08-19 - Replace the generic hero field with the review-queue workflow
+
+- Replaced the generic Three.js nucleus field with a deterministic explanatory
+  sequence tied directly to AANCA: irregular source nucleus contours stay fixed,
+  the four-tile AANCA reticle focuses one candidate, five class-signal pulses are
+  shown, and only a copied review item follows a visible curve into a numbered
+  six-slot expert-review queue. The scene is explicitly labelled
+  `Conceptual workflow · not benchmark data`.
+- The source animation and generated HTML expose the stable markers
+  `threejs-review-queue` and `immutable-source-ranked-review`. Focused MVP tests
+  passed **3/3** and the extracted ES-module source passed Node syntax checking.
+- Real-browser QA passed at 1440x900 and 390x844. WebGL initialized, the browser
+  console reported zero errors and zero warnings, and neither viewport had
+  document-wide horizontal overflow. The mobile composition was moved below the
+  hero copy after visual inspection. With `prefers-reduced-motion: reduce`, the
+  canvas renders the completed queue statically instead of depending on motion.
+- The canonical five-file package in `artifacts/mvp_demo` is byte-identical to the
+  verified candidate and passes `demo verify` with presentation status
+  `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE`, file count 5 and
+  manifest root
+  `33b0456c50777760935bbe6587a170667e07babbb4c5755d910b09d1d633cfa7`.
+- The full mandatory suite passed **2,390 tests, one expected Windows skip and zero
+  failures in 1,110.61 s**. `ruff check .` passed and `ruff format --check .`
+  reported 208 files already formatted.
+- This was presentation-only work. No experiment, metric, evidence file, source
+  annotation, frozen authority or accepted-run artifact was changed. The formal
+  stages remain `DEMO_COMPLETE` for the presentation and
+  `PRIMARY_STUDY_COMPLETE` for the scientific boundary.
+- Exact verification command:
+  `.venv\Scripts\python.exe -m histo_audit demo verify --output-dir
+  artifacts\mvp_demo`, then open `artifacts\mvp_demo\index.html`.
+
 ## 2026-08-19 - Validate the English expert-facing presentation release
 
 - Rebuilt the reader-facing presentation entirely in English. The hero now names
@@ -9805,3 +9837,151 @@ and supervisor before the one authorized Q replacement write.
   No experiment, label, source annotation, accepted-run artifact or scientific
   result changed. Presentation status remains `DEMO_COMPLETE`; the scientific
   boundary remains `PRIMARY_STUDY_COMPLETE`.
+
+## 2026-08-19 - Integrate the explanatory review-queue hero and requalify final bytes
+
+- A concurrent presentation-only update appeared after the first full validation
+  had started. It was preserved and inspected rather than overwritten. The update
+  replaces the abstract Three.js cloud with a clearer deterministic sequence:
+  irregular contours remain in a labelled source patch, one candidate is focused,
+  class signals appear, and a copy travels into a six-slot expert-review queue.
+  The source contour never moves or disappears, and the canvas explicitly says it
+  is a conceptual workflow rather than benchmark data.
+- Real-browser revalidation at 1440x900 and 390x844 found zero horizontal overflow,
+  zero console errors and zero warnings. The final renderer reports
+  `threejs-review-queue` and story identity `immutable-source-ranked-review`; GSAP
+  and ScrollTrigger load; all 36 evidence rows remain present; and none of
+  `DEMO_COMPLETE`, `PRIMARY_STUDY_COMPLETE` or `amended_or_exploratory` appears in
+  visible page text. The H6 filter returns exactly 3/36 H6 rows and no hidden row
+  has a computed display other than `none`.
+- Reduced-motion QA initially found four non-active method steps still visually
+  dimmed. The final CSS now forces all five text steps and every workflow stage to
+  full opacity while retaining the static completed Three.js queue. A regression
+  assertion binds both fallback rules. Revalidation reports zero hidden reveals,
+  zero dim story steps, zero dim workflow stages and zero horizontal overflow.
+- Final screenshots are retained at
+  `output/playwright/aanca-final-desktop-layout-full.png`,
+  `output/playwright/aanca-final-hero-v2.png`,
+  `output/playwright/aanca-final-mobile-hero.png` and
+  `output/playwright/aanca-final-mobile-filter-h6.png`. The full composition and
+  detail views were inspected against `DESIGN-linear.app.md`; the method diagram,
+  charts, forest rows and evidence table remain aligned and readable.
+- The exact final canonical package verifies as `status=valid`, file count 5, with
+  manifest root
+  `33b0456c50777760935bbe6587a170667e07babbb4c5755d910b09d1d633cfa7`.
+  Focused MVP tests passed **3/3 in 4.01 s**. Because the concurrent update landed
+  after the earlier full run had begun, a new full suite was run from a fresh
+  collection on the stable final source: **2,390 passed, one expected Windows skip
+  and zero failures in 930.14 s**.
+- On the same final source, `ruff check .` passed; `ruff format --check .` reported
+  208 files already formatted; `mypy src` passed 100 source files;
+  `uv lock --check` resolved 83 packages; and `uv pip check` found all 64 installed
+  packages compatible. Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No scientific evidence, label, experiment, accepted-run artifact or authority
+  changed.
+
+## 2026-08-19 - Publish and validate the professor-facing editorial release
+
+- Rebuilt the English presentation around a centered explanatory narrative. It
+  now defines annotation auditing in plain language, records Natan Smogór and the
+  18 August 2026 release date, specifies PanNuke/already-segmented nuclei/frozen
+  ResNet-18 plus logistic regression/five-fold group-safe OOF/5% review budget,
+  and explicitly distinguishes the experimental reference label from biological
+  truth.
+- Replaced the stacked benchmark explanation with a five-stage cumulative
+  serpentine story driven by GSAP ScrollTrigger. Desktop keeps a sticky diagram
+  and active text in one frame; mobile and reduced-motion modes show all five
+  stages. The header has no progress line, hides while scrolling down, returns on
+  slight upward movement and animates the AANCA wordmark from its mark.
+- Replaced the former answer-count slogan with `What the study actually learned`,
+  kept all H1-H7 outcomes visible without `<details>`, softened H2 to a descriptive
+  finding, retained the adverse H4 result and reports 36 preregistered entries as
+  33 numeric plus 3 explicitly unavailable. Dense evidence rows stack cleanly on
+  mobile and remain filterable.
+- Added an always-visible QC preview, complete provenance and citations, a clean
+  GitHub repository card, three usage paths and a line-separated footer containing
+  authorship, release, scope, responsible-use, evidence, licence and dataset-term
+  information. Updated both the root README and package README.
+- Real-browser Playwright QA passed at 1440x900 and 390x844. The console reported
+  zero errors and zero warnings; document/viewport widths were exactly 1440/1440
+  and 390/390. Menu open/close/Escape, the cumulative method stages, H6 filtering
+  (3/36 rows), post-filter GSAP refresh and the later `Use` reveal were exercised.
+  Visual inspection found no overlap, clipped numeric value or horizontal overflow.
+- Selected final screenshots are retained at
+  `output/playwright/aanca-professor-release-hero.png`,
+  `output/playwright/aanca-professor-release-method-mid.png`,
+  `output/playwright/aanca-professor-release-qc.png`,
+  `output/playwright/aanca-professor-release-footer.png`,
+  `output/playwright/aanca-professor-release-mobile-menu.png` and
+  `output/playwright/aanca-professor-release-mobile-use-after-filter.png`.
+- The canonical five-file package is byte-identical to the verified candidate and
+  passes `demo verify` with `status=valid`, file count 5, presentation status
+  `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE` and manifest root
+  `be7366d4034f87119db43958e8c2a0189a3679c5e1abd2863a1044c9d6ffc523`.
+- Final validation passed: focused MVP tests **3/3 in 4.79 s**; complete suite
+  **2,390 passed, one expected Windows skip and zero failures in 1,089.54 s**;
+  `ruff check .` passed; `ruff format --check .` reported 208 files already
+  formatted; `mypy src` passed 100 source files; `uv lock --check` resolved 83
+  packages; and `uv pip check` found all 64 installed packages compatible.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No experiment, source annotation, result, accepted-run artifact or frozen rule
+  changed.
+
+## 2026-08-19 - Optimise delivery, runtime work and first-use verification
+
+- Audited CLI startup, package size, presentation resource loading, browser
+  behaviour and the documented first-use path. Warm CLI help and package
+  verification were already fast (roughly 30-50 ms), so no speculative import
+  rewrite was made. The main usability bottleneck was requiring the full ML
+  environment merely to present a static article.
+- Added `scripts/present_demo.py`, a Python-standard-library-only launcher that
+  verifies the exact closed package, serves it on loopback, opens the browser and
+  supports `--no-open`, `--verify-only`, custom binding and automatic free-port
+  selection. It passed from isolated mode with `python -I`, demonstrating that it
+  does not import the project package or third-party dependencies. The installed
+  CLI now also exposes `histo-audit demo serve` with the same verify-before-serve
+  behaviour.
+- Strengthened both package verifiers to require the manifest record paths to be
+  the exact unique payload allowlist. A regression test rewrites a manifest with a
+  duplicate path and recomputes its root; verification correctly rejects it before
+  trusting the duplicated record.
+- Optimised the presentation runtime without changing content or evidence. The
+  Three.js loop now pauses outside the hero and while the tab is hidden, resumes on
+  return, uses a low-power preference and caps the pixel ratio at 1.5 desktop / 1.25
+  compact viewports (or 1 with data saving). The QC image now has explicit intrinsic
+  dimensions, lazy asynchronous decoding and low fetch priority; jsDelivr is
+  preconnected; table-filter refreshes are coalesced per animation frame.
+- Updated the root README, `demo/README.md`, `MVP_SCOPE.md`, the generated package
+  README and the article's repository section to make
+  `python scripts/present_demo.py` the simplest first-use command while preserving
+  the full `uv` workflow for actual software experiments.
+- Real-browser Playwright QA passed through the dependency-free server at 1440x900
+  and 390x844. Both widths had zero horizontal overflow and zero console errors or
+  warnings. The hero state was `running`, changed to `paused` off-screen and resumed
+  after returning; reduced motion produced `static`. The H6 filter retained exactly
+  3/36 records. Desktop usage cards, the hero, the mobile menu and mobile use section
+  were visually inspected with no overlap, clipping or inconsistent spacing.
+- The canonical five-file package passes both independent verifiers with
+  `status=valid`, file count 5, presentation status `DEMO_COMPLETE`, scientific
+  status `PRIMARY_STUDY_COMPLETE` and manifest root
+  `1b95f12a167e749f57bb3fded2d82636586c8d018a75423f332242c43d91f49f`.
+- Final validation passed: focused tests **13/13 in 6.06 s**; complete suite
+  **2,393 passed, one expected Windows skip and zero failures in 1,074.35 s**;
+  `ruff check .` passed; `ruff format --check .` reported 209 files already
+  formatted; `mypy src` passed 100 source files; `uv lock --check` resolved 83
+  packages; and `uv pip check` found all 64 installed packages compatible.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No dataset, source annotation, label, metric, experiment, accepted-run artifact
+  or frozen scientific rule changed.

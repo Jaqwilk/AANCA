@@ -8,6 +8,7 @@
   <meta name="date" content="2026-08-18">
   <meta name="theme-color" content="#010102">
   <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -313,6 +314,8 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .site-header { transform: none !important; }
   .gsap-ready .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; }
+  .story-step { opacity: 1 !important; }
+  .workflow-panel [data-stage] { opacity: 1 !important; transform: none !important; }
 }
 @media print {
   :root { color-scheme: light; --canvas: #fff; --surface-1: #fff; --surface-2: #f6f6f6; --surface-3: #eee; --ink: #111; --ink-muted: #333; --ink-subtle: #555; --ink-tertiary: #666; --line: #ccc; --line-strong: #999; --accent: #4b56bb; }
@@ -325,17 +328,243 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   .workflow-panel [data-stage], .story-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; }
   .section { break-inside: avoid; }
 }
+
+/* Professor-facing editorial release: centered reading rhythm + cumulative method story. */
+:root {
+  --prose: 780px;
+  --editorial: 860px;
+  --figure: 1160px;
+  --wide: 1320px;
+  --section-space: clamp(104px, 11vw, 164px);
+}
+body { font-size: 16px; line-height: 1.68; }
+.site-header { height: 60px; border: 0; background: rgba(1,1,2,.82); backdrop-filter: blur(20px) saturate(125%); will-change: transform; }
+.site-header.is-scrolled { border: 0; }
+.nav-shell { height: 60px; }
+.brand { gap: 9px; font-size: 14px; }
+.brand-mark { position: relative; z-index: 2; width: 19px; height: 19px; flex: 0 0 19px; }
+.brand-word-clip { display: block; width: 51px; overflow: hidden; }
+.brand-label { display: block; transform-origin: left center; }
+.nav-links { gap: 25px; }
+.nav-links a { font-size: 12px; letter-spacing: .01em; }
+.nav-links a::after { display: none; }
+.nav-links a.is-active { color: var(--accent-hover); }
+.reading-progress { display: none !important; }
+.menu-button { border-color: var(--line-strong); }
+
+.hero { min-height: min(900px,100svh); padding-top: 60px; border: 0; }
+.hero::after { content: ""; position: absolute; left: 50%; bottom: 0; width: min(640px,calc(100% - 48px)); height: 1px; background: var(--line); transform: translateX(-50%); }
+#hero-canvas { inset: 60px 0 0; height: calc(100% - 60px); }
+.hero-shell { min-height: calc(min(900px,100svh) - 60px); grid-template-columns: minmax(0,1.03fr) minmax(360px,.97fr); }
+.hero-copy { max-width: 680px; padding: 86px 0 100px; }
+.hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
+.hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
+.hero-byline { margin-top: 30px; }
+.hero-visual-label { bottom: 38px; }
+.eyebrow, .section-kicker, .chart-label { font-size: 10px; letter-spacing: .09em; }
+
+.article-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin-inline: auto; }
+.narrative { padding: var(--section-space) 0; }
+.narrative .lede { margin: 0 0 42px; color: var(--ink); font-size: clamp(23px,2.4vw,31px); font-weight: 500; line-height: 1.38; letter-spacing: -.03em; text-wrap: balance; }
+.article-copy p { margin: 0 0 24px; color: var(--ink-muted); font-size: clamp(16px,1.35vw,18px); line-height: 1.72; letter-spacing: -.008em; }
+.article-copy p:last-child { margin-bottom: 0; }
+.article-copy strong { color: var(--ink); font-weight: 550; }
+.scope-note { margin-top: 44px; padding-top: 24px; font-size: 13px; line-height: 1.65; }
+.study-at-a-glance { padding: 0 0 var(--section-space); }
+.study-at-a-glance .section-heading { margin-bottom: 42px; }
+.study-specs { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(5,1fr); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); gap: 1px; }
+.spec-card { min-height: 158px; padding: 24px 21px; background: var(--surface-1); }
+.spec-card span { display: block; margin-bottom: 24px; color: var(--accent-hover); font: 500 10px/1.3 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.spec-card strong { display: block; color: var(--ink); font-size: 14px; font-weight: 550; line-height: 1.45; }
+.spec-card small { display: block; margin-top: 7px; color: var(--ink-subtle); font-size: 11px; line-height: 1.5; }
+.research-question { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto var(--section-space); padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.research-question span { display: block; margin-bottom: 16px; color: var(--accent-hover); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+.research-question p { margin: 0; color: var(--ink); font-size: clamp(20px,2.25vw,29px); font-weight: 500; line-height: 1.43; letter-spacing: -.026em; text-wrap: balance; }
+
+.section { position: relative; padding: var(--section-space) 0; border: 0; scroll-margin-top: 60px; }
+.section::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
+.section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin-bottom: 54px; }
+h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spacing: -.038em; }
+.section-deck { max-width: 760px; margin-top: 20px; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; }
+.chapter-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin: -20px auto 56px; }
+.chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; }
+
+.journey { position: relative; height: 540vh; scroll-margin-top: 60px; }
+.journey::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
+.journey-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 72px 0 44px; }
+.journey-grid { width: min(var(--wide),calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(560px,1.12fr) minmax(360px,.88fr); gap: clamp(52px,6vw,92px); align-items: center; }
+.journey-visual { min-width: 0; }
+.journey-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
+.journey-lane-bg { fill: var(--surface-1); stroke: var(--line); stroke-width: 1.2; }
+.journey-lane-edge { fill: none; stroke: rgba(255,255,255,.045); stroke-width: 1; }
+.journey-stage-no { fill: var(--accent-hover); font: 500 11px var(--mono); letter-spacing: .04em; }
+.journey-stage-title { fill: var(--ink); font: 600 15px var(--sans); letter-spacing: -.01em; }
+.journey-stage-meta { fill: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.journey-rail { fill: none; stroke: var(--line-strong); stroke-width: 1.4; stroke-linecap: round; }
+.journey-rail-accent { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; }
+.journey-connector { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.journey-node { fill: var(--accent); }
+.journey-node-muted { fill: var(--line-strong); }
+.journey-icon-line { fill: none; stroke: var(--ink-muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stage-group { transform-origin: center; }
+.journey-copy .section-kicker { margin-bottom: 15px; }
+.journey-copy .display { max-width: 480px; font-size: clamp(32px,3.45vw,46px); }
+.journey-intro { max-width: 500px; margin: 20px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.62; }
+.journey-steps { margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.journey-step { position: relative; padding: 17px 0 17px 46px; border-bottom: 1px solid var(--line); opacity: 1; }
+.journey-step::before { content: attr(data-index); position: absolute; left: 0; top: 19px; color: var(--ink-tertiary); font: 500 10px var(--mono); }
+.journey-step small { display: block; margin-bottom: 4px; color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.journey-step h3 { margin: 0 0 5px; font-size: 14px; font-weight: 600; letter-spacing: -.012em; }
+.journey-step p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.52; }
+.motion-enhanced .journey-step { opacity: .2; }
+.journey-step.is-active { opacity: 1 !important; }
+.journey-step.is-active::before, .journey-step.is-active small { color: var(--accent-hover); }
+
+.reading-grid { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
+.reading-card { min-height: 240px; padding: 28px; background: var(--surface-1); }
+.reading-card span { color: var(--accent-hover); font: 500 10px var(--mono); }
+.reading-card h3 { margin: 34px 0 12px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+.reading-card p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+.hypothesis-ledger { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
+.hypothesis-row { min-height: 236px; margin: 0; padding: 26px; border: 0; background: var(--surface-1); }
+.hypothesis-row:last-child { grid-column: 1 / -1; min-height: 0; }
+.hypothesis-row-head { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; }
+.hypothesis-id { font-size: 11px; }
+.hypothesis-theme { color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.hypothesis-result { max-width: 220px; font-size: 10px; text-align: right; white-space: normal; }
+.hypothesis-row .hypothesis-title { margin: 30px 0 10px; font-size: 17px; font-weight: 600; line-height: 1.38; letter-spacing: -.02em; }
+.hypothesis-row p { max-width: 560px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+.always-visible-evidence { margin-top: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
+.evidence-label-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 12px; font-weight: 500; }
+.evidence-label-row span:last-child { color: var(--ink-tertiary); font: 400 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.qc-frame { border: 0; border-radius: 0; }
+.qc-preview { position: relative; max-height: 760px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.qc-preview::after { display: none; }
+.qc-preview img { border: 0; border-radius: 0; }
+.table-wrap { scrollbar-color: var(--line-strong) var(--surface-1); }
+.table-tools { border-top: 0; }
+
+.repo-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; }
+.repo-card { position: relative; padding: clamp(28px,4vw,48px); border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
+.repo-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: var(--accent); }
+.repo-top { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+.repo-icon { width: 40px; height: 40px; color: var(--ink); }
+.repo-path { display: block; color: var(--ink-tertiary); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.repo-title { display: block; margin-top: 3px; color: var(--ink); font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
+.repo-link { min-height: 40px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--surface-2); font-size: 12px; font-weight: 550; text-decoration: none; }
+.repo-description { max-width: 760px; margin: 30px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.7; }
+.repo-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.repo-tags span { padding: 5px 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-subtle); font: 400 10px var(--mono); }
+.usage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
+.repo-command { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-1); }
+.repo-command > span { color: var(--accent-hover); font: 500 10px var(--mono); }
+.repo-command h3 { margin: 20px 0 8px; font-size: 15px; font-weight: 600; }
+.repo-command p { min-height: 58px; margin: 0 0 18px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
+.usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: var(--ink-subtle); font-size: 11px; }
+.footer-inner { width: min(var(--wide),100%); display: block; }
+.footer-divider { width: min(640px,100%); height: 1px; margin: 0 auto 56px; background: var(--line); }
+.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(3,1fr); gap: 48px; }
+.footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
+.footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+.footer-column h3 { margin: 0 0 15px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.footer-column p, .footer-column a { display: block; margin: 0 0 8px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.footer-column a:hover { color: var(--ink); }
+.footer-bottom { display: flex; justify-content: space-between; gap: 32px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.footer-bottom span { max-width: 560px; }
+
+.gsap-ready .reveal { visibility: hidden; }
+@media (max-width: 1120px) {
+  .study-specs { grid-template-columns: repeat(3,1fr); }
+  .spec-card:nth-child(n+4) { min-height: 142px; }
+  .journey-grid { grid-template-columns: minmax(500px,1.05fr) minmax(330px,.95fr); gap: 44px; }
+  .reading-grid { grid-template-columns: repeat(2,1fr); }
+  .usage-grid { grid-template-columns: 1fr 1fr; }
+  .repo-command:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  .hero { min-height: 850px; }
+  .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
+  .hero-copy { padding-top: 122px; }
+  .journey { height: auto; padding: var(--section-space) 0; }
+  .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .journey-visual { order: 2; }
+  .journey-copy { order: 1; }
+  .journey-copy .display, .journey-intro { max-width: 680px; }
+  .journey-step, .motion-enhanced .journey-step { opacity: 1 !important; }
+  .journey-stage-group, .journey-connector { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .hypothesis-ledger { grid-template-columns: 1fr; }
+  .hypothesis-row:last-child { grid-column: auto; }
+  .footer-grid { grid-template-columns: 1.25fr repeat(2,1fr); }
+  .footer-column:last-child { grid-column: 2 / -1; }
+}
+@media (max-width: 720px) {
+  :root { --page-pad: 22px; --section-space: 96px; }
+  .brand, .menu-button { position: relative; z-index: 2; }
+  .nav-links { z-index: 1; top: 66px; left: 12px; right: 12px; padding: 10px 18px 16px; border: 1px solid var(--line); border-radius: 12px; background: #0f1011; }
+  .hero { min-height: 810px; }
+  .hero-shell { min-height: 750px; }
+  .hero-copy { padding-top: 104px; }
+  .hero h1 { font-size: clamp(38px,12vw,50px); }
+  .hero-lead { font-size: 15px; }
+  .narrative .lede { font-size: 23px; }
+  .article-copy p { font-size: 16px; }
+  .study-specs { grid-template-columns: 1fr 1fr; }
+  .spec-card { min-height: 148px; }
+  .spec-card:last-child { grid-column: 1 / -1; }
+  .research-question { padding: 28px 0; }
+  h2, .display { font-size: clamp(31px,10vw,42px); }
+  .section-heading { margin-bottom: 42px; }
+  .journey-grid { gap: 44px; }
+  .journey-visual svg { width: 112%; margin-left: -6%; }
+  .journey-step { padding-left: 40px; }
+  .reading-grid, .usage-grid { grid-template-columns: 1fr; }
+  .reading-card { min-height: 0; }
+  .repo-command:last-child { grid-column: auto; }
+  .repo-top { grid-template-columns: auto 1fr; }
+  .repo-link { grid-column: 1 / -1; justify-self: start; }
+  .repo-command p { min-height: 0; }
+  .hypothesis-row { min-height: 0; }
+  .hypothesis-row-head { grid-template-columns: 38px 1fr; }
+  .hypothesis-result { grid-column: 1 / -1; max-width: none; text-align: left; }
+  .metric-axis, .range-axis { font-size: 8px; }
+  .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .qc-preview { max-height: 620px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+  .footer-column:last-child { grid-column: auto; }
+  .footer-bottom { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header { transform: none !important; }
+  .brand-label, .journey-stage-group, .journey-connector, .journey-step { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .gsap-ready .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; }
+}
+@media print {
+  .site-header, .menu-button, #hero-canvas { display: none !important; }
+  .hero { min-height: auto; padding-top: 48px; }
+  .hero-shell { min-height: auto; grid-template-columns: 1fr; }
+  .journey { height: auto; padding: 72px 0; }
+  .journey-sticky { position: static; min-height: 0; padding: 0; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .journey-stage-group, .journey-connector, .journey-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .section, .repo-card, .hypothesis-row { break-inside: avoid; }
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header" id="site-header">
   <div class="nav-shell">
-    <a class="brand" href="#top" aria-label="AANCA — back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>AANCA</a>
+    <a class="brand" href="#top" aria-label="AANCA — back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#benchmarks">Benchmarks</a><a href="#evidence">Evidence</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Result</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
   </div>
-  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -344,63 +573,130 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
     <div class="hero-copy">
       <p class="eyebrow hero-animate">Automated nucleus-annotation auditing</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
-      <p class="hero-lead hero-animate">A reproducible, group-safe framework that assigns review priority to each <em>potentially inconsistent annotation</em>. High-priority cases are <em>recommended for expert review</em>—without changing the source labels.</p>
-      <div class="hero-byline hero-animate"><span>By <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
+      <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review—without rewriting the source labels.</p>
+      <div class="hero-byline hero-animate"><span>Research prototype by <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
     </div>
     <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
   </div>
 </section>
 
 <main id="main">
-  <section class="intro" id="overview">
-    <div class="prose reveal">
-      <p class="intro-lead">A model can identify labels that do not fit the patterns learned from the rest of a dataset. That is a triage signal—not a verdict.</p>
-      <div class="intro-copy">
-        <p>AANCA tests whether that signal can move intentionally corrupted nucleus labels toward the front of a fixed expert-review queue. Because the benchmark knows exactly which labels were changed, ranking quality can be measured objectively.</p>
-        <p>The system never decides that an annotator was wrong. It preserves every source annotation and produces only a priority order for review by a qualified expert.</p>
-      </div>
-      <div class="scope-note"><strong>Scope.</strong> This presentation reports the completed frozen-feature study. Confirmatory CNN experiments, blinded expert review and external validation have not been performed. The accepted analysis is presented as exploratory because outcomes were inspected during recovery.</div>
+  <section class="narrative" id="overview">
+    <div class="article-copy reveal">
+      <p class="lede">Annotation auditing is a way to decide what a human should inspect first. It is not a way to replace the human decision.</p>
+      <p>Large histopathology datasets contain many already segmented nucleus instances, each paired with a class label. Even careful annotation can include ambiguity, inconsistent conventions or ordinary data-entry noise. Reviewing every instance again is expensive, so the useful question is not “can a model declare a label wrong?” It is “can a model create a better review queue than random sampling?”</p>
+      <p>AANCA evaluates that question under controlled conditions. It intentionally changes a known subset of class labels, hides that intervention from the auditor, and then measures whether the changed labels move toward the front of a fixed review queue. Because the benchmark records exactly what it changed, retrieval can be scored without pretending that model disagreement is biological truth.</p>
+      <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>—never “confirmed error.”</p>
+      <div class="scope-note"><strong>Study boundary.</strong> This presentation reports the completed primary frozen-feature benchmark. Confirmatory CNN experiments, blinded expert review and external validation have not been performed. Model-selection rules were frozen before outcome interpretation; the accepted analysis remains exploratory because outcomes were subsequently exposed during technical recovery.</div>
     </div>
   </section>
 
-  <div class="question-panel reveal">
+  <section class="study-at-a-glance" aria-labelledby="study-title">
+    <div class="section-heading reveal"><p class="section-kicker">Study at a glance</p><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define what the results do—and do not—measure.</p></div>
+    <div class="study-specs reveal">
+      <article class="spec-card"><span>Data</span><strong>PanNuke</strong><small>Verified official release; five positive nucleus classes across 19 tissue types.</small></article>
+      <article class="spec-card"><span>Unit</span><strong>Already segmented nuclei</strong><small>Class-label consistency only. Segmentation quality and diagnosis are outside scope.</small></article>
+      <article class="spec-card"><span>Primary model</span><strong>Frozen ResNet-18 + logistic regression</strong><small>ImageNet context embeddings with balanced multinomial fitting.</small></article>
+      <article class="spec-card"><span>Prediction design</span><strong>Five-fold group-safe OOF</strong><small>A scored nucleus and its whole source patch are absent from its training fold.</small></article>
+      <article class="spec-card"><span>Review budget</span><strong>5% primary queue</strong><small>Guided and random review receive the same integer budget.</small></article>
+    </div>
+  </section>
+
+  <div class="research-question reveal">
     <span>Research question</span>
-    <p>Can group-safe out-of-fold models find controlled label inconsistencies more efficiently than random review—and does correcting the highest-ranked labels improve downstream classification?</p>
+    <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review—and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
   </div>
 
-  <section class="story" id="method" aria-labelledby="story-title">
-    <div class="story-frame"><div class="story-inner">
-      <div class="workflow-panel" id="workflow-panel" data-active-stage="0">
-        <svg viewBox="0 0 720 680" role="img" aria-labelledby="workflow-title workflow-desc">
-          <title id="workflow-title">Five stages of the controlled AANCA benchmark</title>
-          <desc id="workflow-desc">Source labels, controlled label corruption, group-safe out-of-fold predictions, risk ranking and an expert-review queue.</desc>
-          <path data-stage="1" class="workflow-connector is-accent" d="M112 128V166"/>
-          <path data-stage="2" class="workflow-connector is-accent" d="M112 258V296"/>
-          <path data-stage="3" class="workflow-connector is-accent" d="M112 388V426"/>
-          <path data-stage="4" class="workflow-connector is-accent" d="M112 518V556"/>
-          <g data-stage="0"><rect class="workflow-node" x="62" y="36" width="596" height="92" rx="14"/><text class="workflow-step-no" x="88" y="67">01</text><text class="workflow-title" x="132" y="68">Immutable source labels</text><text class="workflow-copy" x="132" y="94">Each nucleus remains linked to its source patch and original class.</text><g transform="translate(568 58)"><rect class="workflow-icon" width="16" height="16" rx="4"/><rect class="workflow-icon" x="23" y="7" width="16" height="16" rx="4" opacity=".7"/><rect class="workflow-icon" x="7" y="27" width="16" height="16" rx="4" opacity=".85"/></g></g>
-          <g data-stage="1"><rect class="workflow-node" x="62" y="166" width="596" height="92" rx="14"/><text class="workflow-step-no" x="88" y="197">02</text><text class="workflow-title" x="132" y="198">Controlled label corruption</text><text class="workflow-copy" x="132" y="224">Known interventions create objective targets for ranking evaluation.</text><g transform="translate(558 192)"><rect x="0" y="0" width="38" height="10" rx="5" fill="#62666d"/><path d="M43 5H58" stroke="#828fff"/><rect class="workflow-icon" x="63" y="0" width="38" height="10" rx="5"/></g></g>
-          <g data-stage="2"><rect class="workflow-node" x="62" y="296" width="596" height="92" rx="14"/><text class="workflow-step-no" x="88" y="327">03</text><text class="workflow-title" x="132" y="328">Group-safe out-of-fold predictions</text><text class="workflow-copy" x="132" y="354">A nucleus is scored only by a model that never trained on its patch.</text><g transform="translate(563 322)"><rect class="workflow-icon" width="27" height="24" rx="5"/><rect x="34" width="27" height="24" rx="5" fill="#34343a"/><rect x="68" width="27" height="24" rx="5" fill="#34343a"/></g></g>
-          <g data-stage="3"><rect class="workflow-node" x="62" y="426" width="596" height="92" rx="14"/><text class="workflow-step-no" x="88" y="457">04</text><text class="workflow-title" x="132" y="458">Risk ranking at a fixed review budget</text><text class="workflow-copy" x="132" y="484">Higher score means earlier review; it does not mean “confirmed error.”</text><g transform="translate(556 449)"><rect class="workflow-icon" width="104" height="7" rx="3.5"/><rect x="0" y="15" width="74" height="7" rx="3.5" fill="#62666d"/><rect x="0" y="30" width="42" height="7" rx="3.5" fill="#34343a"/></g></g>
-          <g data-stage="4"><rect class="workflow-node" x="62" y="556" width="596" height="92" rx="14"/><text class="workflow-step-no" x="88" y="587">05</text><text class="workflow-title" x="132" y="588">Expert-review queue</text><text class="workflow-copy" x="132" y="614">Recommendation only. Source annotations are never changed automatically.</text><g transform="translate(584 578)"><circle cx="24" cy="24" r="23" fill="none" stroke="#5e6ad2" stroke-width="2"/><path d="M13 24l8 8 16-20" fill="none" stroke="#828fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  <section class="journey story" id="method" aria-labelledby="journey-title" data-active-stage="0">
+    <div class="journey-sticky"><div class="journey-grid">
+      <div class="journey-visual">
+        <svg viewBox="0 0 760 680" role="img" aria-labelledby="method-graphic-title method-graphic-desc">
+          <title id="method-graphic-title">The five cumulative stages of the controlled AANCA benchmark</title>
+          <desc id="method-graphic-desc">Five horizontal lanes unfold along an alternating serpentine path from immutable source labels to an expert-review recommendation.</desc>
+
+          <path class="journey-connector" pathLength="1" d="M688 81H711Q732 81 732 102V188Q732 209 711 209H722"/>
+          <path class="journey-connector" pathLength="1" d="M72 209H49Q28 209 28 230V316Q28 337 49 337H38"/>
+          <path class="journey-connector" pathLength="1" d="M688 337H711Q732 337 732 358V444Q732 465 711 465H722"/>
+          <path class="journey-connector" pathLength="1" d="M72 465H49Q28 465 28 486V572Q28 593 49 593H38"/>
+
+          <g class="journey-stage-group" data-journey-stage="0">
+            <rect class="journey-lane-bg" x="38" y="34" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 35H660"/>
+            <text class="journey-stage-no" x="66" y="65">01</text>
+            <text class="journey-stage-title" x="111" y="66">Preserve the source evidence</text>
+            <text class="journey-stage-meta" x="111" y="91">LABEL + PATCH GROUP + ORIGINAL CLASS</text>
+            <path class="journey-rail" d="M430 82H590"/>
+            <path class="journey-rail" d="M583 76L590 82L583 88"/>
+            <g transform="translate(612 59)"><rect class="journey-node" width="16" height="16" rx="4"/><rect class="journey-node" x="21" y="7" width="16" height="16" rx="4" opacity=".7"/><rect class="journey-node" x="7" y="25" width="16" height="16" rx="4" opacity=".85"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="1">
+            <rect class="journey-lane-bg" x="72" y="162" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M100 163H694"/>
+            <text class="journey-stage-no" x="100" y="193">02</text>
+            <text class="journey-stage-title" x="145" y="194">Create known inconsistencies</text>
+            <text class="journey-stage-meta" x="145" y="219">PRE-CORRUPTION ≠ OBSERVED · METADATA KEPT SEPARATE</text>
+            <g transform="translate(596 190)"><rect class="journey-node-muted" width="38" height="10" rx="5"/><path class="journey-rail-accent" d="M44 5H58"/><rect class="journey-node" x="64" width="38" height="10" rx="5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="2">
+            <rect class="journey-lane-bg" x="38" y="290" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 291H660"/>
+            <text class="journey-stage-no" x="66" y="321">03</text>
+            <text class="journey-stage-title" x="111" y="322">Predict without patch leakage</text>
+            <text class="journey-stage-meta" x="111" y="347">FIVE GROUP-SAFE OUT-OF-FOLD MODELS</text>
+            <g transform="translate(564 316)"><rect class="journey-node" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="31" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="62" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="93" width="24" height="24" rx="5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="3">
+            <rect class="journey-lane-bg" x="72" y="418" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M100 419H694"/>
+            <text class="journey-stage-no" x="100" y="449">04</text>
+            <text class="journey-stage-title" x="145" y="450">Turn evidence into a fixed review queue</text>
+            <text class="journey-stage-meta" x="145" y="475">HIGHER SCORE = EARLIER REVIEW · PRIMARY BUDGET 5%</text>
+            <g transform="translate(594 442)"><rect class="journey-node" width="104" height="7" rx="3.5"/><rect class="journey-node-muted" y="15" width="73" height="7" rx="3.5"/><rect class="journey-node-muted" y="30" width="42" height="7" rx="3.5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="4">
+            <rect class="journey-lane-bg" x="38" y="546" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 547H660"/>
+            <text class="journey-stage-no" x="66" y="577">05</text>
+            <text class="journey-stage-title" x="111" y="578">Measure retrieval; leave judgement to an expert</text>
+            <text class="journey-stage-meta" x="111" y="603">RECOMMENDATION ONLY · SOURCE LABELS REMAIN UNCHANGED</text>
+            <g transform="translate(607 564)"><circle class="journey-icon-line" cx="24" cy="24" r="22"/><path class="journey-icon-line" d="M13 24L21 32L37 12" style="stroke:#828fff;stroke-width:3"/></g>
+          </g>
         </svg>
       </div>
-      <div class="story-copy">
+
+      <div class="journey-copy">
         <p class="section-kicker">How the benchmark works</p>
-        <h2 id="story-title" class="display">From source label to review priority.</h2>
-        <ol class="story-steps">
-          <li class="story-step is-active" data-story-step="0" data-index="01"><h3>Preserve the original evidence</h3><p>Every nucleus keeps its patch-level group and pre-corruption class.</p></li>
-          <li class="story-step" data-story-step="1" data-index="02"><h3>Create known inconsistencies</h3><p>Labels are intentionally changed under four fixed mechanisms and saved separately.</p></li>
-          <li class="story-step" data-story-step="2" data-index="03"><h3>Predict without group leakage</h3><p>Out-of-fold models never see the scored nucleus or any nucleus from its source patch.</p></li>
-          <li class="story-step" data-story-step="3" data-index="04"><h3>Rank, then measure retrieval</h3><p>Suspicion scores order a fixed review queue; average precision measures how well it works.</p></li>
-          <li class="story-step" data-story-step="4" data-index="05"><h3>Leave the decision to an expert</h3><p>The output recommends what to inspect first. It never edits or diagnoses.</p></li>
+        <h2 id="journey-title" class="display">One controlled question, unfolded step by step.</h2>
+        <p class="journey-intro">Each stage adds evidence while preserving the source record. Scroll to build the complete benchmark; the graphic remains fully visible on mobile and in reduced-motion mode.</p>
+        <ol class="journey-steps">
+          <li class="journey-step is-active" data-journey-copy="0" data-index="01"><small>Reference</small><h3>Keep label states immutable and separate</h3><p>Each nucleus retains its source patch, experimental reference class and observed class.</p></li>
+          <li class="journey-step" data-journey-copy="1" data-index="02"><small>Intervention</small><h3>Inject a change the benchmark can verify</h3><p>Four frozen mechanisms create objective positives without changing the raw source files.</p></li>
+          <li class="journey-step" data-journey-copy="2" data-index="03"><small>Prediction</small><h3>Score only with unseen source groups</h3><p>No model may train on the scored nucleus or any other nucleus from its source patch.</p></li>
+          <li class="journey-step" data-journey-copy="3" data-index="04"><small>Triage</small><h3>Rank suspicion under an equal budget</h3><p>Guided and random review inspect the same number of cases; only their ordering differs.</p></li>
+          <li class="journey-step" data-journey-copy="4" data-index="05"><small>Evaluation</small><h3>Measure retrieval, then defer the decision</h3><p>Average precision and fixed-budget metrics score the queue. An expert still decides what a case means.</p></li>
         </ol>
+        <div aria-hidden="true" style="height:1px;background:#23252a;margin-top:22px;overflow:hidden"><span id="journey-indicator" style="display:block;width:100%;height:1px;background:#5e6ad2;transform:scaleX(.02);transform-origin:left"></span></div>
       </div>
     </div></div>
   </section>
 
+  <section class="section" id="reading">
+    <div class="section-heading reveal"><p class="section-kicker">How to read the evidence</p><h2>Four quantities answer four different questions.</h2><p class="section-deck">Separating them prevents a strong ranking result from being mistaken for clinical or downstream utility.</p></div>
+    <div class="reading-grid reveal">
+      <article class="reading-card"><span>01</span><h3>Average precision</h3><p>Asks whether injected label changes appear early across the entire ranked list. Higher is better; at 0% corruption it is not applicable.</p></article>
+      <article class="reading-card"><span>02</span><h3>Recall at 5%</h3><p>Asks how many injected changes are found when an expert can review only the first 5% of the queue.</p></article>
+      <article class="reading-card"><span>03</span><h3>Random-review baseline</h3><p>Uses the identical integer budget over 100 deterministic repetitions, making the operational comparison fair.</p></article>
+      <article class="reading-card"><span>04</span><h3>Restoration utility</h3><p>Asks a separate downstream question: after simulated review, does restoring found injected changes improve final-fold macro-F1?</p></article>
+    </div>
+  </section>
+
   <section class="section" id="results">
-    <div class="section-heading"><p class="section-kicker">Primary downstream test · H4</p><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result: ranking quality and downstream utility are related questions, but they are not the same question.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Primary downstream test · H4</p><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
+    <div class="chapter-copy reveal"><p>The H4 experiment restored exactly the same 5% review budget under audit-guided and random selection, then trained the same downstream model and evaluated it on the untouched final reference fold. Audit-guided restoration was not favoured.</p></div>
     <div class="figure-width reveal result-layout">
       <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span><span>Adverse to the registered hypothesis</span></div><span class="result-number">-0.002156</span><p>Audit-guided restoration produced macro-F1 <strong>0.524431</strong>, below the random-review mean of <strong>0.526587</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>0.216 percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
       <div class="h4-chart" aria-label="Complete registered H4 downstream result"><div class="chart-title-row"><div><span class="chart-label">Downstream outcome</span><h3>Macro-F1 after equal-budget label restoration</h3></div><span class="axis-warning">Truncated axis</span></div><div class="metric-axis"><span>0.523</span><span>Macro-F1</span><span>0.539</span></div><div class="metric-row"><span class="metric-name">Reference · uncorrupted</span><span class="metric-track" role="img" aria-label="Reference · uncorrupted: 0.537499432225"><span class="metric-dot" style="--x:93.1034%"></span></span><strong>0.537499</strong></div><div class="metric-row"><span class="metric-name">Baseline · corrupted labels</span><span class="metric-track" role="img" aria-label="Baseline · corrupted labels: 0.526716539926"><span class="metric-dot" style="--x:21.9732%"></span></span><strong>0.526717</strong></div><div class="metric-row"><span class="metric-name">Random review · mean</span><span class="metric-track" role="img" aria-label="Random review · mean: 0.5265870806"><span class="metric-dot" style="--x:21.1192%"></span></span><strong>0.526587</strong></div><div class="metric-row"><span class="metric-name">Audit-guided review</span><span class="metric-track" role="img" aria-label="Audit-guided review: 0.524431020933"><span class="metric-dot" style="--x:6.8966%"></span></span><strong>0.524431</strong></div><div class="difference-panel"><div class="difference-heading"><span>Audit-guided minus random review</span><strong>-0.002156</strong></div><div class="difference-track" style="--zero:90.3226%;--low:9.6774%;--high:51.0382%;--point:29.4979%" role="img" aria-label="Difference -0.00215605966659; 95% CI -0.00285863831075 to -0.0013925186648"><span class="difference-zero"></span><span class="difference-ci"></span><span class="difference-point"></span></div><div class="difference-axis"><span>-0.0032</span><span>0</span><span>0.0003</span></div><p><strong>95% CI [-0.002859, -0.001393]</strong> · 100 random-review repetitions</p></div></div>
@@ -408,19 +704,20 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   </section>
 
   <section class="section" id="benchmarks">
-    <div class="section-heading"><p class="section-kicker">Registered questions · H1-H7</p><h2>Seven questions. One complete answer set.</h2><p class="section-deck">Positive, neutral, adverse and unavailable outcomes are shown together. Nothing is selected because it looks favourable.</p></div>
-    <div class="figure-width reveal"><div class="hypothesis-ledger"><details class="hypothesis-row" data-status="positive"><summary><span class="hypothesis-id">H1</span><span class="hypothesis-title">Can ranking beat random review?</span><span class="hypothesis-result">12 / 12 positive differences</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>All 12 saved 95% bootstrap intervals lie above zero. The instance-dependent seed caveat is reported separately below.</p></details><details class="hypothesis-row" data-status="descriptive"><summary><span class="hypothesis-id">H2</span><span class="hypothesis-title">Does performance vary by context?</span><span class="hypothesis-result">32,760 reportable estimates</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>Saved estimates vary across nucleus class, tissue, corruption mechanism and corruption rate. This is descriptive heterogeneity, not a causal claim.</p></details><details class="hypothesis-row" data-status="qualified"><summary><span class="hypothesis-id">H3</span><span class="hypothesis-title">Are some corruption mechanisms harder?</span><span class="hypothesis-result">6 / 6 positive differences</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>One of 6 saved 95% intervals crosses zero, even though the registered one-sided Holm-adjusted p-value is below 0.05.</p></details><details class="hypothesis-row" data-status="adverse"><summary><span class="hypothesis-id">H4</span><span class="hypothesis-title">Does audit-guided restoration improve downstream classification?</span><span class="hypothesis-result">Δ macro-F1 -0.002156</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>No. Audit-guided restoration underperformed the mean random-review result. The adverse registered result is retained without post-result tuning.</p></details><details class="hypothesis-row" data-status="positive"><summary><span class="hypothesis-id">H5</span><span class="hypothesis-title">Does the fixed hybrid improve ranking?</span><span class="hypothesis-result">12 / 12 positive differences</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>All 12 saved 95% bootstrap intervals lie above zero for fixed hybrid minus self-confidence.</p></details><details class="hypothesis-row" data-status="unavailable"><summary><span class="hypothesis-id">H6</span><span class="hypothesis-title">Does a pathology-specific encoder outperform ImageNet?</span><span class="hypothesis-result">0 / 3 comparisons available</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>No eligible pathology encoder passed the frozen availability rule. No replacement was selected after inspecting results.</p></details><details class="hypothesis-row" data-status="neutral"><summary><span class="hypothesis-id">H7</span><span class="hypothesis-title">Does explicit target highlighting help?</span><span class="hypothesis-result">3 / 3 intervals cross zero</span><span class="hypothesis-toggle" aria-hidden="true">+</span></summary><p>The saved comparisons do not provide clear evidence that target highlighting improves average precision over context alone.</p></details></div></div>
-    <div class="section-heading" style="margin-top:clamp(92px,10vw,136px)"><p class="section-kicker">Comparison atlas</p><h2>All 36 frozen comparisons.</h2><p class="section-deck">Each point is an average-precision difference; each line is the saved 95% percentile-bootstrap interval.</p></div>
-    <div class="wide-width reveal"><div class="forest-plot" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons"><div class="forest-axis" aria-hidden="true"><span>-0.037</span><span>Average-precision difference · zero means no difference</span><span>0.338</span></div><div class="forest-group"><span>H1</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_404">Self-confidence vs random review · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:82.0957%;--high:88.9685%;--point:85.6951%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 404: difference 0.28438693; 95% CI 0.27090819 to 0.29664458; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.284387</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_405">Self-confidence vs random review · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:84.1609%;--high:90.6189%;--point:87.4598%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 405: difference 0.29099513; 95% CI 0.27864193 to 0.30282472; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290995</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_406">Self-confidence vs random review · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:83.9353%;--high:90.7099%;--point:87.3828%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 406: difference 0.29070679; 95% CI 0.27779688 to 0.30316542; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290707</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_404">Self-confidence vs random review · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:86.9017%;--high:93.8596%;--point:90.3675%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 404: difference 0.3018835; 95% CI 0.28890514 to 0.31496022; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301884</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_405">Self-confidence vs random review · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:85.3365%;--high:92.1047%;--point:88.7012%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 405: difference 0.29564363; 95% CI 0.28304403 to 0.30838859; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.295644</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_406">Self-confidence vs random review · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:84.6003%;--high:91.4444%;--point:88.0297%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 406: difference 0.293129; 95% CI 0.2802873 to 0.30591595; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.293129</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_404">Self-confidence vs random review · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 404: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_405">Self-confidence vs random review · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 405: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_406">Self-confidence vs random review · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 406: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_404">Self-confidence vs random review · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:84.5371%;--high:91.2342%;--point:87.9905%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 404: difference 0.29298231; 95% CI 0.28005035 to 0.3051288; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.292982</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_405">Self-confidence vs random review · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:86.0009%;--high:92.6146%;--point:89.3480%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 405: difference 0.29806568; 95% CI 0.2855318 to 0.310298; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.298066</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_406">Self-confidence vs random review · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:86.8325%;--high:93.7940%;--point:90.3430%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 406: difference 0.30179169; 95% CI 0.28864598 to 0.31471441; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301792</span></div><div class="forest-group"><span>H3</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_404">Symmetric vs confusion-targeted corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:9.7768%;--high:14.2085%;--point:12.0457%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 404: difference 0.0085953737; 95% CI 9.9036784e-05 to 0.016694072; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.008595</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_405">Symmetric vs confusion-targeted corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:9.5121%;--high:13.7387%;--point:11.6385%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 405: difference 0.0070705489; 95% CI -0.00089208538 to 0.014935145; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.007071</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_406">Symmetric vs confusion-targeted corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:10.5041%;--high:14.9800%;--point:12.7105%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 406: difference 0.011084902; 95% CI 0.0028225339 to 0.019583405; one-sided Holm-adjusted p 0.010494753"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.011085</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_404">Symmetric vs instance-dependent corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:74.5151%;--high:81.9037%;--point:78.3215%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 404: difference 0.25677515; 95% CI 0.24252166 to 0.27018944; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.256775</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_405">Symmetric vs instance-dependent corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:76.0361%;--high:83.1931%;--point:79.6603%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 405: difference 0.26178842; 95% CI 0.24821729 to 0.27501768; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.261788</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_406">Symmetric vs instance-dependent corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:76.8320%;--high:84.3237%;--point:80.6345%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 406: difference 0.2654366; 95% CI 0.2511977 to 0.27925147; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.265437</span></div><div class="forest-group"><span>H5</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_404">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:22.2215%;--high:25.3817%;--point:23.7830%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404: difference 0.052547547; 95% CI 0.046700138 to 0.058533895; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.052548</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_405">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:22.6984%;--high:26.0588%;--point:24.3336%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405: difference 0.054609071; 95% CI 0.048486094 to 0.061069565; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054609</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_406">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:22.5971%;--high:25.9067%;--point:24.1988%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406: difference 0.054104282; 95% CI 0.048106562 to 0.060499839; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054104</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_404">Fixed hybrid vs self-confidence · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.1199%;--high:27.5766%;--point:25.8447%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 404: difference 0.060267882; 95% CI 0.053808946 to 0.066753113; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.060268</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_405">Fixed hybrid vs self-confidence · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.4399%;--high:28.8327%;--point:27.1444%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 405: difference 0.065134664; 95% CI 0.058751824 to 0.071456854; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065135</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_406">Fixed hybrid vs self-confidence · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.5041%;--high:28.9433%;--point:27.2425%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 406: difference 0.065501914; 95% CI 0.05899227 to 0.071871124; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065502</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_404">Fixed hybrid vs self-confidence · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 404: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_405">Fixed hybrid vs self-confidence · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 405: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_406">Fixed hybrid vs self-confidence · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 406: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_404">Fixed hybrid vs self-confidence · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.8271%;--high:28.1649%;--point:26.4655%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 404: difference 0.062592367; 95% CI 0.056457192 to 0.068956186; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.062592</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_405">Fixed hybrid vs self-confidence · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.1742%;--high:28.6723%;--point:26.9390%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 405: difference 0.064365613; 95% CI 0.057757172 to 0.070856071; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064366</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_406">Fixed hybrid vs self-confidence · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.3355%;--high:28.7690%;--point:27.0166%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 406: difference 0.064656233; 95% CI 0.058360871 to 0.071218164; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064656</span></div><div class="forest-group"><span>H6</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_404">Pathology encoder vs ImageNet · Seed 404</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_405">Pathology encoder vs ImageNet · Seed 405</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_406">Pathology encoder vs ImageNet · Seed 406</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-group"><span>H7</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_404">Target-highlighted vs context · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:8.3986%;--high:12.6309%;--point:10.5506%" role="img" aria-label="Target-highlighted vs context · Seed 404: difference 0.0029966605; 95% CI -0.0050617132 to 0.010786598; one-sided Holm-adjusted p 0.72263868"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.002997</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_405">Target-highlighted vs context · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:7.5672%;--high:11.9576%;--point:9.7493%" role="img" aria-label="Target-highlighted vs context · Seed 405: difference -3.9385653e-06; 95% CI -0.0081752246 to 0.008265313; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.000004</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_406">Target-highlighted vs context · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:6.1404%;--high:10.5863%;--point:8.3160%" role="img" aria-label="Target-highlighted vs context · Seed 406: difference -0.0053711783; 95% CI -0.013518192 to 0.0031302878; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.005371</span></div></div><p class="fine"><strong>Statistical reading.</strong> The registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. H6 is unavailable by design; it is not a zero result.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Preregistered questions · H1-H7</p><h2>What the study actually learned.</h2><p class="section-deck">All seven questions remain visible together: supportive, qualified, adverse, neutral and unavailable. Across the 36 preregistered comparison entries, <strong>33</strong> have numeric results and <strong>3</strong> remain explicitly unavailable.</p></div>
+    <div class="figure-width reveal"><div class="hypothesis-ledger"><article class="hypothesis-row" data-status="supported"><div class="hypothesis-row-head"><span class="hypothesis-id">H1</span><span class="hypothesis-theme">Detection</span><span class="hypothesis-result">12 / 12 positive differences</span></div><h3 class="hypothesis-title">Can ranking beat random review?</h3><p>All 12 saved 95% bootstrap intervals were above zero. The byte-identical instance-dependent seed outputs are disclosed separately and are not counted as independent replications.</p></article><article class="hypothesis-row" data-status="descriptive"><div class="hypothesis-row-head"><span class="hypothesis-id">H2</span><span class="hypothesis-theme">Heterogeneity</span><span class="hypothesis-result">32,760 reportable estimates</span></div><h3 class="hypothesis-title">Did saved performance estimates vary across contexts?</h3><p>Yes, the saved estimates varied across nucleus class, tissue, corruption mechanism and rate. This is descriptive heterogeneity; no omnibus test or causal biological interpretation was registered.</p></article><article class="hypothesis-row" data-status="qualified"><div class="hypothesis-row-head"><span class="hypothesis-id">H3</span><span class="hypothesis-theme">Difficulty</span><span class="hypothesis-result">6 / 6 positive differences</span></div><h3 class="hypothesis-title">Were some corruption mechanisms harder?</h3><p>The registered contrasts generally placed confusion-targeted and instance-dependent corruption below symmetric corruption. One of 6 saved 95% intervals crossed zero.</p></article><article class="hypothesis-row" data-status="adverse"><div class="hypothesis-row-head"><span class="hypothesis-id">H4</span><span class="hypothesis-theme">Utility</span><span class="hypothesis-result">Δ macro-F1 -0.002156</span></div><h3 class="hypothesis-title">Did guided restoration improve downstream classification?</h3><p>No. At the same 5% review budget, audit-guided restoration performed below the mean random-review result. The adverse registered outcome is retained without post-result tuning.</p></article><article class="hypothesis-row" data-status="supported"><div class="hypothesis-row-head"><span class="hypothesis-id">H5</span><span class="hypothesis-theme">Combination</span><span class="hypothesis-result">12 / 12 positive differences</span></div><h3 class="hypothesis-title">Did the fixed hybrid improve ranking?</h3><p>All 12 saved 95% bootstrap intervals were above zero for the preregistered fixed hybrid minus self-confidence comparison.</p></article><article class="hypothesis-row" data-status="unavailable"><div class="hypothesis-row-head"><span class="hypothesis-id">H6</span><span class="hypothesis-theme">Representation</span><span class="hypothesis-result">0 / 3 numeric results</span></div><h3 class="hypothesis-title">Did a pathology-specific encoder outperform ImageNet?</h3><p>This question was not estimated. No pathology encoder satisfied every frozen access, licence, reproducibility, hardware and smoke-test gate, and no replacement was chosen after outcomes were visible.</p></article><article class="hypothesis-row" data-status="neutral"><div class="hypothesis-row-head"><span class="hypothesis-id">H7</span><span class="hypothesis-theme">Target cue</span><span class="hypothesis-result">3 / 3 intervals crossed zero</span></div><h3 class="hypothesis-title">Did explicit target highlighting help?</h3><p>The saved comparisons do not provide clear evidence that target highlighting improved average precision over the context representation.</p></article></div></div>
+    <div class="section-heading reveal" style="margin-top:var(--section-space)"><p class="section-kicker">Comparison atlas</p><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
+    <div class="wide-width reveal"><div class="forest-plot" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons"><div class="forest-axis" aria-hidden="true"><span>-0.037</span><span>Average-precision difference · zero means no difference</span><span>0.338</span></div><div class="forest-group"><span>H1</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_404">Self-confidence vs random review · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:82.0957%;--high:88.9685%;--point:85.6951%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 404: difference 0.28438693; 95% CI 0.27090819 to 0.29664458; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.284387</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_405">Self-confidence vs random review · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:84.1609%;--high:90.6189%;--point:87.4598%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 405: difference 0.29099513; 95% CI 0.27864193 to 0.30282472; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290995</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_406">Self-confidence vs random review · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:83.9353%;--high:90.7099%;--point:87.3828%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 406: difference 0.29070679; 95% CI 0.27779688 to 0.30316542; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290707</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_404">Self-confidence vs random review · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:86.9017%;--high:93.8596%;--point:90.3675%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 404: difference 0.3018835; 95% CI 0.28890514 to 0.31496022; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301884</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_405">Self-confidence vs random review · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:85.3365%;--high:92.1047%;--point:88.7012%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 405: difference 0.29564363; 95% CI 0.28304403 to 0.30838859; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.295644</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_406">Self-confidence vs random review · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:84.6003%;--high:91.4444%;--point:88.0297%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 406: difference 0.293129; 95% CI 0.2802873 to 0.30591595; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.293129</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_404">Self-confidence vs random review · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 404: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_405">Self-confidence vs random review · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 405: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_406">Self-confidence vs random review · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 406: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_404">Self-confidence vs random review · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:84.5371%;--high:91.2342%;--point:87.9905%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 404: difference 0.29298231; 95% CI 0.28005035 to 0.3051288; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.292982</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_405">Self-confidence vs random review · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:86.0009%;--high:92.6146%;--point:89.3480%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 405: difference 0.29806568; 95% CI 0.2855318 to 0.310298; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.298066</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_406">Self-confidence vs random review · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:86.8325%;--high:93.7940%;--point:90.3430%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 406: difference 0.30179169; 95% CI 0.28864598 to 0.31471441; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301792</span></div><div class="forest-group"><span>H3</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_404">Symmetric vs confusion-targeted corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:9.7768%;--high:14.2085%;--point:12.0457%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 404: difference 0.0085953737; 95% CI 9.9036784e-05 to 0.016694072; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.008595</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_405">Symmetric vs confusion-targeted corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:9.5121%;--high:13.7387%;--point:11.6385%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 405: difference 0.0070705489; 95% CI -0.00089208538 to 0.014935145; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.007071</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_406">Symmetric vs confusion-targeted corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:10.5041%;--high:14.9800%;--point:12.7105%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 406: difference 0.011084902; 95% CI 0.0028225339 to 0.019583405; one-sided Holm-adjusted p 0.010494753"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.011085</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_404">Symmetric vs instance-dependent corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:74.5151%;--high:81.9037%;--point:78.3215%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 404: difference 0.25677515; 95% CI 0.24252166 to 0.27018944; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.256775</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_405">Symmetric vs instance-dependent corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:76.0361%;--high:83.1931%;--point:79.6603%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 405: difference 0.26178842; 95% CI 0.24821729 to 0.27501768; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.261788</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_406">Symmetric vs instance-dependent corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:76.8320%;--high:84.3237%;--point:80.6345%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 406: difference 0.2654366; 95% CI 0.2511977 to 0.27925147; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.265437</span></div><div class="forest-group"><span>H5</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_404">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:22.2215%;--high:25.3817%;--point:23.7830%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404: difference 0.052547547; 95% CI 0.046700138 to 0.058533895; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.052548</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_405">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:22.6984%;--high:26.0588%;--point:24.3336%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405: difference 0.054609071; 95% CI 0.048486094 to 0.061069565; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054609</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_406">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:22.5971%;--high:25.9067%;--point:24.1988%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406: difference 0.054104282; 95% CI 0.048106562 to 0.060499839; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054104</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_404">Fixed hybrid vs self-confidence · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.1199%;--high:27.5766%;--point:25.8447%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 404: difference 0.060267882; 95% CI 0.053808946 to 0.066753113; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.060268</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_405">Fixed hybrid vs self-confidence · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.4399%;--high:28.8327%;--point:27.1444%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 405: difference 0.065134664; 95% CI 0.058751824 to 0.071456854; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065135</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_406">Fixed hybrid vs self-confidence · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.5041%;--high:28.9433%;--point:27.2425%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 406: difference 0.065501914; 95% CI 0.05899227 to 0.071871124; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065502</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_404">Fixed hybrid vs self-confidence · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 404: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_405">Fixed hybrid vs self-confidence · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 405: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_406">Fixed hybrid vs self-confidence · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 406: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_404">Fixed hybrid vs self-confidence · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.8271%;--high:28.1649%;--point:26.4655%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 404: difference 0.062592367; 95% CI 0.056457192 to 0.068956186; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.062592</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_405">Fixed hybrid vs self-confidence · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.1742%;--high:28.6723%;--point:26.9390%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 405: difference 0.064365613; 95% CI 0.057757172 to 0.070856071; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064366</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_406">Fixed hybrid vs self-confidence · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.3355%;--high:28.7690%;--point:27.0166%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 406: difference 0.064656233; 95% CI 0.058360871 to 0.071218164; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064656</span></div><div class="forest-group"><span>H6</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_404">Pathology encoder vs ImageNet · Seed 404</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_405">Pathology encoder vs ImageNet · Seed 405</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_406">Pathology encoder vs ImageNet · Seed 406</span><span class="forest-track forest-track-empty" aria-label="Result unavailable"><span>Unavailable by frozen design</span></span><span class="forest-value">—</span></div><div class="forest-group"><span>H7</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_404">Target-highlighted vs context · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:8.3986%;--high:12.6309%;--point:10.5506%" role="img" aria-label="Target-highlighted vs context · Seed 404: difference 0.0029966605; 95% CI -0.0050617132 to 0.010786598; one-sided Holm-adjusted p 0.72263868"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.002997</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_405">Target-highlighted vs context · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:7.5672%;--high:11.9576%;--point:9.7493%" role="img" aria-label="Target-highlighted vs context · Seed 405: difference -3.9385653e-06; 95% CI -0.0081752246 to 0.008265313; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.000004</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_406">Target-highlighted vs context · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:6.1404%;--high:10.5863%;--point:8.3160%" role="img" aria-label="Target-highlighted vs context · Seed 406: difference -0.0053711783; 95% CI -0.013518192 to 0.0031302878; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.005371</span></div></div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
   </section>
 
   <section class="section" id="subgroups">
-    <div class="section-heading"><p class="section-kicker">H2 · descriptive heterogeneity</p><h2>Performance depends on context.</h2><p class="section-deck">The saved subgroup estimates span nucleus classes, tissues, corruption mechanisms and corruption rates. They describe variation; they do not establish biological causation.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">H2 · descriptive heterogeneity</p><h2>Saved performance estimates varied across contexts.</h2><p class="section-deck">The saved subgroup estimates span nucleus classes, tissues, corruption mechanisms and corruption rates. They describe where performance differed in this benchmark; they do not establish a causal biological dependency.</p></div>
+    <div class="chapter-copy reveal"><p>Subgroup average precision is reported only when the preregistered support rule is met: at least 100 samples and at least 10 injected corruptions. Otherwise the study retains counts without inventing an unstable estimate.</p></div>
     <div class="figure-width reveal"><div class="h2-chart"><div class="chart-title-row"><div><span class="chart-label">Descriptive heterogeneity</span><h3>Observed average-precision ranges</h3></div></div><div class="range-axis"><span>0 AP</span><span>Range across saved subgroup estimates</span><span>1 AP</span></div><div class="range-row"><span class="range-name">Nucleus class</span><span class="range-track" style="--low:1.3587%;--high:85.5146%" role="img" aria-label="Nucleus class: 6300 reportable estimates, AP range 0.013587 to 0.855146, 175 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>6,300</strong><small>reported</small></span><span class="range-values">0.0136-0.8551</span></div><div class="range-row"><span class="range-name">Tissue type</span><span class="range-track" style="--low:1.8489%;--high:77.1235%" role="img" aria-label="Tissue type: 23940 reportable estimates, AP range 0.0184891 to 0.771235, 665 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>23,940</strong><small>reported</small></span><span class="range-values">0.0185-0.7712</span></div><div class="range-row"><span class="range-name">Corruption mechanism</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption mechanism: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><div class="range-row"><span class="range-name">Corruption rate</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption rate: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><p class="chart-note"><strong>32,760</strong> reportable estimates from <strong>33,670</strong> saved rows. These ranges are descriptive—not an omnibus test and not a biological ranking.</p></div></div>
   </section>
 
   <section class="section" id="seed-audit">
-    <div class="section-heading"><p class="section-kicker">Reproducibility disclosure</p><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The rows remain in the frozen result set, but they must not be interpreted as three independent replications.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Reproducibility disclosure</p><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The three rows are retained for auditability, but the byte-identical files are not independent realisations and must not be interpreted as three replications.</p></div>
     <div class="figure-width reveal">
       <div class="seed-panel">
         <svg viewBox="0 0 680 390" role="img" aria-labelledby="seed-title seed-desc"><title id="seed-title">Seeds 404, 405 and 406 produced byte-identical files</title><desc id="seed-desc">Three seed paths converge on one ranking hash and one out-of-fold prediction hash.</desc>
@@ -428,53 +725,90 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
           <g fill="none" stroke="#5e6ad2" stroke-width="2"><path d="M160 69H270Q310 69 310 109V168"/><path d="M160 195H310"/><path d="M160 321H270Q310 321 310 281V222"/></g><circle cx="310" cy="195" r="18" fill="#5e6ad2"/><path d="M328 195H404" stroke="#828fff" stroke-width="2"/>
           <g font-family="Inter, sans-serif"><rect x="404" y="130" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="154" fill="#8a8f98" font-size="11">IDENTICAL RANKING SHA-256</text><text x="428" y="174" fill="#d0d6e0" font-size="12">69766d68a24679b5…</text><rect x="404" y="204" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="228" fill="#8a8f98" font-size="11">IDENTICAL OOF SHA-256</text><text x="428" y="248" fill="#d0d6e0" font-size="12">730459794225e338…</text></g>
         </svg>
-        <div class="seed-copy"><h3>Seeds 404, 405 and 406 are not independent realisations.</h3><p>The ranking files and out-of-fold predictions are byte-identical. The presentation therefore treats them as one deterministic scenario.</p><p><code>ranking 69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b</code><br><code>OOF 730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958</code></p></div>
+        <div class="seed-copy"><h3>One deterministic output, preserved three times.</h3><p>The complete ranking and out-of-fold prediction files match byte for byte. That limitation narrows how the instance-dependent results should be interpreted.</p><p><code>ranking 69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b</code><br><code>OOF 730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958</code></p></div>
       </div>
-      <details class="evidence-details"><summary>Inspect complete hashes and cell IDs</summary><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody><tr><td data-label="Seed">404</td><td data-label="Cell ID"><code>primary_0187_53201213be77</code></td><td data-label="Ranking SHA-256"><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td data-label="OOF SHA-256"><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td data-label="Seed">405</td><td data-label="Cell ID"><code>primary_0193_afae7a244238</code></td><td data-label="Ranking SHA-256"><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td data-label="OOF SHA-256"><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td data-label="Seed">406</td><td data-label="Cell ID"><code>primary_0199_6029f5261b38</code></td><td data-label="Ranking SHA-256"><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td data-label="OOF SHA-256"><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr></tbody></table></div></details>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete seed identities</span><span>Always visible · exact traceability</span></div><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody><tr><td>404</td><td><code>primary_0187_53201213be77</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>405</td><td><code>primary_0193_afae7a244238</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>406</td><td><code>primary_0199_6029f5261b38</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr></tbody></table></div></div>
     </div>
   </section>
 
   <section class="section" id="integrity">
-    <div class="section-heading"><p class="section-kicker">Experimental integrity</p><h2>Outcome information cannot leak into model choice.</h2><p class="section-deck">The design separates groups, labels and evaluation roles before any result is interpreted.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Experimental integrity</p><h2>The design limits outcome-informed model selection.</h2><p class="section-deck">The model, split, feature and statistical rules were frozen before outcome interpretation. Because outcomes were later exposed during recovery, this accepted result is reported as exploratory rather than as an untouched confirmatory analysis.</p></div>
     <div class="wide-width reveal">
-      <div class="stats-grid"><div class="stat"><strong>185/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>0</strong><span>failed required cells</span></div><div class="stat"><strong>36</strong><span>saved registered comparisons</span></div><div class="stat"><strong>2,000</strong><span>paired group-bootstrap iterations</span></div></div>
-      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level—never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from group-safe predictions made on unseen groups.</p></div><div class="rule"><b>Untouched reference fold</b><p>The final reference fold remains uncorrupted and unavailable for model selection or tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code> and all corruption metadata remain distinct.</p></div></div>
+      <div class="stats-grid"><div class="stat"><strong>185/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>0</strong><span>failed required cells</span></div><div class="stat"><strong>36</strong><span>preregistered comparison entries retained</span></div><div class="stat"><strong>2,000</strong><span>paired group-bootstrap iterations</span></div></div>
+      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level—never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
     </div>
   </section>
 
   <section class="section" id="interpretation">
-    <div class="section-heading"><p class="section-kicker">Interpretation boundary</p><h2>What this study supports—and what it does not.</h2></div>
+    <div class="section-heading reveal"><p class="section-kicker">Interpretation boundary</p><h2>What this benchmark supports—and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
     <div class="figure-width reveal claim-grid">
-      <article class="claim-card"><h3>Supported by this benchmark</h3><ul><li>Group-safe ranking retrieved injected label corruptions more efficiently than random review in the registered H1 comparisons.</li><li>The fixed hybrid exceeded self-confidence in all 12 registered H5 comparisons.</li><li>The complete workflow is reproducible from sealed, machine-readable evidence.</li></ul></article>
-      <article class="claim-card"><h3>Not established here</h3><ul><li>That naturally occurring labels are wrong, or that a pathologist made an error.</li><li>That ranking automatically improves downstream classification—the H4 result was adverse.</li><li>Clinical validity, expert agreement or external generalisation.</li></ul></article>
+      <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in H1.</li><li>The preregistered fixed hybrid exceeded self-confidence in all 12 H5 comparisons.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
+      <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That better ranking automatically improves downstream classification; H4 was adverse.</li><li>Patient/WSI independence, clinical validity, expert agreement or external generalisation.</li></ul></article>
     </div>
   </section>
 
   <section class="section" id="quality">
-    <div class="section-heading"><p class="section-kicker">PanNuke quality control</p><h2>Source masks remained untouched.</h2><p class="section-deck">Cross-class overlaps and unlabeled regions were measured and retained in provenance. The pipeline never arbitrated an overlap class or reconstructed background.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">PanNuke quality control</p><h2>The source masks remained untouched.</h2><p class="section-deck">The validator measured cross-class overlaps and unlabeled regions, retained them in provenance and applied one frozen eligibility policy. It never arbitrated an overlap class or reconstructed the supplied background.</p></div>
     <div class="wide-width reveal">
       <div class="stats-grid"><div class="stat"><strong>7,901</strong><span>validated PanNuke patches</span></div><div class="stat"><strong>4,318</strong><span>cross-class overlap pixels</span></div><div class="stat"><strong>10,486,091</strong><span>unlabeled / void pixels</span></div><div class="stat"><strong>1,411</strong><span>overlap-touching instances flagged</span></div></div>
-      <details class="evidence-details"><summary>Open the deterministic QC overlay</summary><div class="qc-frame"><div class="qc-toolbar"><span>1512 x 3840 px · original file</span><a href="pannuke_mask_qc_overlays.png" target="_blank" rel="noopener">Open full resolution ↗</a></div><img loading="lazy" src="pannuke_mask_qc_overlays.png" alt="Deterministic PanNuke quality-control overlays showing images and mask boundaries"></div></details>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Deterministic quality-control overlay</span><span>1512 x 3840 px · source preview</span></div><div class="qc-frame"><div class="qc-toolbar"><span>Cropped representative preview · normal, overlap, void and exclusion cases</span><a href="pannuke_mask_qc_overlays.png" target="_blank" rel="noopener">Open the original image ↗</a></div><div class="qc-preview"><img loading="lazy" decoding="async" fetchpriority="low" width="1512" height="3840" src="pannuke_mask_qc_overlays.png" alt="Deterministic PanNuke quality-control overlays showing images and mask boundaries"></div></div></div>
     </div>
   </section>
 
   <section class="section" id="evidence">
-    <div class="section-heading"><p class="section-kicker">Evidence and provenance</p><h2>Every displayed result remains inspectable.</h2><p class="section-deck">The table retains all 36 comparisons, with consistent precision and readable names. Raw comparison IDs remain visible for exact traceability.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Evidence and provenance</p><h2>Every displayed result remains inspectable.</h2><p class="section-deck">The complete table is visible immediately and retains readable comparison names, exact raw identifiers, fixed precision, intervals, multiplicity-adjusted p-values and bootstrap counts.</p></div>
     <div class="wide-width reveal">
-      <details class="evidence-details" open><summary>Complete H1 / H3 / H5 / H6 / H7 comparison table</summary>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete H1 / H3 / H5 / H6 / H7 comparison table</span><span>33 reported · 3 unavailable</span></div>
         <div class="table-tools"><label>Hypothesis<select id="filter-hypothesis"><option value="ALL">All hypotheses</option><option>H1</option><option>H3</option><option>H5</option><option>H6</option><option>H7</option></select></label><label>Status<select id="filter-status"><option value="ALL">All statuses</option><option value="reported">Reported</option><option value="not_available_frozen_optional_cell">Unavailable</option></select></label><label>Search<input id="filter-search" type="search" placeholder="Name, seed or comparison ID"></label><span class="table-count" id="table-count">36 / 36 rows</span></div>
         <div class="table-wrap"><table id="comparison-table"><colgroup><col style="width:7%"><col style="width:35%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:10%"><col style="width:7%"></colgroup><thead><tr><th>Hypothesis</th><th>Comparison</th><th>Status</th><th style="text-align:right">Δ AP</th><th style="text-align:right">95% bootstrap CI</th><th style="text-align:right">Holm-adjusted p</th><th style="text-align:right">Iterations</th></tr></thead><tbody><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.284387</td><td class="numeric" data-label="95% bootstrap CI">[0.270908, 0.296645]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.290995</td><td class="numeric" data-label="95% bootstrap CI">[0.278642, 0.302825]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.290707</td><td class="numeric" data-label="95% bootstrap CI">[0.277797, 0.303165]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.301884</td><td class="numeric" data-label="95% bootstrap CI">[0.288905, 0.314960]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.295644</td><td class="numeric" data-label="95% bootstrap CI">[0.283044, 0.308389]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.293129</td><td class="numeric" data-label="95% bootstrap CI">[0.280287, 0.305916]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.292982</td><td class="numeric" data-label="95% bootstrap CI">[0.280050, 0.305129]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.298066</td><td class="numeric" data-label="95% bootstrap CI">[0.285532, 0.310298]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.301792</td><td class="numeric" data-label="95% bootstrap CI">[0.288646, 0.314714]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 404</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.008595</td><td class="numeric" data-label="95% bootstrap CI">[0.000099, 0.016694]</td><td class="numeric" data-label="Holm-adjusted p">0.047976</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 405</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.007071</td><td class="numeric" data-label="95% bootstrap CI">[-0.000892, 0.014935]</td><td class="numeric" data-label="Holm-adjusted p">0.047976</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 406</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.011085</td><td class="numeric" data-label="95% bootstrap CI">[0.002823, 0.019583]</td><td class="numeric" data-label="Holm-adjusted p">0.010495</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 404</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.256775</td><td class="numeric" data-label="95% bootstrap CI">[0.242522, 0.270189]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 405</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.261788</td><td class="numeric" data-label="95% bootstrap CI">[0.248217, 0.275018]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 406</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.265437</td><td class="numeric" data-label="95% bootstrap CI">[0.251198, 0.279251]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.052548</td><td class="numeric" data-label="95% bootstrap CI">[0.046700, 0.058534]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.054609</td><td class="numeric" data-label="95% bootstrap CI">[0.048486, 0.061070]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.054104</td><td class="numeric" data-label="95% bootstrap CI">[0.048107, 0.060500]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.060268</td><td class="numeric" data-label="95% bootstrap CI">[0.053809, 0.066753]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.065135</td><td class="numeric" data-label="95% bootstrap CI">[0.058752, 0.071457]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.065502</td><td class="numeric" data-label="95% bootstrap CI">[0.058992, 0.071871]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.062592</td><td class="numeric" data-label="95% bootstrap CI">[0.056457, 0.068956]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.064366</td><td class="numeric" data-label="95% bootstrap CI">[0.057757, 0.070856]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.064656</td><td class="numeric" data-label="95% bootstrap CI">[0.058361, 0.071218]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 404</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_404</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">—</td><td class="numeric" data-label="95% bootstrap CI">—</td><td class="numeric" data-label="Holm-adjusted p">—</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 405</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_405</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">—</td><td class="numeric" data-label="95% bootstrap CI">—</td><td class="numeric" data-label="Holm-adjusted p">—</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 406</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_406</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">—</td><td class="numeric" data-label="95% bootstrap CI">—</td><td class="numeric" data-label="Holm-adjusted p">—</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 404</span><code class="comparison-id">h7_highlighted_minus_context_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.002997</td><td class="numeric" data-label="95% bootstrap CI">[-0.005062, 0.010787]</td><td class="numeric" data-label="Holm-adjusted p">0.722639</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 405</span><code class="comparison-id">h7_highlighted_minus_context_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">-0.000004</td><td class="numeric" data-label="95% bootstrap CI">[-0.008175, 0.008265]</td><td class="numeric" data-label="Holm-adjusted p">0.964518</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 406</span><code class="comparison-id">h7_highlighted_minus_context_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">-0.005371</td><td class="numeric" data-label="95% bootstrap CI">[-0.013518, 0.003130]</td><td class="numeric" data-label="Holm-adjusted p">0.964518</td><td class="numeric" data-label="Iterations">2,000</td></tr></tbody></table></div>
-      </details>
+      </div>
       <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
       <div class="provenance" style="margin-top:64px">
-        <div><h3>Sources and limits</h3><ul><li><a href="https://arxiv.org/abs/2003.10778">PanNuke extension</a> — nucleus data and classes.</li><li><a href="https://arxiv.org/abs/1911.00068">Confident Learning</a> — label-quality methodology.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">AQuA</a> — annotation-quality assessment.</li><li><a href="https://arxiv.org/abs/2102.09099">NuCLS</a> — candidate future validation setting.</li></ul><p>No patient- or WSI-level independence is claimed because the released metadata do not support it. Separation is guaranteed at source-patch level.</p></div>
-        <div><h3>Reproducibility</h3><dl class="hash-list"><div><dt>Accepted run</dt><dd>20260727T133947.089370Z_pannuke_primary_orphan_recovery</dd></div><div><dt>Artifact root SHA-256</dt><dd>8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4</dd></div><div><dt>Stage attestation SHA-256</dt><dd>5af827544502fbdf688a73916ec58b5dac0984c5a682a33ce6dfc97538228871</dd></div><div><dt>QC overlay SHA-256</dt><dd>a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a</dd></div></dl></div>
+        <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li></ul><p>No patient- or WSI-level independence is claimed because the released metadata do not support it. Separation is guaranteed at source-patch level.</p></div>
+        <div><h3>Reproducibility identities</h3><dl class="hash-list"><div><dt>Accepted run</dt><dd>20260727T133947.089370Z_pannuke_primary_orphan_recovery</dd></div><div><dt>Artifact root SHA-256</dt><dd>8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4</dd></div><div><dt>Stage attestation SHA-256</dt><dd>5af827544502fbdf688a73916ec58b5dac0984c5a682a33ce6dfc97538228871</dd></div><div><dt>QC overlay SHA-256</dt><dd>a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a</dd></div></dl></div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="use">
+    <div class="section-heading reveal"><p class="section-kicker">Open implementation</p><h2>Inspect the evidence first. Run the software when you need to.</h2><p class="section-deck">The checked-in presentation opens without a dataset or GPU. Package verification and the deterministic synthetic smoke path provide progressively deeper checks without claiming a new real-data study.</p></div>
+    <div class="repo-shell">
+      <article class="repo-card reveal">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
+          <div><span class="repo-path">github.com / Jaqwilk</span><span class="repo-title">AANCA</span></div>
+          <a class="repo-link" href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">View repository ↗</a>
+        </div>
+        <p class="repo-description">The repository contains the scientific specification, preregistration, source code, tests, reproducible command-line workflows and this checksum-verifiable presentation. Raw PanNuke binaries, full runs, embeddings and checkpoints are intentionally not distributed.</p>
+        <div class="repo-tags"><span>Python 3.12</span><span>group-safe OOF</span><span>immutable evidence</span><span>research only</span></div>
+      </article>
+
+      <div class="usage-grid">
+        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>The dependency-free launcher checks every package hash, serves on loopback and opens the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
+cd AANCA
+python scripts/present_demo.py</pre></article>
+        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Use the same standard-library validation in CI, scripts or an offline review.</p><pre>python scripts/present_demo.py `
+  --verify-only</pre></article>
+        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Installs the governed ML environment, then tests software without calling it PanNuke evidence.</p><pre>uv sync --dev
+uv run histo-audit doctor
+uv run histo-audit data generate-synthetic `
+  --config configs\smoke.yaml
+uv run histo-audit experiment smoke</pre></article>
+      </div>
+      <p class="usage-note">Real PanNuke execution is intentionally gated: obtain a lawful local copy from the official source, preserve it unchanged and follow <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>. The repository does not silently download the dataset or relax scientific gates.</p>
     </div>
   </section>
 </main>
 
-<footer><div class="footer-inner"><span>© 2026 Natan Smogór · AANCA research prototype</span><span>Non-diagnostic · no automatic annotation changes · non-commercial research use</span></div></footer>
+<footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
+  <div class="footer-grid">
+    <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Release: 18 August 2026</p><p>Dataset: PanNuke</p><p>Primary frozen-feature benchmark completed; confirmatory and external validation pending.</p></div>
+    <div class="footer-column"><h3>Responsible use</h3><p>Non-diagnostic research only</p><p>No automatic annotation changes</p><p>No claim that an annotator was wrong</p><p>No patient/WSI independence claim</p></div>
+    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="README.md">Presentation package notes</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
+</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
 <script>
@@ -487,111 +821,168 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   if (gsapEngine && scrollEngine) gsapEngine.registerPlugin(scrollEngine);
 
   const header = document.getElementById('site-header');
-  const progress = document.getElementById('reading-progress');
-  let lastScroll = window.scrollY;
-  const updateChrome = () => {
-    const current = window.scrollY;
-    header.classList.toggle('is-scrolled', current > 16);
-    const hide = !reduced && current > 160 && current > lastScroll + 5;
-    if (gsapEngine) {
-      gsapEngine.to(header, {yPercent: hide ? -100 : 0, duration: .28, overwrite: true});
-    } else {
-      header.style.transform = hide ? 'translateY(-100%)' : 'translateY(0)';
-    }
-    const range = document.documentElement.scrollHeight - window.innerHeight;
-    const scale = range > 0 ? current / range : 0;
-    if (gsapEngine) gsapEngine.set(progress, {scaleX: scale});
-    else progress.style.transform = `scaleX(${scale})`;
-    lastScroll = current;
-  };
-  window.addEventListener('scroll', updateChrome, {passive: true});
-  updateChrome();
-
+  const brandLabel = document.querySelector('.brand-label');
   const menuButton = document.getElementById('menu-button');
   const navLinks = document.getElementById('nav-links');
+  let lastScroll = window.scrollY;
+  let headerVisible = true;
+
+  const setHeaderVisible = (visible, immediate = false) => {
+    if (visible === headerVisible && !immediate) return;
+    headerVisible = visible;
+    if (gsapEngine && !reduced) {
+      const duration = immediate ? 0 : .34;
+      gsapEngine.to(header, {
+        yPercent: visible ? 0 : -112,
+        duration,
+        ease: visible ? 'power3.out' : 'power2.in',
+        overwrite: true,
+      });
+      if (visible) {
+        gsapEngine.fromTo(brandLabel, {x: -17, autoAlpha: 0}, {
+          x: 0,
+          autoAlpha: 1,
+          duration: immediate ? .01 : .46,
+          delay: immediate ? 0 : .09,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      } else {
+        gsapEngine.to(brandLabel, {x: -14, autoAlpha: 0, duration: .16, overwrite: true});
+      }
+    } else {
+      header.style.transform = visible ? 'translateY(0)' : 'translateY(-112%)';
+      brandLabel.style.opacity = visible ? '1' : '0';
+      brandLabel.style.transform = visible ? 'translateX(0)' : 'translateX(-14px)';
+    }
+  };
+
+  const updateChrome = () => {
+    const current = Math.max(0, window.scrollY);
+    const delta = current - lastScroll;
+    header.classList.toggle('is-scrolled', current > 18);
+    if (navLinks.classList.contains('is-open') || current < 72 || reduced) {
+      setHeaderVisible(true);
+    } else if (delta > 1.5) {
+      setHeaderVisible(false);
+    } else if (delta < -.25) {
+      setHeaderVisible(true);
+    }
+    lastScroll = current;
+  };
+  setHeaderVisible(true, true);
+  window.addEventListener('scroll', updateChrome, {passive: true});
+
   menuButton.addEventListener('click', () => {
     const open = !navLinks.classList.contains('is-open');
     navLinks.classList.toggle('is-open', open);
     menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.textContent = open ? 'Close' : 'Menu';
+    setHeaderVisible(true);
   });
   navLinks.addEventListener('click', event => {
     if (event.target instanceof HTMLAnchorElement) {
       navLinks.classList.remove('is-open');
       menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'Menu';
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+      navLinks.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'Menu';
+      menuButton.focus();
     }
   });
 
-  const story = document.querySelector('.story');
-  const storySteps = [...document.querySelectorAll('[data-story-step]')];
-  const stageItems = [...document.querySelectorAll('#workflow-panel [data-stage]')];
-  let activeStoryStage = -1;
-  const setStoryStage = active => {
-    if (active === activeStoryStage) return;
-    activeStoryStage = active;
-    storySteps.forEach((step, index) => step.classList.toggle('is-active', index === active));
-    stageItems.forEach(item => {
-      const stage = Number(item.dataset.stage);
-      item.classList.toggle('is-visible', stage <= active);
-      item.classList.toggle('is-current', stage === active);
+  const journey = document.getElementById('method');
+  const journeyGroups = [...document.querySelectorAll('.journey-stage-group')];
+  const journeyConnectors = [...document.querySelectorAll('.journey-connector')];
+  const journeySteps = [...document.querySelectorAll('[data-journey-copy]')];
+  let activeJourneyStage = -1;
+  const setJourneyStage = (active, progress = 1) => {
+    const next = Math.max(0, Math.min(4, active));
+    activeJourneyStage = next;
+    journey.dataset.activeStage = String(next);
+    journeyGroups.forEach((group, index) => {
+      group.classList.toggle('is-active', index === next);
+      group.classList.toggle('is-complete', index < next);
       if (motionAvailable && window.innerWidth > 900) {
-        gsapEngine.to(item, {
-          opacity: stage === active ? 1 : stage < active ? .48 : .16,
-          y: stage === active ? -2 : 0,
-          duration: .32,
+        gsapEngine.to(group, {
+          autoAlpha: index === next ? 1 : index < next ? .56 : .035,
+          x: index > next ? (index % 2 ? 30 : -30) : 0,
+          scale: index === next ? 1 : .985,
+          duration: .48,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      }
+    });
+    journeyConnectors.forEach((connector, index) => {
+      const visible = index < next;
+      if (motionAvailable && window.innerWidth > 900) {
+        gsapEngine.to(connector, {
+          strokeDashoffset: visible ? 0 : 1,
+          opacity: visible ? .9 : .08,
+          duration: .5,
           ease: 'power2.out',
           overwrite: true,
         });
       }
     });
+    journeySteps.forEach((step, index) => step.classList.toggle('is-active', index === next));
+    const indicator = document.getElementById('journey-indicator');
+    if (indicator) indicator.style.transform = `scaleX(${Math.max(.02, progress)})`;
   };
-  const nativeStoryUpdate = () => {
-    if (window.innerWidth <= 900 || reduced) {
-      setStoryStage(4);
-      return;
-    }
-    const rect = story.getBoundingClientRect();
-    const distance = Math.max(1, rect.height - window.innerHeight);
-    const ratio = Math.max(0, Math.min(.9999, -rect.top / distance));
-    setStoryStage(Math.min(4, Math.floor(ratio * 5)));
-  };
+
   if (motionAvailable) {
+    root.classList.add('motion-enhanced', 'gsap-ready');
+    journeyConnectors.forEach(connector => gsapEngine.set(connector, {strokeDashoffset: 1, opacity: .08}));
+    setJourneyStage(0, 0);
     scrollEngine.create({
-      trigger: story,
+      trigger: journey,
       start: 'top top',
       end: 'bottom bottom',
-      onUpdate: self => setStoryStage(Math.min(4, Math.floor(self.progress * 4.9999))),
-      onLeaveBack: () => setStoryStage(0),
+      onUpdate: self => setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress),
+      onLeaveBack: () => setJourneyStage(0, 0),
     });
-    const mobileStory = window.matchMedia('(max-width: 900px)');
-    const syncStoryMode = () => mobileStory.matches && setStoryStage(4);
-    mobileStory.addEventListener('change', syncStoryMode);
-    syncStoryMode();
+    const mobileJourney = window.matchMedia('(max-width: 900px)');
+    const syncJourneyMode = () => {
+      if (mobileJourney.matches) setJourneyStage(4, 1);
+      else setJourneyStage(activeJourneyStage < 0 ? 0 : activeJourneyStage);
+    };
+    mobileJourney.addEventListener('change', syncJourneyMode);
+    syncJourneyMode();
   } else {
-    window.addEventListener('scroll', nativeStoryUpdate, {passive: true});
-    window.addEventListener('resize', nativeStoryUpdate, {passive: true});
-    nativeStoryUpdate();
+    setJourneyStage(4, 1);
   }
 
   const revealItems = [...document.querySelectorAll('.reveal')];
   if (motionAvailable) {
-    root.classList.add('gsap-ready');
-    gsapEngine.set(revealItems, {autoAlpha: 0, y: 20});
+    gsapEngine.set(revealItems, {autoAlpha: 0, y: 24});
     revealItems.forEach(item => {
       gsapEngine.to(item, {
         autoAlpha: 1,
         y: 0,
-        duration: .7,
+        duration: .82,
         ease: 'power3.out',
-        scrollTrigger: {trigger: item, start: 'top 88%', once: true},
+        scrollTrigger: {trigger: item, start: 'top 87%', once: true},
       });
     });
     gsapEngine.from('.hero-animate', {
       autoAlpha: 0,
-      y: 24,
-      duration: .85,
-      stagger: .1,
+      y: 26,
+      duration: .9,
+      stagger: .095,
       ease: 'power3.out',
       delay: .12,
+    });
+    gsapEngine.to('#hero-canvas', {
+      yPercent: 9,
+      opacity: .62,
+      ease: 'none',
+      scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5},
     });
     document.querySelectorAll('.h4-chart, .h2-chart, .forest-plot').forEach(chart => {
       const marks = chart.querySelectorAll(
@@ -600,10 +991,20 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
       );
       gsapEngine.from(marks, {
         scale: 0,
-        duration: .45,
+        duration: .48,
         stagger: .012,
-        ease: 'back.out(1.6)',
-        scrollTrigger: {trigger: chart, start: 'top 82%', once: true},
+        ease: 'back.out(1.55)',
+        scrollTrigger: {trigger: chart, start: 'top 84%', once: true},
+      });
+    });
+    document.querySelectorAll('.spec-card, .reading-card, .hypothesis-row, .repo-command, .rule').forEach((card, index) => {
+      gsapEngine.from(card, {
+        y: 18,
+        autoAlpha: 0,
+        duration: .62,
+        delay: Math.min(index % 5, 4) * .035,
+        ease: 'power2.out',
+        scrollTrigger: {trigger: card, start: 'top 91%', once: true},
       });
     });
     document.querySelectorAll('main section[id]').forEach(section => {
@@ -611,22 +1012,14 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
       if (!link) return;
       scrollEngine.create({
         trigger: section,
-        start: 'top 45%',
-        end: 'bottom 45%',
+        start: 'top 46%',
+        end: 'bottom 46%',
         onToggle: self => link.classList.toggle('is-active', self.isActive),
       });
     });
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => scrollEngine.refresh());
     }
-  } else if ('IntersectionObserver' in window && !reduced) {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.visibility = 'visible';
-        observer.unobserve(entry.target);
-      }
-    }), {threshold: .08});
-    revealItems.forEach(item => observer.observe(item));
   }
 
   const hypothesisFilter = document.getElementById('filter-hypothesis');
@@ -634,6 +1027,15 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   const searchFilter = document.getElementById('filter-search');
   const comparisonRows = [...document.querySelectorAll('[data-comparison-row]')];
   const tableCount = document.getElementById('table-count');
+  let tableRefreshRequest = 0;
+  const scheduleTableRefresh = () => {
+    if (!motionAvailable) return;
+    if (tableRefreshRequest) cancelAnimationFrame(tableRefreshRequest);
+    tableRefreshRequest = requestAnimationFrame(() => {
+      tableRefreshRequest = 0;
+      scrollEngine.refresh();
+    });
+  };
   const filterTable = () => {
     const hypothesis = hypothesisFilter.value;
     const status = statusFilter.value;
@@ -647,6 +1049,7 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
       if (matches) visible += 1;
     });
     tableCount.textContent = `${visible} / ${comparisonRows.length} rows`;
+    scheduleTableRefresh();
   };
   [hypothesisFilter, statusFilter, searchFilter].forEach(control =>
     control.addEventListener('input', filterTable));
@@ -660,8 +1063,12 @@ const canvas = document.getElementById('hero-canvas');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 try {
-  const renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: 'low-power',
+  });
   renderer.setClearColor(0x010102, 0);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
@@ -1024,6 +1431,11 @@ try {
 
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = Boolean(connection && connection.saveData);
+    const ratioCap = saveData ? 1 : rect.width < 720 ? 1.25 : 1.5;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, ratioCap));
+    canvas.dataset.pixelRatioCap = String(ratioCap);
     renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
     camera.aspect = Math.max(.1, rect.width / Math.max(1, rect.height));
     camera.updateProjectionMatrix();
@@ -1034,8 +1446,11 @@ try {
   resize();
   window.addEventListener('resize', resize, {passive: true});
 
+  let heroVisible = true;
+
   if (window.gsap && window.ScrollTrigger && !reduced) {
     window.addEventListener('pointermove', event => {
+      if (!heroVisible) return;
       const x = event.clientX / Math.max(1, window.innerWidth) - .5;
       const y = event.clientY / Math.max(1, window.innerHeight) - .5;
       window.gsap.to(auditField.rotation, {
@@ -1060,11 +1475,40 @@ try {
     }
     renderer.render(scene, camera);
   };
-  if (window.gsap && !reduced) window.gsap.ticker.add(render);
-  else if (!reduced) {
-    const frame = () => { render(); window.requestAnimationFrame(frame); };
-    window.requestAnimationFrame(frame);
-  } else render();
+  let frameRequest = 0;
+  const shouldAnimate = () => !reduced && heroVisible && !document.hidden;
+  const frame = () => {
+    frameRequest = 0;
+    if (!shouldAnimate()) {
+      canvas.dataset.animationState = 'paused';
+      return;
+    }
+    render();
+    frameRequest = window.requestAnimationFrame(frame);
+  };
+  const syncRenderLoop = () => {
+    if (shouldAnimate()) {
+      canvas.dataset.animationState = 'running';
+      if (!frameRequest) frameRequest = window.requestAnimationFrame(frame);
+      return;
+    }
+    if (frameRequest) window.cancelAnimationFrame(frameRequest);
+    frameRequest = 0;
+    canvas.dataset.animationState = reduced ? 'static' : 'paused';
+    if (reduced) render();
+  };
+  if ('IntersectionObserver' in window) {
+    const visibilityObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.target === canvas) heroVisible = entry.isIntersecting;
+      });
+      syncRenderLoop();
+    }, {rootMargin: '160px 0px'});
+    visibilityObserver.observe(canvas);
+  }
+  document.addEventListener('visibilitychange', syncRenderLoop);
+  if (reduced) window.addEventListener('resize', render, {passive: true});
+  syncRenderLoop();
   canvas.dataset.renderer = 'threejs-review-queue';
   canvas.dataset.story = 'immutable-source-ranked-review';
 } catch (_error) {

@@ -1,12 +1,18 @@
 # AANCA presentation MVP
 
 The static MVP is generated at `artifacts/mvp_demo/index.html` from the accepted,
-sealed primary and the checksum-bound PanNuke QC bundle. It needs no server and
-does not execute a model.
+sealed primary and the checksum-bound PanNuke QC bundle. The dependency-free
+launcher verifies it, serves only on loopback by default, and opens the browser;
+it does not execute a model or require the ML environment.
 
 ```powershell
-.venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
+python scripts/present_demo.py
+python scripts/present_demo.py --verify-only
 ```
+
+Directly opening `artifacts/mvp_demo/index.html` remains a zero-server fallback.
+After installing the full environment, `histo-audit demo serve` and
+`histo-audit demo verify` expose the same workflow through the project CLI.
 
 The package visibly states that it is not diagnostic, preserves the
 `amended_or_exploratory` disposition, includes every saved primary comparison,

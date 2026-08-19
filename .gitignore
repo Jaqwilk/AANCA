@@ -71,3 +71,11 @@ artifacts/duplicate_audit/.superseded/**
 reports/doctor_latest.json
 reports/doctor_latest.txt
 *.log
+
+# Local browser-design iterations; selected professor-release captures are kept explicitly.
+output/playwright/aanca-v4-*.png
+output/playwright/reference-anthropic-*.png
+output/playwright/aanca-final-canonical.png
+output/playwright/aanca-optimized-*.png
+output/playwright/aanca-professor-release-method.png
+output/playwright/aanca-professor-release-qc-preview.png

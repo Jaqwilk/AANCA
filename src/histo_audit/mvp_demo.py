@@ -12,6 +12,8 @@ import shutil
 import tempfile
 from collections import Counter
 from dataclasses import dataclass
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
@@ -56,6 +58,27 @@ class MvpPresentationArtifacts:
     readme_path: Path
     manifest_path: Path
     manifest_root_sha256: str
+
+
+def create_mvp_http_server(
+    output_directory: str | Path,
+    *,
+    host: str = "127.0.0.1",
+    port: int = 8000,
+) -> tuple[ThreadingHTTPServer, dict[str, Any]]:
+    """Verify and bind a read-only local HTTP server for the presentation package."""
+
+    if not host.strip() or host != host.strip():
+        raise ValueError("MVP server host must be a non-empty value without outer whitespace")
+    if not 0 <= port <= 65_535:
+        raise ValueError("MVP server port must be between 0 and 65535")
+
+    directory = Path(output_directory).resolve(strict=True)
+    verification = verify_mvp_presentation(directory)
+    handler = partial(SimpleHTTPRequestHandler, directory=str(directory))
+    server = ThreadingHTTPServer((host, port), handler)
+    server.daemon_threads = True
+    return server, verification
 
 
 def _reject_constant(value: str) -> None:
@@ -1615,7 +1638,7 @@ _MVP_SCRIPT = r"""
 """
 
 
-def _render_html_v2(evidence: dict[str, Any]) -> str:
+def _render_html_v4(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     qc = evidence["pannuke_qc"]
     hypotheses = primary["hypothesis_comparisons"]
@@ -1623,11 +1646,11 @@ def _render_html_v2(evidence: dict[str, Any]) -> str:
     h4 = primary["h4_restoration"]
     seed_audit = primary["instance_dependent_seed_audit"]
 
-    comparison_rows = _render_comparison_rows(primary["comparisons"])
-    forest_plot = _render_forest_plot(primary["comparisons"])
-    h4_chart = _render_h4_chart(h4)
-    h2_chart = _render_h2_chart(h2)
-    hypothesis_ledger = _render_hypothesis_ledger(hypotheses, h2, h4)
+    comparison_rows = _render_comparison_rows_v3(primary["comparisons"])
+    forest_plot = _render_forest_plot_v3(primary["comparisons"])
+    h4_chart = _render_h4_chart_v3(h4)
+    h2_chart = _render_h2_chart_v3(h2)
+    hypothesis_ledger = _render_hypothesis_ledger_v4(hypotheses, h2, h4)
 
     seed_rows: list[str] = []
     for record in seed_audit["records"]:
@@ -1643,6 +1666,9 @@ def _render_html_v2(evidence: dict[str, Any]) -> str:
         )
     seed_hash = html.escape(str(seed_audit["records"][0]["ranking_sha256"]))
     oof_hash = html.escape(str(seed_audit["records"][0]["oof_predictions_sha256"]))
+    point_difference = _require_real(h4["point_difference"], role="H4 point difference")
+    reported_comparisons = sum(record["status"] == "reported" for record in primary["comparisons"])
+    unavailable_comparisons = primary["comparison_count"] - reported_comparisons
 
     template = """<!doctype html>
 <html lang="pl">
@@ -1788,12 +1814,292 @@ def _render_html_v2(evidence: dict[str, Any]) -> str:
 </html>
 """
 
+    template = r"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AANCA is a reproducible, non-diagnostic framework for ranking potentially inconsistent nucleus annotations for expert review.">
+  <meta name="author" content="Natan Smogór">
+  <meta name="date" content="2026-08-18">
+  <meta name="theme-color" content="#010102">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23010102'/%3E%3Crect x='14' y='14' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='38' y='14' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='26' y='26' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='14' y='38' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='38' y='38' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3C/svg%3E">
+  <title>AANCA — annotation auditing for expert review</title>
+  <style>__CSS__</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" id="site-header">
+  <div class="nav-shell">
+    <a class="brand" href="#top" aria-label="AANCA — back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
+    <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Result</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
+  </div>
+</header>
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <p class="eyebrow hero-animate">Automated nucleus-annotation auditing</p>
+      <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
+      <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review—without rewriting the source labels.</p>
+      <div class="hero-byline hero-animate"><span>Research prototype by <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
+    </div>
+    <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
+  </div>
+</section>
+
+<main id="main">
+  <section class="narrative" id="overview">
+    <div class="article-copy reveal">
+      <p class="lede">Annotation auditing is a way to decide what a human should inspect first. It is not a way to replace the human decision.</p>
+      <p>Large histopathology datasets contain many already segmented nucleus instances, each paired with a class label. Even careful annotation can include ambiguity, inconsistent conventions or ordinary data-entry noise. Reviewing every instance again is expensive, so the useful question is not “can a model declare a label wrong?” It is “can a model create a better review queue than random sampling?”</p>
+      <p>AANCA evaluates that question under controlled conditions. It intentionally changes a known subset of class labels, hides that intervention from the auditor, and then measures whether the changed labels move toward the front of a fixed review queue. Because the benchmark records exactly what it changed, retrieval can be scored without pretending that model disagreement is biological truth.</p>
+      <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>—never “confirmed error.”</p>
+      <div class="scope-note"><strong>Study boundary.</strong> This presentation reports the completed primary frozen-feature benchmark. Confirmatory CNN experiments, blinded expert review and external validation have not been performed. Model-selection rules were frozen before outcome interpretation; the accepted analysis remains exploratory because outcomes were subsequently exposed during technical recovery.</div>
+    </div>
+  </section>
+
+  <section class="study-at-a-glance" aria-labelledby="study-title">
+    <div class="section-heading reveal"><p class="section-kicker">Study at a glance</p><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define what the results do—and do not—measure.</p></div>
+    <div class="study-specs reveal">
+      <article class="spec-card"><span>Data</span><strong>PanNuke</strong><small>Verified official release; five positive nucleus classes across 19 tissue types.</small></article>
+      <article class="spec-card"><span>Unit</span><strong>Already segmented nuclei</strong><small>Class-label consistency only. Segmentation quality and diagnosis are outside scope.</small></article>
+      <article class="spec-card"><span>Primary model</span><strong>Frozen ResNet-18 + logistic regression</strong><small>ImageNet context embeddings with balanced multinomial fitting.</small></article>
+      <article class="spec-card"><span>Prediction design</span><strong>Five-fold group-safe OOF</strong><small>A scored nucleus and its whole source patch are absent from its training fold.</small></article>
+      <article class="spec-card"><span>Review budget</span><strong>5% primary queue</strong><small>Guided and random review receive the same integer budget.</small></article>
+    </div>
+  </section>
+
+  <div class="research-question reveal">
+    <span>Research question</span>
+    <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review—and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
+  </div>
+
+  <section class="journey story" id="method" aria-labelledby="journey-title" data-active-stage="0">
+    <div class="journey-sticky"><div class="journey-grid">
+      <div class="journey-visual">
+        <svg viewBox="0 0 760 680" role="img" aria-labelledby="method-graphic-title method-graphic-desc">
+          <title id="method-graphic-title">The five cumulative stages of the controlled AANCA benchmark</title>
+          <desc id="method-graphic-desc">Five horizontal lanes unfold along an alternating serpentine path from immutable source labels to an expert-review recommendation.</desc>
+
+          <path class="journey-connector" pathLength="1" d="M688 81H711Q732 81 732 102V188Q732 209 711 209H722"/>
+          <path class="journey-connector" pathLength="1" d="M72 209H49Q28 209 28 230V316Q28 337 49 337H38"/>
+          <path class="journey-connector" pathLength="1" d="M688 337H711Q732 337 732 358V444Q732 465 711 465H722"/>
+          <path class="journey-connector" pathLength="1" d="M72 465H49Q28 465 28 486V572Q28 593 49 593H38"/>
+
+          <g class="journey-stage-group" data-journey-stage="0">
+            <rect class="journey-lane-bg" x="38" y="34" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 35H660"/>
+            <text class="journey-stage-no" x="66" y="65">01</text>
+            <text class="journey-stage-title" x="111" y="66">Preserve the source evidence</text>
+            <text class="journey-stage-meta" x="111" y="91">LABEL + PATCH GROUP + ORIGINAL CLASS</text>
+            <path class="journey-rail" d="M430 82H590"/>
+            <path class="journey-rail" d="M583 76L590 82L583 88"/>
+            <g transform="translate(612 59)"><rect class="journey-node" width="16" height="16" rx="4"/><rect class="journey-node" x="21" y="7" width="16" height="16" rx="4" opacity=".7"/><rect class="journey-node" x="7" y="25" width="16" height="16" rx="4" opacity=".85"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="1">
+            <rect class="journey-lane-bg" x="72" y="162" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M100 163H694"/>
+            <text class="journey-stage-no" x="100" y="193">02</text>
+            <text class="journey-stage-title" x="145" y="194">Create known inconsistencies</text>
+            <text class="journey-stage-meta" x="145" y="219">PRE-CORRUPTION ≠ OBSERVED · METADATA KEPT SEPARATE</text>
+            <g transform="translate(596 190)"><rect class="journey-node-muted" width="38" height="10" rx="5"/><path class="journey-rail-accent" d="M44 5H58"/><rect class="journey-node" x="64" width="38" height="10" rx="5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="2">
+            <rect class="journey-lane-bg" x="38" y="290" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 291H660"/>
+            <text class="journey-stage-no" x="66" y="321">03</text>
+            <text class="journey-stage-title" x="111" y="322">Predict without patch leakage</text>
+            <text class="journey-stage-meta" x="111" y="347">FIVE GROUP-SAFE OUT-OF-FOLD MODELS</text>
+            <g transform="translate(564 316)"><rect class="journey-node" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="31" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="62" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="93" width="24" height="24" rx="5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="3">
+            <rect class="journey-lane-bg" x="72" y="418" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M100 419H694"/>
+            <text class="journey-stage-no" x="100" y="449">04</text>
+            <text class="journey-stage-title" x="145" y="450">Turn evidence into a fixed review queue</text>
+            <text class="journey-stage-meta" x="145" y="475">HIGHER SCORE = EARLIER REVIEW · PRIMARY BUDGET 5%</text>
+            <g transform="translate(594 442)"><rect class="journey-node" width="104" height="7" rx="3.5"/><rect class="journey-node-muted" y="15" width="73" height="7" rx="3.5"/><rect class="journey-node-muted" y="30" width="42" height="7" rx="3.5"/></g>
+          </g>
+
+          <g class="journey-stage-group" data-journey-stage="4">
+            <rect class="journey-lane-bg" x="38" y="546" width="650" height="94" rx="28"/>
+            <path class="journey-lane-edge" d="M66 547H660"/>
+            <text class="journey-stage-no" x="66" y="577">05</text>
+            <text class="journey-stage-title" x="111" y="578">Measure retrieval; leave judgement to an expert</text>
+            <text class="journey-stage-meta" x="111" y="603">RECOMMENDATION ONLY · SOURCE LABELS REMAIN UNCHANGED</text>
+            <g transform="translate(607 564)"><circle class="journey-icon-line" cx="24" cy="24" r="22"/><path class="journey-icon-line" d="M13 24L21 32L37 12" style="stroke:#828fff;stroke-width:3"/></g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="journey-copy">
+        <p class="section-kicker">How the benchmark works</p>
+        <h2 id="journey-title" class="display">One controlled question, unfolded step by step.</h2>
+        <p class="journey-intro">Each stage adds evidence while preserving the source record. Scroll to build the complete benchmark; the graphic remains fully visible on mobile and in reduced-motion mode.</p>
+        <ol class="journey-steps">
+          <li class="journey-step is-active" data-journey-copy="0" data-index="01"><small>Reference</small><h3>Keep label states immutable and separate</h3><p>Each nucleus retains its source patch, experimental reference class and observed class.</p></li>
+          <li class="journey-step" data-journey-copy="1" data-index="02"><small>Intervention</small><h3>Inject a change the benchmark can verify</h3><p>Four frozen mechanisms create objective positives without changing the raw source files.</p></li>
+          <li class="journey-step" data-journey-copy="2" data-index="03"><small>Prediction</small><h3>Score only with unseen source groups</h3><p>No model may train on the scored nucleus or any other nucleus from its source patch.</p></li>
+          <li class="journey-step" data-journey-copy="3" data-index="04"><small>Triage</small><h3>Rank suspicion under an equal budget</h3><p>Guided and random review inspect the same number of cases; only their ordering differs.</p></li>
+          <li class="journey-step" data-journey-copy="4" data-index="05"><small>Evaluation</small><h3>Measure retrieval, then defer the decision</h3><p>Average precision and fixed-budget metrics score the queue. An expert still decides what a case means.</p></li>
+        </ol>
+        <div aria-hidden="true" style="height:1px;background:#23252a;margin-top:22px;overflow:hidden"><span id="journey-indicator" style="display:block;width:100%;height:1px;background:#5e6ad2;transform:scaleX(.02);transform-origin:left"></span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="reading">
+    <div class="section-heading reveal"><p class="section-kicker">How to read the evidence</p><h2>Four quantities answer four different questions.</h2><p class="section-deck">Separating them prevents a strong ranking result from being mistaken for clinical or downstream utility.</p></div>
+    <div class="reading-grid reveal">
+      <article class="reading-card"><span>01</span><h3>Average precision</h3><p>Asks whether injected label changes appear early across the entire ranked list. Higher is better; at 0% corruption it is not applicable.</p></article>
+      <article class="reading-card"><span>02</span><h3>Recall at 5%</h3><p>Asks how many injected changes are found when an expert can review only the first 5% of the queue.</p></article>
+      <article class="reading-card"><span>03</span><h3>Random-review baseline</h3><p>Uses the identical integer budget over 100 deterministic repetitions, making the operational comparison fair.</p></article>
+      <article class="reading-card"><span>04</span><h3>Restoration utility</h3><p>Asks a separate downstream question: after simulated review, does restoring found injected changes improve final-fold macro-F1?</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="section-heading reveal"><p class="section-kicker">Primary downstream test · H4</p><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
+    <div class="chapter-copy reveal"><p>The H4 experiment restored exactly the same 5% review budget under audit-guided and random selection, then trained the same downstream model and evaluated it on the untouched final reference fold. Audit-guided restoration was not favoured.</p></div>
+    <div class="figure-width reveal result-layout">
+      <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span><span>Adverse to the registered hypothesis</span></div><span class="result-number">__H4_POINT__</span><p>Audit-guided restoration produced macro-F1 <strong>__H4_AUDIT__</strong>, below the random-review mean of <strong>__H4_RANDOM__</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>__H4_POINT_PP__ percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
+      __H4_CHART__
+    </div>
+  </section>
+
+  <section class="section" id="benchmarks">
+    <div class="section-heading reveal"><p class="section-kicker">Preregistered questions · H1-H7</p><h2>What the study actually learned.</h2><p class="section-deck">All seven questions remain visible together: supportive, qualified, adverse, neutral and unavailable. Across the 36 preregistered comparison entries, <strong>__REPORTED__</strong> have numeric results and <strong>__UNAVAILABLE__</strong> remain explicitly unavailable.</p></div>
+    <div class="figure-width reveal"><div class="hypothesis-ledger">__HYPOTHESIS_LEDGER__</div></div>
+    <div class="section-heading reveal" style="margin-top:var(--section-space)"><p class="section-kicker">Comparison atlas</p><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
+    <div class="wide-width reveal"><div class="forest-plot" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons">__FOREST_PLOT__</div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
+  </section>
+
+  <section class="section" id="subgroups">
+    <div class="section-heading reveal"><p class="section-kicker">H2 · descriptive heterogeneity</p><h2>Saved performance estimates varied across contexts.</h2><p class="section-deck">The saved subgroup estimates span nucleus classes, tissues, corruption mechanisms and corruption rates. They describe where performance differed in this benchmark; they do not establish a causal biological dependency.</p></div>
+    <div class="chapter-copy reveal"><p>Subgroup average precision is reported only when the preregistered support rule is met: at least 100 samples and at least 10 injected corruptions. Otherwise the study retains counts without inventing an unstable estimate.</p></div>
+    <div class="figure-width reveal">__H2_CHART__</div>
+  </section>
+
+  <section class="section" id="seed-audit">
+    <div class="section-heading reveal"><p class="section-kicker">Reproducibility disclosure</p><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The three rows are retained for auditability, but the byte-identical files are not independent realisations and must not be interpreted as three replications.</p></div>
+    <div class="figure-width reveal">
+      <div class="seed-panel">
+        <svg viewBox="0 0 680 390" role="img" aria-labelledby="seed-title seed-desc"><title id="seed-title">Seeds 404, 405 and 406 produced byte-identical files</title><desc id="seed-desc">Three seed paths converge on one ranking hash and one out-of-fold prediction hash.</desc>
+          <g font-family="Inter, sans-serif" font-size="13" fill="#d0d6e0"><rect x="34" y="42" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="75">Seed 404</text><rect x="34" y="168" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="201">Seed 405</text><rect x="34" y="294" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="327">Seed 406</text></g>
+          <g fill="none" stroke="#5e6ad2" stroke-width="2"><path d="M160 69H270Q310 69 310 109V168"/><path d="M160 195H310"/><path d="M160 321H270Q310 321 310 281V222"/></g><circle cx="310" cy="195" r="18" fill="#5e6ad2"/><path d="M328 195H404" stroke="#828fff" stroke-width="2"/>
+          <g font-family="Inter, sans-serif"><rect x="404" y="130" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="154" fill="#8a8f98" font-size="11">IDENTICAL RANKING SHA-256</text><text x="428" y="174" fill="#d0d6e0" font-size="12">__SEED_HASH_SHORT__…</text><rect x="404" y="204" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="228" fill="#8a8f98" font-size="11">IDENTICAL OOF SHA-256</text><text x="428" y="248" fill="#d0d6e0" font-size="12">__OOF_HASH_SHORT__…</text></g>
+        </svg>
+        <div class="seed-copy"><h3>One deterministic output, preserved three times.</h3><p>The complete ranking and out-of-fold prediction files match byte for byte. That limitation narrows how the instance-dependent results should be interpreted.</p><p><code>ranking __SEED_HASH__</code><br><code>OOF __OOF_HASH__</code></p></div>
+      </div>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete seed identities</span><span>Always visible · exact traceability</span></div><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody>__SEED_ROWS__</tbody></table></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="integrity">
+    <div class="section-heading reveal"><p class="section-kicker">Experimental integrity</p><h2>The design limits outcome-informed model selection.</h2><p class="section-deck">The model, split, feature and statistical rules were frozen before outcome interpretation. Because outcomes were later exposed during recovery, this accepted result is reported as exploratory rather than as an untouched confirmatory analysis.</p></div>
+    <div class="wide-width reveal">
+      <div class="stats-grid"><div class="stat"><strong>__COMPLETED__/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>__FAILED__</strong><span>failed required cells</span></div><div class="stat"><strong>__COMPARISONS__</strong><span>preregistered comparison entries retained</span></div><div class="stat"><strong>__BOOTSTRAPS__</strong><span>paired group-bootstrap iterations</span></div></div>
+      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level—never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="interpretation">
+    <div class="section-heading reveal"><p class="section-kicker">Interpretation boundary</p><h2>What this benchmark supports—and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
+    <div class="figure-width reveal claim-grid">
+      <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in H1.</li><li>The preregistered fixed hybrid exceeded self-confidence in all 12 H5 comparisons.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
+      <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That better ranking automatically improves downstream classification; H4 was adverse.</li><li>Patient/WSI independence, clinical validity, expert agreement or external generalisation.</li></ul></article>
+    </div>
+  </section>
+
+  <section class="section" id="quality">
+    <div class="section-heading reveal"><p class="section-kicker">PanNuke quality control</p><h2>The source masks remained untouched.</h2><p class="section-deck">The validator measured cross-class overlaps and unlabeled regions, retained them in provenance and applied one frozen eligibility policy. It never arbitrated an overlap class or reconstructed the supplied background.</p></div>
+    <div class="wide-width reveal">
+      <div class="stats-grid"><div class="stat"><strong>__PATCHES__</strong><span>validated PanNuke patches</span></div><div class="stat"><strong>__OVERLAP_PIXELS__</strong><span>cross-class overlap pixels</span></div><div class="stat"><strong>__VOID_PIXELS__</strong><span>unlabeled / void pixels</span></div><div class="stat"><strong>__FLAGGED_INSTANCES__</strong><span>overlap-touching instances flagged</span></div></div>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Deterministic quality-control overlay</span><span>1512 x 3840 px · source preview</span></div><div class="qc-frame"><div class="qc-toolbar"><span>Cropped representative preview · normal, overlap, void and exclusion cases</span><a href="pannuke_mask_qc_overlays.png" target="_blank" rel="noopener">Open the original image ↗</a></div><div class="qc-preview"><img loading="lazy" decoding="async" fetchpriority="low" width="1512" height="3840" src="pannuke_mask_qc_overlays.png" alt="Deterministic PanNuke quality-control overlays showing images and mask boundaries"></div></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="evidence">
+    <div class="section-heading reveal"><p class="section-kicker">Evidence and provenance</p><h2>Every displayed result remains inspectable.</h2><p class="section-deck">The complete table is visible immediately and retains readable comparison names, exact raw identifiers, fixed precision, intervals, multiplicity-adjusted p-values and bootstrap counts.</p></div>
+    <div class="wide-width reveal">
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete H1 / H3 / H5 / H6 / H7 comparison table</span><span>__REPORTED__ reported · __UNAVAILABLE__ unavailable</span></div>
+        <div class="table-tools"><label>Hypothesis<select id="filter-hypothesis"><option value="ALL">All hypotheses</option><option>H1</option><option>H3</option><option>H5</option><option>H6</option><option>H7</option></select></label><label>Status<select id="filter-status"><option value="ALL">All statuses</option><option value="reported">Reported</option><option value="not_available_frozen_optional_cell">Unavailable</option></select></label><label>Search<input id="filter-search" type="search" placeholder="Name, seed or comparison ID"></label><span class="table-count" id="table-count">__COMPARISONS__ / __COMPARISONS__ rows</span></div>
+        <div class="table-wrap"><table id="comparison-table"><colgroup><col style="width:7%"><col style="width:35%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:10%"><col style="width:7%"></colgroup><thead><tr><th>Hypothesis</th><th>Comparison</th><th>Status</th><th style="text-align:right">Δ AP</th><th style="text-align:right">95% bootstrap CI</th><th style="text-align:right">Holm-adjusted p</th><th style="text-align:right">Iterations</th></tr></thead><tbody>__COMPARISON_ROWS__</tbody></table></div>
+      </div>
+      <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
+      <div class="provenance" style="margin-top:64px">
+        <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li></ul><p>No patient- or WSI-level independence is claimed because the released metadata do not support it. Separation is guaranteed at source-patch level.</p></div>
+        <div><h3>Reproducibility identities</h3><dl class="hash-list"><div><dt>Accepted run</dt><dd>__RUN_ID__</dd></div><div><dt>Artifact root SHA-256</dt><dd>__ARTIFACT_ROOT__</dd></div><div><dt>Stage attestation SHA-256</dt><dd>__STAGE_HASH__</dd></div><div><dt>QC overlay SHA-256</dt><dd>__QC_HASH__</dd></div></dl></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="use">
+    <div class="section-heading reveal"><p class="section-kicker">Open implementation</p><h2>Inspect the evidence first. Run the software when you need to.</h2><p class="section-deck">The checked-in presentation opens without a dataset or GPU. Package verification and the deterministic synthetic smoke path provide progressively deeper checks without claiming a new real-data study.</p></div>
+    <div class="repo-shell">
+      <article class="repo-card reveal">
+        <div class="repo-top">
+          <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
+          <div><span class="repo-path">github.com / Jaqwilk</span><span class="repo-title">AANCA</span></div>
+          <a class="repo-link" href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">View repository ↗</a>
+        </div>
+        <p class="repo-description">The repository contains the scientific specification, preregistration, source code, tests, reproducible command-line workflows and this checksum-verifiable presentation. Raw PanNuke binaries, full runs, embeddings and checkpoints are intentionally not distributed.</p>
+        <div class="repo-tags"><span>Python 3.12</span><span>group-safe OOF</span><span>immutable evidence</span><span>research only</span></div>
+      </article>
+
+      <div class="usage-grid">
+        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>The dependency-free launcher checks every package hash, serves on loopback and opens the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
+cd AANCA
+python scripts/present_demo.py</pre></article>
+        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Use the same standard-library validation in CI, scripts or an offline review.</p><pre>python scripts/present_demo.py `
+  --verify-only</pre></article>
+        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Installs the governed ML environment, then tests software without calling it PanNuke evidence.</p><pre>uv sync --dev
+uv run histo-audit doctor
+uv run histo-audit data generate-synthetic `
+  --config configs\smoke.yaml
+uv run histo-audit experiment smoke</pre></article>
+      </div>
+      <p class="usage-note">Real PanNuke execution is intentionally gated: obtain a lawful local copy from the official source, preserve it unchanged and follow <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>. The repository does not silently download the dataset or relax scientific gates.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
+  <div class="footer-grid">
+    <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Release: 18 August 2026</p><p>Dataset: PanNuke</p><p>Primary frozen-feature benchmark completed; confirmatory and external validation pending.</p></div>
+    <div class="footer-column"><h3>Responsible use</h3><p>Non-diagnostic research only</p><p>No automatic annotation changes</p><p>No claim that an annotator was wrong</p><p>No patient/WSI independence claim</p></div>
+    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="README.md">Presentation package notes</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
+</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>__SCRIPT__</script>
+<script type="module">__THREE_SCRIPT__</script>
+</body>
+</html>
+"""
+
     replacements = {
-        "__CSS__": _MVP_CSS,
-        "__SCRIPT__": _MVP_SCRIPT,
-        "__H4_POINT__": html.escape(_format_number(h4["point_difference"])),
-        "__H4_AUDIT__": html.escape(_format_number(h4["audit_guided_macro_f1"])),
-        "__H4_RANDOM__": html.escape(_format_number(h4["random_review_macro_f1_mean"])),
+        "__CSS__": _MVP_CSS_V4,
+        "__SCRIPT__": _MVP_SCRIPT_V4,
+        "__THREE_SCRIPT__": _MVP_THREE_SCRIPT_V3,
+        "__H4_POINT__": html.escape(_format_metric_v3(point_difference)),
+        "__H4_POINT_PP__": html.escape(f"{abs(point_difference) * 100:.3f}"),
+        "__H4_AUDIT__": html.escape(_format_metric_v3(h4["audit_guided_macro_f1"])),
+        "__H4_RANDOM__": html.escape(_format_metric_v3(h4["random_review_macro_f1_mean"])),
         "__H4_CHART__": h4_chart,
         "__HYPOTHESIS_LEDGER__": hypothesis_ledger,
         "__FOREST_PLOT__": forest_plot,
@@ -1806,9 +2112,11 @@ def _render_html_v2(evidence: dict[str, Any]) -> str:
         "__COMPLETED__": str(primary["completed_required_cells"]),
         "__FAILED__": str(primary["failed_required_cells"]),
         "__COMPARISONS__": str(primary["comparison_count"]),
+        "__REPORTED__": str(reported_comparisons),
+        "__UNAVAILABLE__": str(unavailable_comparisons),
+        "__BOOTSTRAPS__": f"{primary['bootstrap_iterations_required']:,}",
         "__PATCHES__": f"{qc['patch_count']:,}",
         "__OVERLAP_PIXELS__": f"{qc['cross_class_overlap_pixel_count']:,}",
-        "__OVERLAP_PATCHES__": f"{qc['cross_class_overlap_patch_count']:,}",
         "__VOID_PIXELS__": f"{qc['void_pixel_count']:,}",
         "__FLAGGED_INSTANCES__": f"{qc['overlap_touching_instance_count']:,}",
         "__COMPARISON_ROWS__": comparison_rows,
@@ -2195,6 +2503,108 @@ def _render_hypothesis_ledger_v3(
         + html.escape(detail)
         + "</p></details>"
         for identifier, title, result, status, detail in entries
+    )
+
+
+def _render_hypothesis_ledger_v4(
+    hypotheses: dict[str, dict[str, Any]], h2: dict[str, Any], h4: dict[str, Any]
+) -> str:
+    """Render every preregistered question as visible, non-collapsible evidence."""
+
+    h1, h3, h5, h6, h7 = (
+        hypotheses["h1"],
+        hypotheses["h3"],
+        hypotheses["h5"],
+        hypotheses["h6"],
+        hypotheses["h7"],
+    )
+    entries = (
+        (
+            "H1",
+            "Detection",
+            "Can ranking beat random review?",
+            f"{h1['positive_point_difference_count']} / {h1['reported_count']} positive differences",
+            "supported",
+            f"All {h1['interval_excludes_zero_in_positive_direction_count']} saved 95% "
+            "bootstrap intervals were above zero. The byte-identical "
+            "instance-dependent seed outputs are disclosed separately and are not "
+            "counted as independent replications.",
+        ),
+        (
+            "H2",
+            "Heterogeneity",
+            "Did saved performance estimates vary across contexts?",
+            f"{h2['reported_count']:,} reportable estimates",
+            "descriptive",
+            "Yes, the saved estimates varied across nucleus class, tissue, corruption "
+            "mechanism and rate. This is descriptive heterogeneity; no omnibus test "
+            "or causal biological interpretation was registered.",
+        ),
+        (
+            "H3",
+            "Difficulty",
+            "Were some corruption mechanisms harder?",
+            f"{h3['positive_point_difference_count']} / {h3['reported_count']} positive differences",
+            "qualified",
+            f"The registered contrasts generally placed confusion-targeted and "
+            f"instance-dependent corruption below symmetric corruption. One of "
+            f"{h3['reported_count']} saved 95% intervals crossed zero.",
+        ),
+        (
+            "H4",
+            "Utility",
+            "Did guided restoration improve downstream classification?",
+            f"Δ macro-F1 {_format_metric_v3(h4['point_difference'])}",
+            "adverse",
+            "No. At the same 5% review budget, audit-guided restoration performed "
+            "below the mean random-review result. The adverse registered outcome is "
+            "retained without post-result tuning.",
+        ),
+        (
+            "H5",
+            "Combination",
+            "Did the fixed hybrid improve ranking?",
+            f"{h5['positive_point_difference_count']} / {h5['reported_count']} positive differences",
+            "supported",
+            f"All {h5['interval_excludes_zero_in_positive_direction_count']} saved 95% "
+            "bootstrap intervals were above zero for the preregistered fixed hybrid "
+            "minus self-confidence comparison.",
+        ),
+        (
+            "H6",
+            "Representation",
+            "Did a pathology-specific encoder outperform ImageNet?",
+            f"{h6['reported_count']} / {h6['comparison_count']} numeric results",
+            "unavailable",
+            "This question was not estimated. No pathology encoder satisfied every "
+            "frozen access, licence, reproducibility, hardware and smoke-test gate, "
+            "and no replacement was chosen after outcomes were visible.",
+        ),
+        (
+            "H7",
+            "Target cue",
+            "Did explicit target highlighting help?",
+            f"{h7['interval_crosses_zero_count']} / {h7['reported_count']} intervals crossed zero",
+            "neutral",
+            "The saved comparisons do not provide clear evidence that target "
+            "highlighting improved average precision over the context representation.",
+        ),
+    )
+    return "".join(
+        '<article class="hypothesis-row" data-status="'
+        + status
+        + '"><div class="hypothesis-row-head"><span class="hypothesis-id">'
+        + identifier
+        + '</span><span class="hypothesis-theme">'
+        + html.escape(theme)
+        + '</span><span class="hypothesis-result">'
+        + html.escape(result)
+        + '</span></div><h3 class="hypothesis-title">'
+        + html.escape(title)
+        + "</h3><p>"
+        + html.escape(detail)
+        + "</p></article>"
+        for identifier, theme, title, result, status, detail in entries
     )
 
 
@@ -2700,8 +3110,12 @@ const canvas = document.getElementById('hero-canvas');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 try {
-  const renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: 'low-power',
+  });
   renderer.setClearColor(0x010102, 0);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
@@ -3064,6 +3478,11 @@ try {
 
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = Boolean(connection && connection.saveData);
+    const ratioCap = saveData ? 1 : rect.width < 720 ? 1.25 : 1.5;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, ratioCap));
+    canvas.dataset.pixelRatioCap = String(ratioCap);
     renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
     camera.aspect = Math.max(.1, rect.width / Math.max(1, rect.height));
     camera.updateProjectionMatrix();
@@ -3074,8 +3493,11 @@ try {
   resize();
   window.addEventListener('resize', resize, {passive: true});
 
+  let heroVisible = true;
+
   if (window.gsap && window.ScrollTrigger && !reduced) {
     window.addEventListener('pointermove', event => {
+      if (!heroVisible) return;
       const x = event.clientX / Math.max(1, window.innerWidth) - .5;
       const y = event.clientY / Math.max(1, window.innerHeight) - .5;
       window.gsap.to(auditField.rotation, {
@@ -3100,11 +3522,40 @@ try {
     }
     renderer.render(scene, camera);
   };
-  if (window.gsap && !reduced) window.gsap.ticker.add(render);
-  else if (!reduced) {
-    const frame = () => { render(); window.requestAnimationFrame(frame); };
-    window.requestAnimationFrame(frame);
-  } else render();
+  let frameRequest = 0;
+  const shouldAnimate = () => !reduced && heroVisible && !document.hidden;
+  const frame = () => {
+    frameRequest = 0;
+    if (!shouldAnimate()) {
+      canvas.dataset.animationState = 'paused';
+      return;
+    }
+    render();
+    frameRequest = window.requestAnimationFrame(frame);
+  };
+  const syncRenderLoop = () => {
+    if (shouldAnimate()) {
+      canvas.dataset.animationState = 'running';
+      if (!frameRequest) frameRequest = window.requestAnimationFrame(frame);
+      return;
+    }
+    if (frameRequest) window.cancelAnimationFrame(frameRequest);
+    frameRequest = 0;
+    canvas.dataset.animationState = reduced ? 'static' : 'paused';
+    if (reduced) render();
+  };
+  if ('IntersectionObserver' in window) {
+    const visibilityObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.target === canvas) heroVisible = entry.isIntersecting;
+      });
+      syncRenderLoop();
+    }, {rootMargin: '160px 0px'});
+    visibilityObserver.observe(canvas);
+  }
+  document.addEventListener('visibilitychange', syncRenderLoop);
+  if (reduced) window.addEventListener('resize', render, {passive: true});
+  syncRenderLoop();
   canvas.dataset.renderer = 'threejs-review-queue';
   canvas.dataset.story = 'immutable-source-ranked-review';
 } catch (_error) {
@@ -3113,7 +3564,487 @@ try {
 """
 
 
-def _render_html(evidence: dict[str, Any]) -> str:
+_MVP_CSS_V4 = (
+    _MVP_CSS_V3
+    + r"""
+/* Professor-facing editorial release: centered reading rhythm + cumulative method story. */
+:root {
+  --prose: 780px;
+  --editorial: 860px;
+  --figure: 1160px;
+  --wide: 1320px;
+  --section-space: clamp(104px, 11vw, 164px);
+}
+body { font-size: 16px; line-height: 1.68; }
+.site-header { height: 60px; border: 0; background: rgba(1,1,2,.82); backdrop-filter: blur(20px) saturate(125%); will-change: transform; }
+.site-header.is-scrolled { border: 0; }
+.nav-shell { height: 60px; }
+.brand { gap: 9px; font-size: 14px; }
+.brand-mark { position: relative; z-index: 2; width: 19px; height: 19px; flex: 0 0 19px; }
+.brand-word-clip { display: block; width: 51px; overflow: hidden; }
+.brand-label { display: block; transform-origin: left center; }
+.nav-links { gap: 25px; }
+.nav-links a { font-size: 12px; letter-spacing: .01em; }
+.nav-links a::after { display: none; }
+.nav-links a.is-active { color: var(--accent-hover); }
+.reading-progress { display: none !important; }
+.menu-button { border-color: var(--line-strong); }
+
+.hero { min-height: min(900px,100svh); padding-top: 60px; border: 0; }
+.hero::after { content: ""; position: absolute; left: 50%; bottom: 0; width: min(640px,calc(100% - 48px)); height: 1px; background: var(--line); transform: translateX(-50%); }
+#hero-canvas { inset: 60px 0 0; height: calc(100% - 60px); }
+.hero-shell { min-height: calc(min(900px,100svh) - 60px); grid-template-columns: minmax(0,1.03fr) minmax(360px,.97fr); }
+.hero-copy { max-width: 680px; padding: 86px 0 100px; }
+.hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
+.hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
+.hero-byline { margin-top: 30px; }
+.hero-visual-label { bottom: 38px; }
+.eyebrow, .section-kicker, .chart-label { font-size: 10px; letter-spacing: .09em; }
+
+.article-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin-inline: auto; }
+.narrative { padding: var(--section-space) 0; }
+.narrative .lede { margin: 0 0 42px; color: var(--ink); font-size: clamp(23px,2.4vw,31px); font-weight: 500; line-height: 1.38; letter-spacing: -.03em; text-wrap: balance; }
+.article-copy p { margin: 0 0 24px; color: var(--ink-muted); font-size: clamp(16px,1.35vw,18px); line-height: 1.72; letter-spacing: -.008em; }
+.article-copy p:last-child { margin-bottom: 0; }
+.article-copy strong { color: var(--ink); font-weight: 550; }
+.scope-note { margin-top: 44px; padding-top: 24px; font-size: 13px; line-height: 1.65; }
+.study-at-a-glance { padding: 0 0 var(--section-space); }
+.study-at-a-glance .section-heading { margin-bottom: 42px; }
+.study-specs { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(5,1fr); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); gap: 1px; }
+.spec-card { min-height: 158px; padding: 24px 21px; background: var(--surface-1); }
+.spec-card span { display: block; margin-bottom: 24px; color: var(--accent-hover); font: 500 10px/1.3 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.spec-card strong { display: block; color: var(--ink); font-size: 14px; font-weight: 550; line-height: 1.45; }
+.spec-card small { display: block; margin-top: 7px; color: var(--ink-subtle); font-size: 11px; line-height: 1.5; }
+.research-question { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto var(--section-space); padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.research-question span { display: block; margin-bottom: 16px; color: var(--accent-hover); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+.research-question p { margin: 0; color: var(--ink); font-size: clamp(20px,2.25vw,29px); font-weight: 500; line-height: 1.43; letter-spacing: -.026em; text-wrap: balance; }
+
+.section { position: relative; padding: var(--section-space) 0; border: 0; scroll-margin-top: 60px; }
+.section::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
+.section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin-bottom: 54px; }
+h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spacing: -.038em; }
+.section-deck { max-width: 760px; margin-top: 20px; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; }
+.chapter-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin: -20px auto 56px; }
+.chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; }
+
+.journey { position: relative; height: 540vh; scroll-margin-top: 60px; }
+.journey::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
+.journey-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 72px 0 44px; }
+.journey-grid { width: min(var(--wide),calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(560px,1.12fr) minmax(360px,.88fr); gap: clamp(52px,6vw,92px); align-items: center; }
+.journey-visual { min-width: 0; }
+.journey-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
+.journey-lane-bg { fill: var(--surface-1); stroke: var(--line); stroke-width: 1.2; }
+.journey-lane-edge { fill: none; stroke: rgba(255,255,255,.045); stroke-width: 1; }
+.journey-stage-no { fill: var(--accent-hover); font: 500 11px var(--mono); letter-spacing: .04em; }
+.journey-stage-title { fill: var(--ink); font: 600 15px var(--sans); letter-spacing: -.01em; }
+.journey-stage-meta { fill: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.journey-rail { fill: none; stroke: var(--line-strong); stroke-width: 1.4; stroke-linecap: round; }
+.journey-rail-accent { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; }
+.journey-connector { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.journey-node { fill: var(--accent); }
+.journey-node-muted { fill: var(--line-strong); }
+.journey-icon-line { fill: none; stroke: var(--ink-muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.journey-stage-group { transform-origin: center; }
+.journey-copy .section-kicker { margin-bottom: 15px; }
+.journey-copy .display { max-width: 480px; font-size: clamp(32px,3.45vw,46px); }
+.journey-intro { max-width: 500px; margin: 20px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.62; }
+.journey-steps { margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.journey-step { position: relative; padding: 17px 0 17px 46px; border-bottom: 1px solid var(--line); opacity: 1; }
+.journey-step::before { content: attr(data-index); position: absolute; left: 0; top: 19px; color: var(--ink-tertiary); font: 500 10px var(--mono); }
+.journey-step small { display: block; margin-bottom: 4px; color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.journey-step h3 { margin: 0 0 5px; font-size: 14px; font-weight: 600; letter-spacing: -.012em; }
+.journey-step p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.52; }
+.motion-enhanced .journey-step { opacity: .2; }
+.journey-step.is-active { opacity: 1 !important; }
+.journey-step.is-active::before, .journey-step.is-active small { color: var(--accent-hover); }
+
+.reading-grid { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
+.reading-card { min-height: 240px; padding: 28px; background: var(--surface-1); }
+.reading-card span { color: var(--accent-hover); font: 500 10px var(--mono); }
+.reading-card h3 { margin: 34px 0 12px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+.reading-card p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+.hypothesis-ledger { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
+.hypothesis-row { min-height: 236px; margin: 0; padding: 26px; border: 0; background: var(--surface-1); }
+.hypothesis-row:last-child { grid-column: 1 / -1; min-height: 0; }
+.hypothesis-row-head { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; }
+.hypothesis-id { font-size: 11px; }
+.hypothesis-theme { color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.hypothesis-result { max-width: 220px; font-size: 10px; text-align: right; white-space: normal; }
+.hypothesis-row .hypothesis-title { margin: 30px 0 10px; font-size: 17px; font-weight: 600; line-height: 1.38; letter-spacing: -.02em; }
+.hypothesis-row p { max-width: 560px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+.always-visible-evidence { margin-top: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
+.evidence-label-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 12px; font-weight: 500; }
+.evidence-label-row span:last-child { color: var(--ink-tertiary); font: 400 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.qc-frame { border: 0; border-radius: 0; }
+.qc-preview { position: relative; max-height: 760px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.qc-preview::after { display: none; }
+.qc-preview img { border: 0; border-radius: 0; }
+.table-wrap { scrollbar-color: var(--line-strong) var(--surface-1); }
+.table-tools { border-top: 0; }
+
+.repo-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; }
+.repo-card { position: relative; padding: clamp(28px,4vw,48px); border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
+.repo-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: var(--accent); }
+.repo-top { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+.repo-icon { width: 40px; height: 40px; color: var(--ink); }
+.repo-path { display: block; color: var(--ink-tertiary); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.repo-title { display: block; margin-top: 3px; color: var(--ink); font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
+.repo-link { min-height: 40px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--surface-2); font-size: 12px; font-weight: 550; text-decoration: none; }
+.repo-description { max-width: 760px; margin: 30px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.7; }
+.repo-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.repo-tags span { padding: 5px 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-subtle); font: 400 10px var(--mono); }
+.usage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
+.repo-command { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-1); }
+.repo-command > span { color: var(--accent-hover); font: 500 10px var(--mono); }
+.repo-command h3 { margin: 20px 0 8px; font-size: 15px; font-weight: 600; }
+.repo-command p { min-height: 58px; margin: 0 0 18px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
+.usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+
+footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: var(--ink-subtle); font-size: 11px; }
+.footer-inner { width: min(var(--wide),100%); display: block; }
+.footer-divider { width: min(640px,100%); height: 1px; margin: 0 auto 56px; background: var(--line); }
+.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(3,1fr); gap: 48px; }
+.footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
+.footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+.footer-column h3 { margin: 0 0 15px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.footer-column p, .footer-column a { display: block; margin: 0 0 8px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.footer-column a:hover { color: var(--ink); }
+.footer-bottom { display: flex; justify-content: space-between; gap: 32px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.footer-bottom span { max-width: 560px; }
+
+.gsap-ready .reveal { visibility: hidden; }
+@media (max-width: 1120px) {
+  .study-specs { grid-template-columns: repeat(3,1fr); }
+  .spec-card:nth-child(n+4) { min-height: 142px; }
+  .journey-grid { grid-template-columns: minmax(500px,1.05fr) minmax(330px,.95fr); gap: 44px; }
+  .reading-grid { grid-template-columns: repeat(2,1fr); }
+  .usage-grid { grid-template-columns: 1fr 1fr; }
+  .repo-command:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  .hero { min-height: 850px; }
+  .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
+  .hero-copy { padding-top: 122px; }
+  .journey { height: auto; padding: var(--section-space) 0; }
+  .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .journey-visual { order: 2; }
+  .journey-copy { order: 1; }
+  .journey-copy .display, .journey-intro { max-width: 680px; }
+  .journey-step, .motion-enhanced .journey-step { opacity: 1 !important; }
+  .journey-stage-group, .journey-connector { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .hypothesis-ledger { grid-template-columns: 1fr; }
+  .hypothesis-row:last-child { grid-column: auto; }
+  .footer-grid { grid-template-columns: 1.25fr repeat(2,1fr); }
+  .footer-column:last-child { grid-column: 2 / -1; }
+}
+@media (max-width: 720px) {
+  :root { --page-pad: 22px; --section-space: 96px; }
+  .brand, .menu-button { position: relative; z-index: 2; }
+  .nav-links { z-index: 1; top: 66px; left: 12px; right: 12px; padding: 10px 18px 16px; border: 1px solid var(--line); border-radius: 12px; background: #0f1011; }
+  .hero { min-height: 810px; }
+  .hero-shell { min-height: 750px; }
+  .hero-copy { padding-top: 104px; }
+  .hero h1 { font-size: clamp(38px,12vw,50px); }
+  .hero-lead { font-size: 15px; }
+  .narrative .lede { font-size: 23px; }
+  .article-copy p { font-size: 16px; }
+  .study-specs { grid-template-columns: 1fr 1fr; }
+  .spec-card { min-height: 148px; }
+  .spec-card:last-child { grid-column: 1 / -1; }
+  .research-question { padding: 28px 0; }
+  h2, .display { font-size: clamp(31px,10vw,42px); }
+  .section-heading { margin-bottom: 42px; }
+  .journey-grid { gap: 44px; }
+  .journey-visual svg { width: 112%; margin-left: -6%; }
+  .journey-step { padding-left: 40px; }
+  .reading-grid, .usage-grid { grid-template-columns: 1fr; }
+  .reading-card { min-height: 0; }
+  .repo-command:last-child { grid-column: auto; }
+  .repo-top { grid-template-columns: auto 1fr; }
+  .repo-link { grid-column: 1 / -1; justify-self: start; }
+  .repo-command p { min-height: 0; }
+  .hypothesis-row { min-height: 0; }
+  .hypothesis-row-head { grid-template-columns: 38px 1fr; }
+  .hypothesis-result { grid-column: 1 / -1; max-width: none; text-align: left; }
+  .metric-axis, .range-axis { font-size: 8px; }
+  .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .qc-preview { max-height: 620px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+  .footer-column:last-child { grid-column: auto; }
+  .footer-bottom { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header { transform: none !important; }
+  .brand-label, .journey-stage-group, .journey-connector, .journey-step { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .gsap-ready .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; }
+}
+@media print {
+  .site-header, .menu-button, #hero-canvas { display: none !important; }
+  .hero { min-height: auto; padding-top: 48px; }
+  .hero-shell { min-height: auto; grid-template-columns: 1fr; }
+  .journey { height: auto; padding: 72px 0; }
+  .journey-sticky { position: static; min-height: 0; padding: 0; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .journey-stage-group, .journey-connector, .journey-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  .section, .repo-card, .hypothesis-row { break-inside: avoid; }
+}
+"""
+)
+
+
+_MVP_SCRIPT_V4 = r"""
+(() => {
+  const root = document.documentElement;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const gsapEngine = window.gsap;
+  const scrollEngine = window.ScrollTrigger;
+  const motionAvailable = Boolean(gsapEngine && scrollEngine && !reduced);
+  if (gsapEngine && scrollEngine) gsapEngine.registerPlugin(scrollEngine);
+
+  const header = document.getElementById('site-header');
+  const brandLabel = document.querySelector('.brand-label');
+  const menuButton = document.getElementById('menu-button');
+  const navLinks = document.getElementById('nav-links');
+  let lastScroll = window.scrollY;
+  let headerVisible = true;
+
+  const setHeaderVisible = (visible, immediate = false) => {
+    if (visible === headerVisible && !immediate) return;
+    headerVisible = visible;
+    if (gsapEngine && !reduced) {
+      const duration = immediate ? 0 : .34;
+      gsapEngine.to(header, {
+        yPercent: visible ? 0 : -112,
+        duration,
+        ease: visible ? 'power3.out' : 'power2.in',
+        overwrite: true,
+      });
+      if (visible) {
+        gsapEngine.fromTo(brandLabel, {x: -17, autoAlpha: 0}, {
+          x: 0,
+          autoAlpha: 1,
+          duration: immediate ? .01 : .46,
+          delay: immediate ? 0 : .09,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      } else {
+        gsapEngine.to(brandLabel, {x: -14, autoAlpha: 0, duration: .16, overwrite: true});
+      }
+    } else {
+      header.style.transform = visible ? 'translateY(0)' : 'translateY(-112%)';
+      brandLabel.style.opacity = visible ? '1' : '0';
+      brandLabel.style.transform = visible ? 'translateX(0)' : 'translateX(-14px)';
+    }
+  };
+
+  const updateChrome = () => {
+    const current = Math.max(0, window.scrollY);
+    const delta = current - lastScroll;
+    header.classList.toggle('is-scrolled', current > 18);
+    if (navLinks.classList.contains('is-open') || current < 72 || reduced) {
+      setHeaderVisible(true);
+    } else if (delta > 1.5) {
+      setHeaderVisible(false);
+    } else if (delta < -.25) {
+      setHeaderVisible(true);
+    }
+    lastScroll = current;
+  };
+  setHeaderVisible(true, true);
+  window.addEventListener('scroll', updateChrome, {passive: true});
+
+  menuButton.addEventListener('click', () => {
+    const open = !navLinks.classList.contains('is-open');
+    navLinks.classList.toggle('is-open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.textContent = open ? 'Close' : 'Menu';
+    setHeaderVisible(true);
+  });
+  navLinks.addEventListener('click', event => {
+    if (event.target instanceof HTMLAnchorElement) {
+      navLinks.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'Menu';
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+      navLinks.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'Menu';
+      menuButton.focus();
+    }
+  });
+
+  const journey = document.getElementById('method');
+  const journeyGroups = [...document.querySelectorAll('.journey-stage-group')];
+  const journeyConnectors = [...document.querySelectorAll('.journey-connector')];
+  const journeySteps = [...document.querySelectorAll('[data-journey-copy]')];
+  let activeJourneyStage = -1;
+  const setJourneyStage = (active, progress = 1) => {
+    const next = Math.max(0, Math.min(4, active));
+    activeJourneyStage = next;
+    journey.dataset.activeStage = String(next);
+    journeyGroups.forEach((group, index) => {
+      group.classList.toggle('is-active', index === next);
+      group.classList.toggle('is-complete', index < next);
+      if (motionAvailable && window.innerWidth > 900) {
+        gsapEngine.to(group, {
+          autoAlpha: index === next ? 1 : index < next ? .56 : .035,
+          x: index > next ? (index % 2 ? 30 : -30) : 0,
+          scale: index === next ? 1 : .985,
+          duration: .48,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      }
+    });
+    journeyConnectors.forEach((connector, index) => {
+      const visible = index < next;
+      if (motionAvailable && window.innerWidth > 900) {
+        gsapEngine.to(connector, {
+          strokeDashoffset: visible ? 0 : 1,
+          opacity: visible ? .9 : .08,
+          duration: .5,
+          ease: 'power2.out',
+          overwrite: true,
+        });
+      }
+    });
+    journeySteps.forEach((step, index) => step.classList.toggle('is-active', index === next));
+    const indicator = document.getElementById('journey-indicator');
+    if (indicator) indicator.style.transform = `scaleX(${Math.max(.02, progress)})`;
+  };
+
+  if (motionAvailable) {
+    root.classList.add('motion-enhanced', 'gsap-ready');
+    journeyConnectors.forEach(connector => gsapEngine.set(connector, {strokeDashoffset: 1, opacity: .08}));
+    setJourneyStage(0, 0);
+    scrollEngine.create({
+      trigger: journey,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: self => setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress),
+      onLeaveBack: () => setJourneyStage(0, 0),
+    });
+    const mobileJourney = window.matchMedia('(max-width: 900px)');
+    const syncJourneyMode = () => {
+      if (mobileJourney.matches) setJourneyStage(4, 1);
+      else setJourneyStage(activeJourneyStage < 0 ? 0 : activeJourneyStage);
+    };
+    mobileJourney.addEventListener('change', syncJourneyMode);
+    syncJourneyMode();
+  } else {
+    setJourneyStage(4, 1);
+  }
+
+  const revealItems = [...document.querySelectorAll('.reveal')];
+  if (motionAvailable) {
+    gsapEngine.set(revealItems, {autoAlpha: 0, y: 24});
+    revealItems.forEach(item => {
+      gsapEngine.to(item, {
+        autoAlpha: 1,
+        y: 0,
+        duration: .82,
+        ease: 'power3.out',
+        scrollTrigger: {trigger: item, start: 'top 87%', once: true},
+      });
+    });
+    gsapEngine.from('.hero-animate', {
+      autoAlpha: 0,
+      y: 26,
+      duration: .9,
+      stagger: .095,
+      ease: 'power3.out',
+      delay: .12,
+    });
+    gsapEngine.to('#hero-canvas', {
+      yPercent: 9,
+      opacity: .62,
+      ease: 'none',
+      scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5},
+    });
+    document.querySelectorAll('.h4-chart, .h2-chart, .forest-plot').forEach(chart => {
+      const marks = chart.querySelectorAll(
+        '.metric-dot, .difference-ci, .difference-point, .range-line, .range-start, ' +
+        '.range-end, .forest-ci, .forest-point'
+      );
+      gsapEngine.from(marks, {
+        scale: 0,
+        duration: .48,
+        stagger: .012,
+        ease: 'back.out(1.55)',
+        scrollTrigger: {trigger: chart, start: 'top 84%', once: true},
+      });
+    });
+    document.querySelectorAll('.spec-card, .reading-card, .hypothesis-row, .repo-command, .rule').forEach((card, index) => {
+      gsapEngine.from(card, {
+        y: 18,
+        autoAlpha: 0,
+        duration: .62,
+        delay: Math.min(index % 5, 4) * .035,
+        ease: 'power2.out',
+        scrollTrigger: {trigger: card, start: 'top 91%', once: true},
+      });
+    });
+    document.querySelectorAll('main section[id]').forEach(section => {
+      const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+      if (!link) return;
+      scrollEngine.create({
+        trigger: section,
+        start: 'top 46%',
+        end: 'bottom 46%',
+        onToggle: self => link.classList.toggle('is-active', self.isActive),
+      });
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => scrollEngine.refresh());
+    }
+  }
+
+  const hypothesisFilter = document.getElementById('filter-hypothesis');
+  const statusFilter = document.getElementById('filter-status');
+  const searchFilter = document.getElementById('filter-search');
+  const comparisonRows = [...document.querySelectorAll('[data-comparison-row]')];
+  const tableCount = document.getElementById('table-count');
+  let tableRefreshRequest = 0;
+  const scheduleTableRefresh = () => {
+    if (!motionAvailable) return;
+    if (tableRefreshRequest) cancelAnimationFrame(tableRefreshRequest);
+    tableRefreshRequest = requestAnimationFrame(() => {
+      tableRefreshRequest = 0;
+      scrollEngine.refresh();
+    });
+  };
+  const filterTable = () => {
+    const hypothesis = hypothesisFilter.value;
+    const status = statusFilter.value;
+    const query = searchFilter.value.trim().toLowerCase();
+    let visible = 0;
+    comparisonRows.forEach(row => {
+      const matches = (hypothesis === 'ALL' || row.dataset.hypothesis === hypothesis) &&
+        (status === 'ALL' || row.dataset.status === status) &&
+        (!query || row.textContent.toLowerCase().includes(query));
+      row.hidden = !matches;
+      if (matches) visible += 1;
+    });
+    tableCount.textContent = `${visible} / ${comparisonRows.length} rows`;
+    scheduleTableRefresh();
+  };
+  [hypothesisFilter, statusFilter, searchFilter].forEach(control =>
+    control.addEventListener('input', filterTable));
+  filterTable();
+})();
+"""
+
+
+def _render_html_v3_legacy(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     qc = evidence["pannuke_qc"]
     hypotheses = primary["hypothesis_comparisons"]
@@ -3125,7 +4056,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
     forest_plot = _render_forest_plot_v3(primary["comparisons"])
     h4_chart = _render_h4_chart_v3(h4)
     h2_chart = _render_h2_chart_v3(h2)
-    hypothesis_ledger = _render_hypothesis_ledger_v3(hypotheses, h2, h4)
+    hypothesis_ledger = _render_hypothesis_ledger_v4(hypotheses, h2, h4)
 
     seed_rows: list[str] = []
     for record in seed_audit["records"]:
@@ -3144,6 +4075,8 @@ def _render_html(evidence: dict[str, Any]) -> str:
     seed_hash = html.escape(str(seed_audit["records"][0]["ranking_sha256"]))
     oof_hash = html.escape(str(seed_audit["records"][0]["oof_predictions_sha256"]))
     point_difference = _require_real(h4["point_difference"], role="H4 point difference")
+    reported_comparisons = sum(record["status"] == "reported" for record in primary["comparisons"])
+    unavailable_comparisons = primary["comparison_count"] - reported_comparisons
 
     template = """<!doctype html>
 <html lang="en">
@@ -3319,8 +4252,8 @@ def _render_html(evidence: dict[str, Any]) -> str:
 """
 
     replacements = {
-        "__CSS__": _MVP_CSS_V3,
-        "__SCRIPT__": _MVP_SCRIPT_V3,
+        "__CSS__": _MVP_CSS_V4,
+        "__SCRIPT__": _MVP_SCRIPT_V4,
         "__THREE_SCRIPT__": _MVP_THREE_SCRIPT_V3,
         "__H4_POINT__": html.escape(_format_metric_v3(point_difference)),
         "__H4_POINT_PP__": html.escape(f"{abs(point_difference) * 100:.3f}"),
@@ -3338,6 +4271,8 @@ def _render_html(evidence: dict[str, Any]) -> str:
         "__COMPLETED__": str(primary["completed_required_cells"]),
         "__FAILED__": str(primary["failed_required_cells"]),
         "__COMPARISONS__": str(primary["comparison_count"]),
+        "__REPORTED__": str(reported_comparisons),
+        "__UNAVAILABLE__": str(unavailable_comparisons),
         "__BOOTSTRAPS__": f"{primary['bootstrap_iterations_required']:,}",
         "__PATCHES__": f"{qc['patch_count']:,}",
         "__OVERLAP_PIXELS__": f"{qc['cross_class_overlap_pixel_count']:,}",
@@ -3356,12 +4291,37 @@ def _render_html(evidence: dict[str, Any]) -> str:
     return template
 
 
+def _render_html(evidence: dict[str, Any]) -> str:
+    """Render the current professor-facing presentation release."""
+
+    return _render_html_v4(evidence)
+
+
 def _render_readme(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     return f"""# AANCA presentation MVP
 
-Open `index.html` in a browser. The package was generated from selected,
-checksum-verified sources in the accepted run `{primary["run_id"]}`.
+The package was generated from selected, checksum-verified sources in the accepted
+run `{primary["run_id"]}`. From the repository root, the recommended presentation
+command is:
+
+```powershell
+python scripts/present_demo.py
+```
+
+This standard-library launcher requires no project dependency installation. It
+verifies the closed package before serving it on `127.0.0.1` and opens the article
+in the default browser. No model run, dataset, or GPU is required. Use `--no-open`
+in headless environments and `--port 0` to select a free port.
+
+For verification without a browser or server, run:
+
+```powershell
+python scripts/present_demo.py --verify-only
+```
+
+After installing the full research environment, the equivalent commands are
+`uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
 
 Author: Natan Smogór. Released: 18 August 2026.
 
@@ -3369,6 +4329,8 @@ The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,
 tables and scientific interpretation remain available when motion is reduced;
 network access is only needed for the optional web fonts and animation libraries.
+The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
+pixel ratio, and respects reduced-motion and data-saving preferences.
 
 Scientific status: `PRIMARY_STUDY_COMPLETE`. Presentation status:
 `DEMO_COMPLETE`. The primary analysis is permanently labelled
@@ -3383,6 +4345,11 @@ the complete H2 subgroup summary, the byte-identical instance-dependent seed
 disclosure, and all 36 saved H1/H3/H5/H6/H7 comparisons. P-values shown in the
 HTML are explicitly labelled one-sided and Holm-adjusted. `manifest.json` binds
 every other file in this package.
+
+Of the 36 preregistered comparison entries, 33 contain numeric results and the
+three H6 entries remain explicitly unavailable under the frozen encoder gate.
+Source code, setup guidance, specifications, tests, and the complete documentation
+map are available at <https://github.com/Jaqwilk/AANCA>.
 """
 
 
@@ -3422,6 +4389,9 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
     records = manifest.get("files")
     if not isinstance(records, list) or len(records) != len(_OUTPUT_FILES):
         raise ValueError("MVP manifest file list differs")
+    record_paths = [record.get("path") if isinstance(record, dict) else None for record in records]
+    if sorted(path for path in record_paths if isinstance(path, str)) != sorted(_OUTPUT_FILES):
+        raise ValueError("MVP manifest record allowlist differs")
     if manifest.get("manifest_root_sha256") != _canonical_sha256(records):
         raise ValueError("MVP manifest root differs")
     for record in records:
@@ -3536,5 +4506,6 @@ __all__ = [
     "DEFAULT_QC_BUNDLE",
     "MvpPresentationArtifacts",
     "build_mvp_presentation",
+    "create_mvp_http_server",
     "verify_mvp_presentation",
 ]
