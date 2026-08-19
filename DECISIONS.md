@@ -5800,3 +5800,49 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - This decision changes article layout, progressive animation and punctuation only.
   It does not alter evidence, metrics, registered hypotheses, annotations, the
   accepted run, frozen authorities or scientific completion status.
+
+## 2026-08-19 - Add an evidence-oriented author profile
+
+- Place the author profile after the open-implementation section and immediately
+  before the footer. Keep the project, results and reproducibility evidence ahead of
+  personal background, while making the profile reachable from both the primary
+  navigation and the hero byline.
+- Identify Natan Smogór as AANCA's author and developer. Describe only work that is
+  visible in this repository: research-prototype design, reproducible Python
+  workflow, group-safe evaluation and evidence-led presentation.
+- Record Management and Artificial Intelligence at Kozminski University as current
+  study, never as a completed degree. Record the Artificial Intelligence programme
+  at Uniwersytet Młodzieżowy as an 80-hour programme completed in the 2024/2025
+  academic year. Keep both claims separate and include an explicit no-endorsement
+  boundary.
+- Do not reconstruct, recolour or scrape an institutional logo. The official
+  Kozminski identity guide routes downloadable marks through its authenticated
+  templates area, and no owner-supplied approved logo or public-safe diploma scan is
+  present in the workspace. Use typographic institution identification and a neutral
+  credential-document symbol until those exact assets are supplied.
+- Preserve the closed five-file presentation package. This is presentation-only
+  authorship context and does not alter scientific evidence, metrics, hypotheses,
+  source annotations, the accepted run, frozen authorities or completion status.
+
+## 2026-08-19 - Prefer non-overlapping atlas flow and explanatory findings
+
+- Do not use sticky axis or hypothesis headers inside the comparison atlas. The
+  viewport is intentionally compact, but every heading remains in normal document
+  flow so it can never cover a comparison row during internal scrolling.
+- Remove repeated horizontal borders from metric, range and forest rows. Retain the
+  plotted interval lines because they encode data, and retain one subtle separator
+  only where a new hypothesis group begins. Remove the atlas's outer top and bottom
+  rules because the surrounding section already supplies hierarchy.
+- Write every H1 to H7 answer as a three-part explanation: a plain-language
+  conclusion, the exact registered evidence that supports it, and the boundary on
+  what may be inferred. Explain that improved ranking concerns review priority, not
+  proof of annotation error; distinguish ranking from downstream classification;
+  and state explicitly that unavailable H6 entries are neither zero nor negative
+  results.
+- Increase the desktop findings stage only enough to contain the longest revised
+  answer without clipping. Preserve the existing one-question scroll progression,
+  static narrow and reduced-motion fallbacks, centered 640 px editorial axis and
+  complete seven-question semantic HTML.
+- This decision changes presentation copy and layout only. It does not change a
+  registered hypothesis, evidence value, metric, annotation, accepted run, frozen
+  authority or completion status.

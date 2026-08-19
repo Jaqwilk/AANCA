@@ -363,6 +363,10 @@ html.motion-enhanced { scroll-behavior: auto; }
 .hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
 .hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
 .hero-byline { margin-top: 30px; }
+.author-jump { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
+.author-jump strong { color: var(--ink-muted); font-weight: 550; }
+.author-jump:hover strong, .author-jump:focus-visible strong { color: var(--ink); }
+.author-jump:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; border-radius: 2px; }
 .hero-visual-label { bottom: 38px; }
 .eyebrow, .section-kicker, .chart-label { font-size: 10px; letter-spacing: .09em; }
 
@@ -449,9 +453,9 @@ html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; pa
 @media (min-width: 901px) {
   html.motion-enhanced .learned-story { height: 980vh; padding: 0; }
   html.motion-enhanced .learned-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 76px 0 48px; box-sizing: border-box; }
-  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(320px,1fr); align-content: center; max-height: 820px; }
+  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(390px,1fr); align-content: center; max-height: 820px; }
   html.motion-enhanced .learned-heading { margin-bottom: 48px; }
-  html.motion-enhanced .learned-stage { min-height: 320px; overflow: hidden; }
+  html.motion-enhanced .learned-stage { min-height: 390px; overflow: hidden; }
   html.motion-enhanced .hypothesis-ledger { position: relative; height: 100%; border: 0; }
   html.motion-enhanced .hypothesis-row { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 10px 0 30px; border: 0; visibility: hidden; opacity: 0; }
   html.motion-enhanced .learned-word { opacity: 0; }
@@ -490,6 +494,30 @@ input, select { min-height: 44px; }
 .repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
 .usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
 
+.author-shell { width: min(900px,calc(100% - 2 * var(--page-pad))); margin: auto; }
+.author-profile { max-width: 720px; }
+.author-profile h2 { max-width: 660px; margin: 0; font-size: clamp(34px,4.2vw,50px); }
+.author-lede { max-width: 670px; margin: 24px 0 0; color: var(--ink-muted); font-size: clamp(16px,1.35vw,19px); line-height: 1.65; letter-spacing: -.01em; }
+.author-credentials { margin-top: clamp(58px,7vw,82px); border-top: 1px solid var(--line); }
+.credential-record { display: grid; grid-template-columns: 110px minmax(220px,1fr) minmax(260px,.9fr); gap: 8px 32px; padding: 27px 0; border-bottom: 1px solid var(--line); }
+.credential-heading { grid-column: 1; grid-row: 1 / span 2; display: flex; align-items: center; }
+.credential-logo { width: 116px; min-height: 56px; display: flex; align-items: center; }
+.credential-logo img { display: block; width: 116px; max-height: 56px; object-fit: contain; object-position: left center; }
+.credential-record h3 { grid-column: 2; margin: 0; color: var(--ink); font-size: clamp(20px,2vw,25px); font-weight: 560; line-height: 1.22; letter-spacing: -.03em; }
+.credential-record h3 a { color: inherit; text-decoration: none; }
+.credential-record h3 a:hover, .credential-record h3 a:focus-visible { color: var(--accent-hover); }
+.credential-record h3 a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 5px; border-radius: 2px; }
+.credential-course { grid-column: 2; margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 1.55; }
+.credential-meta { grid-column: 3; grid-row: 1 / span 2; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; align-self: center; margin: 0; }
+.credential-meta div { padding: 0; }
+.credential-meta dt { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.credential-meta dd { margin: 6px 0 0; color: var(--ink-muted); font-size: 12px; line-height: 1.5; }
+.credential-proof { grid-column: 2 / -1; display: flex; gap: 12px; align-items: center; margin-top: 13px; padding-top: 17px; border-top: 1px solid var(--line); }
+.credential-proof svg { width: 27px; height: 27px; flex: 0 0 27px; fill: none; stroke: var(--accent-hover); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.credential-proof strong { display: block; color: var(--ink-muted); font-size: 11px; font-weight: 600; }
+.credential-proof span { display: block; margin-top: 3px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.45; }
+.institution-note { max-width: 650px; margin: 17px 0 0 142px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.55; }
+
 /* Editorial surfaces: structure with rhythm and rules, not nested cards. */
 .study-specs, .reading-grid {
   gap: 1px;
@@ -516,33 +544,38 @@ input, select { min-height: 44px; }
   background: transparent;
 }
 .metric-dot { border-color: var(--canvas); }
-.metric-row { min-height: 42px; }
-.range-row { min-height: 50px; }
+.metric-row { min-height: 42px; border-top: 0; }
+.range-row { min-height: 50px; border-top: 0; }
 .forest-group { margin: 20px 0 6px; padding-top: 14px; }
 .forest-row { min-height: 38px; gap: 16px; }
 .forest-track { height: 18px; }
 .forest-label { font-size: 10px; line-height: 1.3; }
 #benchmarks .forest-plot {
   max-height: min(62svh,680px);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 0;
+  border-bottom: 0;
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
 }
 #benchmarks .forest-axis {
-  position: sticky;
-  z-index: 3;
-  top: 0;
-  padding: 10px 0 12px;
-  margin: -10px 0 2px;
-  background: var(--canvas);
+  position: static;
+  z-index: auto;
+  padding: 0 0 12px;
+  margin: 0 0 4px;
+  background: transparent;
 }
 #benchmarks .forest-group {
-  position: sticky;
-  z-index: 2;
-  top: 38px;
-  padding-bottom: 8px;
-  background: var(--canvas);
+  position: static;
+  z-index: auto;
+  top: auto;
+  padding-bottom: 4px;
+  background: transparent;
 }
+#benchmarks .forest-axis + .forest-group { margin-top: 0; padding-top: 0; border-top: 0; }
+#benchmarks .forest-row { border-top: 0; }
 #benchmarks .forest-plot:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
 .always-visible-evidence {
   border: 0;
@@ -575,8 +608,14 @@ input, select { min-height: 44px; }
   background: transparent;
 }
 .repo-card::before { display: none; }
-.usage-grid { gap: clamp(28px,3.5vw,48px); }
-.repo-command { padding: 28px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+.usage-grid { gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.repo-command { padding: 21px clamp(20px,2.3vw,30px) 22px; border: 0; border-left: 1px solid var(--line); border-radius: 0; background: transparent; }
+.repo-command:first-child { padding-left: 0; border-left: 0; }
+.repo-command:last-child { padding-right: 0; }
+.repo-command h3 { margin: 13px 0 6px; }
+.repo-command p { min-height: 0; margin-bottom: 0; }
+.repo-command pre { min-height: 0; margin-top: 14px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-1); }
+.usage-note { max-width: 760px; margin-top: 15px; font-size: 11px; }
 .evidence-label-row { padding: 12px 0; }
 .table-tools { padding: 12px 0; }
 table { font-size: 10px; }
@@ -616,6 +655,9 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .reading-grid { grid-template-columns: repeat(2,1fr); }
   .usage-grid { grid-template-columns: 1fr 1fr; }
   .repo-command:last-child { grid-column: 1 / -1; }
+  .repo-command:nth-child(3) { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
+  .author-shell { grid-template-columns: 1fr; gap: 64px; }
+  .author-profile { max-width: 760px; }
 }
 @media (max-width: 1200px) {
   .journey { height: auto; padding: var(--section-space) 0; }
@@ -639,7 +681,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   html.motion-enhanced .learned-sticky { padding: 62px 0 22px; }
   html.motion-enhanced .learned-heading { margin-bottom: 22px; }
   html.motion-enhanced .learned-heading h2 { font-size: 34px; }
-  html.motion-enhanced .learned-stage { min-height: 252px; }
+  html.motion-enhanced .learned-stage { min-height: 340px; }
   html.motion-enhanced .hypothesis-row { padding: 20px 0 22px; }
   html.motion-enhanced .hypothesis-row .hypothesis-title { margin: 0; font-size: 29px; }
   html.motion-enhanced .hypothesis-row .learned-answer { margin-top: 19px; font-size: 14px; line-height: 1.52; }
@@ -670,9 +712,17 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .stat:last-child { border-bottom: 0; }
   .reading-card { min-height: 0; }
   .repo-command:last-child { grid-column: auto; }
+  .repo-command, .repo-command:first-child, .repo-command:last-child { padding: 23px 0; border-left: 0; }
+  .repo-command + .repo-command { border-top: 1px solid var(--line); }
   .repo-top { grid-template-columns: auto 1fr; }
   .repo-link { grid-column: 1 / -1; justify-self: start; }
   .repo-command p { min-height: 0; }
+  .credential-record { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .credential-heading { grid-column: 1; grid-row: auto; flex-direction: row; align-items: center; margin-bottom: 14px; }
+  .credential-record h3, .credential-course, .credential-meta, .credential-proof { grid-column: 1; grid-row: auto; }
+  .credential-meta { margin-top: 18px; }
+  .credential-proof { margin-top: 15px; }
+  .institution-note { margin-left: 0; }
   .hypothesis-row { min-height: 0; }
   .metric-axis, .range-axis { font-size: 10px; }
   .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
@@ -694,7 +744,6 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   #comparison-table td[data-label="Comparison"] .comparison-id { margin-top: 3px; }
   #seed-audit table tr { padding: 9px 0; }
   #seed-audit table td { grid-template-columns: 76px 1fr; gap: 8px; padding: 3px 0; }
-  #benchmarks .forest-group { top: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transform: none !important; }
@@ -716,7 +765,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .hypothesis-row { position: static !important; visibility: visible !important; opacity: 1 !important; transform: none !important; padding: 32px 0 !important; border: 0 !important; }
   .learned-word { visibility: visible !important; opacity: 1 !important; transform: none !important; }
   .journey-stage-group, .journey-connector, .journey-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
-  .section, .repo-card, .hypothesis-row { break-inside: avoid; }
+  .section, .repo-card, .hypothesis-row, .credential-record { break-inside: avoid; }
 }
 </style>
 </head>
@@ -726,7 +775,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   <div class="nav-shell">
     <a class="brand" href="#top" aria-label="AANCA: back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a><a href="#author">Author</a></nav>
   </div>
 </header>
 
@@ -737,7 +786,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
       <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
     </div>
     <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
   </div>
@@ -871,7 +920,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
       <div class="learned-sticky"><div class="learned-shell">
         <div class="section-heading learned-heading"><h2>What the study actually learned.</h2></div>
         <div class="learned-stage" role="region" aria-label="Seven preregistered research questions and their answers">
-          <div class="hypothesis-ledger" role="group" aria-roledescription="carousel" aria-label="Preregistered findings"><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Can ranking beat random review?</h3><p class="learned-answer"><span class="sr-only">All 12 saved 95% bootstrap intervals were above zero. The byte-identical instance-dependent seed outputs are disclosed separately and are not counted as independent replications.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">All</span><span class="learned-word">12</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">intervals</span><span class="learned-word">were</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">The</span><span class="learned-word">byte-identical</span><span class="learned-word">instance-dependent</span><span class="learned-word">seed</span><span class="learned-word">outputs</span><span class="learned-word">are</span><span class="learned-word">disclosed</span><span class="learned-word">separately</span><span class="learned-word">and</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">counted</span><span class="learned-word">as</span><span class="learned-word">independent</span><span class="learned-word">replications.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did saved performance estimates vary across contexts?</h3><p class="learned-answer"><span class="sr-only">Yes. Across 32,760 reportable estimates, values varied across nucleus class, tissue, corruption mechanism and rate. This is descriptive heterogeneity; no omnibus test or causal biological interpretation was registered.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes.</span><span class="learned-word">Across</span><span class="learned-word">32,760</span><span class="learned-word">reportable</span><span class="learned-word">estimates,</span><span class="learned-word">values</span><span class="learned-word">varied</span><span class="learned-word">across</span><span class="learned-word">nucleus</span><span class="learned-word">class,</span><span class="learned-word">tissue,</span><span class="learned-word">corruption</span><span class="learned-word">mechanism</span><span class="learned-word">and</span><span class="learned-word">rate.</span><span class="learned-word">This</span><span class="learned-word">is</span><span class="learned-word">descriptive</span><span class="learned-word">heterogeneity;</span><span class="learned-word">no</span><span class="learned-word">omnibus</span><span class="learned-word">test</span><span class="learned-word">or</span><span class="learned-word">causal</span><span class="learned-word">biological</span><span class="learned-word">interpretation</span><span class="learned-word">was</span><span class="learned-word">registered.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Were some corruption mechanisms harder?</h3><p class="learned-answer"><span class="sr-only">The registered contrasts generally placed confusion-targeted and instance-dependent corruption below symmetric corruption. One of 6 saved 95% intervals crossed zero.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">The</span><span class="learned-word">registered</span><span class="learned-word">contrasts</span><span class="learned-word">generally</span><span class="learned-word">placed</span><span class="learned-word">confusion-targeted</span><span class="learned-word">and</span><span class="learned-word">instance-dependent</span><span class="learned-word">corruption</span><span class="learned-word">below</span><span class="learned-word">symmetric</span><span class="learned-word">corruption.</span><span class="learned-word">One</span><span class="learned-word">of</span><span class="learned-word">6</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">crossed</span><span class="learned-word">zero.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did guided restoration improve downstream classification?</h3><p class="learned-answer"><span class="sr-only">No. At the same 5% review budget, audit-guided restoration performed below the mean random-review result by -0.002156 macro-F1. The saved 95% interval remained below zero, and the adverse registered outcome is retained without post-result tuning.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No.</span><span class="learned-word">At</span><span class="learned-word">the</span><span class="learned-word">same</span><span class="learned-word">5%</span><span class="learned-word">review</span><span class="learned-word">budget,</span><span class="learned-word">audit-guided</span><span class="learned-word">restoration</span><span class="learned-word">performed</span><span class="learned-word">below</span><span class="learned-word">the</span><span class="learned-word">mean</span><span class="learned-word">random-review</span><span class="learned-word">result</span><span class="learned-word">by</span><span class="learned-word">-0.002156</span><span class="learned-word">macro-F1.</span><span class="learned-word">The</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">interval</span><span class="learned-word">remained</span><span class="learned-word">below</span><span class="learned-word">zero,</span><span class="learned-word">and</span><span class="learned-word">the</span><span class="learned-word">adverse</span><span class="learned-word">registered</span><span class="learned-word">outcome</span><span class="learned-word">is</span><span class="learned-word">retained</span><span class="learned-word">without</span><span class="learned-word">post-result</span><span class="learned-word">tuning.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did the fixed hybrid improve ranking?</h3><p class="learned-answer"><span class="sr-only">All 12 saved 95% bootstrap intervals were above zero for the preregistered fixed hybrid minus self-confidence comparison.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">All</span><span class="learned-word">12</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">intervals</span><span class="learned-word">were</span><span class="learned-word">above</span><span class="learned-word">zero</span><span class="learned-word">for</span><span class="learned-word">the</span><span class="learned-word">preregistered</span><span class="learned-word">fixed</span><span class="learned-word">hybrid</span><span class="learned-word">minus</span><span class="learned-word">self-confidence</span><span class="learned-word">comparison.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did a pathology-specific encoder outperform ImageNet?</h3><p class="learned-answer"><span class="sr-only">This question was not estimated. No pathology encoder satisfied every frozen access, licence, reproducibility, hardware and smoke-test gate, and no replacement was chosen after outcomes were visible.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">This</span><span class="learned-word">question</span><span class="learned-word">was</span><span class="learned-word">not</span><span class="learned-word">estimated.</span><span class="learned-word">No</span><span class="learned-word">pathology</span><span class="learned-word">encoder</span><span class="learned-word">satisfied</span><span class="learned-word">every</span><span class="learned-word">frozen</span><span class="learned-word">access,</span><span class="learned-word">licence,</span><span class="learned-word">reproducibility,</span><span class="learned-word">hardware</span><span class="learned-word">and</span><span class="learned-word">smoke-test</span><span class="learned-word">gate,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">replacement</span><span class="learned-word">was</span><span class="learned-word">chosen</span><span class="learned-word">after</span><span class="learned-word">outcomes</span><span class="learned-word">were</span><span class="learned-word">visible.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did explicit target highlighting help?</h3><p class="learned-answer"><span class="sr-only">The saved comparisons do not provide clear evidence that target highlighting improved average precision over the context representation.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">The</span><span class="learned-word">saved</span><span class="learned-word">comparisons</span><span class="learned-word">do</span><span class="learned-word">not</span><span class="learned-word">provide</span><span class="learned-word">clear</span><span class="learned-word">evidence</span><span class="learned-word">that</span><span class="learned-word">target</span><span class="learned-word">highlighting</span><span class="learned-word">improved</span><span class="learned-word">average</span><span class="learned-word">precision</span><span class="learned-word">over</span><span class="learned-word">the</span><span class="learned-word">context</span><span class="learned-word">representation.</span></span></p></article></div>
+          <div class="hypothesis-ledger" role="group" aria-roledescription="carousel" aria-label="Preregistered findings"><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Can the audit score find injected label changes earlier than random review?</h3><p class="learned-answer"><span class="sr-only">Yes, within this controlled benchmark. Self-confidence ranking beat random review in all 12 registered comparisons: average-precision gains ranged from 0.036206 to 0.301884, and every saved 95% bootstrap interval was above zero. This means injected changes were prioritised more efficiently; it does not prove that a natural annotation is wrong. Byte-identical instance-dependent seeds are not independent replications.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">controlled</span><span class="learned-word">benchmark.</span><span class="learned-word">Self-confidence</span><span class="learned-word">ranking</span><span class="learned-word">beat</span><span class="learned-word">random</span><span class="learned-word">review</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons:</span><span class="learned-word">average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.036206</span><span class="learned-word">to</span><span class="learned-word">0.301884,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">means</span><span class="learned-word">injected</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">prioritised</span><span class="learned-word">more</span><span class="learned-word">efficiently;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">prove</span><span class="learned-word">that</span><span class="learned-word">a</span><span class="learned-word">natural</span><span class="learned-word">annotation</span><span class="learned-word">is</span><span class="learned-word">wrong.</span><span class="learned-word">Byte-identical</span><span class="learned-word">instance-dependent</span><span class="learned-word">seeds</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">independent</span><span class="learned-word">replications.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Where did ranking performance vary?</h3><p class="learned-answer"><span class="sr-only">Across 32,760 reportable subgroup estimates, ranking performance varied with nucleus class, tissue, corruption mechanism and corruption rate. The practical lesson is that audit difficulty depends on context. These are descriptive summaries only: the study did not register an omnibus test and cannot interpret the variation as a causal biological effect.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Across</span><span class="learned-word">32,760</span><span class="learned-word">reportable</span><span class="learned-word">subgroup</span><span class="learned-word">estimates,</span><span class="learned-word">ranking</span><span class="learned-word">performance</span><span class="learned-word">varied</span><span class="learned-word">with</span><span class="learned-word">nucleus</span><span class="learned-word">class,</span><span class="learned-word">tissue,</span><span class="learned-word">corruption</span><span class="learned-word">mechanism</span><span class="learned-word">and</span><span class="learned-word">corruption</span><span class="learned-word">rate.</span><span class="learned-word">The</span><span class="learned-word">practical</span><span class="learned-word">lesson</span><span class="learned-word">is</span><span class="learned-word">that</span><span class="learned-word">audit</span><span class="learned-word">difficulty</span><span class="learned-word">depends</span><span class="learned-word">on</span><span class="learned-word">context.</span><span class="learned-word">These</span><span class="learned-word">are</span><span class="learned-word">descriptive</span><span class="learned-word">summaries</span><span class="learned-word">only:</span><span class="learned-word">the</span><span class="learned-word">study</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">register</span><span class="learned-word">an</span><span class="learned-word">omnibus</span><span class="learned-word">test</span><span class="learned-word">and</span><span class="learned-word">cannot</span><span class="learned-word">interpret</span><span class="learned-word">the</span><span class="learned-word">variation</span><span class="learned-word">as</span><span class="learned-word">a</span><span class="learned-word">causal</span><span class="learned-word">biological</span><span class="learned-word">effect.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Which injected changes were harder to retrieve?</h3><p class="learned-answer"><span class="sr-only">Confusion-targeted and instance-dependent changes were harder to rank than symmetric changes, meaning their average precision was lower. All 6 registered point differences favoured symmetric corruption; five saved 95% intervals were above zero and one crossed zero. This describes the controlled benchmark and does not establish that one natural error type is universally harder.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Confusion-targeted</span><span class="learned-word">and</span><span class="learned-word">instance-dependent</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">harder</span><span class="learned-word">to</span><span class="learned-word">rank</span><span class="learned-word">than</span><span class="learned-word">symmetric</span><span class="learned-word">changes,</span><span class="learned-word">meaning</span><span class="learned-word">their</span><span class="learned-word">average</span><span class="learned-word">precision</span><span class="learned-word">was</span><span class="learned-word">lower.</span><span class="learned-word">All</span><span class="learned-word">6</span><span class="learned-word">registered</span><span class="learned-word">point</span><span class="learned-word">differences</span><span class="learned-word">favoured</span><span class="learned-word">symmetric</span><span class="learned-word">corruption;</span><span class="learned-word">five</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">were</span><span class="learned-word">above</span><span class="learned-word">zero</span><span class="learned-word">and</span><span class="learned-word">one</span><span class="learned-word">crossed</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">describes</span><span class="learned-word">the</span><span class="learned-word">controlled</span><span class="learned-word">benchmark</span><span class="learned-word">and</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">establish</span><span class="learned-word">that</span><span class="learned-word">one</span><span class="learned-word">natural</span><span class="learned-word">error</span><span class="learned-word">type</span><span class="learned-word">is</span><span class="learned-word">universally</span><span class="learned-word">harder.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did a better review queue improve the later classifier?</h3><p class="learned-answer"><span class="sr-only">No. With the same 5% review budget, audit-guided restoration produced macro-F1 0.524431, compared with the random-review mean of 0.526587. The difference was -0.002156, with a saved 95% interval from -0.002859 to -0.001393. The central lesson is that better retrieval did not translate into better downstream classification here.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No.</span><span class="learned-word">With</span><span class="learned-word">the</span><span class="learned-word">same</span><span class="learned-word">5%</span><span class="learned-word">review</span><span class="learned-word">budget,</span><span class="learned-word">audit-guided</span><span class="learned-word">restoration</span><span class="learned-word">produced</span><span class="learned-word">macro-F1</span><span class="learned-word">0.524431,</span><span class="learned-word">compared</span><span class="learned-word">with</span><span class="learned-word">the</span><span class="learned-word">random-review</span><span class="learned-word">mean</span><span class="learned-word">of</span><span class="learned-word">0.526587.</span><span class="learned-word">The</span><span class="learned-word">difference</span><span class="learned-word">was</span><span class="learned-word">-0.002156,</span><span class="learned-word">with</span><span class="learned-word">a</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">interval</span><span class="learned-word">from</span><span class="learned-word">-0.002859</span><span class="learned-word">to</span><span class="learned-word">-0.001393.</span><span class="learned-word">The</span><span class="learned-word">central</span><span class="learned-word">lesson</span><span class="learned-word">is</span><span class="learned-word">that</span><span class="learned-word">better</span><span class="learned-word">retrieval</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">translate</span><span class="learned-word">into</span><span class="learned-word">better</span><span class="learned-word">downstream</span><span class="learned-word">classification</span><span class="learned-word">here.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did combining two ranking signals help?</h3><p class="learned-answer"><span class="sr-only">Yes, for review prioritisation. The equal-weight combination of self-confidence and fold-safe nearest-neighbour disagreement outperformed self-confidence alone in all 12 registered comparisons. Average-precision gains ranged from 0.020983 to 0.065502, and every saved 95% bootstrap interval was above zero. This supports the fixed hybrid within this benchmark; it does not authorise automatic correction or diagnosis.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">for</span><span class="learned-word">review</span><span class="learned-word">prioritisation.</span><span class="learned-word">The</span><span class="learned-word">equal-weight</span><span class="learned-word">combination</span><span class="learned-word">of</span><span class="learned-word">self-confidence</span><span class="learned-word">and</span><span class="learned-word">fold-safe</span><span class="learned-word">nearest-neighbour</span><span class="learned-word">disagreement</span><span class="learned-word">outperformed</span><span class="learned-word">self-confidence</span><span class="learned-word">alone</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons.</span><span class="learned-word">Average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.020983</span><span class="learned-word">to</span><span class="learned-word">0.065502,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">supports</span><span class="learned-word">the</span><span class="learned-word">fixed</span><span class="learned-word">hybrid</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">benchmark;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">authorise</span><span class="learned-word">automatic</span><span class="learned-word">correction</span><span class="learned-word">or</span><span class="learned-word">diagnosis.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Could a pathology-specific encoder be evaluated fairly?</h3><p class="learned-answer"><span class="sr-only">No result is available. None of the candidate pathology encoders passed every frozen access, licence, reproducibility, hardware and smoke-test gate, so all 3 registered H6 entries remain unavailable. They are not zero or negative results, and no substitute was selected after the other outcomes became visible.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">result</span><span class="learned-word">is</span><span class="learned-word">available.</span><span class="learned-word">None</span><span class="learned-word">of</span><span class="learned-word">the</span><span class="learned-word">candidate</span><span class="learned-word">pathology</span><span class="learned-word">encoders</span><span class="learned-word">passed</span><span class="learned-word">every</span><span class="learned-word">frozen</span><span class="learned-word">access,</span><span class="learned-word">licence,</span><span class="learned-word">reproducibility,</span><span class="learned-word">hardware</span><span class="learned-word">and</span><span class="learned-word">smoke-test</span><span class="learned-word">gate,</span><span class="learned-word">so</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">registered</span><span class="learned-word">H6</span><span class="learned-word">entries</span><span class="learned-word">remain</span><span class="learned-word">unavailable.</span><span class="learned-word">They</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">zero</span><span class="learned-word">or</span><span class="learned-word">negative</span><span class="learned-word">results,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">substitute</span><span class="learned-word">was</span><span class="learned-word">selected</span><span class="learned-word">after</span><span class="learned-word">the</span><span class="learned-word">other</span><span class="learned-word">outcomes</span><span class="learned-word">became</span><span class="learned-word">visible.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did highlighting the target nucleus add useful signal?</h3><p class="learned-answer"><span class="sr-only">No clear benefit was detected. Across three seeds, the average-precision differences ranged from -0.005371 to 0.002997; all 3 saved 95% intervals crossed zero, and no Holm-adjusted one-sided p-value was below 0.05. In this benchmark, explicit highlighting did not improve ranking over the context representation.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">clear</span><span class="learned-word">benefit</span><span class="learned-word">was</span><span class="learned-word">detected.</span><span class="learned-word">Across</span><span class="learned-word">three</span><span class="learned-word">seeds,</span><span class="learned-word">the</span><span class="learned-word">average-precision</span><span class="learned-word">differences</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">-0.005371</span><span class="learned-word">to</span><span class="learned-word">0.002997;</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">crossed</span><span class="learned-word">zero,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">Holm-adjusted</span><span class="learned-word">one-sided</span><span class="learned-word">p-value</span><span class="learned-word">was</span><span class="learned-word">below</span><span class="learned-word">0.05.</span><span class="learned-word">In</span><span class="learned-word">this</span><span class="learned-word">benchmark,</span><span class="learned-word">explicit</span><span class="learned-word">highlighting</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">improve</span><span class="learned-word">ranking</span><span class="learned-word">over</span><span class="learned-word">the</span><span class="learned-word">context</span><span class="learned-word">representation.</span></span></p></article></div>
         </div>
       </div></div>
     </div>
@@ -940,7 +989,6 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   </section>
 
   <section class="section" id="use">
-    <div class="section-heading reveal"><p class="section-kicker">Open implementation</p><h2>Inspect the evidence first. Run the software when you need to.</h2><p class="section-deck">The checked-in presentation opens without a dataset or GPU. Package verification and the deterministic synthetic smoke path provide progressively deeper checks without claiming a new real-data study.</p></div>
     <div class="repo-shell">
       <article class="repo-card reveal">
         <div class="repo-top">
@@ -953,18 +1001,49 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
       </article>
 
       <div class="usage-grid">
-        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>The dependency-free launcher checks every package hash, serves on loopback and opens the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
+        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>Check the package, serve it locally and open the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
 cd AANCA
 python scripts/present_demo.py</pre></article>
-        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Use the same standard-library validation in CI, scripts or an offline review.</p><pre>python scripts/present_demo.py `
+        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Validate the package without starting a server.</p><pre>python scripts/present_demo.py `
   --verify-only</pre></article>
-        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Installs the governed ML environment, then tests software without calling it PanNuke evidence.</p><pre>uv sync --dev
+        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Exercise the software with deterministic synthetic data.</p><pre>uv sync --dev
 uv run histo-audit doctor
 uv run histo-audit data generate-synthetic `
   --config configs\smoke.yaml
 uv run histo-audit experiment smoke</pre></article>
       </div>
-      <p class="usage-note">Real PanNuke execution is intentionally gated: obtain a lawful local copy from the official source, preserve it unchanged and follow <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>. The repository does not silently download the dataset or relax scientific gates.</p>
+      <p class="usage-note">Real PanNuke runs require a lawful local dataset and the governed setup in <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>.</p>
+    </div>
+  </section>
+
+  <section class="section author-section" id="author" aria-labelledby="author-title">
+    <div class="author-shell">
+      <div class="author-profile reveal">
+        <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
+        <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
+      </div>
+
+      <aside class="author-credentials reveal" aria-label="Education and credentials">
+        <article class="credential-record">
+          <div class="credential-heading"><a class="credential-logo" href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener" aria-label="Visit Kozminski University"><img src="https://www.kozminski.edu.pl/themes/custom/leon_copy/images/kozminski_logo.svg" alt="Kozminski University logo"></a></div>
+          <h3><a href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener">Kozminski University</a></h3>
+          <p class="credential-course">Management and Artificial Intelligence</p>
+          <dl class="credential-meta"><div><dt>Location</dt><dd>Warsaw, Poland</dd></div><div><dt>Status</dt><dd>Current student</dd></div></dl>
+        </article>
+
+        <article class="credential-record">
+          <div class="credential-heading"><a class="credential-logo" href="https://uniw.edu.pl/" target="_blank" rel="noopener" aria-label="Visit Uniwersytet Młodzieżowy"><img src="https://uniw.edu.pl/wp-content/uploads/2025/08/Uniwersytet-Mlodziezowy-rebrand-BIALY-scaled.png" alt="Uniwersytet Młodzieżowy logo"></a></div>
+          <h3><a href="https://uniw.edu.pl/" target="_blank" rel="noopener">Uniwersytet Młodzieżowy</a></h3>
+          <p class="credential-course">Artificial Intelligence</p>
+          <dl class="credential-meta"><div><dt>Duration</dt><dd>80 hours</dd></div><div><dt>Academic year</dt><dd>2024/2025</dd></div></dl>
+          <div class="credential-proof" aria-label="Completion diploma for the 80-hour Artificial Intelligence programme">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 5.5h16l7 7v30H13z"/><path d="M29 5.5v8h7M18 24h13M18 30h13M18 36h8"/></svg>
+            <div><strong>Completion diploma</strong><span>80-hour programme, completed in the 2024/2025 academic year</span></div>
+          </div>
+        </article>
+
+        <p class="institution-note">Education references identify the author's background and do not imply institutional endorsement of AANCA.</p>
+      </aside>
     </div>
   </section>
 </main>

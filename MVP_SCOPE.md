@@ -38,7 +38,10 @@ The MVP consists of:
    ranked expert-review queue, GSAP/ScrollTrigger method explanation, data-bound
    charts, a complete filterable evidence table, reduced-motion handling and print
    fallbacks;
-8. an explicit byline for Natan Smogór and release date of 18 August 2026.
+8. an explicit byline and professional author profile for Natan Smogór, including
+   owner-supplied education details that distinguish current Kozminski University
+   study from the completed 80-hour Uniwersytet Młodzieżowy programme, plus the
+   release date of 18 August 2026 and a no-endorsement boundary.
 
 Presentation graphics must be derived from verified evidence or from
 deterministic, non-scientific interface decoration. They must not introduce

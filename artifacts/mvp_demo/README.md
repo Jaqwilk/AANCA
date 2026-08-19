@@ -33,7 +33,8 @@ Author: Natan Smogór. Released: 18 August 2026.
 The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,
 tables and scientific interpretation remain available when motion is reduced;
-network access is only needed for the optional web fonts and animation libraries.
+network access is only needed for the optional web fonts, institution logos and
+animation libraries.
 The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
 pixel ratio, and respects reduced-motion and data-saving preferences.
 

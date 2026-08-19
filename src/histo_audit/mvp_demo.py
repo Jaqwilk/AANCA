@@ -1873,7 +1873,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
       <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong><span aria-hidden="true">↘</span></a></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
     </div>
     <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
   </div>
@@ -2076,7 +2076,6 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
   </section>
 
   <section class="section" id="use">
-    <div class="section-heading reveal"><p class="section-kicker">Open implementation</p><h2>Inspect the evidence first. Run the software when you need to.</h2><p class="section-deck">The checked-in presentation opens without a dataset or GPU. Package verification and the deterministic synthetic smoke path provide progressively deeper checks without claiming a new real-data study.</p></div>
     <div class="repo-shell">
       <article class="repo-card reveal">
         <div class="repo-top">
@@ -2089,55 +2088,39 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
       </article>
 
       <div class="usage-grid">
-        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>The dependency-free launcher checks every package hash, serves on loopback and opens the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
+        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>Check the package, serve it locally and open the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
 cd AANCA
 python scripts/present_demo.py</pre></article>
-        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Use the same standard-library validation in CI, scripts or an offline review.</p><pre>python scripts/present_demo.py `
+        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Validate the package without starting a server.</p><pre>python scripts/present_demo.py `
   --verify-only</pre></article>
-        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Installs the governed ML environment, then tests software without calling it PanNuke evidence.</p><pre>uv sync --dev
+        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Exercise the software with deterministic synthetic data.</p><pre>uv sync --dev
 uv run histo-audit doctor
 uv run histo-audit data generate-synthetic `
   --config configs\smoke.yaml
 uv run histo-audit experiment smoke</pre></article>
       </div>
-      <p class="usage-note">Real PanNuke execution is intentionally gated: obtain a lawful local copy from the official source, preserve it unchanged and follow <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>. The repository does not silently download the dataset or relax scientific gates.</p>
+      <p class="usage-note">Real PanNuke runs require a lawful local dataset and the governed setup in <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>.</p>
     </div>
   </section>
 
   <section class="section author-section" id="author" aria-labelledby="author-title">
     <div class="author-shell">
       <div class="author-profile reveal">
-        <p class="section-kicker">About the author</p>
-        <div class="author-identity">
-          <span class="author-monogram" aria-hidden="true">NS</span>
-          <div><span>Author and developer</span><strong>Natan Smogór</strong></div>
-        </div>
         <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
         <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
-        <p class="author-copy">He studies Management and Artificial Intelligence at Kozminski University in Warsaw and completed an 80-hour Artificial Intelligence programme at Uniwersytet Młodzieżowy during the 2024/2025 academic year.</p>
-
-        <div class="author-work" aria-labelledby="author-work-title">
-          <h3 id="author-work-title">Work demonstrated in AANCA</h3>
-          <div class="author-contributions">
-            <article class="author-contribution"><span>01</span><h4>Research prototype design</h4><p>Scientific boundaries, controlled corruption and an expert-review-only output.</p></article>
-            <article class="author-contribution"><span>02</span><h4>Reproducible Python workflow</h4><p>Governed data processing, immutable evidence and checksum-verifiable outputs.</p></article>
-            <article class="author-contribution"><span>03</span><h4>Group-safe evaluation</h4><p>Out-of-fold scoring that excludes each nucleus and its complete source group from fitting.</p></article>
-            <article class="author-contribution"><span>04</span><h4>Evidence-led presentation</h4><p>An inspectable account of positive, adverse, neutral and unavailable study outcomes.</p></article>
-          </div>
-        </div>
       </div>
 
       <aside class="author-credentials reveal" aria-label="Education and credentials">
         <article class="credential-record">
-          <div class="credential-heading"><span class="credential-index">01</span><span class="credential-status">Current studies</span></div>
-          <h3><a href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener">Kozminski University <span aria-hidden="true">↗</span></a></h3>
+          <div class="credential-heading"><a class="credential-logo" href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener" aria-label="Visit Kozminski University"><img src="https://www.kozminski.edu.pl/themes/custom/leon_copy/images/kozminski_logo.svg" alt="Kozminski University logo"></a></div>
+          <h3><a href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener">Kozminski University</a></h3>
           <p class="credential-course">Management and Artificial Intelligence</p>
           <dl class="credential-meta"><div><dt>Location</dt><dd>Warsaw, Poland</dd></div><div><dt>Status</dt><dd>Current student</dd></div></dl>
         </article>
 
         <article class="credential-record">
-          <div class="credential-heading"><span class="credential-index">02</span><span class="credential-status">Completed programme</span></div>
-          <h3>Uniwersytet Młodzieżowy</h3>
+          <div class="credential-heading"><a class="credential-logo" href="https://uniw.edu.pl/" target="_blank" rel="noopener" aria-label="Visit Uniwersytet Młodzieżowy"><img src="https://uniw.edu.pl/wp-content/uploads/2025/08/Uniwersytet-Mlodziezowy-rebrand-BIALY-scaled.png" alt="Uniwersytet Młodzieżowy logo"></a></div>
+          <h3><a href="https://uniw.edu.pl/" target="_blank" rel="noopener">Uniwersytet Młodzieżowy</a></h3>
           <p class="credential-course">Artificial Intelligence</p>
           <dl class="credential-meta"><div><dt>Duration</dt><dd>80 hours</dd></div><div><dt>Academic year</dt><dd>2024/2025</dd></div></dl>
           <div class="credential-proof" aria-label="Completion diploma for the 80-hour Artificial Intelligence programme">
@@ -2588,62 +2571,89 @@ def _render_hypothesis_ledger_v4(
 ) -> str:
     """Render every preregistered question as an accessible story slide."""
 
-    h1, h3, h5 = (
+    h1, h3, h5, h6, h7 = (
         hypotheses["h1"],
         hypotheses["h3"],
         hypotheses["h5"],
+        hypotheses["h6"],
+        hypotheses["h7"],
     )
+    h1_range = _require_interval(h1["point_difference_range"], role="H1 AP range")
+    h5_range = _require_interval(h5["point_difference_range"], role="H5 AP range")
+    h7_range = _require_interval(h7["point_difference_range"], role="H7 AP range")
+    h4_interval = _require_interval(h4["interval_95"], role="H4 interval")
     entries = (
         (
             "H1",
-            "Can ranking beat random review?",
-            f"All {h1['interval_excludes_zero_in_positive_direction_count']} saved 95% "
-            "bootstrap intervals were above zero. The byte-identical "
-            "instance-dependent seed outputs are disclosed separately and are not "
-            "counted as independent replications.",
+            "Can the audit score find injected label changes earlier than random review?",
+            "Yes, within this controlled benchmark. Self-confidence ranking beat "
+            f"random review in all {h1['reported_count']} registered comparisons: "
+            f"average-precision gains ranged from {_format_metric_v3(h1_range[0])} to "
+            f"{_format_metric_v3(h1_range[1])}, and every saved 95% bootstrap interval "
+            "was above zero. This means injected changes were prioritised more "
+            "efficiently; it does not prove that a natural annotation is wrong. "
+            "Byte-identical instance-dependent seeds are not independent replications.",
         ),
         (
             "H2",
-            "Did saved performance estimates vary across contexts?",
-            f"Yes. Across {h2['reported_count']:,} reportable estimates, values varied "
-            "across nucleus class, tissue, corruption mechanism and rate. This is "
-            "descriptive heterogeneity; no omnibus test or causal biological "
-            "interpretation was registered.",
+            "Where did ranking performance vary?",
+            f"Across {h2['reported_count']:,} reportable subgroup estimates, ranking "
+            "performance varied with nucleus class, tissue, corruption mechanism and "
+            "corruption rate. The practical lesson is that audit difficulty depends on "
+            "context. These are descriptive summaries only: the study did not register "
+            "an omnibus test and cannot interpret the variation as a causal biological "
+            "effect.",
         ),
         (
             "H3",
-            "Were some corruption mechanisms harder?",
-            f"The registered contrasts generally placed confusion-targeted and "
-            f"instance-dependent corruption below symmetric corruption. One of "
-            f"{h3['reported_count']} saved 95% intervals crossed zero.",
+            "Which injected changes were harder to retrieve?",
+            "Confusion-targeted and instance-dependent changes were harder to rank "
+            "than symmetric changes, meaning their average precision was lower. All "
+            f"{h3['reported_count']} registered point differences favoured symmetric "
+            "corruption; five saved 95% intervals were above zero and one crossed zero. "
+            "This describes the controlled benchmark and does not establish that one "
+            "natural error type is universally harder.",
         ),
         (
             "H4",
-            "Did guided restoration improve downstream classification?",
-            "No. At the same 5% review budget, audit-guided restoration performed "
-            f"below the mean random-review result by {_format_metric_v3(h4['point_difference'])} "
-            "macro-F1. The saved 95% interval remained below zero, and the adverse "
-            "registered outcome is retained without post-result tuning.",
+            "Did a better review queue improve the later classifier?",
+            "No. With the same 5% review budget, audit-guided restoration produced "
+            f"macro-F1 {_format_metric_v3(h4['audit_guided_macro_f1'])}, compared with "
+            f"the random-review mean of {_format_metric_v3(h4['random_review_macro_f1_mean'])}. "
+            f"The difference was {_format_metric_v3(h4['point_difference'])}, with a "
+            f"saved 95% interval from {_format_metric_v3(h4_interval[0])} to "
+            f"{_format_metric_v3(h4_interval[1])}. The central lesson is that better "
+            "retrieval did not translate into better downstream classification here.",
         ),
         (
             "H5",
-            "Did the fixed hybrid improve ranking?",
-            f"All {h5['interval_excludes_zero_in_positive_direction_count']} saved 95% "
-            "bootstrap intervals were above zero for the preregistered fixed hybrid "
-            "minus self-confidence comparison.",
+            "Did combining two ranking signals help?",
+            "Yes, for review prioritisation. The equal-weight combination of "
+            "self-confidence and fold-safe nearest-neighbour disagreement outperformed "
+            f"self-confidence alone in all {h5['reported_count']} registered comparisons. "
+            f"Average-precision gains ranged from {_format_metric_v3(h5_range[0])} to "
+            f"{_format_metric_v3(h5_range[1])}, and every saved 95% bootstrap interval "
+            "was above zero. This supports the fixed hybrid within this benchmark; it "
+            "does not authorise automatic correction or diagnosis.",
         ),
         (
             "H6",
-            "Did a pathology-specific encoder outperform ImageNet?",
-            "This question was not estimated. No pathology encoder satisfied every "
-            "frozen access, licence, reproducibility, hardware and smoke-test gate, "
-            "and no replacement was chosen after outcomes were visible.",
+            "Could a pathology-specific encoder be evaluated fairly?",
+            "No result is available. None of the candidate pathology encoders passed "
+            "every frozen access, licence, reproducibility, hardware and smoke-test "
+            f"gate, so all {h6['comparison_count']} registered H6 entries remain "
+            "unavailable. They are not zero or negative results, and no substitute was "
+            "selected after the other outcomes became visible.",
         ),
         (
             "H7",
-            "Did explicit target highlighting help?",
-            "The saved comparisons do not provide clear evidence that target "
-            "highlighting improved average precision over the context representation.",
+            "Did highlighting the target nucleus add useful signal?",
+            "No clear benefit was detected. Across three seeds, the average-precision "
+            f"differences ranged from {_format_metric_v3(h7_range[0])} to "
+            f"{_format_metric_v3(h7_range[1])}; all {h7['interval_crosses_zero_count']} "
+            "saved 95% intervals crossed zero, and no Holm-adjusted one-sided p-value "
+            "was below 0.05. In this benchmark, explicit highlighting did not improve "
+            "ranking over the context representation.",
         ),
     )
     slides: list[str] = []
@@ -3662,9 +3672,8 @@ html.motion-enhanced { scroll-behavior: auto; }
 .hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
 .hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
 .hero-byline { margin-top: 30px; }
-.author-jump { display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; }
+.author-jump { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
 .author-jump strong { color: var(--ink-muted); font-weight: 550; }
-.author-jump > span { color: var(--accent-hover); font-size: 10px; }
 .author-jump:hover strong, .author-jump:focus-visible strong { color: var(--ink); }
 .author-jump:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; border-radius: 2px; }
 .hero-visual-label { bottom: 38px; }
@@ -3753,9 +3762,9 @@ html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; pa
 @media (min-width: 901px) {
   html.motion-enhanced .learned-story { height: 980vh; padding: 0; }
   html.motion-enhanced .learned-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 76px 0 48px; box-sizing: border-box; }
-  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(320px,1fr); align-content: center; max-height: 820px; }
+  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(390px,1fr); align-content: center; max-height: 820px; }
   html.motion-enhanced .learned-heading { margin-bottom: 48px; }
-  html.motion-enhanced .learned-stage { min-height: 320px; overflow: hidden; }
+  html.motion-enhanced .learned-stage { min-height: 390px; overflow: hidden; }
   html.motion-enhanced .hypothesis-ledger { position: relative; height: 100%; border: 0; }
   html.motion-enhanced .hypothesis-row { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 10px 0 30px; border: 0; visibility: hidden; opacity: 0; }
   html.motion-enhanced .learned-word { opacity: 0; }
@@ -3794,43 +3803,29 @@ input, select { min-height: 44px; }
 .repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
 .usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
 
-.author-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: minmax(0,1.08fr) minmax(360px,.92fr); gap: clamp(58px,7vw,104px); align-items: start; }
-.author-profile { min-width: 0; }
-.author-profile > .section-kicker { margin-bottom: 28px; }
-.author-identity { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-.author-monogram { width: 54px; height: 54px; display: grid; place-items: center; flex: 0 0 54px; border: 1px solid var(--line-strong); border-radius: 12px; color: var(--accent-hover); background: var(--surface-1); font: 500 13px/1 var(--mono); letter-spacing: .08em; }
-.author-identity div > span { display: block; margin-bottom: 3px; color: var(--ink-tertiary); font: 500 9px/1.35 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
-.author-identity div > strong { display: block; color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
-.author-profile h2 { max-width: 680px; margin: 0; font-size: clamp(34px,4vw,52px); }
-.author-lede { max-width: 680px; margin: 28px 0 0; color: var(--ink-muted); font-size: clamp(17px,1.45vw,20px); line-height: 1.68; letter-spacing: -.01em; }
-.author-copy { max-width: 680px; margin: 20px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.72; }
-.author-work { margin-top: 48px; }
-.author-work > h3 { margin: 0 0 18px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-.author-contributions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 clamp(28px,4vw,48px); }
-.author-contribution { padding: 20px 0 24px; border-top: 1px solid var(--line); }
-.author-contribution > span { color: var(--accent-hover); font: 500 9px/1 var(--mono); }
-.author-contribution h4 { margin: 16px 0 7px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: -.01em; }
-.author-contribution p { margin: 0; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
-.author-credentials { min-width: 0; border-top: 1px solid var(--line); }
-.credential-record { padding: 30px 0 34px; border-bottom: 1px solid var(--line); }
-.credential-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
-.credential-index { color: var(--accent-hover); font: 500 10px/1 var(--mono); }
-.credential-status { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
-.credential-record h3 { margin: 0; color: var(--ink); font-size: clamp(21px,2.1vw,28px); font-weight: 560; line-height: 1.22; letter-spacing: -.03em; }
+.author-shell { width: min(900px,calc(100% - 2 * var(--page-pad))); margin: auto; }
+.author-profile { max-width: 720px; }
+.author-profile h2 { max-width: 660px; margin: 0; font-size: clamp(34px,4.2vw,50px); }
+.author-lede { max-width: 670px; margin: 24px 0 0; color: var(--ink-muted); font-size: clamp(16px,1.35vw,19px); line-height: 1.65; letter-spacing: -.01em; }
+.author-credentials { margin-top: clamp(58px,7vw,82px); border-top: 1px solid var(--line); }
+.credential-record { display: grid; grid-template-columns: 110px minmax(220px,1fr) minmax(260px,.9fr); gap: 8px 32px; padding: 27px 0; border-bottom: 1px solid var(--line); }
+.credential-heading { grid-column: 1; grid-row: 1 / span 2; display: flex; align-items: center; }
+.credential-logo { width: 116px; min-height: 56px; display: flex; align-items: center; }
+.credential-logo img { display: block; width: 116px; max-height: 56px; object-fit: contain; object-position: left center; }
+.credential-record h3 { grid-column: 2; margin: 0; color: var(--ink); font-size: clamp(20px,2vw,25px); font-weight: 560; line-height: 1.22; letter-spacing: -.03em; }
 .credential-record h3 a { color: inherit; text-decoration: none; }
-.credential-record h3 a span { color: var(--accent-hover); font-size: .55em; vertical-align: .42em; }
 .credential-record h3 a:hover, .credential-record h3 a:focus-visible { color: var(--accent-hover); }
 .credential-record h3 a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 5px; border-radius: 2px; }
-.credential-course { margin: 10px 0 0; color: var(--ink-muted); font-size: 14px; line-height: 1.55; }
-.credential-meta { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; margin: 28px 0 0; }
-.credential-meta div { padding-top: 13px; border-top: 1px solid var(--line); }
+.credential-course { grid-column: 2; margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 1.55; }
+.credential-meta { grid-column: 3; grid-row: 1 / span 2; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; align-self: center; margin: 0; }
+.credential-meta div { padding: 0; }
 .credential-meta dt { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 .credential-meta dd { margin: 6px 0 0; color: var(--ink-muted); font-size: 12px; line-height: 1.5; }
-.credential-proof { display: grid; grid-template-columns: 38px 1fr; gap: 15px; align-items: center; margin-top: 26px; padding: 18px 0 0; border-top: 1px solid var(--line); }
-.credential-proof svg { width: 34px; height: 34px; fill: none; stroke: var(--accent-hover); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.credential-proof { grid-column: 2 / -1; display: flex; gap: 12px; align-items: center; margin-top: 13px; padding-top: 17px; border-top: 1px solid var(--line); }
+.credential-proof svg { width: 27px; height: 27px; flex: 0 0 27px; fill: none; stroke: var(--accent-hover); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .credential-proof strong { display: block; color: var(--ink-muted); font-size: 11px; font-weight: 600; }
 .credential-proof span { display: block; margin-top: 3px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.45; }
-.institution-note { margin: 20px 0 0; color: var(--ink-tertiary); font-size: 10px; line-height: 1.55; }
+.institution-note { max-width: 650px; margin: 17px 0 0 142px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.55; }
 
 /* Editorial surfaces: structure with rhythm and rules, not nested cards. */
 .study-specs, .reading-grid {
@@ -3858,33 +3853,38 @@ input, select { min-height: 44px; }
   background: transparent;
 }
 .metric-dot { border-color: var(--canvas); }
-.metric-row { min-height: 42px; }
-.range-row { min-height: 50px; }
+.metric-row { min-height: 42px; border-top: 0; }
+.range-row { min-height: 50px; border-top: 0; }
 .forest-group { margin: 20px 0 6px; padding-top: 14px; }
 .forest-row { min-height: 38px; gap: 16px; }
 .forest-track { height: 18px; }
 .forest-label { font-size: 10px; line-height: 1.3; }
 #benchmarks .forest-plot {
   max-height: min(62svh,680px);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 0;
+  border-bottom: 0;
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
 }
 #benchmarks .forest-axis {
-  position: sticky;
-  z-index: 3;
-  top: 0;
-  padding: 10px 0 12px;
-  margin: -10px 0 2px;
-  background: var(--canvas);
+  position: static;
+  z-index: auto;
+  padding: 0 0 12px;
+  margin: 0 0 4px;
+  background: transparent;
 }
 #benchmarks .forest-group {
-  position: sticky;
-  z-index: 2;
-  top: 38px;
-  padding-bottom: 8px;
-  background: var(--canvas);
+  position: static;
+  z-index: auto;
+  top: auto;
+  padding-bottom: 4px;
+  background: transparent;
 }
+#benchmarks .forest-axis + .forest-group { margin-top: 0; padding-top: 0; border-top: 0; }
+#benchmarks .forest-row { border-top: 0; }
 #benchmarks .forest-plot:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
 .always-visible-evidence {
   border: 0;
@@ -3917,8 +3917,14 @@ input, select { min-height: 44px; }
   background: transparent;
 }
 .repo-card::before { display: none; }
-.usage-grid { gap: clamp(28px,3.5vw,48px); }
-.repo-command { padding: 28px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+.usage-grid { gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.repo-command { padding: 21px clamp(20px,2.3vw,30px) 22px; border: 0; border-left: 1px solid var(--line); border-radius: 0; background: transparent; }
+.repo-command:first-child { padding-left: 0; border-left: 0; }
+.repo-command:last-child { padding-right: 0; }
+.repo-command h3 { margin: 13px 0 6px; }
+.repo-command p { min-height: 0; margin-bottom: 0; }
+.repo-command pre { min-height: 0; margin-top: 14px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-1); }
+.usage-note { max-width: 760px; margin-top: 15px; font-size: 11px; }
 .evidence-label-row { padding: 12px 0; }
 .table-tools { padding: 12px 0; }
 table { font-size: 10px; }
@@ -3958,6 +3964,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .reading-grid { grid-template-columns: repeat(2,1fr); }
   .usage-grid { grid-template-columns: 1fr 1fr; }
   .repo-command:last-child { grid-column: 1 / -1; }
+  .repo-command:nth-child(3) { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
   .author-shell { grid-template-columns: 1fr; gap: 64px; }
   .author-profile { max-width: 760px; }
 }
@@ -3983,7 +3990,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   html.motion-enhanced .learned-sticky { padding: 62px 0 22px; }
   html.motion-enhanced .learned-heading { margin-bottom: 22px; }
   html.motion-enhanced .learned-heading h2 { font-size: 34px; }
-  html.motion-enhanced .learned-stage { min-height: 252px; }
+  html.motion-enhanced .learned-stage { min-height: 340px; }
   html.motion-enhanced .hypothesis-row { padding: 20px 0 22px; }
   html.motion-enhanced .hypothesis-row .hypothesis-title { margin: 0; font-size: 29px; }
   html.motion-enhanced .hypothesis-row .learned-answer { margin-top: 19px; font-size: 14px; line-height: 1.52; }
@@ -4014,13 +4021,17 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .stat:last-child { border-bottom: 0; }
   .reading-card { min-height: 0; }
   .repo-command:last-child { grid-column: auto; }
+  .repo-command, .repo-command:first-child, .repo-command:last-child { padding: 23px 0; border-left: 0; }
+  .repo-command + .repo-command { border-top: 1px solid var(--line); }
   .repo-top { grid-template-columns: auto 1fr; }
   .repo-link { grid-column: 1 / -1; justify-self: start; }
   .repo-command p { min-height: 0; }
-  .author-contributions { grid-template-columns: 1fr; }
-  .author-contribution { padding-bottom: 22px; }
-  .author-shell { gap: 52px; }
-  .author-monogram { width: 48px; height: 48px; flex-basis: 48px; }
+  .credential-record { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .credential-heading { grid-column: 1; grid-row: auto; flex-direction: row; align-items: center; margin-bottom: 14px; }
+  .credential-record h3, .credential-course, .credential-meta, .credential-proof { grid-column: 1; grid-row: auto; }
+  .credential-meta { margin-top: 18px; }
+  .credential-proof { margin-top: 15px; }
+  .institution-note { margin-left: 0; }
   .hypothesis-row { min-height: 0; }
   .metric-axis, .range-axis { font-size: 10px; }
   .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
@@ -4042,7 +4053,6 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   #comparison-table td[data-label="Comparison"] .comparison-id { margin-top: 3px; }
   #seed-audit table tr { padding: 9px 0; }
   #seed-audit table td { grid-template-columns: 76px 1fr; gap: 8px; padding: 3px 0; }
-  #benchmarks .forest-group { top: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transform: none !important; }
@@ -4806,7 +4816,8 @@ Author: Natan Smogór. Released: 18 August 2026.
 The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,
 tables and scientific interpretation remain available when motion is reduced;
-network access is only needed for the optional web fonts and animation libraries.
+network access is only needed for the optional web fonts, institution logos and
+animation libraries.
 The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
 pixel ratio, and respects reduced-motion and data-saving preferences.
 

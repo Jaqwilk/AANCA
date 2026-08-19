@@ -391,6 +391,11 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Saved performance estimates varied across contexts" in html
     assert "What the study actually learned" in html
     assert html.count('<article class="hypothesis-row" data-learned-slide>') == 7
+    assert "Can the audit score find injected label changes earlier than random review?" in html
+    assert "The central lesson is that better retrieval did not translate" in html
+    assert "They are not zero or negative results" in html
+    assert "all 3 saved 95% intervals crossed zero" in html
+    assert "Can ranking beat random review?" not in html
     assert 'aria-roledescription="carousel"' in html
     assert 'aria-roledescription="slide"' not in html
     assert "let learnedSlideThresholds = [0]" in html
@@ -408,6 +413,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "max-height: min(62svh,680px)" in html
     assert 'aria-label="Scrollable forest plot' in html
     assert 'comparisons" tabindex="0"' in html
+    assert "#benchmarks .forest-axis {\n  position: static;" in html
+    assert "#benchmarks .forest-row { border-top: 0; }" in html
     assert "html.motion-enhanced .learned-story" in html
     assert "html.motion-enhanced .learned-word" in html
     assert 'id="learned-current"' not in html

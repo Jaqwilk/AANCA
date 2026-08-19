@@ -10278,3 +10278,102 @@ and supervisor before the one authorized Q replacement write.
   `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
   No scientific evidence, metric, label, dataset, accepted run, frozen authority or
   completion status changed.
+
+## 2026-08-19 - Atlas overlap repair and findings-content audit
+
+- Removed the two interacting sticky layers from the compact comparison atlas. The
+  global axis and all H1/H3/H5/H6/H7 group headings now remain in ordinary flow.
+  Repeated borders were removed from forest, H4 metric and H2 range rows; the atlas
+  keeps only hypothesis-boundary rules and the lines that encode point intervals.
+- Rewrote all seven findings answers against `SPEC.md`, `PRE_REGISTRATION.md` and
+  the accepted `evidence.json`. Each answer now gives a plain conclusion, exact
+  supporting values and an interpretation boundary. H1 explains review-queue
+  prioritisation without implying a natural annotation error; H4 reports both
+  macro-F1 values, the difference and saved interval; H5 identifies the frozen
+  equal-weight components; H6 distinguishes unavailable from zero; and H7 reports
+  its range, interval count and adjusted-test result.
+- Playwright readback at 1,440 by 900 sampled 21 internal atlas positions and found
+  zero overlapping element pairs. Computed styles confirmed static axis and group
+  positions, zero row borders, zero atlas outer borders and only group-transition
+  separators. The final atlas viewport measured 558 px high with 1,696 px of
+  complete content.
+- The normal-motion findings sequence reached all seven questions. At both 1,440 by
+  900 and 1,440 by 720, every slide had zero content overflow. At 390 by 844, all
+  seven findings were visible in normal flow, the page and atlas had zero horizontal
+  overflow, and the atlas's internal width was 331 px. Reduced motion exposed all
+  seven findings statically. Browser execution produced zero console errors or
+  warnings.
+- Axe 4.10.3 reported zero WCAG A/AA violations and 33 passing rule groups. The
+  automated run left `aria-prohibited-attr` and `color-contrast` as incomplete, so
+  this remains an automated audit result rather than a claim of certification.
+- The focused MVP regression passed 6/6; Ruff check and Ruff format check passed for
+  the changed Python and test files. The canonical five-file package verifies as
+  `DEMO_COMPLETE` with scientific status `PRIMARY_STUDY_COMPLETE` and manifest root
+  `95c50b59bdd452aeda49c940af74658cb4a0601d5ec2a7f5fb99708c852d5a16`.
+- The replaced package remains recoverable at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_table_content_20260819_145523_206`.
+  No scientific evidence, metric, label, dataset, accepted run, frozen authority or
+  completion status changed.
+
+## 2026-08-19 - Professional author profile in the demo
+
+- Added an `Author` navigation destination and linked the hero byline to a dedicated
+  author section placed after the usage/reproducibility material and before the
+  footer. This keeps research evidence ahead of biography while still making
+  authorship easy to verify.
+- The editorial two-column section identifies Natan Smogór as AANCA's author and
+  developer, summarises the demonstrated work, and distinguishes current Management
+  and Artificial Intelligence study at Kozminski University in Warsaw from the
+  completed 80-hour Artificial Intelligence programme at Uniwersytet Młodzieżowy
+  in the 2024/2025 academic year. The responsive layout becomes one column on narrow
+  screens.
+- No official Kozminski logo or diploma scan was present in the workspace. The demo
+  therefore uses a restrained typographic institution reference, an official-site
+  link and a neutral document symbol rather than inventing, scraping or implying an
+  institutional endorsement. A supplied, publication-approved logo and redacted
+  diploma can replace these neutral elements later.
+- Reconciled the author work with concurrent presentation refinements without
+  reverting them. A focused regression exposed a missing hero workflow caption, so
+  the active template again states that source annotations stay fixed and that the
+  hero animation is conceptual rather than benchmark data.
+- Browser readback of the final package at 1,440 by 900 and 390 by 844 confirmed the
+  author heading and credential marker, a single-column mobile layout, an `Author`
+  navigation item, zero horizontal overflow, and zero console errors or warnings.
+  Reduced-motion readback kept the author section visible. Review screenshots are
+  stored in `output/playwright/aanca-author-section-desktop.png` and
+  `output/playwright/aanca-author-section-mobile.png`.
+- The author implementation's complete suite passed **2,393 tests with one expected
+  Windows skip and zero failures in 1,239.79 s**. After the concurrent layout
+  reconciliation and caption repair, the final focused MVP regression passed **6/6
+  in 4.14 s**; Ruff check, Ruff format check across 209 files and
+  `git diff --check` also passed.
+- The canonical five-file package verifies as `DEMO_COMPLETE` with scientific status
+  `PRIMARY_STUDY_COMPLETE` and manifest root
+  `fb41176344a7dbeeed11a2f4bc0883accf63604efc8a33e2d2c32a5e4937757f`.
+  The immediately replaced package remains recoverable at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_author_20260819_1515`.
+  No scientific evidence, metric, label, dataset, accepted run, frozen authority or
+  completion status changed.
+
+## 2026-08-19 - Final concurrent presentation reconciliation
+
+- Reconciled the atlas and findings-content repair with the concurrently completed
+  author-profile work. The final source and checked package contain both changes:
+  non-sticky atlas headings with reduced rules, the seven expanded evidence-bound
+  answers, the author section and the restored conceptual hero caption.
+- A fresh build from the final source was byte-identical to the canonical five-file
+  package. The final verifier reports `status=valid`, presentation status
+  `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE`, file count 5 and
+  manifest root
+  `ed53469ee32211cfb37ad144c35f73229401e1ef16af11efcce846f798d84087`.
+- This audit's complete regression passed **2,393 tests with one expected Windows
+  skip and zero failures in 1,120.74 s**. After the last presentation-only
+  reconciliation, the focused MVP suite passed **6/6 in 4.13 s**; Ruff check and
+  Ruff format check passed across 209 files, and `git diff --check` passed.
+- Moved this audit's four unselected demo builds, five Playwright snapshots and nine
+  review captures out of the workspace to the recoverable directory
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_table_content_QA_cleanup_20260819_151721_132`.
+  The package replaced before reconciliation remains recoverable at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_table_content_20260819_145523_206`.
+- No scientific evidence, metric, label, dataset, accepted run, frozen authority or
+  completion status changed.

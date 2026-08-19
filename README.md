@@ -89,8 +89,25 @@ all seven answers become an immediately visible static article. The complete
 comparison atlas and evidence table remain immediately present inside compact,
 keyboard-scrollable viewports; the evidence rows become labelled two-column
 records on narrow screens and can be filtered by hypothesis, status, or free text.
+The atlas uses ordinary-flow headings, so internal scrolling cannot place an axis
+or group label over a data row. Repeated row rules are removed; whitespace and one
+subtle boundary between hypothesis groups provide the remaining structure.
 Results, method notes, tables, and study limits use open editorial surfaces with
 thin rules instead of nested dashboard cards.
+
+Each findings answer now states the practical conclusion first, reports the exact
+registered evidence needed to support it, and closes with the relevant scope
+boundary. In particular, retrieval performance is kept separate from downstream
+classification, unavailable H6 comparisons are not treated as zero, and no ranking
+result is presented as proof that a natural annotation is wrong.
+
+The final article section identifies Natan Smogór as the author and developer,
+summarises the work demonstrated in AANCA, and records the owner's educational
+background without overstating it: Management and Artificial Intelligence at
+Kozminski University is marked as current study, while the 80-hour Artificial
+Intelligence programme at Uniwersytet Młodzieżowy is marked as completed in the
+2024/2025 academic year. The section explicitly avoids implying institutional
+endorsement of the project.
 
 GSAP coordinates the directional header, logo reveal, section transitions, chart
 marks, and cumulative method story. Three.js renders the conceptual source-patch
