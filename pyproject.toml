@@ -9,7 +9,7 @@ description = "Reproducible auditing of potentially inconsistent nucleus class a
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = { text = "Research prototype; dataset and pretrained-weight licences remain separate" }
-authors = [{ name = "University research project" }]
+authors = [{ name = "Natan Smogór" }]
 dependencies = [
   "cleanlab>=2.7,<3",
   "imagehash>=4.3,<5",

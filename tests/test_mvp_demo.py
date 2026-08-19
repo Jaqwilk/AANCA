@@ -456,6 +456,17 @@ def test_verified_mvp_http_server_serves_only_the_closed_package(tmp_path: Path)
         with urlopen(f"http://127.0.0.1:{port}/", timeout=5) as response:
             payload = response.read()
             assert response.status == 200
+            assert response.headers["Cache-Control"] == "no-store"
+            assert response.headers["Content-Security-Policy"] == (
+                "base-uri 'none'; frame-ancestors 'none'; object-src 'none'"
+            )
+            assert response.headers["Permissions-Policy"] == (
+                "camera=(), geolocation=(), microphone=()"
+            )
+            assert response.headers["Referrer-Policy"] == "no-referrer"
+            assert response.headers["Server"] == "AANCA"
+            assert response.headers["X-Content-Type-Options"] == "nosniff"
+            assert response.headers["X-Frame-Options"] == "DENY"
         assert payload.startswith(b"<!doctype html>")
         assert verification["status"] == "valid"
         assert verification["file_count"] == 5

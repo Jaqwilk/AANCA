@@ -5662,3 +5662,33 @@ Decisions are conservative, reversible where possible, and amended rather than s
   professor-release captures referenced by the project. Optimisation must not
   alter evidence, metrics, labels, frozen authorities, the accepted run or the
   scientific completion boundary.
+
+## 2026-08-19 - Add remote integrity checks and harden local presentation delivery
+
+- Add one deliberately small GitHub Actions workflow that runs the standard-library
+  presentation verifier on every `main` push and pull request. Keep permissions
+  read-only, disable credential persistence, cancel superseded runs and pin every
+  third-party action to a reviewed full commit SHA. Do not install the large ML
+  environment merely to verify the static presentation package.
+- Treat the workflow as a fast remote integrity guard, not evidence that the full
+  scientific suite ran. Material changes still require pytest, Ruff check, Ruff
+  format check, mypy, dependency/lock checks and the relevant functional CLI.
+- Serve the locally verified package with no-cache and browser-hardening headers
+  and without disclosing the Python runtime version. Preserve loopback as the
+  default and retain the exact package-verification gate before binding a socket.
+- Use Natan Smogór consistently as the distributable package and presentation
+  author. This is metadata correction only; it does not change study attribution,
+  evidence or scientific status.
+- Do not change the frozen torch/torchvision stack solely to force a newer
+  Setuptools release. The known Setuptools advisory affects macOS sdist file
+  exclusion; this project uses Hatchling, the presentation path is dependency-free,
+  and torch currently constrains Setuptools below the fixed release. Record the
+  constraint and unreachable path explicitly and revisit it when the governed ML
+  stack is intentionally upgraded and fully requalified.
+- Do not change GitHub repository visibility or grant third-party access as an
+  inferred side effect of a code audit. Report the anonymous-access limitation so
+  the owner can choose whether to make the repository public or invite the intended
+  reviewer before presentation.
+- Preserve `SPEC.md`, `PLAN.md`, `PRE_REGISTRATION.md`, the accepted primary run,
+  source annotations and all scientific values byte-for-byte. These changes improve
+  delivery, metadata, remote verification and auditability only.

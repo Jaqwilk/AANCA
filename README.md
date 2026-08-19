@@ -12,6 +12,7 @@ that may warrant expert review—without changing source labels.
   <img alt="Presentation status: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
   <img alt="Scientific status: PRIMARY_STUDY_COMPLETE" src="https://img.shields.io/badge/science-PRIMARY__STUDY__COMPLETE-238636">
   <img alt="Research only, non-diagnostic" src="https://img.shields.io/badge/use-research_only_%7C_non--diagnostic-C2410C">
+  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml"><img alt="Presentation integrity workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml/badge.svg?branch=main"></a>
 </p>
 
 <p align="center">
@@ -403,6 +404,11 @@ Before submitting a change:
 .venv\Scripts\mypy.exe src
 .venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
 ~~~
+
+The `Presentation integrity` GitHub Actions workflow also runs the dependency-free
+five-file package verifier on every push to `main` and every pull request. It is a
+fast remote guard for the checked-in article; the complete scientific gate set
+above remains mandatory for material local changes.
 
 Mandatory scientific invariants live in [`AGENTS.md`](AGENTS.md) and
 [`SPEC.md`](SPEC.md). Material changes must update the corresponding evidence in

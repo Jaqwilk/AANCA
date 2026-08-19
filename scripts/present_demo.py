@@ -17,6 +17,31 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = PROJECT_ROOT / "artifacts" / "mvp_demo"
 OUTPUT_FILES = ("README.md", "evidence.json", "index.html", "pannuke_mask_qc_overlays.png")
 
+_PRESENTATION_HEADERS = (
+    ("Cache-Control", "no-store"),
+    ("Content-Security-Policy", "base-uri 'none'; frame-ancestors 'none'; object-src 'none'"),
+    ("Permissions-Policy", "camera=(), geolocation=(), microphone=()"),
+    ("Referrer-Policy", "no-referrer"),
+    ("X-Content-Type-Options", "nosniff"),
+    ("X-Frame-Options", "DENY"),
+)
+
+
+class _PresentationRequestHandler(SimpleHTTPRequestHandler):
+    """Serve the verified package with presentation-safe response headers."""
+
+    def version_string(self) -> str:
+        """Avoid disclosing the Python runtime in the local server banner."""
+
+        return "AANCA"
+
+    def end_headers(self) -> None:
+        """Attach deterministic hardening and no-cache headers to every response."""
+
+        for name, value in _PRESENTATION_HEADERS:
+            self.send_header(name, value)
+        super().end_headers()
+
 
 def _reject_constant(value: str) -> None:
     raise ValueError(f"non-standard JSON number rejected: {value}")
@@ -178,7 +203,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     directory = Path(args.output_dir).resolve(strict=True)
-    handler = partial(SimpleHTTPRequestHandler, directory=str(directory))
+    handler = partial(_PresentationRequestHandler, directory=str(directory))
     try:
         server = ThreadingHTTPServer((args.host, args.port), handler)
     except OSError as exc:

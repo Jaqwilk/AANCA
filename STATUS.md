@@ -9985,3 +9985,76 @@ and supervisor before the one authorized Q replacement write.
   `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
   No dataset, source annotation, label, metric, experiment, accepted-run artifact
   or frozen scientific rule changed.
+
+## 2026-08-19 - Complete repository, security, dependency and presentation audit
+
+- Audited the 401 tracked files at Git revision
+  `288956737d1693c1461e7538f0e2a0f88836aef8` before modification. The local
+  `main`, `origin/main` and remote head were identical; `git fsck --full
+  --no-dangling` reported no repository-integrity error. All 76 Markdown files had
+  valid in-repository link targets, the article had 32 unique IDs, every internal
+  anchor resolved, all local assets resolved after lazy loading, and its UTF-8
+  source contained no replacement characters or detected mojibake.
+- Completed one formal repository-wide Codex Security Standard scan covering nine
+  surfaces: CLI/configuration, archive and numerical-data ingestion, filesystem
+  publication, deserialization, subprocesses, the demo server, the browser surface,
+  governed capsule control and blinded expert-review packaging. The sealed report
+  contains **zero reportable findings** and complete surface coverage. The runtime
+  did not permit a delegated independent baseline auditor, which is recorded as a
+  variance-reduction limitation rather than hidden.
+- Dependency review found one unique PyPI advisory, `PYSEC-2026-3447`, reported
+  twice for the same installed `setuptools 81.0.0` distribution. `torch
+  2.12.1+cu126` requires `setuptools<82`, so the patched `setuptools>=83` cannot be
+  resolved without changing the frozen ML stack. The affected path is Setuptools'
+  macOS sdist file-selection logic; AANCA builds with Hatchling and the audited
+  presentation verifier uses only the Python standard library. The advisory is
+  therefore retained transparently as constrained and unreachable in the verified
+  workflow, not silently ignored. `pip-audit` could not map the custom CUDA local
+  versions of torch/torchvision to PyPI, which remains an explicit audit limitation.
+- Added `.github/workflows/presentation-integrity.yml`. It verifies the exact
+  sealed five-file demo on pushes to `main`, pull requests and manual dispatch,
+  with read-only repository permission, a five-minute timeout, concurrency
+  cancellation, disabled credential persistence and full-SHA pins for
+  `actions/checkout` and `actions/setup-python`. Offline `zizmor --pedantic`
+  returned **no findings**. The root README now exposes the workflow and explains
+  that it complements rather than replaces the full scientific gates.
+- Corrected the distributable package author from the generic university-project
+  placeholder to `Natan Smogór`; a rebuilt wheel contains the corrected metadata.
+  The scientific version and dependency constraints did not change.
+- Hardened both verified local presentation servers with deterministic `no-store`,
+  CSP frame/object/base restrictions, permissions policy, no-referrer, `nosniff`
+  and frame-denial headers, and replaced the Python version banner with `AANCA`.
+  Regression coverage checks every header. A real-browser follow-up confirmed that
+  pinned GSAP and Three.js still load and the console remains free of errors.
+- Playwright QA passed at 1440x900 and 390x844 with zero document-wide horizontal
+  overflow. It exercised mobile menu open/close/Escape and focus return, directional
+  header hiding/reveal, comparison filtering, the full 36-row evidence table,
+  reduced-motion rendering and a blocked-CDN fallback. The no-CDN layout retained
+  every reveal and the complete five-stage benchmark; expected network-load errors
+  were the only console messages in that deliberately blocked scenario.
+- Selected audit captures are retained at
+  `output/playwright/aanca-full-layout-audit-20260819.png`,
+  `output/playwright/aanca-mobile-layout-audit-20260819.png` and
+  `output/playwright/aanca-reduced-motion-audit-20260819.png`. Visual inspection
+  found no overlap, clipped value, broken table layout or inconsistent spacing.
+- The dependency-free verifier and installed CLI both report `status=valid`, file
+  count 5, presentation status `DEMO_COMPLETE`, scientific status
+  `PRIMARY_STUDY_COMPLETE` and manifest root
+  `1b95f12a167e749f57bb3fded2d82636586c8d018a75423f332242c43d91f49f`.
+  The package builds successfully as both sdist and wheel.
+- Final validation passed: focused MVP tests **6/6 in 4.82 s**; complete suite
+  **2,393 passed, one expected Windows skip and zero failures in 1,089.96 s**;
+  `ruff check .` passed; `ruff format --check .` reported 209 files already
+  formatted; `mypy src` passed 100 source files; `uv lock --check` resolved 83
+  packages; and `uv pip check` found all 64 installed packages compatible.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No dataset, source annotation, label, metric, experiment, accepted-run artifact
+  or frozen scientific rule changed.
+- Authenticated Git access to `https://github.com/Jaqwilk/AANCA.git` works, but an
+  anonymous HTTPS request cannot read the repository and the public web URL returns
+  404. Repository visibility or professor access remains an owner-controlled
+  external setting and was not changed implicitly by this audit.

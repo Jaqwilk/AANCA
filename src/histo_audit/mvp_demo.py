@@ -45,6 +45,30 @@ _SELECTED_RUN_FILES = (
 _OUTPUT_FILES = ("README.md", "evidence.json", "index.html", "pannuke_mask_qc_overlays.png")
 _H4_COMPARISON_ID = "audit_guided_minus_random_macro_f1"
 _INSTANCE_DEPENDENT_SEEDS = (404, 405, 406)
+_PRESENTATION_HEADERS = (
+    ("Cache-Control", "no-store"),
+    ("Content-Security-Policy", "base-uri 'none'; frame-ancestors 'none'; object-src 'none'"),
+    ("Permissions-Policy", "camera=(), geolocation=(), microphone=()"),
+    ("Referrer-Policy", "no-referrer"),
+    ("X-Content-Type-Options", "nosniff"),
+    ("X-Frame-Options", "DENY"),
+)
+
+
+class _PresentationRequestHandler(SimpleHTTPRequestHandler):
+    """Serve the verified package with presentation-safe response headers."""
+
+    def version_string(self) -> str:
+        """Avoid disclosing the Python runtime in the local server banner."""
+
+        return "AANCA"
+
+    def end_headers(self) -> None:
+        """Attach deterministic hardening and no-cache headers to every response."""
+
+        for name, value in _PRESENTATION_HEADERS:
+            self.send_header(name, value)
+        super().end_headers()
 
 
 @dataclass(frozen=True, slots=True)
@@ -75,7 +99,7 @@ def create_mvp_http_server(
 
     directory = Path(output_directory).resolve(strict=True)
     verification = verify_mvp_presentation(directory)
-    handler = partial(SimpleHTTPRequestHandler, directory=str(directory))
+    handler = partial(_PresentationRequestHandler, directory=str(directory))
     server = ThreadingHTTPServer((host, port), handler)
     server.daemon_threads = True
     return server, verification
