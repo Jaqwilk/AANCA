@@ -78,12 +78,19 @@ exact boundary and saved evidence.
 ### Presentation experience
 
 The checked-in article is designed for both a research presentation and a close
-technical reading. Its English narrative uses a centered editorial column, a
-scroll-driven five-stage serpentine explanation of the benchmark, and visible
-evidence panels that never require disclosure clicks. The H1–H7 ledger preserves
-supportive, qualified, adverse, neutral, and unavailable outcomes together; the
-dense comparison table becomes stacked records on narrow screens and can be
-filtered by hypothesis, status, or free text.
+technical reading. Its English narrative uses one centered 640 px editorial
+column, a scroll-driven five-stage serpentine explanation of the benchmark, and
+visible evidence panels that never require disclosure clicks. The findings section
+contains only its title, seven registered questions, and their complete answers.
+On motion-capable desktops, each answer resolves word by word and becomes a firm
+scroll stop before the next question can enter from below. A single gesture cannot
+skip multiple questions. On narrow screens, with reduced motion, or without GSAP,
+all seven answers become an immediately visible static article. The complete
+comparison atlas and evidence table remain immediately present inside compact,
+keyboard-scrollable viewports; the evidence rows become labelled two-column
+records on narrow screens and can be filtered by hypothesis, status, or free text.
+Results, method notes, tables, and study limits use open editorial surfaces with
+thin rules instead of nested dashboard cards.
 
 GSAP coordinates the directional header, logo reveal, section transitions, chart
 marks, and cumulative method story. Three.js renders the conceptual source-patch

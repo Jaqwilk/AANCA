@@ -358,6 +358,17 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Holm-adjusted p" in html
     assert "not independent realisations" in html
     assert "Natan Smogór" in html
+    assert 'href="#author">Author</a>' in html
+    assert 'id="author" aria-labelledby="author-title"' in html
+    assert "Research and implementation by Natan Smogór" in html
+    assert "Management and Artificial Intelligence" in html
+    assert "Kozminski University" in html
+    assert "Current student" in html
+    assert "Uniwersytet Młodzieżowy" in html
+    assert "80-hour Artificial Intelligence programme" in html
+    assert "2024/2025 academic year" in html
+    assert "Completion diploma" in html
+    assert "do not imply institutional endorsement of AANCA" in html
     assert "18 August 2026" in html
     assert "gsap@3.15.0" in html
     assert "three@0.185.1" in html
@@ -378,6 +389,39 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'class="journey-connector"' in html
     assert "One controlled question, unfolded step by step" in html
     assert "Saved performance estimates varied across contexts" in html
+    assert "What the study actually learned" in html
+    assert html.count('<article class="hypothesis-row" data-learned-slide>') == 7
+    assert 'aria-roledescription="carousel"' in html
+    assert 'aria-roledescription="slide"' not in html
+    assert "let learnedSlideThresholds = [0]" in html
+    assert "let learnedSettleThresholds = [0]" in html
+    assert "learnedSlideStarts.map(start => start / learnedDuration)" in html
+    assert "learnedSettleTimes.map(time => time / learnedDuration)" in html
+    assert "const activationDistance = beforeFirstAnswer ? 60 : 360" in html
+    assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" in html
+    assert "height: 980vh" in html
+    assert "scrub: true" in html
+    assert "filter: 'blur(4px)'" not in html
+    assert "Editorial surfaces: structure with rhythm and rules" in html
+    assert ".repo-card::before { display: none; }" in html
+    assert "max-height: min(60svh,620px)" in html
+    assert "max-height: min(62svh,680px)" in html
+    assert 'aria-label="Scrollable forest plot' in html
+    assert 'comparisons" tabindex="0"' in html
+    assert "html.motion-enhanced .learned-story" in html
+    assert "html.motion-enhanced .learned-word" in html
+    assert 'id="learned-current"' not in html
+    assert 'class="learned-progress"' not in html
+    assert 'class="hypothesis-row-head"' not in html
+    assert 'class="learned-answer-label"' not in html
+    assert "Move through one registered question at a time" not in html
+    assert "12 / 12 positive differences" not in html
+    assert "Automated Auditing of Nucleus Class Annotations" in html
+    assert "Automated nucleus-annotation auditing" not in html
+    assert "--prose: 640px" in html
+    assert "--editorial: 640px" in html
+    assert "\N{EM DASH}" not in html
+    assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
     assert "33 reported · 3 unavailable" in html
     assert "github.com/Jaqwilk/AANCA" in html

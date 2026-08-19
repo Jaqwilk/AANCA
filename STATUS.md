@@ -10217,3 +10217,64 @@ and supervisor before the one authorized Q replacement write.
   `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
   No metric, evidence value, experiment, annotation, dataset, accepted run or frozen
   scientific rule changed.
+
+## 2026-08-19 - Compact evidence surfaces and final presentation acceptance
+
+- Replaced the remaining oversized data surfaces with immediately visible,
+  keyboard-scrollable viewports. The 36-entry comparison atlas now occupies 558 px
+  of a 900 px desktop viewport while retaining 1,811 px of complete content; the
+  evidence table occupies 540 px while retaining all 1,553 px of desktop rows.
+  On the 390 by 844 mobile viewport, the atlas and evidence viewports measure 523 px
+  and 506 px. Mobile evidence entries use a labelled two-column record layout, and
+  the three-seed identity table decreased from 403 px to 331 px.
+- This reduced the desktop benchmark section from 4,975 px to 3,772 px, the evidence
+  section from 1,744 px to 1,636 px and the full desktop document from 21,187 px to
+  19,876 px. The mobile document decreased from 27,100 px to 24,187 px. No row,
+  comparison, raw identifier, interval, adjusted p-value or unavailable H6 result
+  was removed. Page Down keyboard checks moved the atlas by 486 px and the evidence
+  table by 472 px.
+- Repeated responsive browser readback at 1,440 by 900, 1,024 by 768 and 390 by 844.
+  The article, figures and tables had zero horizontal overflow and a measured center
+  error of 0 px at every tested width. The narrow layout exposed all seven complete
+  findings statically. Reduced motion and a deliberate GSAP/Three.js CDN block also
+  exposed all seven findings with no reserved pinned-scroll space.
+- Re-exercised the normal-motion findings sequence. A 100 px gesture revealed the
+  complete first answer, a later 250 px gesture did not advance accidentally, and a
+  deliberate 450 px gesture advanced exactly one question. Five consecutive 5,000
+  px gestures advanced one adjacent question each. A 900 ms transition sample
+  recorded 215 frames, 4.212 ms mean frame interval, 4.3 ms p95, 12 ms maximum and
+  zero frames above 16.7 ms.
+- Normal browser execution produced zero console errors or warnings. Axe 4.10.3
+  reported zero automated accessibility violations and 34 passing rule groups; the
+  colour-contrast rule remained an automated incomplete because of transparent and
+  canvas-backed nodes, so this remains an audit result rather than a formal WCAG
+  certification.
+- Rebuilt and visually inspected the final audit boards:
+  `output/playwright/aanca-full-layout-audit-20260819.png`,
+  `output/playwright/aanca-mobile-layout-audit-20260819.png`,
+  `output/playwright/aanca-reduced-motion-audit-20260819.png` and
+  `output/playwright/aanca-professor-release-findings-carousel.png`. The selected
+  screenshots show the compact atlas and evidence viewport without nested cards.
+- Moved two obsolete demo candidates, Playwright session records, temporary layout
+  parts and seven review-only captures out of the workspace to the recoverable copy
+  at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_frontend_cleanup_20260819_141829_622`.
+  The two replaced canonical packages remain recoverable at
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_20260819_141746_655`
+  and
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_20260819_142015_614`.
+- Both presentation verifiers report `status=valid`, file count 5, presentation
+  status `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE` and final
+  manifest root
+  `1378f1bb59b42421dfce8d3b9bafb37307edf405eb1711914a26b70314ef26ac`.
+  The final focused MVP and governance regression passed **14/14 in 4.31 s**
+  (the six MVP tests alone passed in 4.22 s). The complete suite passed **2,393
+  tests with one expected Windows skip and zero failures in 982.42 s**; Ruff check,
+  Ruff format check across 209 files and `git diff --check` also passed.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No scientific evidence, metric, label, dataset, accepted run, frozen authority or
+  completion status changed.

@@ -1,6 +1,6 @@
 # Verified starting literature review
 
-**Project:** Automated nucleus-annotation auditing  
+**Project:** Automated Auditing of Nucleus Class Annotations
 **Search and verification date:** 2026-07-17 (Europe/Warsaw)  
 **Scope:** targeted verification of the required starting bibliography, not a systematic review or a claim of exhaustive coverage  
 **Machine-readable companion:** `reports/literature_matrix.csv`  

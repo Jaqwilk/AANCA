@@ -1117,7 +1117,7 @@ def _render_html_legacy(evidence: dict[str, Any]) -> str:
 <body>
 <a class="skip" href="#main">Przejdź do treści</a>
 <header>
-  <div class="eyebrow">Automated Nucleus-Annotation Auditing</div><h1>AANCA</h1>
+  <div class="eyebrow">Automated Auditing of Nucleus Class Annotations</div><h1>AANCA</h1>
   <p>Reprodukowalny prototyp badawczy do priorytetyzacji przypadków oznaczonych jako
   <em>potentially inconsistent annotation</em> i <em>recommended for expert review</em>.</p>
   <span class="badge">DEMO_COMPLETE</span><span class="badge">PRIMARY_STUDY_COMPLETE</span><span class="badge scope">amended_or_exploratory</span>
@@ -1723,7 +1723,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
 <section class="hero" id="top" aria-labelledby="hero-title">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell"><div class="hero-copy">
-    <p class="eyebrow">Automated Nucleus-Annotation Auditing · research prototype</p>
+    <p class="eyebrow">Automated Auditing of Nucleus Class Annotations · research prototype</p>
     <h1 id="hero-title">Gdy adnotacja może być niespójna.</h1>
     <p class="hero-lead">Reprodukowalny ranking <em>potentially inconsistent annotation</em> do <em>recommended for expert review</em> — bez automatycznej zmiany danych źródłowych.</p>
     <div class="hero-meta"><span><i></i>DEMO_COMPLETE</span><span><i></i>PRIMARY_STUDY_COMPLETE</span><span>amended_or_exploratory</span></div>
@@ -1853,16 +1853,16 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23010102'/%3E%3Crect x='14' y='14' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='38' y='14' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='26' y='26' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='14' y='38' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='38' y='38' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3C/svg%3E">
-  <title>AANCA — annotation auditing for expert review</title>
+  <title>AANCA: Automated Auditing of Nucleus Class Annotations</title>
   <style>__CSS__</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header" id="site-header">
   <div class="nav-shell">
-    <a class="brand" href="#top" aria-label="AANCA — back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
+    <a class="brand" href="#top" aria-label="AANCA: back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a><a href="#author">Author</a></nav>
   </div>
 </header>
 
@@ -1870,10 +1870,10 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell">
     <div class="hero-copy">
-      <p class="eyebrow hero-animate">Automated nucleus-annotation auditing</p>
+      <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
-      <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review—without rewriting the source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
+      <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong><span aria-hidden="true">↘</span></a></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
     </div>
     <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
   </div>
@@ -1885,13 +1885,13 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
       <p class="lede">Annotation auditing is a way to decide what a human should inspect first. It is not a way to replace the human decision.</p>
       <p>Large histopathology datasets contain many already segmented nucleus instances, each paired with a class label. Even careful annotation can include ambiguity, inconsistent conventions or ordinary data-entry noise. Reviewing every instance again is expensive, so the useful question is not “can a model declare a label wrong?” It is “can a model create a better review queue than random sampling?”</p>
       <p>AANCA evaluates that question under controlled conditions. It intentionally changes a known subset of class labels, hides that intervention from the auditor, and then measures whether the changed labels move toward the front of a fixed review queue. Because the benchmark records exactly what it changed, retrieval can be scored without pretending that model disagreement is biological truth.</p>
-      <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>—never “confirmed error.”</p>
+      <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>. It never means “confirmed error.”</p>
       <div class="scope-note"><strong>Study boundary.</strong> This presentation reports the completed primary frozen-feature benchmark. Confirmatory CNN experiments, blinded expert review and external validation have not been performed. Model-selection rules were frozen before outcome interpretation; the accepted analysis remains exploratory because outcomes were subsequently exposed during technical recovery.</div>
     </div>
   </section>
 
   <section class="study-at-a-glance" aria-labelledby="study-title">
-    <div class="section-heading reveal"><p class="section-kicker">Study at a glance</p><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define what the results do—and do not—measure.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Study at a glance</p><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define both what the results measure and what they do not measure.</p></div>
     <div class="study-specs reveal">
       <article class="spec-card"><span>Data</span><strong>PanNuke</strong><small>Verified official release; five positive nucleus classes across 19 tissue types.</small></article>
       <article class="spec-card"><span>Unit</span><strong>Already segmented nuclei</strong><small>Class-label consistency only. Segmentation quality and diagnosis are outside scope.</small></article>
@@ -1903,7 +1903,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
 
   <div class="research-question reveal">
     <span>Research question</span>
-    <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review—and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
+    <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review, and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
   </div>
 
   <section class="journey story" id="method" aria-labelledby="journey-title" data-active-stage="0">
@@ -2002,11 +2002,17 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
     </div>
   </section>
 
-  <section class="section" id="benchmarks">
-    <div class="section-heading reveal"><p class="section-kicker">Preregistered questions · H1-H7</p><h2>What the study actually learned.</h2><p class="section-deck">All seven questions remain visible together: supportive, qualified, adverse, neutral and unavailable. Across the 36 preregistered comparison entries, <strong>__REPORTED__</strong> have numeric results and <strong>__UNAVAILABLE__</strong> remain explicitly unavailable.</p></div>
-    <div class="figure-width reveal"><div class="hypothesis-ledger">__HYPOTHESIS_LEDGER__</div></div>
+  <section class="section learned-section" id="benchmarks">
+    <div class="learned-story" id="learned-story">
+      <div class="learned-sticky"><div class="learned-shell">
+        <div class="section-heading learned-heading"><h2>What the study actually learned.</h2></div>
+        <div class="learned-stage" role="region" aria-label="Seven preregistered research questions and their answers">
+          <div class="hypothesis-ledger" role="group" aria-roledescription="carousel" aria-label="Preregistered findings">__HYPOTHESIS_LEDGER__</div>
+        </div>
+      </div></div>
+    </div>
     <div class="section-heading reveal" style="margin-top:var(--section-space)"><p class="section-kicker">Comparison atlas</p><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
-    <div class="wide-width reveal"><div class="forest-plot" role="group" aria-label="Forest plot of all H1, H3, H5, H6 and H7 comparisons">__FOREST_PLOT__</div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
+    <div class="wide-width reveal"><div class="forest-plot" role="region" aria-label="Scrollable forest plot of all H1, H3, H5, H6 and H7 comparisons" tabindex="0">__FOREST_PLOT__</div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
   </section>
 
   <section class="section" id="subgroups">
@@ -2034,12 +2040,12 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
     <div class="section-heading reveal"><p class="section-kicker">Experimental integrity</p><h2>The design limits outcome-informed model selection.</h2><p class="section-deck">The model, split, feature and statistical rules were frozen before outcome interpretation. Because outcomes were later exposed during recovery, this accepted result is reported as exploratory rather than as an untouched confirmatory analysis.</p></div>
     <div class="wide-width reveal">
       <div class="stats-grid"><div class="stat"><strong>__COMPLETED__/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>__FAILED__</strong><span>failed required cells</span></div><div class="stat"><strong>__COMPARISONS__</strong><span>preregistered comparison entries retained</span></div><div class="stat"><strong>__BOOTSTRAPS__</strong><span>paired group-bootstrap iterations</span></div></div>
-      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level—never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
+      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level, never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
     </div>
   </section>
 
   <section class="section" id="interpretation">
-    <div class="section-heading reveal"><p class="section-kicker">Interpretation boundary</p><h2>What this benchmark supports—and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
+    <div class="section-heading reveal"><p class="section-kicker">Interpretation boundary</p><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
     <div class="figure-width reveal claim-grid">
       <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in H1.</li><li>The preregistered fixed hybrid exceeded self-confidence in all 12 H5 comparisons.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
       <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That better ranking automatically improves downstream classification; H4 was adverse.</li><li>Patient/WSI independence, clinical validity, expert agreement or external generalisation.</li></ul></article>
@@ -2095,6 +2101,53 @@ uv run histo-audit data generate-synthetic `
 uv run histo-audit experiment smoke</pre></article>
       </div>
       <p class="usage-note">Real PanNuke execution is intentionally gated: obtain a lawful local copy from the official source, preserve it unchanged and follow <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>. The repository does not silently download the dataset or relax scientific gates.</p>
+    </div>
+  </section>
+
+  <section class="section author-section" id="author" aria-labelledby="author-title">
+    <div class="author-shell">
+      <div class="author-profile reveal">
+        <p class="section-kicker">About the author</p>
+        <div class="author-identity">
+          <span class="author-monogram" aria-hidden="true">NS</span>
+          <div><span>Author and developer</span><strong>Natan Smogór</strong></div>
+        </div>
+        <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
+        <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
+        <p class="author-copy">He studies Management and Artificial Intelligence at Kozminski University in Warsaw and completed an 80-hour Artificial Intelligence programme at Uniwersytet Młodzieżowy during the 2024/2025 academic year.</p>
+
+        <div class="author-work" aria-labelledby="author-work-title">
+          <h3 id="author-work-title">Work demonstrated in AANCA</h3>
+          <div class="author-contributions">
+            <article class="author-contribution"><span>01</span><h4>Research prototype design</h4><p>Scientific boundaries, controlled corruption and an expert-review-only output.</p></article>
+            <article class="author-contribution"><span>02</span><h4>Reproducible Python workflow</h4><p>Governed data processing, immutable evidence and checksum-verifiable outputs.</p></article>
+            <article class="author-contribution"><span>03</span><h4>Group-safe evaluation</h4><p>Out-of-fold scoring that excludes each nucleus and its complete source group from fitting.</p></article>
+            <article class="author-contribution"><span>04</span><h4>Evidence-led presentation</h4><p>An inspectable account of positive, adverse, neutral and unavailable study outcomes.</p></article>
+          </div>
+        </div>
+      </div>
+
+      <aside class="author-credentials reveal" aria-label="Education and credentials">
+        <article class="credential-record">
+          <div class="credential-heading"><span class="credential-index">01</span><span class="credential-status">Current studies</span></div>
+          <h3><a href="https://www.kozminski.edu.pl/en" target="_blank" rel="noopener">Kozminski University <span aria-hidden="true">↗</span></a></h3>
+          <p class="credential-course">Management and Artificial Intelligence</p>
+          <dl class="credential-meta"><div><dt>Location</dt><dd>Warsaw, Poland</dd></div><div><dt>Status</dt><dd>Current student</dd></div></dl>
+        </article>
+
+        <article class="credential-record">
+          <div class="credential-heading"><span class="credential-index">02</span><span class="credential-status">Completed programme</span></div>
+          <h3>Uniwersytet Młodzieżowy</h3>
+          <p class="credential-course">Artificial Intelligence</p>
+          <dl class="credential-meta"><div><dt>Duration</dt><dd>80 hours</dd></div><div><dt>Academic year</dt><dd>2024/2025</dd></div></dl>
+          <div class="credential-proof" aria-label="Completion diploma for the 80-hour Artificial Intelligence programme">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 5.5h16l7 7v30H13z"/><path d="M29 5.5v8h7M18 24h13M18 30h13M18 36h8"/></svg>
+            <div><strong>Completion diploma</strong><span>80-hour programme, completed in the 2024/2025 academic year</span></div>
+          </div>
+        </article>
+
+        <p class="institution-note">Education references identify the author's background and do not imply institutional endorsement of AANCA.</p>
+      </aside>
     </div>
   </section>
 </main>
@@ -2160,7 +2213,7 @@ def _format_metric_v3(value: Any) -> str:
     """Format presentation metrics consistently without scientific notation."""
 
     if value is None:
-        return "—"
+        return "Unavailable"
     if isinstance(value, bool):
         return str(value)
     if isinstance(value, int):
@@ -2294,7 +2347,7 @@ def _render_forest_plot_v3(comparisons: list[dict[str, Any]]) -> str:
                 f"{html.escape(label)}</span>"
                 '<span class="forest-track forest-track-empty">'
                 "<span>Unavailable by frozen design</span></span>"
-                '<span class="forest-value">—</span></div>'
+                '<span class="forest-value">Unavailable</span></div>'
             )
             continue
         point = _require_real(item.get("point_difference"), role="forest point difference")
@@ -2441,7 +2494,7 @@ def _render_h2_chart_v3(h2: dict[str, Any]) -> str:
         + "".join(rows)
         + f'<p class="chart-note"><strong>{h2["reported_count"]:,}</strong> reportable '
         + f"estimates from <strong>{h2['row_count']:,}</strong> saved rows. These ranges "
-        + "are descriptive—not an omnibus test and not a biological ranking.</p></div>"
+        + "are descriptive. They are not an omnibus test or a biological ranking.</p></div>"
     )
 
 
@@ -2533,22 +2586,17 @@ def _render_hypothesis_ledger_v3(
 def _render_hypothesis_ledger_v4(
     hypotheses: dict[str, dict[str, Any]], h2: dict[str, Any], h4: dict[str, Any]
 ) -> str:
-    """Render every preregistered question as visible, non-collapsible evidence."""
+    """Render every preregistered question as an accessible story slide."""
 
-    h1, h3, h5, h6, h7 = (
+    h1, h3, h5 = (
         hypotheses["h1"],
         hypotheses["h3"],
         hypotheses["h5"],
-        hypotheses["h6"],
-        hypotheses["h7"],
     )
     entries = (
         (
             "H1",
-            "Detection",
             "Can ranking beat random review?",
-            f"{h1['positive_point_difference_count']} / {h1['reported_count']} positive differences",
-            "supported",
             f"All {h1['interval_excludes_zero_in_positive_direction_count']} saved 95% "
             "bootstrap intervals were above zero. The byte-identical "
             "instance-dependent seed outputs are disclosed separately and are not "
@@ -2556,80 +2604,64 @@ def _render_hypothesis_ledger_v4(
         ),
         (
             "H2",
-            "Heterogeneity",
             "Did saved performance estimates vary across contexts?",
-            f"{h2['reported_count']:,} reportable estimates",
-            "descriptive",
-            "Yes, the saved estimates varied across nucleus class, tissue, corruption "
-            "mechanism and rate. This is descriptive heterogeneity; no omnibus test "
-            "or causal biological interpretation was registered.",
+            f"Yes. Across {h2['reported_count']:,} reportable estimates, values varied "
+            "across nucleus class, tissue, corruption mechanism and rate. This is "
+            "descriptive heterogeneity; no omnibus test or causal biological "
+            "interpretation was registered.",
         ),
         (
             "H3",
-            "Difficulty",
             "Were some corruption mechanisms harder?",
-            f"{h3['positive_point_difference_count']} / {h3['reported_count']} positive differences",
-            "qualified",
             f"The registered contrasts generally placed confusion-targeted and "
             f"instance-dependent corruption below symmetric corruption. One of "
             f"{h3['reported_count']} saved 95% intervals crossed zero.",
         ),
         (
             "H4",
-            "Utility",
             "Did guided restoration improve downstream classification?",
-            f"Δ macro-F1 {_format_metric_v3(h4['point_difference'])}",
-            "adverse",
             "No. At the same 5% review budget, audit-guided restoration performed "
-            "below the mean random-review result. The adverse registered outcome is "
-            "retained without post-result tuning.",
+            f"below the mean random-review result by {_format_metric_v3(h4['point_difference'])} "
+            "macro-F1. The saved 95% interval remained below zero, and the adverse "
+            "registered outcome is retained without post-result tuning.",
         ),
         (
             "H5",
-            "Combination",
             "Did the fixed hybrid improve ranking?",
-            f"{h5['positive_point_difference_count']} / {h5['reported_count']} positive differences",
-            "supported",
             f"All {h5['interval_excludes_zero_in_positive_direction_count']} saved 95% "
             "bootstrap intervals were above zero for the preregistered fixed hybrid "
             "minus self-confidence comparison.",
         ),
         (
             "H6",
-            "Representation",
             "Did a pathology-specific encoder outperform ImageNet?",
-            f"{h6['reported_count']} / {h6['comparison_count']} numeric results",
-            "unavailable",
             "This question was not estimated. No pathology encoder satisfied every "
             "frozen access, licence, reproducibility, hardware and smoke-test gate, "
             "and no replacement was chosen after outcomes were visible.",
         ),
         (
             "H7",
-            "Target cue",
             "Did explicit target highlighting help?",
-            f"{h7['interval_crosses_zero_count']} / {h7['reported_count']} intervals crossed zero",
-            "neutral",
             "The saved comparisons do not provide clear evidence that target "
             "highlighting improved average precision over the context representation.",
         ),
     )
-    return "".join(
-        '<article class="hypothesis-row" data-status="'
-        + status
-        + '"><div class="hypothesis-row-head"><span class="hypothesis-id">'
-        + identifier
-        + '</span><span class="hypothesis-theme">'
-        + html.escape(theme)
-        + '</span><span class="hypothesis-result">'
-        + html.escape(result)
-        + '</span></div><h3 class="hypothesis-title">'
-        + html.escape(title)
-        + "</h3><p>"
-        + html.escape(detail)
-        + "</p></article>"
-        for identifier, theme, title, result, status, detail in entries
-    )
+    slides: list[str] = []
+    for _, title, detail in entries:
+        visual_words = "".join(
+            f'<span class="learned-word">{html.escape(word)}</span>' for word in detail.split()
+        )
+        slides.append(
+            '<article class="hypothesis-row" data-learned-slide>'
+            + '<h3 class="hypothesis-title">'
+            + html.escape(title)
+            + '</h3><p class="learned-answer"><span class="sr-only">'
+            + html.escape(detail)
+            + '</span><span class="learned-answer-visual" aria-hidden="true">'
+            + visual_words
+            + "</span></p></article>"
+        )
+    return "".join(slides)
 
 
 _MVP_CSS_V3 = r"""
@@ -3599,13 +3631,14 @@ _MVP_CSS_V4 = (
 /* Professor-facing editorial release: centered reading rhythm + cumulative method story. */
 :root {
   --ink-tertiary: #7b8089;
-  --prose: 780px;
-  --editorial: 860px;
+  --prose: 640px;
+  --editorial: 640px;
   --figure: 1160px;
   --wide: 1320px;
   --section-space: clamp(104px, 11vw, 164px);
 }
 body { font-size: 16px; line-height: 1.68; }
+html.motion-enhanced { scroll-behavior: auto; }
 .site-header { height: 60px; border: 0; background: rgba(1,1,2,.82); backdrop-filter: blur(20px) saturate(125%); will-change: transform; }
 .site-header.is-scrolled { border: 0; }
 .nav-shell { height: 60px; }
@@ -3629,6 +3662,11 @@ body { font-size: 16px; line-height: 1.68; }
 .hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
 .hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
 .hero-byline { margin-top: 30px; }
+.author-jump { display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; }
+.author-jump strong { color: var(--ink-muted); font-weight: 550; }
+.author-jump > span { color: var(--accent-hover); font-size: 10px; }
+.author-jump:hover strong, .author-jump:focus-visible strong { color: var(--ink); }
+.author-jump:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; border-radius: 2px; }
 .hero-visual-label { bottom: 38px; }
 .eyebrow, .section-kicker, .chart-label { font-size: 10px; letter-spacing: .09em; }
 
@@ -3652,11 +3690,11 @@ body { font-size: 16px; line-height: 1.68; }
 
 .section { position: relative; padding: var(--section-space) 0; border: 0; scroll-margin-top: 60px; }
 .section::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
-.section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin-bottom: 54px; }
+.section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto 54px; }
 h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spacing: -.038em; }
-.section-deck { max-width: 760px; margin-top: 20px; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; }
+.section-deck { max-width: none; margin: 20px auto 0; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; text-wrap: pretty; }
 .chapter-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin: -20px auto 56px; }
-.chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; }
+.chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; text-wrap: pretty; }
 
 .journey { position: relative; height: 540vh; scroll-margin-top: 60px; }
 .journey::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
@@ -3697,15 +3735,31 @@ html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; pa
 .reading-card h3 { margin: 34px 0 12px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
 .reading-card p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
 
-.hypothesis-ledger { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
-.hypothesis-row { min-height: 236px; margin: 0; padding: 26px; border: 0; background: var(--surface-1); }
-.hypothesis-row:last-child { grid-column: 1 / -1; min-height: 0; }
-.hypothesis-row-head { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; }
-.hypothesis-id { font-size: 11px; }
-.hypothesis-theme { color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-.hypothesis-result { max-width: 220px; font-size: 10px; text-align: right; white-space: normal; }
-.hypothesis-row .hypothesis-title { margin: 30px 0 10px; font-size: 17px; font-weight: 600; line-height: 1.38; letter-spacing: -.02em; }
-.hypothesis-row p { max-width: 560px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+.learned-section { padding-top: 0; }
+.learned-section::before { display: none; }
+.learned-story { padding: var(--section-space) 0 0; }
+.learned-sticky { width: 100%; }
+.learned-shell { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: auto; }
+.learned-heading { width: 100%; margin-bottom: clamp(58px,7vw,86px); }
+.learned-stage { position: relative; }
+.hypothesis-ledger { display: grid; gap: clamp(68px,9vw,112px); overflow: visible; border: 0; border-radius: 0; background: transparent; }
+.hypothesis-row { min-height: 0; margin: 0; padding: 0; border: 0; background: transparent; }
+.hypothesis-row .hypothesis-title { max-width: 680px; margin: 0; color: var(--ink); font-size: clamp(28px,3.15vw,42px); font-weight: 560; line-height: 1.14; letter-spacing: -.038em; text-wrap: balance; }
+.hypothesis-row .learned-answer { max-width: 680px; margin: 28px 0 0; color: var(--ink-muted); font-size: clamp(16px,1.5vw,19px); line-height: 1.7; letter-spacing: -.008em; text-wrap: pretty; }
+.learned-answer-visual { display: block; }
+.learned-word { display: inline-block; margin-right: .27em; }
+
+@media (min-width: 901px) {
+  html.motion-enhanced .learned-story { height: 980vh; padding: 0; }
+  html.motion-enhanced .learned-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 76px 0 48px; box-sizing: border-box; }
+  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(320px,1fr); align-content: center; max-height: 820px; }
+  html.motion-enhanced .learned-heading { margin-bottom: 48px; }
+  html.motion-enhanced .learned-stage { min-height: 320px; overflow: hidden; }
+  html.motion-enhanced .hypothesis-ledger { position: relative; height: 100%; border: 0; }
+  html.motion-enhanced .hypothesis-row { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 10px 0 30px; border: 0; visibility: hidden; opacity: 0; }
+  html.motion-enhanced .learned-word { opacity: 0; }
+}
 
 .always-visible-evidence { margin-top: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
 .evidence-label-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 12px; font-weight: 500; }
@@ -3740,8 +3794,147 @@ input, select { min-height: 44px; }
 .repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
 .usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
 
+.author-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: minmax(0,1.08fr) minmax(360px,.92fr); gap: clamp(58px,7vw,104px); align-items: start; }
+.author-profile { min-width: 0; }
+.author-profile > .section-kicker { margin-bottom: 28px; }
+.author-identity { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.author-monogram { width: 54px; height: 54px; display: grid; place-items: center; flex: 0 0 54px; border: 1px solid var(--line-strong); border-radius: 12px; color: var(--accent-hover); background: var(--surface-1); font: 500 13px/1 var(--mono); letter-spacing: .08em; }
+.author-identity div > span { display: block; margin-bottom: 3px; color: var(--ink-tertiary); font: 500 9px/1.35 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.author-identity div > strong { display: block; color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.author-profile h2 { max-width: 680px; margin: 0; font-size: clamp(34px,4vw,52px); }
+.author-lede { max-width: 680px; margin: 28px 0 0; color: var(--ink-muted); font-size: clamp(17px,1.45vw,20px); line-height: 1.68; letter-spacing: -.01em; }
+.author-copy { max-width: 680px; margin: 20px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.72; }
+.author-work { margin-top: 48px; }
+.author-work > h3 { margin: 0 0 18px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.author-contributions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 clamp(28px,4vw,48px); }
+.author-contribution { padding: 20px 0 24px; border-top: 1px solid var(--line); }
+.author-contribution > span { color: var(--accent-hover); font: 500 9px/1 var(--mono); }
+.author-contribution h4 { margin: 16px 0 7px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: -.01em; }
+.author-contribution p { margin: 0; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
+.author-credentials { min-width: 0; border-top: 1px solid var(--line); }
+.credential-record { padding: 30px 0 34px; border-bottom: 1px solid var(--line); }
+.credential-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+.credential-index { color: var(--accent-hover); font: 500 10px/1 var(--mono); }
+.credential-status { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.credential-record h3 { margin: 0; color: var(--ink); font-size: clamp(21px,2.1vw,28px); font-weight: 560; line-height: 1.22; letter-spacing: -.03em; }
+.credential-record h3 a { color: inherit; text-decoration: none; }
+.credential-record h3 a span { color: var(--accent-hover); font-size: .55em; vertical-align: .42em; }
+.credential-record h3 a:hover, .credential-record h3 a:focus-visible { color: var(--accent-hover); }
+.credential-record h3 a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 5px; border-radius: 2px; }
+.credential-course { margin: 10px 0 0; color: var(--ink-muted); font-size: 14px; line-height: 1.55; }
+.credential-meta { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; margin: 28px 0 0; }
+.credential-meta div { padding-top: 13px; border-top: 1px solid var(--line); }
+.credential-meta dt { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.credential-meta dd { margin: 6px 0 0; color: var(--ink-muted); font-size: 12px; line-height: 1.5; }
+.credential-proof { display: grid; grid-template-columns: 38px 1fr; gap: 15px; align-items: center; margin-top: 26px; padding: 18px 0 0; border-top: 1px solid var(--line); }
+.credential-proof svg { width: 34px; height: 34px; fill: none; stroke: var(--accent-hover); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.credential-proof strong { display: block; color: var(--ink-muted); font-size: 11px; font-weight: 600; }
+.credential-proof span { display: block; margin-top: 3px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.45; }
+.institution-note { margin: 20px 0 0; color: var(--ink-tertiary); font-size: 10px; line-height: 1.55; }
+
+/* Editorial surfaces: structure with rhythm and rules, not nested cards. */
+.study-specs, .reading-grid {
+  gap: 1px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--line);
+  overflow: visible;
+}
+.spec-card, .reading-card { background: var(--canvas); }
+.spec-card { min-height: 132px; padding: 21px 18px; }
+.spec-card span { margin-bottom: 18px; }
+.reading-card { min-height: 190px; padding: 24px 22px; }
+.reading-card h3 { margin-top: 27px; }
+.result-layout { gap: clamp(42px,5vw,72px); align-items: center; }
+.result-lead { padding: 0; border: 0; border-radius: 0; background: transparent; }
+.h4-chart, .h2-chart, .forest-plot, .seed-panel {
+  padding: clamp(28px,3.4vw,44px) 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+.metric-dot { border-color: var(--canvas); }
+.metric-row { min-height: 42px; }
+.range-row { min-height: 50px; }
+.forest-group { margin: 20px 0 6px; padding-top: 14px; }
+.forest-row { min-height: 38px; gap: 16px; }
+.forest-track { height: 18px; }
+.forest-label { font-size: 10px; line-height: 1.3; }
+#benchmarks .forest-plot {
+  max-height: min(62svh,680px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+#benchmarks .forest-axis {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  padding: 10px 0 12px;
+  margin: -10px 0 2px;
+  background: var(--canvas);
+}
+#benchmarks .forest-group {
+  position: sticky;
+  z-index: 2;
+  top: 38px;
+  padding-bottom: 8px;
+  background: var(--canvas);
+}
+#benchmarks .forest-plot:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
+.always-visible-evidence {
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.qc-frame { padding: 0; border: 0; border-radius: 0; background: transparent; }
+.stats-grid {
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  overflow: visible;
+}
+.stat { background: transparent; }
+.stat { min-height: 108px; padding: 20px; }
+.rules { gap: 0 clamp(38px,5vw,72px); border: 0; background: transparent; }
+.rule { padding: 26px 0; border-top: 1px solid var(--line); background: transparent; }
+.claim-grid { gap: clamp(42px,6vw,84px); border: 0; border-radius: 0; background: transparent; overflow: visible; }
+.claim-card { padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: transparent; }
+.repo-card {
+  padding: 34px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+.repo-card::before { display: none; }
+.usage-grid { gap: clamp(28px,3.5vw,48px); }
+.repo-command { padding: 28px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+.evidence-label-row { padding: 12px 0; }
+.table-tools { padding: 12px 0; }
+table { font-size: 10px; }
+th, td { padding: 8px 10px; }
+.comparison-name { font-size: 10px; line-height: 1.32; }
+.comparison-id { margin-top: 2px; font-size: 8px; line-height: 1.25; }
+.status-pill { padding: 2px 5px; font-size: 8px; }
+#evidence .table-wrap {
+  max-height: min(60svh,620px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
 footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: var(--ink-subtle); font-size: 11px; }
-.footer-inner { width: min(var(--wide),100%); display: block; }
+.footer-inner { width: min(var(--wide),100%); margin-inline: auto; display: block; }
 .footer-divider { width: min(640px,100%); height: 1px; margin: 0 auto 56px; background: var(--line); }
 .footer-grid { display: grid; grid-template-columns: 1.35fr repeat(3,1fr); gap: 48px; }
 .footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
@@ -3758,10 +3951,15 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
 @media (max-width: 1120px) {
   .study-specs { grid-template-columns: repeat(3,1fr); }
   .spec-card:nth-child(n+4) { min-height: 142px; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .stat:nth-child(2n) { border-right: 0; }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .journey-grid { grid-template-columns: minmax(500px,1.05fr) minmax(330px,.95fr); gap: 44px; }
   .reading-grid { grid-template-columns: repeat(2,1fr); }
   .usage-grid { grid-template-columns: 1fr 1fr; }
   .repo-command:last-child { grid-column: 1 / -1; }
+  .author-shell { grid-template-columns: 1fr; gap: 64px; }
+  .author-profile { max-width: 760px; }
 }
 @media (max-width: 1200px) {
   .journey { height: auto; padding: var(--section-space) 0; }
@@ -3778,9 +3976,17 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
   .hero-copy { padding-top: 122px; }
   .hypothesis-ledger { grid-template-columns: 1fr; }
-  .hypothesis-row:last-child { grid-column: auto; }
   .footer-grid { grid-template-columns: 1.25fr repeat(2,1fr); }
   .footer-column:last-child { grid-column: 2 / -1; }
+}
+@media (min-width: 901px) and (max-height: 720px) {
+  html.motion-enhanced .learned-sticky { padding: 62px 0 22px; }
+  html.motion-enhanced .learned-heading { margin-bottom: 22px; }
+  html.motion-enhanced .learned-heading h2 { font-size: 34px; }
+  html.motion-enhanced .learned-stage { min-height: 252px; }
+  html.motion-enhanced .hypothesis-row { padding: 20px 0 22px; }
+  html.motion-enhanced .hypothesis-row .hypothesis-title { margin: 0; font-size: 29px; }
+  html.motion-enhanced .hypothesis-row .learned-answer { margin-top: 19px; font-size: 14px; line-height: 1.52; }
 }
 @media (max-width: 720px) {
   :root { --page-pad: 22px; --section-space: 96px; }
@@ -3803,14 +4009,19 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .journey-visual svg { width: 112%; margin-left: -6%; }
   .journey-step { padding-left: 40px; }
   .reading-grid, .usage-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: 0; }
   .reading-card { min-height: 0; }
   .repo-command:last-child { grid-column: auto; }
   .repo-top { grid-template-columns: auto 1fr; }
   .repo-link { grid-column: 1 / -1; justify-self: start; }
   .repo-command p { min-height: 0; }
+  .author-contributions { grid-template-columns: 1fr; }
+  .author-contribution { padding-bottom: 22px; }
+  .author-shell { gap: 52px; }
+  .author-monogram { width: 48px; height: 48px; flex-basis: 48px; }
   .hypothesis-row { min-height: 0; }
-  .hypothesis-row-head { grid-template-columns: 38px 1fr; }
-  .hypothesis-result { grid-column: 1 / -1; max-width: none; text-align: left; }
   .metric-axis, .range-axis { font-size: 10px; }
   .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
   .qc-preview { max-height: 620px; }
@@ -3819,6 +4030,19 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .footer-column a { min-height: 44px; }
   .footer-bottom { flex-direction: column; }
   #comparison-table td[data-label="Comparison"] .comparison-id { grid-column: 2; margin-top: -4px; }
+  #comparison-table tr {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 10px 16px;
+    padding: 12px 0;
+  }
+  #comparison-table td { display: block; min-width: 0; padding: 0; }
+  #comparison-table td::before { display: block; margin-bottom: 3px; }
+  #comparison-table td[data-label="Comparison"] { grid-column: 1 / -1; }
+  #comparison-table td[data-label="Comparison"] .comparison-id { margin-top: 3px; }
+  #seed-audit table tr { padding: 9px 0; }
+  #seed-audit table td { grid-template-columns: 76px 1fr; gap: 8px; padding: 3px 0; }
+  #benchmarks .forest-group { top: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transform: none !important; }
@@ -3832,8 +4056,15 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .journey { height: auto; padding: 72px 0; }
   .journey-sticky { position: static; min-height: 0; padding: 0; }
   .journey-grid { grid-template-columns: 1fr; }
+  .learned-story { height: auto !important; padding: 72px 0 0 !important; }
+  .learned-sticky { position: static !important; min-height: 0 !important; padding: 0 !important; overflow: visible !important; }
+  .learned-shell { display: block !important; max-height: none !important; }
+  .learned-stage { min-height: 0 !important; border: 0 !important; overflow: visible !important; }
+  .hypothesis-ledger { position: static !important; height: auto !important; border: 0 !important; }
+  .hypothesis-row { position: static !important; visibility: visible !important; opacity: 1 !important; transform: none !important; padding: 32px 0 !important; border: 0 !important; }
+  .learned-word { visibility: visible !important; opacity: 1 !important; transform: none !important; }
   .journey-stage-group, .journey-connector, .journey-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
-  .section, .repo-card, .hypothesis-row { break-inside: avoid; }
+  .section, .repo-card, .hypothesis-row, .credential-record { break-inside: avoid; }
 }
 """
 )
@@ -3991,6 +4222,200 @@ _MVP_SCRIPT_V4 = r"""
     setJourneyStage(4, 1);
   }
 
+  const learnedStory = document.getElementById('learned-story');
+  const learnedSlides = [...document.querySelectorAll('[data-learned-slide]')];
+  let learnedActiveIndex = -1;
+  const setLearnedState = active => {
+    const next = Math.max(0, Math.min(learnedSlides.length - 1, active));
+    if (next === learnedActiveIndex) return;
+    learnedSlides.forEach((slide, index) => {
+      if (index === next) slide.removeAttribute('aria-hidden');
+      else slide.setAttribute('aria-hidden', 'true');
+    });
+    learnedActiveIndex = next;
+  };
+
+  if (motionAvailable && learnedStory && learnedSlides.length) {
+    const learnedMedia = gsapEngine.matchMedia();
+    learnedMedia.add('(min-width: 901px)', () => {
+      let learnedSlideThresholds = [0];
+      let learnedSettleThresholds = [0];
+      let learnedSettledIndex = 0;
+      const learnedWords = learnedSlides.flatMap(slide => [
+        ...slide.querySelectorAll('.learned-word'),
+      ]);
+      const nearestSettleIndex = value => {
+        let nearest = 0;
+        let distance = Infinity;
+        learnedSettleThresholds.forEach((threshold, index) => {
+          const nextDistance = Math.abs(value - threshold);
+          if (nextDistance < distance) {
+            nearest = index;
+            distance = nextDistance;
+          }
+        });
+        return nearest;
+      };
+      const learnedTimeline = gsapEngine.timeline({
+        defaults: {ease: 'power4.out'},
+        scrollTrigger: {
+          trigger: learnedStory,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          invalidateOnRefresh: true,
+          onRefresh: self => {
+            learnedSettledIndex = nearestSettleIndex(self.progress);
+          },
+          onUpdate: self => {
+            let active = 0;
+            learnedSlideThresholds.forEach((threshold, index) => {
+              if (self.progress + .0001 >= threshold) active = index;
+            });
+            setLearnedState(active);
+          },
+        },
+      });
+
+      gsapEngine.set(learnedSlides, {autoAlpha: 0, y: 72, scale: .988});
+      gsapEngine.set(learnedSlides[0], {autoAlpha: 1, y: 0, scale: 1});
+      gsapEngine.set(learnedWords, {autoAlpha: 0});
+      const learnedSlideStarts = [];
+      const learnedSettleTimes = [];
+      learnedSlides.forEach((slide, index) => {
+        learnedSlideStarts.push(learnedTimeline.duration());
+        const words = slide.querySelectorAll('.learned-word');
+        if (index === 0) {
+          learnedTimeline.set(slide, {autoAlpha: 1, y: 0, scale: 1});
+        } else {
+          learnedTimeline.fromTo(
+            slide,
+            {autoAlpha: 0, y: 72, scale: .988},
+            {autoAlpha: 1, y: 0, scale: 1, duration: .48, ease: 'power3.out'}
+          );
+        }
+        learnedTimeline.to({}, {duration: .14});
+        learnedTimeline.to(words, {
+          autoAlpha: 1,
+          duration: .08,
+          stagger: .012,
+          ease: 'power1.out',
+        });
+        learnedSettleTimes.push(learnedTimeline.duration());
+        learnedTimeline.to({}, {duration: 1.38});
+        if (index < learnedSlides.length - 1) {
+          learnedTimeline.to(slide, {
+            autoAlpha: 0,
+            y: -82,
+            scale: .988,
+            duration: .44,
+            ease: 'power4.inOut',
+          });
+        }
+      });
+      const learnedDuration = learnedTimeline.duration();
+      learnedSlideThresholds = learnedSlideStarts.map(start => start / learnedDuration);
+      learnedSettleThresholds = learnedSettleTimes.map(time => time / learnedDuration);
+      setLearnedState(0);
+      scrollEngine.refresh();
+
+      let learnedScrollTween;
+      let learnedWheelTimer;
+      let learnedWheelAccumulator = 0;
+      let learnedWheelDirection = 0;
+      let learnedWheelConsumed = false;
+      let learnedWheelQuiet = true;
+      let learnedTransitioning = false;
+      const releaseLearnedWheel = () => {
+        if (!learnedWheelQuiet || learnedTransitioning) return;
+        learnedWheelAccumulator = 0;
+        learnedWheelDirection = 0;
+        learnedWheelConsumed = false;
+      };
+      const scheduleLearnedWheelRelease = () => {
+        learnedWheelQuiet = false;
+        window.clearTimeout(learnedWheelTimer);
+        learnedWheelTimer = window.setTimeout(() => {
+          learnedWheelQuiet = true;
+          releaseLearnedWheel();
+        }, 180);
+      };
+      const moveLearnedTo = targetIndex => {
+        const trigger = learnedTimeline.scrollTrigger;
+        if (!trigger) return;
+        const next = Math.max(0, Math.min(learnedSlides.length - 1, targetIndex));
+        const targetY = trigger.start
+          + (trigger.end - trigger.start) * learnedSettleThresholds[next];
+        const scrollState = {y: window.scrollY};
+        learnedTransitioning = true;
+        if (learnedScrollTween) learnedScrollTween.kill();
+        learnedScrollTween = gsapEngine.to(scrollState, {
+          y: targetY,
+          duration: .58,
+          ease: 'power2.inOut',
+          overwrite: true,
+          onUpdate: () => window.scrollTo(0, scrollState.y),
+          onComplete: () => {
+            learnedSettledIndex = next;
+            learnedTransitioning = false;
+            setLearnedState(next);
+            releaseLearnedWheel();
+          },
+        });
+      };
+      const normaliseWheelDelta = event => {
+        if (event.deltaMode === 1) return event.deltaY * 16;
+        if (event.deltaMode === 2) return event.deltaY * window.innerHeight;
+        return event.deltaY;
+      };
+      const onLearnedWheel = event => {
+        if (event.ctrlKey || !learnedTimeline.scrollTrigger) return;
+        const delta = normaliseWheelDelta(event);
+        if (Math.abs(delta) < .5) return;
+        const trigger = learnedTimeline.scrollTrigger;
+        const currentY = window.scrollY;
+        const direction = delta > 0 ? 1 : -1;
+        const inside = currentY >= trigger.start - 2 && currentY <= trigger.end + 2;
+        if (!inside) return;
+        const beforeFirstAnswer = trigger.progress < learnedSettleThresholds[0] - .002;
+        const atFirstExit = direction < 0 && learnedSettledIndex === 0;
+        const atLastExit = direction > 0
+          && learnedSettledIndex === learnedSlides.length - 1
+          && !beforeFirstAnswer;
+        if (!learnedTransitioning && (atFirstExit || atLastExit)) return;
+
+        event.preventDefault();
+        scheduleLearnedWheelRelease();
+        if (learnedWheelConsumed) return;
+        if (learnedWheelDirection && learnedWheelDirection !== direction) {
+          learnedWheelAccumulator = 0;
+        }
+        learnedWheelDirection = direction;
+        learnedWheelAccumulator += Math.abs(delta);
+        const activationDistance = beforeFirstAnswer ? 60 : 360;
+        if (learnedWheelAccumulator < activationDistance) return;
+        learnedWheelConsumed = true;
+        const target = beforeFirstAnswer
+          ? 0
+          : learnedSettledIndex + direction;
+        moveLearnedTo(target);
+      };
+      learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false});
+
+      return () => {
+        learnedStory.removeEventListener('wheel', onLearnedWheel);
+        window.clearTimeout(learnedWheelTimer);
+        if (learnedScrollTween) learnedScrollTween.kill();
+        if (learnedTimeline.scrollTrigger) learnedTimeline.scrollTrigger.kill();
+        learnedTimeline.kill();
+        gsapEngine.set(learnedSlides, {clearProps: 'all'});
+        gsapEngine.set(learnedWords, {clearProps: 'all'});
+        learnedSlides.forEach(slide => slide.removeAttribute('aria-hidden'));
+        learnedActiveIndex = -1;
+      };
+    });
+  }
+
   const revealItems = [...document.querySelectorAll('.reveal')];
   if (motionAvailable) {
     gsapEngine.set(revealItems, {autoAlpha: 0, y: 24});
@@ -4139,7 +4564,7 @@ def _render_html_v3_legacy(evidence: dict[str, Any]) -> str:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23010102'/%3E%3Crect x='14' y='14' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='38' y='14' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='26' y='26' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='14' y='38' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='38' y='38' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3C/svg%3E">
-  <title>AANCA — annotation auditing for expert review</title>
+  <title>AANCA: Automated Auditing of Nucleus Class Annotations</title>
   <style>__CSS__</style>
 </head>
 <body>
@@ -4157,7 +4582,7 @@ def _render_html_v3_legacy(evidence: dict[str, Any]) -> str:
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell">
     <div class="hero-copy">
-      <p class="eyebrow hero-animate">Automated nucleus-annotation auditing</p>
+      <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that assigns review priority to each <em>potentially inconsistent annotation</em>. High-priority cases are <em>recommended for expert review</em>—without changing the source labels.</p>
       <div class="hero-byline hero-animate"><span>By <strong>Natan Smogór</strong></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
@@ -4384,6 +4809,11 @@ tables and scientific interpretation remain available when motion is reduced;
 network access is only needed for the optional web fonts and animation libraries.
 The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
 pixel ratio, and respects reduced-motion and data-saving preferences.
+
+The complete 36-entry comparison atlas and evidence table stay immediately
+available inside compact, keyboard-scrollable viewports. On narrow screens, each
+evidence entry becomes a labelled two-column record without dropping any saved
+identifier, interval, adjusted p-value, or unavailable result.
 
 Scientific status: `PRIMARY_STUDY_COMPLETE`. Presentation status:
 `DEMO_COMPLETE`. The primary analysis is permanently labelled

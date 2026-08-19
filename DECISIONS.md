@@ -5762,3 +5762,41 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - This decision changes responsive presentation state and hand-off documentation
   only. It does not alter evidence, metrics, hypotheses, source annotations,
   accepted-run artifacts, frozen authorities or scientific completion status.
+
+## 2026-08-19 - Use one article axis and a progressive findings sequence
+
+- Use one centered 640 px editorial axis for narrative introductions, section
+  headings, decks, research questions and follow-up prose. Wide charts and evidence
+  tables remain centered in their separate figure containers. Centering refers to
+  the column in the viewport; prose stays left aligned for sustained reading.
+- Replace the two-column H1 to H7 card ledger with one scroll-controlled findings
+  sequence on motion-capable viewports above 900 px. Keep only the section title,
+  one registered question and its full answer in the visible presentation. Remove
+  hypothesis codes, category labels, outcome chips, answer labels, decorative
+  rules, counters and progress tracks from this sequence.
+- Make each fully revealed answer a mandatory snap point. Allow the next question
+  to enter from below only after a separate, deliberate scroll, and clamp every
+  snap to one adjacent question so a large gesture cannot settle several questions
+  ahead. On pointer-wheel desktops, consume one gesture at a time and require a
+  larger accumulated movement after the first answer. Use one scroll tween as the
+  animation clock, avoid filter effects, and update accessibility state only when
+  the active question changes. Move the completed question upward during the
+  transition.
+- Keep all seven questions and full answers in semantic HTML. At narrow widths,
+  under reduced motion, for print, or when GSAP is unavailable, render the same
+  content as a complete static sequence with no collapsed controls or reserved
+  pinned-scroll height.
+- Do not use em dashes or en dashes in the generated demo. Use sentences, commas,
+  colons or explicit “Unavailable” labels so missing values are not represented by
+  ambiguous dash glyphs.
+- Prefer open editorial surfaces over nested dashboard cards. Study facts, metric
+  explanations, plots, tables, integrity rules, claims and usage steps use spacing
+  plus thin rules; closed borders remain only for controls, code and image bounds.
+- Keep the complete evidence table and comparison atlas immediately present and
+  keyboard-scrollable, but cap both viewport heights instead of forcing each set of
+  36 entries into the article axis. Tighten row height and group spacing, and use a
+  two-column labelled record grid on narrow screens without dropping any comparison,
+  identifier, interval or adjusted p-value.
+- This decision changes article layout, progressive animation and punctuation only.
+  It does not alter evidence, metrics, registered hypotheses, annotations, the
+  accepted run, frozen authorities or scientific completion status.

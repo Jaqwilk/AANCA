@@ -78,6 +78,7 @@ reports/doctor_latest.txt
 output/playwright/**
 !output/playwright/
 !output/playwright/aanca-professor-release-footer.png
+!output/playwright/aanca-professor-release-findings-carousel.png
 !output/playwright/aanca-professor-release-hero.png
 !output/playwright/aanca-professor-release-method-mid.png
 !output/playwright/aanca-professor-release-mobile-menu.png

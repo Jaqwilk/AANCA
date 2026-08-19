@@ -37,6 +37,11 @@ network access is only needed for the optional web fonts and animation libraries
 The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
 pixel ratio, and respects reduced-motion and data-saving preferences.
 
+The complete 36-entry comparison atlas and evidence table stay immediately
+available inside compact, keyboard-scrollable viewports. On narrow screens, each
+evidence entry becomes a labelled two-column record without dropping any saved
+identifier, interval, adjusted p-value, or unavailable result.
+
 Scientific status: `PRIMARY_STUDY_COMPLETE`. Presentation status:
 `DEMO_COMPLETE`. The primary analysis is permanently labelled
 `amended_or_exploratory`; confirmatory and external validation were not run.
