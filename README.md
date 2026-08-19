@@ -415,6 +415,22 @@ Mandatory scientific invariants live in [`AGENTS.md`](AGENTS.md) and
 `STATUS.md` and rationale in `DECISIONS.md`. A failed mandatory gate stops
 advancement.
 
+### Workspace hygiene
+
+Raw PanNuke files, representation caches and sealed run directories are local and
+ignored by Git, but they are not disposable build cache. In particular, do **not**
+run `git clean -fdX`: it would also target licensed raw data and the immutable run
+lineage required to reproduce the accepted evidence.
+
+Routine cleanup is limited to tool caches (`.mypy_cache`, `.playwright-cli`,
+`.pytest_cache`, `.ruff_cache`, `__pycache__`), `dist`, non-canonical
+`artifacts/mvp_demo_*` previews and unselected browser-QA output. The canonical
+five-file package remains in `artifacts/mvp_demo`; the repository retains only six
+professor-release captures and three final-audit captures under
+`output/playwright`. Data, embeddings, run directories, authorities and evidence
+reports must be preserved unless a separately reviewed retention decision says
+otherwise.
+
 ## Data terms, software licence, and citation
 
 Dataset files and pretrained weights retain their own licences and access terms. The

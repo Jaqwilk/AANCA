@@ -10058,3 +10058,53 @@ and supervisor before the one authorized Q replacement write.
   anonymous HTTPS request cannot read the repository and the public web URL returns
   404. Repository visibility or professor access remains an owner-controlled
   external setting and was not changed implicitly by this audit.
+
+## 2026-08-19 - Recoverable workspace and repository cleanup
+
+- Classified the workspace before removal rather than applying a blanket ignored-file
+  deletion. The local tree contained approximately 91.373 GiB under `artifacts`,
+  36.677 GiB under `data` and 4.501 GiB in `.venv`. Raw PanNuke archives and arrays,
+  both 43-GiB primary lineage trees, representation caches, `.venv`, authorities,
+  registries, evidence reports and the canonical `artifacts/mvp_demo` package were
+  retained. In particular, `git clean -fdX` remains unsafe because ignored paths
+  include licensed data and immutable scientific evidence.
+- Removed 29 tracked intermediate QA files from the intended repository state:
+  superseded English-layout captures, pre-release final captures, review-queue
+  animation iterations and the obsolete `mvp_demo_before_review_queue` copy. The
+  removed files total 8,735,705 bytes. After the new hygiene policy and attributes
+  file are included, the planned repository head contains 377 files and 95,033,593
+  bytes instead of 405 files and 103,762,380 bytes: a net reduction of 8,728,787
+  bytes without removing any canonical presentation or scientific evidence.
+- Retained exactly nine deliberate browser captures: six professor-release views
+  and the three latest full/mobile/reduced-motion audit views. `.gitignore` now
+  ignores all other `output/playwright` content by default and explicitly allowlists
+  only those nine files. `.playwright-cli` is also explicitly classified as local
+  cache.
+- Moved, rather than permanently deleted, 44 ignored browser-design images, eight
+  non-canonical `artifacts/mvp_demo_*` preview directories, one generated figure,
+  tool caches, bytecode caches and the 29 tracked intermediate files. The recoverable
+  copy is
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA-cleanup-backup-20260819T0400` and contains
+  572 files / 231,292,255 bytes. Tracked removals also remain recoverable from Git
+  history. No transient cache or non-canonical demo preview remains in the workspace.
+- Added `.gitattributes` so repository text uses deterministic LF endings across
+  platforms while NPY, NPZ, Parquet, PNG and ZIP assets remain binary and
+  byte-preserving. Added a README hygiene policy that forbids blanket ignored-file
+  cleanup and distinguishes disposable tooling output from retained research state.
+- Complete post-cleanup validation passed: **2,393 tests passed, one expected Windows
+  skip and zero failures in 1,098.56 s**; Ruff check passed without cache; Ruff format
+  check reported 209 files already formatted; mypy passed 100 source files; `uv
+  lock --check` resolved 83 packages; and `uv pip check` found all 64 installed
+  packages compatible. Both the dependency-free verifier and installed CLI report
+  `status=valid`, file count 5 and manifest root
+  `1b95f12a167e749f57bb3fded2d82636586c8d018a75423f332242c43d91f49f`.
+- All 36 retained Markdown files have valid local link targets. The canonical article
+  retains 32 unique IDs, zero duplicate IDs, zero missing static anchors and zero
+  missing local assets. `git fsck --full --no-dangling` and `git diff --check` passed.
+- Frozen authority hashes remain unchanged:
+  `SPEC.md=9260d7d00e5a9fe2e9eec0809c3a8b3125aff7cc1d0d35ad1053055bc40e2fd0`,
+  `PLAN.md=176f0184f5841a89b8c4746a821d548bb3a1ec8ab59242338b7d65892f552357`
+  and
+  `PRE_REGISTRATION.md=7cd9e1cfc38d648ed551ee9835f885c9ab94d45d65b5f8e86064a189d320473b`.
+  No implementation, dataset, source annotation, label, metric, accepted-run file or
+  frozen scientific rule changed.

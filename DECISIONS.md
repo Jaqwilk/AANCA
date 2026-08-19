@@ -5692,3 +5692,32 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - Preserve `SPEC.md`, `PLAN.md`, `PRE_REGISTRATION.md`, the accepted primary run,
   source annotations and all scientific values byte-for-byte. These changes improve
   delivery, metadata, remote verification and auditability only.
+
+## 2026-08-19 - Use an allowlisted, evidence-aware cleanup policy
+
+- Treat Git ignore status as a publication rule, not a deletion authorization.
+  Ignored PanNuke data, representation caches and sealed run trees are required local
+  research state; a blanket `git clean -fdX` is therefore prohibited.
+- Preserve `.venv` so the reviewed project remains immediately runnable. Preserve raw
+  data, both the interrupted source run and accepted recovery run, embeddings,
+  authorities, registries, reports and `artifacts/mvp_demo` even when they are large
+  or reproducible. Cleanup must not trade scientific lineage for disk space.
+- Remove from the repository head only superseded browser QA and the obsolete
+  pre-review-queue demo copy. Retain six professor-release captures plus three latest
+  audit captures, and make that nine-file set the explicit `output/playwright`
+  allowlist. New screenshots remain local unless deliberately reviewed and added to
+  the allowlist.
+- Move local transient material to one checked destination outside the workspace
+  before considering permanent deletion. This cleanup keeps a temporary recovery
+  copy; tracked files remain independently recoverable from Git history.
+- Define cross-platform line-ending behaviour in `.gitattributes`: LF for text and
+  binary treatment for research arrays, archives and presentation images. This
+  prevents incidental Windows line-ending churn without modifying frozen authority
+  bytes.
+- Document the retention boundary in the root README. Future routine cleanup is
+  limited to tooling caches, bytecode, `dist`, non-canonical demo previews and
+  unselected browser QA. Any broader deletion requires a separately reviewed
+  evidence-retention decision.
+- This decision changes repository hygiene and retained presentation QA only. It does
+  not change implementation behaviour, scientific values, datasets, annotations,
+  accepted-run artifacts, frozen authorities or completion status.

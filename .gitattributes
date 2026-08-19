@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Keep binary research and presentation assets byte-for-byte.
+*.npy binary
+*.npz binary
+*.parquet binary
+*.png binary
+*.zip binary

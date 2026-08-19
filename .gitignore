@@ -5,6 +5,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.playwright-cli/
 .coverage
 htmlcov/
 *.egg-info/
@@ -72,10 +73,16 @@ reports/doctor_latest.json
 reports/doctor_latest.txt
 *.log
 
-# Local browser-design iterations; selected professor-release captures are kept explicitly.
-output/playwright/aanca-v4-*.png
-output/playwright/reference-anthropic-*.png
-output/playwright/aanca-final-canonical.png
-output/playwright/aanca-optimized-*.png
-output/playwright/aanca-professor-release-method.png
-output/playwright/aanca-professor-release-qc-preview.png
+# Browser QA is transient by default. Keep only the deliberately selected release
+# and final-audit captures; any new retained capture must be added explicitly.
+output/playwright/**
+!output/playwright/
+!output/playwright/aanca-professor-release-footer.png
+!output/playwright/aanca-professor-release-hero.png
+!output/playwright/aanca-professor-release-method-mid.png
+!output/playwright/aanca-professor-release-mobile-menu.png
+!output/playwright/aanca-professor-release-mobile-use-after-filter.png
+!output/playwright/aanca-professor-release-qc.png
+!output/playwright/aanca-full-layout-audit-20260819.png
+!output/playwright/aanca-mobile-layout-audit-20260819.png
+!output/playwright/aanca-reduced-motion-audit-20260819.png
