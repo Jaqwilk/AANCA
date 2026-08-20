@@ -155,12 +155,24 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
 
     evidence = _load_json(directory / "evidence.json")
     primary = evidence.get("primary")
+    external_completed = evidence.get("external_validation_completed")
+    external = evidence.get("external_validation")
+    external_scope_valid = external_completed is False or (
+        external_completed is True
+        and isinstance(external, dict)
+        and external.get("completion_stage") == "EXTERNAL_VALIDATION_COMPLETE"
+        and external.get("overall_conclusion") == "not_supported"
+        and external.get("primary_subset", {}).get("ranking_success_conditions_met") is False
+        and external.get("primary_subset", {}).get("downstream_success_conditions_met") is False
+        and isinstance(external.get("claim_boundary"), dict)
+        and not any(external["claim_boundary"].values())
+    )
     if (
         evidence.get("schema_version") != 2
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
-        or evidence.get("external_validation_completed") is not False
+        or not external_scope_valid
         or not isinstance(primary, dict)
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"
@@ -179,6 +191,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         "status": "valid",
         "presentation_status": "DEMO_COMPLETE",
         "scientific_status": "PRIMARY_STUDY_COMPLETE",
+        "external_validation_completed": external_completed,
         "manifest_root_sha256": manifest["manifest_root_sha256"],
         "file_count": len(expected_names),
     }

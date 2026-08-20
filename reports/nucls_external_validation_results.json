@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "study_id": "nucls_natural_label_external_validation_v1",
+  "status": "completed",
+  "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+  "preregistered_tag": "nucls-external-validation-preregistered-v1",
+  "primary_subset": {
+    "name": "unbiased_control",
+    "sample_count": 811,
+    "patient_group_count": 5,
+    "natural_disagreement_count": 27,
+    "natural_disagreement_prevalence": 0.03329223181257707,
+    "average_precision": 0.07348905384277785,
+    "ap_minus_prevalence": {
+      "estimate": 0.04019682203020078,
+      "interval_95": [
+        0.006105441307506995,
+        0.21362402839313893
+      ]
+    },
+    "precision_at_5_percent": 0.0975609756097561,
+    "precision_at_5_percent_minus_prevalence": {
+      "estimate": 0.06426874379717903,
+      "interval_95": [
+        -0.03007518796992481,
+        0.15407470288624786
+      ]
+    },
+    "uncorrected_macro_f1": 0.7639687577478279,
+    "guided_macro_f1": 0.7493354052113146,
+    "mean_random_macro_f1": 0.7610853660302145,
+    "guided_minus_mean_random_macro_f1": {
+      "estimate": -0.011749960818899896,
+      "interval_95": [
+        -0.02386630572001025,
+        0.005799510666181229
+      ]
+    },
+    "guided_minus_uncorrected_macro_f1": {
+      "estimate": -0.014633352536513322,
+      "interval_95": [
+        -0.026683314580239315,
+        -0.002414596650361811
+      ]
+    },
+    "ranking_success_conditions_met": false,
+    "downstream_success_conditions_met": false
+  },
+  "secondary_subset": {
+    "name": "evaluation",
+    "sample_count": 908,
+    "patient_group_count": 5,
+    "natural_disagreement_count": 60,
+    "natural_disagreement_prevalence": 0.06607929515418502,
+    "average_precision": 0.08385776787414528,
+    "ap_minus_prevalence_interval_95": [
+      -0.014534404982312607,
+      0.11068625558630536
+    ],
+    "precision_at_5_percent": 0.06521739130434782,
+    "precision_at_5_percent_minus_prevalence_interval_95": [
+      -0.08308583308583309,
+      0.12576622278588034
+    ],
+    "uncorrected_macro_f1": 0.6981813775706905,
+    "guided_macro_f1": 0.6898175669699332,
+    "mean_random_macro_f1": 0.692547185690326,
+    "ranking_success_conditions_met": false,
+    "downstream_success_conditions_met": false
+  },
+  "overall_conclusion": "not_supported",
+  "claim_boundary": {
+    "pathologist_error_proven": false,
+    "biological_truth_proven": false,
+    "clinical_utility_proven": false,
+    "automatic_source_changes_permitted": false
+  },
+  "independent_verifier": "scripts/verify_nucls_external_validation.py"
+}

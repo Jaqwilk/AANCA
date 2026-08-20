@@ -1,0 +1,21 @@
+{
+  "files": {
+    "canonical_manifest.csv": {
+      "bytes": 454586,
+      "sha256": "145a1e3d8bafd6121ae099dfa1d3201b2338475a6848d001874a945328034513"
+    },
+    "numeric_evidence.npz": {
+      "bytes": 1712144,
+      "sha256": "b03e578b5b4939dbb2554e26fedbd28515fb5c52e3353027f853cad03d3b75b9"
+    },
+    "results.json": {
+      "bytes": 19653,
+      "sha256": "a931100a57e8d4b2a34a0216f047de8aa9d21c7275bc1beafd3b361fd955e9f6"
+    },
+    "source_inventory.json": {
+      "bytes": 29132,
+      "sha256": "c89fcb83d52ee449fa3ff45638ad477d8880714b1c5bfec9efaac2d0be992243"
+    }
+  },
+  "schema_version": 1
+}

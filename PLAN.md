@@ -93,11 +93,11 @@ Status: complete (`DEMO_COMPLETE`)
   `primary-evidence-v1`;
 - independent verifier recalculates all available comparisons and H4.
 
-## Current engineering milestone
+## Completed engineering milestone
 
 ### M8 — Portable, maintainable public repository
 
-Status: in progress
+Status: complete
 
 Required gates:
 
@@ -112,7 +112,29 @@ Required gates:
 Completion requires a green `Scientific software` workflow on both operating
 systems after the simplified source is merged to `main`.
 
-## Next scientific milestones
+Acceptance evidence: workflow run `32389776361` passed the full maintained suite,
+lint, formatting and synthetic smoke on Ubuntu and Windows; the verified static
+package was deployed byte-identically.
+
+### M11 — External multi-rater validation
+
+Status: complete (`EXTERNAL_VALIDATION_COMPLETE`)
+
+- the NuCLS protocol and configuration were publicly frozen before outcome-table
+  download;
+- exact official NP/P anchor pairing and TCGA-patient grouping were used;
+- the Unbiased Control subset was primary and Evaluation subset secondary;
+- both ranking and downstream success rules were evaluated without post-outcome
+  tuning;
+- portable source inventories, numeric evidence and an independent verifier are
+  published;
+- the primary result is retained as null/adverse: it does not establish natural
+  disagreement prioritisation or downstream improvement.
+
+Completion means the genuine multi-rater evaluation ran and was preserved. It does
+not mean that AANCA detected biological truth or that a pathologist was wrong.
+
+## Open scientific milestones
 
 These require new evidence and cannot be completed by software refactoring.
 
@@ -137,17 +159,6 @@ Target stage: no completion status claimed yet
 - allocate folds without `pre_corruption_label`;
 - preserve group and final-fold boundaries;
 - compare against the accepted benchmark as a sensitivity analysis, not a rewrite.
-
-### M11 — External validation
-
-Target stages: `EXTERNAL_VALIDATION_READY`, then
-`EXTERNAL_VALIDATION_COMPLETE`
-
-- use a genuinely external dataset;
-- verify patient/WSI identifiers and split at the strongest available level;
-- freeze the intervention and downstream outcome before inspection;
-- keep dataset-specific failures and unavailable cells explicit;
-- require qualified expert review before any natural-error claim.
 
 ## Standard validation order
 

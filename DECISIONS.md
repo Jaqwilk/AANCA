@@ -120,13 +120,15 @@ H4, H1-H7, detailed evidence, QC and limitations, reproducibility, author. Keep 
 “What the study actually learned” animation while respecting reduced motion and
 maintaining one consistent article typography system.
 
-## D014 — Research limits remain open
+## D014 — Natural-error and clinical claims remain open
 
 Status: accepted
 
-No code change may mark natural-error review, pathologist validation, patient/WSI
-independence, clinical utility or external validation complete. These require new,
-prospectively gathered evidence and qualified external participants.
+Completion of a responsible external multi-rater study does not itself prove a
+natural pathology error, pathologist error, clinical utility or unrestricted
+patient/WSI generalisation. Those claims require evidence designed for each claim,
+including newly recruited qualified reviewers or prospective clinical evaluation
+where applicable.
 
 ## D015 — Repeatable synthetic quick-start
 
@@ -137,3 +139,23 @@ regenerating the expected dataset and checking the complete file set, every arra
 the manifest and generation evidence. It must fail without writing when any saved
 content differs. This makes the documented quick-start repeatable without weakening
 the no-overwrite rule.
+
+## D016 — Preserve the frozen NuCLS external result
+
+Status: implemented
+
+Accept the NuCLS Unbiased Control analysis as the primary genuine external
+multi-rater evaluation and the NuCLS Evaluation analysis as a secondary sensitivity
+analysis. The protocol/configuration public freeze predates outcome download. Exact
+official NP/P anchors, TCGA-patient groups and independently inferred pathologist
+consensus define the endpoint; consensus is not guaranteed biological truth.
+
+Both frozen primary success decisions are negative. The ranking rule fails because
+the 5% precision-minus-prevalence interval crosses zero, and guided correction is
+adverse versus leaving labels unchanged. Do not tune the method after outcome
+inspection to turn this result positive. `EXTERNAL_VALIDATION_COMPLETE` records
+execution and publication, not efficacy.
+
+Publish portable source inventories, canonical paired manifests, numeric evidence,
+all random and bootstrap arrays, and an independent verifier that imports neither
+the AANCA package nor scikit-learn.

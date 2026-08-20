@@ -3,7 +3,42 @@
   "automatic_annotation_changes": false,
   "confirmatory_completed": false,
   "diagnostic_system": false,
-  "external_validation_completed": false,
+  "external_validation": {
+    "claim_boundary": {
+      "biological_truth_proven": false,
+      "clinical_utility_proven": false,
+      "pathologist_error_proven": false
+    },
+    "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+    "overall_conclusion": "not_supported",
+    "primary_subset": {
+      "ap_minus_prevalence_interval_95": [
+        0.006105441307506995,
+        0.21362402839313893
+      ],
+      "average_precision": 0.07348905384277785,
+      "guided_minus_uncorrected_macro_f1": -0.014633352536513322,
+      "guided_minus_uncorrected_macro_f1_interval_95": [
+        -0.026683314580239315,
+        -0.002414596650361811
+      ],
+      "natural_disagreement_count": 27,
+      "natural_disagreement_prevalence": 0.03329223181257707,
+      "patient_group_count": 5,
+      "precision_at_5_percent": 0.0975609756097561,
+      "precision_at_5_percent_minus_prevalence_interval_95": [
+        -0.03007518796992481,
+        0.15407470288624786
+      ],
+      "ranking_success_conditions_met": false,
+      "sample_count": 811,
+      "subset": "unbiased_control",
+      "downstream_success_conditions_met": false
+    },
+    "reference_interpretation": "natural NP-label disagreement relative to inferred pathologist consensus; not guaranteed biological truth",
+    "study_id": "nucls_natural_label_external_validation_v1"
+  },
+  "external_validation_completed": true,
   "pannuke_qc": {
     "cross_class_overlap_patch_count": 575,
     "cross_class_overlap_pixel_count": 4318,

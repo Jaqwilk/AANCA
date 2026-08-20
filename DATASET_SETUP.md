@@ -10,9 +10,11 @@ archives (`fold_1.zip`, `fold_2.zip`, and `fold_3.zip`) and their extracted fold
 directories remain in the ignored repository-relative `data/raw/pannuke` directory
 on the original research workstation. Other checkouts may set `PANNUKE_ROOT` to a
 lawfully obtained copy.
-The accepted real-data primary run is recorded in `README.md`; confirmatory,
-expert-review, and external-validation work remains deferred. This paragraph
-supersedes the historical 2026-07-17 presence-only checkpoint.
+The accepted real-data primary run is recorded in `README.md`. Confirmatory and
+newly recruited blinded expert-review work remains deferred. A separate NuCLS
+external multi-rater evaluation was later completed with a null/adverse result; it
+does not change the PanNuke acquisition boundary. This paragraph supersedes the
+historical 2026-07-17 presence-only checkpoint.
 
 The acquisition source is the [official University of Warwick PanNuke
 page](https://warwick.ac.uk/fac/cross_fac/tia/data/pannuke/). The local release
@@ -108,6 +110,21 @@ The default attempts full-release coverage for both perceptual and embedding com
 
 The class-order implementation reference is the archived official [Tissue Image Analytics PanNuke metrics repository at commit `c00014d`](https://github.com/TissueImageAnalytics/PanNuke-metrics/tree/c00014d766ca1be142b81bea19d9ef4315cde65a). It documents positive indices 0–4 as neoplastic, inflammatory, connective/soft tissue, dead, and non-neoplastic epithelial. This does not authorise assuming the downloaded array channel/background layout: the validator still inspects the actual release and fails when semantics are ambiguous.
 
-## NuCLS (optional external validation)
+## NuCLS external multi-rater validation
 
-NuCLS is not a substitute for the primary PanNuke benchmark. Before use, verify its licence, multi-rater structure, class definitions, source separation, responsible mapping, and domain differences. Set `NUCLS_ROOT` only for a legitimately obtained local copy.
+NuCLS is not a substitute for the primary PanNuke benchmark. The frozen external
+analysis uses the official CC0 dataset, exact official `anchor_id` pairing,
+`EM_inferred_label_NPs` as the observed label and `EM_inferred_label_Ps` as the
+external consensus reference. Its three mapped superclasses, TCGA-patient grouping,
+representation, model, review budgets, seeds and success rules are fixed in
+[`configs/nucls_external_validation.yaml`](configs/nucls_external_validation.yaml).
+
+Raw NuCLS files remain ignored under `data/raw/nucls`. Portable source inventories
+in `artifacts/nucls_external_validation/*/source_inventory.json` record the official
+folder authorities, relative file names, byte sizes and SHA-256 identities for every
+input actually used. The analysis fails on unknown labels, non-exact pairing,
+duplicate identities or fewer than five patient groups.
+
+The completed result did not meet its ranking or downstream success conditions. See
+[`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
+P-truth remains inferred consensus, not guaranteed biological truth.

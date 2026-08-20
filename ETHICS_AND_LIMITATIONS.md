@@ -12,6 +12,14 @@ equal-budget random review in that experiment. It must be retained and presented
 alongside favourable ranking results. Ranking injected changes more efficiently is
 not equivalent to demonstrating downstream model benefit.
 
+The later prospectively frozen NuCLS multi-rater evaluation also did not meet its
+ranking or downstream success conditions. In the primary subset, the operational
+5% ranking interval crossed zero and guided correction was adverse versus leaving
+labels unchanged. This is genuine external evidence, but NuCLS P-truth is inferred
+pathologist consensus rather than guaranteed biological truth. The completed stage
+therefore cannot be described as detection of natural errors, proof that a
+pathologist was wrong, clinical validation or real-use improvement.
+
 For the accepted instance-dependent 10% ImageNet-context logistic cells, seeds 404,
 405, and 406 produced byte-identical saved rankings and OOF predictions. Those rows
 are retained because the primary result is frozen, but they represent one

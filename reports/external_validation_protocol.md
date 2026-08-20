@@ -1,6 +1,8 @@
 # External Validation Protocol
 
-**Status:** protocol implemented/tested with software fixtures; no genuine expert responses or external multi-rater outcomes exist.
+**Status:** the blinded PanNuke expert-review path remains protocol-only. A separate
+prospectively frozen NuCLS external multi-rater evaluation has now been completed and
+published with a null/adverse result.
 
 ## Blinded expert-review path
 
@@ -18,10 +20,24 @@ Preserve each reviewer’s response separately. Do not invent missing responses,
 
 ## External multi-rater path
 
-NuCLS is a candidate rather than an assumed drop-in benchmark. Before analysis, verify its licence, source separation, rater structure, label definitions, and any PanNuke mapping. Do not force incompatible categories. Preserve individual-rater observations and report domain shift (breast-only NuCLS versus multi-tissue PanNuke) separately.
+NuCLS was evaluated as a separate external study rather than treated as a PanNuke
+drop-in benchmark. Its licence, source separation, rater structure and official
+three-superclass mapping were frozen before outcome download. Exact official
+NP-label/P-truth anchors were paired, and complete TCGA patients were held together.
+The endpoint was disagreement with inferred multi-rater pathologist consensus, not
+biological truth.
 
-Possible prespecified questions are whether lower estimated label quality correlates with rater disagreement and whether top-ranked samples contain more disagreement than random samples. Rater consensus is an external signal, not guaranteed biological truth.
+The primary question was whether frozen group-safe risk prioritised NP/P disagreement
+above random review at both overall AP and the operational 5% budget. The secondary
+question was whether guided correction improved group-held-out macro F1. Neither
+combined success rule passed. See
+[`nucls_external_validation_results.md`](nucls_external_validation_results.md).
 
 ## Completion language
 
 Generating a package permits `EXTERNAL_VALIDATION_READY`; only genuine completed expert or responsible external multi-rater evaluation permits `EXTERNAL_VALIDATION_COMPLETE`. Fixture tests and synthetic labels confer neither status.
+
+The NuCLS execution satisfies the completion definition because it is genuine
+multi-rater evidence with a locked analysis and published artifacts. Completion does
+not imply a positive result, pathologist error, clinical validity or permission to
+change source labels.

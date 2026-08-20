@@ -1,0 +1,723 @@
+{
+  "claim_boundary": {
+    "automatic_source_changes_permitted": false,
+    "biological_truth_proven": false,
+    "clinical_utility_proven": false,
+    "pathologist_error_proven": false
+  },
+  "class_order": [
+    "tumor_any",
+    "nonTIL_stromal",
+    "sTIL"
+  ],
+  "crops_sha256": "c500fe0cefcb266d27cf3fc026411211f4ee2d46dca21a2da83e4100319e1f36",
+  "downstream": {
+    "audit_guided_review": {
+      "accuracy": 0.7558569667077681,
+      "balanced_accuracy": 0.7449029392281913,
+      "confusion_matrix": [
+        [
+          268,
+          35,
+          13
+        ],
+        [
+          67,
+          145,
+          24
+        ],
+        [
+          38,
+          21,
+          200
+        ]
+      ],
+      "expected_calibration_error": 0.1411851376504414,
+      "macro_f1": 0.7493354052113146,
+      "multiclass_brier_score": 0.37864876196624914,
+      "per_class_precision": [
+        0.7184986595174263,
+        0.7213930348258707,
+        0.8438818565400844
+      ],
+      "per_class_recall": [
+        0.8481012658227848,
+        0.614406779661017,
+        0.7722007722007722
+      ]
+    },
+    "claim": "does not establish retrospective downstream utility",
+    "folds": [
+      {
+        "fold_id": 0,
+        "guided_disagreements_corrected": 2,
+        "held_out_groups": [
+          "TCGA-A1-A0SP"
+        ],
+        "inner_fold_evidence": {
+          "fallback_reason": null,
+          "fallback_status": "not_used",
+          "folds": [
+            {
+              "converged": true,
+              "fold_id": 0,
+              "held_out_groups": [
+                "TCGA-AR-A1AR"
+              ],
+              "holdout_count": 95,
+              "training_count": 505,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 1,
+              "held_out_groups": [
+                "TCGA-E2-A158"
+              ],
+              "holdout_count": 62,
+              "training_count": 538,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 2,
+              "held_out_groups": [
+                "TCGA-C8-A12V"
+              ],
+              "holdout_count": 223,
+              "training_count": 377,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 3,
+              "held_out_groups": [
+                "TCGA-A7-A0DA"
+              ],
+              "holdout_count": 220,
+              "training_count": 380,
+              "training_groups": [
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            }
+          ],
+          "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+        },
+        "random_disagreements_corrected_mean": 0.73,
+        "review_count": 30,
+        "test_count": 211,
+        "training_count": 600,
+        "training_groups": [
+          "TCGA-A7-A0DA",
+          "TCGA-AR-A1AR",
+          "TCGA-C8-A12V",
+          "TCGA-E2-A158"
+        ]
+      },
+      {
+        "fold_id": 1,
+        "guided_disagreements_corrected": 4,
+        "held_out_groups": [
+          "TCGA-C8-A12V"
+        ],
+        "inner_fold_evidence": {
+          "fallback_reason": null,
+          "fallback_status": "not_used",
+          "folds": [
+            {
+              "converged": true,
+              "fold_id": 0,
+              "held_out_groups": [
+                "TCGA-A1-A0SP"
+              ],
+              "holdout_count": 211,
+              "training_count": 377,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 1,
+              "held_out_groups": [
+                "TCGA-AR-A1AR"
+              ],
+              "holdout_count": 95,
+              "training_count": 493,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 2,
+              "held_out_groups": [
+                "TCGA-E2-A158"
+              ],
+              "holdout_count": 62,
+              "training_count": 526,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 3,
+              "held_out_groups": [
+                "TCGA-A7-A0DA"
+              ],
+              "holdout_count": 220,
+              "training_count": 368,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-AR-A1AR",
+                "TCGA-E2-A158"
+              ]
+            }
+          ],
+          "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+        },
+        "random_disagreements_corrected_mean": 0.61,
+        "review_count": 30,
+        "test_count": 223,
+        "training_count": 588,
+        "training_groups": [
+          "TCGA-A1-A0SP",
+          "TCGA-A7-A0DA",
+          "TCGA-AR-A1AR",
+          "TCGA-E2-A158"
+        ]
+      },
+      {
+        "fold_id": 2,
+        "guided_disagreements_corrected": 2,
+        "held_out_groups": [
+          "TCGA-AR-A1AR"
+        ],
+        "inner_fold_evidence": {
+          "fallback_reason": null,
+          "fallback_status": "not_used",
+          "folds": [
+            {
+              "converged": true,
+              "fold_id": 0,
+              "held_out_groups": [
+                "TCGA-A1-A0SP"
+              ],
+              "holdout_count": 211,
+              "training_count": 505,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 1,
+              "held_out_groups": [
+                "TCGA-C8-A12V"
+              ],
+              "holdout_count": 223,
+              "training_count": 493,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 2,
+              "held_out_groups": [
+                "TCGA-E2-A158"
+              ],
+              "holdout_count": 62,
+              "training_count": 654,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-C8-A12V"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 3,
+              "held_out_groups": [
+                "TCGA-A7-A0DA"
+              ],
+              "holdout_count": 220,
+              "training_count": 496,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            }
+          ],
+          "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+        },
+        "random_disagreements_corrected_mean": 1.13,
+        "review_count": 36,
+        "test_count": 95,
+        "training_count": 716,
+        "training_groups": [
+          "TCGA-A1-A0SP",
+          "TCGA-A7-A0DA",
+          "TCGA-C8-A12V",
+          "TCGA-E2-A158"
+        ]
+      },
+      {
+        "fold_id": 3,
+        "guided_disagreements_corrected": 5,
+        "held_out_groups": [
+          "TCGA-E2-A158"
+        ],
+        "inner_fold_evidence": {
+          "fallback_reason": null,
+          "fallback_status": "not_used",
+          "folds": [
+            {
+              "converged": true,
+              "fold_id": 0,
+              "held_out_groups": [
+                "TCGA-A1-A0SP"
+              ],
+              "holdout_count": 211,
+              "training_count": 538,
+              "training_groups": [
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 1,
+              "held_out_groups": [
+                "TCGA-C8-A12V"
+              ],
+              "holdout_count": 223,
+              "training_count": 526,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-AR-A1AR"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 2,
+              "held_out_groups": [
+                "TCGA-AR-A1AR"
+              ],
+              "holdout_count": 95,
+              "training_count": 654,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-A7-A0DA",
+                "TCGA-C8-A12V"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 3,
+              "held_out_groups": [
+                "TCGA-A7-A0DA"
+              ],
+              "holdout_count": 220,
+              "training_count": 529,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V"
+              ]
+            }
+          ],
+          "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+        },
+        "random_disagreements_corrected_mean": 1.32,
+        "review_count": 38,
+        "test_count": 62,
+        "training_count": 749,
+        "training_groups": [
+          "TCGA-A1-A0SP",
+          "TCGA-A7-A0DA",
+          "TCGA-AR-A1AR",
+          "TCGA-C8-A12V"
+        ]
+      },
+      {
+        "fold_id": 4,
+        "guided_disagreements_corrected": 4,
+        "held_out_groups": [
+          "TCGA-A7-A0DA"
+        ],
+        "inner_fold_evidence": {
+          "fallback_reason": null,
+          "fallback_status": "not_used",
+          "folds": [
+            {
+              "converged": true,
+              "fold_id": 0,
+              "held_out_groups": [
+                "TCGA-A1-A0SP"
+              ],
+              "holdout_count": 211,
+              "training_count": 380,
+              "training_groups": [
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 1,
+              "held_out_groups": [
+                "TCGA-C8-A12V"
+              ],
+              "holdout_count": 223,
+              "training_count": 368,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-AR-A1AR",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 2,
+              "held_out_groups": [
+                "TCGA-AR-A1AR"
+              ],
+              "holdout_count": 95,
+              "training_count": 496,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-C8-A12V",
+                "TCGA-E2-A158"
+              ]
+            },
+            {
+              "converged": true,
+              "fold_id": 3,
+              "held_out_groups": [
+                "TCGA-E2-A158"
+              ],
+              "holdout_count": 62,
+              "training_count": 529,
+              "training_groups": [
+                "TCGA-A1-A0SP",
+                "TCGA-AR-A1AR",
+                "TCGA-C8-A12V"
+              ]
+            }
+          ],
+          "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+        },
+        "random_disagreements_corrected_mean": 1.11,
+        "review_count": 30,
+        "test_count": 220,
+        "training_count": 591,
+        "training_groups": [
+          "TCGA-A1-A0SP",
+          "TCGA-AR-A1AR",
+          "TCGA-C8-A12V",
+          "TCGA-E2-A158"
+        ]
+      }
+    ],
+    "guided_minus_mean_random_macro_f1": {
+      "estimate": -0.011749960818899896,
+      "interval_95": [
+        -0.02386630572001025,
+        0.005799510666181229
+      ],
+      "mean": -0.010417833079558651,
+      "requested_iterations": 2000,
+      "valid_iterations": 2000
+    },
+    "guided_minus_uncorrected_macro_f1": {
+      "estimate": -0.014633352536513322,
+      "interval_95": [
+        -0.026683314580239315,
+        -0.002414596650361811
+      ],
+      "mean": -0.013748216794832253,
+      "requested_iterations": 2000,
+      "valid_iterations": 2000
+    },
+    "outer_fallback_reason": null,
+    "outer_fallback_status": "not_used",
+    "outer_splitter": "sklearn.model_selection.StratifiedGroupKFold",
+    "pathologist_reference_ceiling": {
+      "accuracy": 0.7570900123304563,
+      "balanced_accuracy": 0.7460645124236628,
+      "confusion_matrix": [
+        [
+          268,
+          37,
+          11
+        ],
+        [
+          69,
+          144,
+          23
+        ],
+        [
+          35,
+          22,
+          202
+        ]
+      ],
+      "expected_calibration_error": 0.13608262544273897,
+      "macro_f1": 0.7504226100242417,
+      "multiclass_brier_score": 0.3838138484395868,
+      "per_class_precision": [
+        0.7204301075268817,
+        0.7093596059113301,
+        0.8559322033898306
+      ],
+      "per_class_recall": [
+        0.8481012658227848,
+        0.6101694915254238,
+        0.7799227799227799
+      ]
+    },
+    "primary_metric": "macro_f1",
+    "random_review": {
+      "macro_f1_interval_95_across_repetitions": [
+        0.752167384259362,
+        0.7683456093747212
+      ],
+      "macro_f1_mean": 0.7610853660302145,
+      "repetitions": 100
+    },
+    "success_conditions_met": false,
+    "uncorrected_observed": {
+      "accuracy": 0.7706535141800247,
+      "balanced_accuracy": 0.7598826567395545,
+      "confusion_matrix": [
+        [
+          270,
+          29,
+          17
+        ],
+        [
+          66,
+          145,
+          25
+        ],
+        [
+          35,
+          14,
+          210
+        ]
+      ],
+      "expected_calibration_error": 0.13512985309351724,
+      "macro_f1": 0.7639687577478279,
+      "multiclass_brier_score": 0.3626648566223533,
+      "per_class_precision": [
+        0.7277628032345014,
+        0.7712765957446809,
+        0.8333333333333334
+      ],
+      "per_class_recall": [
+        0.8544303797468354,
+        0.614406779661017,
+        0.8108108108108109
+      ]
+    }
+  },
+  "embeddings_sha256": "ae311e2cc4de64d563d30432f69966da516ad2925a5cd7462b3e76de9436b626",
+  "exclusions": {
+    "excluded_label:unlabeled": 193,
+    "missing_exact_p_truth_anchor": 248,
+    "p_truth_excluded_label:apoptotic_body": 13,
+    "p_truth_excluded_label:eosinophil": 1,
+    "p_truth_excluded_label:neutrophil": 1,
+    "p_truth_excluded_label:unlabeled": 160
+  },
+  "manifest_sha256": "e61588f96f64d216faafbb31f6ea3457bd389a459441cf847a880e1e1bad112c",
+  "patient_group_count": 5,
+  "ranking": {
+    "ap_minus_prevalence": {
+      "estimate": 0.04019682203020078,
+      "interval_95": [
+        0.006105441307506995,
+        0.21362402839313893
+      ],
+      "mean": 0.059228614440255886,
+      "requested_iterations": 2000,
+      "valid_iterations": 1984
+    },
+    "auroc": 0.674697656840514,
+    "average_precision": 0.07348905384277785,
+    "budgets": {
+      "0.05": {
+        "disagreements_found": 4,
+        "fraction": 0.05,
+        "lift_over_prevalence": 2.930442637759711,
+        "precision": 0.0975609756097561,
+        "recall": 0.14814814814814814,
+        "reviewed_count": 41
+      },
+      "0.1": {
+        "disagreements_found": 6,
+        "fraction": 0.1,
+        "lift_over_prevalence": 2.197831978319783,
+        "precision": 0.07317073170731707,
+        "recall": 0.2222222222222222,
+        "reviewed_count": 82
+      },
+      "0.2": {
+        "disagreements_found": 11,
+        "fraction": 0.2,
+        "lift_over_prevalence": 2.027039309247898,
+        "precision": 0.06748466257668712,
+        "recall": 0.4074074074074074,
+        "reviewed_count": 163
+      }
+    },
+    "claim": "does not establish prioritisation of natural NP/P disagreements",
+    "fold_evidence": {
+      "fallback_reason": null,
+      "fallback_status": "not_used",
+      "folds": [
+        {
+          "converged": true,
+          "fold_id": 0,
+          "held_out_groups": [
+            "TCGA-A1-A0SP"
+          ],
+          "holdout_count": 211,
+          "training_count": 600,
+          "training_groups": [
+            "TCGA-A7-A0DA",
+            "TCGA-AR-A1AR",
+            "TCGA-C8-A12V",
+            "TCGA-E2-A158"
+          ]
+        },
+        {
+          "converged": true,
+          "fold_id": 1,
+          "held_out_groups": [
+            "TCGA-C8-A12V"
+          ],
+          "holdout_count": 223,
+          "training_count": 588,
+          "training_groups": [
+            "TCGA-A1-A0SP",
+            "TCGA-A7-A0DA",
+            "TCGA-AR-A1AR",
+            "TCGA-E2-A158"
+          ]
+        },
+        {
+          "converged": true,
+          "fold_id": 2,
+          "held_out_groups": [
+            "TCGA-AR-A1AR"
+          ],
+          "holdout_count": 95,
+          "training_count": 716,
+          "training_groups": [
+            "TCGA-A1-A0SP",
+            "TCGA-A7-A0DA",
+            "TCGA-C8-A12V",
+            "TCGA-E2-A158"
+          ]
+        },
+        {
+          "converged": true,
+          "fold_id": 3,
+          "held_out_groups": [
+            "TCGA-E2-A158"
+          ],
+          "holdout_count": 62,
+          "training_count": 749,
+          "training_groups": [
+            "TCGA-A1-A0SP",
+            "TCGA-A7-A0DA",
+            "TCGA-AR-A1AR",
+            "TCGA-C8-A12V"
+          ]
+        },
+        {
+          "converged": true,
+          "fold_id": 4,
+          "held_out_groups": [
+            "TCGA-A7-A0DA"
+          ],
+          "holdout_count": 220,
+          "training_count": 591,
+          "training_groups": [
+            "TCGA-A1-A0SP",
+            "TCGA-AR-A1AR",
+            "TCGA-C8-A12V",
+            "TCGA-E2-A158"
+          ]
+        }
+      ],
+      "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+    },
+    "group_count": 5,
+    "natural_disagreement_count": 27,
+    "natural_disagreement_prevalence": 0.03329223181257707,
+    "precision_at_5_percent_minus_prevalence": {
+      "estimate": 0.06426874379717903,
+      "interval_95": [
+        -0.03007518796992481,
+        0.15407470288624786
+      ],
+      "mean": 0.048398696717918153,
+      "requested_iterations": 2000,
+      "valid_iterations": 2000
+    },
+    "random_rankings": {
+      "ap_interval_95": [
+        0.027007774259137668,
+        0.07421310684484267
+      ],
+      "ap_mean": 0.040719808246531895,
+      "precision_interval_95": [
+        0.0,
+        0.0975609756097561
+      ],
+      "precision_mean": 0.0344390243902439,
+      "repetitions": 1000
+    },
+    "sample_count": 811,
+    "success_conditions_met": false
+  },
+  "reference_interpretation": "natural NP-label disagreement relative to inferred pathologist consensus; not guaranteed biological truth",
+  "sample_count": 811,
+  "schema_version": 1,
+  "source_inventory_sha256": "50231468685a5662e008ced97abe57a0cd596b225d380173b64480a199e01386",
+  "status": "completed",
+  "study_id": "nucls_natural_label_external_validation_v1",
+  "subset": "unbiased_control"
+}

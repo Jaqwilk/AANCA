@@ -1,0 +1,670 @@
+{
+  "files": [
+    {
+      "bytes": 7467,
+      "relative_path": "contours/ANCHFOV-0_TCGA-A1-A0SP-01Z-00-DX1_left-9322_top-53945_bottom-54253_right-9642.csv",
+      "role": "np_contours",
+      "sha256": "193bdbbedf825182468ccc9891975ca5a7ac39fa2a35539dc1a3c7a2b43e41fe"
+    },
+    {
+      "bytes": 9713,
+      "relative_path": "contours/ANCHFOV-10_TCGA-A1-A0SP-01Z-00-DX1_left-8041_top-55487_bottom-55797_right-8349.csv",
+      "role": "np_contours",
+      "sha256": "4f849256a15848772e2257fffa81a7887d1fc423c5608b80376ba463756dc4b5"
+    },
+    {
+      "bytes": 5976,
+      "relative_path": "contours/ANCHFOV-11_TCGA-A7-A0DA-01Z-00-DX1_left-44221_top-19944_bottom-20242_right-44517.csv",
+      "role": "np_contours",
+      "sha256": "70a4ff48cd99facb94634bf8d7f336adab7086231af554a95ded1fb96e22d797"
+    },
+    {
+      "bytes": 10071,
+      "relative_path": "contours/ANCHFOV-12_TCGA-A7-A0DA-01Z-00-DX1_left-44485_top-23532_bottom-23826_right-44764.csv",
+      "role": "np_contours",
+      "sha256": "f9c9f11372ff63ba99814ff763cd58d113bf2939f1e2014696276c3229cb4c07"
+    },
+    {
+      "bytes": 5320,
+      "relative_path": "contours/ANCHFOV-13_TCGA-A7-A0DA-01Z-00-DX1_left-48062_top-20215_bottom-20508_right-48356.csv",
+      "role": "np_contours",
+      "sha256": "ca1caf720e739eb1afe625981ffc7db4d596939b9b9f4ca30ae1d9a96c7de479"
+    },
+    {
+      "bytes": 2739,
+      "relative_path": "contours/ANCHFOV-14_TCGA-A7-A0DA-01Z-00-DX1_left-48814_top-21004_bottom-21274_right-49118.csv",
+      "role": "np_contours",
+      "sha256": "3fc7cfe15d5982801f3dd60ea5cc4880b6f36988e5c40c4f78024319674bd573"
+    },
+    {
+      "bytes": 7021,
+      "relative_path": "contours/ANCHFOV-15_TCGA-A7-A0DA-01Z-00-DX1_left-46756_top-21244_bottom-21504_right-47084.csv",
+      "role": "np_contours",
+      "sha256": "6a0af1d499c88f3c4fe7b064c512263ed3cf00b94578d509ea4935c8ef930ec3"
+    },
+    {
+      "bytes": 5963,
+      "relative_path": "contours/ANCHFOV-16_TCGA-A7-A0DA-01Z-00-DX1_left-44221_top-25810_bottom-26106_right-44507.csv",
+      "role": "np_contours",
+      "sha256": "e038d583c726df9f2b162c92adbb5c438d8ab7220f74c753d08020010698016b"
+    },
+    {
+      "bytes": 5799,
+      "relative_path": "contours/ANCHFOV-17_TCGA-A7-A0DA-01Z-00-DX1_left-45745_top-22248_bottom-22535_right-46067.csv",
+      "role": "np_contours",
+      "sha256": "3a762aa34b6a3b5bc7a358fe53598fec57843cf2f84db8ea50ab8e2bb2272435"
+    },
+    {
+      "bytes": 5455,
+      "relative_path": "contours/ANCHFOV-18_TCGA-A7-A0DA-01Z-00-DX1_left-47296_top-24820_bottom-25105_right-47597.csv",
+      "role": "np_contours",
+      "sha256": "509facd5fff5d5420577400123b95b50daa5436e6321528284468131a7f18dda"
+    },
+    {
+      "bytes": 4995,
+      "relative_path": "contours/ANCHFOV-19_TCGA-A7-A0DA-01Z-00-DX1_left-46531_top-26324_bottom-26628_right-46812.csv",
+      "role": "np_contours",
+      "sha256": "1fa3c1524fd27743b3a29d021cb416c6de1a4e5b6862a9c551c123100b5956f4"
+    },
+    {
+      "bytes": 15669,
+      "relative_path": "contours/ANCHFOV-1_TCGA-A1-A0SP-01Z-00-DX1_left-8317_top-54469_bottom-54758_right-8610.csv",
+      "role": "np_contours",
+      "sha256": "086378360c42db853b74d8e7db93b9f22432d2276dde13d893c35678a0253c40"
+    },
+    {
+      "bytes": 6015,
+      "relative_path": "contours/ANCHFOV-20_TCGA-A7-A0DA-01Z-00-DX1_left-47281_top-24550_bottom-24834_right-47585.csv",
+      "role": "np_contours",
+      "sha256": "6b2bbbcf8301e351aca34509682c0da71bd5f9b449c8d2468c7a51891d5ce83c"
+    },
+    {
+      "bytes": 4534,
+      "relative_path": "contours/ANCHFOV-21_TCGA-A7-A0DA-01Z-00-DX1_left-44473_top-19163_bottom-19466_right-44747.csv",
+      "role": "np_contours",
+      "sha256": "b5201fe53193a723a818f0eba608544e43928a8dd81e893228c044d462ada4b3"
+    },
+    {
+      "bytes": 3042,
+      "relative_path": "contours/ANCHFOV-22_TCGA-A7-A0DA-01Z-00-DX1_left-47292_top-21488_bottom-21743_right-47632.csv",
+      "role": "np_contours",
+      "sha256": "bc5c3e59ad83bb62d26d1c5bf0fac274e786ab012848ca911bc08b4bb5889555"
+    },
+    {
+      "bytes": 4703,
+      "relative_path": "contours/ANCHFOV-23_TCGA-A7-A0DA-01Z-00-DX1_left-44475_top-25071_bottom-25382_right-44735.csv",
+      "role": "np_contours",
+      "sha256": "796842e7c9bbf5e2a2b93956a33c108f9ab6606ae37d9b441178597c7ab914b0"
+    },
+    {
+      "bytes": 5357,
+      "relative_path": "contours/ANCHFOV-24_TCGA-A7-A0DA-01Z-00-DX1_left-47815_top-20989_bottom-21257_right-48110.csv",
+      "role": "np_contours",
+      "sha256": "0872c04b5c49899d57116fffeb4d5d7a8fcce42649c13d33e51189b95222a9d7"
+    },
+    {
+      "bytes": 4986,
+      "relative_path": "contours/ANCHFOV-25_TCGA-A7-A0DA-01Z-00-DX1_left-45743_top-22766_bottom-23039_right-46062.csv",
+      "role": "np_contours",
+      "sha256": "d00af5605dd3e6242457354e041f78806619051aeca49f06dffc3c29345beb24"
+    },
+    {
+      "bytes": 8142,
+      "relative_path": "contours/ANCHFOV-26_TCGA-A7-A0DA-01Z-00-DX1_left-45256_top-22508_bottom-22790_right-45543.csv",
+      "role": "np_contours",
+      "sha256": "02951842ddffb82d30881c09032af33a58b6c448a8cf096585a66d07db552046"
+    },
+    {
+      "bytes": 5206,
+      "relative_path": "contours/ANCHFOV-27_TCGA-A7-A0DA-01Z-00-DX1_left-44465_top-19450_bottom-19755_right-44796.csv",
+      "role": "np_contours",
+      "sha256": "c643c21fc5f1c882d0af5fc74a34fc10f7ac3583084893e9b5ed3b5a04ea4422"
+    },
+    {
+      "bytes": 5248,
+      "relative_path": "contours/ANCHFOV-28_TCGA-A7-A0DA-01Z-00-DX1_left-48323_top-20973_bottom-21261_right-48606.csv",
+      "role": "np_contours",
+      "sha256": "1943143b5075ac1bd7a788daac841e9043726076d761bb7b94ea70419534d08c"
+    },
+    {
+      "bytes": 8311,
+      "relative_path": "contours/ANCHFOV-29_TCGA-AR-A1AR-01Z-00-DX1_left-16532_top-31126_bottom-31420_right-16838.csv",
+      "role": "np_contours",
+      "sha256": "bc6415e2b4ca248523062e570d7d5a2d4db9f2d6ccba054f7e5b80651f81c17b"
+    },
+    {
+      "bytes": 6542,
+      "relative_path": "contours/ANCHFOV-2_TCGA-A1-A0SP-01Z-00-DX1_left-7293_top-55220_bottom-55525_right-7613.csv",
+      "role": "np_contours",
+      "sha256": "23f7c50fd9a0a5e245e9b97b8736d1fb9442cbf148152ce1ad975072121658be"
+    },
+    {
+      "bytes": 8660,
+      "relative_path": "contours/ANCHFOV-30_TCGA-AR-A1AR-01Z-00-DX1_left-16036_top-30357_bottom-30665_right-16314.csv",
+      "role": "np_contours",
+      "sha256": "bd3d9eeed571198b925c2be107c93b3c9b017ca2e24e353f28cf448ae20d75c9"
+    },
+    {
+      "bytes": 8175,
+      "relative_path": "contours/ANCHFOV-31_TCGA-AR-A1AR-01Z-00-DX1_left-17044_top-29871_bottom-30138_right-17303.csv",
+      "role": "np_contours",
+      "sha256": "2dd6220bb63b4a5c66278e0eb4db03973eb74f327ffb26cc4d6b1769ec5a4470"
+    },
+    {
+      "bytes": 5400,
+      "relative_path": "contours/ANCHFOV-32_TCGA-AR-A1AR-01Z-00-DX1_left-16789_top-29839_bottom-30142_right-17057.csv",
+      "role": "np_contours",
+      "sha256": "29ed29e1a85269ff2b869124764f424c30101f80e632df4976ad4f70b522434c"
+    },
+    {
+      "bytes": 6080,
+      "relative_path": "contours/ANCHFOV-33_TCGA-AR-A1AR-01Z-00-DX1_left-14227_top-31925_bottom-32184_right-14504.csv",
+      "role": "np_contours",
+      "sha256": "532b839ff324433f32b2d6dbf25dba1f0187d1d5da3b764686c40df0fbf9ab04"
+    },
+    {
+      "bytes": 17791,
+      "relative_path": "contours/ANCHFOV-34_TCGA-C8-A12V-01Z-00-DX1_left-13092_top-56433_bottom-56719_right-13369.csv",
+      "role": "np_contours",
+      "sha256": "f4c04f36da06c1cdddaa4ee6433431cc670146f23d96596505a461207d2a8e51"
+    },
+    {
+      "bytes": 9480,
+      "relative_path": "contours/ANCHFOV-35_TCGA-C8-A12V-01Z-00-DX1_left-16394_top-56662_bottom-56976_right-16711.csv",
+      "role": "np_contours",
+      "sha256": "63b0110624cf23983de7d72626905085cf715727c953a4145b928cce6fc85b7b"
+    },
+    {
+      "bytes": 4512,
+      "relative_path": "contours/ANCHFOV-36_TCGA-C8-A12V-01Z-00-DX1_left-14878_top-56436_bottom-56683_right-15176.csv",
+      "role": "np_contours",
+      "sha256": "131efc90b837474606720095f91dda938181b47370d37531ff077b6095d8754a"
+    },
+    {
+      "bytes": 6776,
+      "relative_path": "contours/ANCHFOV-37_TCGA-C8-A12V-01Z-00-DX1_left-16899_top-55663_bottom-55932_right-17234.csv",
+      "role": "np_contours",
+      "sha256": "ecbb59e297d954c38f50840745aef8a192fc2852a30828bdbc3cd7365b17f865"
+    },
+    {
+      "bytes": 5380,
+      "relative_path": "contours/ANCHFOV-38_TCGA-C8-A12V-01Z-00-DX1_left-17447_top-58232_bottom-58512_right-17738.csv",
+      "role": "np_contours",
+      "sha256": "5ba9c80361d3b71113c0fcb85a2eafcd5fde1aa6055415b878ffa8513fc957c0"
+    },
+    {
+      "bytes": 5991,
+      "relative_path": "contours/ANCHFOV-39_TCGA-C8-A12V-01Z-00-DX1_left-14863_top-57171_bottom-57498_right-15177.csv",
+      "role": "np_contours",
+      "sha256": "f1448d10be7aa04ff600308456fdd940c57c17d4ffde15f670f7a01e1dd1c868"
+    },
+    {
+      "bytes": 7122,
+      "relative_path": "contours/ANCHFOV-3_TCGA-A1-A0SP-01Z-00-DX1_left-8059_top-55998_bottom-56294_right-8341.csv",
+      "role": "np_contours",
+      "sha256": "e04bed8ae15bb93ee45713d0e8581f4498618feb28bfb306c8797f93a0365da9"
+    },
+    {
+      "bytes": 7620,
+      "relative_path": "contours/ANCHFOV-40_TCGA-C8-A12V-01Z-00-DX1_left-14118_top-57452_bottom-57748_right-14398.csv",
+      "role": "np_contours",
+      "sha256": "3f6120533c739cd05aa1426060b6f7f2b3be79ccfc251e77ba93855e441da516"
+    },
+    {
+      "bytes": 7310,
+      "relative_path": "contours/ANCHFOV-41_TCGA-C8-A12V-01Z-00-DX1_left-11820_top-57216_bottom-57472_right-12092.csv",
+      "role": "np_contours",
+      "sha256": "ab39a5fba3a58887de60f0baefa901b3ec934b4416e59beb6bce318116e3f783"
+    },
+    {
+      "bytes": 10059,
+      "relative_path": "contours/ANCHFOV-42_TCGA-C8-A12V-01Z-00-DX1_left-16939_top-55915_bottom-56212_right-17226.csv",
+      "role": "np_contours",
+      "sha256": "f8bb5117ca09747711b14fef822e26c2d59419a86e690cf72fcfc2e15c2104cc"
+    },
+    {
+      "bytes": 4023,
+      "relative_path": "contours/ANCHFOV-43_TCGA-C8-A12V-01Z-00-DX1_left-12082_top-57471_bottom-57701_right-12347.csv",
+      "role": "np_contours",
+      "sha256": "7f1c305f5c47577d221be6fe785adbabe913254dfb9f466dae9e0a759979a98f"
+    },
+    {
+      "bytes": 4914,
+      "relative_path": "contours/ANCHFOV-44_TCGA-C8-A12V-01Z-00-DX1_left-11565_top-58000_bottom-58245_right-11857.csv",
+      "role": "np_contours",
+      "sha256": "a4e137f3a1a22731f1cba8f0168be9b1019894e340a48b4ba435ee7a4aa9aa03"
+    },
+    {
+      "bytes": 5291,
+      "relative_path": "contours/ANCHFOV-45_TCGA-C8-A12V-01Z-00-DX1_left-13333_top-57444_bottom-57737_right-13625.csv",
+      "role": "np_contours",
+      "sha256": "8ce65121021fd0d3adb51d7f4fc7f7875f80087069de3ecb64316fc1dd61a65b"
+    },
+    {
+      "bytes": 6100,
+      "relative_path": "contours/ANCHFOV-46_TCGA-C8-A12V-01Z-00-DX1_left-15133_top-57162_bottom-57491_right-15443.csv",
+      "role": "np_contours",
+      "sha256": "a6ce16e88de82d1e948003357d4e4a64fdc7f3a244d624446464eebaeba9c127"
+    },
+    {
+      "bytes": 5902,
+      "relative_path": "contours/ANCHFOV-47_TCGA-E2-A158-01Z-00-DX1_left-59133_top-26872_bottom-27156_right-59450.csv",
+      "role": "np_contours",
+      "sha256": "ce7032e50e224f0eafcc0f77496b094679666c6885ec5123d00468476a4ad2f0"
+    },
+    {
+      "bytes": 4021,
+      "relative_path": "contours/ANCHFOV-48_TCGA-E2-A158-01Z-00-DX1_left-58336_top-26873_bottom-27166_right-58632.csv",
+      "role": "np_contours",
+      "sha256": "8aa445214a09b1a1e532f2bec378e72a4b8cecd6670e5d37700fd91a0c7b2741"
+    },
+    {
+      "bytes": 5513,
+      "relative_path": "contours/ANCHFOV-49_TCGA-E2-A158-01Z-00-DX1_left-59119_top-27915_bottom-28155_right-59422.csv",
+      "role": "np_contours",
+      "sha256": "b028042209e1d2f53d59db83d6d12ce92ff7652b5a2fc3a5e87b6d9729ec35c7"
+    },
+    {
+      "bytes": 10135,
+      "relative_path": "contours/ANCHFOV-4_TCGA-A1-A0SP-01Z-00-DX1_left-8063_top-57037_bottom-57317_right-8321.csv",
+      "role": "np_contours",
+      "sha256": "ba81beccd17cbe93ee09c0a27c401fd665bab873f473307bce340c46efc1b399"
+    },
+    {
+      "bytes": 5976,
+      "relative_path": "contours/ANCHFOV-50_TCGA-E2-A158-01Z-00-DX1_left-58118_top-27628_bottom-27936_right-58424.csv",
+      "role": "np_contours",
+      "sha256": "34ef875adf57c4529e9a27162991b5588901e6cb79e2a6390bbd86eaa490b283"
+    },
+    {
+      "bytes": 2715,
+      "relative_path": "contours/ANCHFOV-51_TCGA-E2-A158-01Z-00-DX1_left-56821_top-27478_bottom-27637_right-57094.csv",
+      "role": "np_contours",
+      "sha256": "d9602d5ba17e6f954e38ac20cc93f9a9eae459580ddb0982c25063256a0721e5"
+    },
+    {
+      "bytes": 3746,
+      "relative_path": "contours/ANCHFOV-52_TCGA-E2-A158-01Z-00-DX1_left-57092_top-27142_bottom-27407_right-57373.csv",
+      "role": "np_contours",
+      "sha256": "f297f209c48fb3612f4869ef1ac9d9c7bfaf41617403af179b334f33bf5a2b3e"
+    },
+    {
+      "bytes": 2271,
+      "relative_path": "contours/ANCHFOV-53_TCGA-E2-A158-01Z-00-DX1_left-56432_top-26141_bottom-26362_right-56628.csv",
+      "role": "np_contours",
+      "sha256": "9c7e6bd08f6832eaa3ba8ee7561c30a419e22afd3d5a1803154c306c98bb49ee"
+    },
+    {
+      "bytes": 7472,
+      "relative_path": "contours/ANCHFOV-5_TCGA-A1-A0SP-01Z-00-DX1_left-8820_top-57293_bottom-57578_right-9110.csv",
+      "role": "np_contours",
+      "sha256": "f739c80f5977999ffac58cf96fc4999a5aa06db6737445a1cf5b642ee6977549"
+    },
+    {
+      "bytes": 8820,
+      "relative_path": "contours/ANCHFOV-6_TCGA-A1-A0SP-01Z-00-DX1_left-8325_top-57028_bottom-57311_right-8602.csv",
+      "role": "np_contours",
+      "sha256": "3063b92425a29677b654a5a1f841e031ea816b73c2d98da12df4d69b9d263eec"
+    },
+    {
+      "bytes": 5789,
+      "relative_path": "contours/ANCHFOV-7_TCGA-A1-A0SP-01Z-00-DX1_left-10104_top-56510_bottom-56820_right-10382.csv",
+      "role": "np_contours",
+      "sha256": "d275be7cdf2d2a3fa139e2a6c6925b6eea16d1de85a66753f55b51e28d5543a1"
+    },
+    {
+      "bytes": 5782,
+      "relative_path": "contours/ANCHFOV-8_TCGA-A1-A0SP-01Z-00-DX1_left-9069_top-55759_bottom-56057_right-9369.csv",
+      "role": "np_contours",
+      "sha256": "c22546f4f89774327a548eb0044e817b0668cdbc94f89a2f6cd93736866922ad"
+    },
+    {
+      "bytes": 6084,
+      "relative_path": "contours/ANCHFOV-9_TCGA-A1-A0SP-01Z-00-DX1_left-9343_top-55735_bottom-56028_right-9642.csv",
+      "role": "np_contours",
+      "sha256": "a9cd7258382fb1625e2b2b9c1f790a0ea6a513251406bbaeefdf0ce8fec4c881"
+    },
+    {
+      "bytes": 216620,
+      "relative_path": "rgb/ANCHFOV-0_TCGA-A1-A0SP-01Z-00-DX1_left-9322_top-53945_bottom-54253_right-9642.png",
+      "role": "np_rgb",
+      "sha256": "de29d1ca7f5a1dbd45a9a1afa5dbee9c3780d09f7adac773d31662c18efe1975"
+    },
+    {
+      "bytes": 217343,
+      "relative_path": "rgb/ANCHFOV-10_TCGA-A1-A0SP-01Z-00-DX1_left-8041_top-55487_bottom-55797_right-8349.png",
+      "role": "np_rgb",
+      "sha256": "3888d32e6de73738d87ecdca298e2f1189849d27427b44204419961b7241c628"
+    },
+    {
+      "bytes": 198360,
+      "relative_path": "rgb/ANCHFOV-11_TCGA-A7-A0DA-01Z-00-DX1_left-44221_top-19944_bottom-20242_right-44517.png",
+      "role": "np_rgb",
+      "sha256": "9f59e68b641a8aef34594d300ead64bde9e8f40b15ec15529f7a7d894e2309fa"
+    },
+    {
+      "bytes": 205321,
+      "relative_path": "rgb/ANCHFOV-12_TCGA-A7-A0DA-01Z-00-DX1_left-44485_top-23532_bottom-23826_right-44764.png",
+      "role": "np_rgb",
+      "sha256": "649d99e4aced520a84852e41ddbc20a8bae3a3cb69b828fcbc70f91aea6671d4"
+    },
+    {
+      "bytes": 216122,
+      "relative_path": "rgb/ANCHFOV-13_TCGA-A7-A0DA-01Z-00-DX1_left-48062_top-20215_bottom-20508_right-48356.png",
+      "role": "np_rgb",
+      "sha256": "b414bf35c1cebd20940f0f7c533231108251b58eec9b6381a23104979a777ac3"
+    },
+    {
+      "bytes": 210879,
+      "relative_path": "rgb/ANCHFOV-14_TCGA-A7-A0DA-01Z-00-DX1_left-48814_top-21004_bottom-21274_right-49118.png",
+      "role": "np_rgb",
+      "sha256": "8b64631fa33b16c6e971211d3c40e2736ef73cffb8ade201dd27563d3915cfc1"
+    },
+    {
+      "bytes": 204672,
+      "relative_path": "rgb/ANCHFOV-15_TCGA-A7-A0DA-01Z-00-DX1_left-46756_top-21244_bottom-21504_right-47084.png",
+      "role": "np_rgb",
+      "sha256": "0945e896fe17018b6bba9bb2fdbaee5091a53a745cf22699f02e25ed19b37afc"
+    },
+    {
+      "bytes": 212625,
+      "relative_path": "rgb/ANCHFOV-16_TCGA-A7-A0DA-01Z-00-DX1_left-44221_top-25810_bottom-26106_right-44507.png",
+      "role": "np_rgb",
+      "sha256": "e0320adf167977dd0af05aaaa482800075227820db5138be24335f720c3c3e6f"
+    },
+    {
+      "bytes": 220648,
+      "relative_path": "rgb/ANCHFOV-17_TCGA-A7-A0DA-01Z-00-DX1_left-45745_top-22248_bottom-22535_right-46067.png",
+      "role": "np_rgb",
+      "sha256": "3a9fe11014fd776af168114434b828002e42c6cd09982be23958e1bebbcfdab2"
+    },
+    {
+      "bytes": 205024,
+      "relative_path": "rgb/ANCHFOV-18_TCGA-A7-A0DA-01Z-00-DX1_left-47296_top-24820_bottom-25105_right-47597.png",
+      "role": "np_rgb",
+      "sha256": "8e57d802642d0bd55bf24720b8d7b2987acf357a696ac201d3c76f690727575c"
+    },
+    {
+      "bytes": 211276,
+      "relative_path": "rgb/ANCHFOV-19_TCGA-A7-A0DA-01Z-00-DX1_left-46531_top-26324_bottom-26628_right-46812.png",
+      "role": "np_rgb",
+      "sha256": "985729a1a0d1d4ecd419df18cc1aa20d72ea48f023ebf8c116bb3c2daf944602"
+    },
+    {
+      "bytes": 205712,
+      "relative_path": "rgb/ANCHFOV-1_TCGA-A1-A0SP-01Z-00-DX1_left-8317_top-54469_bottom-54758_right-8610.png",
+      "role": "np_rgb",
+      "sha256": "3c5f3c121261971807dffd31197f23c77b37f9f2cc4cfec7918b6d8f6da76d37"
+    },
+    {
+      "bytes": 208605,
+      "relative_path": "rgb/ANCHFOV-20_TCGA-A7-A0DA-01Z-00-DX1_left-47281_top-24550_bottom-24834_right-47585.png",
+      "role": "np_rgb",
+      "sha256": "caa2c8729ed873b9788626b58d8dedc042d708e28e3135ee5901bcceccc080ae"
+    },
+    {
+      "bytes": 197587,
+      "relative_path": "rgb/ANCHFOV-21_TCGA-A7-A0DA-01Z-00-DX1_left-44473_top-19163_bottom-19466_right-44747.png",
+      "role": "np_rgb",
+      "sha256": "ef07d55d6d67b81aba4be45dc0fa289bd2547d05e297248b239bc7f3690b2118"
+    },
+    {
+      "bytes": 218992,
+      "relative_path": "rgb/ANCHFOV-22_TCGA-A7-A0DA-01Z-00-DX1_left-47292_top-21488_bottom-21743_right-47632.png",
+      "role": "np_rgb",
+      "sha256": "ae121e9f38b52f11d736ea7b3dedb65c014af358c46e1610a42d01730e0f7659"
+    },
+    {
+      "bytes": 197043,
+      "relative_path": "rgb/ANCHFOV-23_TCGA-A7-A0DA-01Z-00-DX1_left-44475_top-25071_bottom-25382_right-44735.png",
+      "role": "np_rgb",
+      "sha256": "38a263950d236bb5fa26a10fdc4084b5dbd3826bbf7e60200a356cf52d3528ee"
+    },
+    {
+      "bytes": 208153,
+      "relative_path": "rgb/ANCHFOV-24_TCGA-A7-A0DA-01Z-00-DX1_left-47815_top-20989_bottom-21257_right-48110.png",
+      "role": "np_rgb",
+      "sha256": "66fe4c3502598f4a76cbb5bae82ba7802cfd7526735cfa505e3ff342f1f26c58"
+    },
+    {
+      "bytes": 213124,
+      "relative_path": "rgb/ANCHFOV-25_TCGA-A7-A0DA-01Z-00-DX1_left-45743_top-22766_bottom-23039_right-46062.png",
+      "role": "np_rgb",
+      "sha256": "64f774c092673259808110b5b53c82d55745e99888570be201ca5b82abe8823b"
+    },
+    {
+      "bytes": 200674,
+      "relative_path": "rgb/ANCHFOV-26_TCGA-A7-A0DA-01Z-00-DX1_left-45256_top-22508_bottom-22790_right-45543.png",
+      "role": "np_rgb",
+      "sha256": "9bc9c6b5e9e0b10a33ea6b0b44bd57301edee4d3fa3fda59fe4bc7e86681c4d0"
+    },
+    {
+      "bytes": 252122,
+      "relative_path": "rgb/ANCHFOV-27_TCGA-A7-A0DA-01Z-00-DX1_left-44465_top-19450_bottom-19755_right-44796.png",
+      "role": "np_rgb",
+      "sha256": "f2976253c55049afb5834388a658c2988e8ca131b06923f73a381afe8df7d2e8"
+    },
+    {
+      "bytes": 212104,
+      "relative_path": "rgb/ANCHFOV-28_TCGA-A7-A0DA-01Z-00-DX1_left-48323_top-20973_bottom-21261_right-48606.png",
+      "role": "np_rgb",
+      "sha256": "3c07a7cb546370428ba8e79bf0ffbf215311a27b84ac33ec9d72cdf66c21eca5"
+    },
+    {
+      "bytes": 244669,
+      "relative_path": "rgb/ANCHFOV-29_TCGA-AR-A1AR-01Z-00-DX1_left-16532_top-31126_bottom-31420_right-16838.png",
+      "role": "np_rgb",
+      "sha256": "92905ed955237c5f078c6208aa935e9ee824389f20e0c6d524be843a3c4aedc5"
+    },
+    {
+      "bytes": 221524,
+      "relative_path": "rgb/ANCHFOV-2_TCGA-A1-A0SP-01Z-00-DX1_left-7293_top-55220_bottom-55525_right-7613.png",
+      "role": "np_rgb",
+      "sha256": "17925026de36c4c0d794457a7e96cccf99c38666a0e6b53cdb6cc3653625fc24"
+    },
+    {
+      "bytes": 223350,
+      "relative_path": "rgb/ANCHFOV-30_TCGA-AR-A1AR-01Z-00-DX1_left-16036_top-30357_bottom-30665_right-16314.png",
+      "role": "np_rgb",
+      "sha256": "13030ab6cb5c5122713f35e051b67deb87fd98ea92a076ae1c8156435cbe9189"
+    },
+    {
+      "bytes": 188033,
+      "relative_path": "rgb/ANCHFOV-31_TCGA-AR-A1AR-01Z-00-DX1_left-17044_top-29871_bottom-30138_right-17303.png",
+      "role": "np_rgb",
+      "sha256": "27ec1fa56917cc8ec8fd6807b523e788b13c201faa42a786f2054d161a7c724c"
+    },
+    {
+      "bytes": 211220,
+      "relative_path": "rgb/ANCHFOV-32_TCGA-AR-A1AR-01Z-00-DX1_left-16789_top-29839_bottom-30142_right-17057.png",
+      "role": "np_rgb",
+      "sha256": "beb3d239b31495116bd7dbbd272e131b3dc67044cf556e51f4412f0d95029a6f"
+    },
+    {
+      "bytes": 188214,
+      "relative_path": "rgb/ANCHFOV-33_TCGA-AR-A1AR-01Z-00-DX1_left-14227_top-31925_bottom-32184_right-14504.png",
+      "role": "np_rgb",
+      "sha256": "e83d9e13917dd88c0d1597cbe855e7f6b7471bcb0638b1ca13a8157783578384"
+    },
+    {
+      "bytes": 217816,
+      "relative_path": "rgb/ANCHFOV-34_TCGA-C8-A12V-01Z-00-DX1_left-13092_top-56433_bottom-56719_right-13369.png",
+      "role": "np_rgb",
+      "sha256": "a53a17bb18db389e6eebb1cdd5f3509734cb98346880f66dee96869f4d6f0af1"
+    },
+    {
+      "bytes": 275332,
+      "relative_path": "rgb/ANCHFOV-35_TCGA-C8-A12V-01Z-00-DX1_left-16394_top-56662_bottom-56976_right-16711.png",
+      "role": "np_rgb",
+      "sha256": "639d9f26122738b9f78bf87134029a087f5515934dc508765500a8907dcc25af"
+    },
+    {
+      "bytes": 184474,
+      "relative_path": "rgb/ANCHFOV-36_TCGA-C8-A12V-01Z-00-DX1_left-14878_top-56436_bottom-56683_right-15176.png",
+      "role": "np_rgb",
+      "sha256": "24fada261e9523dadd645345d52302a2d64771c79bf09f7a7f1b47931b7aa12d"
+    },
+    {
+      "bytes": 241002,
+      "relative_path": "rgb/ANCHFOV-37_TCGA-C8-A12V-01Z-00-DX1_left-16899_top-55663_bottom-55932_right-17234.png",
+      "role": "np_rgb",
+      "sha256": "675dbc07191120534a28639e2667fcf8fbbe2dc4f6e100e225dd649b771b713c"
+    },
+    {
+      "bytes": 227390,
+      "relative_path": "rgb/ANCHFOV-38_TCGA-C8-A12V-01Z-00-DX1_left-17447_top-58232_bottom-58512_right-17738.png",
+      "role": "np_rgb",
+      "sha256": "3f3563c43e49d733dc8f3e494a0284698c567d76fe13aa652c756550f0272bff"
+    },
+    {
+      "bytes": 274177,
+      "relative_path": "rgb/ANCHFOV-39_TCGA-C8-A12V-01Z-00-DX1_left-14863_top-57171_bottom-57498_right-15177.png",
+      "role": "np_rgb",
+      "sha256": "dfe204e774216f667eca0adbef1d7fb2917f16f342e5c5c184aa5b5282dda913"
+    },
+    {
+      "bytes": 193904,
+      "relative_path": "rgb/ANCHFOV-3_TCGA-A1-A0SP-01Z-00-DX1_left-8059_top-55998_bottom-56294_right-8341.png",
+      "role": "np_rgb",
+      "sha256": "7c369230303b0d7c4f42a3091ef84e211297c412845f5945b3dcd0f32276acae"
+    },
+    {
+      "bytes": 216280,
+      "relative_path": "rgb/ANCHFOV-40_TCGA-C8-A12V-01Z-00-DX1_left-14118_top-57452_bottom-57748_right-14398.png",
+      "role": "np_rgb",
+      "sha256": "c6faaa662a5136b5f927620614dd26296e97ab541f3299cc42a9224b240e905a"
+    },
+    {
+      "bytes": 170492,
+      "relative_path": "rgb/ANCHFOV-41_TCGA-C8-A12V-01Z-00-DX1_left-11820_top-57216_bottom-57472_right-12092.png",
+      "role": "np_rgb",
+      "sha256": "061585a0fe1fa95241e4e0279f55119e61d730ef89951e182ddd4e920047d0c0"
+    },
+    {
+      "bytes": 227328,
+      "relative_path": "rgb/ANCHFOV-42_TCGA-C8-A12V-01Z-00-DX1_left-16939_top-55915_bottom-56212_right-17226.png",
+      "role": "np_rgb",
+      "sha256": "84ec896911298b776d627e090618a1bcd61f9fc4037bf9123b2be26fb465aa18"
+    },
+    {
+      "bytes": 146463,
+      "relative_path": "rgb/ANCHFOV-43_TCGA-C8-A12V-01Z-00-DX1_left-12082_top-57471_bottom-57701_right-12347.png",
+      "role": "np_rgb",
+      "sha256": "cc8ff6bfb37b7c9f5c3ebb760cd4d265a61b512a4ea125a91904745a0837eb50"
+    },
+    {
+      "bytes": 166802,
+      "relative_path": "rgb/ANCHFOV-44_TCGA-C8-A12V-01Z-00-DX1_left-11565_top-58000_bottom-58245_right-11857.png",
+      "role": "np_rgb",
+      "sha256": "e333a31895c40dd1734dfd665cc392ebdd444f8dcd8ebc34ff5a0e527b24edab"
+    },
+    {
+      "bytes": 208506,
+      "relative_path": "rgb/ANCHFOV-45_TCGA-C8-A12V-01Z-00-DX1_left-13333_top-57444_bottom-57737_right-13625.png",
+      "role": "np_rgb",
+      "sha256": "93d4f3603547a3b76dac57c6100b28027af6323bcb0be1787568911ac21f6465"
+    },
+    {
+      "bytes": 275335,
+      "relative_path": "rgb/ANCHFOV-46_TCGA-C8-A12V-01Z-00-DX1_left-15133_top-57162_bottom-57491_right-15443.png",
+      "role": "np_rgb",
+      "sha256": "5c5793f92adaf70b63d5be9ba1947b1d01d3a65844cbd0c32b8cc69e9f09056b"
+    },
+    {
+      "bytes": 226150,
+      "relative_path": "rgb/ANCHFOV-47_TCGA-E2-A158-01Z-00-DX1_left-59133_top-26872_bottom-27156_right-59450.png",
+      "role": "np_rgb",
+      "sha256": "d319281a67c3065bec17b4b7c97a26ec371337832bec6f262386cab1f6695eb8"
+    },
+    {
+      "bytes": 209834,
+      "relative_path": "rgb/ANCHFOV-48_TCGA-E2-A158-01Z-00-DX1_left-58336_top-26873_bottom-27166_right-58632.png",
+      "role": "np_rgb",
+      "sha256": "4da2bde94a6cf2b5a09e1773438a7c818e2dc20b85509aaccaa0f62e3c108f2c"
+    },
+    {
+      "bytes": 172088,
+      "relative_path": "rgb/ANCHFOV-49_TCGA-E2-A158-01Z-00-DX1_left-59119_top-27915_bottom-28155_right-59422.png",
+      "role": "np_rgb",
+      "sha256": "d49d9d9e73db73599c71ec82cf6a11d331f6e59f630017bc39b848516e73cb3b"
+    },
+    {
+      "bytes": 169227,
+      "relative_path": "rgb/ANCHFOV-4_TCGA-A1-A0SP-01Z-00-DX1_left-8063_top-57037_bottom-57317_right-8321.png",
+      "role": "np_rgb",
+      "sha256": "b10baadc65091e061066ed898b97fd00b70d4060c5cbeb3603f002968830c578"
+    },
+    {
+      "bytes": 213838,
+      "relative_path": "rgb/ANCHFOV-50_TCGA-E2-A158-01Z-00-DX1_left-58118_top-27628_bottom-27936_right-58424.png",
+      "role": "np_rgb",
+      "sha256": "1d460ec9b7dfa31718081ca0675fa3ffa6d8447d9b4fd2515bc9df9594e93dec"
+    },
+    {
+      "bytes": 115810,
+      "relative_path": "rgb/ANCHFOV-51_TCGA-E2-A158-01Z-00-DX1_left-56821_top-27478_bottom-27637_right-57094.png",
+      "role": "np_rgb",
+      "sha256": "bfb9d733bffef6851c926b4c9942c64be21800fd4d1d6df4d13f6efc4d02b3b2"
+    },
+    {
+      "bytes": 182305,
+      "relative_path": "rgb/ANCHFOV-52_TCGA-E2-A158-01Z-00-DX1_left-57092_top-27142_bottom-27407_right-57373.png",
+      "role": "np_rgb",
+      "sha256": "726dd5bd0e5839b41700e45b00308423e3838c483f06f12bf55e7c04adb62947"
+    },
+    {
+      "bytes": 101818,
+      "relative_path": "rgb/ANCHFOV-53_TCGA-E2-A158-01Z-00-DX1_left-56432_top-26141_bottom-26362_right-56628.png",
+      "role": "np_rgb",
+      "sha256": "dc718c82d056f47f5ce115b45196b1ab9ed11ffe832736329d0a20eb3a1ac20f"
+    },
+    {
+      "bytes": 196003,
+      "relative_path": "rgb/ANCHFOV-5_TCGA-A1-A0SP-01Z-00-DX1_left-8820_top-57293_bottom-57578_right-9110.png",
+      "role": "np_rgb",
+      "sha256": "e83ed2405214c1e195372b5d0d44b7d979488009360f3f17829303c6aeb0912e"
+    },
+    {
+      "bytes": 186882,
+      "relative_path": "rgb/ANCHFOV-6_TCGA-A1-A0SP-01Z-00-DX1_left-8325_top-57028_bottom-57311_right-8602.png",
+      "role": "np_rgb",
+      "sha256": "4699cffa9f521e30b7302429371f082685181abd8fbd042899388c54ba49e217"
+    },
+    {
+      "bytes": 192245,
+      "relative_path": "rgb/ANCHFOV-7_TCGA-A1-A0SP-01Z-00-DX1_left-10104_top-56510_bottom-56820_right-10382.png",
+      "role": "np_rgb",
+      "sha256": "d22c986b395aee221d8f7f11924463d56b0cddcd08998124aea9217cbca7ff3c"
+    },
+    {
+      "bytes": 190549,
+      "relative_path": "rgb/ANCHFOV-8_TCGA-A1-A0SP-01Z-00-DX1_left-9069_top-55759_bottom-56057_right-9369.png",
+      "role": "np_rgb",
+      "sha256": "9242ef3b960305905d5e2265453389e250613cb2b466a1e5211d3da21bd90cd3"
+    },
+    {
+      "bytes": 192387,
+      "relative_path": "rgb/ANCHFOV-9_TCGA-A1-A0SP-01Z-00-DX1_left-9343_top-55735_bottom-56028_right-9642.png",
+      "role": "np_rgb",
+      "sha256": "577f6c42ce7ee131d035664feda4a47f8bedbb43d8d79958377e1c05e591a4cc"
+    },
+    {
+      "bytes": 2863336,
+      "relative_path": "v3.1_final_anchors_E_Ps_AreTruth.csv",
+      "role": "p_truth_master",
+      "sha256": "c648f5efa8c1461624721d5b1810fc5d233f89171aa6f69e67a37c4df6c8af9c"
+    }
+  ],
+  "files_canonical_sha256": "e87c4ec62daf382685513ee73947eba429e382b0d70254d1231a146ceb705043",
+  "license": "CC0-1.0",
+  "official_folder_ids": {
+    "np_truth_folder_id": "1-cYZ3yjJtRnvfMMLR2rN4Ow50zmlZTBJ",
+    "p_truth_folder_id": "1U8SrL8ChE7ByXa6cgN2Tm5jYjb565zV8",
+    "raw_folder_id": "1gvjlC9lPYUyf03X2ddWKscqUcEMEsIFX"
+  },
+  "official_repository": "https://github.com/PathologyDataScience/NuCLS",
+  "official_repository_commit": "a87ac50c05cbc8ea11a41516be819f6b31436be7",
+  "schema_version": 1,
+  "study_id": "nucls_natural_label_external_validation_v1",
+  "subset": "evaluation"
+}

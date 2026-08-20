@@ -63,5 +63,8 @@ root URL serve `index.html` directly.
 The package visibly states that it is not diagnostic, preserves the
 `amended_or_exploratory` disposition, includes every saved primary comparison,
 and identifies only a “potentially inconsistent annotation” or an item
-“recommended for expert review”. Confirmatory and external validation remain
-explicit future work. See `MVP_SCOPE.md` for the reduced acceptance boundary.
+“recommended for expert review”. The later NuCLS multi-rater validation is now
+complete and is reported as null/adverse; confirmatory CNN work and newly recruited
+blinded expert review remain future work. See `MVP_SCOPE.md` for the original reduced
+presentation boundary and `reports/nucls_external_validation_results.md` for the
+later external result.

@@ -11,6 +11,7 @@ that may warrant expert review—without changing source labels.
   <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
   <img alt="Presentation status: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
   <img alt="Scientific status: PRIMARY_STUDY_COMPLETE" src="https://img.shields.io/badge/science-PRIMARY__STUDY__COMPLETE-238636">
+  <img alt="External validation completed with null or adverse result" src="https://img.shields.io/badge/external-COMPLETE_%7C_not_supported-8B5CF6">
   <img alt="Research only, non-diagnostic" src="https://img.shields.io/badge/use-research_only_%7C_non--diagnostic-C2410C">
   <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml"><img alt="Presentation integrity workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml/badge.svg?branch=main"></a>
   <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Cross-platform scientific software workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
@@ -62,11 +63,12 @@ relabelling system.
 | --- | --- |
 | Presentation | `DEMO_COMPLETE` — static, responsive, checksum-verifiable MVP |
 | Scientific boundary | `PRIMARY_STUDY_COMPLETE` |
+| External multi-rater evaluation | `EXTERNAL_VALIDATION_COMPLETE` — frozen NuCLS claims not supported |
 | Primary matrix | 185/185 required cells completed; 0 required failures |
 | Optional primary cells | 37 pathology-encoder cells skipped under the frozen availability rule |
 | Statistical output | 36 preregistered H1/H3/H5/H6/H7 entries: 33 numeric results and 3 explicitly unavailable H6 entries; 2,000 group-bootstrap iterations where applicable |
 | Analysis disposition | `amended_or_exploratory` because outcomes had been inspected before recovery finalisation |
-| Not claimed | `CONFIRMATORY_COMPLETE`, `EXTERNAL_VALIDATION_READY`, or `EXTERNAL_VALIDATION_COMPLETE` |
+| Not claimed | `CONFIRMATORY_COMPLETE`, natural/pathologist-error detection, or clinical utility |
 
 The accepted primary run is
 `20260727T133947.089370Z_pannuke_primary_orphan_recovery`. Its full run directory
@@ -75,6 +77,14 @@ is local and ignored by Git. The public
 release now provides all completed-cell OOF predictions and rankings, the full group
 bootstrap, subgroup table and H4 restoration arrays. The independent verifier
 recalculates the saved H1-H7 comparison statistics without importing AANCA.
+
+The later NuCLS study was publicly frozen before outcome-table download and is now
+complete. In the primary Unbiased Control subset, neither the combined ranking rule
+nor the downstream rule passed. Guided correction was adverse versus leaving labels
+unchanged. The checked-in derived evidence and independent verifier are documented
+in [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
+This completes a genuine external multi-rater evaluation; it does not prove that a
+pathologist was wrong or that consensus is biological truth.
 
 See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
@@ -126,8 +136,8 @@ reduce background CPU/GPU work and layout shift without changing any evidence.
 ## Evidence at a glance
 
 The values below are read from the checked-in MVP evidence package. They measure
-recovery of **injected label changes**, not validation of naturally occurring
-annotation inconsistencies.
+recovery of **injected label changes**. The separate NuCLS table below reports the
+external natural-disagreement evaluation.
 
 | Registered result | Saved evidence |
 | --- | --- |
@@ -142,6 +152,20 @@ annotation inconsistencies.
 Three registered instance-dependent seeds produced byte-identical rankings and OOF
 predictions. They are retained for auditability but represent **one deterministic
 realisation, not three independent replications**.
+
+### External NuCLS result
+
+| Frozen outcome | Primary Unbiased Control result |
+| --- | --- |
+| Eligible evidence | 811 nuclei, 5 TCGA patient groups, 27 NP/P disagreements |
+| Ranking | AP 0.073489 vs prevalence 0.033292; 4/41 disagreements at the 5% budget |
+| Ranking decision | **Not supported**: 5%-precision-minus-prevalence CI [−0.030075, 0.154075] crossed zero |
+| Downstream decision | **Not supported/adverse**: guided minus uncorrected macro F1 −0.014633, CI [−0.026683, −0.002415] |
+| Meaning | The frozen method did not establish natural NP/P disagreement prioritisation or retrospective model improvement |
+
+NuCLS P-truth is inferred pathologist consensus, not guaranteed biological truth.
+The Evaluation sensitivity subset also failed its frozen ranking and downstream
+rules and could not rescue the primary outcome.
 
 The primary study produced 2,288 sealed artifacts and retained neutral, adverse,
 missing, and unavailable outcomes. Detailed comparison rows, intervals, adjusted
@@ -350,9 +374,10 @@ Run `python -m histo_audit --help` for the authoritative command tree.
 | `report` | Build sourced Markdown and static HTML from strict metrics JSON |
 | `demo` | Build, checksum-verify, or locally serve the static presentation MVP |
 
-Real-data study commands are intentionally hard-gated. A new confirmatory study,
-original-label audit execution, genuine expert review and external validation remain
-deferred; an implemented component is not evidence that a stage has run.
+Real-data study commands are intentionally hard-gated. The NuCLS external study has
+run and is backed by checked-in immutable evidence; a new confirmatory study, a
+PanNuke original-label audit and newly recruited blinded expert review remain
+deferred. An implemented component is not evidence that a stage has run.
 
 ## Repository layout
 
@@ -367,11 +392,13 @@ AANCA/
 │   ├── auditing/             # annotation-risk scores and neighbours
 │   ├── statistics/           # review metrics and group bootstrap
 │   ├── evaluation/           # controlled restoration experiments
+│   ├── external_validation/  # frozen NuCLS exact-pairing and multi-rater analysis
 │   ├── experiment/           # scientific contracts, statistics, and maintained runners
 │   ├── reporting/            # evidence-backed reports and figures
 │   └── workflows/            # preregistration, study gates, and review workflows
 ├── configs/                  # smoke, pilot, primary, confirmatory, external
 ├── scripts/present_demo.py   # dependency-free verified local presentation launcher
+├── scripts/verify_nucls_external_validation.py # independent NuCLS recalculation
 ├── tests/                    # unit, integration, portability, and CLI tests
 ├── reports/                  # compact QC, provenance, literature, and validation evidence
 ├── artifacts/mvp_demo/       # checked-in five-file static presentation package
@@ -390,6 +417,8 @@ AANCA/
 | [`STATUS.md`](STATUS.md) | Executed commands, evidence, blockers, and current handoff |
 | [`DECISIONS.md`](DECISIONS.md) | Current binding rationale; full history remains in Git |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Download and independently recalculate the released primary evidence |
+| [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Frozen NuCLS design, exact external result and independent verification |
+| [`NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md`](NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md) | Publicly frozen NuCLS multi-rater protocol |
 | [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md) | Prospective requirements for a future blinded natural-case expert review |
 | [`MVP_SCOPE.md`](MVP_SCOPE.md) | Reduced presentation boundary and acceptance checks |
 | [`DATASET_SETUP.md`](DATASET_SETUP.md) | PanNuke acquisition, integrity, QC, and licence gate |
@@ -423,8 +452,9 @@ Key limitations include:
 - The public evidence release supports independent recalculation of saved H1-H7
   statistics and inspection of per-cell OOF/ranking data. It does not constitute a
   second independent model-training run or external replication.
-- External multi-rater or blinded expert validation is still required before making
-  claims about naturally occurring annotation inconsistency.
+- The completed NuCLS multi-rater evaluation contains only five patient groups and
+  did not meet its frozen success conditions. It cannot support natural-error or
+  downstream-improvement claims.
 - Human disagreement and insufficient context must be preserved rather than forced
   into a single truth.
 - Nothing in this repository supports clinical use or patient-level decisions.
@@ -440,6 +470,7 @@ Completed evidence stages:
 - `PILOT_COMPLETE`
 - `PRE_REGISTRATION_FROZEN`
 - `PRIMARY_STUDY_COMPLETE`
+- `EXTERNAL_VALIDATION_COMPLETE` — completed NuCLS evaluation; primary claims not supported
 - `DEMO_COMPLETE`
 
 Explicitly deferred:
@@ -448,11 +479,12 @@ Explicitly deferred:
 - real original-label audit execution;
 - execution of the published blinded natural-case protocol in
   [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md);
-- genuine expert or multi-rater evaluation;
-- external domain validation.
+- newly recruited blinded expert evaluation;
+- broader external replication, prospective utility and clinical outcomes.
 
-Accordingly, `CONFIRMATORY_COMPLETE`, `EXTERNAL_VALIDATION_READY`, and
-`EXTERNAL_VALIDATION_COMPLETE` are not claimed.
+Accordingly, `CONFIRMATORY_COMPLETE`, natural/pathologist-error detection and
+clinical utility are not claimed. `EXTERNAL_VALIDATION_COMPLETE` records a completed
+null/adverse multi-rater evaluation, not efficacy.
 
 ## Development and validation
 

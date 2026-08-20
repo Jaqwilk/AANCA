@@ -60,6 +60,40 @@ saved model outputs; model retraining remains a separate operation governed by
 than implying that unavailable checkpoints were published.
 
 Publishing these artifacts makes the reported H1-H7 numbers independently
-recalculable and the OOF/ranking evidence publicly inspectable. It does not create
-expert validation, external validation or evidence that natural annotation
-disagreement is a pathology error.
+recalculable and the OOF/ranking evidence publicly inspectable. The PanNuke release
+alone does not create expert or external validation and does not show that natural
+annotation disagreement is a pathology error.
+
+## External NuCLS evidence
+
+The separate external study is checked in under
+`artifacts/nucls_external_validation` and documented in
+[`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
+It contains two frozen result bundles:
+
+- `unbiased-v1`: primary Unbiased Control subset;
+- `evaluation-v1`: secondary sensitivity subset.
+
+Each bundle contains a portable per-file source inventory, exact paired-anchor
+manifest, saved numeric evidence, result JSON and an artifact manifest. The source
+inventories bind the official NuCLS files used in the analysis; raw NuCLS images and
+outcome tables are not republished.
+
+Run:
+
+```text
+uv sync --dev
+uv run python scripts/verify_nucls_external_validation.py --json
+```
+
+The verifier imports neither `histo_audit` nor scikit-learn. It pins every evidence
+file and independently recalculates ranking AP/AUROC and fixed-budget outcomes,
+classification metrics, all deterministic random baselines and all group-bootstrap
+draws from the frozen seeds. The accepted primary conclusion is `not_supported`.
+
+This genuine external multi-rater execution establishes the completion stage
+`EXTERNAL_VALIDATION_COMPLETE`, not a positive scientific claim. The primary ranking
+rule failed because its 5% operational interval crossed zero, and guided correction
+was adverse versus leaving labels unchanged. Inferred NuCLS pathologist consensus is
+not guaranteed biological truth and disagreement is not proof that a pathologist
+made an error.

@@ -1,7 +1,8 @@
 # Blinded natural-case expert-review protocol
 
-Status: **protocol only; not yet executed**  
-Scientific stage: no new completion stage is claimed
+Status: **this newly recruited blinded-review protocol is not yet executed**
+Scientific stage: a separate NuCLS multi-rater study has reached
+`EXTERNAL_VALIDATION_COMPLETE`; this protocol does not claim expert-review execution
 
 This protocol defines the evidence required before AANCA may make any claim about
 naturally occurring annotation inconsistency. It does not reinterpret the completed
@@ -140,4 +141,3 @@ for an authorised researcher to reconstruct the package.
 - [ ] Lock responses before unblinding cohort assignment.
 - [ ] Run the frozen group-aware analysis and publish all eligible outcomes.
 - [ ] Update `STATUS.md` only with an allowed completion stage supported by evidence.
-

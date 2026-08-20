@@ -54,6 +54,9 @@ artifacts/resource_control/**
 artifacts/execution_capsules/**
 artifacts/original_confirmatory_technical_authorities/**
 artifacts/original_confirmatory_technical_authority_requests/**
+artifacts/nucls_external_validation/.superseded/**
+artifacts/nucls_external_validation/*.embeddings.npz
+artifacts/nucls_external_validation/*.embeddings.npz.metadata.json
 artifacts/mvp_demo*/**
 artifacts/duplicate_audit/*.npz
 artifacts/duplicate_audit/*.npz.metadata.json
