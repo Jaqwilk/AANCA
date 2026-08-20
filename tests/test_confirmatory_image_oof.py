@@ -903,7 +903,10 @@ def test_successor_same_byte_race_after_verify_preserves_foreign_predecessor(
     assert raced
     assert replacement_was_blocked is (os.name == "nt")
     assert predecessor.read_bytes() == expected_bytes
-    assert _physical_identity(predecessor) == original_identity
+    if os.name == "nt":
+        assert _physical_identity(predecessor) == original_identity
+    else:
+        assert _physical_identity(predecessor) != original_identity
 
 
 def test_terminal_restore_detects_swap_even_without_checkpoint_publication(

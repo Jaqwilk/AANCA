@@ -4,10 +4,12 @@ PanNuke data are used only after provenance, licence/terms, and actual file sema
 
 ## Current local result
 
-As of 2026-08-18, acquisition, schema/semantic validation, overlap/void QC,
+As of 2026-08-20, acquisition, schema/semantic validation, overlap/void QC,
 manifest construction, and the real-data M5 gate are complete. All three
 archives (`fold_1.zip`, `fold_2.zip`, and `fold_3.zip`) and their extracted fold
-directories remain under `C:\Users\NATAN\Documents\AANCA\data\raw\pannuke`.
+directories remain in the ignored repository-relative `data/raw/pannuke` directory
+on the original research workstation. Other checkouts may set `PANNUKE_ROOT` to a
+lawfully obtained copy.
 The accepted real-data primary run is recorded in `README.md`; confirmatory,
 expert-review, and external-validation work remains deferred. This paragraph
 supersedes the historical 2026-07-17 presence-only checkpoint.

@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-import numpy as np
+import hashlib
+import json
+from pathlib import Path
 
+import numpy as np
+from typer.testing import CliRunner
+
+from histo_audit.cli import app
 from histo_audit.data.manifest import validate_manifest
 from histo_audit.data.splitting import make_outer_audit_split
 from histo_audit.data.synthetic import CLASS_NAMES, generate_synthetic_dataset
@@ -95,3 +101,54 @@ def test_outer_split_separates_groups_and_protects_final_fold(synthetic_dataset)
         == synthetic_dataset.pre_corruption_labels[split.final_test_indices]
     )
     split.validate(len(synthetic_dataset.records))
+
+
+def test_generate_synthetic_cli_verifies_and_reuses_identical_output(tmp_path: Path) -> None:
+    config = Path(__file__).parents[1] / "configs" / "smoke.yaml"
+    output = tmp_path / "synthetic"
+    arguments = [
+        "data",
+        "generate-synthetic",
+        "--project-root",
+        str(tmp_path),
+        "--config",
+        str(config),
+        "--output-dir",
+        str(output),
+    ]
+
+    first = CliRunner().invoke(app, arguments)
+    assert first.exit_code == 0, first.output
+    assert json.loads(first.output)["status"] == "generated"
+    before = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in output.iterdir()}
+
+    second = CliRunner().invoke(app, arguments)
+    assert second.exit_code == 0, second.output
+    assert json.loads(second.output)["status"] == "verified_existing"
+    after = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in output.iterdir()}
+    assert after == before
+
+
+def test_generate_synthetic_cli_rejects_changed_existing_output(tmp_path: Path) -> None:
+    config = Path(__file__).parents[1] / "configs" / "smoke.yaml"
+    output = tmp_path / "synthetic"
+    arguments = [
+        "data",
+        "generate-synthetic",
+        "--project-root",
+        str(tmp_path),
+        "--config",
+        str(config),
+        "--output-dir",
+        str(output),
+    ]
+    first = CliRunner().invoke(app, arguments)
+    assert first.exit_code == 0, first.output
+    arrays_sha256 = hashlib.sha256((output / "dataset.npz").read_bytes()).hexdigest()
+    (output / "manifest.json").write_text("[]\n", encoding="utf-8")
+
+    repeated = CliRunner().invoke(app, arguments)
+
+    assert repeated.exit_code == 1
+    assert "existing synthetic manifest differs" in repeated.output
+    assert hashlib.sha256((output / "dataset.npz").read_bytes()).hexdigest() == arrays_sha256

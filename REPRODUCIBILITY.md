@@ -20,6 +20,8 @@ append to `artifacts/runs/registry.csv`, which is a historical workstation ledge
 containing absolute Windows paths. A reviewer can also pass an empty directory with
 `--runs-root`. Synthetic success validates corruption, group-safe OOF scoring,
 ranking, restoration, statistics and artifact plumbing; it is not PanNuke evidence.
+The data-generation command is idempotent: an identical existing package is verified
+and reused, while any changed, partial or unexpected artifact fails closed.
 
 The `Scientific software` GitHub Actions workflow is configured to execute lint,
 formatting, the complete test suite and this synthetic workflow on both Ubuntu and Windows. Tests
@@ -34,28 +36,33 @@ detect a changed or incomplete presentation package. It does not run a model,
 recompute a bootstrap, reload PanNuke or prove that the upstream analysis was
 scientifically correct.
 
-## What is not independently reproducible from GitHub
+## Independently recalculating the saved primary results
 
-The accepted primary run occupies approximately 46 GB locally and contains
-thousands of files. The public repository does not distribute PanNuke binaries, full per-cell
-corruption manifests, OOF probabilities, rankings, checkpoints or the 372 MB
-bootstrap array. It therefore cannot independently recompute H1-H7 from the public
-checkout alone. The checked-in `artifacts/mvp_demo/evidence.json` is a compact
-reporting extract, not a substitute for those upstream arrays.
+The public GitHub release
+[`primary-evidence-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1)
+contains all 185 completed-cell rankings and OOF probability arrays, the full
+2,000-draw group bootstrap, subgroup table, H4 restoration arrays, frozen controls
+and per-cell manifests. The three assets total approximately 2.75 GB and are rooted
+in the accepted run's existing SHA-256 identities.
 
-The retained local primary statistics manifest identifies the principal omitted
-outputs:
+After extracting `aanca-primary-evidence-v1.zip`, run:
 
-| Artifact | Size | SHA-256 |
-| --- | ---: | --- |
-| `primary_statistics.json` | 22,498,321 bytes | `c3685fe9863fd73b1298f0558212cb5267b07c3ce6e4e4f37018dec55c115ac0` |
-| `primary_subgroups.csv` | 4,208,358 bytes | `36be649fef067de82cd11b77f508f0a6fe62f649d393a1c9975a4523c24d166e` |
-| `primary_bootstrap_evidence.npz` | 372,330,793 bytes | `35f8017cfcc887a1e94498a72e6868481088ce0fac4d8d2369d32504780bafa2` |
+```text
+uv run python scripts/verify_primary_evidence.py PATH/TO/aanca-primary-evidence-v1
+```
 
-A future archival release must publish licence-compatible OOF/ranking and bootstrap
-evidence in a durable data repository, with a manifest rooted in the existing
-accepted run. Until then the correct claim is “internally traceable and publicly
-inspectable summaries,” not “independently reproduced primary results.”
+The verifier intentionally does not import `histo_audit`. It independently
+recalculates the 33 numeric primary comparison bootstrap summaries, intervals,
+one-sided p-values and Holm corrections, preserves the three unavailable H6 entries,
+and recalculates the adverse H4 macro-F1 result from 100 random-review repetitions.
+See [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) and
+[`evidence-release-manifest.json`](evidence-release-manifest.json) for exact asset
+sizes, digests and scope.
+
+This is independent recalculation of the saved numeric evidence, not independent
+replication of the entire experiment from images. PanNuke images and masks are not
+redistributed. Fold checkpoints were not retained in the accepted run, so model
+retraining still requires a lawful PanNuke copy and the frozen code/configuration.
 
 ## Public-history disclosure
 
@@ -82,8 +89,9 @@ wording or adding tests:
    benchmark-only information.
 5. Evaluate an external dataset and a downstream intervention defined before its
    outcomes are inspected.
-6. Deposit the full licence-compatible prediction and statistical evidence needed
-   to recompute every published comparison.
+6. Independently replicate the complete image-to-result run in a separate environment;
+   the public release now supports result recalculation and OOF/ranking inspection,
+   but not a second independent execution of model training.
 
 Until those steps are completed, AANCA is a functioning research prototype and a
 synthetic-corruption benchmark. It is not expert-validated, externally validated,

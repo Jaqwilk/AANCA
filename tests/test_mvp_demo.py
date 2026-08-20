@@ -369,7 +369,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "18 August 2026" in html
+    assert "20 August 2026" in html
     assert "gsap@3.15.0" in html
     assert "three@0.185.1" in html
     assert "import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')" in html
@@ -439,7 +439,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Inspect the complete H1 / H3 / H5 / H6 / H7 table" in html
     assert '<div class="reading-grid reveal">' not in html
     assert "benchmark-only information unavailable in a real audit" in html
-    assert "it cannot independently recompute H1-H7 from a checkout alone" in html
+    assert "evidence needed to recalculate H1-H7" in html
+    assert "primary evidence release" in html
     assert "verifies the five-file presentation package" in html
     assert 'href="#evidence">Reproducibility boundary</a>' in html
     assert (

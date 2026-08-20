@@ -7,12 +7,7 @@ from typing import Any
 
 import numpy as np
 import pytest
-from typer.testing import CliRunner
 
-import histo_audit.cli as cli_module
-import histo_audit.experiment.confirmatory_cli_inputs as adapter_module
-import histo_audit.workflows as workflows
-from histo_audit.cli import app
 from histo_audit.config import config_sha256, load_config
 from histo_audit.corruption.controlled import apply_controlled_corruption
 from histo_audit.experiment.confirmatory_cli_inputs import (
@@ -249,93 +244,3 @@ def test_frozen_feature_specs_require_exact_semantic_sidecar_match(
     )
     with pytest.raises(ConfirmatoryCLIInputError, match="matches=0"):
         _frozen_feature_specs(config, candidates)
-
-
-def test_confirmatory_cli_capsule_gate_precedes_all_legacy_hooks(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    events: list[str] = []
-
-    def _lifecycle(**_: Any) -> None:
-        events.append("lifecycle")
-
-    def _gate(**_: Any) -> object:
-        events.append("scientific_gate")
-        return object()
-
-    def _adapter(**_: Any) -> None:
-        events.append("adapter")
-
-    def _loader(*_: Any) -> None:
-        events.append("executor_lookup")
-
-    monkeypatch.setattr(workflows, "require_current_lifecycle_readiness", _lifecycle)
-    monkeypatch.setattr(workflows, "validate_confirmatory_execution_gate", _gate)
-    monkeypatch.setattr(adapter_module, "resolve_confirmatory_cli_inputs", _adapter)
-    monkeypatch.setattr(cli_module, "_load_optional_study_executor", _loader)
-
-    result = CliRunner().invoke(
-        app,
-        [
-            "experiment",
-            "confirmatory",
-            "--project-root",
-            str(tmp_path),
-            "--primary-run-dir",
-            "primary",
-            "--freeze-dir",
-            "freeze",
-            "--lifecycle-readiness-run-dir",
-            "readiness",
-        ],
-    )
-
-    assert result.exit_code == 2, result.output
-    assert "GATED [CONFIRMATORY_CAPSULE_AUTHORITY_REQUIRED]" in result.output
-    assert events == []
-    assert not (tmp_path / "artifacts" / "runs").exists()
-
-
-def test_confirmatory_cli_capsule_gate_precedes_adapter_failure_and_run_creation(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    adapter_called = False
-    executor_loaded = False
-    monkeypatch.setattr(workflows, "require_current_lifecycle_readiness", lambda **_: None)
-    monkeypatch.setattr(workflows, "validate_confirmatory_execution_gate", lambda **_: object())
-
-    def _unexpected_adapter(**_: Any) -> None:
-        nonlocal adapter_called
-        adapter_called = True
-        raise AssertionError("adapter must not run before capsule authority")
-
-    monkeypatch.setattr(adapter_module, "resolve_confirmatory_cli_inputs", _unexpected_adapter)
-
-    def _unexpected_loader(*_: Any) -> None:
-        nonlocal executor_loaded
-        executor_loaded = True
-        raise AssertionError("executor must not load after adapter failure")
-
-    monkeypatch.setattr(cli_module, "_load_optional_study_executor", _unexpected_loader)
-
-    result = CliRunner().invoke(
-        app,
-        [
-            "experiment",
-            "confirmatory",
-            "--project-root",
-            str(tmp_path),
-            "--primary-run-dir",
-            "primary",
-            "--freeze-dir",
-            "freeze",
-            "--lifecycle-readiness-run-dir",
-            "readiness",
-        ],
-    )
-
-    assert result.exit_code == 2, result.output
-    assert "GATED [CONFIRMATORY_CAPSULE_AUTHORITY_REQUIRED]" in result.output
-    assert not adapter_called
-    assert not executor_loaded
-    assert not (tmp_path / "artifacts" / "runs").exists()

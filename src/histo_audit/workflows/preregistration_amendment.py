@@ -138,9 +138,11 @@ _INHERITED_PRIOR_NUMERIC_TRUST_ASSUMPTION = (
 _INHERITED_PRIOR_NUMERIC_LIMITATION = (
     "control_flow_and_content_addressed_inheritance_not_fresh_semantic_recomputation"
 )
-_TRUSTED_PROCESS_OBSERVATION_SOURCE = Path(
-    r"C:\Users\NATAN\Documents\AANCA\artifacts\process_observations"
-    r"\20260726T185709.6378333Z_pid20792_cli_receipt.json"
+_TRUSTED_PROCESS_OBSERVATION_SOURCE = (
+    Path(__file__).resolve().parents[3]
+    / "artifacts"
+    / "process_observations"
+    / "20260726T185709.6378333Z_pid20792_cli_receipt.json"
 )
 _TRUSTED_PROCESS_OBSERVATION_SIZE_BYTES = 4138
 _TRUSTED_PROCESS_OBSERVATION_SHA256 = (

@@ -70,11 +70,11 @@ relabelling system.
 
 The accepted primary run is
 `20260727T133947.089370Z_pannuke_primary_orphan_recovery`. Its full run directory
-is local and ignored by Git; the compact checked-in presentation contains a
-machine-readable, checksum-bound evidence snapshot. Consequently, the public
-repository supports package verification and synthetic software reproduction,
-but it does **not** currently support independent recomputation of H1-H7 from the
-full OOF predictions and bootstrap arrays.
+is local and ignored by Git. The public
+[`primary-evidence-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1)
+release now provides all completed-cell OOF predictions and rankings, the full group
+bootstrap, subgroup table and H4 restoration arrays. The independent verifier
+recalculates the saved H1-H7 comparison statistics without importing AANCA.
 
 See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
@@ -259,6 +259,10 @@ is intentionally separate from the checked-in historical primary ledger, whose
 absolute Windows paths describe the original workstation and are not portable.
 Use `--runs-root <clean-directory>` to select another caller-owned location.
 
+`generate-synthetic` is safe to repeat: it regenerates the expected data in memory,
+verifies every saved array and manifest field, and reports `verified_existing` when
+the on-disk package is identical. It never overwrites a changed or partial package.
+
 Synthetic success validates the software pipeline only. It must not be described
 as real-data, primary, confirmatory, expert-reviewed, or clinical validation.
 
@@ -309,8 +313,9 @@ post-processing step:
   operands.
 - Reports and the static demo read machine-readable artifacts instead of embedding
   hand-entered benchmark values.
-- Raw data, full run directories, embeddings, checkpoints, and predictions remain
-  outside Git; small reviewable evidence and manifests are committed deliberately.
+- Raw data, full run directories, embeddings and checkpoints remain outside Git.
+  Licence-compatible OOF predictions, rankings and statistical arrays are published
+  as checksum-bound release assets rather than committed to the source tree.
 - Negative, neutral, missing, optional, and adverse outcomes are preserved.
 
 To verify the checked-in MVP:
@@ -338,16 +343,16 @@ Run `python -m histo_audit --help` for the authoritative command tree.
 | `doctor` | Record environment, hardware, CUDA, package, disk, and data availability |
 | `data` | Generate synthetic data; verify, validate, inspect duplicates, and manifest PanNuke |
 | `representations` | Extract target crops, engineered features, and frozen ResNet embeddings |
-| `experiment` | Run immutable smoke, pilot, primary-recovery, and governed study workflows |
-| `preregistration` | Freeze, amend, and verify immutable analysis authorities |
+| `experiment` | Run maintained smoke, pilot, and primary workflows |
+| `preregistration` | Freeze the analysis definition and verify its evidence |
 | `audit` | Rank unmodified original labels using group-safe OOF evidence |
 | `external` | Build blinded external-review packages when eligibility gates are satisfied |
 | `report` | Build sourced Markdown and static HTML from strict metrics JSON |
 | `demo` | Build, checksum-verify, or locally serve the static presentation MVP |
 
-Real-data study commands are intentionally hard-gated. The original confirmatory
-study, original-label audit execution, genuine expert review, and external validation
-remain deferred; an implemented command is not evidence that a stage has run.
+Real-data study commands are intentionally hard-gated. A new confirmatory study,
+original-label audit execution, genuine expert review and external validation remain
+deferred; an implemented component is not evidence that a stage has run.
 
 ## Repository layout
 
@@ -362,12 +367,12 @@ AANCA/
 │   ├── auditing/             # annotation-risk scores and neighbours
 │   ├── statistics/           # review metrics and group bootstrap
 │   ├── evaluation/           # controlled restoration experiments
-│   ├── experiment/           # tracked study runners and gates
+│   ├── experiment/           # scientific contracts, statistics, and maintained runners
 │   ├── reporting/            # evidence-backed reports and figures
-│   └── workflows/            # frozen/governed execution authorities
+│   └── workflows/            # preregistration, study gates, and review workflows
 ├── configs/                  # smoke, pilot, primary, confirmatory, external
 ├── scripts/present_demo.py   # dependency-free verified local presentation launcher
-├── tests/                    # unit, integration, security, lifecycle, and CLI tests
+├── tests/                    # unit, integration, portability, and CLI tests
 ├── reports/                  # compact QC, provenance, literature, and validation evidence
 ├── artifacts/mvp_demo/       # checked-in five-file static presentation package
 ├── references/               # bibliographic records
@@ -383,11 +388,12 @@ AANCA/
 | [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md) | Exact primary and confirmatory analysis definition |
 | [`PLAN.md`](PLAN.md) | Milestones, gates, acceptance criteria, and deferred work |
 | [`STATUS.md`](STATUS.md) | Executed commands, evidence, blockers, and current handoff |
-| [`DECISIONS.md`](DECISIONS.md) | Append-only rationale and operational decision history |
+| [`DECISIONS.md`](DECISIONS.md) | Current binding rationale; full history remains in Git |
+| [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Download and independently recalculate the released primary evidence |
+| [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md) | Prospective requirements for a future blinded natural-case expert review |
 | [`MVP_SCOPE.md`](MVP_SCOPE.md) | Reduced presentation boundary and acceptance checks |
 | [`DATASET_SETUP.md`](DATASET_SETUP.md) | PanNuke acquisition, integrity, QC, and licence gate |
 | [`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md) | Non-diagnostic scope, scientific limits, and responsible language |
-| [`CAPSULE_DESIGN.md`](CAPSULE_DESIGN.md) | Advanced governed execution-capsule architecture |
 | [`references/references.bib`](references/references.bib) | Project bibliography, including both required PanNuke citations |
 
 Read the first four documents before changing experiment code or scientific claims.
@@ -414,9 +420,9 @@ Key limitations include:
 - The timestamped July freeze artifacts were created before the repository's first
   public commit on 19 August 2026. Their internal hashes preserve file identity,
   but public Git history is not independent proof of prospective preregistration.
-- The public package omits the full primary OOF predictions, per-cell data and
-  bootstrap arrays, so its checksums verify the published files rather than the
-  correctness or independent reproducibility of the original computation.
+- The public evidence release supports independent recalculation of saved H1-H7
+  statistics and inspection of per-cell OOF/ranking data. It does not constitute a
+  second independent model-training run or external replication.
 - External multi-rater or blinded expert validation is still required before making
   claims about naturally occurring annotation inconsistency.
 - Human disagreement and insufficient context must be preserved rather than forced
@@ -438,9 +444,10 @@ Completed evidence stages:
 
 Explicitly deferred:
 
-- the unchanged original confirmatory matrix;
+- a new prospectively registered confirmatory study;
 - real original-label audit execution;
-- a blinded expert-review package backed by eligible real audit evidence;
+- execution of the published blinded natural-case protocol in
+  [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md);
 - genuine expert or multi-rater evaluation;
 - external domain validation.
 
@@ -463,8 +470,9 @@ GitHub Actions separates two claims. `Presentation integrity` runs the
 dependency-free five-file package verifier. `Scientific software` is configured to
 install the locked environment on Ubuntu and Windows, run linting, formatting, the complete
 test suite and the deterministic synthetic workflow in a clean registry. Neither
-workflow recomputes the PanNuke primary study; that requires the licensed dataset
-and the unpublished full run artifacts described in `REPRODUCIBILITY.md`.
+workflow retrains the PanNuke primary study. The release described in
+`REPRODUCIBILITY.md` supports independent result recalculation; a full image-to-result
+replication still requires the licensed dataset.
 
 Mandatory scientific invariants live in [`AGENTS.md`](AGENTS.md) and
 [`SPEC.md`](SPEC.md). Material changes must update the corresponding evidence in
@@ -504,5 +512,5 @@ dependencies, and pretrained weights.
 
 ## Author
 
-University research prototype. Presentation release by **Natan Smogór**, dated
-18 August 2026.
+University research prototype. Presentation release by **Natan Smogór**, updated
+20 August 2026.

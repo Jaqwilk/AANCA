@@ -18,10 +18,6 @@ from typing import Annotated, Any, NoReturn, cast
 
 import typer
 
-from histo_audit.workflows.original_confirmatory_technical_authority_publication_v1 import (
-    original_confirmatory_technical_authority_app,
-)
-
 app = typer.Typer(
     name="histo-audit",
     help="Leakage-safe nucleus annotation-auditing research workflow.",
@@ -52,10 +48,6 @@ app.add_typer(audit_app, name="audit")
 app.add_typer(external_app, name="external")
 app.add_typer(report_app, name="report")
 app.add_typer(demo_app, name="demo")
-app.add_typer(
-    original_confirmatory_technical_authority_app,
-    name="original-confirmatory-technical-authority",
-)
 
 
 def _resolve_from_root(project_root: Path, path: Path) -> Path:
@@ -815,61 +807,96 @@ def generate_synthetic_command(
         )
         arrays_path = destination / "dataset.npz"
         manifest_path = destination / "manifest.json"
-        if arrays_path.exists() or manifest_path.exists():
-            raise FileExistsError(
-                f"synthetic output already exists and will not be overwritten: {destination}"
-            )
-        destination.mkdir(parents=True, exist_ok=True)
+        generation_path = destination / "generation.json"
         dataset = generate_synthetic_dataset(
             n_groups=int(data_config.get("groups", 60)),
             instances_per_group=int(data_config.get("samples_per_group", 5)),
             patch_size=int(data_config.get("image_size", 64)),
             seed=int(seed_config.get("dataset", 101)),
         )
-        descriptor, temporary_name = tempfile.mkstemp(
-            prefix=".dataset.", suffix=".tmp", dir=destination
+        arrays = {
+            "images": dataset.images,
+            "target_masks": dataset.target_masks,
+            "audit_features": dataset.audit_features,
+            "corruption_features": dataset.corruption_features,
+            "pre_corruption_labels": dataset.pre_corruption_labels,
+            "observed_labels": dataset.observed_labels,
+            "group_ids": dataset.group_ids,
+            "sample_ids": dataset.sample_ids,
+        }
+        manifest_payload = json.loads(
+            json.dumps(
+                [record.as_dict() for record in dataset.records],
+                allow_nan=False,
+            )
         )
-        temporary_path = Path(temporary_name)
-        try:
-            with os.fdopen(descriptor, "wb") as handle:
-                np.savez_compressed(
-                    handle,
-                    images=dataset.images,
-                    target_masks=dataset.target_masks,
-                    audit_features=dataset.audit_features,
-                    corruption_features=dataset.corruption_features,
-                    pre_corruption_labels=dataset.pre_corruption_labels,
-                    observed_labels=dataset.observed_labels,
-                    group_ids=dataset.group_ids,
-                    sample_ids=dataset.sample_ids,
+        generation_payload = {
+            "software_validation_only": True,
+            "configuration_path": str(config_file),
+            "configuration_sha256": digest,
+            "dataset_definition_sha256": definition_digest,
+            "generator_schema_version": SYNTHETIC_GENERATOR_SCHEMA_VERSION,
+            "generator_code_sha256": generator_code_sha256,
+            "n_samples": len(dataset.records),
+            "n_groups": len(set(dataset.group_ids.tolist())),
+            "class_names": list(dataset.class_names),
+        }
+        status = "generated"
+        if destination.exists():
+            expected_names = {"dataset.npz", "manifest.json", "generation.json"}
+            if destination.is_symlink() or not destination.is_dir():
+                raise ValueError(f"synthetic output is not a regular directory: {destination}")
+            observed_names = {path.name for path in destination.iterdir()}
+            if observed_names != expected_names:
+                raise ValueError(
+                    "existing synthetic output has an unexpected file set: "
+                    f"{sorted(observed_names)!r}"
                 )
-                handle.flush()
-                os.fsync(handle.fileno())
-            os.replace(temporary_path, arrays_path)
-        except BaseException:
-            temporary_path.unlink(missing_ok=True)
-            raise
-        atomic_write_json(manifest_path, [record.as_dict() for record in dataset.records])
-        atomic_write_json(
-            destination / "generation.json",
-            {
-                "software_validation_only": True,
-                "configuration_path": str(config_file),
-                "configuration_sha256": digest,
-                "dataset_definition_sha256": definition_digest,
-                "generator_schema_version": SYNTHETIC_GENERATOR_SCHEMA_VERSION,
-                "generator_code_sha256": generator_code_sha256,
-                "n_samples": len(dataset.records),
-                "n_groups": len(set(dataset.group_ids.tolist())),
-                "class_names": list(dataset.class_names),
-            },
-        )
+            for path in (arrays_path, manifest_path, generation_path):
+                if path.is_symlink() or not path.is_file():
+                    raise ValueError(f"existing synthetic artifact is not a regular file: {path}")
+            with np.load(arrays_path, allow_pickle=False) as saved:
+                if set(saved.files) != set(arrays):
+                    raise ValueError("existing synthetic dataset array set differs")
+                for name, expected in arrays.items():
+                    if not np.array_equal(saved[name], expected):
+                        raise ValueError(f"existing synthetic dataset array differs: {name}")
+            if json.loads(manifest_path.read_text(encoding="utf-8")) != manifest_payload:
+                raise ValueError("existing synthetic manifest differs")
+            observed_generation = json.loads(generation_path.read_text(encoding="utf-8"))
+            if not isinstance(observed_generation, dict):
+                raise ValueError("existing synthetic generation evidence is not an object")
+            expected_generation = dict(generation_payload)
+            existing_configuration_path = observed_generation.get("configuration_path")
+            if not isinstance(existing_configuration_path, str) or not existing_configuration_path:
+                raise ValueError("existing synthetic generation evidence lacks configuration_path")
+            expected_generation["configuration_path"] = existing_configuration_path
+            if observed_generation != expected_generation:
+                raise ValueError("existing synthetic generation evidence differs")
+            status = "verified_existing"
+        else:
+            destination.mkdir(parents=True)
+            descriptor, temporary_name = tempfile.mkstemp(
+                prefix=".dataset.", suffix=".tmp", dir=destination
+            )
+            temporary_path = Path(temporary_name)
+            try:
+                with os.fdopen(descriptor, "wb") as handle:
+                    np.savez_compressed(handle, **arrays)
+                    handle.flush()
+                    os.fsync(handle.fileno())
+                os.replace(temporary_path, arrays_path)
+            except BaseException:
+                temporary_path.unlink(missing_ok=True)
+                raise
+            atomic_write_json(manifest_path, manifest_payload)
+            atomic_write_json(generation_path, generation_payload)
     except Exception as exc:
         _failure(f"synthetic generation failed: {type(exc).__name__}: {exc}")
     typer.echo(
         json.dumps(
             {
-                "status": "generated",
+                "status": status,
                 "software_validation_only": True,
                 "output_directory": str(destination.resolve()),
                 "configuration_sha256": digest,
@@ -1948,111 +1975,6 @@ def verify_pilot_post_seal_command(
     typer.echo(json.dumps(result, indent=2, sort_keys=True))
 
 
-@experiment_app.command("lifecycle-rehearsal")
-def lifecycle_rehearsal_command(
-    authority_directory: Annotated[
-        Path,
-        typer.Option(
-            "--authority-dir",
-            help="Verified immutable freeze/amendment authority for the current source tree.",
-        ),
-    ],
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    runs_root: Annotated[
-        Path,
-        typer.Option("--runs-root", help="Run registry root for the operational rehearsal."),
-    ] = Path("artifacts/runs"),
-    retry_of_run_id: Annotated[
-        str | None,
-        typer.Option(
-            "--retry-of-run-id",
-            help="Optional exact sealed failed rehearsal predecessor run ID.",
-        ),
-    ] = None,
-) -> None:
-    """Exercise the real persistence/publication/seal lifecycle on synthetic evidence."""
-
-    from histo_audit.workflows import execute_lifecycle_rehearsal
-
-    root = project_root.resolve()
-    authority = _resolve_from_root(root, authority_directory)
-    run_root = _resolve_from_root(root, runs_root)
-    try:
-        result = execute_lifecycle_rehearsal(
-            project_root=root,
-            authority_directory=authority,
-            runs_root=run_root,
-            retry_of_run_id=retry_of_run_id,
-        )
-    except Exception as exc:
-        _failure(f"lifecycle rehearsal failed: {type(exc).__name__}: {exc}")
-    typer.echo(
-        json.dumps(
-            {
-                "schema_version": 1,
-                "workflow": "operational_lifecycle_qualification_rehearsal",
-                "scientific_outcome": False,
-                "project_completion_status_changed": False,
-                "result": result.as_dict(),
-                "next_command": (
-                    ".venv\\Scripts\\python.exe -m histo_audit experiment "
-                    "verify-lifecycle-rehearsal --project-root . --authority-dir "
-                    f'"{authority}" --rehearsal-run-dir "{result.run_directory}" '
-                    f'--runs-root "{run_root}"'
-                ),
-            },
-            indent=2,
-            sort_keys=True,
-        )
-    )
-
-
-@experiment_app.command("verify-lifecycle-rehearsal")
-def verify_lifecycle_rehearsal_command(
-    authority_directory: Annotated[
-        Path,
-        typer.Option("--authority-dir", help="Same verified authority used by the rehearsal."),
-    ],
-    rehearsal_run_directory: Annotated[
-        Path,
-        typer.Option("--rehearsal-run-dir", help="Sealed rehearsal run to reopen."),
-    ],
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    runs_root: Annotated[
-        Path,
-        typer.Option("--runs-root", help="Run registry root for the sealed readiness record."),
-    ] = Path("artifacts/runs"),
-) -> None:
-    """Fresh-process verification that publishes one immutable readiness run."""
-
-    from histo_audit.workflows import verify_lifecycle_rehearsal_fresh_process
-
-    root = project_root.resolve()
-    try:
-        result = verify_lifecycle_rehearsal_fresh_process(
-            project_root=root,
-            authority_directory=_resolve_from_root(root, authority_directory),
-            rehearsal_run_directory=_resolve_from_root(root, rehearsal_run_directory),
-            runs_root=_resolve_from_root(root, runs_root),
-        )
-    except Exception as exc:
-        _failure(f"lifecycle rehearsal verification failed: {type(exc).__name__}: {exc}")
-    typer.echo(
-        json.dumps(
-            {
-                "schema_version": 1,
-                "workflow": "operational_lifecycle_qualification_fresh_verification",
-                "decision": "passed",
-                "scientific_outcome": False,
-                "project_completion_status_changed": False,
-                "result": result.as_dict(),
-            },
-            indent=2,
-            sort_keys=True,
-        )
-    )
-
-
 @experiment_app.command("primary")
 def primary_command(
     project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
@@ -2158,540 +2080,6 @@ def primary_command(
     except Exception as exc:
         _failure(f"real primary study failed: {type(exc).__name__}: {exc}")
     typer.echo(json.dumps({"status": "executor_returned", "result": result}, indent=2, default=str))
-
-
-@experiment_app.command("primary-orphan-recovery")
-def primary_orphan_recovery_command(
-    authority_directory: Annotated[
-        Path,
-        typer.Option(
-            "--authority-dir",
-            "--freeze-dir",
-            file_okay=False,
-            help=(
-                "Verified immutable post-outcome amendment containing the exclusive "
-                "primary-recovery authorization."
-            ),
-        ),
-    ],
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    dataset_path: Annotated[
-        Path,
-        typer.Option("--dataset", help="Exact frozen PanNuke dataset file or directory."),
-    ] = Path("data/raw/pannuke"),
-    manifest_path: Annotated[
-        Path,
-        typer.Option("--manifest", help="Exact frozen nucleus manifest."),
-    ] = Path("data/manifests/pannuke/pannuke_nucleus_manifest.parquet"),
-    duplicate_audit_path: Annotated[
-        Path,
-        typer.Option("--duplicate-audit", help="Exact frozen duplicate-audit JSON."),
-    ] = Path("artifacts/duplicate_audit/pannuke_duplicate_audit.json"),
-    pathology_encoder_audit_path: Annotated[
-        Path,
-        typer.Option(
-            "--pathology-encoder-audit",
-            "--pathology-audit",
-            help="Exact frozen pathology-encoder availability-audit JSON.",
-        ),
-    ] = Path("reports/pathology_encoder_availability.json"),
-    frozen_primary_config_path: Annotated[
-        Path | None,
-        typer.Option(
-            "--primary-config",
-            "--frozen-primary-config",
-            help=(
-                "Primary config snapshot inside --authority-dir; defaults to "
-                "primary_frozen.yaml in that authority."
-            ),
-        ),
-    ] = None,
-    frozen_confirmatory_config_path: Annotated[
-        Path | None,
-        typer.Option(
-            "--confirmatory-config",
-            "--frozen-confirmatory-config",
-            help=(
-                "Confirmatory config snapshot inside --authority-dir; defaults to "
-                "confirmatory_frozen.yaml in that authority."
-            ),
-        ),
-    ] = None,
-    runs_root: Annotated[
-        Path,
-        typer.Option(
-            "--runs-root",
-            file_okay=False,
-            help="Run registry root containing the orphan and the new recovery run.",
-        ),
-    ] = Path("artifacts/runs"),
-    run_id: Annotated[
-        str | None,
-        typer.Option(
-            "--run-id",
-            help="Optional new unique recovery run ID; collisions fail without retry.",
-        ),
-    ] = None,
-    preflight_only: Annotated[
-        bool,
-        typer.Option(
-            "--preflight-only",
-            help=(
-                "Run only the public read-only recovery qualification; never create a "
-                "RunTracker or copy artifacts."
-            ),
-        ),
-    ] = False,
-) -> None:
-    """Execute one authorized zero-training orphan recovery with no automatic retry."""
-
-    from histo_audit.config import load_config
-    from histo_audit.experiment import (
-        RecoveryAuthorization,
-        build_primary_matrix_plan,
-        primary_execution_controls_from_frozen_config,
-    )
-    from histo_audit.workflows import (
-        PRIMARY_RECOVERY_EXPERIMENT_NAME,
-        require_primary_recovery_authorization,
-        validate_primary_execution_gate,
-    )
-
-    root = project_root.resolve()
-    authority = _resolve_from_root(root, authority_directory)
-    dataset = _resolve_from_root(root, dataset_path)
-    manifest = _resolve_from_root(root, manifest_path)
-    duplicate_audit = _resolve_from_root(root, duplicate_audit_path)
-    pathology_audit = _resolve_from_root(root, pathology_encoder_audit_path)
-    primary_config = (
-        (authority / "primary_frozen.yaml").resolve()
-        if frozen_primary_config_path is None
-        else _resolve_from_root(root, frozen_primary_config_path)
-    )
-    confirmatory_config = (
-        (authority / "confirmatory_frozen.yaml").resolve()
-        if frozen_confirmatory_config_path is None
-        else _resolve_from_root(root, frozen_confirmatory_config_path)
-    )
-    run_root = _resolve_from_root(root, runs_root)
-    source_run_id: str | None = None
-    try:
-        gate_evidence = validate_primary_execution_gate(
-            project_root=root,
-            freeze_directory=authority,
-            dataset_path=dataset,
-            manifest_path=manifest,
-            duplicate_audit_path=duplicate_audit,
-            pathology_encoder_audit_path=pathology_audit,
-            frozen_primary_config_path=primary_config,
-            frozen_confirmatory_config_path=confirmatory_config,
-            experiment_name=PRIMARY_RECOVERY_EXPERIMENT_NAME,
-        )
-        authorization_mapping = require_primary_recovery_authorization(authority)
-        authorization = RecoveryAuthorization.from_mapping(
-            authorization_mapping,
-            authority_directory=authority,
-            authority_artifact_root_sha256=gate_evidence.freeze_artifact_root_sha256,
-            authority_manifest_sha256=gate_evidence.freeze_manifest_sha256,
-        )
-        source_run_id = authorization.source_run_id
-        primary_config_payload = load_config(primary_config)
-        plan = build_primary_matrix_plan(primary_config_payload)
-        controls = primary_execution_controls_from_frozen_config(primary_config_payload)
-    except Exception as exc:
-        _emit_primary_recovery_error(
-            exc,
-            status="gated",
-            authority_directory=authority,
-            source_run_id=source_run_id,
-            exit_code=2,
-        )
-
-    if preflight_only:
-        try:
-            preflight = _load_optional_study_executor(
-                "histo_audit.experiment.primary_recovery_runner",
-                "preflight_primary_orphan_recovery",
-            )
-        except Exception as exc:
-            _emit_primary_recovery_error(
-                exc,
-                status="preflight_import_failed",
-                authority_directory=authority,
-                source_run_id=source_run_id,
-                exit_code=1,
-            )
-        if preflight is None:
-            _emit_primary_recovery_error(
-                RuntimeError("primary orphan recovery preflight is unavailable"),
-                status="preflight_unavailable",
-                authority_directory=authority,
-                source_run_id=source_run_id,
-                exit_code=2,
-            )
-        try:
-            result = preflight(
-                gate_evidence=gate_evidence,
-                plan=plan,
-                controls=controls,
-                authorization=authorization,
-                runs_root=run_root,
-                run_id=run_id,
-            )
-        except Exception as exc:
-            _emit_primary_recovery_error(
-                exc,
-                status="preflight_failed",
-                authority_directory=authority,
-                source_run_id=source_run_id,
-                exit_code=1,
-            )
-        typer.echo(
-            json.dumps(
-                {
-                    "schema_version": 1,
-                    "workflow": "primary_orphan_recovery",
-                    "status": "preflight_passed",
-                    "preflight_only": True,
-                    "authority_directory": str(authority),
-                    "source_run_id": source_run_id,
-                    "completion_stage": None,
-                    "study_outcome_eligible": False,
-                    "run_tracker_created": False,
-                    "copy_invoked": False,
-                    "training_invoked": False,
-                    "fallback_invoked": False,
-                    "automatic_retry_allowed": False,
-                    "result": result,
-                },
-                indent=2,
-                sort_keys=True,
-                default=str,
-            )
-        )
-        return
-
-    try:
-        executor = _load_optional_study_executor(
-            "histo_audit.experiment.primary_recovery_runner",
-            "execute_primary_orphan_recovery",
-        )
-    except Exception as exc:
-        _emit_primary_recovery_error(
-            exc,
-            status="executor_import_failed",
-            authority_directory=authority,
-            source_run_id=source_run_id,
-            exit_code=1,
-        )
-    if executor is None:
-        _emit_primary_recovery_error(
-            RuntimeError("primary orphan recovery executor is unavailable"),
-            status="executor_unavailable",
-            authority_directory=authority,
-            source_run_id=source_run_id,
-            exit_code=2,
-        )
-    try:
-        result = executor(
-            gate_evidence=gate_evidence,
-            plan=plan,
-            controls=controls,
-            authorization=authorization,
-            project_root=root,
-            runs_root=run_root,
-            run_id=run_id,
-        )
-    except Exception as exc:
-        _emit_primary_recovery_error(
-            exc,
-            status="failed",
-            authority_directory=authority,
-            source_run_id=source_run_id,
-            exit_code=1,
-        )
-    typer.echo(
-        json.dumps(
-            {
-                "schema_version": 1,
-                "workflow": "primary_orphan_recovery",
-                "status": "executor_returned",
-                "preflight_only": False,
-                "authority_directory": str(authority),
-                "source_run_id": source_run_id,
-                "training_invoked": False,
-                "fallback_invoked": False,
-                "automatic_retry_allowed": False,
-                "result": result,
-            },
-            indent=2,
-            sort_keys=True,
-            default=str,
-        )
-    )
-
-
-@experiment_app.command("confirmatory")
-def confirmatory_command(
-    primary_run_directory: Annotated[
-        Path,
-        typer.Option(
-            "--primary-run-dir",
-            help="Sealed, registry-backed PRIMARY_STUDY_COMPLETE run directory.",
-        ),
-    ] = Path("artifacts/runs/PRIMARY_RUN_REQUIRED"),
-    lifecycle_readiness_run_directory: Annotated[
-        Path,
-        typer.Option(
-            "--lifecycle-readiness-run-dir",
-            help=(
-                "Sealed fresh-process lifecycle-readiness verification run matching the "
-                "current execution source and authority."
-            ),
-        ),
-    ] = Path("artifacts/runs/LIFECYCLE_READINESS_REQUIRED"),
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    freeze_directory: Annotated[
-        Path,
-        typer.Option(
-            "--freeze-dir",
-            "--freeze-directory",
-            help="Immutable timestamped post-pilot preregistration freeze directory.",
-        ),
-    ] = Path("artifacts/preregistrations/latest"),
-    dataset_path: Annotated[
-        Path,
-        typer.Option("--dataset", help="Exact frozen PanNuke dataset file or directory."),
-    ] = Path("data/raw/pannuke"),
-    manifest_path: Annotated[
-        Path,
-        typer.Option("--manifest", help="Exact frozen nucleus manifest."),
-    ] = Path("data/manifests/pannuke/pannuke_nucleus_manifest.parquet"),
-    duplicate_audit_path: Annotated[
-        Path,
-        typer.Option("--duplicate-audit", help="Exact frozen duplicate-audit JSON."),
-    ] = Path("artifacts/duplicate_audit/pannuke_duplicate_audit.json"),
-    pathology_encoder_audit_path: Annotated[
-        Path,
-        typer.Option(
-            "--pathology-encoder-audit",
-            "--pathology-audit",
-            help="Exact frozen pathology-encoder availability-audit JSON.",
-        ),
-    ] = Path("reports/pathology_encoder_availability.json"),
-    frozen_primary_config_path: Annotated[
-        Path,
-        typer.Option(
-            "--primary-config",
-            "--frozen-primary-config",
-            help="Canonical primary config authenticated by the freeze.",
-        ),
-    ] = Path("configs/primary_frozen.yaml"),
-    frozen_confirmatory_config_path: Annotated[
-        Path,
-        typer.Option(
-            "--confirmatory-config",
-            "--frozen-confirmatory-config",
-            help="Canonical confirmatory config frozen before primary outcomes.",
-        ),
-    ] = Path("configs/confirmatory_frozen.yaml"),
-) -> None:
-    """Reject the superseded direct entry; protected execution requires Q/E."""
-
-    _gate(
-        "CONFIRMATORY_CAPSULE_AUTHORITY_REQUIRED",
-        "direct confirmatory execution is disabled before lifecycle, dataset, cache, "
-        "executor, or run-directory access. The unchanged original confirmatory may run "
-        "only through the sealed execution capsule with the exact published Q, one-use E, "
-        "strict published-T0 lifecycle result, and qualified event-driven supervisor.",
-    )
-
-
-@experiment_app.command("resource-bounded-sensitivity")
-def resource_bounded_sensitivity_command(
-    primary_run_directory: Annotated[
-        Path,
-        typer.Option(
-            "--primary-run-dir",
-            help="Exact sealed historical primary run authorized by authority C.",
-        ),
-    ] = Path("artifacts/runs/PRIMARY_RUN_REQUIRED"),
-    resource_authority_directory: Annotated[
-        Path,
-        typer.Option(
-            "--resource-authority-dir",
-            help=(
-                "Effective immutable resource-bounded post-outcome execution authority "
-                "C or its unique technical successor D."
-            ),
-        ),
-    ] = Path("artifacts/preregistration_amendments/RESOURCE_AUTHORITY_REQUIRED"),
-    lifecycle_readiness_run_directory: Annotated[
-        Path,
-        typer.Option(
-            "--lifecycle-readiness-run-dir",
-            help=(
-                "Sealed fresh-process lifecycle-readiness run for the current source "
-                "and effective resource authority."
-            ),
-        ),
-    ] = Path("artifacts/runs/LIFECYCLE_READINESS_REQUIRED"),
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    dataset_path: Annotated[
-        Path,
-        typer.Option("--dataset", help="Exact frozen PanNuke dataset file or directory."),
-    ] = Path("data/raw/pannuke"),
-    manifest_path: Annotated[
-        Path,
-        typer.Option("--manifest", help="Exact frozen nucleus manifest."),
-    ] = Path("data/manifests/pannuke/pannuke_nucleus_manifest.parquet"),
-    duplicate_audit_path: Annotated[
-        Path,
-        typer.Option("--duplicate-audit", help="Exact frozen duplicate-audit JSON."),
-    ] = Path("artifacts/duplicate_audit/pannuke_duplicate_audit.json"),
-    pathology_encoder_audit_path: Annotated[
-        Path,
-        typer.Option(
-            "--pathology-encoder-audit",
-            "--pathology-audit",
-            help="Exact frozen pathology-encoder availability-audit JSON.",
-        ),
-    ] = Path("reports/pathology_encoder_availability.json"),
-    runs_root: Annotated[
-        Path,
-        typer.Option(
-            "--runs-root",
-            file_okay=False,
-            help="Explicit parent directory for tracked study runs and capacity checks.",
-        ),
-    ] = Path("artifacts/runs"),
-    run_id: Annotated[
-        str | None,
-        typer.Option(
-            "--run-id",
-            help="Optional new run ID; it must differ from any explicit predecessor.",
-        ),
-    ] = None,
-    checkpoint_predecessor_run_directory: Annotated[
-        Path | None,
-        typer.Option(
-            "--checkpoint-predecessor-run-dir",
-            help=(
-                "Explicit predecessor for one successor resume. Its exact basename is "
-                "used as retry_of_run_id; no run is discovered automatically."
-            ),
-        ),
-    ] = None,
-    preflight_only: Annotated[
-        bool,
-        typer.Option(
-            "--preflight-only",
-            help=(
-                "Validate lifecycle, dual authority, inputs, capacity, and resume "
-                "eligibility without creating a tracked or scientific run."
-            ),
-        ),
-    ] = False,
-) -> None:
-    """Run the permanently non-claiming resource-bounded sensitivity path."""
-
-    root = project_root.resolve()
-    primary_run = _resolve_from_root(root, primary_run_directory)
-    authority = _resolve_from_root(root, resource_authority_directory)
-    lifecycle_readiness = _resolve_from_root(
-        root,
-        lifecycle_readiness_run_directory,
-    )
-    dataset = _resolve_from_root(root, dataset_path)
-    manifest = _resolve_from_root(root, manifest_path)
-    duplicate_audit = _resolve_from_root(root, duplicate_audit_path)
-    pathology_audit = _resolve_from_root(root, pathology_encoder_audit_path)
-    run_root = _resolve_from_root(root, runs_root)
-    predecessor = (
-        _resolve_from_root(root, checkpoint_predecessor_run_directory)
-        if checkpoint_predecessor_run_directory is not None
-        else None
-    )
-    run_mode = "successor_resume" if predecessor is not None else "fresh"
-    retry_of_run_id = predecessor.name if predecessor is not None else None
-    if predecessor is not None and run_id == retry_of_run_id:
-        _emit_resource_bounded_error(
-            ValueError("a successor --run-id must differ from its explicit predecessor"),
-            status="invalid_run_identity",
-            preflight_only=preflight_only,
-            run_mode=run_mode,
-            retry_of_run_id=retry_of_run_id,
-            exit_code=2,
-        )
-
-    function_name = (
-        "preflight_resource_bounded_sensitivity"
-        if preflight_only
-        else "execute_resource_bounded_sensitivity"
-    )
-    try:
-        executor = _load_optional_study_executor(
-            "histo_audit.experiment.resource_bounded_runner",
-            function_name,
-        )
-    except Exception as exc:
-        _emit_resource_bounded_error(
-            exc,
-            status="executor_import_failed",
-            preflight_only=preflight_only,
-            run_mode=run_mode,
-            retry_of_run_id=retry_of_run_id,
-            exit_code=1,
-        )
-    if executor is None:
-        _emit_resource_bounded_error(
-            RuntimeError(f"resource-bounded {function_name} is unavailable"),
-            status="executor_unavailable",
-            preflight_only=preflight_only,
-            run_mode=run_mode,
-            retry_of_run_id=retry_of_run_id,
-            exit_code=2,
-        )
-    executor_kwargs = {
-        "run_mode": run_mode,
-        "primary_run_directory": primary_run,
-        "project_root": root,
-        "resource_authority_directory": authority,
-        "dataset_path": dataset,
-        "manifest_path": manifest,
-        "duplicate_audit_path": duplicate_audit,
-        "pathology_encoder_audit_path": pathology_audit,
-        "lifecycle_readiness_run_directory": lifecycle_readiness,
-        "checkpoint_predecessor_run_directory": predecessor,
-        "retry_of_run_id": retry_of_run_id,
-        "runs_root": run_root,
-        "run_id": run_id,
-    }
-    try:
-        result = executor(**executor_kwargs)
-        payload = _resource_bounded_success_payload(
-            result,
-            preflight_only=preflight_only,
-            run_mode=run_mode,
-            retry_of_run_id=retry_of_run_id,
-        )
-    except Exception as exc:
-        _emit_resource_bounded_error(
-            exc,
-            status="preflight_failed" if preflight_only else "failed",
-            preflight_only=preflight_only,
-            run_mode=run_mode,
-            retry_of_run_id=retry_of_run_id,
-            exit_code=1,
-        )
-    typer.echo(
-        json.dumps(
-            _resource_bounded_safe_json_value(payload),
-            indent=2,
-            sort_keys=True,
-            default=str,
-        )
-    )
 
 
 @preregistration_app.command("freeze")
@@ -2823,371 +2211,6 @@ def freeze_preregistration_command(
             indent=2,
         )
     )
-
-
-@preregistration_app.command("amend")
-def amend_preregistration_command(
-    parent_authority_directory: Annotated[
-        Path,
-        typer.Option(
-            "--parent-authority-dir",
-            "--parent-authority",
-            help="Explicit immutable base-freeze or predecessor-amendment authority.",
-        ),
-    ],
-    preregistration_path: Annotated[
-        Path,
-        typer.Option(
-            "--amended-preregistration",
-            help="Complete successor preregistration Markdown; never a delta.",
-        ),
-    ],
-    primary_config_path: Annotated[
-        Path,
-        typer.Option(
-            "--amended-primary-config",
-            help="Complete successor primary-study YAML configuration.",
-        ),
-    ],
-    confirmatory_config_path: Annotated[
-        Path,
-        typer.Option(
-            "--amended-confirmatory-config",
-            help="Complete successor confirmatory-study YAML configuration.",
-        ),
-    ],
-    reason: Annotated[
-        str,
-        typer.Option("--reason", help="Single-line scientific reason for the amendment."),
-    ],
-    affected_hypotheses: Annotated[
-        list[str],
-        typer.Option(
-            "--affected-hypothesis",
-            help="Affected hypothesis identifier; repeat for every affected hypothesis.",
-        ),
-    ],
-    affected_analyses: Annotated[
-        list[str],
-        typer.Option(
-            "--affected-analysis",
-            help="Affected analysis identifier; repeat for every affected analysis.",
-        ),
-    ],
-    amendment_timestamp_utc: Annotated[
-        str,
-        typer.Option(
-            "--amendment-timestamp-utc",
-            help="Explicit amendment timestamp as ISO-8601 UTC ending in Z.",
-        ),
-    ],
-    amendment_root: Annotated[
-        Path,
-        typer.Option(
-            "--amendment-root",
-            help="Parent directory for the new timestamped immutable successor authority.",
-        ),
-    ],
-    finalization_predecessor_run_directory: Annotated[
-        Path | None,
-        typer.Option(
-            "--finalization-predecessor-run-dir",
-            "--finalization-predecessor",
-            file_okay=False,
-            help=(
-                "Reserved only to reject mixing the retired finalization-successor path "
-                "with bounded orphan recovery."
-            ),
-        ),
-    ] = None,
-    primary_recovery_authorization_json: Annotated[
-        Path | None,
-        typer.Option(
-            "--primary-recovery-authorization-json",
-            dir_okay=False,
-            help=(
-                "Exact JSON object authorizing one interrupted, unsealed primary recovery. "
-                "Mutually exclusive with --finalization-predecessor-run-dir."
-            ),
-        ),
-    ] = None,
-    confirmatory_single_copy_checkpoint_storage: Annotated[
-        bool,
-        typer.Option(
-            "--confirmatory-single-copy-checkpoint-storage",
-            help=(
-                "Bind the closed single-canonical-copy checkpoint policy; requires the "
-                "primary-recovery authorization."
-            ),
-        ),
-    ] = False,
-    outcomes_inspected: Annotated[
-        bool,
-        typer.Option(
-            "--outcomes-inspected",
-            help="Declare explicitly that study outcomes were inspected before amendment.",
-        ),
-    ] = False,
-    outcomes_not_inspected: Annotated[
-        bool,
-        typer.Option(
-            "--outcomes-not-inspected",
-            help="Declare explicitly that study outcomes were not inspected before amendment.",
-        ),
-    ] = False,
-    outcomes_inspected_at_utc: Annotated[
-        str | None,
-        typer.Option(
-            "--outcomes-inspected-at-utc",
-            help="Required UTC timestamp when --outcomes-inspected is declared.",
-        ),
-    ] = None,
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-) -> None:
-    """Publish a full immutable, parent-hash-linked preregistration successor."""
-
-    if outcomes_inspected == outcomes_not_inspected:
-        _failure("declare exactly one of --outcomes-inspected or --outcomes-not-inspected")
-    if (
-        primary_recovery_authorization_json is not None
-        and finalization_predecessor_run_directory is not None
-    ):
-        _failure(
-            "--primary-recovery-authorization-json and "
-            "--finalization-predecessor-run-dir are mutually exclusive"
-        )
-    if finalization_predecessor_run_directory is not None:
-        _failure(
-            "--finalization-predecessor-run-dir is retired; use the bounded "
-            "--primary-recovery-authorization-json path"
-        )
-    if confirmatory_single_copy_checkpoint_storage and primary_recovery_authorization_json is None:
-        _failure(
-            "--confirmatory-single-copy-checkpoint-storage requires "
-            "--primary-recovery-authorization-json"
-        )
-    if primary_recovery_authorization_json is not None and not outcomes_inspected:
-        _failure("--primary-recovery-authorization-json requires --outcomes-inspected")
-    if primary_recovery_authorization_json is not None and outcomes_inspected_at_utc is None:
-        _failure("--primary-recovery-authorization-json requires --outcomes-inspected-at-utc")
-    root = project_root.resolve()
-    try:
-        timestamp = _parse_explicit_utc_timestamp(
-            amendment_timestamp_utc, role="amendment timestamp"
-        )
-        inspected_at = (
-            _parse_explicit_utc_timestamp(
-                outcomes_inspected_at_utc,
-                role="outcomes-inspected timestamp",
-            )
-            if outcomes_inspected_at_utc is not None
-            else None
-        )
-        from histo_audit.workflows import (
-            ConfirmatoryStoragePolicy,
-            create_preregistration_amendment,
-            verify_preregistration_amendment,
-        )
-
-        parent_authority = _resolve_from_root(root, parent_authority_directory)
-        recovery_authorization: dict[str, Any] | None = None
-        if primary_recovery_authorization_json is not None:
-            authorization_path = _resolve_from_root(
-                root,
-                primary_recovery_authorization_json,
-            )
-            raw_authorization = json.loads(authorization_path.read_text(encoding="utf-8"))
-            if not isinstance(raw_authorization, dict):
-                raise ValueError(
-                    "--primary-recovery-authorization-json must contain one JSON object"
-                )
-            recovery_authorization = cast(dict[str, Any], raw_authorization)
-        amendment_kwargs: dict[str, Any] = {
-            "project_root": root,
-            "parent_authority_directory": parent_authority,
-            "amendment_root": _resolve_from_root(root, amendment_root),
-            "preregistration_path": _resolve_from_root(root, preregistration_path),
-            "primary_config_path": _resolve_from_root(root, primary_config_path),
-            "confirmatory_config_path": _resolve_from_root(root, confirmatory_config_path),
-            "reason": reason,
-            "affected_hypotheses": affected_hypotheses,
-            "affected_analyses": affected_analyses,
-            "outcomes_inspected": outcomes_inspected,
-            "outcomes_inspected_at": inspected_at,
-            "timestamp": timestamp,
-        }
-        if recovery_authorization is not None:
-            amendment_kwargs.update(
-                {
-                    "finalization_successor_authorization": None,
-                    "primary_recovery_authorization": recovery_authorization,
-                    "confirmatory_storage_policy": (
-                        ConfirmatoryStoragePolicy()
-                        if confirmatory_single_copy_checkpoint_storage
-                        else None
-                    ),
-                }
-            )
-        result = create_preregistration_amendment(**amendment_kwargs)
-        verification = verify_preregistration_amendment(result.amendment_directory)
-        if not verification.valid:
-            raise RuntimeError(
-                "new preregistration amendment failed independent integrity verification: "
-                + "; ".join(verification.errors)
-            )
-    except Exception as exc:
-        _failure(f"preregistration amendment failed: {type(exc).__name__}: {exc}")
-    typer.echo(
-        json.dumps(
-            {
-                "authority_status": "amended",
-                **result.as_dict(),
-                "integrity_verified": True,
-            },
-            indent=2,
-        )
-    )
-
-
-@preregistration_app.command("verify-amendment")
-def verify_preregistration_amendment_command(
-    amendment_directory: Annotated[
-        Path,
-        typer.Option(
-            "--amendment-dir",
-            help="Immutable preregistration-amendment authority to verify recursively.",
-        ),
-    ],
-    project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
-    max_chain_depth: Annotated[
-        int,
-        typer.Option(
-            "--max-chain-depth",
-            min=1,
-            help="Maximum predecessor depth accepted during recursive verification.",
-        ),
-    ] = 64,
-) -> None:
-    """Verify an amendment bundle and every immutable parent authority."""
-
-    from histo_audit.workflows import verify_preregistration_amendment
-
-    root = project_root.resolve()
-    directory = _resolve_from_root(root, amendment_directory)
-    verification = verify_preregistration_amendment(
-        directory,
-        max_chain_depth=max_chain_depth,
-    )
-    if not verification.valid:
-        _failure("preregistration amendment verification failed: " + "; ".join(verification.errors))
-    typer.echo(
-        json.dumps(
-            {
-                "authority_status": "verified_amendment",
-                "amendment_directory": str(verification.amendment_directory),
-                "chain_depth": verification.chain_depth,
-                "artifact_root_sha256": verification.artifact_root_sha256,
-                "sha256_manifest_sha256": verification.sha256_manifest_sha256,
-                "parent_authority_directory": (
-                    str(verification.parent_authority_directory)
-                    if verification.parent_authority_directory is not None
-                    else None
-                ),
-                "integrity_verified": True,
-            },
-            indent=2,
-        )
-    )
-
-
-@preregistration_app.command("verify-resource-technical-successor")
-def verify_resource_technical_successor_command(
-    successor_directory: Annotated[
-        Path,
-        typer.Option(
-            "--successor-dir",
-            help="Published schema-v5 resource technical successor D.",
-        ),
-    ],
-    expected_parent_authority_directory: Annotated[
-        Path,
-        typer.Option(
-            "--expected-parent-authority-dir",
-            help="Exact superseded schema-v4 resource authority C.",
-        ),
-    ],
-    expected_artifact_root_sha256: Annotated[
-        str,
-        typer.Option(
-            "--expected-artifact-root-sha256",
-            help="Externally pinned artifact-root SHA-256 for D.",
-        ),
-    ],
-    expected_sha256_manifest_sha256: Annotated[
-        str,
-        typer.Option(
-            "--expected-sha256-manifest-sha256",
-            help="Externally pinned checksum-manifest SHA-256 for D.",
-        ),
-    ],
-    expected_authorization_sha256: Annotated[
-        str,
-        typer.Option(
-            "--expected-authorization-sha256",
-            help="Externally pinned canonical schema-v5 authorization SHA-256.",
-        ),
-    ],
-    expected_intent_sha256: Annotated[
-        str,
-        typer.Option(
-            "--expected-intent-sha256",
-            help="Pre-mutation canonical publication-intent SHA-256.",
-        ),
-    ],
-    expected_controller_process_id: Annotated[
-        int,
-        typer.Option(
-            "--expected-controller-pid",
-            min=1,
-            help="PID of the publication controller that spawned this verifier.",
-        ),
-    ],
-    verification_nonce: Annotated[
-        str,
-        typer.Option(
-            "--verification-nonce",
-            help="One-use 64-hex challenge generated by the publication controller.",
-        ),
-    ],
-    project_root: Annotated[
-        Path,
-        typer.Option("--project-root", file_okay=False),
-    ] = Path("."),
-) -> None:
-    """Verify the exact effective D in a read-only fresh-process boundary."""
-
-    from histo_audit.workflows import (
-        verify_resource_bounded_technical_successor,
-    )
-
-    root = project_root.resolve()
-    try:
-        verification = verify_resource_bounded_technical_successor(
-            _resolve_from_root(root, successor_directory),
-            expected_parent_authority_directory=_resolve_from_root(
-                root,
-                expected_parent_authority_directory,
-            ),
-            expected_artifact_root_sha256=expected_artifact_root_sha256,
-            expected_sha256_manifest_sha256=(expected_sha256_manifest_sha256),
-            expected_authorization_sha256=expected_authorization_sha256,
-            expected_intent_sha256=expected_intent_sha256,
-            expected_controller_process_id=expected_controller_process_id,
-            verification_nonce=verification_nonce,
-        )
-    except Exception as exc:
-        _failure(f"resource technical successor verification failed: {type(exc).__name__}: {exc}")
-    typer.echo(json.dumps(verification.as_dict(), indent=2))
 
 
 @audit_app.command("original")

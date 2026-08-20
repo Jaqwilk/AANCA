@@ -9,6 +9,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import pytest
+from cli_contracts import cli_options
 from PIL import Image
 from typer.testing import CliRunner
 
@@ -24,7 +25,6 @@ from histo_audit.external_validation import (
 )
 from histo_audit.pannuke.models import OFFICIAL_METRICS_CLASS_MAPPING
 from histo_audit.utils.run_tracking import RunTracker, sha256_file, sha256_path
-from tests.cli_contracts import cli_options
 
 
 def _review_inputs(root: Path) -> tuple[Path, Path]:

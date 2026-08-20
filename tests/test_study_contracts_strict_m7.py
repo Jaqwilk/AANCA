@@ -6,6 +6,7 @@ from collections.abc import Callable
 from typing import Any
 
 import pytest
+from test_study_contracts import complete_confirmatory_config, complete_primary_config
 
 from histo_audit.experiment.study_contracts import (
     StudyContractError,
@@ -14,7 +15,6 @@ from histo_audit.experiment.study_contracts import (
     validate_frozen_confirmatory_config,
     validate_frozen_primary_config,
 )
-from tests.test_study_contracts import complete_confirmatory_config, complete_primary_config
 
 EXCLUSION_POLICY = {
     "cross_class_overlap_touching": "exclude_with_reason_touches_cross_class_overlap",

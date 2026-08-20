@@ -28,7 +28,7 @@ only `index.html`: the QC image, machine-readable evidence and checksum manifest
 separate files in the same package. Repository links require reviewer access when
 the GitHub repository is private.
 
-Author: Natan Smogór. Released: 18 August 2026.
+Author: Natan Smogór. Updated: 20 August 2026.
 
 The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,
@@ -60,5 +60,9 @@ every other file in this package.
 
 Of the 36 preregistered comparison entries, 33 contain numeric results and the
 three H6 entries remain explicitly unavailable under the frozen encoder gate.
+The public `primary-evidence-v1` GitHub release contains all completed-cell OOF
+predictions and rankings, the full bootstrap and H4 restoration arrays. It supports
+independent recalculation of the saved comparison statistics; it does not include
+raw PanNuke binaries or fold checkpoints that were not retained.
 Source code, setup guidance, specifications, tests, and the complete documentation
 map are available at <https://github.com/Jaqwilk/AANCA>.

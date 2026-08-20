@@ -358,66 +358,6 @@ def test_atomic_npz_publishes_directly_without_link_or_replace(
     assert destination.read_bytes() == expected.getvalue()
 
 
-def test_core_frozen_feature_runner_matches_legacy_runner(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    from histo_audit.experiment import confirmatory_core as core_module
-    from histo_audit.experiment import confirmatory_runner as legacy_module
-
-    controls = confirmatory_execution_controls_from_frozen_config(complete_confirmatory_config())
-    features = np.asarray([[1.0, 2.0], [3.0, 4.0]], dtype=np.float64)
-    provenance = SimpleNamespace(semantic_sha256="a" * 64)
-    request = SimpleNamespace(
-        scenario=SimpleNamespace(
-            family="imagenet_frozen",
-            classifier="multinomial_logistic_regression",
-            representation_id="imagenet_resnet18_penultimate",
-        ),
-        inputs=SimpleNamespace(
-            frozen_audit_features={
-                "imagenet_resnet18_penultimate": features,
-            },
-            frozen_feature_provenance={
-                "imagenet_resnet18_penultimate": provenance,
-            },
-            audit_group_ids=("g1", "g2"),
-            final_reference_group_ids=("final",),
-            audit_sample_ids=("s1", "s2"),
-        ),
-        corruption=SimpleNamespace(
-            observed_labels=np.asarray([0, 1], dtype=np.int64),
-            pre_corruption_labels=np.asarray([0, 1], dtype=np.int64),
-        ),
-        controls=controls,
-        cell=SimpleNamespace(model_seed=303),
-        cpu_test_only=False,
-    )
-    sentinel_oof = object()
-    core_kwargs: dict[str, Any] = {}
-    legacy_kwargs: dict[str, Any] = {}
-
-    def core_oof(*_args: Any, **kwargs: Any) -> object:
-        core_kwargs.update(kwargs)
-        return sentinel_oof
-
-    def legacy_oof(*_args: Any, **kwargs: Any) -> object:
-        legacy_kwargs.update(kwargs)
-        return sentinel_oof
-
-    monkeypatch.setattr(core_module, "grouped_oof_logistic", core_oof)
-    monkeypatch.setattr(legacy_module, "grouped_oof_logistic", legacy_oof)
-
-    core_result = core_module.run_confirmatory_frozen_feature_oof(request)
-    legacy_result = legacy_module.run_confirmatory_frozen_feature_oof(request)
-
-    assert core_kwargs == legacy_kwargs
-    assert core_result.oof_result is legacy_result.oof_result is sentinel_oof
-    assert core_result.execution_mode == legacy_result.execution_mode
-    assert core_result.study_outcome_eligible is legacy_result.study_outcome_eligible
-    assert core_result.configuration_sha256 == legacy_result.configuration_sha256
-    assert dict(core_result.evidence) == dict(legacy_result.evidence)
-
-
 def test_atomic_npz_short_temp_supports_legal_near_max_path(tmp_path: Path) -> None:
     filename = "artifact.npz"
     base = str(tmp_path.resolve())

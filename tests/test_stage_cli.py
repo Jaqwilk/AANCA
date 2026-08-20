@@ -7,6 +7,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from cli_contracts import cli_options
 from typer.testing import CliRunner
 
 import histo_audit.cli as cli_module
@@ -14,7 +15,6 @@ import histo_audit.external_validation as external_validation
 import histo_audit.workflows as workflows
 from histo_audit.cli import app
 from histo_audit.external_validation import ReviewPackageValidationResult
-from tests.cli_contracts import cli_options
 
 
 def test_stage_command_help_exposes_required_evidence_options() -> None:
@@ -63,8 +63,7 @@ def test_stage_command_help_exposes_required_evidence_options() -> None:
 
 def test_study_command_help_exposes_all_immutable_gate_inputs() -> None:
     primary_options = cli_options(app, ("experiment", "primary"))
-    confirmatory_options = cli_options(app, ("experiment", "confirmatory"))
-    shared_options = {
+    required_options = {
         "--project-root",
         "--freeze-dir",
         "--dataset",
@@ -74,9 +73,7 @@ def test_study_command_help_exposes_all_immutable_gate_inputs() -> None:
         "--primary-config",
         "--confirmatory-config",
     }
-    assert shared_options.issubset(primary_options)
-    assert shared_options.issubset(confirmatory_options)
-    assert "--primary-run-dir" in confirmatory_options
+    assert required_options.issubset(primary_options)
 
 
 def test_primary_cli_validates_gate_before_loading_executor_or_creating_run(
@@ -137,68 +134,6 @@ def test_primary_cli_validates_gate_before_loading_executor_or_creating_run(
         "frozen_primary_config_path": (tmp_path / "primary.yaml").resolve(),
         "frozen_confirmatory_config_path": (tmp_path / "confirmatory.yaml").resolve(),
     }
-    assert not (tmp_path / "artifacts" / "runs").exists()
-
-
-def test_confirmatory_cli_rejects_direct_execution_before_any_live_gate_or_executor(
-    tmp_path: Path, monkeypatch: Any
-) -> None:
-    live_gate_called = False
-    lifecycle_called = False
-    executor_loader_called = False
-
-    def _unexpected_gate(**kwargs: Any) -> None:
-        nonlocal live_gate_called
-        live_gate_called = True
-        raise AssertionError("direct CLI must stop before the scientific gate")
-
-    def _unexpected_lifecycle(**kwargs: Any) -> None:
-        nonlocal lifecycle_called
-        lifecycle_called = True
-        raise AssertionError("direct CLI must stop before lifecycle verification")
-
-    def _unexpected_executor_loader(*args: Any, **kwargs: Any) -> None:
-        nonlocal executor_loader_called
-        executor_loader_called = True
-        raise AssertionError("direct CLI must not load the executor")
-
-    monkeypatch.setattr(workflows, "require_current_lifecycle_readiness", _unexpected_lifecycle)
-    monkeypatch.setattr(workflows, "validate_confirmatory_execution_gate", _unexpected_gate)
-    monkeypatch.setattr(cli_module, "_load_optional_study_executor", _unexpected_executor_loader)
-
-    result = CliRunner().invoke(
-        app,
-        [
-            "experiment",
-            "confirmatory",
-            "--project-root",
-            str(tmp_path),
-            "--primary-run-dir",
-            "primary-run",
-            "--freeze-dir",
-            "freeze",
-            "--dataset",
-            "dataset",
-            "--manifest",
-            "manifest.parquet",
-            "--duplicate-audit",
-            "duplicates.json",
-            "--pathology-encoder-audit",
-            "pathology.json",
-            "--primary-config",
-            "primary.yaml",
-            "--confirmatory-config",
-            "confirmatory.yaml",
-        ],
-    )
-
-    assert result.exit_code == 2, result.output
-    assert "GATED [CONFIRMATORY_CAPSULE_AUTHORITY_REQUIRED]" in result.output
-    assert "sealed execution capsule" in result.output
-    assert "CONFIRMATORY_COMPLETE" not in result.output
-    assert not lifecycle_called
-    assert not live_gate_called
-    assert not executor_loader_called
     assert not (tmp_path / "artifacts" / "runs").exists()
 
 

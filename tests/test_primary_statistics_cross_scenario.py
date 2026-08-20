@@ -7,6 +7,7 @@ from dataclasses import replace
 
 import numpy as np
 import pytest
+from test_study_contracts_strict_m7 import strict_primary_config
 
 from histo_audit.experiment.primary_core import (
     PrimaryExecutionControls,
@@ -21,7 +22,6 @@ from histo_audit.experiment.primary_statistics import (
 )
 from histo_audit.experiment.study_contracts import PrimaryCell
 from histo_audit.statistics.review import average_precision
-from tests.test_study_contracts_strict_m7 import strict_primary_config
 
 _METHOD = "self_confidence"
 _CLASSIFIER = "multinomial_logistic_regression"

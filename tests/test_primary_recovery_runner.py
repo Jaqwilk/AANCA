@@ -12,6 +12,7 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
+from test_primary_recovery import _make_fixture, _tree_state, _write_json
 
 import histo_audit.experiment.primary_core as primary_core_module
 import histo_audit.experiment.primary_recovery_runner as runner_module
@@ -40,7 +41,6 @@ from histo_audit.utils.run_tracking import (
     sha256_file,
 )
 from histo_audit.workflows.study_gates import PrimaryExecutionGateEvidence
-from tests.test_primary_recovery import _make_fixture, _tree_state, _write_json
 
 requires_windows_wof = pytest.mark.skipif(
     os.name != "nt",

@@ -143,37 +143,6 @@ _PRIMARY_RECOVERY_RUNNER_EXPORTS = frozenset(
     }
 )
 
-_RESOURCE_BOUNDED_RUNNER_EXPORTS = frozenset(
-    {
-        "RESOURCE_BOUNDED_ANALYSIS_DISPOSITION",
-        "RESOURCE_BOUNDED_CAPACITY_POLICY",
-        "RESOURCE_BOUNDED_EXPERIMENT_NAME",
-        "ResourceBoundedStudyIntegrityError",
-        "ResourceBoundedStudyRunnerError",
-        "ResourceCapacityEvidence",
-        "build_resource_checkpoint_allowlist",
-        "execute_resource_bounded_sensitivity",
-        "preflight_resource_bounded_sensitivity",
-        "require_resource_capacity",
-    }
-)
-
-_RESOURCE_BOUNDED_RESUME_EXPORTS = frozenset(
-    {
-        "RESOURCE_BOUNDED_COPY_POLICY",
-        "RESOURCE_BOUNDED_READ_SCOPE",
-        "RESOURCE_BOUNDED_RESUME_POLICY",
-        "ReadOnlyPredecessorSnapshot",
-        "ResourceBoundedResumeCopyReceipt",
-        "ResourceBoundedResumeError",
-        "ResumeCheckpointExpectation",
-        "build_fresh_resource_resume_evidence",
-        "build_resource_bounded_resume_evidence",
-        "copy_validated_resume_checkpoints",
-        "inspect_read_only_resume_predecessor",
-    }
-)
-
 
 def __getattr__(name: str) -> Any:
     """Load the workflow-dependent primary runner only when explicitly requested."""
@@ -186,14 +155,6 @@ def __getattr__(name: str) -> Any:
         value = getattr(import_module(f"{__name__}.primary_recovery_runner"), name)
         globals()[name] = value
         return value
-    if name in _RESOURCE_BOUNDED_RUNNER_EXPORTS:
-        value = getattr(import_module(f"{__name__}.resource_bounded_runner"), name)
-        globals()[name] = value
-        return value
-    if name in _RESOURCE_BOUNDED_RESUME_EXPORTS:
-        value = getattr(import_module(f"{__name__}.resource_bounded_resume"), name)
-        globals()[name] = value
-        return value
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
@@ -203,12 +164,6 @@ __all__ = [
     "RECOVERY_EXPERIMENT_NAME",
     "RECOVERY_POLICY",
     "RECOVERY_REGISTRATION_STATUS",
-    "RESOURCE_BOUNDED_ANALYSIS_DISPOSITION",
-    "RESOURCE_BOUNDED_CAPACITY_POLICY",
-    "RESOURCE_BOUNDED_COPY_POLICY",
-    "RESOURCE_BOUNDED_EXPERIMENT_NAME",
-    "RESOURCE_BOUNDED_READ_SCOPE",
-    "RESOURCE_BOUNDED_RESUME_POLICY",
     "ConfirmatoryArtifactReadback",
     "ConfirmatoryCellReadback",
     "ConfirmatoryComparisonOperand",
@@ -262,7 +217,6 @@ __all__ = [
     "PrimaryStudyIntegrityError",
     "PrimaryStudyRunnerError",
     "PrimaryWithinCellComparison",
-    "ReadOnlyPredecessorSnapshot",
     "RecoveryArtifact",
     "RecoveryAuthorization",
     "RecoveryCopyReceipt",
@@ -270,12 +224,6 @@ __all__ = [
     "RecoveryDiskPreflight",
     "RecoveryInterruptionEvidence",
     "RepresentationAvailability",
-    "ResourceBoundedResumeCopyReceipt",
-    "ResourceBoundedResumeError",
-    "ResourceBoundedStudyIntegrityError",
-    "ResourceBoundedStudyRunnerError",
-    "ResourceCapacityEvidence",
-    "ResumeCheckpointExpectation",
     "StudyContractError",
     "SyntheticConfirmatoryFixtureResult",
     "SyntheticPrimaryFixtureResult",
@@ -284,30 +232,23 @@ __all__ = [
     "aggregate_primary_statistics",
     "build_confirmatory_completion_evidence",
     "build_confirmatory_matrix_plan",
-    "build_fresh_resource_resume_evidence",
     "build_pannuke_pilot_development_manifest_view",
     "build_pannuke_primary_inputs",
     "build_primary_completion_evidence",
     "build_primary_matrix_plan",
     "build_primary_recovery_authorization",
-    "build_resource_bounded_resume_evidence",
-    "build_resource_checkpoint_allowlist",
     "collect_orphan_source_snapshot",
     "confirmatory_execution_controls_from_frozen_config",
     "copy_authorized_orphan_artifacts",
-    "copy_validated_resume_checkpoints",
     "default_primary_cache_paths",
     "derive_primary_cache_hashes",
     "execute_confirmatory_matrix",
     "execute_primary_matrix",
     "execute_primary_orphan_recovery",
     "execute_primary_study",
-    "execute_resource_bounded_sensitivity",
     "inspect_orphan_source",
-    "inspect_read_only_resume_predecessor",
     "load_pannuke_confirmatory_inputs",
     "preflight_primary_orphan_recovery",
-    "preflight_resource_bounded_sensitivity",
     "primary_execution_controls_from_frozen_config",
     "read_confirmatory_run_directory",
     "read_primary_filesystem_evidence",
@@ -315,7 +256,6 @@ __all__ = [
     "reconcile_confirmatory_cell_outcomes",
     "reconcile_pilot_audit_evidence",
     "reconcile_primary_cell_outcomes",
-    "require_resource_capacity",
     "run_pannuke_pilot",
     "run_smoke",
     "run_synthetic_confirmatory_contract_fixture",

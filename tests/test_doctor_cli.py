@@ -106,7 +106,7 @@ def test_required_command_tree_is_visible() -> None:
         "demo",
     ):
         assert command in root_help.output
-    for command in ("smoke", "pilot", "primary", "confirmatory"):
+    for command in ("smoke", "pilot", "primary"):
         assert command in experiment_help.output
     for command in (
         "generate-synthetic",

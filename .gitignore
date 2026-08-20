@@ -46,6 +46,8 @@ artifacts/rankings/**
 artifacts/figures/**
 artifacts/checkpoints/**
 artifacts/runs/**
+artifacts/smoke_runs/**
+artifacts/ci-smoke-runs/**
 artifacts/review_packages/**
 artifacts/synthetic_core/**
 artifacts/resource_control/**

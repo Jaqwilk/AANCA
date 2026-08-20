@@ -67,11 +67,6 @@ extend-exclude = ["data", "artifacts", ".venv"]
 select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
 ignore = ["E501"]
 
-[tool.ruff.format]
-# This independently admitted authority is byte-pinned. It remains covered by
-# `ruff check`, but formatter rewrites would invalidate its frozen SHA-256.
-exclude = ["src/histo_audit/workflows/original_confirmatory_capsule_authority.py"]
-
 [tool.mypy]
 python_version = "3.12"
 packages = ["histo_audit"]

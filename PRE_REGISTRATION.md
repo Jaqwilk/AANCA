@@ -558,3 +558,11 @@ analysis. A pre-outcome amendment is explicitly labelled
 `amended_before_outcome_inspection`. Verification uses
 `preregistration verify-amendment`; a failed parent, hash, cycle, timestamp,
 disposition, or artifact check fails closed.
+
+## Public maintenance note — 20 August 2026
+
+The command names above document the historical amendment mechanism used by the
+accepted run; they are not part of the simplified public CLI. Their implementation
+is recoverable from Git tag `pre-audit-simplification-2026-08-20`. Removing that
+unexecuted orchestration does not change this frozen scientific definition, the
+accepted artifact hashes or the permanent `amended_or_exploratory` disposition.
