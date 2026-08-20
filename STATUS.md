@@ -124,7 +124,26 @@ Final local validation for this external-evidence update:
 
 Evidence commit `317022ccf268aa0352327064cf3f55453089e934` is public on `main` and
 is the target of release `nucls-external-validation-v1`. The live deployment
-identity is recorded after publication.
+was published from documentation commit
+`063658ade0010e8916e15dc9f134a3736b5b722c` to
+[`mediumaquamarine-wombat-125861.hostingersite.com`](https://mediumaquamarine-wombat-125861.hostingersite.com/).
+
+Hostinger deployment evidence:
+
+- rollback backup: `20260820-195717`;
+- health checks: page, local JSON asset and external animation assets returned HTTP
+  200;
+- all five files read directly from the Hostinger origin matched the local byte
+  sizes and SHA-256 identities exactly;
+- origin `index.html`: 219,789 bytes,
+  `9464bcf51bc640109a3b6dbf4ca3ef7b34b8fc07175f7b27249627e93026b0d4`;
+- origin QC PNG: 3,188,071 bytes,
+  `a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a`;
+- Hostinger CDN losslessly recompresses the public PNG response to 3,096,631 bytes.
+  Decoded RGBA arrays were exactly equal, with shared pixel SHA-256
+  `a834db2c180d6f4b961d92487d86117356f831137165a80282933febc1585b58`.
+  The GitHub release and checked-in package remain the byte-verifiable evidence
+  authorities; the CDN-delivered image is pixel-identical presentation media.
 
 ## Open research work
 
