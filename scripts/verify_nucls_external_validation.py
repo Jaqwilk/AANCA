@@ -27,11 +27,11 @@ EXPECTED_RELEASES = {
         "files": {
             "artifact_manifest.json": (
                 609,
-                "f87b10860040855d0982aaf196389e321b2e32bf3e6598bcf053b33e159ae789",
+                "f044f29688a7340d7b9d8c3c12134873bbfa5c2a8a29ddcb22a493a269581c61",
             ),
             "canonical_manifest.csv": (
-                454_586,
-                "145a1e3d8bafd6121ae099dfa1d3201b2338475a6848d001874a945328034513",
+                453_774,
+                "b5f4a41cec342c2de7427eee8b457ab50daf1da48f815ea026d617d47c38c657",
             ),
             "numeric_evidence.npz": (
                 1_712_144,
@@ -52,11 +52,11 @@ EXPECTED_RELEASES = {
         "files": {
             "artifact_manifest.json": (
                 609,
-                "c6c6df030ffa1c840790e19392679ff5602cb23974f30c0b26116631fc8d0d55",
+                "5dc9ba6187f6f6ae3e9307f172f9e4d75be91892ca8a72491e503ec921499e35",
             ),
             "canonical_manifest.csv": (
-                489_171,
-                "90b8b67509b4d3fc65b9bb94f790900137f69a3eadd9b82df5514c93c1c26858",
+                488_262,
+                "7c707768398c2ef6e50b764a85a18510188ea5086f2ab4f63d01f77f8d7b5356",
             ),
             "numeric_evidence.npz": (
                 2_144_648,

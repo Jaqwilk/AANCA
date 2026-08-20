@@ -950,7 +950,9 @@ def run_nucls_external_validation(
     destination.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{destination.name}.", dir=destination.parent))
     try:
-        prepared.manifest.to_csv(staging / "canonical_manifest.csv", index=False)
+        prepared.manifest.to_csv(
+            staging / "canonical_manifest.csv", index=False, lineterminator="\n"
+        )
         dataset_config = next(
             dataset
             for dataset in config["datasets"].values()

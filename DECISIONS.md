@@ -159,3 +159,14 @@ execution and publication, not efficacy.
 Publish portable source inventories, canonical paired manifests, numeric evidence,
 all random and bootstrap arrays, and an independent verifier that imports neither
 the AANCA package nor scikit-learn.
+
+## D017 — Canonical external-evidence files use LF bytes
+
+Status: implemented
+
+Write the published NuCLS `canonical_manifest.csv` files with an explicit LF line
+terminator. The repository already declares `eol=lf`; generation must therefore
+produce the same bytes that Git checks out on every platform. Pin the normalized
+files and their enclosing artifact manifests by byte count and SHA-256 in the
+independent verifier. This is a serialization correction only: sample identities,
+arrays, metrics, intervals and the negative primary conclusion remain unchanged.

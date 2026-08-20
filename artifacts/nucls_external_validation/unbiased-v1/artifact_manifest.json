@@ -1,8 +1,8 @@
 {
   "files": {
     "canonical_manifest.csv": {
-      "bytes": 454586,
-      "sha256": "145a1e3d8bafd6121ae099dfa1d3201b2338475a6848d001874a945328034513"
+      "bytes": 453774,
+      "sha256": "b5f4a41cec342c2de7427eee8b457ab50daf1da48f815ea026d617d47c38c657"
     },
     "numeric_evidence.npz": {
       "bytes": 1712144,
