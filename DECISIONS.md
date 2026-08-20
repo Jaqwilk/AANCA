@@ -254,3 +254,8 @@ The primary candidate is the balanced fold-safe neighbour queue. Its exact budge
 seeds, caps, matched control and simultaneous retrieval/downstream/class-safety rule
 are frozen in `configs/monusac_current_aanca_external.yaml`. Do not tune or promote a
 candidate from this final result. Preserve null and adverse outcomes.
+
+The first execution attempt stopped before manifest preparation or metric execution
+because the official LZW-compressed TIFF files require `imagecodecs`. Adding that
+decoder is an input-compatibility correction only; the frozen scientific
+configuration, labels, seeds, budgets, models and success rules remain unchanged.

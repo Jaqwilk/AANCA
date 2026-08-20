@@ -13,6 +13,7 @@ authors = [{ name = "Natan Smogór" }]
 dependencies = [
   "cleanlab>=2.7,<3",
   "imagehash>=4.3,<5",
+  "imagecodecs>=2024,<2027",
   "jinja2>=3.1,<4",
   "matplotlib>=3.9,<4",
   "numpy>=1.26,<3",
