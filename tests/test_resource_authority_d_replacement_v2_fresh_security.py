@@ -1414,7 +1414,16 @@ class _CreatorFailsBeforeCallback:
 
 @pytest.mark.parametrize(
     "canary_spawn_fails",
-    (False, True),
+    (
+        False,
+        pytest.param(
+            True,
+            marks=pytest.mark.skipif(
+                os.name != "nt",
+                reason="the disposable Job Object canary is a Windows-only gate",
+            ),
+        ),
+    ),
     ids=("creator-fails-after-canary", "canary-fails-before-a2"),
 )
 def test_containment_canary_precedes_a2_and_creator_failure_has_scoped_f2(

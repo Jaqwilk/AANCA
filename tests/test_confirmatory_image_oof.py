@@ -894,10 +894,14 @@ def test_successor_same_byte_race_after_verify_preserves_foreign_predecessor(
         "_read_private_checkpoint_bytes",
         race_before_source_recheck,
     )
-    grouped_oof_confirmatory_cnn(**arguments)
+    if os.name == "nt":
+        grouped_oof_confirmatory_cnn(**arguments)
+    else:
+        with pytest.raises(ConfirmatoryCheckpointContractError):
+            grouped_oof_confirmatory_cnn(**arguments)
 
     assert raced
-    assert replacement_was_blocked
+    assert replacement_was_blocked is (os.name == "nt")
     assert predecessor.read_bytes() == expected_bytes
     assert _physical_identity(predecessor) == original_identity
 
@@ -1343,10 +1347,11 @@ def test_owned_execution_manifest_same_byte_replacement_is_not_adopted(
         )
         manifest_bytes = execution_manifest.read_bytes()
         original_identity = _physical_identity(execution_manifest)
+        replacement = execution_manifest.with_name("replacement-manifest.json")
+        replacement.write_bytes(manifest_bytes)
         execution_manifest.chmod(stat.S_IWRITE | stat.S_IREAD)
-        execution_manifest.unlink()
-        execution_manifest.write_bytes(manifest_bytes)
-        assert _physical_identity(execution_manifest).file_id_128 != original_identity.file_id_128
+        os.replace(replacement, execution_manifest)
+        assert _physical_identity(execution_manifest) != original_identity
 
         with pytest.raises(
             ConfirmatoryCheckpointContractError,

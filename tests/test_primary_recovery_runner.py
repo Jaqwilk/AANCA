@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import inspect
 import json
+import os
 from dataclasses import dataclass, replace
 from pathlib import Path
 from types import SimpleNamespace
@@ -40,6 +41,11 @@ from histo_audit.utils.run_tracking import (
 )
 from histo_audit.workflows.study_gates import PrimaryExecutionGateEvidence
 from tests.test_primary_recovery import _make_fixture, _tree_state, _write_json
+
+requires_windows_wof = pytest.mark.skipif(
+    os.name != "nt",
+    reason="primary orphan recovery requires the Windows WOF/LZX compressor",
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -166,6 +172,7 @@ def _stub_positive_stage(monkeypatch: pytest.MonkeyPatch) -> None:
     )
 
 
+@requires_windows_wof
 def test_read_only_preflight_and_actual_runner_happy_path(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -305,6 +312,7 @@ def test_active_pid_fails_before_tracker(
         )
 
 
+@requires_windows_wof
 def test_low_disk_fails_before_tracker(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -326,6 +334,7 @@ def test_low_disk_fails_before_tracker(
         )
 
 
+@requires_windows_wof
 def test_streaming_disk_preflight_uses_largest_file_not_whole_tree(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -360,6 +369,7 @@ def test_streaming_disk_preflight_uses_largest_file_not_whole_tree(
     assert second["copy_invoked"] is False
 
 
+@requires_windows_wof
 def test_copy_failure_creates_one_failed_run_without_retry(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -398,6 +408,7 @@ def test_copy_failure_creates_one_failed_run_without_retry(
     )
 
 
+@requires_windows_wof
 def test_anchored_boundary_error_never_uses_pathname_fail_seal(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -444,6 +455,7 @@ def test_anchored_boundary_error_never_uses_pathname_fail_seal(
     assert not (run / ".immutable.json").exists()
 
 
+@requires_windows_wof
 def test_partial_completion_seal_never_attempts_failure_seal(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -478,6 +490,7 @@ def test_partial_completion_seal_never_attempts_failure_seal(
     assert not (run / ".immutable.json").exists()
 
 
+@requires_windows_wof
 def test_positive_attestation_is_terminal_without_later_file_reads(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -521,6 +534,7 @@ def test_positive_attestation_is_terminal_without_later_file_reads(
     assert result["stage_attestation_record_sha256"] == "e" * 64
 
 
+@requires_windows_wof
 def test_preseal_copy_mutation_is_sealed_but_permanently_withdrawn(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -563,6 +577,7 @@ def test_preseal_copy_mutation_is_sealed_but_permanently_withdrawn(
     )
 
 
+@requires_windows_wof
 def test_postseal_failure_withdraws_completed_candidate(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

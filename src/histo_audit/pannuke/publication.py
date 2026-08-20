@@ -2949,10 +2949,15 @@ def _capture_physical_publication_source(
     provisional = _LockedPublishedFile(parent, path, path.name, (0, 0, 0), "")
     descriptor: int | None = None
     try:
-        descriptor = provisional._open_descriptor(
-            share_write=False,
-            share_delete=False,
-        )
+        try:
+            descriptor = provisional._open_descriptor(
+                share_write=False,
+                share_delete=False,
+            )
+        except OSError as exc:
+            raise ValueError(
+                f"physical publication source is not a lexical regular file: {path}"
+            ) from exc
         before = os.fstat(descriptor)
         if not stat.S_ISREG(before.st_mode) or _is_link_or_reparse(path, before):
             raise ValueError(f"physical publication source is not a lexical regular file: {path}")

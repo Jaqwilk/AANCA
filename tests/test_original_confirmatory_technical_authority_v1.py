@@ -14,7 +14,7 @@ import capsule_builder
 from histo_audit.workflows import original_confirmatory_technical_authority_v1 as t0
 
 PROJECT_ROOT = Path(
-    os.environ.get("AANCA_PROJECT_ROOT", r"C:\Users\NATAN\Documents\AANCA")
+    os.environ.get("AANCA_PROJECT_ROOT", str(Path(__file__).resolve().parents[1]))
 ).resolve()
 ZERO = "0" * 64
 SOURCE_ROOT = "1" * 64

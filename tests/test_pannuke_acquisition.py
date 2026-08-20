@@ -5,6 +5,7 @@ from __future__ import annotations
 import errno
 import json
 import os
+import subprocess
 from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
@@ -735,7 +736,9 @@ def test_bundle_refuses_conflicting_report_before_creating_manifest(tmp_path: Pa
     assert json.loads(report_path.read_text(encoding="utf-8")) == {"stale": True}
 
 
-def test_gitignore_blocks_raw_zip_npy_and_leaves_provenance_trackable() -> None:
+def test_gitignore_blocks_raw_zip_npy_and_leaves_provenance_trackable(
+    tmp_path: Path,
+) -> None:
     project = Path(__file__).resolve().parents[1]
     patterns = {
         value.strip() for value in (project / ".gitignore").read_text(encoding="utf-8").splitlines()
@@ -748,7 +751,31 @@ def test_gitignore_blocks_raw_zip_npy_and_leaves_provenance_trackable() -> None:
         "artifacts/duplicate_audit/*.npz",
         "artifacts/duplicate_audit/.frozen_resnet18_duplicate_embeddings.resume/**",
     }.issubset(patterns)
-    evidence = git_ignore_evidence(project)
+
+    # Prove the Git behavior against a self-contained repository. The public
+    # checkout intentionally excludes the raw PanNuke release, so this test must
+    # not depend on one researcher's local dataset tree.
+    (tmp_path / ".gitignore").write_text(
+        (project / ".gitignore").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    raw_root = tmp_path / "data" / "raw" / "pannuke"
+    representative_files = (
+        raw_root / "Fold 1" / "images" / "fold1" / "images.npy",
+        raw_root / "Fold 1" / "README.md",
+        raw_root / "Fold 1.zip",
+    )
+    for path in representative_files:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"representative ignored PanNuke fixture\n")
+    subprocess.run(
+        ["git", "init", "--quiet"],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
+
+    evidence = git_ignore_evidence(tmp_path)
     assert evidence["status"] == "passed"
     assert evidence["raw_release_file_count"] == evidence["ignored_raw_file_count"]
     assert evidence["tracked_raw_file_count"] == 0

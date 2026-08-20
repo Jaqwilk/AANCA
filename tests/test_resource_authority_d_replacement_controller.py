@@ -1049,7 +1049,7 @@ def test_fresh_verifier_uses_exact_shell_free_direct_child_command(
 
     argv, kwargs = factory.calls[0]
     assert argv[:7] == [
-        sys.executable,
+        request.python_executable,
         "-I",
         "-B",
         "-m",

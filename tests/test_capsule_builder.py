@@ -183,12 +183,17 @@ def _synthetic_codex_handoff_creation(
 def _synthetic_launch_environment(
     attempt_nonce: str,
 ) -> tuple[dict[str, object], dict[str, object]]:
+    # This authority deliberately seals a Windows launch contract even when its
+    # pure validation tests run on a POSIX CI host. Do not derive these values
+    # from the host's home or temporary directory syntax.
+    user_profile = str(Path.home()) if os.name == "nt" else r"C:\Users\NATAN"
+    local_app_data = user_profile + r"\AppData\Local"
     supervisor_environment = {
-        "LOCALAPPDATA": str(Path.home() / "AppData" / "Local"),
-        "SYSTEMROOT": str(Path(os.environ.get("SYSTEMROOT", r"C:\Windows"))),
-        "TEMP": str(Path(os.environ.get("TEMP", r"C:\Windows\Temp"))),
-        "TMP": str(Path(os.environ.get("TMP", r"C:\Windows\Temp"))),
-        "USERPROFILE": str(Path.home()),
+        "LOCALAPPDATA": local_app_data,
+        "SYSTEMROOT": r"C:\Windows",
+        "TEMP": local_app_data + r"\Temp",
+        "TMP": local_app_data + r"\Temp",
+        "USERPROFILE": user_profile,
     }
     child_environment = {
         **supervisor_environment,
@@ -3811,7 +3816,11 @@ def _run_capsule(capsule: Path, *, cwd: Path) -> subprocess.CompletedProcess[byt
             "fresh",
             *_projection_suffix("verify-terminal", job_directory),
         ]
-        program = sys.executable
+        program = (
+            sys.executable
+            if os.name == "nt"
+            else str(getattr(sys, "_base_executable", sys.executable))
+        )
     return _invoke_capsule(
         capsule,
         cwd=cwd,

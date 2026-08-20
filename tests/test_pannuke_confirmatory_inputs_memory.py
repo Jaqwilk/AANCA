@@ -894,7 +894,7 @@ def test_final_verification_rejects_checksum_identical_parent_reparse_swap(
         probe.symlink_to(replacement_directory, target_is_directory=True)
     except OSError:
         pytest.skip("platform does not permit an unprivileged directory symlink")
-    probe.rmdir()
+    probe.unlink()
 
     real_source_hashes = workspace_module._source_hashes
     hash_passes = 0

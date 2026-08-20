@@ -2020,6 +2020,7 @@ def test_every_request_phase_rejects_an_extra_file(
         anchor.close_noexcept()
 
 
+@pytest.mark.skipif(os.name != "nt", reason="fresh-child review mutex is Windows-only")
 def test_review_intent_cli_binds_receipt_to_the_spawned_process(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -2173,6 +2174,7 @@ def test_review_intent_cli_binds_receipt_to_the_spawned_process(
     assert len(spawned) == 1
 
 
+@pytest.mark.skipif(os.name != "nt", reason="fresh-child review mutex is Windows-only")
 def test_two_concurrent_review_controllers_spawn_exactly_one_child(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -2316,6 +2318,7 @@ def test_two_concurrent_review_controllers_spawn_exactly_one_child(
     }
 
 
+@pytest.mark.skipif(os.name != "nt", reason="fresh-child review mutex is Windows-only")
 def test_abandoned_review_attempt_after_parent_death_blocks_second_child(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -3076,6 +3079,7 @@ def test_two_different_destinations_share_one_global_singleton_claim(
     )
 
 
+@pytest.mark.skipif(os.name != "nt", reason="retained rename-denying handles are Windows-only")
 def test_publish_cli_does_not_run_terminal_verifier(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -3328,6 +3332,7 @@ def test_combined_terminal_verifier_rejects_writable_authority_leaf(
         )
 
 
+@pytest.mark.skipif(os.name != "nt", reason="retained rename-denying handles are Windows-only")
 def test_combined_verifier_retains_directory_and_leaf_handles_across_live_verify(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

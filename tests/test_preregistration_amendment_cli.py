@@ -15,6 +15,7 @@ from histo_audit.workflows import (
     PreregistrationAmendmentResult,
     PreregistrationAmendmentVerification,
 )
+from tests.cli_contracts import cli_options, resolve_cli_command
 
 
 def _amend_arguments(project: Path) -> list[str]:
@@ -80,20 +81,12 @@ def _valid_verification(result: PreregistrationAmendmentResult) -> Any:
 
 
 def test_amendment_cli_help_exposes_every_explicit_authority_input() -> None:
-    result = CliRunner().invoke(
-        app,
-        ["preregistration", "amend", "--help"],
-        terminal_width=220,
-    )
-
-    assert result.exit_code == 0, result.output
-    for option in (
+    options = cli_options(app, ("preregistration", "amend"))
+    assert {
         "--parent-authority-dir",
         "--amended-preregistration",
         "--amended-primary-config",
-        # Rich abbreviates these two longest names in its fixed option column;
-        # successful invocations below exercise their complete spellings.
-        "--amended-confirmatory-c",
+        "--amended-confirmatory-config",
         "--reason",
         "--affected-hypothesis",
         "--affected-analysis",
@@ -101,9 +94,8 @@ def test_amendment_cli_help_exposes_every_explicit_authority_input() -> None:
         "--amendment-root",
         "--outcomes-inspected",
         "--outcomes-not-inspected",
-        "--outcomes-inspected-at-",
-    ):
-        assert option in result.output
+        "--outcomes-inspected-at-utc",
+    }.issubset(options)
 
 
 def test_amend_cli_maps_explicit_pre_outcome_inputs_and_verifies_publication(
@@ -316,20 +308,12 @@ def test_verify_amendment_cli_fails_closed_on_invalid_chain(
 
 
 def test_verify_resource_technical_successor_cli_help_exposes_required_pins() -> None:
-    result = CliRunner().invoke(
-        app,
-        [
-            "preregistration",
-            "verify-resource-technical-successor",
-            "--help",
-        ],
-        terminal_width=240,
-    )
-
-    assert result.exit_code == 0, result.output
-    assert "read-only fresh-process boundary" in result.output
-    for option in ("--successor-dir", "--verification-nonce", "--project-root"):
-        assert option in result.output
+    path = ("preregistration", "verify-resource-technical-successor")
+    command = resolve_cli_command(app, path)
+    options = cli_options(app, path)
+    assert "read-only fresh-process boundary" in (command.help or "")
+    assert {"--successor-dir", "--verification-nonce", "--project-root"}.issubset(options)
+    descriptions = "\n".join(option.help or "" for option in set(options.values()))
     for description in (
         "Exact superseded",
         "Externally pinned",
@@ -337,8 +321,8 @@ def test_verify_resource_technical_successor_cli_help_exposes_required_pins() ->
         "PID of the publication",
         "One-use 64-hex",
     ):
-        assert description in result.output
-    assert result.output.count("[required]") == 8
+        assert description in descriptions
+    assert sum(option.required for option in set(options.values())) == 8
 
 
 def test_verify_resource_technical_successor_cli_maps_exact_external_pins(

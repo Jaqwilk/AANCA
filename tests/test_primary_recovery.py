@@ -615,6 +615,7 @@ def test_exact_tiny_snapshot_is_read_only_and_allowlisted(
     )
 
 
+@pytest.mark.skipif(os.name != "nt", reason="recovery copy requires Windows WOF/LZX")
 def test_physical_copy_is_independent_and_destination_passes_light_closure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -697,6 +698,7 @@ def test_missing_or_hash_drifted_source_is_rejected_without_copy(
     assert not fixture.destination.exists()
 
 
+@pytest.mark.skipif(os.name != "nt", reason="recovery copy requires Windows WOF/LZX")
 def test_destination_light_closure_rejects_reauthorized_semantic_tamper(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

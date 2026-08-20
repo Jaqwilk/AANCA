@@ -87,7 +87,7 @@ def capsule_fixture(tmp_path: Path) -> CapsuleFixture:
         file_id_128=physical.file_id_128,
         size_bytes=physical.size_bytes,
         sha256=physical.sha256,
-        file_attributes=physical.file_attributes,
+        file_attributes=(physical.file_attributes | (0x1 if os.name != "nt" else 0)),
     )
     ancestor_paths = (
         tmp_path,
@@ -164,9 +164,15 @@ def capsule_fixture(tmp_path: Path) -> CapsuleFixture:
         sha256=runtime_python_physical.sha256,
         file_attributes=runtime_python_physical.file_attributes,
     )
-    runtime_user_root = Path(os.environ.get("USERPROFILE", str(Path.home())))
-    runtime_relative_parent = runtime_python_path.parent.relative_to(runtime_user_root)
-    runtime_ancestor_paths = [runtime_user_root]
+    runtime_user_root = Path(os.environ.get("USERPROFILE", str(Path.home()))).resolve()
+    runtime_parent = runtime_python_path.parent.resolve()
+    try:
+        runtime_relative_parent = runtime_parent.relative_to(runtime_user_root)
+        runtime_anchor = runtime_user_root
+    except ValueError:
+        runtime_anchor = Path(runtime_parent.anchor)
+        runtime_relative_parent = runtime_parent.relative_to(runtime_anchor)
+    runtime_ancestor_paths = [runtime_anchor]
     for part in runtime_relative_parent.parts:
         runtime_ancestor_paths.append(runtime_ancestor_paths[-1] / part)
     runtime_ancestor_records = []
@@ -184,7 +190,7 @@ def capsule_fixture(tmp_path: Path) -> CapsuleFixture:
         )
     runtime_python_ancestor = (
         authority.build_original_confirmatory_runtime_interpreter_ancestor_lease(
-            anchor_path=runtime_user_root,
+            anchor_path=runtime_anchor,
             records=runtime_ancestor_records,
         )
     )

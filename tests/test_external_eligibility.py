@@ -24,6 +24,7 @@ from histo_audit.external_validation import (
 )
 from histo_audit.pannuke.models import OFFICIAL_METRICS_CLASS_MAPPING
 from histo_audit.utils.run_tracking import RunTracker, sha256_file, sha256_path
+from tests.cli_contracts import cli_options
 
 
 def _review_inputs(root: Path) -> tuple[Path, Path]:
@@ -398,18 +399,13 @@ def test_structural_fixture_build_is_useful_but_never_emits_readiness(tmp_path: 
 
 
 def test_external_help_separates_stage_evidence_from_fixture_inputs() -> None:
-    result = CliRunner().invoke(
-        app, ["external", "build-review-package", "--help"], terminal_width=180
-    )
-
-    assert result.exit_code == 0, result.output
-    for option in (
+    options = cli_options(app, ("external", "build-review-package"))
+    assert {
         "--audit-run-dir",
         "--dataset",
-        "--dataset-validation",
-        "--duplicate-audit-js",
-    ):
-        assert option in result.output
+        "--dataset-validation-json",
+        "--duplicate-audit-json",
+    }.issubset(options)
 
 
 def test_partial_eligibility_request_fails_before_creating_outputs(tmp_path: Path) -> None:

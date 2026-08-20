@@ -45,6 +45,7 @@ from histo_audit.workflows.original_confirmatory_technical_authority_v1 import (
     VerifiedOriginalConfirmatoryTechnicalAuthority,
 )
 from histo_audit.workflows.preregistration import verify_preregistration_freeze
+from tests.cli_contracts import cli_options
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -1243,14 +1244,12 @@ def test_confirmatory_direct_entry_fails_before_any_input_without_readiness(
 
 
 def test_public_cli_exposes_lifecycle_commands_and_confirmatory_gate() -> None:
-    runner = CliRunner()
-    rehearsal = runner.invoke(app, ["experiment", "lifecycle-rehearsal", "--help"])
-    verifier = runner.invoke(app, ["experiment", "verify-lifecycle-rehearsal", "--help"])
-    confirmatory = runner.invoke(app, ["experiment", "confirmatory", "--help"], terminal_width=200)
-    assert rehearsal.exit_code == verifier.exit_code == confirmatory.exit_code == 0
-    assert "--authority-dir" in rehearsal.output
-    assert "--rehearsal-run-dir" in verifier.output
-    assert "lifecycle-readiness" in confirmatory.output
+    rehearsal = cli_options(app, ("experiment", "lifecycle-rehearsal"))
+    verifier = cli_options(app, ("experiment", "verify-lifecycle-rehearsal"))
+    confirmatory = cli_options(app, ("experiment", "confirmatory"))
+    assert "--authority-dir" in rehearsal
+    assert "--rehearsal-run-dir" in verifier
+    assert "--lifecycle-readiness-run-dir" in confirmatory
 
 
 def test_partial_publication_failure_is_sealed_failed_and_can_be_exact_retry(

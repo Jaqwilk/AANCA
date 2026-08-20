@@ -14,21 +14,16 @@ import histo_audit.external_validation as external_validation
 import histo_audit.workflows as workflows
 from histo_audit.cli import app
 from histo_audit.external_validation import ReviewPackageValidationResult
+from tests.cli_contracts import cli_options
 
 
 def test_stage_command_help_exposes_required_evidence_options() -> None:
-    runner = CliRunner()
-    freeze_help = runner.invoke(app, ["preregistration", "freeze", "--help"], terminal_width=240)
-    audit_help = runner.invoke(app, ["audit", "original", "--help"], terminal_width=180)
-    external_help = runner.invoke(
-        app, ["external", "build-review-package", "--help"], terminal_width=180
-    )
-    representations_help = runner.invoke(
-        app, ["representations", "extract", "--help"], terminal_width=220
-    )
+    freeze_options = cli_options(app, ("preregistration", "freeze"))
+    audit_options = cli_options(app, ("audit", "original"))
+    external_options = cli_options(app, ("external", "build-review-package"))
+    representation_options = cli_options(app, ("representations", "extract"))
 
-    assert freeze_help.exit_code == 0, freeze_help.output
-    for option in (
+    assert {
         "--pilot-run-dir",
         "--dataset",
         "--manifest",
@@ -41,22 +36,16 @@ def test_stage_command_help_exposes_required_evidence_options() -> None:
         "--primary-config",
         "--confirmatory-config",
         "--freeze-root",
-    ):
-        assert option in freeze_help.output
-
-    assert audit_help.exit_code == 0, audit_help.output
-    for option in (
+    }.issubset(freeze_options)
+    assert {
         "--manifest",
         "--feature-cache",
-        "--final-reference-g",
+        "--final-reference-groups",
         "--output-dir",
         "--class-order",
         "--n-splits",
-    ):
-        assert option in audit_help.output
-
-    assert external_help.exit_code == 0, external_help.output
-    for option in (
+    }.issubset(audit_options)
+    assert {
         "--manifest",
         "--ranking",
         "--output-dir",
@@ -64,28 +53,18 @@ def test_stage_command_help_exposes_required_evidence_options() -> None:
         "--top",
         "--random",
         "--seed",
-    ):
-        assert option in external_help.output
-
-    assert representations_help.exit_code == 0, representations_help.output
-    for option in (
+    }.issubset(external_options)
+    assert {
         "--independence-output",
         "--primary-config",
-        "--include-context-emb",
-    ):
-        assert option in representations_help.output
+        "--include-context-embeddings",
+    }.issubset(representation_options)
 
 
 def test_study_command_help_exposes_all_immutable_gate_inputs() -> None:
-    runner = CliRunner()
-    primary_help = runner.invoke(app, ["experiment", "primary", "--help"], terminal_width=220)
-    confirmatory_help = runner.invoke(
-        app, ["experiment", "confirmatory", "--help"], terminal_width=220
-    )
-
-    assert primary_help.exit_code == 0, primary_help.output
-    assert confirmatory_help.exit_code == 0, confirmatory_help.output
-    shared_options = (
+    primary_options = cli_options(app, ("experiment", "primary"))
+    confirmatory_options = cli_options(app, ("experiment", "confirmatory"))
+    shared_options = {
         "--project-root",
         "--freeze-dir",
         "--dataset",
@@ -94,11 +73,10 @@ def test_study_command_help_exposes_all_immutable_gate_inputs() -> None:
         "--pathology-encoder-audit",
         "--primary-config",
         "--confirmatory-config",
-    )
-    for option in shared_options:
-        assert option in primary_help.output
-        assert option in confirmatory_help.output
-    assert "--primary-run-dir" in confirmatory_help.output
+    }
+    assert shared_options.issubset(primary_options)
+    assert shared_options.issubset(confirmatory_options)
+    assert "--primary-run-dir" in confirmatory_options
 
 
 def test_primary_cli_validates_gate_before_loading_executor_or_creating_run(

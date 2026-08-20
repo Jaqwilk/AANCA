@@ -522,6 +522,7 @@ def test_stale_release_and_legacy_wake_fields_are_rejected() -> None:
         assert "codex_terminal_wake_prompt" not in source
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Codex carrier seals Windows session paths")
 def test_operational_base_creation_and_exact_environment_crosslinks() -> None:
     base = _base_authority()
     canonical_base = bootstrap._require_codex_handoff_base_authority(
@@ -627,6 +628,7 @@ def test_runtime_shape_rejects_v2_non_null_codex_and_legacy_session() -> None:
             terminal._require_v3_external_runtime_shape(bad)
 
 
+@pytest.mark.skipif(os.name != "nt", reason="control-staging carrier seals Windows paths")
 def test_control_staging_binding_tamper_is_fail_closed() -> None:
     binding, payload, spec, values = _control_staging_fixture()
     terminal._validate_control_staging_run_spec_binding(

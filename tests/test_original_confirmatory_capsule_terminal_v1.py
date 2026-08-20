@@ -2526,7 +2526,7 @@ def test_live_process_command_view_and_launcher_flag_are_closed_contracts(
         == _HASH_A
     )
     for mutated in (
-        {**view, "argv": [str(Path(sys.executable).resolve()), *argv[1:]]},
+        {**view, "argv": [str((tmp_path / "different-python").resolve()), *argv[1:]]},
         {**view, "argv": [*argv, "--unexpected"]},
         {**view, "cwd": str(tmp_path.parent.resolve())},
         {**view, "observation_method": "receipt_claim_v1"},
