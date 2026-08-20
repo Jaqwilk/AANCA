@@ -392,3 +392,20 @@ Final local validation for this new-data result and publication update:
 - real-browser readback: the article begins with the thesis, retains the animated
   “What the study actually learned” section, places NuCLS and MoNuSAC after detailed
   evidence, and renders the new centered article section without overflow.
+
+Publication evidence:
+
+- scientific result and presentation commit `296f8afe1e7b2eb8d0d14f5ffd2c9599d0162ab0`
+  was pushed to `origin/main`;
+- Hostinger connection and pre-deploy build verification passed;
+- rollback backup `20260820-235533` was created before replacing `public_html`;
+- the page, `evidence.json` and all checked external animation assets returned HTTP
+  200 after deployment;
+- live `index.html`, `evidence.json`, `README.md` and `manifest.json` matched their
+  local deployed files byte for byte;
+- live `index.html`: 223,814 bytes, SHA-256
+  `5871a7a8f7c620a7dcd8ed0b8f10c948bf7cdfdc125928f5577cd768076aaae8`;
+- live machine evidence: 29,782 bytes, SHA-256
+  `68de15f65a0e69c111f660354b05e2439666b613a3ce2e2482303b5baa681bbb`;
+- deployed presentation manifest root:
+  `113e3e8d20cf86dcde4afb09ffd9eb21f9aa78ab3733364e13c26d04945a8827`.
