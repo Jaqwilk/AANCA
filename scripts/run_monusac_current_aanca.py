@@ -29,7 +29,7 @@ def _atomic_npz(path: Path, arrays: dict[str, np.ndarray]) -> None:
     temporary = Path(temporary_name)
     try:
         np.savez_compressed(temporary, **arrays)
-        with temporary.open("rb") as stream:
+        with temporary.open("r+b") as stream:
             os.fsync(stream.fileno())
         os.replace(temporary, path)
     finally:

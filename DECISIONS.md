@@ -265,3 +265,9 @@ implementation reflect-padded an entire tile for every nucleus and exhausted loc
 memory. Crop construction now slices the local window first and reflect-pads only a
 missing border. The selected centre, 64-by-64 geometry and resulting pixel values are
 unchanged; this is a resource correction, not an analytical amendment.
+
+The first complete metric calculation then reached artifact publication but failed
+on Windows because the temporary NPZ was opened read-only before `fsync`. After this
+point no scientific parameter may change. Opening the same temporary file as `r+b`
+is an artifact-durability correction only; the deterministic calculation is rerun
+unchanged and its final evidence identities are recorded.
