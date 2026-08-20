@@ -60,7 +60,7 @@ are the saved model outputs. Retraining requires a lawful local PanNuke copy.
 
 ## Engineering status
 
-Active work branch: `codex/fix-audit-followup`.
+Published code commit: `fc944c6f4508efccfe09c4952bd0cd101786a2c5` on `main`.
 
 Completed in this audit pass:
 
@@ -90,11 +90,19 @@ Final local validation on 20 August 2026:
 - five-file presentation: valid, root
   `e69b4a4bf5224ec841eaac845c67515ad2e5a4fb83149a398f0e361c6646a812`.
 
-## Remaining publication gates
+## Publication verification
 
-Push the branch, require a green Ubuntu and Windows workflow, fast-forward `main`,
-and deploy the verified package to Hostinger. No scientific stage changes during
-these publication steps.
+- [`Scientific software` run 32389776361](https://github.com/Jaqwilk/AANCA/actions/runs/32389776361)
+  passed on Ubuntu in 9 minutes 23 seconds and Windows in 27 minutes 44 seconds;
+  both jobs completed lint, formatting, the full suite and synthetic smoke.
+- `main` was fast-forwarded to the exact tested code commit `fc944c6`.
+- Hostinger deployment completed with rollback backup `20260820-183718`.
+- the live `index.html` returned HTTP 200 and exactly matched the checked-in file:
+  216,201 bytes, SHA-256
+  `73ca68df93b1935e103164aba99a0a6e20af70596a5bf3f730df365299e1b3d4`.
+
+These engineering and publication results do not change a scientific completion
+stage.
 
 ## Open research work
 
