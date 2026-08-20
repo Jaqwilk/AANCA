@@ -69,6 +69,11 @@ annotation disagreement is a pathology error.
 The separate external study is checked in under
 `artifacts/nucls_external_validation` and documented in
 [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
+The immutable
+[`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1)
+release contains the same derived evidence and independent verifier in one archive
+(4,001,323 bytes; SHA-256
+`e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`).
 It contains two frozen result bundles:
 
 - `unbiased-v1`: primary Unbiased Control subset;

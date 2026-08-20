@@ -70,5 +70,8 @@ raw PanNuke binaries or fold checkpoints that were not retained.
 The checked-in NuCLS evidence and independent verifier are documented in
 `reports/nucls_external_validation_results.md`; they include derived arrays and
 portable source inventories, not raw NuCLS images.
+The same bundle is published as GitHub release
+`nucls-external-validation-v1` with SHA-256
+`e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`.
 Source code, setup guidance, specifications, tests, and the complete documentation
 map are available at <https://github.com/Jaqwilk/AANCA>.

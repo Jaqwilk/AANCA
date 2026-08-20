@@ -82,6 +82,13 @@ manifests, saved OOF probabilities, fixed-budget selections, downstream probabil
 arrays, random repetitions, and every bootstrap draw. Raw NuCLS images are not
 published.
 
+Public release:
+[`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1)
+
+- asset: `aanca-nucls-external-validation-v1.zip`;
+- bytes: `4,001,323`;
+- SHA-256: `e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`.
+
 Run:
 
 ```text

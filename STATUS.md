@@ -94,6 +94,15 @@ manifest, OOF risk calculation, fixed-budget outcome, random baseline, downstrea
 metric and frozen group-bootstrap draw. Its accepted conclusion is
 `primary_claim_conclusion: not_supported`.
 
+Public release:
+[`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1)
+
+- target commit: `317022ccf268aa0352327064cf3f55453089e934`;
+- asset: `aanca-nucls-external-validation-v1.zip`, 4,001,323 bytes;
+- GitHub digest:
+  `sha256:e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`;
+- a fresh extraction passed the independent verifier before upload.
+
 ## Engineering and publication status
 
 The repository has portable Ubuntu/Windows CI, deterministic synthetic reuse,
@@ -110,11 +119,12 @@ Final local validation for this external-evidence update:
   exact sample manifests, ranking, random baselines, downstream metrics and all
   frozen group bootstraps passed; primary conclusion `not_supported`;
 - five-file presentation: valid, root
-  `d0da474c0862233ddc9335110fac1ef2c3e877057a76c8a0486fafa051485f31`,
+  `557cb17a81dcc64429060ec0a7c578c2bcd00bba477543a9b94aa6396031383d`,
   with `external_validation_completed: true` and the null/adverse claim boundary.
 
-GitHub identities and the live deployment identity for this update are recorded
-after publication.
+Evidence commit `317022ccf268aa0352327064cf3f55453089e934` is public on `main` and
+is the target of release `nucls-external-validation-v1`. The live deployment
+identity is recorded after publication.
 
 ## Open research work
 

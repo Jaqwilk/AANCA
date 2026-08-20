@@ -69,6 +69,13 @@
     "downstream_success_conditions_met": false
   },
   "overall_conclusion": "not_supported",
+  "public_release": {
+    "asset": "aanca-nucls-external-validation-v1.zip",
+    "asset_bytes": 4001323,
+    "asset_sha256": "e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08",
+    "tag": "nucls-external-validation-v1",
+    "url": "https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1"
+  },
   "claim_boundary": {
     "pathologist_error_proven": false,
     "biological_truth_proven": false,

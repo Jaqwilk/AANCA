@@ -85,6 +85,8 @@ unchanged. The checked-in derived evidence and independent verifier are document
 in [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
 This completes a genuine external multi-rater evaluation; it does not prove that a
 pathologist was wrong or that consensus is biological truth.
+The sealed derived evidence is also available as GitHub release
+[`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1).
 
 See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
