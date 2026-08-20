@@ -1,0 +1,22 @@
+{
+  "files": {
+    "numeric_evidence.npz": {
+      "bytes": 9889779,
+      "sha256": "bda87a00b79db4962c71177a2dd3dea0c4c65b8b2d7299c577fd2ce4fdc1e8ec"
+    },
+    "report.md": {
+      "bytes": 2711,
+      "sha256": "e6911fd73f2103a3ffbb650da180816f344a527691326ec62d641ef55663be42"
+    },
+    "results.json": {
+      "bytes": 33249,
+      "sha256": "b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4"
+    },
+    "source_inventory.json": {
+      "bytes": 114728,
+      "sha256": "2b84809ea064552c8d011e17c32b86c6a47e0870f7d3801ef9c15ba1eeb87b0d"
+    }
+  },
+  "schema_version": 1,
+  "study_id": "monusac_current_aanca_controlled_external_v1"
+}

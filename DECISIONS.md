@@ -271,3 +271,27 @@ on Windows because the temporary NPZ was opened read-only before `fsync`. After 
 point no scientific parameter may change. Opening the same temporary file as `r+b`
 is an artifact-durability correction only; the deterministic calculation is rerun
 unchanged and its final evidence identities are recorded.
+
+## D024 — Retain the MoNuSAC result without promotion
+
+Status: binding after frozen outcome execution
+
+The balanced fold-safe neighbour queue passed the registered controlled-change
+retrieval comparison against exact matched random. It did not pass either downstream
+benefit comparison or the simultaneous important-class recall safeguard. Because
+the prospectively frozen rule required all four conditions, retain
+`corrupted_uncorrected` as the comparison action and do not promote or tune any
+candidate from the final MoNuSAC test.
+
+The fixed hybrid had the largest ranking point estimate, but it was not the frozen
+primary candidate and its downstream result was adverse. It is not promoted
+post-outcome. The positive neighbour macro-F1 point estimate is reported alongside
+its interval crossing zero and its practically null comparison with matched-random
+restoration.
+
+After metric execution, add only audit fields needed for independent verification:
+OOF fold identifiers, organ strata and the exact matched-random indices. This does
+not change an input, score, selection, model, seed, budget, metric or decision. A
+second complete execution produced byte-identical results, report and source
+inventory. Pin the final package and require the independent standard-library/NumPy
+verifier to recalculate every published gate.

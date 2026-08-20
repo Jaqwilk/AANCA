@@ -1,0 +1,1222 @@
+{
+  "all_success_conditions_met": false,
+  "analysis_disposition": "prospectively_frozen_controlled_external_benchmark",
+  "claim_boundary": {
+    "automatic_annotation_change_permitted": false,
+    "clinical_or_operational_utility_claim_permitted": false,
+    "disposition": "prospectively_frozen_controlled_external_benchmark",
+    "natural_pathology_error_detection_claim_permitted": false,
+    "pathologist_error_claim_permitted": false,
+    "preserve_null_and_adverse_results": true,
+    "result_may_select_or_tune_a_new_candidate": false
+  },
+  "config_sha256": "97df4c4db5bdbfb588438c25eacbd8c33c26a24dcf690ca8149ad7a9c7600ebe",
+  "controlled_corruption": {
+    "configuration_hash": "1ae83b5208efbe4ad57900e4150a6dda6c2bf5b3a8728a6163b76dd1f1f423b8",
+    "exact_count": 2961,
+    "mechanism": "symmetric_random_corruption",
+    "rate": 0.1,
+    "seed": 26082080,
+    "source_annotations_modified": false
+  },
+  "dataset": {
+    "cross_dataset_pannuke_patient_overlap_excluded": false,
+    "cross_dataset_pannuke_patient_overlap_limitation": "PanNuke release metadata does not expose sufficient patient identities to prove non-overlap",
+    "excluded_overlap_patients": [
+      "TCGA-A2-A0ES",
+      "TCGA-MP-A4T7"
+    ],
+    "license": "CC-BY-NC-SA-4.0",
+    "name": "MoNuSAC2020",
+    "test_eligible_nuclei": 15494,
+    "test_exclusions": {
+      "ambiguous_region_excluded": 2403,
+      "polygon_centre_outside_image": 3
+    },
+    "test_manifest_sha256": "ff4527206762c8c0f9a88b7cb8455055ec02873f40f89ad96942c89c3fde2270",
+    "test_patient_groups": 25,
+    "test_source_inventory_sha256": "f9681af1d7bfe30f0e14ce7541c8426db97ec16f07ffeac3f00b38d0d091e4f6",
+    "train_eligible_nuclei": 29610,
+    "train_exclusions": {
+      "overlap_patient_excluded_from_development": 1796,
+      "polygon_centre_outside_image": 5
+    },
+    "train_manifest_sha256": "1bc1c095f12545b7256db5fbd92d03b3a7eac46cc065d5c0697e9f7a15fc88e1",
+    "train_patient_groups": 44,
+    "train_source_inventory_sha256": "c18707e4868f10dc9fc02a887ffce562456f1fd5b5095a5ef63f9be6012e8973"
+  },
+  "decision": "not supported; retain corrupted-baseline comparison and do not claim a better real-world model",
+  "downstream": {
+    "adoption_guards": {
+      "fixed_hybrid_balanced_review": {
+        "action": "retain_uncorrected",
+        "apply_candidate": false,
+        "candidate_minus_uncorrected_recall": {
+          "0": -0.029815559561780614,
+          "1": -0.009226037929267017,
+          "2": 0.013029315960912058,
+          "3": 0.011627906976744096
+        },
+        "important_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "important_classes_pass": false,
+        "macro_f1": {
+          "action": "retain_uncorrected",
+          "apply_candidate": false,
+          "candidate_minus_uncorrected_macro_f1": -0.010437901008646389,
+          "evidence_role": "independent_group_validation",
+          "group_count": 25,
+          "interval_95": [
+            -0.0192425016326104,
+            -0.001451086958569814
+          ],
+          "minimum_effect": 0.0,
+          "reason": "lower 95% whole-group bootstrap bound does not exceed the minimum effect",
+          "requested_iterations": 2000,
+          "valid_iterations": 2000
+        },
+        "minimum_per_class_recall_effect": -0.01,
+        "minimum_valid_iteration_fraction": 0.95,
+        "per_class_recall_intervals_95": {
+          "0": [
+            -0.044837235686828666,
+            -0.014097613791666718
+          ],
+          "1": [
+            -0.028097798250579894,
+            0.011405511681705864
+          ],
+          "2": [
+            -0.02666765578635021,
+            0.05729742809734507
+          ],
+          "3": [
+            -0.031055900621117963,
+            0.04444798301486193
+          ]
+        },
+        "per_class_valid_iterations": {
+          "0": 2000,
+          "1": 2000,
+          "2": 2000,
+          "3": 2000
+        },
+        "reason": "macro-F1 benefit gate failed; retain the uncorrected model"
+      },
+      "nearest_neighbour_disagreement_balanced_review": {
+        "action": "retain_uncorrected",
+        "apply_candidate": false,
+        "candidate_minus_uncorrected_recall": {
+          "0": -0.0002773540424351184,
+          "1": 0.010379292670425477,
+          "2": 0.019543973941368087,
+          "3": 0.0
+        },
+        "important_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "important_classes_pass": false,
+        "macro_f1": {
+          "action": "retain_uncorrected",
+          "apply_candidate": false,
+          "candidate_minus_uncorrected_macro_f1": 0.00552561448676292,
+          "evidence_role": "independent_group_validation",
+          "group_count": 25,
+          "interval_95": [
+            -0.001505873468356683,
+            0.012832750726675505
+          ],
+          "minimum_effect": 0.0,
+          "reason": "lower 95% whole-group bootstrap bound does not exceed the minimum effect",
+          "requested_iterations": 2000,
+          "valid_iterations": 2000
+        },
+        "minimum_per_class_recall_effect": -0.01,
+        "minimum_valid_iteration_fraction": 0.95,
+        "per_class_recall_intervals_95": {
+          "0": [
+            -0.013332776958061131,
+            0.013779858145446357
+          ],
+          "1": [
+            -0.008482656154514387,
+            0.029519992136917837
+          ],
+          "2": [
+            -0.00957365003417629,
+            0.05420299451863292
+          ],
+          "3": [
+            -0.03669893416082029,
+            0.03478369024443004
+          ]
+        },
+        "per_class_valid_iterations": {
+          "0": 2000,
+          "1": 2000,
+          "2": 2000,
+          "3": 2000
+        },
+        "reason": "macro-F1 benefit gate failed; retain the uncorrected model"
+      },
+      "self_confidence_balanced_review": {
+        "action": "retain_uncorrected",
+        "apply_candidate": false,
+        "candidate_minus_uncorrected_recall": {
+          "0": -0.019553459991679345,
+          "1": -0.026652998462326938,
+          "2": 0.013029315960912058,
+          "3": 0.0
+        },
+        "important_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "important_classes_pass": false,
+        "macro_f1": {
+          "action": "retain_uncorrected",
+          "apply_candidate": false,
+          "candidate_minus_uncorrected_macro_f1": -0.013057413178349742,
+          "evidence_role": "independent_group_validation",
+          "group_count": 25,
+          "interval_95": [
+            -0.019320294920635712,
+            -0.007704312595891661
+          ],
+          "minimum_effect": 0.0,
+          "reason": "lower 95% whole-group bootstrap bound does not exceed the minimum effect",
+          "requested_iterations": 2000,
+          "valid_iterations": 2000
+        },
+        "minimum_per_class_recall_effect": -0.01,
+        "minimum_valid_iteration_fraction": 0.95,
+        "per_class_recall_intervals_95": {
+          "0": [
+            -0.03212785003898648,
+            -0.0057395607728503335
+          ],
+          "1": [
+            -0.04073719856117331,
+            -0.013361066200109956
+          ],
+          "2": [
+            -0.0337090503958659,
+            0.061436072459963256
+          ],
+          "3": [
+            -0.043485054347826166,
+            0.03864801024901909
+          ]
+        },
+        "per_class_valid_iterations": {
+          "0": 2000,
+          "1": 2000,
+          "2": 2000,
+          "3": 2000
+        },
+        "reason": "macro-F1 benefit gate failed; retain the uncorrected model"
+      },
+      "self_confidence_global_review": {
+        "action": "retain_uncorrected",
+        "apply_candidate": false,
+        "candidate_minus_uncorrected_recall": {
+          "0": -0.018582720843156264,
+          "1": -0.018452075858534034,
+          "2": 0.0,
+          "3": 0.005813953488372103
+        },
+        "important_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "important_classes_pass": false,
+        "macro_f1": {
+          "action": "retain_uncorrected",
+          "apply_candidate": false,
+          "candidate_minus_uncorrected_macro_f1": -0.01100902423271316,
+          "evidence_role": "independent_group_validation",
+          "group_count": 25,
+          "interval_95": [
+            -0.01819974671283811,
+            -0.004937656029613591
+          ],
+          "minimum_effect": 0.0,
+          "reason": "lower 95% whole-group bootstrap bound does not exceed the minimum effect",
+          "requested_iterations": 2000,
+          "valid_iterations": 2000
+        },
+        "minimum_per_class_recall_effect": -0.01,
+        "minimum_valid_iteration_fraction": 0.95,
+        "per_class_recall_intervals_95": {
+          "0": [
+            -0.029930092713954075,
+            -0.006427074241500445
+          ],
+          "1": [
+            -0.035350172111664135,
+            -0.002390512524431106
+          ],
+          "2": [
+            -0.036102170414509985,
+            0.042741935483871
+          ],
+          "3": [
+            -0.02986783639056623,
+            0.040005025125628146
+          ]
+        },
+        "per_class_valid_iterations": {
+          "0": 2000,
+          "1": 2000,
+          "2": 2000,
+          "3": 2000
+        },
+        "reason": "macro-F1 benefit gate failed; retain the uncorrected model"
+      }
+    },
+    "matched_random_restored_count_mean": 823.45,
+    "matched_random_restored_count_range": [
+      807,
+      848
+    ],
+    "metrics": {
+      "corrupted_uncorrected": {
+        "accuracy": 0.7508713050212986,
+        "balanced_accuracy": 0.7520822719537438,
+        "confusion_matrix": [
+          [
+            5439,
+            146,
+            1084,
+            542
+          ],
+          [
+            181,
+            5846,
+            564,
+            1213
+          ],
+          [
+            45,
+            2,
+            205,
+            55
+          ],
+          [
+            1,
+            11,
+            16,
+            144
+          ]
+        ],
+        "expected_calibration_error": 0.20268113125364748,
+        "macro_f1": 0.5038352361344909,
+        "multiclass_brier_score": 0.4271450012494713,
+        "per_class_precision": [
+          0.9599364631133075,
+          0.9735220649458785,
+          0.10968432316746923,
+          0.0736949846468782
+        ],
+        "per_class_recall": [
+          0.7542643184024407,
+          0.7491030240902101,
+          0.6677524429967426,
+          0.8372093023255814
+        ]
+      },
+      "fixed_hybrid_balanced_review": {
+        "accuracy": 0.7327352523557507,
+        "balanced_accuracy": 0.7484861783153958,
+        "confusion_matrix": [
+          [
+            5224,
+            160,
+            1249,
+            578
+          ],
+          [
+            175,
+            5774,
+            604,
+            1251
+          ],
+          [
+            42,
+            3,
+            209,
+            53
+          ],
+          [
+            1,
+            10,
+            15,
+            146
+          ]
+        ],
+        "expected_calibration_error": 0.10598347838725906,
+        "macro_f1": 0.4933973351258445,
+        "multiclass_brier_score": 0.39822517463759566,
+        "per_class_precision": [
+          0.9599411980889379,
+          0.9709097023709433,
+          0.1006259027443428,
+          0.07199211045364892
+        ],
+        "per_class_recall": [
+          0.7244487588406601,
+          0.7398769861609431,
+          0.6807817589576547,
+          0.8488372093023255
+        ]
+      },
+      "nearest_neighbour_disagreement_balanced_review": {
+        "accuracy": 0.7563572995998451,
+        "balanced_accuracy": 0.7594937500960833,
+        "confusion_matrix": [
+          [
+            5437,
+            173,
+            1072,
+            529
+          ],
+          [
+            207,
+            5927,
+            423,
+            1247
+          ],
+          [
+            40,
+            3,
+            211,
+            53
+          ],
+          [
+            3,
+            16,
+            9,
+            144
+          ]
+        ],
+        "expected_calibration_error": 0.15921186343647156,
+        "macro_f1": 0.5093608506212538,
+        "multiclass_brier_score": 0.39079578561329686,
+        "per_class_precision": [
+          0.9560400914366098,
+          0.9686223239091355,
+          0.12303206997084548,
+          0.07298530157121136
+        ],
+        "per_class_recall": [
+          0.7539869643600056,
+          0.7594823167606356,
+          0.6872964169381107,
+          0.8372093023255814
+        ]
+      },
+      "self_confidence_balanced_review": {
+        "accuracy": 0.7286046211436685,
+        "balanced_accuracy": 0.7437879863304702,
+        "confusion_matrix": [
+          [
+            5298,
+            134,
+            1164,
+            615
+          ],
+          [
+            167,
+            5638,
+            719,
+            1280
+          ],
+          [
+            43,
+            3,
+            209,
+            52
+          ],
+          [
+            0,
+            13,
+            15,
+            144
+          ]
+        ],
+        "expected_calibration_error": 0.12621994176595758,
+        "macro_f1": 0.49077782295614114,
+        "multiclass_brier_score": 0.41347126928960193,
+        "per_class_precision": [
+          0.9618736383442266,
+          0.9740843123704216,
+          0.09919316563834836,
+          0.06886657101865136
+        ],
+        "per_class_recall": [
+          0.7347108584107613,
+          0.7224500256278832,
+          0.6807817589576547,
+          0.8372093023255814
+        ]
+      },
+      "self_confidence_global_review": {
+        "accuracy": 0.7329934168065058,
+        "balanced_accuracy": 0.7442770611504141,
+        "confusion_matrix": [
+          [
+            5305,
+            133,
+            1165,
+            608
+          ],
+          [
+            176,
+            5702,
+            688,
+            1238
+          ],
+          [
+            45,
+            2,
+            205,
+            55
+          ],
+          [
+            1,
+            12,
+            14,
+            145
+          ]
+        ],
+        "expected_calibration_error": 0.13765159713105848,
+        "macro_f1": 0.4928262119017777,
+        "multiclass_brier_score": 0.41344816108577664,
+        "per_class_precision": [
+          0.9598335444183101,
+          0.9748674987177295,
+          0.09893822393822393,
+          0.07086999022482894
+        ],
+        "per_class_recall": [
+          0.7356815975592844,
+          0.7306509482316761,
+          0.6677524429967426,
+          0.8430232558139535
+        ]
+      },
+      "uncorrupted_reference_ceiling": {
+        "accuracy": 0.8755647347360268,
+        "balanced_accuracy": 0.8079088013089953,
+        "confusion_matrix": [
+          [
+            6186,
+            254,
+            573,
+            198
+          ],
+          [
+            235,
+            7038,
+            73,
+            458
+          ],
+          [
+            59,
+            6,
+            202,
+            40
+          ],
+          [
+            4,
+            20,
+            8,
+            140
+          ]
+        ],
+        "expected_calibration_error": 0.023230478186522782,
+        "macro_f1": 0.6148449762508121,
+        "multiclass_brier_score": 0.19075636272370283,
+        "per_class_precision": [
+          0.9540407156076496,
+          0.9617381798305548,
+          0.23598130841121495,
+          0.1674641148325359
+        ],
+        "per_class_recall": [
+          0.8578560532519761,
+          0.9018452075858534,
+          0.6579804560260586,
+          0.813953488372093
+        ]
+      }
+    },
+    "primary_minus_mean_matched_random": {
+      "candidate_macro_f1": 0.5093608506212538,
+      "candidate_minus_mean_matched_random_macro_f1": 3.0946417352573086e-05,
+      "interval_95": [
+        -0.0086920112069291,
+        0.008485812521403327
+      ],
+      "iterations": 2000,
+      "mean_matched_random_macro_f1": 0.5093299042039012,
+      "random_repetitions": 20
+    },
+    "restored_injected_counts": {
+      "fixed_hybrid_balanced_review": 1141,
+      "nearest_neighbour_disagreement_balanced_review": 1035,
+      "self_confidence_balanced_review": 949,
+      "self_confidence_global_review": 943
+    }
+  },
+  "oof_evidence": {
+    "fallback_reason": null,
+    "fallback_status": "not_used",
+    "folds": [
+      {
+        "converged": true,
+        "fold_id": 0,
+        "held_out_groups": [
+          "TCGA-55-1594",
+          "TCGA-73-4668",
+          "TCGA-86-8672",
+          "TCGA-F9-A97G",
+          "TCGA-G7-A8LD",
+          "TCGA-MH-A560",
+          "TCGA-S3-AA11",
+          "TCGA-UZ-A9PO"
+        ],
+        "holdout_count": 5910,
+        "training_count": 23700,
+        "training_groups": [
+          "TCGA-5P-A9K0",
+          "TCGA-69-7760",
+          "TCGA-69-A59K",
+          "TCGA-78-7220",
+          "TCGA-86-7713",
+          "TCGA-A2-A0CV",
+          "TCGA-B6-A0WZ",
+          "TCGA-B9-A44B",
+          "TCGA-B9-A8YI",
+          "TCGA-BH-A18T",
+          "TCGA-D8-A1X5",
+          "TCGA-DW-7841",
+          "TCGA-E2-A154",
+          "TCGA-E9-A22B",
+          "TCGA-E9-A22G",
+          "TCGA-EJ-5495",
+          "TCGA-EJ-5505",
+          "TCGA-EJ-5517",
+          "TCGA-EV-5903",
+          "TCGA-EW-A6SD",
+          "TCGA-G9-6342",
+          "TCGA-G9-6499",
+          "TCGA-J4-A67Q",
+          "TCGA-J4-A67T",
+          "TCGA-KK-A59X",
+          "TCGA-KK-A6E0",
+          "TCGA-KK-A7AW",
+          "TCGA-L4-A4E5",
+          "TCGA-MP-A4SY",
+          "TCGA-P4-AAVK",
+          "TCGA-SX-A7SR",
+          "TCGA-UZ-A9PU",
+          "TCGA-V1-A8WL",
+          "TCGA-V1-A9O9",
+          "TCGA-X4-A8KQ",
+          "TCGA-YL-A9WY"
+        ]
+      },
+      {
+        "converged": true,
+        "fold_id": 1,
+        "held_out_groups": [
+          "TCGA-86-7713",
+          "TCGA-A2-A0CV",
+          "TCGA-B9-A8YI",
+          "TCGA-BH-A18T",
+          "TCGA-E9-A22B",
+          "TCGA-EJ-5505",
+          "TCGA-V1-A8WL",
+          "TCGA-X4-A8KQ",
+          "TCGA-YL-A9WY"
+        ],
+        "holdout_count": 5859,
+        "training_count": 23751,
+        "training_groups": [
+          "TCGA-55-1594",
+          "TCGA-5P-A9K0",
+          "TCGA-69-7760",
+          "TCGA-69-A59K",
+          "TCGA-73-4668",
+          "TCGA-78-7220",
+          "TCGA-86-8672",
+          "TCGA-B6-A0WZ",
+          "TCGA-B9-A44B",
+          "TCGA-D8-A1X5",
+          "TCGA-DW-7841",
+          "TCGA-E2-A154",
+          "TCGA-E9-A22G",
+          "TCGA-EJ-5495",
+          "TCGA-EJ-5517",
+          "TCGA-EV-5903",
+          "TCGA-EW-A6SD",
+          "TCGA-F9-A97G",
+          "TCGA-G7-A8LD",
+          "TCGA-G9-6342",
+          "TCGA-G9-6499",
+          "TCGA-J4-A67Q",
+          "TCGA-J4-A67T",
+          "TCGA-KK-A59X",
+          "TCGA-KK-A6E0",
+          "TCGA-KK-A7AW",
+          "TCGA-L4-A4E5",
+          "TCGA-MH-A560",
+          "TCGA-MP-A4SY",
+          "TCGA-P4-AAVK",
+          "TCGA-S3-AA11",
+          "TCGA-SX-A7SR",
+          "TCGA-UZ-A9PO",
+          "TCGA-UZ-A9PU",
+          "TCGA-V1-A9O9"
+        ]
+      },
+      {
+        "converged": true,
+        "fold_id": 2,
+        "held_out_groups": [
+          "TCGA-69-A59K",
+          "TCGA-78-7220",
+          "TCGA-D8-A1X5",
+          "TCGA-DW-7841",
+          "TCGA-EW-A6SD",
+          "TCGA-J4-A67T",
+          "TCGA-KK-A6E0",
+          "TCGA-L4-A4E5",
+          "TCGA-UZ-A9PU"
+        ],
+        "holdout_count": 6011,
+        "training_count": 23599,
+        "training_groups": [
+          "TCGA-55-1594",
+          "TCGA-5P-A9K0",
+          "TCGA-69-7760",
+          "TCGA-73-4668",
+          "TCGA-86-7713",
+          "TCGA-86-8672",
+          "TCGA-A2-A0CV",
+          "TCGA-B6-A0WZ",
+          "TCGA-B9-A44B",
+          "TCGA-B9-A8YI",
+          "TCGA-BH-A18T",
+          "TCGA-E2-A154",
+          "TCGA-E9-A22B",
+          "TCGA-E9-A22G",
+          "TCGA-EJ-5495",
+          "TCGA-EJ-5505",
+          "TCGA-EJ-5517",
+          "TCGA-EV-5903",
+          "TCGA-F9-A97G",
+          "TCGA-G7-A8LD",
+          "TCGA-G9-6342",
+          "TCGA-G9-6499",
+          "TCGA-J4-A67Q",
+          "TCGA-KK-A59X",
+          "TCGA-KK-A7AW",
+          "TCGA-MH-A560",
+          "TCGA-MP-A4SY",
+          "TCGA-P4-AAVK",
+          "TCGA-S3-AA11",
+          "TCGA-SX-A7SR",
+          "TCGA-UZ-A9PO",
+          "TCGA-V1-A8WL",
+          "TCGA-V1-A9O9",
+          "TCGA-X4-A8KQ",
+          "TCGA-YL-A9WY"
+        ]
+      },
+      {
+        "converged": true,
+        "fold_id": 3,
+        "held_out_groups": [
+          "TCGA-5P-A9K0",
+          "TCGA-B6-A0WZ",
+          "TCGA-B9-A44B",
+          "TCGA-EV-5903",
+          "TCGA-G9-6342",
+          "TCGA-G9-6499",
+          "TCGA-J4-A67Q",
+          "TCGA-SX-A7SR",
+          "TCGA-V1-A9O9"
+        ],
+        "holdout_count": 5789,
+        "training_count": 23821,
+        "training_groups": [
+          "TCGA-55-1594",
+          "TCGA-69-7760",
+          "TCGA-69-A59K",
+          "TCGA-73-4668",
+          "TCGA-78-7220",
+          "TCGA-86-7713",
+          "TCGA-86-8672",
+          "TCGA-A2-A0CV",
+          "TCGA-B9-A8YI",
+          "TCGA-BH-A18T",
+          "TCGA-D8-A1X5",
+          "TCGA-DW-7841",
+          "TCGA-E2-A154",
+          "TCGA-E9-A22B",
+          "TCGA-E9-A22G",
+          "TCGA-EJ-5495",
+          "TCGA-EJ-5505",
+          "TCGA-EJ-5517",
+          "TCGA-EW-A6SD",
+          "TCGA-F9-A97G",
+          "TCGA-G7-A8LD",
+          "TCGA-J4-A67T",
+          "TCGA-KK-A59X",
+          "TCGA-KK-A6E0",
+          "TCGA-KK-A7AW",
+          "TCGA-L4-A4E5",
+          "TCGA-MH-A560",
+          "TCGA-MP-A4SY",
+          "TCGA-P4-AAVK",
+          "TCGA-S3-AA11",
+          "TCGA-UZ-A9PO",
+          "TCGA-UZ-A9PU",
+          "TCGA-V1-A8WL",
+          "TCGA-X4-A8KQ",
+          "TCGA-YL-A9WY"
+        ]
+      },
+      {
+        "converged": true,
+        "fold_id": 4,
+        "held_out_groups": [
+          "TCGA-69-7760",
+          "TCGA-E2-A154",
+          "TCGA-E9-A22G",
+          "TCGA-EJ-5495",
+          "TCGA-EJ-5517",
+          "TCGA-KK-A59X",
+          "TCGA-KK-A7AW",
+          "TCGA-MP-A4SY",
+          "TCGA-P4-AAVK"
+        ],
+        "holdout_count": 6041,
+        "training_count": 23569,
+        "training_groups": [
+          "TCGA-55-1594",
+          "TCGA-5P-A9K0",
+          "TCGA-69-A59K",
+          "TCGA-73-4668",
+          "TCGA-78-7220",
+          "TCGA-86-7713",
+          "TCGA-86-8672",
+          "TCGA-A2-A0CV",
+          "TCGA-B6-A0WZ",
+          "TCGA-B9-A44B",
+          "TCGA-B9-A8YI",
+          "TCGA-BH-A18T",
+          "TCGA-D8-A1X5",
+          "TCGA-DW-7841",
+          "TCGA-E9-A22B",
+          "TCGA-EJ-5505",
+          "TCGA-EV-5903",
+          "TCGA-EW-A6SD",
+          "TCGA-F9-A97G",
+          "TCGA-G7-A8LD",
+          "TCGA-G9-6342",
+          "TCGA-G9-6499",
+          "TCGA-J4-A67Q",
+          "TCGA-J4-A67T",
+          "TCGA-KK-A6E0",
+          "TCGA-L4-A4E5",
+          "TCGA-MH-A560",
+          "TCGA-S3-AA11",
+          "TCGA-SX-A7SR",
+          "TCGA-UZ-A9PO",
+          "TCGA-UZ-A9PU",
+          "TCGA-V1-A8WL",
+          "TCGA-V1-A9O9",
+          "TCGA-X4-A8KQ",
+          "TCGA-YL-A9WY"
+        ]
+      }
+    ],
+    "splitter": "sklearn.model_selection.StratifiedGroupKFold"
+  },
+  "primary_matched_random_retrieval": {
+    "interval_95": [
+      0.0991810700012709,
+      0.18849133691115186
+    ],
+    "mean_matched_random_found": 823.45,
+    "mean_matched_random_precision": 0.5560094530722484,
+    "requested_iterations": 2000,
+    "top_found": 1035,
+    "top_minus_mean_matched_random_precision": 0.1428426738690075,
+    "top_precision": 0.6988521269412559,
+    "top_reviewed": 1481,
+    "valid_iterations": 2000
+  },
+  "project": "AANCA",
+  "queue_evidence": {
+    "constraints": {
+      "max_per_class": 593,
+      "max_per_group": 75,
+      "max_per_tissue": 519,
+      "max_per_transition": 297,
+      "minimum_cosine_distance": 0.01,
+      "requested_count": 1481
+    },
+    "fixed_hybrid_balanced": {
+      "class_counts": {
+        "0": 426,
+        "1": 480,
+        "2": 287,
+        "3": 288
+      },
+      "group_counts": {
+        "TCGA-55-1594": 43,
+        "TCGA-5P-A9K0": 15,
+        "TCGA-69-7760": 28,
+        "TCGA-69-A59K": 27,
+        "TCGA-73-4668": 30,
+        "TCGA-78-7220": 21,
+        "TCGA-86-7713": 49,
+        "TCGA-86-8672": 33,
+        "TCGA-A2-A0CV": 39,
+        "TCGA-B6-A0WZ": 35,
+        "TCGA-B9-A44B": 37,
+        "TCGA-B9-A8YI": 65,
+        "TCGA-BH-A18T": 64,
+        "TCGA-D8-A1X5": 58,
+        "TCGA-DW-7841": 37,
+        "TCGA-E2-A154": 21,
+        "TCGA-E9-A22B": 55,
+        "TCGA-E9-A22G": 30,
+        "TCGA-EJ-5495": 43,
+        "TCGA-EJ-5505": 21,
+        "TCGA-EJ-5517": 53,
+        "TCGA-EV-5903": 50,
+        "TCGA-EW-A6SD": 44,
+        "TCGA-F9-A97G": 45,
+        "TCGA-G7-A8LD": 4,
+        "TCGA-G9-6342": 1,
+        "TCGA-G9-6499": 54,
+        "TCGA-J4-A67Q": 32,
+        "TCGA-J4-A67T": 35,
+        "TCGA-KK-A59X": 14,
+        "TCGA-KK-A6E0": 13,
+        "TCGA-KK-A7AW": 16,
+        "TCGA-L4-A4E5": 21,
+        "TCGA-MH-A560": 38,
+        "TCGA-MP-A4SY": 35,
+        "TCGA-P4-AAVK": 30,
+        "TCGA-S3-AA11": 75,
+        "TCGA-SX-A7SR": 19,
+        "TCGA-UZ-A9PO": 35,
+        "TCGA-UZ-A9PU": 11,
+        "TCGA-V1-A8WL": 7,
+        "TCGA-V1-A9O9": 54,
+        "TCGA-X4-A8KQ": 13,
+        "TCGA-YL-A9WY": 31
+      },
+      "rejection_counts": {
+        "group_quota": 4,
+        "transition_quota": 122
+      },
+      "selected_count": 1481,
+      "tissue_counts": {
+        "Breast": 421,
+        "Kidney": 386,
+        "Lung": 287,
+        "Prostate": 387
+      },
+      "transition_counts": {
+        "0->1": 297,
+        "0->2": 43,
+        "0->3": 86,
+        "1->0": 297,
+        "1->2": 104,
+        "1->3": 79,
+        "2->0": 101,
+        "2->1": 130,
+        "2->3": 56,
+        "3->0": 132,
+        "3->1": 111,
+        "3->2": 45
+      },
+      "underfilled": false
+    },
+    "model_improvement_queue_available": false,
+    "model_improvement_queue_reason": "no nested cross-fitted measured development intervention utility is available",
+    "nearest_neighbour_disagreement_balanced": {
+      "class_counts": {
+        "0": 208,
+        "1": 368,
+        "2": 439,
+        "3": 466
+      },
+      "group_counts": {
+        "TCGA-55-1594": 31,
+        "TCGA-5P-A9K0": 21,
+        "TCGA-69-7760": 26,
+        "TCGA-69-A59K": 31,
+        "TCGA-73-4668": 28,
+        "TCGA-78-7220": 23,
+        "TCGA-86-7713": 49,
+        "TCGA-86-8672": 41,
+        "TCGA-A2-A0CV": 42,
+        "TCGA-B6-A0WZ": 36,
+        "TCGA-B9-A44B": 36,
+        "TCGA-B9-A8YI": 63,
+        "TCGA-BH-A18T": 63,
+        "TCGA-D8-A1X5": 54,
+        "TCGA-DW-7841": 42,
+        "TCGA-E2-A154": 31,
+        "TCGA-E9-A22B": 34,
+        "TCGA-E9-A22G": 28,
+        "TCGA-EJ-5495": 51,
+        "TCGA-EJ-5505": 28,
+        "TCGA-EJ-5517": 54,
+        "TCGA-EV-5903": 45,
+        "TCGA-EW-A6SD": 37,
+        "TCGA-F9-A97G": 38,
+        "TCGA-G7-A8LD": 9,
+        "TCGA-G9-6342": 1,
+        "TCGA-G9-6499": 47,
+        "TCGA-J4-A67Q": 28,
+        "TCGA-J4-A67T": 30,
+        "TCGA-KK-A59X": 10,
+        "TCGA-KK-A6E0": 23,
+        "TCGA-KK-A7AW": 21,
+        "TCGA-L4-A4E5": 30,
+        "TCGA-MH-A560": 23,
+        "TCGA-MP-A4SY": 47,
+        "TCGA-P4-AAVK": 40,
+        "TCGA-S3-AA11": 69,
+        "TCGA-SX-A7SR": 24,
+        "TCGA-UZ-A9PO": 34,
+        "TCGA-UZ-A9PU": 11,
+        "TCGA-V1-A8WL": 7,
+        "TCGA-V1-A9O9": 44,
+        "TCGA-X4-A8KQ": 12,
+        "TCGA-YL-A9WY": 39
+      },
+      "rejection_counts": {},
+      "selected_count": 1481,
+      "tissue_counts": {
+        "Breast": 394,
+        "Kidney": 386,
+        "Lung": 306,
+        "Prostate": 395
+      },
+      "transition_counts": {
+        "0->0": 4,
+        "0->1": 145,
+        "0->2": 17,
+        "0->3": 42,
+        "1->0": 228,
+        "1->1": 18,
+        "1->2": 61,
+        "1->3": 61,
+        "2->0": 153,
+        "2->1": 145,
+        "2->2": 71,
+        "2->3": 70,
+        "3->0": 157,
+        "3->1": 150,
+        "3->2": 78,
+        "3->3": 81
+      },
+      "underfilled": false
+    },
+    "review_count": 1481,
+    "self_confidence_balanced": {
+      "class_counts": {
+        "0": 558,
+        "1": 593,
+        "2": 159,
+        "3": 171
+      },
+      "group_counts": {
+        "TCGA-55-1594": 57,
+        "TCGA-5P-A9K0": 36,
+        "TCGA-69-7760": 27,
+        "TCGA-69-A59K": 19,
+        "TCGA-73-4668": 34,
+        "TCGA-78-7220": 16,
+        "TCGA-86-7713": 54,
+        "TCGA-86-8672": 58,
+        "TCGA-A2-A0CV": 24,
+        "TCGA-B6-A0WZ": 30,
+        "TCGA-B9-A44B": 26,
+        "TCGA-B9-A8YI": 63,
+        "TCGA-BH-A18T": 75,
+        "TCGA-D8-A1X5": 56,
+        "TCGA-DW-7841": 39,
+        "TCGA-E2-A154": 14,
+        "TCGA-E9-A22B": 75,
+        "TCGA-E9-A22G": 28,
+        "TCGA-EJ-5495": 41,
+        "TCGA-EJ-5505": 17,
+        "TCGA-EJ-5517": 36,
+        "TCGA-EV-5903": 51,
+        "TCGA-EW-A6SD": 44,
+        "TCGA-F9-A97G": 46,
+        "TCGA-G7-A8LD": 7,
+        "TCGA-G9-6342": 1,
+        "TCGA-G9-6499": 57,
+        "TCGA-J4-A67Q": 28,
+        "TCGA-J4-A67T": 27,
+        "TCGA-KK-A59X": 15,
+        "TCGA-KK-A6E0": 19,
+        "TCGA-KK-A7AW": 12,
+        "TCGA-L4-A4E5": 24,
+        "TCGA-MH-A560": 39,
+        "TCGA-MP-A4SY": 30,
+        "TCGA-P4-AAVK": 24,
+        "TCGA-S3-AA11": 75,
+        "TCGA-SX-A7SR": 27,
+        "TCGA-UZ-A9PO": 25,
+        "TCGA-UZ-A9PU": 6,
+        "TCGA-V1-A8WL": 9,
+        "TCGA-V1-A9O9": 46,
+        "TCGA-X4-A8KQ": 10,
+        "TCGA-YL-A9WY": 34
+      },
+      "rejection_counts": {
+        "class_quota": 89,
+        "group_quota": 46,
+        "transition_quota": 179
+      },
+      "selected_count": 1481,
+      "tissue_counts": {
+        "Breast": 421,
+        "Kidney": 389,
+        "Lung": 319,
+        "Prostate": 352
+      },
+      "transition_counts": {
+        "0->1": 297,
+        "0->2": 125,
+        "0->3": 136,
+        "1->0": 297,
+        "1->2": 152,
+        "1->3": 144,
+        "2->0": 58,
+        "2->1": 61,
+        "2->3": 40,
+        "3->0": 71,
+        "3->1": 69,
+        "3->2": 31
+      },
+      "underfilled": false
+    }
+  },
+  "ranking": {
+    "fixed_hybrid_balanced": {
+      "average_precision": 0.6916490214580042,
+      "injected_found": 1141,
+      "injected_prevalence": 0.1,
+      "precision": 0.7704253882511817,
+      "reviewed_count": 1481,
+      "strategy": {
+        "components": [
+          "self_confidence",
+          "nearest_neighbour_disagreement"
+        ],
+        "hybrid_weights": [
+          0.5,
+          0.5
+        ],
+        "method": "fixed_hybrid",
+        "neighbour_k": 7,
+        "neighbour_metric": "cosine",
+        "risk_direction": "larger means more suspicious, not confirmed incorrect"
+      },
+      "underfilled": false
+    },
+    "nearest_neighbour_disagreement_balanced": {
+      "average_precision": 0.6581415388588143,
+      "injected_found": 1035,
+      "injected_prevalence": 0.1,
+      "precision": 0.6988521269412559,
+      "reviewed_count": 1481,
+      "strategy": {
+        "components": [
+          "nearest_neighbour_disagreement"
+        ],
+        "hybrid_weights": null,
+        "method": "nearest_neighbour_disagreement",
+        "neighbour_k": 7,
+        "neighbour_metric": "cosine",
+        "risk_direction": "larger means more suspicious, not confirmed incorrect"
+      },
+      "underfilled": false
+    },
+    "self_confidence_balanced": {
+      "average_precision": 0.5475797312695276,
+      "injected_found": 949,
+      "injected_prevalence": 0.1,
+      "precision": 0.6407832545577312,
+      "reviewed_count": 1481,
+      "strategy": {
+        "components": [
+          "self_confidence"
+        ],
+        "hybrid_weights": null,
+        "method": "self_confidence",
+        "neighbour_k": null,
+        "neighbour_metric": null,
+        "risk_direction": "larger means more suspicious, not confirmed incorrect"
+      },
+      "underfilled": false
+    },
+    "self_confidence_global": {
+      "average_precision": 0.5475797312695276,
+      "injected_found": 943,
+      "injected_prevalence": 0.1,
+      "precision": 0.636731937879811,
+      "reviewed_count": 1481,
+      "strategy": {
+        "components": [
+          "self_confidence"
+        ],
+        "hybrid_weights": null,
+        "method": "self_confidence",
+        "neighbour_k": null,
+        "neighbour_metric": null,
+        "risk_direction": "larger means more suspicious, not confirmed incorrect"
+      },
+      "underfilled": false
+    }
+  },
+  "replacement_project_or_v2": false,
+  "schema_version": 1,
+  "study_id": "monusac_current_aanca_controlled_external_v1",
+  "success_conditions": {
+    "no_important_class_recall_ci95_lower_below_minus_0_01": false,
+    "primary_intervention_macro_f1_ci95_lower_gt_corrupted_uncorrected": false,
+    "primary_intervention_macro_f1_ci95_lower_gt_mean_matched_random": false,
+    "primary_top_k_beats_exact_matched_random_control": true
+  },
+  "unavailable_empirical_components": {
+    "model_improvement_queue": "no prior measured per-case intervention utility is available",
+    "multi_reviewer_soft_labels": "MoNuSAC does not provide raw independent reviewer vote distributions",
+    "pathology_encoder_comparison": "no pathology encoder passed the frozen source, licence, weight and smoke gates"
+  }
+}

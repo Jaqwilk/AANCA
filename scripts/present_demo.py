@@ -157,6 +157,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     primary = evidence.get("primary")
     external_completed = evidence.get("external_validation_completed")
     external = evidence.get("external_validation")
+    controlled = evidence.get("controlled_external_benchmark")
     external_scope_valid = external_completed is False or (
         external_completed is True
         and isinstance(external, dict)
@@ -167,12 +168,33 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and isinstance(external.get("claim_boundary"), dict)
         and not any(external["claim_boundary"].values())
     )
+    controlled_scope_valid = external_completed is False or (
+        isinstance(controlled, dict)
+        and controlled.get("study_id") == "monusac_current_aanca_controlled_external_v1"
+        and controlled.get("decision") == "not_supported"
+        and controlled.get("all_success_conditions_met") is False
+        and controlled.get("success_conditions", {}).get("primary_top_k_beats_exact_matched_random")
+        is True
+        and controlled.get("success_conditions", {}).get(
+            "primary_downstream_beats_corrupted_uncorrected"
+        )
+        is False
+        and controlled.get("success_conditions", {}).get(
+            "primary_downstream_beats_mean_matched_random"
+        )
+        is False
+        and controlled.get("success_conditions", {}).get("important_class_recall_non_degradation")
+        is False
+        and isinstance(controlled.get("claim_boundary"), dict)
+        and not any(controlled["claim_boundary"].values())
+    )
     if (
         evidence.get("schema_version") != 2
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
         or not external_scope_valid
+        or not controlled_scope_valid
         or not isinstance(primary, dict)
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"

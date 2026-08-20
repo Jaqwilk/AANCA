@@ -38,6 +38,68 @@
     "reference_interpretation": "natural NP-label disagreement relative to inferred pathologist consensus; not guaranteed biological truth",
     "study_id": "nucls_natural_label_external_validation_v1"
   },
+  "controlled_external_benchmark": {
+    "all_success_conditions_met": false,
+    "analysis_disposition": "prospectively_frozen_controlled_external_benchmark",
+    "claim_boundary": {
+      "clinical_or_operational_utility_proven": false,
+      "natural_pathology_error_detection_proven": false,
+      "pathologist_error_proven": false,
+      "source_annotations_modified": false
+    },
+    "dataset": "MoNuSAC2020",
+    "decision": "not_supported",
+    "development": {
+      "controlled_corruption_count": 2961,
+      "controlled_corruption_rate": 0.1,
+      "controlled_corruption_seed": 26082080,
+      "eligible_nuclei": 29610,
+      "patient_group_count": 44
+    },
+    "evidence": {
+      "artifact_manifest_sha256": "e4b1c0c327bba39f98677fc5e6f742f4158c77d0b0ba660ee29f5378b7510e7b",
+      "numeric_evidence_sha256": "bda87a00b79db4962c71177a2dd3dea0c4c65b8b2d7299c577fd2ce4fdc1e8ec",
+      "results_sha256": "b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4",
+      "source_inventory_sha256": "2b84809ea064552c8d011e17c32b86c6a47e0870f7d3801ef9c15ba1eeb87b0d",
+      "verifier": "scripts/verify_monusac_external_validation.py"
+    },
+    "primary_downstream": {
+      "corrupted_uncorrected_macro_f1": 0.5038352361344909,
+      "minus_corrupted_uncorrected_interval_95": [
+        -0.001505873468356683,
+        0.012832750726675505
+      ],
+      "minus_corrupted_uncorrected_macro_f1": 0.00552561448676292,
+      "minus_mean_matched_random_interval_95": [
+        -0.0086920112069291,
+        0.008485812521403327
+      ],
+      "minus_mean_matched_random_macro_f1": 0.000030946417352573086,
+      "neighbour_review_macro_f1": 0.5093608506212538
+    },
+    "primary_ranking": {
+      "average_precision": 0.6581415388588143,
+      "injected_found": 1035,
+      "precision_at_5_percent": 0.6988521269412559,
+      "precision_minus_matched_random": 0.1428426738690075,
+      "precision_minus_matched_random_interval_95": [
+        0.0991810700012709,
+        0.18849133691115186
+      ],
+      "reviewed_count": 1481
+    },
+    "study_id": "monusac_current_aanca_controlled_external_v1",
+    "success_conditions": {
+      "important_class_recall_non_degradation": false,
+      "primary_downstream_beats_corrupted_uncorrected": false,
+      "primary_downstream_beats_mean_matched_random": false,
+      "primary_top_k_beats_exact_matched_random": true
+    },
+    "untouched_final_test": {
+      "eligible_nuclei": 15494,
+      "patient_group_count": 25
+    }
+  },
   "external_validation_completed": true,
   "pannuke_qc": {
     "cross_class_overlap_patch_count": 575,

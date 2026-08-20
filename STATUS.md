@@ -9,6 +9,9 @@ Updated: 20 August 2026
 - `EXTERNAL_VALIDATION_COMPLETE`: the prospectively frozen NuCLS genuine
   multi-rater evaluation completed; its primary ranking and downstream claims were
   **not supported**.
+- An additional prospectively frozen controlled-external MoNuSAC benchmark
+  completed; its retrieval gate passed, but the registered combined success rule
+  was **not supported**.
 - `DEMO_COMPLETE`: the checksum-verifiable static article package is built and
   deployed.
 - `CONFIRMATORY_COMPLETE`: not reached.
@@ -302,3 +305,90 @@ not supply the still-missing empirical evidence: natural-error detection, operat
 benefit and clinical utility still require a new prospective, blinded, multi-rater,
 multi-site study on untouched cases. Until that study is executed, those claims remain
 prohibited.
+
+## MoNuSAC controlled external new-data evidence
+
+Study: `monusac_current_aanca_controlled_external_v1`
+
+The protocol and machine configuration were committed at `3036059` before outcome
+metric execution. Official archive SHA-256 values matched the frozen authorities.
+Two TCGA patient identities present in both official archives were excluded from
+development only; the official test remained intact. There was no patient-ID
+overlap with saved NuCLS manifests. PanNuke does not expose enough patient metadata
+to exclude every cross-dataset overlap, so this remains an explicit limitation.
+
+Data and intervention:
+
+- 29,610 eligible development nuclei in 44 patient groups;
+- 15,494 eligible untouched final-test nuclei in 25 patient groups;
+- exactly 2,961 symmetric controlled label changes (10%), seed `26082080`;
+- five OOF folds, each holding out complete TCGA patients;
+- source annotations remained unchanged.
+
+Frozen 5% primary neighbour queue:
+
+- AP `0.6581415388588143`;
+- 1,035 injected changes found among 1,481 reviewed nuclei;
+- precision `0.6988521269412559`;
+- precision minus exact matched random `0.1428426738690075`, 95% whole-patient
+  interval `[0.0991810700012709, 0.18849133691115186]`: retrieval gate passed.
+
+Frozen downstream result on the untouched official test:
+
+- corrupted/no-review macro F1 `0.5038352361344909`;
+- primary neighbour-review macro F1 `0.5093608506212538`;
+- primary minus corrupted/no review `0.00552561448676292`, interval
+  `[-0.001505873468356683, 0.012832750726675505]`: failed;
+- primary minus mean exact-matched random `0.000030946417352573086`, interval
+  `[-0.0086920112069291, 0.008485812521403327]`: failed;
+- the important-class recall rule failed because at least one whole-patient lower
+  bound was below the registered `-0.01` margin.
+
+Only one of four simultaneously required conditions passed. The frozen decision is
+`not supported`, and every candidate action is `retain_uncorrected`. This is positive
+evidence for prioritising injected changes on new images, not evidence of natural
+pathologist-error detection, real-use model improvement or clinical utility.
+
+Evidence identities:
+
+| Artifact | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Artifact manifest | 657 | `e4b1c0c327bba39f98677fc5e6f742f4158c77d0b0ba660ee29f5378b7510e7b` |
+| Numeric evidence | 9,889,779 | `bda87a00b79db4962c71177a2dd3dea0c4c65b8b2d7299c577fd2ce4fdc1e8ec` |
+| Results | 33,249 | `b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4` |
+| Report | 2,711 | `e6911fd73f2103a3ffbb650da180816f344a527691326ec62d641ef55663be42` |
+| Source inventory | 114,728 | `2b84809ea064552c8d011e17c32b86c6a47e0870f7d3801ef9c15ba1eeb87b0d` |
+
+The complete frozen run was repeated. Results, report, source inventory and all
+scientific metrics were identical. The final numeric evidence adds only the fold,
+organ and matched-index arrays required for independent recalculation.
+
+`scripts/verify_monusac_external_validation.py` imports only the standard library
+and NumPy. It verified the pinned package, patient separation, OOF group allocation,
+all four rankings, exact matched strata, every downstream metric and all 2,000-draw
+whole-patient bootstrap decisions. Its accepted readback is `status: verified` and
+`all_success_conditions_met: false`.
+
+Final local validation for this new-data result and publication update:
+
+- complete maintained suite: `1103 passed, 1 skipped` in 610.40 seconds; the skip is
+  the documented Windows/POSIX open-file rename difference;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 190 maintained Python files formatted;
+- focused post-format tests: `9 passed` for the presentation and MoNuSAC modules;
+- independent MoNuSAC verifier: four pinned evidence files, four ranking candidates,
+  exact controls, downstream metrics and 2,000 whole-patient bootstrap iterations
+  passed; overall frozen success remained false;
+- independent NuCLS verifier: all file identities, portable manifests, rankings,
+  random baselines, downstream metrics and bootstraps passed; primary conclusion
+  remained `not_supported`;
+- current-model NuCLS recalculation: no replacement project, frozen result unchanged,
+  neighbour candidate not promoted and retraining application fail-closed;
+- deterministic synthetic data: existing checksum-matching dataset verified;
+- synthetic smoke run `20260820T215257.976122Z_synthetic_smoke_7e2654bac3`:
+  completed successfully;
+- dependency-free and package-aware presentation verifiers: valid five-file package,
+  root `113e3e8d20cf86dcde4afb09ffd9eb21f9aa78ab3733364e13c26d04945a8827`;
+- real-browser readback: the article begins with the thesis, retains the animated
+  “What the study actually learned” section, places NuCLS and MoNuSAC after detailed
+  evidence, and renders the new centered article section without overflow.

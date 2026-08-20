@@ -49,6 +49,9 @@ Scientific status: `PRIMARY_STUDY_COMPLETE` and
 primary analysis is permanently labelled `amended_or_exploratory`; confirmatory CNN
 work and newly recruited blinded expert review were not run. The completed NuCLS
 multi-rater validation did not meet its frozen ranking or downstream success rules.
+The separately frozen MoNuSAC controlled-external test passed its injected-change
+retrieval gate but failed both downstream benefit gates and its class-recall safety
+gate; its overall decision is `not_supported`.
 
 This is a non-diagnostic research prototype. It identifies a potentially
 inconsistent annotation and recommends it for expert review; it never modifies
@@ -57,7 +60,8 @@ source annotations or claims that a pathologist was wrong.
 `evidence.json` contains the sourced H1-H7 summary, the adverse H4 result,
 the complete H2 subgroup summary, the byte-identical instance-dependent seed
 disclosure, all 36 saved H1/H3/H5/H6/H7 comparisons and the completed null/adverse
-NuCLS external-validation summary. P-values shown in the HTML are explicitly
+NuCLS external-validation summary, plus the completed MoNuSAC controlled-external
+result. P-values shown in the HTML are explicitly
 labelled one-sided and Holm-adjusted. `manifest.json` binds every other file in this
 package.
 
@@ -70,6 +74,9 @@ raw PanNuke binaries or fold checkpoints that were not retained.
 The checked-in NuCLS evidence and independent verifier are documented in
 `reports/nucls_external_validation_results.md`; they include derived arrays and
 portable source inventories, not raw NuCLS images.
+The checked-in MoNuSAC evidence and independent readback are documented in
+`reports/monusac_current_aanca_external_results.md`. Raw MoNuSAC images remain local
+under their own dataset terms and are not part of this presentation package.
 The same bundle is published as GitHub release
 `nucls-external-validation-v1` with SHA-256
 `e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`.

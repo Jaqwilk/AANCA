@@ -64,6 +64,7 @@ relabelling system.
 | Presentation | `DEMO_COMPLETE` — static, responsive, checksum-verifiable MVP |
 | Scientific boundary | `PRIMARY_STUDY_COMPLETE` |
 | External multi-rater evaluation | `EXTERNAL_VALIDATION_COMPLETE` — frozen NuCLS claims not supported |
+| New-data controlled external benchmark | Completed on MoNuSAC — retrieval gate passed; downstream and class-safety gates failed |
 | Primary matrix | 185/185 required cells completed; 0 required failures |
 | Optional primary cells | 37 pathology-encoder cells skipped under the frozen availability rule |
 | Statistical output | 36 preregistered H1/H3/H5/H6/H7 entries: 33 numeric results and 3 explicitly unavailable H6 entries; 2,000 group-bootstrap iterations where applicable |
@@ -87,6 +88,18 @@ This completes a genuine external multi-rater evaluation; it does not prove that
 pathologist was wrong or that consensus is biological truth.
 The sealed derived evidence is also available as GitHub release
 [`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1).
+
+The prospectively frozen MoNuSAC controlled-external test is also complete. On
+29,610 development nuclei from 44 patients, the primary fold-safe neighbour queue
+found 1,035 of 2,961 injected changes while reviewing 1,481 nuclei. Its precision
+gain over exact matched random was `+0.142843`, with 95% whole-patient interval
+`[+0.099181, +0.188491]`. On 15,494 untouched test nuclei from 25 patients, the
+primary macro-F1 point estimate improved by `+0.005526` over corrupted/no review,
+but its interval `[-0.001506, +0.012833]` crossed zero, it was indistinguishable
+from matched-random restoration and the registered class-recall safeguard failed.
+The overall frozen decision is therefore **not supported**. Exact results and the
+independent readback are in
+[`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md).
 
 See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
@@ -137,9 +150,9 @@ reduce background CPU/GPU work and layout shift without changing any evidence.
 
 ## Evidence at a glance
 
-The values below are read from the checked-in MVP evidence package. They measure
-recovery of **injected label changes**. The separate NuCLS table below reports the
-external natural-disagreement evaluation.
+The values below are read from the checked-in evidence packages. PanNuke and
+MoNuSAC controlled tests measure recovery of **injected label changes**. The NuCLS
+table reports the external natural-disagreement evaluation.
 
 | Registered result | Saved evidence |
 | --- | --- |
@@ -168,6 +181,20 @@ realisation, not three independent replications**.
 NuCLS P-truth is inferred pathologist consensus, not guaranteed biological truth.
 The Evaluation sensitivity subset also failed its frozen ranking and downstream
 rules and could not rescue the primary outcome.
+
+### New-data MoNuSAC result
+
+| Frozen outcome | Controlled external result |
+| --- | --- |
+| Eligible evidence | 29,610 development nuclei / 44 patients; 15,494 untouched test nuclei / 25 patients |
+| Primary ranking | AP 0.658142; 1,035/1,481 injected changes found at the 5% budget |
+| Ranking decision | **Passed**: precision minus exact matched random +0.142843, CI [+0.099181, +0.188491] |
+| Downstream vs no review | Macro-F1 +0.005526, CI [-0.001506, +0.012833] — failed |
+| Downstream vs matched random | Macro-F1 +0.000031, CI [-0.008692, +0.008486] — failed |
+| Overall meaning | Better controlled-change triage on new images was established; safe downstream improvement was not |
+
+This is a controlled-corruption test, not a natural-error study. It does not show
+that a pathologist was wrong or that AANCA improves a model in real use.
 
 ### Incremental improvement of the current AANCA model
 
@@ -215,9 +242,9 @@ The complete prospective policy and implementation boundary are in
 [`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) and
 [`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml).
 
-### Frozen new-data test
+### Completed frozen new-data test
 
-A separate controlled external benchmark is frozen on the official MoNuSAC 2020
+A separate controlled external benchmark was frozen on the official MoNuSAC 2020
 train/test release before computing its metrics. It uses patient-group-safe OOF
 ranking on deterministically corrupted training labels and evaluates downstream
 models once on the untouched official test patients. Two patient IDs found in both
@@ -225,14 +252,17 @@ official archives are excluded from development only. The primary comparison is 
 balanced fold-safe neighbour queue against corrupted/no-review and exact
 matched-random baselines, with simultaneous per-class recall protection.
 
-This test can show whether the current AANCA safely recovers injected changes on new
-images. It cannot show that a natural annotation or pathologist is wrong. The exact
-freeze is in [`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md) and
+The primary retrieval gate passed, but all three downstream or class-safety gates
+failed; the registered overall decision is `not supported`. It cannot show that a
+natural annotation or pathologist is wrong. The exact freeze is in
+[`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md), the outcome is in
+[`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md), and the machine configuration is
 [`configs/monusac_current_aanca_external.yaml`](configs/monusac_current_aanca_external.yaml).
 Run it only with the checksum-matching official archives:
 
 ```text
 uv run python scripts/run_monusac_current_aanca.py --device auto
+uv run python scripts/verify_monusac_external_validation.py
 ```
 
 The primary study produced 2,288 sealed artifacts and retained neutral, adverse,
@@ -454,10 +484,11 @@ Run `python -m histo_audit --help` for the authoritative command tree.
 | `report` | Build sourced Markdown and static HTML from strict metrics JSON |
 | `demo` | Build, checksum-verify, or locally serve the static presentation MVP |
 
-Real-data study commands are intentionally hard-gated. The NuCLS external study has
-run and is backed by checked-in immutable evidence; a new confirmatory study, a
-PanNuke original-label audit and newly recruited blinded expert review remain
-deferred. An implemented component is not evidence that a stage has run.
+Real-data study commands are intentionally hard-gated. The NuCLS external study and
+MoNuSAC controlled-external benchmark have run and are backed by checked-in
+immutable evidence; a new confirmatory study, a PanNuke original-label audit and
+newly recruited blinded expert review remain deferred. An implemented component is
+not evidence that a stage has run.
 
 ## Repository layout
 
@@ -472,13 +503,15 @@ AANCA/
 │   ├── auditing/             # annotation-risk scores and neighbours
 │   ├── statistics/           # review metrics and group bootstrap
 │   ├── evaluation/           # controlled restoration experiments
-│   ├── external_validation/  # frozen NuCLS exact-pairing and multi-rater analysis
+│   ├── external_validation/  # frozen NuCLS and MoNuSAC external analyses
 │   ├── experiment/           # scientific contracts, statistics, and maintained runners
 │   ├── reporting/            # evidence-backed reports and figures
 │   └── workflows/            # preregistration, study gates, and review workflows
 ├── configs/                  # smoke, pilot, primary, confirmatory, external
 ├── scripts/present_demo.py   # dependency-free verified local presentation launcher
 ├── scripts/verify_nucls_external_validation.py # independent NuCLS recalculation
+├── scripts/verify_monusac_external_validation.py # independent MoNuSAC recalculation
+├── scripts/run_monusac_current_aanca.py # frozen current-AANCA MoNuSAC execution
 ├── scripts/analyze_nucls_current_model.py # post-outcome current-model analysis
 ├── tests/                    # unit, integration, portability, and CLI tests
 ├── reports/                  # compact QC, provenance, literature, and validation evidence
@@ -500,6 +533,8 @@ AANCA/
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Download and independently recalculate the released primary evidence |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Frozen NuCLS design, exact external result and independent verification |
 | [`reports/nucls_current_aanca_improvement.md`](reports/nucls_current_aanca_improvement.md) | Exploratory ranking candidates and fail-closed retraining decisions for the same AANCA model |
+| [`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md) | Prospectively frozen controlled-external new-data protocol |
+| [`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md) | Exact MoNuSAC result, claim boundary and independent evidence identities |
 | [`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) | Implemented two-queue, multi-rater, calibration, stability and adoption safeguards for the same AANCA system |
 | [`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml) | Machine-readable prospective policy; NuCLS is excluded from selection and fresh evidence is still required |
 | [`NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md`](NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md) | Publicly frozen NuCLS multi-rater protocol |
@@ -508,7 +543,7 @@ AANCA/
 | [`MVP_SCOPE.md`](MVP_SCOPE.md) | Reduced presentation boundary and acceptance checks |
 | [`DATASET_SETUP.md`](DATASET_SETUP.md) | PanNuke acquisition, integrity, QC, and licence gate |
 | [`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md) | Non-diagnostic scope, scientific limits, and responsible language |
-| [`references/references.bib`](references/references.bib) | Project bibliography, including both required PanNuke citations |
+| [`references/references.bib`](references/references.bib) | Project bibliography, including PanNuke, NuCLS and MoNuSAC sources |
 
 Read the first four documents before changing experiment code or scientific claims.
 

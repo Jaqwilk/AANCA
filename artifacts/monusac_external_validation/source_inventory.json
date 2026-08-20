@@ -1,0 +1,3017 @@
+{
+  "schema_version": 1,
+  "test": [
+    {
+      "bytes": 50368,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_1.tif",
+      "sha256": "4165f99ac2ec3a207220614e893de2f74d4b768086f53bbabbf63fc5e4651a5c"
+    },
+    {
+      "bytes": 35767,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_1.xml",
+      "sha256": "7a16593bdd518d277a36a7158f879b8deedb26a213b365fe8adff1754a7ab3bf"
+    },
+    {
+      "bytes": 9554,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_2.tif",
+      "sha256": "238b11dea890541a2808be674703a6633a27a4c5da08e0b8f4ed62d797940e39"
+    },
+    {
+      "bytes": 10805,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_2.xml",
+      "sha256": "53f7894a33f743305242e5d66ac79878c9cb7dbcb16cb7e70e2d5aa35a4708ba"
+    },
+    {
+      "bytes": 48826,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_3.tif",
+      "sha256": "9462bb5089189291a131895aee3009383ecfd382debe9eaa2359e1ae504045dc"
+    },
+    {
+      "bytes": 43777,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_3.xml",
+      "sha256": "1f0675b912e9b9aa8e18d1f06cdb1458d894bf17a33c4c06e68ee0579fb5b67b"
+    },
+    {
+      "bytes": 1130080,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_4.tif",
+      "sha256": "a1b7259e87d5506e9e157efcaf7321a117410883d89774684c9b278eaacb935b"
+    },
+    {
+      "bytes": 546562,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_4.xml",
+      "sha256": "a455a571d7c9c0b5afbae025d523ed3f745d4faff928d463612a0e18a585ed87"
+    },
+    {
+      "bytes": 1386256,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_5.tif",
+      "sha256": "12eaf92a94539c01b4c7275b7e5e1256b95e05563e35a030bb8b57c206b1cb20"
+    },
+    {
+      "bytes": 1687878,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_5.xml",
+      "sha256": "9a968f784ba0dd8a55882001acee2eb7ac76efc29778dca4ab6203cb425cc5b2"
+    },
+    {
+      "bytes": 908664,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_6.tif",
+      "sha256": "d99e013ae26c0d7043d129e49ff7fddcab47d2259f5f38fd4fe6197685ba856e"
+    },
+    {
+      "bytes": 263211,
+      "path": "TCGA-2Z-A9JG-01Z-00-DX1/TCGA-2Z-A9JG-01Z-00-DX1_6.xml",
+      "sha256": "9b533568d21fa7f52f6331523f258574721d28771f8fd2062ee979b633cb9bb7"
+    },
+    {
+      "bytes": 565644,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_1.tif",
+      "sha256": "3efacb3223902c51afbe433e2ba0feb8f4fa858c0ef1b3c216e10a2bae7f6f58"
+    },
+    {
+      "bytes": 726896,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_1.xml",
+      "sha256": "54f818ab2343d25f6e6110aa6fad0976faa3b95ca0bc6a0d01d58ce481502625"
+    },
+    {
+      "bytes": 7452562,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_2.tif",
+      "sha256": "6cf735f24988fa2a8a372dff02a4064a395b1415bdc1022a9436a3a9fcd6d770"
+    },
+    {
+      "bytes": 1795804,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_2.xml",
+      "sha256": "2302381b4b1a4eee2753f64b8422ee3eb7052605a77ccb4446deb3bcfeb21346"
+    },
+    {
+      "bytes": 601874,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_3.tif",
+      "sha256": "2d3f57f46708b3dd2a8494cd4f00f308952644c4873043866cf05ca048e96253"
+    },
+    {
+      "bytes": 27002,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_3.xml",
+      "sha256": "c37e5a187ad56c157b886f63d7cba1390ebc964d773c9a41dfea621cd85e3236"
+    },
+    {
+      "bytes": 233008,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_4.tif",
+      "sha256": "e63fa7e7ee5ad2d09119e3fcb5df6c2ca6e761e9301c05a305594336f5e67105"
+    },
+    {
+      "bytes": 99128,
+      "path": "TCGA-2Z-A9JN-01Z-00-DX1/TCGA-2Z-A9JN-01Z-00-DX1_4.xml",
+      "sha256": "3a9b08397b647d88b57ce8bc5c4eefa0023e06897506df399e796711d7d0caef"
+    },
+    {
+      "bytes": 240480,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_001.tif",
+      "sha256": "0260b55a1e9ea427c0f846b8088b1216aa5f45b6180c2507dbc7b77cf4c0d97b"
+    },
+    {
+      "bytes": 137824,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_001.xml",
+      "sha256": "d255467c97931fc7de127709a9d494ef834749f3597e7b547752678a18d315c4"
+    },
+    {
+      "bytes": 131962,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_002.tif",
+      "sha256": "0571ce68a66689b15afdf4cbba6ad03f98df82415d66819c964ea63db1c425cf"
+    },
+    {
+      "bytes": 63042,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_002.xml",
+      "sha256": "fa9f02ec67d1a8a98252982220a3ddc6b892ca9d4a9e31a983d616f115d82e6f"
+    },
+    {
+      "bytes": 1157338,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_003.tif",
+      "sha256": "0aeae19ec28621ca00d61b6e730783a9fcc6338521388dd1af63117657847ddb"
+    },
+    {
+      "bytes": 1238880,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_003.xml",
+      "sha256": "4389502917e433477b5dfbff6ea1a2a166ad14a7cd709de2eeba70bf86782f8b"
+    },
+    {
+      "bytes": 6112190,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_004.tif",
+      "sha256": "aceaac0ff7e14ffa6e96664152ae733734e6a8f43a8b198f72a9655ebaed4cf8"
+    },
+    {
+      "bytes": 1282816,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_004.xml",
+      "sha256": "00eb1b5ad6e3e3afdf232e75956fd68c5d9e9ab32c64f21736b8121c9db30aeb"
+    },
+    {
+      "bytes": 2535354,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_005.tif",
+      "sha256": "b5b98e0171ce1d14e9e9a3e16af73a52f053c1b906c61e2ccd381633c89799be"
+    },
+    {
+      "bytes": 578951,
+      "path": "TCGA-49-6743-01Z-00-DX2/TCGA-49-6743-01Z-00-DX2_005.xml",
+      "sha256": "0e8b50c895b6f98c1b96b94517e54412a0b50e80eeaea8e4fc87a7819d810c41"
+    },
+    {
+      "bytes": 3037976,
+      "path": "TCGA-50-6591-01Z-00-DX1/TCGA-50-6591-01Z-00-DX1_001.tif",
+      "sha256": "7da23540f9624e8a2b29e13743285c244720e451b876903ec5211227be524585"
+    },
+    {
+      "bytes": 1514722,
+      "path": "TCGA-50-6591-01Z-00-DX1/TCGA-50-6591-01Z-00-DX1_001.xml",
+      "sha256": "c24955f86ae0915e3df35fecd67a121c075a6a1cee29348407f42448e544959c"
+    },
+    {
+      "bytes": 875032,
+      "path": "TCGA-55-7570-01Z-00-DX1/TCGA-55-7570-01Z-00-DX1_001.tif",
+      "sha256": "f2d22fe5286ce3487ce38ef0e14d6a6100e8530b2de8093e1bd867ec5c1ad0cc"
+    },
+    {
+      "bytes": 866847,
+      "path": "TCGA-55-7570-01Z-00-DX1/TCGA-55-7570-01Z-00-DX1_001.xml",
+      "sha256": "6c5f8bb63028a63bb8789d4d25d47212f78f63c040360e13af6f4ff458ec1212"
+    },
+    {
+      "bytes": 93578,
+      "path": "TCGA-55-7570-01Z-00-DX1/TCGA-55-7570-01Z-00-DX1_002.tif",
+      "sha256": "5149e202f32475a216210fad65e443cda79d1d8e0cfafa53cdd2a631e154b465"
+    },
+    {
+      "bytes": 48192,
+      "path": "TCGA-55-7570-01Z-00-DX1/TCGA-55-7570-01Z-00-DX1_002.xml",
+      "sha256": "246ea295ec2e13f97d4a3897578f8361a807e542cb7ce0dd8e7ced2477944947"
+    },
+    {
+      "bytes": 149874,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_001.tif",
+      "sha256": "925d3c6339f258e030cf63d9b317c150b34314b4a97b6559e361fbe2ee31eba2"
+    },
+    {
+      "bytes": 74177,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_001.xml",
+      "sha256": "f99657ca567c42e9ab08751e27c15780166893a6c48394bcf2c5a98211916d78"
+    },
+    {
+      "bytes": 47750,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_002.tif",
+      "sha256": "8c104c1ae044c84f231011d6dadcb9453f56deb8230839acf5411442c63d34dc"
+    },
+    {
+      "bytes": 40531,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_002.xml",
+      "sha256": "5295f5519395ee812ebb5e0078c98d2a1c191844489bf9ac62157a7be71f7a8f"
+    },
+    {
+      "bytes": 1419216,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_003.tif",
+      "sha256": "2956932ebabe533553be2354cb42eb07c6eff5b102a01f7788846396b728421b"
+    },
+    {
+      "bytes": 1149438,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_003.xml",
+      "sha256": "bd98e313dfcb0ed18642c5590cea7e39797ca3b4a6bad873d871f645c213dc36"
+    },
+    {
+      "bytes": 4809238,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_004.tif",
+      "sha256": "cb4361df7db23302d03d5da515afab463d182d87526e8d5b9d5f183cce6bea2e"
+    },
+    {
+      "bytes": 1569732,
+      "path": "TCGA-55-7573-01Z-00-DX1/TCGA-55-7573-01Z-00-DX1_004.xml",
+      "sha256": "fb034eecea2bbb0a0dd50f0c1d29ddcd4c370e0dfad8feff0f62c152e6159cc8"
+    },
+    {
+      "bytes": 1038042,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_001.tif",
+      "sha256": "8510026f5bceac2fdd7eb9d14e7711f1cc0b54552a5b14662f7cd71c41d0e19d"
+    },
+    {
+      "bytes": 1092497,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_001.xml",
+      "sha256": "b2aedf6f060649ac1097c27b1b13bb1426cf94a3cc8edff4d56962cb0114f68f"
+    },
+    {
+      "bytes": 230686,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_002.tif",
+      "sha256": "9559231d19de1bfa85c5c7b528809828969014f3b0abc9a31016e4f7e80c8950"
+    },
+    {
+      "bytes": 54481,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_002.xml",
+      "sha256": "dfb6f51b4b4d34b531315e3c404f6c5d893946e0f6c84a50b0a3996725ce9f26"
+    },
+    {
+      "bytes": 5010518,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_003.tif",
+      "sha256": "470a109020c2fca05066666d7f0882019c8943efd8771352266febef361a3734"
+    },
+    {
+      "bytes": 1980927,
+      "path": "TCGA-73-4662-01Z-00-DX1/TCGA-73-4662-01Z-00-DX1_003.xml",
+      "sha256": "167a9a478255f08431054d2dd18dbf85120d7fe381e0f81b148c5db5bee568fb"
+    },
+    {
+      "bytes": 334964,
+      "path": "TCGA-78-7152-01Z-00-DX1/TCGA-78-7152-01Z-00-DX1_001.tif",
+      "sha256": "431d1486baa2aceb98677bc242f0bad5b880b76b0ad13028969035f94c28f73d"
+    },
+    {
+      "bytes": 48677,
+      "path": "TCGA-78-7152-01Z-00-DX1/TCGA-78-7152-01Z-00-DX1_001.xml",
+      "sha256": "9318a51f450b2de428c2989896c35492e584ccd8ce510916ac8aa17466c25f5f"
+    },
+    {
+      "bytes": 57120,
+      "path": "TCGA-78-7152-01Z-00-DX1/TCGA-78-7152-01Z-00-DX1_002.tif",
+      "sha256": "9a11ac1208e59e6be0f9466b66df98ab791adfb8598354b9fa216a7630ef3e43"
+    },
+    {
+      "bytes": 40355,
+      "path": "TCGA-78-7152-01Z-00-DX1/TCGA-78-7152-01Z-00-DX1_002.xml",
+      "sha256": "46ae05a338ef72a3b9659518862fec7a34f6511d264489107844769d17ffb14f"
+    },
+    {
+      "bytes": 2684070,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_001.tif",
+      "sha256": "b7d53f521422cd0204a8427c2348224df180abf6bfc3b28e05596fcc65ebbb38"
+    },
+    {
+      "bytes": 2195020,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_001.xml",
+      "sha256": "3e875167f25a2861b80d08c7d04f33e24776195c36619f8030de8bd1ae31e7ba"
+    },
+    {
+      "bytes": 1831990,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_002.tif",
+      "sha256": "84c8f89b549f5decde8433ce509f7571de36f11e51d434e5e08a0d26e10f9e25"
+    },
+    {
+      "bytes": 848825,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_002.xml",
+      "sha256": "d5851f3670e5c127daa23409beb0977734cd3e9c36f1e259f68aa7baae21d91b"
+    },
+    {
+      "bytes": 23368,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_003.tif",
+      "sha256": "e1350f6234f66686937570db1752b5f6f29eae1a01b90cd8d681a591c7ba7a85"
+    },
+    {
+      "bytes": 11039,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_003.xml",
+      "sha256": "63746fb419de99f23e5da8fc01d400d9e45fdc981b62763fa8df7f71b834ac5a"
+    },
+    {
+      "bytes": 1203990,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_004.tif",
+      "sha256": "3b9a65cea02eeb3426aeb05ccc4d13284afd72dba5128badc496754163296fc3"
+    },
+    {
+      "bytes": 559604,
+      "path": "TCGA-A2-A04X-01Z-00-DX1/TCGA-A2-A04X-01Z-00-DX1_004.xml",
+      "sha256": "1419dfa54db7336ab98f1b158390c858b06ef6fdd94e6f0bd192c91d0d84ade2"
+    },
+    {
+      "bytes": 1127698,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_001.tif",
+      "sha256": "c9c61e646f9d73fccfd726c10b2621f5172f9fa57862f99f5c600458b2b66c15"
+    },
+    {
+      "bytes": 1104150,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_001.xml",
+      "sha256": "1b6050e62564252dde54c9fd788f7f4ff584c6f0057f81f4b489d030169415d0"
+    },
+    {
+      "bytes": 1408256,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_002.tif",
+      "sha256": "7bc84cc67db665f95587fae3ea2f5da98406d71d7c9fb046efb9251240133021"
+    },
+    {
+      "bytes": 1169452,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_002.xml",
+      "sha256": "f193adf3d5d56936db837d8b1b7c99178dedcb63823337fbf5ccd3dea1c94287"
+    },
+    {
+      "bytes": 711065,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_003.svs",
+      "sha256": "b65f89b20f646ede72dccaf1d23b4a4f4dd99b74d4f4dc2af0187cb520785ce4"
+    },
+    {
+      "bytes": 21388,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_003.xml",
+      "sha256": "f52a13657257810f4c21e915534b2321471f2ac4875be1848fc6ff7c1860543e"
+    },
+    {
+      "bytes": 743933,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_004.svs",
+      "sha256": "e286c043109d61e1ab295eb961dc068249c3c07c3992156a35170447d3f7f80e"
+    },
+    {
+      "bytes": 76522,
+      "path": "TCGA-A2-A0ES-01Z-00-DX1/TCGA-A2-A0ES-01Z-00-DX1_004.xml",
+      "sha256": "1bd311f1dc9e33ff92ad848a34c2b55a47fa222a43f8981af8f7f92316218da7"
+    },
+    {
+      "bytes": 1218003,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_001.svs",
+      "sha256": "5649043d3f6f1125b468d626cb7b348124ee2a6ee31733dc68c6e29486ff54f5"
+    },
+    {
+      "bytes": 772772,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_001.xml",
+      "sha256": "20a5f0037e85d0d224305a9b22f8f07a99c7d006787630b0976647c731183de7"
+    },
+    {
+      "bytes": 1488223,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_002.svs",
+      "sha256": "421f002962cdbb1b1245170774149ccac00e96c2341877f7bc24c9c1d0760d8b"
+    },
+    {
+      "bytes": 1728350,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_002.xml",
+      "sha256": "6bde5d95189ad0942b7960d9ba1919e1e4319352293349f55a29c3facb78298f"
+    },
+    {
+      "bytes": 1144769,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_003.svs",
+      "sha256": "5b9ce18e3028e1c93a77f659f843892de94f5edee367f7de98a35088014a2572"
+    },
+    {
+      "bytes": 203850,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_003.xml",
+      "sha256": "a19c1cad8b24afa63571dbb5c570bfbadb48f9fb01d959083b15714cbc72f22c"
+    },
+    {
+      "bytes": 1087861,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_004.svs",
+      "sha256": "b04d83085c5d9e67c9ea66e18c0e124b7c83f0540dba361b69997283a09ce9a7"
+    },
+    {
+      "bytes": 247254,
+      "path": "TCGA-D8-A3Z6-01Z-00-DX2/TCGA-D8-A3Z6-01Z-00-DX2_004.xml",
+      "sha256": "cf77828982a0cd8abf8844fa694efa81b11d3940b5c90c8ce3be7e82c5a16905"
+    },
+    {
+      "bytes": 1136808,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_1.tif",
+      "sha256": "781a73e91ce562df567c80e2e8ac83494e01c542bd17a7f8c804900cffba25e4"
+    },
+    {
+      "bytes": 1652894,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_1.xml",
+      "sha256": "4e78dc77e97a59ae96b473cc82bec73499c8c9a9ab34d1e4ffa9c169061892c2"
+    },
+    {
+      "bytes": 1240250,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_2.tif",
+      "sha256": "05e44096e871263ad5e175f90b778011118d5d22e4f2418cadc3fbc4aabced6a"
+    },
+    {
+      "bytes": 630177,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_2.xml",
+      "sha256": "dd496ca0728bf4b0aefdb2e96898989f3eeb1e3be25d2c53527276d27bb9eaa7"
+    },
+    {
+      "bytes": 569904,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_3.tif",
+      "sha256": "15a10a32af1a312a4967e931d616ad1dffb4e2c310fc7a6cc798684cfa0cc514"
+    },
+    {
+      "bytes": 35549,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_3.xml",
+      "sha256": "c852f08811645b874a1a01f8fe96e82def823b98ca227800332945a33f7a8855"
+    },
+    {
+      "bytes": 120638,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_4.tif",
+      "sha256": "da7399aa4a587ac1734e6f29058753d79454a3161942c68920d73e1a2dbe89cd"
+    },
+    {
+      "bytes": 14540,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_4.xml",
+      "sha256": "40501068b904967b2f2ccadf2ba512f83dfc2063bc0fc006ea4fdc1a60736a64"
+    },
+    {
+      "bytes": 97106,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_5.tif",
+      "sha256": "a1ecacf0237435cee21f37788ca981395ebf1fc63d7a5a505cfae78be7b7c5b9"
+    },
+    {
+      "bytes": 25831,
+      "path": "TCGA-DW-7838-01Z-00-DX1/TCGA-DW-7838-01Z-00-DX1_5.xml",
+      "sha256": "8e3684eac4f97da15b7624d4b5f0fcaf73f31f9d776745426d460aa591de218a"
+    },
+    {
+      "bytes": 528018,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_1.tif",
+      "sha256": "6c261098507bfae2967812a74a7cdfc3d0cff3d26e210f103b115499107566b7"
+    },
+    {
+      "bytes": 645927,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_1.xml",
+      "sha256": "f5536b2a5e40627fc12d16ba0eda7a5e3ce22c83b851e6558fe76d55f46f63c2"
+    },
+    {
+      "bytes": 38860,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_2.tif",
+      "sha256": "1be6d41cd4195079403111967608e6f5b902a546444739fe4ce260a421226de5"
+    },
+    {
+      "bytes": 21431,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_2.xml",
+      "sha256": "2080e74b6e0fe454eeb6adbe37b5383e362f9b703ea0e28287af1a9f0f7c83f3"
+    },
+    {
+      "bytes": 227466,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_3.tif",
+      "sha256": "d1eb642cdcb1a71b6164b869b9a7a35bab3ea5cc86bfbc70167ac2e7105c2273"
+    },
+    {
+      "bytes": 25342,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_3.xml",
+      "sha256": "5a0aad7f45f211a1033f1ed64e866bf1aeb17aaedaeb716c2557d0b4a45cf813"
+    },
+    {
+      "bytes": 49444,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_4.tif",
+      "sha256": "42bbd674a32568c8b688d75821642fd317d8817e36b687767a7245484435c9e0"
+    },
+    {
+      "bytes": 15151,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_4.xml",
+      "sha256": "78344329b1a3d3b75a2a15b3a554463fbd706bc859369ece08a990a9aa1f9025"
+    },
+    {
+      "bytes": 217328,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_5.tif",
+      "sha256": "ed63abe6507e653f944b02d7538afa389c8f8b941690b69327cea5b67e7bf49a"
+    },
+    {
+      "bytes": 85531,
+      "path": "TCGA-DW-7963-01Z-00-DX1/TCGA-DW-7963-01Z-00-DX1_5.xml",
+      "sha256": "724ad4c7ecd0e9a52fbbfe4ab2819ee1934814c5898872f3bfe73b4f503e2ffa"
+    },
+    {
+      "bytes": 1433307,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_001.svs",
+      "sha256": "8c5f8c1f308ec7f84ad6a51582dc22e97c7b14703e371d085d41f6e96e697102"
+    },
+    {
+      "bytes": 2101556,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_001.xml",
+      "sha256": "ca6af930ae76a76d6e1463e6fc90fc300f670b5c3038626fdebbe6c40c968bac"
+    },
+    {
+      "bytes": 1277111,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_002.svs",
+      "sha256": "4a9207295a6c9d4ba8b5fca16a5a5f09c2e7b6a1997e78d6473893fd4277de03"
+    },
+    {
+      "bytes": 450861,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_002.xml",
+      "sha256": "65431fed3a01eb19ab42555e36ce029d36166578e9d68ee3f3fc31dcd24e877a"
+    },
+    {
+      "bytes": 1301979,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_003.svs",
+      "sha256": "54afa3028e393200fc2297060a0fb7a5e07ecf15c864763272b1489783bdf8fe"
+    },
+    {
+      "bytes": 730898,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_003.xml",
+      "sha256": "b550879167b4906078b44b3d85712c343207587692c753fccaab102103bc9b28"
+    },
+    {
+      "bytes": 1117473,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_004.svs",
+      "sha256": "c239873a5fda127b670af3d602b8d34321f98376619407202f9cab5de51357d7"
+    },
+    {
+      "bytes": 129056,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_004.xml",
+      "sha256": "9cc5b715fed2458769eab44e16d56693c8268621ca15de92647c2dbbf12a42fc"
+    },
+    {
+      "bytes": 1072417,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_005.svs",
+      "sha256": "79d3a1e5c8efe27bede467de61b80851ce71cf0cc3cf29f6775085e22b0ed194"
+    },
+    {
+      "bytes": 112764,
+      "path": "TCGA-E2-A108-01Z-00-DX1/TCGA-E2-A108-01Z-00-DX1_005.xml",
+      "sha256": "6daa3ab2e07659e29a63c4ef4f79796cf3d4b7158af87153054ce044c9b7306b"
+    },
+    {
+      "bytes": 1462543,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_001.svs",
+      "sha256": "3db862b7ef4f6c8aaa42756cda0ea885ae3a66df07c63c2d0521710cee4ffb56"
+    },
+    {
+      "bytes": 281801,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_001.xml",
+      "sha256": "5d9699f322a4553580d41bff1e9e5b6f5bd5538d3800678e805dec89339d7a94"
+    },
+    {
+      "bytes": 1689083,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_002.svs",
+      "sha256": "8ca4040be44c61c8183f94caf5fd2095edafc49566798ab3f2b500bb9446c9a9"
+    },
+    {
+      "bytes": 505671,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_002.xml",
+      "sha256": "28e5275bfe6961f9c3e908af59aa73382c07b8112764b2b8df8444845d767c62"
+    },
+    {
+      "bytes": 1545147,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_003.svs",
+      "sha256": "221472101acdab54a708bd826bcce0a7a2be05e6aa79c754dba58a1d5811f1db"
+    },
+    {
+      "bytes": 155950,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_003.xml",
+      "sha256": "4103af61756de77df5f5b61a303c21c51828e14ef9a84b0118fcb09ad33b379f"
+    },
+    {
+      "bytes": 1313515,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_004.svs",
+      "sha256": "a1a28b051b2829f137bd08b5eed4a604cade9a224cd5e04aaefb398d3d7b0a81"
+    },
+    {
+      "bytes": 351049,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_004.xml",
+      "sha256": "6881f8e8c71c0be54847a2740a9aec7e95943c83f322d52495a64297137b3dfe"
+    },
+    {
+      "bytes": 1371959,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_005.svs",
+      "sha256": "e77d32fc485472397ef3ccb007e6de8a540a314bd6190ccfc0904b53a0b7de35"
+    },
+    {
+      "bytes": 475987,
+      "path": "TCGA-EW-A6SB-01Z-00-DX1/TCGA-EW-A6SB-01Z-00-DX1_005.xml",
+      "sha256": "487c081475c6e6fca0b07f6539eaf0fd7c9228544155bc041b873e5d03a7f126"
+    },
+    {
+      "bytes": 7529730,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_1.tif",
+      "sha256": "49c5cf9a9e4774070db7c20bb8a2da2d94c08dcdb8b70b627ca9f3ca2fbbc6a0"
+    },
+    {
+      "bytes": 3668888,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_1.xml",
+      "sha256": "282b42a461c7bd23b102e53004e76eb2f07e7ded97da83c28b02814f67320437"
+    },
+    {
+      "bytes": 256874,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_2.tif",
+      "sha256": "0aaea371ecc2c3334a3f6fc42c21bee8fce33aaecdfa8d593ff7f248d62f07b3"
+    },
+    {
+      "bytes": 102319,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_2.xml",
+      "sha256": "a97ede0a5dd1cf2847b13e7ff010b60a7379f519efc0cfddd1402a5eb226ea10"
+    },
+    {
+      "bytes": 1133794,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_3.tif",
+      "sha256": "5ff64cafd70d0e02cdfabcf5931cdc1ff3c7b0d38249738f7b07237efa70f28e"
+    },
+    {
+      "bytes": 830504,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_3.xml",
+      "sha256": "7d90681a33bad74dc6bc4e6043b1d93e4d813bc6d5e03be0a059f8811741ba64"
+    },
+    {
+      "bytes": 44558,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_4.tif",
+      "sha256": "ef7e3b18ef7f38d48dcd637c083a222abfcc51bb10e97467ee510e5ac67beb96"
+    },
+    {
+      "bytes": 19313,
+      "path": "TCGA-F9-A8NY-01Z-00-DX1/TCGA-F9-A8NY-01Z-00-DX1_4.xml",
+      "sha256": "ac4ad02a8f3da043e608d5b88e29e553b5995dc60a9d41b8e3330b0e0e3d8034"
+    },
+    {
+      "bytes": 3402316,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_1.tif",
+      "sha256": "3fb8ae32337f03d4920a96ab3943f7481b3c1e57e9dfe8828689a62d469c3490"
+    },
+    {
+      "bytes": 1139905,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_1.xml",
+      "sha256": "2dd8ff1d435a4f3379b68271f5158dcdf15fd01bab825010b20b1a2b30a43ab6"
+    },
+    {
+      "bytes": 642120,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_3.tif",
+      "sha256": "e96f5c14b4040abf1297f1da27ffd071d1a33f77ba949f42f14005f1dd0a0fb6"
+    },
+    {
+      "bytes": 402826,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_3.xml",
+      "sha256": "c4991c01945d380faceda3a898cdcef794873090780a4a2bc351b18e7402d576"
+    },
+    {
+      "bytes": 723734,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_4.tif",
+      "sha256": "62734cd274e8b0f3ae18b77e12c0106f58a3c6112d148711e0df9e783a6941de"
+    },
+    {
+      "bytes": 430315,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_4.xml",
+      "sha256": "474503fb92fe987571d1c2fef68241026a83f8427f1de32adab1c1608d6d39f9"
+    },
+    {
+      "bytes": 69114,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_5.tif",
+      "sha256": "e1df3b63cefd379541892e95497476327f5a0976a10db9ede7b265fd0e9eb051"
+    },
+    {
+      "bytes": 40222,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_5.xml",
+      "sha256": "868f1ae9cffd27288815c055d2fcd6d2847e7b451f05605893c112a86f8071a8"
+    },
+    {
+      "bytes": 798934,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_6.tif",
+      "sha256": "b4f4a389a4510c647dd23ce33017f5d0aaedf9e138b35c25ab251d47986078f2"
+    },
+    {
+      "bytes": 178516,
+      "path": "TCGA-G9-6356-01Z-00-DX1/TCGA-G9-6356-01Z-00-DX1_6.xml",
+      "sha256": "e629d1274658ab2009b57ad78fa21c86a8c51bad0c0ad31ab5feb3a82205b7bf"
+    },
+    {
+      "bytes": 1611884,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_1.tif",
+      "sha256": "f12d341563ff2fab008d0abc10c92694914aa91c4433ebe85bc399c57fe1a2fe"
+    },
+    {
+      "bytes": 1573437,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_1.xml",
+      "sha256": "8e2601aecce44e4d7900603d3883e86870cc6fb719f0658275d72912f443195c"
+    },
+    {
+      "bytes": 3211458,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_2.tif",
+      "sha256": "1055b267096509b5b445dcd7793c18e0cd0f851853f1c74db7908d1e8a34618d"
+    },
+    {
+      "bytes": 911613,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_2.xml",
+      "sha256": "bf5f19ef4636e9f30318aca69952e35a02092993f653184a6d8bb591794c5707"
+    },
+    {
+      "bytes": 115830,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_3.tif",
+      "sha256": "44a045be3d7ff54aa42deb83b1899d8dd558f79a90ee7be30387f31b8f1354aa"
+    },
+    {
+      "bytes": 106984,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_3.xml",
+      "sha256": "1f6e7077cea7ee70761148a443c35f5d897802080350f77e88d252ce89fa9fb1"
+    },
+    {
+      "bytes": 107036,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_4.tif",
+      "sha256": "4287d1bf02ac6a7c7a5e3681da1a4ecd617c95ed0b3e313a1475439f96299f3c"
+    },
+    {
+      "bytes": 21712,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_4.xml",
+      "sha256": "88e10105e69a633ee4cca093ca031f4de2ea9cf6875b9b0d1c62459fcdd6777e"
+    },
+    {
+      "bytes": 140300,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_5.tif",
+      "sha256": "160a1f55c2d118c278be8a16321d0befe2026a161f3a027561a235e0d959006a"
+    },
+    {
+      "bytes": 40879,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_5.xml",
+      "sha256": "2564486174fa6531794b57cb3833b58f1db0c6b34fce7b88cff1aa9df4914a09"
+    },
+    {
+      "bytes": 106390,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_6.tif",
+      "sha256": "2373a222f64211a8b8b2edf588755fb905ae9e3028761b8e97e68e632395317d"
+    },
+    {
+      "bytes": 29440,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_6.xml",
+      "sha256": "9a51d1447bbf544de8c0ebe5c28e52530882a70406e4ecc6e5b751ebaca26e9e"
+    },
+    {
+      "bytes": 1283030,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_7.tif",
+      "sha256": "69fafb305d5faa65e4a55c96fd87fa11e280004d87d877c42d9f740b4fc382c9"
+    },
+    {
+      "bytes": 486844,
+      "path": "TCGA-G9-6367-01Z-00-DX1/TCGA-G9-6367-01Z-00-DX1_7.xml",
+      "sha256": "b01ef56fda533e72d248363fbb8c4854b03ab1d01147b9ee186e1303d7b1579f"
+    },
+    {
+      "bytes": 1054574,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_1.tif",
+      "sha256": "98ef43cb6b5c7af39e3d674c39718edfd737cef92b18103d8b8a832dfad11e17"
+    },
+    {
+      "bytes": 494234,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_1.xml",
+      "sha256": "1b422fb4af67c4119d0f2d488e88f31dda1c213e0d5db2524a8d20138ee4d3d8"
+    },
+    {
+      "bytes": 5309310,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_2.tif",
+      "sha256": "1bf13646e12dfc8c2eab925d200bf328c78a5bf2653e3d694bf97a980e12a77b"
+    },
+    {
+      "bytes": 1802002,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_2.xml",
+      "sha256": "00e307e272ae7998ab2e1f7de81b07cbcdf9e529770fcd5f737deb02bf72b01f"
+    },
+    {
+      "bytes": 698326,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_3.tif",
+      "sha256": "557314d1c2063fbd85dfcb3e4e107aae0aec417b55bfc1f43b80efcabe636141"
+    },
+    {
+      "bytes": 259563,
+      "path": "TCGA-IZ-A6M9-01Z-00-DX1/TCGA-IZ-A6M9-01Z-00-DX1_3.xml",
+      "sha256": "e08c9ace11e70f2b512ea6d96597b221b99bb08cbc8d25347e487be9b1f6b6d5"
+    },
+    {
+      "bytes": 37882,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_1.tif",
+      "sha256": "1f445fd9fec758df572ec48218a452372c3e9f15fe7a818c3b3735c323c0ce2e"
+    },
+    {
+      "bytes": 24695,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_1.xml",
+      "sha256": "47c29b60dcc49a931d0b2b974eb64c22f781d3a8dde270b01da6569ac2d9c84f"
+    },
+    {
+      "bytes": 10192,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_2.tif",
+      "sha256": "d1dede9be685989693461e95935b945b5cff90409e6dcc24254690b59caa476c"
+    },
+    {
+      "bytes": 10211,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_2.xml",
+      "sha256": "7b7ff3450f75b3ee479d018b0e42ed293f24a3b9be181020dc00b3922db215a3"
+    },
+    {
+      "bytes": 17188,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_3.tif",
+      "sha256": "267ae0d9c1f2367127b468803fe749ded18f495284557a8d9ab03d223eca7209"
+    },
+    {
+      "bytes": 20186,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_3.xml",
+      "sha256": "3b3cf1126efadf7f66cdd3e74408bc32ed90f7328f597ac8b19cd7a072e59625"
+    },
+    {
+      "bytes": 9308,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_4.tif",
+      "sha256": "afbbad908fe2653db618c1815819d8aed1d847fcf842715c86d6ae10fd8dd621"
+    },
+    {
+      "bytes": 10448,
+      "path": "TCGA-MH-A55W-01Z-00-DX1/TCGA-MH-A55W-01Z-00-DX1_4.xml",
+      "sha256": "94a41914a2d4c1a02ed221fa9ab5aee0b7c87722c2ff567c796c694bdb3c405b"
+    },
+    {
+      "bytes": 49488,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_001.tif",
+      "sha256": "e2851c36de560e1299a12674bace3c794c0d8c704af6292953a8bbc3228ab0da"
+    },
+    {
+      "bytes": 33508,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_001.xml",
+      "sha256": "3feb2681bf644951c2d4c86462fe8f2940d4cd96ffcd2c8e261f80f984998530"
+    },
+    {
+      "bytes": 369962,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_002.tif",
+      "sha256": "15795ac69f169016266a04afdbae61a8d909e34a66d5bafca0eccb575eecd298"
+    },
+    {
+      "bytes": 138146,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_002.xml",
+      "sha256": "61b623ee6af0d46035ed0d0de71ec9fad2dd622fb9a1f045755ca79adb36af4d"
+    },
+    {
+      "bytes": 784006,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_003.tif",
+      "sha256": "5f7eb8ae8b176e45eebc326fbe1851a5dc4b22c45f249708a5569e4bb0ff3b12"
+    },
+    {
+      "bytes": 778220,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_003.xml",
+      "sha256": "6cfbbfeaeb08649d3995645250fb2d271682c3b7c37f6ba10ff3dbacb6564874"
+    },
+    {
+      "bytes": 2566458,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_004.tif",
+      "sha256": "4ffc1b2cce7712ad4d54220d89cfa03c89ba051229be9eb77a0aabeeedfcc66c"
+    },
+    {
+      "bytes": 1141393,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_004.xml",
+      "sha256": "cf3e49880c71d0c11fc304d4822b644056aee350fe29cd2523ac0b9a2fcb2232"
+    },
+    {
+      "bytes": 411732,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_005.tif",
+      "sha256": "51571696f21b44902e0c49b01d0f94af3b0482a1a3606e8d39dde6e15aa247d4"
+    },
+    {
+      "bytes": 81288,
+      "path": "TCGA-MP-A4T7-01Z-00-DX1/TCGA-MP-A4T7-01Z-00-DX1_005.xml",
+      "sha256": "fde22e0a51a8b7e686bea95896dcf1d53cb800cc9b81c982a59d3eb379dae92e"
+    },
+    {
+      "bytes": 298042,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_1.tif",
+      "sha256": "15dc5dcf88c6a3f01c14888c2f8dd2299c8f790dc8db4f6e980cdf0d1490138b"
+    },
+    {
+      "bytes": 363993,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_1.xml",
+      "sha256": "5d8cd9a5bd27b940b240dab0b319c9a86a47f6c6ae9b34248bc14a28ad193100"
+    },
+    {
+      "bytes": 264222,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_2.tif",
+      "sha256": "5469adc25fdb4288599a1ac634a8793b290050381e1e7c5c76609a1e01f64adb"
+    },
+    {
+      "bytes": 300758,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_2.xml",
+      "sha256": "5109c4c8301307d82d975c4b56dcdbdf55194d6e5cc9c1c8fbdd825df98b0485"
+    },
+    {
+      "bytes": 77772,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_3.tif",
+      "sha256": "500fcb469bee84960c4fb006e9d62dd39b67406304578e0c8be95695324108c5"
+    },
+    {
+      "bytes": 51111,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_3.xml",
+      "sha256": "b1b3a2d587af86f166522fdeff5858bce6c3fa818773b2df54e53bb4270819f8"
+    },
+    {
+      "bytes": 343476,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_4.tif",
+      "sha256": "a654022e453fa4f749ae5405827ba2dc1dc6db03883f6a540b70b0d50f7d0f98"
+    },
+    {
+      "bytes": 151071,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_4.xml",
+      "sha256": "e6c4028f74ec7248da9ab5132d6986672e24d241fb6b4346d3e918e8154f463a"
+    },
+    {
+      "bytes": 6845298,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_5.tif",
+      "sha256": "e3f5f69df82943fe5d59de29be2d73d8e3ee41379fa900f241647e38c3f8036a"
+    },
+    {
+      "bytes": 1905910,
+      "path": "TCGA-VP-A87E-01Z-00-DX1/TCGA-VP-A87E-01Z-00-DX1_5.xml",
+      "sha256": "2cebd5b7587678c34e0d6970fa30f0b698013434f67517312d23816295a83a06"
+    },
+    {
+      "bytes": 1041388,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_1.tif",
+      "sha256": "bd16bcc0db2656c051bee9f842ac38ddb6d8b609ae70668c874744b660ba3d1c"
+    },
+    {
+      "bytes": 1275836,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_1.xml",
+      "sha256": "d33fb7a25051b261b63ab13138b82fd2e18b7847eb0034c72a4902e3b410b44b"
+    },
+    {
+      "bytes": 4936492,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_2.tif",
+      "sha256": "b81b27ac9fdc4a84da904397f67fee06313a00575ca43034a07be12b1d8eb419"
+    },
+    {
+      "bytes": 2271368,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_2.xml",
+      "sha256": "540a9841ec0073562764ca695b3405170151034f00b8cb3ab10a0ef5d60ae9fc"
+    },
+    {
+      "bytes": 143280,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_5.tif",
+      "sha256": "86555dfecf82d17c572ad3c7c9ea0cd1453bf9ff1c01eddd783046ad68871edf"
+    },
+    {
+      "bytes": 58440,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_5.xml",
+      "sha256": "1ede87460d3452a191e5abaddd0fe91caf82e9bb1c68374eccb88e0e6aad75a4"
+    },
+    {
+      "bytes": 630406,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_6.tif",
+      "sha256": "5131b1aee8c9f02aa5bf988b7e9c12b3e4d7dcd7e0ba93382d40e0d098bbe8bc"
+    },
+    {
+      "bytes": 410158,
+      "path": "TCGA-VP-A87H-01Z-00-DX1/TCGA-VP-A87H-01Z-00-DX1_6.xml",
+      "sha256": "76ec04b457530cdf01c624be0232f9955adfc40d99d8ea8dacd030e7a6aee30f"
+    },
+    {
+      "bytes": 1629192,
+      "path": "TCGA-X4-A8KS-01Z-00-DX3/TCGA-X4-A8KS-01Z-00-DX3_1.tif",
+      "sha256": "e948bb4adb06b469970426af9f4631bc486c220a8fa50d494082cfbb560c45f9"
+    },
+    {
+      "bytes": 1299112,
+      "path": "TCGA-X4-A8KS-01Z-00-DX3/TCGA-X4-A8KS-01Z-00-DX3_1.xml",
+      "sha256": "1689a94f45310477e48477b01fbb6fba51ccf10b76b109a87cb89386ce3e25a8"
+    },
+    {
+      "bytes": 1169288,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_1.tif",
+      "sha256": "9a5c79f5919c2c72718b3ef41c24eb1c054c6c127ebeba569445caaca0fd26c4"
+    },
+    {
+      "bytes": 732002,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_1.xml",
+      "sha256": "595cd013e671f95313abbd54b4bb6dea9fae796acf77cfe48208b0935482e0e8"
+    },
+    {
+      "bytes": 475638,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_2.tif",
+      "sha256": "7641282cabe9a796cc994ea1da6e22efb26815dbff789cd6419fdeecc832f836"
+    },
+    {
+      "bytes": 129388,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_2.xml",
+      "sha256": "e01df69a9c13cdc38136ec14f79c976e8559bd0068100dfeee38c3be3581f57c"
+    },
+    {
+      "bytes": 58606,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_3.tif",
+      "sha256": "9285619939f2eb20aecfcb63cfa49e25b4bea81657736a0b8253c26d9e100535"
+    },
+    {
+      "bytes": 39151,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_3.xml",
+      "sha256": "f41940c87f9f07284c5b1a2171c37e6d444ece7085b3f8c50d5c50e268ef7821"
+    },
+    {
+      "bytes": 609278,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_4.tif",
+      "sha256": "4c68ab7eac222c9a3ae2aa1c1f994851a6a0778bee7f5bb79f86aa68645c9f51"
+    },
+    {
+      "bytes": 430062,
+      "path": "TCGA-YL-A9WL-01Z-00-DX1/TCGA-YL-A9WL-01Z-00-DX1_4.xml",
+      "sha256": "63d728c229c2bc9110f5aab709354fdd5817ae4570b4b6688dc00269f4899ef2"
+    }
+  ],
+  "train": [
+    {
+      "bytes": 3070138,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_001.tif",
+      "sha256": "f0089cefd3892a775ca9831a3599a55180244de5ff4ea7d9ca44eefc019d8625"
+    },
+    {
+      "bytes": 954158,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_001.xml",
+      "sha256": "6348ce11e441db7fc92a2ed988c80e9d0187d31567407a5d9c5609e6dd877d27"
+    },
+    {
+      "bytes": 782414,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_002.tif",
+      "sha256": "61e1c6c7c428b28be65fcdce1dcd2e8cf4a4ad1504e47e611fab35af136c67f5"
+    },
+    {
+      "bytes": 615871,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_002.xml",
+      "sha256": "8437d312d99aff64361ada128fb4fed97a18b938a0dd4e5e663f213b6e02d165"
+    },
+    {
+      "bytes": 737432,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_003.tif",
+      "sha256": "da73a3be443f3c62d650a4ebb62b76fded11077f8f3c046152be7ed71d006a2c"
+    },
+    {
+      "bytes": 151907,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_003.xml",
+      "sha256": "9959c1a91791774e4390c6e8e89bb5b963ebc0b301adbe746f446edd2f78a02b"
+    },
+    {
+      "bytes": 685124,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_004.tif",
+      "sha256": "2edc4d233a1a34112b67e34870f45479482b0ff15c8c2aa9a7436d9a2eaef876"
+    },
+    {
+      "bytes": 59949,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_004.xml",
+      "sha256": "4b7666fe31a086786fbba7f4aed0dc88b858c37b8844f625875d57faed92a7e3"
+    },
+    {
+      "bytes": 783816,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_005.tif",
+      "sha256": "4c4d0d6c62f5ca9bb5cb5ab4026f3f74254d214ead0244286dd0173d3644177f"
+    },
+    {
+      "bytes": 254413,
+      "path": "TCGA-55-1594-01Z-00-DX1/TCGA-55-1594-01Z-00-DX1_005.xml",
+      "sha256": "e9018dbe533a12965aa2c5853c73d953104c1f16802198e1a74e7992bf3082ad"
+    },
+    {
+      "bytes": 3238362,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_1.tif",
+      "sha256": "509f0ef7343a81d8bbec69eb9cd8d050428faa5493a1d7d46000f053f225acec"
+    },
+    {
+      "bytes": 1077413,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_1.xml",
+      "sha256": "c0db590b4bee3a64132d849788dc851cacf8620ce851a5ca7bdf2c4883f1913a"
+    },
+    {
+      "bytes": 1404342,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_2.tif",
+      "sha256": "9e42f561865745bcee50236138807c99544e0531192fe2f0dd43f53dbbe37cde"
+    },
+    {
+      "bytes": 877030,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_2.xml",
+      "sha256": "6cb59f6a9cc3f56ee5f7ccddbaa1174212cb1903ea5059f8c33a81dc8fd68c2c"
+    },
+    {
+      "bytes": 200792,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_3.tif",
+      "sha256": "edd80c419f06709c1181a6f1869cc29a1f40328ef7fc8402b87ca6a28bb81eaf"
+    },
+    {
+      "bytes": 20446,
+      "path": "TCGA-5P-A9K0-01Z-00-DX1/TCGA-5P-A9K0-01Z-00-DX1_3.xml",
+      "sha256": "8f190bd40b10bcdcf9e1322a42fa69ab8352f7d229d162e49a21a1a3397abb7f"
+    },
+    {
+      "bytes": 598838,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_001.tif",
+      "sha256": "140ac3d79db1d72090d4e14eb58955248f8ac5c2db6f584cda0e1df8f87478cd"
+    },
+    {
+      "bytes": 85644,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_001.xml",
+      "sha256": "220c7f07c49fd7f0f4dd9d43814530ab0e4a9b9b96229bff99cbb9bfe644c135"
+    },
+    {
+      "bytes": 730060,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_002.tif",
+      "sha256": "b8e8d933e21adbc7292187d715ba1305160abb034d5ccacbebec03055e7c567f"
+    },
+    {
+      "bytes": 367102,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_002.xml",
+      "sha256": "2ac532c3eb4a2196abdbf8ed964c526879d680f408ba4f3c792199f45a5207c3"
+    },
+    {
+      "bytes": 693206,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_003.tif",
+      "sha256": "3a04c2a3dd5ec5004c59532910c0b52003a45ff15ed6dff126d7f7f76a3a8fde"
+    },
+    {
+      "bytes": 218130,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_003.xml",
+      "sha256": "999fa85806078b22466569bb6e374a250afb0bf7924a04fe1d36fe059cb21ef8"
+    },
+    {
+      "bytes": 2954648,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_004.tif",
+      "sha256": "5186d436cc5c66fac483174a78a39c6141633e5c3341d57ec648340cbcc858f4"
+    },
+    {
+      "bytes": 837708,
+      "path": "TCGA-69-7760-01Z-00-DX1/TCGA-69-7760-01Z-00-DX1_004.xml",
+      "sha256": "59572e1c39c3d8943c6b132b0e39dce6f896099e110023fe25452ab528990cc4"
+    },
+    {
+      "bytes": 76678,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_001.tif",
+      "sha256": "b57d047857abf1a000dfcecf5251dfb700dfcd80e551a6d46fcd26cab642aea6"
+    },
+    {
+      "bytes": 61461,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_001.xml",
+      "sha256": "8c085a4abf8569bd546cd0b1c7932761c95cd51dc8016c6a1ce37de65eca6a9c"
+    },
+    {
+      "bytes": 338216,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_002.tif",
+      "sha256": "a7323d3ae86a6cea53a0a080b87ed6870adef98fd7350910568fcdab06b70648"
+    },
+    {
+      "bytes": 28452,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_002.xml",
+      "sha256": "3960e6f259e6639d7e2ce2802dc035fa05cd4136dd04b3f547ccc2f4045f3b11"
+    },
+    {
+      "bytes": 10294156,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_003.tif",
+      "sha256": "a4fa446f178363e9b566fe8a3f7e36d3a1fa4f249c38b96b578697044a54cd68"
+    },
+    {
+      "bytes": 1446995,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_003.xml",
+      "sha256": "52219f39746efb14a90c08beea0bf4db074192d62b17d5623081f2f024a58b02"
+    },
+    {
+      "bytes": 1577324,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_004.tif",
+      "sha256": "b072f794e670f1315f43b56ee1fddc1d5e5fe11210b204ae16669397a6df90f3"
+    },
+    {
+      "bytes": 610072,
+      "path": "TCGA-69-A59K-01Z-00-DX1/TCGA-69-A59K-01Z-00-DX1_004.xml",
+      "sha256": "63cb35964ff5499f047ee375b194daeecc3e53ff874122ea6cdc4f73c6a9ceb9"
+    },
+    {
+      "bytes": 1286060,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_001.tif",
+      "sha256": "c0c5aee28e4a5a95fe85de94be2718ca3968029de14cd4d0b227a45eb8d836dc"
+    },
+    {
+      "bytes": 63630,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_001.xml",
+      "sha256": "222c39de519e118db954a20dd79dddbff9864b0aee8088d562200c582877f73d"
+    },
+    {
+      "bytes": 2960934,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_002.tif",
+      "sha256": "30d129ab2ebcf023781414b22f8cf44e143ba61bb71c8ba048fc1a5d2b9600e2"
+    },
+    {
+      "bytes": 1103319,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_002.xml",
+      "sha256": "a33660be3a043b228d62a06c04332afd4592bbd6562cad43c413fbedae1659dd"
+    },
+    {
+      "bytes": 153534,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_003.tif",
+      "sha256": "0bded0a7b70d300b48bc1427f6f4c0ac4b79ceeb6adfb54d0fc2ff7d39c5819d"
+    },
+    {
+      "bytes": 30237,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_003.xml",
+      "sha256": "3807014cf2d60e121f65ab670b0cbe6c9341a7298a35ad50575f3ec76e3dbe35"
+    },
+    {
+      "bytes": 947072,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_004.tif",
+      "sha256": "e7443caa7835ee8ec1354c9a4d4c8fb4b4e2dbc281b72858e13bfee7c82989e8"
+    },
+    {
+      "bytes": 479865,
+      "path": "TCGA-73-4668-01Z-00-DX1/TCGA-73-4668-01Z-00-DX1_004.xml",
+      "sha256": "c60366bde6c3c8ad2f3636c44a211f653529128ace9e120af90baf4d501c1806"
+    },
+    {
+      "bytes": 391482,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_001.tif",
+      "sha256": "b80903065e39fbe12c5df1f0b4d644f2c5ef53edc8296daff3cba724905ae2dc"
+    },
+    {
+      "bytes": 67330,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_001.xml",
+      "sha256": "c5f238add1491872b4e35c315dc0bb14dc570563fde371dc7105291499ceb2ed"
+    },
+    {
+      "bytes": 586882,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_002.tif",
+      "sha256": "3a75008eb7d0eb136ca82cc2232577abb9b9a4e60020fb437fb5dbf3f968d0c6"
+    },
+    {
+      "bytes": 56014,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_002.xml",
+      "sha256": "dff270a4f7e7e05f236d7e404f86b5b94f409f6ffd10aba6f8e100f45517a637"
+    },
+    {
+      "bytes": 2937284,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_003.tif",
+      "sha256": "0e48f2047ac80882548c34e3faf279f7eb80d1f2f417ab731ec53ddf7a837997"
+    },
+    {
+      "bytes": 1047823,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_003.xml",
+      "sha256": "c7a0aa2e5cb52c7d0b76c32d41c616904c4bb175c88ed7b36982976bae5a7a4b"
+    },
+    {
+      "bytes": 741458,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_004.tif",
+      "sha256": "2219a20092965d5c2ff081b2f656feb51ebdc7a28420e1fa1fdf41b07a86fbe8"
+    },
+    {
+      "bytes": 297611,
+      "path": "TCGA-78-7220-01Z-00-DX1/TCGA-78-7220-01Z-00-DX1_004.xml",
+      "sha256": "2290b3b351607a0a94633530b6cf490cf21621af5b7618007e7b620f791f069c"
+    },
+    {
+      "bytes": 715956,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_001.tif",
+      "sha256": "6940ce9ae6b050d1ecf93d78caf397d96387edd9dceef1831b758c5e9ae7e0d0"
+    },
+    {
+      "bytes": 40915,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_001.xml",
+      "sha256": "650c71b9c8ac1386e5bc8e7b6f46fd647d730679da5891f5a04c484407ba980f"
+    },
+    {
+      "bytes": 1343058,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_002.tif",
+      "sha256": "cf68c365e790baf36b4a4884ec8344bac2ee06af9090b99bcfb12e9b4f64f15c"
+    },
+    {
+      "bytes": 125854,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_002.xml",
+      "sha256": "626b1c310a1eabecad1e89581cb5472bdfaec305b163772e4b14d40cd108256b"
+    },
+    {
+      "bytes": 1246460,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_003.tif",
+      "sha256": "cfda1d24cea85220503338f2e91b96d7da95f30e9b2e07e29f584396a98af27c"
+    },
+    {
+      "bytes": 776804,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_003.xml",
+      "sha256": "5d9f1836e982cdc76d774a8f723ec64b6a052ac67bcfd599cd4f7f7eb957287d"
+    },
+    {
+      "bytes": 3056492,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_004.tif",
+      "sha256": "76cd29342d134f4f40ff05cff26d914710c6c8426659eae7a3787f72b91b7e93"
+    },
+    {
+      "bytes": 1323475,
+      "path": "TCGA-86-7713-01Z-00-DX1/TCGA-86-7713-01Z-00-DX1_004.xml",
+      "sha256": "b08a1ae39f856510cbde187d899f5a2abe4bccbe280aa7a57cc0e827a0275d1d"
+    },
+    {
+      "bytes": 1249408,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_1.tif",
+      "sha256": "94212c27b5cdf64393512a82bbe0626ae4c2faaf3dfcffdb473ff62e70adef1a"
+    },
+    {
+      "bytes": 716834,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_1.xml",
+      "sha256": "64cf6d5229cb038d9d181fdbb2f9cf2f92233cfc651485d5e1a1007df6856009"
+    },
+    {
+      "bytes": 5335874,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_2.tif",
+      "sha256": "f1d66023300ed4df9955554964127b45392c0553e62cb6fa95d6757095dbe7fd"
+    },
+    {
+      "bytes": 157965,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_2.xml",
+      "sha256": "71cd70755b1350f4538538dfde4d4f097ca0d8d15155581a05d79042339fc5e5"
+    },
+    {
+      "bytes": 5532670,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_3.tif",
+      "sha256": "d5994f045cb2c045ae0dadedd08d11f3513e862c6b49d5099874f361b2fcbd22"
+    },
+    {
+      "bytes": 1819150,
+      "path": "TCGA-86-8672-01Z-00-DX1/TCGA-86-8672-01Z-00-DX1_3.xml",
+      "sha256": "322ee1392f389a3b7fb533dd00df838278ad42cfac76dbb5847814a30f758572"
+    },
+    {
+      "bytes": 946402,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_1.tif",
+      "sha256": "7a49137f1bbefa828841745a18b8bd3aefc79f5ef9816a7706c76d711003b919"
+    },
+    {
+      "bytes": 732293,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_1.xml",
+      "sha256": "9c0a8a082541ec99f475c0046196c6e1247d74a8077f4103a55a8bdd12e3c0e2"
+    },
+    {
+      "bytes": 984832,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_2.tif",
+      "sha256": "6639cec75cbc5922f54c3e0bff76192179ef5e60dc11c2e5975dffeea0af4499"
+    },
+    {
+      "bytes": 601593,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_2.xml",
+      "sha256": "03101f3e6f540624a38e4aadcdb90ee4cfa8bab63da8bbf25379a6ff6815e322"
+    },
+    {
+      "bytes": 106886,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_3.tif",
+      "sha256": "86b257e11608eeba3a7cc532988fad2232384018b1da7bab0005a5b43e81b23a"
+    },
+    {
+      "bytes": 64778,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_3.xml",
+      "sha256": "81cfa9872225a97cca425d8167bac2bec6cc263735a6c6300eacf590b482c747"
+    },
+    {
+      "bytes": 1483620,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_4.tif",
+      "sha256": "44e33efde19004bbdd38c667f4e138f9c1562b1bbdd9d14acb5e476952b8b798"
+    },
+    {
+      "bytes": 917800,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_4.xml",
+      "sha256": "2d586d3717e7d7f53e3d0d9169c1c6ae21d7d2f9184f597998f043674b122a16"
+    },
+    {
+      "bytes": 84158,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_5.tif",
+      "sha256": "3cbd0b20b9a3e8915c7bb186ff07f4671d9ecb22d7fd3965e895697a4a713b6d"
+    },
+    {
+      "bytes": 29741,
+      "path": "TCGA-A2-A0CV-01Z-00-DX1/TCGA-A2-A0CV-01Z-00-DX1_5.xml",
+      "sha256": "b1eae4b3cef3928a793d5beb22efcbbae6807ecd3c3d9b0f905a59737efd5ee5"
+    },
+    {
+      "bytes": 6448982,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_1.tif",
+      "sha256": "d47936e39e44dd032c680d55bfebe90308b3bdebb9192524dcb3142a57ce2924"
+    },
+    {
+      "bytes": 1341930,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_1.xml",
+      "sha256": "c06dbb3b79dc1d71ec6fec31dcbe8bc7828ffc45a33f015d6a6ff69b6bb703ac"
+    },
+    {
+      "bytes": 139596,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_2.tif",
+      "sha256": "137213049462a67e29473b80320c04239ea2fb9dbbd5dea197f10d9f99a66fab"
+    },
+    {
+      "bytes": 81873,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_2.xml",
+      "sha256": "74c13955696dc8d1004b1d29debd0e23c358aedc63e676ef008b67debe2e2a5d"
+    },
+    {
+      "bytes": 220942,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_3.tif",
+      "sha256": "b2d0b6c676cfd174ca98a131907df8f05b8c1a4dd022ab95a286aedda1e3cc65"
+    },
+    {
+      "bytes": 16773,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_3.xml",
+      "sha256": "a493371a583b03a1de368a5c75eed1d12d510816b986b1c8222328de65f096b9"
+    },
+    {
+      "bytes": 283548,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_4.tif",
+      "sha256": "b6d6032e72496aefc4bbf95b1baf306c50011dc613d5b6523daa54529f66022f"
+    },
+    {
+      "bytes": 91650,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_4.xml",
+      "sha256": "cccab1f173c9c53cf771ad078e262cb1cef15acd36237cbc952d7f3f47bb9a4e"
+    },
+    {
+      "bytes": 925808,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_5.tif",
+      "sha256": "32d9874c9a73ea2209348d534e53bafec074a2688037251af9da99141659dc28"
+    },
+    {
+      "bytes": 611709,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_5.xml",
+      "sha256": "be965feaef5ea9ccbad7ec654f2a50210669dc992ca798ae34f3bb892884512a"
+    },
+    {
+      "bytes": 201240,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_6.tif",
+      "sha256": "9d690b12e66591c815aebb3a5197dd47725a1a71fbc8a4f0f1139b803ef03187"
+    },
+    {
+      "bytes": 16190,
+      "path": "TCGA-B6-A0WZ-01Z-00-DX1/TCGA-B6-A0WZ-01Z-00-DX1_6.xml",
+      "sha256": "c788a88bf33ecafab13e6727b12e930f304d4e9ca93e000a82c2de67966ac676"
+    },
+    {
+      "bytes": 869384,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_1.tif",
+      "sha256": "ab7c22cf9db65c59147ffa604ad0664ffcd29204abf9294f15bf3d6dcad12d64"
+    },
+    {
+      "bytes": 1150543,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_1.xml",
+      "sha256": "51474853a253449fa644b718f6ce602cafde9bcb16e5616611283914b2e552df"
+    },
+    {
+      "bytes": 4300054,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_2.tif",
+      "sha256": "fa05e4d0263e16f7baae456508ff811d87e8f133560d95b415c6d32c772da409"
+    },
+    {
+      "bytes": 1269128,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_2.xml",
+      "sha256": "5372cc49d075f214bb3e2e803600676db926e710ab7bfe3b63c20e1e8e7749ba"
+    },
+    {
+      "bytes": 94024,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_3.tif",
+      "sha256": "c3cefeddf2d37ec323c8d5d94c356d7fd83db07049476dcfac97387945312228"
+    },
+    {
+      "bytes": 65921,
+      "path": "TCGA-B9-A44B-01Z-00-DX1/TCGA-B9-A44B-01Z-00-DX1_3.xml",
+      "sha256": "5acb0b156ce24e44e1677ddd5675d898fb304be2b011668d8df44f252e758afe"
+    },
+    {
+      "bytes": 4292732,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_1.tif",
+      "sha256": "374e7c28321b446a0904eb90956f3074fce9238a54f85432ad07adc7e5396979"
+    },
+    {
+      "bytes": 995660,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_1.xml",
+      "sha256": "f2b4a3ea9e8e6a6ca59e3c0dc68c531f481db170ad51f5c6b9038c797551e185"
+    },
+    {
+      "bytes": 2149598,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_2.tif",
+      "sha256": "3a7d258aca6cee2e8b6a18c2b17b790acbf9f7237d8dd8e9bce06d1f94357bb9"
+    },
+    {
+      "bytes": 345198,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_2.xml",
+      "sha256": "3f8aabc37e5959e761d7421699ae660a15cd7bdf3d74a9f4071b5354579a7906"
+    },
+    {
+      "bytes": 5643760,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_3.tif",
+      "sha256": "14eb3b4e860bf84a7f1c56e7c2f0ec672e2957fc7f95c186b8947eccdd005e7a"
+    },
+    {
+      "bytes": 1102556,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_3.xml",
+      "sha256": "1c1098acb18c2a7414b4d5c3430ba6b148123a45e96cc7faecb7b9a7ce4cda87"
+    },
+    {
+      "bytes": 180428,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_4.tif",
+      "sha256": "e710bb32074fb0a1548e0b61fbe108da676377e0d4a4f552a3cce9b30c363a76"
+    },
+    {
+      "bytes": 19115,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_4.xml",
+      "sha256": "490c04974a4dfb75b75d922c20fcd1d8aa9529b6c769280ba6fe65b7fd876cf9"
+    },
+    {
+      "bytes": 114780,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_5.tif",
+      "sha256": "6c5520f46b360c7759e46af1f22ca059ebbfc74b99141fef855c0fc4e7c65524"
+    },
+    {
+      "bytes": 64764,
+      "path": "TCGA-B9-A8YI-01Z-00-DX1/TCGA-B9-A8YI-01Z-00-DX1_5.xml",
+      "sha256": "0c423a0df350ba46fab9b29fabe7f430a6ce766606939e1dc49e06535e3d865b"
+    },
+    {
+      "bytes": 3666110,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_1.tif",
+      "sha256": "501d009139cf64dc60d8759bd6adea8b389e0230c182cbee38f3623638c2c5ad"
+    },
+    {
+      "bytes": 2070328,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_1.xml",
+      "sha256": "917bad4fb5b86d749b89dd43a153d3218e0ec739aa1574f34a5122ff2d43cfaa"
+    },
+    {
+      "bytes": 977640,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_2.tif",
+      "sha256": "6a602a3e9ed05f261072f10d70f8e0f7e42d0c7a7d8841dd62390a54e738d43c"
+    },
+    {
+      "bytes": 106960,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_2.xml",
+      "sha256": "29ae8b72c50828bc72f03be9d6a29b1764ca61d8ae4da2c0020d11667a02d8e5"
+    },
+    {
+      "bytes": 471870,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_3.tif",
+      "sha256": "a30bc85b556a33a2d967aeeb13b680bbf1bbedd741af525a768ff52657396dd0"
+    },
+    {
+      "bytes": 59459,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_3.xml",
+      "sha256": "08277b0b49731e5cc04b018cedf0b521ceb2d9eef1307dcdff4b7f8f1d4fb0da"
+    },
+    {
+      "bytes": 475126,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_4.tif",
+      "sha256": "e0c9feef09d6d12e403d90e78060e1a5849eeb76eca1193af1dc504f16a45375"
+    },
+    {
+      "bytes": 165920,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_4.xml",
+      "sha256": "65b8820cd312d1dcfd63ae4478cff5e07b577f67b9d20656b22fdfedabb42b1f"
+    },
+    {
+      "bytes": 2149046,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_5.tif",
+      "sha256": "e322f3804da3c8291910ea5ac077771a6f1c0c0a990a28da958b00d8deb7b81b"
+    },
+    {
+      "bytes": 523981,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_5.xml",
+      "sha256": "65a51be3dce95e2876d0422daad41e456a810b02876a1ba6f7a813fe53905f6a"
+    },
+    {
+      "bytes": 3989504,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_6.tif",
+      "sha256": "3f05e5a3b9c812ce5a8bce2c37615d6588f943740eac9404ff11f1e802fc7173"
+    },
+    {
+      "bytes": 941947,
+      "path": "TCGA-BH-A18T-01Z-00-DX1/TCGA-BH-A18T-01Z-00-DX1_6.xml",
+      "sha256": "467e2915da31453616e9c22d9c7ab70651e6ce6f0d508c1cb45da5a1c0286624"
+    },
+    {
+      "bytes": 190502,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_1.tif",
+      "sha256": "69ec780f9b68f61123a7dfd804793f40c093b7cae77cbfc1e441733ec731d5bb"
+    },
+    {
+      "bytes": 26506,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_1.xml",
+      "sha256": "8d1287474f37faec9ab2dd948516b8b169bb4d5c237ff24944a49d41eeaf4318"
+    },
+    {
+      "bytes": 3721696,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_2.tif",
+      "sha256": "f8dbd526834b673b48a45a05a6a2bf4aa69222f5abdeaec0b7c269f6acfcffe1"
+    },
+    {
+      "bytes": 1328986,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_2.xml",
+      "sha256": "e170f1559c4e8a12361f8f5db6e6ee092a30883bb1eb84953d9af6b534fd9960"
+    },
+    {
+      "bytes": 6275542,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_3.tif",
+      "sha256": "06ccd76791ed7cd422eb587d86f0d28cba60a62a4f225bccfced62bf7663827c"
+    },
+    {
+      "bytes": 1619851,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_3.xml",
+      "sha256": "1bfce45f280c631415f82c430d7cc12dc4831ba0a18a9aaa67aef20f60364fb9"
+    },
+    {
+      "bytes": 2275504,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_4.tif",
+      "sha256": "89b5b50fe9ceefa160b35002314eac1ba379592f35f37b564da8c8953edb1471"
+    },
+    {
+      "bytes": 68832,
+      "path": "TCGA-D8-A1X5-01Z-00-DX2/TCGA-D8-A1X5-01Z-00-DX2_4.xml",
+      "sha256": "3fbccdf8eedd0d2f93e4f04973c0c020beccb2dfdcb532a6e6ec41ea678b5a0a"
+    },
+    {
+      "bytes": 2087840,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_1.tif",
+      "sha256": "790b81d9b771aa09ccc26b9f2ae6b6db26299f46f023e91ef17ca29063e837b9"
+    },
+    {
+      "bytes": 1874602,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_1.xml",
+      "sha256": "e72dc3df37d0389c0c2cc5bc2e867c0032859f1b365d85e7bdeeaaaafa0b51fa"
+    },
+    {
+      "bytes": 2085596,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_2.tif",
+      "sha256": "0fa25b91db9b0c44fd777881f8f6421261e2231dc1957060e2209e1bdf18f3d4"
+    },
+    {
+      "bytes": 1057401,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_2.xml",
+      "sha256": "dc3f82067ba34f0dda0fbbc56c15cc660ea6781fc2beca068261e33955c67121"
+    },
+    {
+      "bytes": 310190,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_3.tif",
+      "sha256": "7f6d3920ab39d7eff522cab2c084d9f202ed1a8ead544edbe455d286b2ee885b"
+    },
+    {
+      "bytes": 41367,
+      "path": "TCGA-DW-7841-01Z-00-DX1/TCGA-DW-7841-01Z-00-DX1_3.xml",
+      "sha256": "7a52704ed6f11d6fbe1ad161efcb3729d024ff3c2a30fcf8203bcf479674e607"
+    },
+    {
+      "bytes": 611352,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_1.tif",
+      "sha256": "c31048bfcede2476446e7135682661fe6d4a937cf77467299c60057f0e2626d2"
+    },
+    {
+      "bytes": 309946,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_1.xml",
+      "sha256": "19c864e3df58d4a4e3642c9065c712ee72c182e17c2c31f9ad685d94bd7b9435"
+    },
+    {
+      "bytes": 164422,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_2.tif",
+      "sha256": "4600860a523076c84eb75260e86e645557b531d889471317b3af08d6c105ff54"
+    },
+    {
+      "bytes": 77105,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_2.xml",
+      "sha256": "c4d69eda2c90e16718d2aa08774b7bc83f9a326f052038ca3b960f9fd7564560"
+    },
+    {
+      "bytes": 938524,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_3.tif",
+      "sha256": "44764e495733b550acdd27fa8cd8a1757335e48da3b3c8015743d711c3a874aa"
+    },
+    {
+      "bytes": 459609,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_3.xml",
+      "sha256": "77631be7ecd587b5b68184159d63a28ca9ede91b3690530658cc9fade1d061d2"
+    },
+    {
+      "bytes": 1162340,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_4.tif",
+      "sha256": "dc9ec983ff0dba10d2d6f2059162ada12daa097a544fd71b378830ddf21a7e8f"
+    },
+    {
+      "bytes": 519913,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_4.xml",
+      "sha256": "bfc1d890f5c2ccc84a3eca1bae38fa75d3bdb4248d3be8f200806e756a9a7e15"
+    },
+    {
+      "bytes": 494866,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_5.tif",
+      "sha256": "a3787a38264e15d1bb263b94744455bcdf3c86a065d9167efc03409fd618bde3"
+    },
+    {
+      "bytes": 239893,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_5.xml",
+      "sha256": "107cb15c6c1c54d4c42b88b35377c9faf91f4c0cca8780b7a6767f354192bd36"
+    },
+    {
+      "bytes": 27008,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_6.tif",
+      "sha256": "f95ca8d4c4236f347575d0c3d28791c0214baece961a2421600ac609ea798602"
+    },
+    {
+      "bytes": 10787,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_6.xml",
+      "sha256": "173d3f32ce2c1425b9c8f436edc90e393c059d93f6e300c2ae30844d00cc350c"
+    },
+    {
+      "bytes": 43464,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_7.tif",
+      "sha256": "8ec510996e4e5de838001adf053c0f3448cf60565bb44b8840be4c55d582ba9a"
+    },
+    {
+      "bytes": 9984,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_7.xml",
+      "sha256": "16a54414735b34f3f04b5707fdf90f295f3e485d2da97abb54da5f933a617567"
+    },
+    {
+      "bytes": 102042,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_8.tif",
+      "sha256": "2d9145f5651eda8129b12f8b75a803f68748aaa702c68fdb266d1aec1b351f80"
+    },
+    {
+      "bytes": 55274,
+      "path": "TCGA-E2-A154-01Z-00-DX1/TCGA-E2-A154-01Z-00-DX1_8.xml",
+      "sha256": "d86f636620c745c3a8186c987a08eb239a52ab53dae22185558f3e9bf91bd639"
+    },
+    {
+      "bytes": 6133866,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_1.tif",
+      "sha256": "655d11a98027104dc55272ce66dbd3f731a6ee6801db64e04670bbd0e639cfdb"
+    },
+    {
+      "bytes": 834911,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_1.xml",
+      "sha256": "51366ab2e3016b253aeee72cdbd7ec60dc30d16e19337925eb856869496313c2"
+    },
+    {
+      "bytes": 1442820,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_2.tif",
+      "sha256": "5ecba1461ab2bd7b3dbf56f88f53dae8ce1c6e4b0565c0ed269046f1fcd9ee78"
+    },
+    {
+      "bytes": 91897,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_2.xml",
+      "sha256": "598b63ef0dc03ba03fab1d44ab7385f9f66904eff9674c7416c1d808a2404a65"
+    },
+    {
+      "bytes": 1651828,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_3.tif",
+      "sha256": "fcbcf53ad8c55152b3e8017cec2168cc5a006b0db6d741cd646db0e5ee76d94c"
+    },
+    {
+      "bytes": 757575,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_3.xml",
+      "sha256": "161ff9d3533dce26322851a012ea28a5b05e7fdf72d9023bbf4ba3ec30be5124"
+    },
+    {
+      "bytes": 156590,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_4.tif",
+      "sha256": "18992bcd33495dee1733ee02ffbf8e6677dbe300ebcd7d8666946bdf2740df12"
+    },
+    {
+      "bytes": 28496,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_4.xml",
+      "sha256": "feddcf9a9f8d9eef815cc177bfc8e7a82f17a10684fa643808c42af5b5e498f3"
+    },
+    {
+      "bytes": 79222,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_5.tif",
+      "sha256": "0fd69e65da385b4b00bcf46cd14ca775bc979eab50397d32b3635935cbad3289"
+    },
+    {
+      "bytes": 23348,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_5.xml",
+      "sha256": "ae11965aaa4f4f7e02ccea0854ea444eade5d3d3a4b7a8d6c54fdfe3bcb64598"
+    },
+    {
+      "bytes": 186302,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_6.tif",
+      "sha256": "b8ec945a64ab38bf6a60dc43cae39e3af63b5bbd7e87ece077c6d99c91484f8c"
+    },
+    {
+      "bytes": 29922,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_6.xml",
+      "sha256": "8f6cd4fa72c52841acd742f247efda344187eed368fd299f22483915b18aaf10"
+    },
+    {
+      "bytes": 133566,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_7.tif",
+      "sha256": "974b00ec49dd755d343b809fc2338df15bae6ff0e338d4d2aebf0c6d18be6478"
+    },
+    {
+      "bytes": 10072,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_7.xml",
+      "sha256": "4eff481249a8a64a1f96086fe00ef458927180e9ad5a58fec031501191d6d37b"
+    },
+    {
+      "bytes": 3384338,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_8.tif",
+      "sha256": "47835789b36df2e3ced619e1d7131f6a1fe7027144dd0bfe9dd00c11170fa4bd"
+    },
+    {
+      "bytes": 834374,
+      "path": "TCGA-E9-A22B-01Z-00-DX1/TCGA-E9-A22B-01Z-00-DX1_8.xml",
+      "sha256": "b4e4301e3aff9b644ee641f91dd017fc3d1349c4327f493713882ae84ff3b0f2"
+    },
+    {
+      "bytes": 1076456,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_1.tif",
+      "sha256": "b095db8e31580d104ea9ea8720f2a0485e367e27ed215b859bab3743198a7db6"
+    },
+    {
+      "bytes": 1057476,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_1.xml",
+      "sha256": "1ee969f9ef7cafd3673f2b759aad0279747e692195fd15a53f4605bc9b2ea672"
+    },
+    {
+      "bytes": 1361312,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_2.tif",
+      "sha256": "49d347723a5f5bda20df085cdc14a392d70cccdd0773b42dca87963e2e7bcf9a"
+    },
+    {
+      "bytes": 816802,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_2.xml",
+      "sha256": "c7bd97040a0ef2ebe12fa7265a59f7bf7b30fb3beeb76fe2025b69fa41735813"
+    },
+    {
+      "bytes": 350754,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_3.tif",
+      "sha256": "5c4b7e411429c64b946cf27c1581a58f58c12758186c2f04f7b5a4707f6c0f90"
+    },
+    {
+      "bytes": 85647,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_3.xml",
+      "sha256": "0f821170b7a89d585de87c524a436e20892a84ce195a9e1a89fc712d1e897b49"
+    },
+    {
+      "bytes": 200794,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_4.tif",
+      "sha256": "984505bd3db4a5cddd06c0fdd42408f8b33b988e9505ae1d2b5baf3eec4c479c"
+    },
+    {
+      "bytes": 35918,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_4.xml",
+      "sha256": "946867240bcf94952fcd9b6b3f151d1c77220da0f522fbaaf2fac514d3277243"
+    },
+    {
+      "bytes": 1366202,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_5.tif",
+      "sha256": "8cc20797ac5cb9dbfaa4d05b900f4243e89249a10b16ec4cb18a9294b66ab029"
+    },
+    {
+      "bytes": 552923,
+      "path": "TCGA-E9-A22G-01Z-00-DX1/TCGA-E9-A22G-01Z-00-DX1_5.xml",
+      "sha256": "b46a1c47c2f02904ca9fd9e478004dccb47f11a5a471fe461a7e34cba5b056ac"
+    },
+    {
+      "bytes": 6274054,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-1.tif",
+      "sha256": "590918f4ac81a3c136665466b3e9a39f6b434b02eaa7d41261be104fa721104b"
+    },
+    {
+      "bytes": 2749872,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-1.xml",
+      "sha256": "7893d8fd17160d1256316f0dcddf218b29ff46b0a3e3e722ee50ee9ec8110496"
+    },
+    {
+      "bytes": 1063062,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-2.tif",
+      "sha256": "78ebfbfaa53476b0a13b1a3195d0c1fd68d920290b9a3bd7fae2398aca7c6414"
+    },
+    {
+      "bytes": 1048423,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-2.xml",
+      "sha256": "45964e2d34fa7c1245ac3ad2f84a92be7ecfabeab3e1dd3397b1688669dc585c"
+    },
+    {
+      "bytes": 348694,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-3.tif",
+      "sha256": "c99708503107e953e02ca0ecd61a88162e8c4f057afd435d4c883ad685838555"
+    },
+    {
+      "bytes": 75097,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-3.xml",
+      "sha256": "57aa984e951d54b382d68391a2fff4410677917c4fbd7032f87b3b677f35340c"
+    },
+    {
+      "bytes": 191014,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-4.tif",
+      "sha256": "b41b4725c070f6d76c3aaf8aee72f6ea60c4bbf61c36b9c5f4ddd36d1dca0634"
+    },
+    {
+      "bytes": 60446,
+      "path": "TCGA-EJ-5495-01Z-00-DX1/TCGA-EJ-5495-01Z-00-DX1-4.xml",
+      "sha256": "4501fd49e52c4940c5379ab955001f3b1c95bd4c3ae189d8484f534d6a8ea3e5"
+    },
+    {
+      "bytes": 3089444,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-1.tif",
+      "sha256": "1ebb1d1fa636dbd158286900e3d9e9059af1f6aaf9d5d70766021cbd73bcef11"
+    },
+    {
+      "bytes": 1308126,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-1.xml",
+      "sha256": "682d89d2b1b298d16bd9c4dd1c19d3919414fb3c6e724ba4055c12a2ec0f111c"
+    },
+    {
+      "bytes": 198140,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-2.tif",
+      "sha256": "b580dc70ad94505a2da55eafbc882973ab0f5fe7b62065aa737644b7c2f8239f"
+    },
+    {
+      "bytes": 23450,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-2.xml",
+      "sha256": "a4975458194adad337a7c4aa5c7488e9037af5c7fe356db159fa4ac169202d3c"
+    },
+    {
+      "bytes": 169744,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-3.tif",
+      "sha256": "f6a0a9565502e78ca1e74a16221bf9c2ae8f6280d908e2dd1264019fc5b4b887"
+    },
+    {
+      "bytes": 35223,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-3.xml",
+      "sha256": "0c5b104b48154bb666afa6c681259746b6c538da7908feadd4bc85a4c7359dea"
+    },
+    {
+      "bytes": 464204,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-4.tif",
+      "sha256": "d6d0f1fcbf7542dc640efc4262b93483181c028b98cce7016172f02ded7033cd"
+    },
+    {
+      "bytes": 118353,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-4.xml",
+      "sha256": "9df62ec15263d6c36b1501ea2bc3c7d3719b5f0a8ad14870aa567e2368ea8316"
+    },
+    {
+      "bytes": 322268,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-5.tif",
+      "sha256": "32b6c0e292c018de314349556b7071eb335f278a94db4275957cf8222b8d3ac8"
+    },
+    {
+      "bytes": 126624,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-5.xml",
+      "sha256": "0784364e7641079f9028eefd5a893f3d55253ce5e2cdb5df896eba0780dcae4e"
+    },
+    {
+      "bytes": 171994,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-6.tif",
+      "sha256": "5475824beb651d2334ba97c698ea83d2f13b56188d85b888428cca4bfaa0db31"
+    },
+    {
+      "bytes": 112515,
+      "path": "TCGA-EJ-5505-01Z-00-DX1/TCGA-EJ-5505-01Z-00-DX1-6.xml",
+      "sha256": "ae9bd43752a088021d7db48678e81aacb44fb420613a1b52642a1a5e0deba7cb"
+    },
+    {
+      "bytes": 621570,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-1.tif",
+      "sha256": "eff19f21fe2e7a84d2bb46202b3ddb73f4dae614a4dc387a2e49e82b94bd09a1"
+    },
+    {
+      "bytes": 209742,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-1.xml",
+      "sha256": "3882ed770d308ce27f6992b460cfbb66f46660a696a6ec0b65ac9d2c0d1ad150"
+    },
+    {
+      "bytes": 71408,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-2.tif",
+      "sha256": "3028f5d086663b51d270ae91ed860a2f4a133f269b83e6d890bd1b357263b6d8"
+    },
+    {
+      "bytes": 26132,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-2.xml",
+      "sha256": "6ddbc38e05f06ea45a28ec1d235ad284f6c783b5999f4068e581a943d2076639"
+    },
+    {
+      "bytes": 1275304,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-3.tif",
+      "sha256": "14622362f37550e7879032e90f4541395a9ce36b0a7ee92478c044db79fd3d82"
+    },
+    {
+      "bytes": 74218,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-3.xml",
+      "sha256": "1b329eb73b7b65301ab24687333a68c0a291cd22d5213f4c4f23aacaf5e7ea43"
+    },
+    {
+      "bytes": 7675948,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-4.tif",
+      "sha256": "7fff31022f04bd2b79b28b2a9aafae1a0a3c23be05873c4442d62c7cb379c457"
+    },
+    {
+      "bytes": 3326870,
+      "path": "TCGA-EJ-5517-01Z-00-DX1/TCGA-EJ-5517-01Z-00-DX1-4.xml",
+      "sha256": "fac65b804055c3c42396c6ea33d07e5b63e0332432954f3966fc0887ec259fbb"
+    },
+    {
+      "bytes": 2764728,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_1.tif",
+      "sha256": "ae47e68188d1c3a92503a306b242310f2b6b3ab87f4c5ef83c9e969a0ae7eb94"
+    },
+    {
+      "bytes": 1194394,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_1.xml",
+      "sha256": "a02e9eeb08aede418cd015cbbca3d60e567a1b16d1349df5452495bb559f9a24"
+    },
+    {
+      "bytes": 1302852,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_2.tif",
+      "sha256": "eadd22c70698fabad7c6dad1f9c4c3ffdd4a651fa5a19feca00f516b1ff4b5e2"
+    },
+    {
+      "bytes": 1273795,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_2.xml",
+      "sha256": "201ab80df5d554438b1b878eca65272d945469e74274d57a6e8904fcce213a36"
+    },
+    {
+      "bytes": 74374,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_3.tif",
+      "sha256": "5f5ac4e8c60d3ac44a0b60d8fecc9dac6a02e2a668219b9beeee76b699cfebd0"
+    },
+    {
+      "bytes": 60057,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_3.xml",
+      "sha256": "90fa94d9bbd4297479ab198e444d676aebf79cb244d15f5d9dbad0ef5f953bc6"
+    },
+    {
+      "bytes": 186022,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_4.tif",
+      "sha256": "de148e8172f33d53acc401cb925cfcf36bf825f5cb5b135a50bcdd08d795f563"
+    },
+    {
+      "bytes": 82181,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_4.xml",
+      "sha256": "8cb99015003931f38e9fd30aca3641e8df972bae0d3af0228f4d1aad89dfbc06"
+    },
+    {
+      "bytes": 106026,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_5.tif",
+      "sha256": "578c257f71d8e470bbf8741e303160ed7fe557d36249c1917de4d2c9f208a6ba"
+    },
+    {
+      "bytes": 40238,
+      "path": "TCGA-EV-5903-01Z-00-DX1/TCGA-EV-5903-01Z-00-DX1_5.xml",
+      "sha256": "fd34cac637ad243e85b9f26b129b7cc0f9049a8f10b4419397eef49b50a06761"
+    },
+    {
+      "bytes": 147782,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_1.tif",
+      "sha256": "f1089956e7771e8c7f9931b764b2aecb40590fc2cb2fcfd376e1001573bda4f4"
+    },
+    {
+      "bytes": 39498,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_1.xml",
+      "sha256": "d20edd0931243156ac101b8a5a75243c016f2dd95582876d003cef53cf0ab5c0"
+    },
+    {
+      "bytes": 108026,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_2.tif",
+      "sha256": "73716abce3700be346a1bfa6a1bebf0c671b2f082c8d809aa0aea429a11891df"
+    },
+    {
+      "bytes": 23772,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_2.xml",
+      "sha256": "25898050e7c0d874ba09e0c1a8e08b1ebff06d3a32452b89fce973b61c0fe17d"
+    },
+    {
+      "bytes": 2447624,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_3.tif",
+      "sha256": "2d99a620cfd5f806722a7be55d691648109353c61fef83f38e0a437d3de67566"
+    },
+    {
+      "bytes": 919460,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_3.xml",
+      "sha256": "ab3445b444aa1e215df03e39ffeedf7826cbf1229a139a6759d980ebcb3e4999"
+    },
+    {
+      "bytes": 2168900,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_4.tif",
+      "sha256": "09f1f5e5ea06162cb6ee7ebadbd8db30721df6485c560891835caa0c1439188f"
+    },
+    {
+      "bytes": 534302,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_4.xml",
+      "sha256": "f1a6f3762d4bb95a84de096deb52ba56a4628dbcfc18bc9f6b02eaf1212433bd"
+    },
+    {
+      "bytes": 829980,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_5.tif",
+      "sha256": "79461da086557ac1310d415ac3d1b031d687d3b50f7a7e17677f4ee6dc8e898d"
+    },
+    {
+      "bytes": 731536,
+      "path": "TCGA-EW-A6SD-01Z-00-DX1/TCGA-EW-A6SD-01Z-00-DX1_5.xml",
+      "sha256": "c4af3895df7da60d7722e869d3fb49f8b97754be9a5f80ed283f1fdaef64f9db"
+    },
+    {
+      "bytes": 2969812,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_1.tif",
+      "sha256": "7c1f8ba9d83f1db0c230e36c4c7888e3fe1ecf655c99cc8f50d973727857a908"
+    },
+    {
+      "bytes": 768248,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_1.xml",
+      "sha256": "932ba29b5c0e37ba0fd2c40537bfbb199b33ac76e21657769627944cd56a0b61"
+    },
+    {
+      "bytes": 88582,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_2.tif",
+      "sha256": "cb4e0cd1d6f28049c73408e891e7e42787049f50bb9c5b627ef3c7c930b778eb"
+    },
+    {
+      "bytes": 70140,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_2.xml",
+      "sha256": "b3ab4f4a123f55d176c9b51a31230c2820091809ca71ffeeb7cb0ae49c87db02"
+    },
+    {
+      "bytes": 1109162,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_3.tif",
+      "sha256": "26d484e3b6cb92cb9c3de566818d6832e6aff2c9990dd07e746b896ba262e5fd"
+    },
+    {
+      "bytes": 1118322,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_3.xml",
+      "sha256": "15bb928e96ebfbce0b496adb908601551955a87eb670564df19cc5fa01b0abd5"
+    },
+    {
+      "bytes": 652714,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_4.tif",
+      "sha256": "f6864dcdfa65e596278c40ed781c9bd6336afd7d47524eaf7c999e356164e699"
+    },
+    {
+      "bytes": 18826,
+      "path": "TCGA-F9-A97G-01Z-00-DX1/TCGA-F9-A97G-01Z-00-DX1_4.xml",
+      "sha256": "46a175fbe3407a73082bc611c228928358a05a30c6221aad221a0537c0f46c87"
+    },
+    {
+      "bytes": 842916,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_1.tif",
+      "sha256": "9bd17ead3c578f2eab8ba9c7a67bc9e86157888c06253d3ebb870e4cb39bc851"
+    },
+    {
+      "bytes": 30962,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_1.xml",
+      "sha256": "38ada729e637b2a681531247fc7dbb648f8a9038ce95b0c98ded77aed80caad3"
+    },
+    {
+      "bytes": 58096,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_10.tif",
+      "sha256": "784798e7d08300bd478d503d2b0d6d6463f1692e5f2139328311881a65a9a4f3"
+    },
+    {
+      "bytes": 19370,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_10.xml",
+      "sha256": "e2059da6360e04be9fdbba62e5a7264812683873236eee53dbd6ba04fc032c56"
+    },
+    {
+      "bytes": 139774,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_2.tif",
+      "sha256": "6bf25a11c0072f67dfc89a544e791f5a547e4461798a6a0bfd6378424290fd66"
+    },
+    {
+      "bytes": 11089,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_2.xml",
+      "sha256": "7ea220d5c4172c346c2621c929f0a93c38b8a25d862e05990653d8596018d5cf"
+    },
+    {
+      "bytes": 64772,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_3.tif",
+      "sha256": "a391623d2d2ccb42d9d1adf80ba75299bf70a18c65474745067b4f8dc377a042"
+    },
+    {
+      "bytes": 14097,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_3.xml",
+      "sha256": "da387f38c47695f164bcdac84ca9f89e4a5d060fa17da39ca2941b11e9ee7a28"
+    },
+    {
+      "bytes": 160516,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_4.tif",
+      "sha256": "422d8a506ab666b563f481cbafa4e0f7e958d1658d9e18665e1cfc31c34207e9"
+    },
+    {
+      "bytes": 11219,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_4.xml",
+      "sha256": "3757ae2dde36466c05c2d43bd74dd106870bf188df78c1149cfee35eab5ab739"
+    },
+    {
+      "bytes": 1670948,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_5.tif",
+      "sha256": "174037148287a349bd23e7c9aecf72f65fd4f639f656ab7334e283e6234c708b"
+    },
+    {
+      "bytes": 55184,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_5.xml",
+      "sha256": "450df73792da5324d79e37b4e460122adad812b2778007b9d5e1a9799d84890c"
+    },
+    {
+      "bytes": 378190,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_6.tif",
+      "sha256": "582a48c91d8c7a7b903656456178c8b3e749f206be05764e509b0a4f421e2f7d"
+    },
+    {
+      "bytes": 42496,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_6.xml",
+      "sha256": "f5dead2994159fd85351f2a79beb2bcecb7b6e45ab1c373bec57f3682aaea291"
+    },
+    {
+      "bytes": 306076,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_7.tif",
+      "sha256": "fd130873192f506d058b9a2e84e4e80d146772897dbf12f25e94356e71b4e203"
+    },
+    {
+      "bytes": 15365,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_7.xml",
+      "sha256": "1e1e494ded4f7fd2213dd98ef32c877989756ee7aca7d2a060cdb1bcfd03bcdf"
+    },
+    {
+      "bytes": 777354,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_8.tif",
+      "sha256": "60423d4b1cddc051181a2587a330213c36f7a3c7cb89e89945c6335f3ebcb501"
+    },
+    {
+      "bytes": 23148,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_8.xml",
+      "sha256": "d9189183a58f2cfce9142288054108f10f5adcd602078d4a9030eaede11d006e"
+    },
+    {
+      "bytes": 363904,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_9.tif",
+      "sha256": "577bef5ecd202ea92a94c2f464391c9112903ab114aa89b31e987a64592ed0f6"
+    },
+    {
+      "bytes": 85970,
+      "path": "TCGA-G7-A8LD-01Z-00-DX1/TCGA-G7-A8LD-01Z-00-DX1_9.xml",
+      "sha256": "9bab7daf93054242d5ceb427d98ece3a2a0622755095de16194f7aade2a18c5a"
+    },
+    {
+      "bytes": 76064,
+      "path": "TCGA-G9-6342-01Z-00-DX1/TCGA-G9-6342-01Z-00-DX1-1.tif",
+      "sha256": "f874416894d2a7800c9b6dc8d273577923ea7246b0fd1649589f463375584058"
+    },
+    {
+      "bytes": 21191,
+      "path": "TCGA-G9-6342-01Z-00-DX1/TCGA-G9-6342-01Z-00-DX1-1.xml",
+      "sha256": "9966ace694d7d2f6df180a5bfbd6bea67e8e691eefd312470aceac0a3ca07660"
+    },
+    {
+      "bytes": 302088,
+      "path": "TCGA-G9-6342-01Z-00-DX1/TCGA-G9-6342-01Z-00-DX1-2.tif",
+      "sha256": "75d770119753d72cbdb7d0dec955db18381b28b000978ebd8e56d458d691d646"
+    },
+    {
+      "bytes": 36943,
+      "path": "TCGA-G9-6342-01Z-00-DX1/TCGA-G9-6342-01Z-00-DX1-2.xml",
+      "sha256": "1ecc55148deaa56ed9cb75b08213b870da495c40097a505a102b828a17d86d4c"
+    },
+    {
+      "bytes": 1691782,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-1.tif",
+      "sha256": "824725a75b07743f8bd8b610e0d31ae3e90a184c535bfe449cd69eac8c2ea33e"
+    },
+    {
+      "bytes": 279961,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-1.xml",
+      "sha256": "f69f4bd2ab825eba52714d70f0204298220ecf971b1e61da76c49f5c381341ad"
+    },
+    {
+      "bytes": 718176,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-2.tif",
+      "sha256": "a7c09703aa3eeda85f507e2ecde784734d8ab4f0eea2d970a314329b7b4e908b"
+    },
+    {
+      "bytes": 803278,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-2.xml",
+      "sha256": "68083807afcf840e9fe4ec4363faeffbfbe956f44a87f4750094659f07e05725"
+    },
+    {
+      "bytes": 402050,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-3.tif",
+      "sha256": "0c137178077a71c36d3a493068223fbd7549c39d1051c6ac4274723886e676ec"
+    },
+    {
+      "bytes": 83211,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-3.xml",
+      "sha256": "e2a85ca3d8c3f04631f660d175b096e152f4823cf9bce7145d8d0b40e720fe41"
+    },
+    {
+      "bytes": 4746412,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-4.tif",
+      "sha256": "d0f1eb5ea0a36120e1336cec7b41433063266d2ea8e2369bf46d24bd6da56575"
+    },
+    {
+      "bytes": 1598687,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-4.xml",
+      "sha256": "43ea87da7e881870a760e50fdc10980fdf5eadfaa684bad5a1c449366d889f64"
+    },
+    {
+      "bytes": 352182,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-5.tif",
+      "sha256": "169896dc78d168486b0fc3153fea81a5f9d19364f6bd48eaa06893a4eea50c2d"
+    },
+    {
+      "bytes": 277775,
+      "path": "TCGA-G9-6499-01Z-00-DX1/TCGA-G9-6499-01Z-00-DX1-5.xml",
+      "sha256": "1fa993cddcf55dd28d57148500c821aea08f2d2e9a83d13c7d72842b3a7f9929"
+    },
+    {
+      "bytes": 2059978,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-1.tif",
+      "sha256": "b8d38ba13ead4b91640c729be65acd7ffd8f37d610dfabd2c6ac9bbfcdbccec4"
+    },
+    {
+      "bytes": 663404,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-1.xml",
+      "sha256": "6c73f81ac8ab27f6b70d37433fcd44c71dbca9b259c313a8cb9814cdea0062dd"
+    },
+    {
+      "bytes": 175446,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-2.tif",
+      "sha256": "b69b8062abd46edafcdeb7f57ce7a47007c41ce43265c56d77be2854ae211b45"
+    },
+    {
+      "bytes": 82173,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-2.xml",
+      "sha256": "606fbd03ee511a3d65feb0a6fcc6364a2f070ac2b6746ee531b900f77b4d7e94"
+    },
+    {
+      "bytes": 896820,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-3.tif",
+      "sha256": "6d31e20b6d41a4fc6f72c46502eb16c1828cbc749c2e8e6915b9bad323ef04c9"
+    },
+    {
+      "bytes": 847362,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-3.xml",
+      "sha256": "fb76bbd754144f1a8824735c6ac3759528d1019438841727c42a916d16ea2b0a"
+    },
+    {
+      "bytes": 739004,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-4.tif",
+      "sha256": "4dee5e0fd46cb895ba4b46cd14694c0e5e0166bb718c3676c6d2386b2c677110"
+    },
+    {
+      "bytes": 224213,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-4.xml",
+      "sha256": "46c7ab4b2554128fa99dca257c3090901f39888aba051992cefa49875ac725bf"
+    },
+    {
+      "bytes": 95548,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-5.tif",
+      "sha256": "155660dd8c00b33426a00f57e2e1009eecd8fac2a4c2c02ab19d4bce5bde9574"
+    },
+    {
+      "bytes": 29023,
+      "path": "TCGA-J4-A67Q-01Z-00-DX1/TCGA-J4-A67Q-01Z-00-DX1-5.xml",
+      "sha256": "f97909df8669a41f7bc034919c6df00c724842daf5848a82e270cdaad03d7ef1"
+    },
+    {
+      "bytes": 629362,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-1.tif",
+      "sha256": "fd8e09bf800bccdd5255385eecf9406f256f06165bd22b0091ccc3b8ac3ad9e2"
+    },
+    {
+      "bytes": 763393,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-1.xml",
+      "sha256": "1ed4670fb0c7e55c654eb200b235597ad720b3510d5891cf0f56e09ddcd961e0"
+    },
+    {
+      "bytes": 2807960,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-2.tif",
+      "sha256": "9539c9aa98e85e86ed433446732545eae73ea9a83a3c8bec86858716355232f6"
+    },
+    {
+      "bytes": 709606,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-2.xml",
+      "sha256": "342eb724e003e54519f5af07f8bdae9b1bdb2de8918f9926b5f44ac99802b87c"
+    },
+    {
+      "bytes": 87878,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-3.tif",
+      "sha256": "02f04bce6cab5553f581cef851bdb5b09fad97c8c174aaa94f29f9373a537a27"
+    },
+    {
+      "bytes": 46162,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-3.xml",
+      "sha256": "e13dd10b8dbe5dbad4983ab82be3fa404b8059fa79c489e03a17a045d9ce6216"
+    },
+    {
+      "bytes": 52076,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-4.tif",
+      "sha256": "b89894ffd0ea413ae33be194b0e4bdc1ef9de6eb1b4114b7c3ed247ec8eb28fc"
+    },
+    {
+      "bytes": 26613,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-4.xml",
+      "sha256": "e0ab5b0d0b63c99a2a5df0533199dd587bb990aeb4a1fbd2d245f87e2c1b6cc3"
+    },
+    {
+      "bytes": 360340,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-5.tif",
+      "sha256": "880e7cbd4f9ab32577270fa626e5e04be8ffde32efac3572d1a9d861244bb074"
+    },
+    {
+      "bytes": 418022,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-5.xml",
+      "sha256": "752c4f2d68b854d031570849c5ef3b371d775c0de774204683cf02ef6c866551"
+    },
+    {
+      "bytes": 939750,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-6.tif",
+      "sha256": "b58ba4148b950320b98ebbf0fa01394d98d8ecdb480c2fcd01115363ddced0c3"
+    },
+    {
+      "bytes": 380524,
+      "path": "TCGA-J4-A67T-01Z-00-DX1/TCGA-J4-A67T-01Z-00-DX1-6.xml",
+      "sha256": "3181938e1b2bdd3170d99c0b06224ff3a74ab001035d83e8143c8b3dd0783bda"
+    },
+    {
+      "bytes": 949288,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-1.tif",
+      "sha256": "bb8a461153f165bdd72d0dc24f885b4215d8a32ac68a8963777bd59486bf385f"
+    },
+    {
+      "bytes": 994468,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-1.xml",
+      "sha256": "ce4ca200426bdea06a8c8921ebda92e1ae4b065e8c701f65509fb6868c852dd7"
+    },
+    {
+      "bytes": 578594,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-2.tif",
+      "sha256": "508476a29cd76bfdbe7ba64c83dd1054fba8ed5d5228d5225c80da6fc5e7c4da"
+    },
+    {
+      "bytes": 152387,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-2.xml",
+      "sha256": "c33723a5a23e2b18073c15c18420327ff7a619de621bb9cbcd929d86ee7a6df0"
+    },
+    {
+      "bytes": 155286,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-3.tif",
+      "sha256": "9815d3a705d976b0be1ddb0ba84f0b41fdd55cd69df8e3fd3c2bf079701983c4"
+    },
+    {
+      "bytes": 24093,
+      "path": "TCGA-KK-A59X-01Z-00-DX1/TCGA-KK-A59X-01Z-00-DX1-3.xml",
+      "sha256": "844dddc142730bef13b6362aa93f20b678a69a75f2b110e97a426aa141849440"
+    },
+    {
+      "bytes": 1716882,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-1.tif",
+      "sha256": "f5f4bf78749a07711ac0b905d4e9c535d2d9ebd49c21b138b0c1d42562f6b014"
+    },
+    {
+      "bytes": 598151,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-1.xml",
+      "sha256": "34fc7b78a9a266db4abc65af609af5e80dce2657cedf3590a3180c74842a20f1"
+    },
+    {
+      "bytes": 2784278,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-2.tif",
+      "sha256": "58231d9acf7a7e20439780598149ad1e4ada76d90a0dee93641b7fdcb6fb3086"
+    },
+    {
+      "bytes": 755680,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-2.xml",
+      "sha256": "7f747db7970c1fe1257a79256e81e4c738f494b5fd85abcfa15888efb31ff0ce"
+    },
+    {
+      "bytes": 324802,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-3.tif",
+      "sha256": "14cf71ee34b88950015c3574a90a1eeba390679019e05794228d79528b6d204d"
+    },
+    {
+      "bytes": 134482,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-3.xml",
+      "sha256": "2766a9049e1309b82d5cd01630a9c0096b2c48bd7256255234c0f6e4c1989a2a"
+    },
+    {
+      "bytes": 29876,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-4.tif",
+      "sha256": "1fb98974c7ad319bfa4055b0eee6699bd1a39f7fe0798a10c1f165c3295a1c0e"
+    },
+    {
+      "bytes": 22372,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-4.xml",
+      "sha256": "061a1278238293b3b8c9e0fc41af51766fd2c84831f91fae65433a0e6bc8954f"
+    },
+    {
+      "bytes": 583588,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-5.tif",
+      "sha256": "d1191075e6cc5536cdd3fa6a0cf9f081e91f44ba01d4eca2350e37206dc7f3ee"
+    },
+    {
+      "bytes": 43666,
+      "path": "TCGA-KK-A6E0-01Z-00-DX1/TCGA-KK-A6E0-01Z-00-DX1-5.xml",
+      "sha256": "59f5ef07ee2573f5f2432aca34c8cd519ddd9ed12345ffecac2d647f743ad113"
+    },
+    {
+      "bytes": 862694,
+      "path": "TCGA-KK-A7AW-01Z-00-DX1/TCGA-KK-A7AW-01Z-00-DX1-1.tif",
+      "sha256": "c80e5d3fe4d6681efdc5fbf4260687c88a80b7abd1cbf8474d7cdbea4c3ca673"
+    },
+    {
+      "bytes": 878566,
+      "path": "TCGA-KK-A7AW-01Z-00-DX1/TCGA-KK-A7AW-01Z-00-DX1-1.xml",
+      "sha256": "90821945fce598f00fa374bf1962b1acd33c3fb0de4cd4a08c1f66ff04468fc6"
+    },
+    {
+      "bytes": 1925130,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_1.tif",
+      "sha256": "3917a0ea21a860b8df7bf4680adf981a927736e1a969c017a79ced797e7147d3"
+    },
+    {
+      "bytes": 827459,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_1.xml",
+      "sha256": "dcc55989bb468bfb34f158ea5e4a83181eb1a601a2b7c39df5677584c7c767a7"
+    },
+    {
+      "bytes": 520774,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_2.tif",
+      "sha256": "8fe1834f1d81918d85dd2add6f5d6ba3b3e66abfa9c4a5af4ac9c61397d01122"
+    },
+    {
+      "bytes": 109002,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_2.xml",
+      "sha256": "d2b6b16d5d0ea449ed010ae7f5799b2e261f4d86b08aa061a4b8a0557ac054cc"
+    },
+    {
+      "bytes": 2135268,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_3.tif",
+      "sha256": "88c367e68ba60eef5facd3d5201b4468de565e00dbf24afc02f993c24eddbfda"
+    },
+    {
+      "bytes": 690841,
+      "path": "TCGA-L4-A4E5-01Z-00-DX1/TCGA-L4-A4E5-01Z-00-DX1_3.xml",
+      "sha256": "a7524d5aa56814575f80c12ea643333fbcb4197b86ae74e4cea6e0367b412616"
+    },
+    {
+      "bytes": 554640,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_1.tif",
+      "sha256": "6da74a8c82fb0bf850bf42300571be30118f3f2d952d1c5a7c78ef8a60bce628"
+    },
+    {
+      "bytes": 554388,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_1.xml",
+      "sha256": "76c9ba0e244a241ed412859cd5ff1847ff1e27d21e5ad1c32004ea0b9cbe4d96"
+    },
+    {
+      "bytes": 6242580,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_2.tif",
+      "sha256": "ff9f5a232ecce8b6f8abb1aa71b491385d2ade9c59668c5c5e6f6ecdd0383cc7"
+    },
+    {
+      "bytes": 1123112,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_2.xml",
+      "sha256": "0c61288c7d686f0cdc6191bc280ce57148e79131ccd91cf9587ec245731e096a"
+    },
+    {
+      "bytes": 216072,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_3.tif",
+      "sha256": "526ac600bf68ae29719feac7b8aa864c87d822ce8e2c857f5d6b00ba748d4246"
+    },
+    {
+      "bytes": 69986,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_3.xml",
+      "sha256": "d9fc576b5c4064f6ee13830887a070681e974549880d57b1b9981a1908281123"
+    },
+    {
+      "bytes": 51528,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_4.tif",
+      "sha256": "1523fc9f1df14f68265bc996e2b88559f11142208fda93d5e7d84df2c8b95aeb"
+    },
+    {
+      "bytes": 13797,
+      "path": "TCGA-MH-A560-01Z-00-DX2/TCGA-MH-A560-01Z-00-DX2_4.xml",
+      "sha256": "aa98f9040755bb0fb1820fae31fc2fe4349d12691d83bc45e84c7a0b7e9c0b68"
+    },
+    {
+      "bytes": 385082,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_1.tif",
+      "sha256": "556a86677bfab859c05f4b35ce87343fa9b20127a3790347b54f2552d1898967"
+    },
+    {
+      "bytes": 78150,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_1.xml",
+      "sha256": "d0dbc694287e41a1aaa75bb7a0a98553c45203cd344679aebc52b247c9b3ce7f"
+    },
+    {
+      "bytes": 3543666,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_2.tif",
+      "sha256": "3f2496421c15b4e411a3cdc91d39e214124b7156dc624564552f9a300b959cef"
+    },
+    {
+      "bytes": 1297246,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_2.xml",
+      "sha256": "f8f31e8e81c05409b8cc64a62f8219d2075a9e4550fc7f96f51368522883dfa6"
+    },
+    {
+      "bytes": 1027734,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_3.tif",
+      "sha256": "2c9d66d009c3a50f174f4e4a4a0b84585279877737071ba1faf17e06b8958dd1"
+    },
+    {
+      "bytes": 823234,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_3.xml",
+      "sha256": "60d58d1962c1643075534b9f73e57e0b176345f848238f2922dbb27ab62bfe43"
+    },
+    {
+      "bytes": 805144,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_4.tif",
+      "sha256": "d959ad5595823b5f39ed3ddd30138858239e9e6ee0127127b9d37d190fc204db"
+    },
+    {
+      "bytes": 254683,
+      "path": "TCGA-MP-A4SY-01Z-00-DX1/TCGA-MP-A4SY-01Z-00-DX1_4.xml",
+      "sha256": "b9a120a5dabee9386df33b3483bd16f3868d18a7caa1e90994f08517cd0a8e44"
+    },
+    {
+      "bytes": 754070,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_1.tif",
+      "sha256": "fe87e02c44b9d6af61528e108bee934c245d7ff6574b9ddbe907f80445f596bd"
+    },
+    {
+      "bytes": 494687,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_1.xml",
+      "sha256": "738df1ff25bfd2504ddfbc53c92d286b4cb7b71a3f06b63dca39625d96167d69"
+    },
+    {
+      "bytes": 236860,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_2.tif",
+      "sha256": "6daf92e7232ef6f06b5a899dcbf19bb0ad7adbe9b9e6de801e412dd249df9f1b"
+    },
+    {
+      "bytes": 230966,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_2.xml",
+      "sha256": "ad300c499272655c67c220d961a1cd43c4c732c2e78653f53b3c1670fe956e7f"
+    },
+    {
+      "bytes": 6358900,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_3.tif",
+      "sha256": "49fb1d446fa2a0af3599ca3e47576d4729188894a1f162f46e98d08954c7a428"
+    },
+    {
+      "bytes": 1728427,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_3.xml",
+      "sha256": "7b53b21a79a62b138e4a20ef9f99af136ec833fb574b49f1254c7beaba948cdc"
+    },
+    {
+      "bytes": 409782,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_4.tif",
+      "sha256": "e05a842b6bb7a253e14f46596975967fee901a69484c56f31828fdb14e0f39ab"
+    },
+    {
+      "bytes": 41271,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_4.xml",
+      "sha256": "13e9d15217903d9cff256de7df3b3293a4122838dd502ef7f062054417601658"
+    },
+    {
+      "bytes": 331256,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_5.tif",
+      "sha256": "d9f0227843fbbf9fea0ed927d69235d64cbad74ef1420c6976b4d1104e38f83c"
+    },
+    {
+      "bytes": 40676,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_5.xml",
+      "sha256": "904ce16163edaf3301505d60074a2a222b461639a4b46aa7a8ea480467391576"
+    },
+    {
+      "bytes": 38482,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_6.tif",
+      "sha256": "c38ec6a5c32f5153bd2b6ae11ec2b2c58f3f174a52c0445606a63dbe9c4a9f1a"
+    },
+    {
+      "bytes": 13820,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_6.xml",
+      "sha256": "58314994d2fadbe95aef708cb44e0b8ece160e67bbeb737a524d2dce4ae06136"
+    },
+    {
+      "bytes": 24700,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_7.tif",
+      "sha256": "0e2fea195e4ecb56c328d917fb392fd233ec25befa181b321e47df6ec566d3e7"
+    },
+    {
+      "bytes": 10528,
+      "path": "TCGA-P4-AAVK-01Z-00-DX1/TCGA-P4-AAVK-01Z-00-DX1_7.xml",
+      "sha256": "e82485a6c23f6cc89dee1fdd6e443443868f8986b0486debca6f2e31bb028de5"
+    },
+    {
+      "bytes": 3985936,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_1.tif",
+      "sha256": "72b3af5bf97680c4da097f5e5d20984f88091bef009a96b1d389850794737eaa"
+    },
+    {
+      "bytes": 904848,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_1.xml",
+      "sha256": "30e672c9ae7c9cc344ca1c92805adbe1ae2b848dcd82d03e0d57454fc02f657b"
+    },
+    {
+      "bytes": 5403440,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_2.tif",
+      "sha256": "c6dc451dce83279e061d754148bb86dfabfcb8e9c1cfb6e5a399393c76bc82b3"
+    },
+    {
+      "bytes": 2187933,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_2.xml",
+      "sha256": "58c0734c80f013a84c296253feac9e7fba4f545e580095b42251873c7e65345b"
+    },
+    {
+      "bytes": 1369436,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_3.tif",
+      "sha256": "26811baa47c5daa32b9e916e3f96389e4d2840e6179d2ae48777e86e3cf4dfc2"
+    },
+    {
+      "bytes": 713593,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_3.xml",
+      "sha256": "8b23cb570b675ef6c57eb7f66460a9fd0801023d0f2413a9f9fb7109dba6c91a"
+    },
+    {
+      "bytes": 1569500,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_4.tif",
+      "sha256": "c0cac4991bd175024e6edaa1534ac7fa0f6c21d668f8603d21db4ce633f52f9a"
+    },
+    {
+      "bytes": 732781,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_4.xml",
+      "sha256": "00e0a98a5c4353fd9dd0be68fe3b3b6c7213625be8ffd544fb3744bbfae8e30c"
+    },
+    {
+      "bytes": 506348,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_5.tif",
+      "sha256": "477284755e7cbb32c473a4679ae0382d7ad0c76ab83600cd7edeabf248303976"
+    },
+    {
+      "bytes": 84581,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_5.xml",
+      "sha256": "02534a2d289848b02d0bf3455b01421b11a412c445e7513a43dc4b4bea4a3930"
+    },
+    {
+      "bytes": 136312,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_6.tif",
+      "sha256": "08d1a995df20b1fea3fc32f031a806cef38468e6d8b19ce59d76a2f445b33102"
+    },
+    {
+      "bytes": 42225,
+      "path": "TCGA-S3-AA11-01Z-00-DX1/TCGA-S3-AA11-01Z-00-DX1_6.xml",
+      "sha256": "69fd23fe1c808dec61e0eb982e256f5253f490d0e53f0325cf3d70df3ff4a616"
+    },
+    {
+      "bytes": 1188436,
+      "path": "TCGA-SX-A7SR-01Z-00-DX1/TCGA-SX-A7SR-01Z-00-DX1_1.tif",
+      "sha256": "791d23fa74d7025730b41266e42061f59aa478fd35e51f11a0a1b1b81a326035"
+    },
+    {
+      "bytes": 694226,
+      "path": "TCGA-SX-A7SR-01Z-00-DX1/TCGA-SX-A7SR-01Z-00-DX1_1.xml",
+      "sha256": "b036373b413b5851e679081478c8ddb1b1104e9464a6937da57ee274b043c7ce"
+    },
+    {
+      "bytes": 1116024,
+      "path": "TCGA-SX-A7SR-01Z-00-DX1/TCGA-SX-A7SR-01Z-00-DX1_2.tif",
+      "sha256": "b2e1543646acc65e2b6008221402358140256ee9d676cf1c43cbbd09bcae3f89"
+    },
+    {
+      "bytes": 289189,
+      "path": "TCGA-SX-A7SR-01Z-00-DX1/TCGA-SX-A7SR-01Z-00-DX1_2.xml",
+      "sha256": "f70cb7fe9af2303525b0fe9654a0273c1bde4cf065e82b6a8d09e5cbe6c68a6c"
+    },
+    {
+      "bytes": 707336,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_1.tif",
+      "sha256": "ad585fe9fe7ff86c573f1f62de383ce16ad99da0ebf2e65fa38645a077eccab1"
+    },
+    {
+      "bytes": 694502,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_1.xml",
+      "sha256": "a86af3227cc3da2b30242e16ede99dac7a58ac0f689013a2ba352abad3094218"
+    },
+    {
+      "bytes": 234798,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_2.tif",
+      "sha256": "00f9dbcb93418bf57e14b99bfba19510e6a929b637ef0030e28ac9c164968137"
+    },
+    {
+      "bytes": 318219,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_2.xml",
+      "sha256": "72ffc1ff274518a8dfbed9a4e6fc23acea1236fb9b0b33360f9c7948e0979ba7"
+    },
+    {
+      "bytes": 2092014,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_3.tif",
+      "sha256": "de70e99d1035a1b4c753b07e67bdba73d9ef68874b65aeb62b079f80c86e9e29"
+    },
+    {
+      "bytes": 932229,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_3.xml",
+      "sha256": "a1688e3145298f9033f2a80cd6c7ad92d6629983a3ced3da808a53d81dd2fe8c"
+    },
+    {
+      "bytes": 1193398,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_4.tif",
+      "sha256": "6e9e755814a4955e2dbc281a33c9071d24e1f73782327aa1d84f68210d6bcf0e"
+    },
+    {
+      "bytes": 66828,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_4.xml",
+      "sha256": "c66bc68d12a97feb4c89ca627f007fdb0ff9d478adec6c087428a6e6494fd6f8"
+    },
+    {
+      "bytes": 144848,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_5.tif",
+      "sha256": "c2b92396fb438948199f3379d2528daaabf50d151206e36fc64401fcc0ac8245"
+    },
+    {
+      "bytes": 11489,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_5.xml",
+      "sha256": "5139b3b64a07acc8ecea4ad958482313399a9683e0df27f4a03fab8591fe7be1"
+    },
+    {
+      "bytes": 72758,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_6.tif",
+      "sha256": "c66ffaad8335a53ef82a4f599f8860b7326cc42afba2eeae340fcfd296e858d7"
+    },
+    {
+      "bytes": 13119,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_6.xml",
+      "sha256": "72de34c9308c81c29438c0b51caa2f7c62a32d8438b97646a74ae442b8fb134b"
+    },
+    {
+      "bytes": 67286,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_7.tif",
+      "sha256": "88987a21b83b43a9d0caa146017f689a1ea300c14746a6e005f4a979de4f033d"
+    },
+    {
+      "bytes": 15105,
+      "path": "TCGA-UZ-A9PO-01Z-00-DX1/TCGA-UZ-A9PO-01Z-00-DX1_7.xml",
+      "sha256": "1ccf5f8c510ade608588f136a588b21318025b3f5b16efe1f0e74c3d020e3815"
+    },
+    {
+      "bytes": 311998,
+      "path": "TCGA-UZ-A9PU-01Z-00-DX1/TCGA-UZ-A9PU-01Z-00-DX1_1.tif",
+      "sha256": "0d5b6f1168b8e5b8a5c18b534de72b4bb07daf4c1b4a4a16cc2459f9d6fef23c"
+    },
+    {
+      "bytes": 350413,
+      "path": "TCGA-UZ-A9PU-01Z-00-DX1/TCGA-UZ-A9PU-01Z-00-DX1_1.xml",
+      "sha256": "963d7cdc1ddc69565e6cd5688e01187d7c70a3592e824c82f8fdc70dfcb9c04e"
+    },
+    {
+      "bytes": 337418,
+      "path": "TCGA-UZ-A9PU-01Z-00-DX1/TCGA-UZ-A9PU-01Z-00-DX1_2.tif",
+      "sha256": "275a502377255090d3c759de6be74a81812a6aae00eaeef91fcc77622ef687b9"
+    },
+    {
+      "bytes": 501001,
+      "path": "TCGA-UZ-A9PU-01Z-00-DX1/TCGA-UZ-A9PU-01Z-00-DX1_2.xml",
+      "sha256": "250ace85d4aa7b1103587cd51121987091a539fde3ac900caa5df2133dea3062"
+    },
+    {
+      "bytes": 1137578,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-1.tif",
+      "sha256": "b9cf445856b8a13666d780d2b06032bfdbe5e4667efdfa6726573a4cc95cb9ed"
+    },
+    {
+      "bytes": 427034,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-1.xml",
+      "sha256": "9a59a1326aa17fe2b58f1f61ca65bb44431e5a60fbaefdc875510a44b989c69d"
+    },
+    {
+      "bytes": 661220,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-2.tif",
+      "sha256": "849aea81e994e85d21ee8470fd2a3d020020af1b134c9f798e19b139624b72b3"
+    },
+    {
+      "bytes": 157853,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-2.xml",
+      "sha256": "a8f022fc48eb1bcdad611948eb685c06065e6f9744ec37bc165d14fa548df425"
+    },
+    {
+      "bytes": 39992,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-3.tif",
+      "sha256": "2ac9df2690eaa3e25f389cc6fd8ea5bba62b880ba6a3321d9f9d3a19a4c100d2"
+    },
+    {
+      "bytes": 22648,
+      "path": "TCGA-V1-A8WL-01Z-00-DX1/TCGA-V1-A8WL-01Z-00-DX1-3.xml",
+      "sha256": "948edfb2a0db1586d08f0edbd82a345ca0ca253adf1d80472ca4fe1b45e1c611"
+    },
+    {
+      "bytes": 1379308,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-1.tif",
+      "sha256": "e42389b0c2e6bd030ca2557f4de5c2ca4413ef426a7d25501e24df2237e945cc"
+    },
+    {
+      "bytes": 704624,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-1.xml",
+      "sha256": "b57e24499ebfe4100b2db4d979ad99a83d90de2e57a791a24051d28c47b15766"
+    },
+    {
+      "bytes": 1179976,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-2.tif",
+      "sha256": "0ef939748d8cae6f865b7ffe1924e2f4cde6e1ac48be57491463f817fb8602e8"
+    },
+    {
+      "bytes": 946711,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-2.xml",
+      "sha256": "c04ca935338aac4fe95b954b22d45e0acf6b08db955be3005543a429893917ea"
+    },
+    {
+      "bytes": 2163834,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-3.tif",
+      "sha256": "3004fb44719113e2fec70ee1b6589a89d77c04e1a1ff07958cfb73d2c3b53f31"
+    },
+    {
+      "bytes": 1200859,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-3.xml",
+      "sha256": "906f0ad8fa3e389a479236f76b8d6d8b01056496f8c1b4641515b2e25d8c78b8"
+    },
+    {
+      "bytes": 276082,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-4.tif",
+      "sha256": "b56a836ea73e55beae39ac21580dd286b3f4b20f004cb7659511ddf63c576921"
+    },
+    {
+      "bytes": 59808,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-4.xml",
+      "sha256": "9088de14c30ce5c94fbba008f00750740f04349049a1fc5697e34b796ec05875"
+    },
+    {
+      "bytes": 261874,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-5.tif",
+      "sha256": "4cf4350450412b89e256baaac076c7af3a9cd67a2011c00b32bc868a864f7c6b"
+    },
+    {
+      "bytes": 85988,
+      "path": "TCGA-V1-A9O9-01Z-00-DX1/TCGA-V1-A9O9-01Z-00-DX1-5.xml",
+      "sha256": "07620779e01b75b4a8b91aebd3ec2eb05059b8946b0e3b0b19a8fd04abe0a679"
+    },
+    {
+      "bytes": 562512,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-1.tif",
+      "sha256": "3dea5fc1b84037d14b52bf48f566753d91bc920a23547961da753dc54de4cccf"
+    },
+    {
+      "bytes": 424553,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-1.xml",
+      "sha256": "de96527a4012a072ce53c117990154aa9354d6a0e221f9239f3e94a62ed9b08f"
+    },
+    {
+      "bytes": 412140,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-2.tif",
+      "sha256": "7f1af32d6eb68c448dedbdc111e39b4ef9c577795c84e670e9015628ada57855"
+    },
+    {
+      "bytes": 534320,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-2.xml",
+      "sha256": "dabcb95af8b519921924bf390974deec8e5911bd9d017c48945a07d46c9e78ec"
+    },
+    {
+      "bytes": 160420,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-3.tif",
+      "sha256": "302ab5b2fe563aaa597e75e64c7ef9489438e500c32bba5a6b5d6c952704feb8"
+    },
+    {
+      "bytes": 46675,
+      "path": "TCGA-X4-A8KQ-01Z-00-DX8/TCGA-X4-A8KQ-01Z-00-DX8-3.xml",
+      "sha256": "68382a0a44b93a790f42e363ca5e1694a0138c848b85efd7a6b49fa30ef3dfd5"
+    },
+    {
+      "bytes": 3576740,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-1.tif",
+      "sha256": "499357cbcd4fcf968f92d320730f27571580bd55474cc86885c1226b09ef894e"
+    },
+    {
+      "bytes": 1067247,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-1.xml",
+      "sha256": "f04836d847d0f9a8252ae21f87ef349d31ab83641025e32effe73008d856b601"
+    },
+    {
+      "bytes": 1876094,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-2.tif",
+      "sha256": "ceaba197618d595b1e474bc2fce73a3c1913b8fc368f524d07b51544a8a98a21"
+    },
+    {
+      "bytes": 667132,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-2.xml",
+      "sha256": "29d1741727a59eb54b0534253beff38e4cc2bdafe8e240b262b90e934c9a2b93"
+    },
+    {
+      "bytes": 577094,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-3.tif",
+      "sha256": "b7cec7eb8fcad74343f39312122731b16d15c107346026c3e84f95c4afa47e69"
+    },
+    {
+      "bytes": 497315,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-3.xml",
+      "sha256": "a74ef5fb6ddff65df92f0e70e18ee535a3f55f16e3ce041496e4c93c21a3d767"
+    },
+    {
+      "bytes": 336400,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-4.tif",
+      "sha256": "bec26ad45e5803832d8eb1e538cc99a96aae130165290f545aca7c97a4c58e8e"
+    },
+    {
+      "bytes": 350077,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-4.xml",
+      "sha256": "db9f7b564d2b03a8d71b05e05e5b0212b8ec4690a2884ffbed29099d76798269"
+    },
+    {
+      "bytes": 115762,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-5.tif",
+      "sha256": "cd8714ccecf1e4e9c8a7876a3bb1d0cff97ebf71e783ad4da7d06cde2f04554e"
+    },
+    {
+      "bytes": 70851,
+      "path": "TCGA-YL-A9WY-01Z-00-DX1/TCGA-YL-A9WY-01Z-00-DX1-5.xml",
+      "sha256": "5278204092aa8d1cae7e320144c82deb75aa21dc066d47320bd4696eeb93fd75"
+    }
+  ]
+}

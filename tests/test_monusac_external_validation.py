@@ -169,5 +169,9 @@ def test_frozen_monusac_runner_is_group_safe_and_preserves_source_labels() -> No
     assert result["dataset"]["test_patient_groups"] == 5
     assert np.array_equal(train.manifest["reference_label"], source_labels)
     assert arrays["oof_probabilities"].shape == (80, 4)
+    assert arrays["matched_random_indices"].shape == (3, 4)
+    assert arrays["train_organs"].shape == (80,)
+    for group in np.unique(arrays["train_group_ids"]):
+        assert np.unique(arrays["oof_fold_ids"][arrays["train_group_ids"] == group]).size == 1
     assert result["queue_evidence"]["model_improvement_queue_available"] is False
     assert set(result["success_conditions"]) == set(local["success_requires_all"])

@@ -1062,10 +1062,13 @@ def run_monusac_controlled_external(
         "test_sample_ids": test.manifest["sample_id"].astype(str).to_numpy(dtype=np.str_),
         "train_group_ids": train.manifest["group_id"].astype(str).to_numpy(dtype=np.str_),
         "test_group_ids": test.manifest["group_id"].astype(str).to_numpy(dtype=np.str_),
+        "train_organs": train.manifest["organ"].astype(str).to_numpy(dtype=np.str_),
         "train_reference_labels": reference_train,
         "train_observed_labels": observed,
         "is_injected_corruption": injected,
+        "oof_fold_ids": fold_ids,
         "oof_probabilities": oof_probabilities,
+        "matched_random_indices": np.stack(random_indices, axis=0),
         "test_reference_labels": reference_test,
         "matched_random_probabilities": random_probabilities.astype(np.float32),
     }

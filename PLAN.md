@@ -184,7 +184,7 @@ Implementation and exact unresolved evidence requirements are recorded in
 
 ### M15 — New-data controlled external benchmark on MoNuSAC
 
-Status: frozen and implementation-tested; real metric execution pending
+Status: completed; frozen overall claim not supported
 
 - pin the official MoNuSAC train and test archives by SHA-256;
 - exclude the two patient identifiers appearing in both archives from development
@@ -200,9 +200,22 @@ Status: frozen and implementation-tested; real metric execution pending
   matched-random baselines plus registered per-class recall non-degradation;
 - retain the result without post-test tuning or natural-error claims.
 
+Executed result:
+
+- the primary 5% neighbour queue passed the exact-matched-random retrieval gate;
+- its downstream macro-F1 point estimate was positive versus corrupted/no review,
+  but the whole-patient interval crossed zero;
+- it did not exceed mean exact-matched-random restoration and the registered
+  important-class recall safeguard failed;
+- all four conditions were required, so the final action is `retain_uncorrected`;
+- the checked-in independent verifier recalculates the metrics and all frozen
+  bootstrap decisions without importing AANCA analysis code.
+
 The frozen protocol is
 [`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md); the machine configuration is
-[`configs/monusac_current_aanca_external.yaml`](configs/monusac_current_aanca_external.yaml).
+[`configs/monusac_current_aanca_external.yaml`](configs/monusac_current_aanca_external.yaml),
+and the result is
+[`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md).
 
 ## Open scientific milestones
 
