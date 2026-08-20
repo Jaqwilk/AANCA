@@ -1,0 +1,29 @@
+schema_version: 1
+study_id: nucls_current_aanca_postvalidation_improvement
+parent_frozen_study_id: nucls_natural_label_external_validation_v1
+disposition: post_outcome_exploratory
+outcomes_inspected_before_analysis: true
+frozen_result_must_remain_unchanged: true
+evidence_roots:
+  unbiased: artifacts/nucls_external_validation/unbiased-v1
+  evaluation: artifacts/nucls_external_validation/evaluation-v1
+ranking:
+  candidates:
+    - one_minus_probability_of_observed_label
+    - nearest_neighbour_disagreement
+    - fixed_hybrid
+  neighbour_k: 7
+  neighbour_metric: cosine
+  hybrid_weights: [0.5, 0.5]
+promotion_rule:
+  candidate_method: nearest_neighbour_disagreement
+  require_strict_success_in_every_declared_subset: true
+  permit_posthoc_replacement_of_frozen_result: false
+retraining_guard:
+  evidence_role: independent_group_validation
+  primary_metric: macro_f1
+  bootstrap_iterations: 2000
+  bootstrap_seed: 26082071
+  minimum_macro_f1_effect: 0.0
+  action_when_not_strictly_positive: retain_uncorrected
+  automatic_source_annotation_modification: false

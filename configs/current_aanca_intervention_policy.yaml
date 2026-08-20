@@ -1,0 +1,127 @@
+schema_version: 1
+policy_id: current_aanca_safe_review_and_training_policy
+project: AANCA
+replacement_project_or_v2: false
+disposition: prospective_development_policy_not_yet_executed
+frozen_nucls_result:
+  remains_immutable: true
+  allowed_for_method_or_threshold_selection: false
+  conclusion: ranking_and_downstream_claims_not_supported
+
+claim_boundary:
+  score_name: annotation_inconsistency_score
+  call_score_probability_of_error_before_new_expert_calibration: false
+  automatic_source_annotation_modification: false
+  diagnostic_or_clinical_claims_permitted: false
+
+representations:
+  selection_data: fresh_group_separated_development_only
+  required_inputs:
+    - target_nucleus_rgb
+    - exact_target_mask_or_contour
+    - wider_tissue_context_rgb
+    - target_morphometrics
+    - tissue_type
+    - neighbouring_cell_context_when_lawfully_available
+  candidates:
+    - imagenet_resnet18_context_plus_target_morphometrics
+    - UNI
+    - CTransPath
+  pathology_encoder_gate:
+    existing_implementation: histo_audit.representations.pathology
+    require_source_licence_weights_authentication_preprocessing_hardware_intended_use_and_smoke: true
+    select_by_final_test_performance: false
+
+ensemble_and_stability:
+  model_count: 3
+  model_seeds: [303, 304, 305]
+  require_group_safe_oof_for_every_scored_sample: true
+  minimum_training_checkpoints: 2
+  persistent_risk_threshold: freeze_after_fresh_development_only
+  minimum_checkpoint_persistence: 0.6
+  minimum_stable_model_fraction: 0.6
+  transient_high_risk_action: do_not_escalate_from_history_signal_alone
+
+calibration:
+  method: scalar_temperature
+  labels: newly_collected_expert_development_labels
+  folds: 5
+  group_cross_fitted: true
+  maximum_ece_increase: 0.0
+  adoption_requires:
+    - cross_fitted_negative_log_likelihood_improves
+    - expected_calibration_error_does_not_exceed_registered_tolerance
+  nucls_final_allowed: false
+
+review_queues:
+  annotation_quality:
+    input: group_safe_oof_annotation_inconsistency_score
+    available_without_downstream_utility: true
+  model_improvement:
+    input: nested_group_cross_fitted_measured_development_intervention_utility
+    require_lower_bound_gt: 0.0
+    unavailable_without_measured_utility: true
+  balance_dimensions:
+    - patient_or_strongest_available_group
+    - observed_class
+    - proposed_transition
+    - tissue_type
+    - embedding_diversity
+  integer_capacity_and_caps: freeze_after_power_calculation_before_new_responses
+  matched_control:
+    ratio: 1
+    require_exact_predeclared_match_stratum: true
+    permit_partial_comparator: false
+
+expert_review:
+  minimum_independent_reviewers: 2
+  preserve_individual_votes: true
+  allowed_outcomes:
+    - annotation_supported
+    - probably_inconsistent
+    - ambiguous
+    - insufficient_context
+    - exclude_technical_reason
+  hard_change:
+    default_enabled: false
+    minimum_votes: 2
+    minimum_fraction: 0.6666666666666666
+    requires_explicit_prospective_opt_in: true
+  ambiguous_default: soft_label
+  insufficient_context_default: exclude
+  uncertain_training_weight: 0.5
+
+development_training_comparison:
+  final_external_test_used_for_selection: false
+  candidates:
+    - uncorrected_observed_labels
+    - gated_hard_changes
+    - soft_labels
+    - downweighted_hard_targets
+    - soft_labels_with_abstention_weights
+  report_metrics:
+    - macro_f1
+    - per_class_precision
+    - per_class_recall
+    - balanced_accuracy
+    - multiclass_brier_score
+    - expected_calibration_error
+  adoption_guard:
+    evidence: independent_group_validation
+    bootstrap_iterations: 2000
+    bootstrap_seed: 26082071
+    minimum_macro_f1_effect: 0.0
+    minimum_per_class_recall_effect: -0.01
+    minimum_valid_bootstrap_fraction_per_important_class: 0.95
+    action_on_adverse_neutral_uncertain_or_unavailable: retain_uncorrected
+
+new_final_test:
+  sites_required_for_multisite_claim: 3
+  patient_or_wsi_groups: determine_by_prospective_power_calculation
+  source: new_external_site_not_used_for_development
+  unavailable_for_encoder_threshold_queue_calibration_or_training_selection: true
+  success_requires_all:
+    - top_k_beats_exact_matched_random_control
+    - intervention_model_beats_uncorrected_model
+    - no_important_class_breaches_registered_recall_non_degradation_limit
+  current_execution_status: not_executed

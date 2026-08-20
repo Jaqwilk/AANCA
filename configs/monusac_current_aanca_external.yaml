@@ -1,0 +1,140 @@
+schema_version: 1
+study_id: monusac_current_aanca_controlled_external_v1
+project: AANCA
+replacement_project_or_v2: false
+freeze:
+  state: frozen_before_metric_execution
+  date: 2026-08-20
+  source_schema_and_inventory_inspected_before_freeze: true
+  labels_used_to_compute_outcomes_before_freeze: false
+  outcome_metrics_inspected_before_freeze: false
+  parameters_may_change_after_outcome_execution: false
+
+authority:
+  dataset: MoNuSAC2020
+  official_page: https://monusac-2020.grand-challenge.org/Data/
+  paper_doi: 10.1109/TMI.2021.3085712
+  license: CC-BY-NC-SA-4.0
+  train_google_drive_id: 1lxMZaAPSpEHLSxGA9KKMt_r-4S8dwLhq
+  train_archive_sha256: 5b7cbeb34817a8f880d3fddc28391e48d3329a91bf3adcbd131ea149a725cd92
+  test_google_drive_id: 1G54vsOdxWY1hG7dzmkeK3r0xz9s-heyQ
+  test_archive_sha256: bcbc38f6bf8b149230c90c29f3428cc7b2b76f8acd7766ce9fc908fc896c2674
+  organ_information_google_drive_id: 1kdOl3s6uQBRv0nToSIf1dPuceZunzL4N
+
+dataset:
+  development_split: official_train
+  final_split: official_test
+  group_id: tcga_patient_id
+  expected_train_patients_before_overlap_exclusion: 46
+  expected_test_patients: 25
+  expected_train_images: 209
+  expected_test_xml_annotations: 101
+  overlap_policy:
+    action: exclude_from_development_only
+    identities: [TCGA-A2-A0ES, TCGA-MP-A4T7]
+    discovered_from_identifiers_before_label_outcomes: true
+  ambiguous_test_regions: exclude
+  classes:
+    order: [Epithelial, Lymphocyte, Macrophage, Neutrophil]
+    codes:
+      Epithelial: 0
+      Lymphocyte: 1
+      Macrophage: 2
+      Neutrophil: 3
+  organs: [Breast, Kidney, Lung, Prostate]
+  source_annotation_modification_permitted: false
+
+representation:
+  crop_size: 64
+  crop_anchor: polygon_bounding_box_centre
+  padding: reflection
+  input_variant: context_rgb
+  encoder: torchvision_resnet18_imagenet1k_v1
+  frozen: true
+  output_dimension: 512
+  allow_weight_download_during_execution: false
+
+controlled_corruption:
+  split: development_only
+  mechanism: symmetric_random_corruption
+  rate: 0.10
+  seed: 26082080
+  preserve_pre_corruption_observed_and_metadata_separately: true
+
+model:
+  kind: balanced_multinomial_logistic_regression
+  l2: 0.01
+  max_iter: 400
+
+ranking:
+  folds: 5
+  split_seed: 26082081
+  candidates:
+    - self_confidence_global
+    - self_confidence_balanced
+    - nearest_neighbour_disagreement_balanced
+    - fixed_hybrid_balanced
+  primary_candidate: nearest_neighbour_disagreement_balanced
+  neighbour_k: 7
+  neighbour_metric: cosine
+  hybrid_weights: [0.5, 0.5]
+  review_budget: 0.05
+  bootstrap_iterations: 2000
+  bootstrap_seed: 26082082
+
+balanced_quality_queue:
+  max_per_group_fraction_of_review_count: 0.05
+  max_per_class_fraction_of_review_count: 0.40
+  max_per_tissue_fraction_of_review_count: 0.35
+  max_per_transition_fraction_of_review_count: 0.20
+  minimum_cosine_distance: 0.01
+  underfill_action: report_without_relaxing_constraints
+  model_improvement_queue_without_measured_utility: unavailable
+
+matched_random_control:
+  ratio: 1
+  fields: [observed_class, organ, proposed_transition]
+  repetitions: 20
+  seed_start: 26082100
+  partial_comparator_permitted: false
+
+downstream:
+  train_split: corrupted_official_train_after_overlap_exclusion
+  evaluation_split: untouched_official_test
+  primary_metric: macro_f1
+  secondary_metrics:
+    - accuracy
+    - balanced_accuracy
+    - per_class_precision
+    - per_class_recall
+    - multiclass_brier_score
+    - expected_calibration_error
+  conditions:
+    - corrupted_uncorrected
+    - self_confidence_global_review
+    - self_confidence_balanced_review
+    - nearest_neighbour_balanced_review
+    - fixed_hybrid_balanced_review
+    - primary_matched_random_review
+    - uncorrupted_reference_ceiling
+  restoration_rule: restore_only_reviewed_injected_changes_to_pre_corruption_label
+  bootstrap_iterations: 2000
+  bootstrap_seed: 26082083
+  important_classes: [Epithelial, Lymphocyte, Macrophage, Neutrophil]
+  minimum_macro_f1_effect: 0.0
+  minimum_per_class_recall_effect: -0.01
+
+success_requires_all:
+  - primary_top_k_beats_exact_matched_random_control
+  - primary_intervention_macro_f1_ci95_lower_gt_corrupted_uncorrected
+  - primary_intervention_macro_f1_ci95_lower_gt_mean_matched_random
+  - no_important_class_recall_ci95_lower_below_minus_0_01
+
+claim_boundary:
+  disposition: prospectively_frozen_controlled_external_benchmark
+  natural_pathology_error_detection_claim_permitted: false
+  pathologist_error_claim_permitted: false
+  clinical_or_operational_utility_claim_permitted: false
+  automatic_annotation_change_permitted: false
+  result_may_select_or_tune_a_new_candidate: false
+  preserve_null_and_adverse_results: true

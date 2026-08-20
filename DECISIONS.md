@@ -170,3 +170,87 @@ produce the same bytes that Git checks out on every platform. Pin the normalized
 files and their enclosing artifact manifests by byte count and SHA-256 in the
 independent verifier. This is a serialization correction only: sample identities,
 arrays, metrics, intervals and the negative primary conclusion remain unchanged.
+
+## D018 — Improve the current model without rewriting the frozen result
+
+Status: implemented
+
+Keep one AANCA project and one immutable frozen NuCLS result. Add the existing
+fold-safe neighbour signal and fixed hybrid to the current exploratory original-label
+audit instead of creating a replacement “v2”. Because NuCLS outcomes were already
+known, all candidate comparisons are permanently labelled `post_outcome_exploratory`.
+
+The neighbour candidate passed both primary ranking gates but failed the Evaluation
+sensitivity analysis. It is not promoted to the default. Future promotion requires a
+fresh prospectively frozen dataset, not retrospective parameter selection.
+
+Reviewed-label retraining is fail-closed: apply a candidate only when independent
+group-held-out validation has a lower 95% bootstrap bound above the registered
+minimum macro-F1 effect. Otherwise retain the uncorrected model. This rule prevents
+uncertain or demonstrated degradation but is not proof of natural-error detection,
+clinical utility or prospective workflow benefit.
+
+## D019 — Separate annotation quality from downstream utility
+
+Status: implemented as a prospective current-system policy
+
+An annotation-inconsistency score answers which case merits expert review; it is not
+an estimate of training benefit and is not named `P(error)` without new expert
+calibration. Maintain two queues. The model-improvement queue fails closed unless
+genuinely measured development interventions support nested group-cross-fitted
+expected-gain estimates and their lower bounds exceed the frozen minimum. NuCLS may
+not supply or tune these estimates after its outcome was inspected.
+
+## D020 — Preserve multi-rater uncertainty and make hard changes exceptional
+
+Status: implemented
+
+Never collapse raw independent votes into a source rewrite. Derived training views
+may keep, use a soft distribution, downweight, exclude or make a hard change. Hard
+changes are disabled by default and require explicit prospective opt-in, at least two
+independent label votes and the registered majority fraction. Ambiguity and
+insufficient context remain outcomes rather than hidden missingness.
+
+## D021 — Balance review and enforce the matched comparator in code
+
+Status: implemented
+
+The quality queue supports predeclared caps for source group, observed class, tissue
+and proposed transition plus optional embedding-distance diversity. An exact matched
+random comparator must contain one control for every top case within each declared
+stratum. Under-populated strata fail closed; partial matching is not silently used.
+The blinded package records a canonical selection-plan hash and verifies stratum
+counts before publication.
+
+## D022 — Candidate adoption requires global benefit and class safety
+
+Status: implemented as software; fresh scientific evidence is not yet available
+
+Compare unchanged, gated-hard, soft, downweighted and abstention-aware training only
+on independent development groups. A candidate replaces the unchanged model only if
+the macro-F1 whole-group lower bound exceeds the frozen benefit threshold and every
+important-class recall lower bound remains above its registered non-degradation
+limit. Report Brier score and expected calibration error. The final external test is
+unavailable to this choice; adverse, uncertain, non-independent or unavailable
+evidence always selects `retain_uncorrected`.
+
+## D023 — Freeze a new controlled MoNuSAC external benchmark before metrics
+
+Status: frozen before outcome execution
+
+Use the official MoNuSAC train split as the controlled-corruption development source
+and its official test split as an untouched final evaluation. Split every OOF model
+by TCGA patient, exclude ambiguous test regions, retain source annotations unchanged
+and pin both official archives by SHA-256. The benchmark evaluates injected-label
+recovery and downstream classification only; it cannot establish natural pathology
+errors, pathologist errors or clinical utility.
+
+Identifier-only inspection found `TCGA-A2-A0ES` and `TCGA-MP-A4T7` in both official
+archives. Exclude these identities from development only and leave the official test
+intact. PanNuke lacks sufficient patient metadata to prove complete cross-dataset
+non-overlap, so this limitation remains in every report.
+
+The primary candidate is the balanced fold-safe neighbour queue. Its exact budget,
+seeds, caps, matched control and simultaneous retrieval/downstream/class-safety rule
+are frozen in `configs/monusac_current_aanca_external.yaml`. Do not tune or promote a
+candidate from this final result. Preserve null and adverse outcomes.

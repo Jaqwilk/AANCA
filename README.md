@@ -169,6 +169,72 @@ NuCLS P-truth is inferred pathologist consensus, not guaranteed biological truth
 The Evaluation sensitivity subset also failed its frozen ranking and downstream
 rules and could not rescue the primary outcome.
 
+### Incremental improvement of the current AANCA model
+
+This repository improves the same AANCA implementation; it does not replace it with
+a “v2”. The original-label audit can now use the existing fold-safe neighbour score
+or the registered fixed hybrid, while preserving exact OOF and source-group
+exclusion evidence. A new fail-closed retraining guard retains the uncorrected model
+unless the lower 95% whole-group bootstrap bound for macro-F1 improvement is above
+the registered minimum effect.
+
+The post-outcome NuCLS analysis found that the neighbour score passed both strict
+ranking conditions in the primary Unbiased Control subset, but failed in the
+Evaluation sensitivity subset. It was therefore **not promoted to the default**.
+The guard rejected both the saved audit-guided correction and the full-consensus
+training candidate on the preserved evidence. This prevents demonstrated or
+uncertain degradation; it does not prove real-world improvement.
+
+The current implementation now also separates annotation-quality ranking from
+expected downstream benefit. The quality queue can be quota-balanced by source
+group, class, tissue, proposed transition and embedding diversity. The
+model-improvement queue is unavailable until genuinely measured development
+interventions produce nested group-cross-fitted utility estimates with a positive
+lower bound. Multi-rater review can derive keep, soft-label, downweight, exclude and
+strictly gated hard-change views without mutating source annotations. Candidate
+training policies are compared only on independent development groups, and adoption
+requires both a positive macro-F1 lower bound and registered recall non-degradation
+for every important class.
+
+Calibration and stability are similarly fail-closed: temperature scaling accepts
+only newly collected expert development labels and is evaluated group-cross-fitted;
+the persistence signal requires 3-5 group-safe models over multiple checkpoints.
+An exact matched-random selection plan is validated stratum by stratum before a
+blinded review package is built. These are software safeguards for the same AANCA,
+not positive empirical results.
+
+Recalculate the result with:
+
+```text
+uv run python scripts/analyze_nucls_current_model.py --format markdown
+```
+
+Exact values and claim boundaries are in
+[`reports/nucls_current_aanca_improvement.md`](reports/nucls_current_aanca_improvement.md).
+The complete prospective policy and implementation boundary are in
+[`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) and
+[`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml).
+
+### Frozen new-data test
+
+A separate controlled external benchmark is frozen on the official MoNuSAC 2020
+train/test release before computing its metrics. It uses patient-group-safe OOF
+ranking on deterministically corrupted training labels and evaluates downstream
+models once on the untouched official test patients. Two patient IDs found in both
+official archives are excluded from development only. The primary comparison is the
+balanced fold-safe neighbour queue against corrupted/no-review and exact
+matched-random baselines, with simultaneous per-class recall protection.
+
+This test can show whether the current AANCA safely recovers injected changes on new
+images. It cannot show that a natural annotation or pathologist is wrong. The exact
+freeze is in [`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md) and
+[`configs/monusac_current_aanca_external.yaml`](configs/monusac_current_aanca_external.yaml).
+Run it only with the checksum-matching official archives:
+
+```text
+uv run python scripts/run_monusac_current_aanca.py --device auto
+```
+
 The primary study produced 2,288 sealed artifacts and retained neutral, adverse,
 missing, and unavailable outcomes. Detailed comparison rows, intervals, adjusted
 p-values, subgroup ranges, hashes, and the H4 restoration record are available in
@@ -207,6 +273,18 @@ flowchart LR
 - **Fixed review budgets:** guided and random review use identical integer budgets.
 - **Fail-closed evidence:** missing Cleanlab output, unavailable encoders, failed
   cells, or insufficient subgroup support remain explicit—nothing is fabricated.
+- **Fail-closed retraining:** reviewed-label candidates are applied only after a
+  positive lower whole-group confidence bound on independent validation and no
+  registered important-class recall breach; otherwise the uncorrected model remains
+  selected.
+- **Separate review objectives:** annotation inconsistency never substitutes for
+  expected downstream benefit; the second queue is unavailable without measured,
+  cross-fitted development utility.
+- **Multi-rater uncertainty:** raw votes, ambiguity, soft labels, downweighting and
+  abstention remain explicit; hard changes are opt-in and require at least two votes.
+- **Balanced and matched review:** queue caps limit concentration, and an optional
+  blinded comparator plan must match top and random cohorts 1:1 within every frozen
+  stratum.
 - **No source mutation:** raw masks, source manifests, and source annotations are
   never rewritten.
 
@@ -401,6 +479,7 @@ AANCA/
 ├── configs/                  # smoke, pilot, primary, confirmatory, external
 ├── scripts/present_demo.py   # dependency-free verified local presentation launcher
 ├── scripts/verify_nucls_external_validation.py # independent NuCLS recalculation
+├── scripts/analyze_nucls_current_model.py # post-outcome current-model analysis
 ├── tests/                    # unit, integration, portability, and CLI tests
 ├── reports/                  # compact QC, provenance, literature, and validation evidence
 ├── artifacts/mvp_demo/       # checked-in five-file static presentation package
@@ -420,8 +499,12 @@ AANCA/
 | [`DECISIONS.md`](DECISIONS.md) | Current binding rationale; full history remains in Git |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Download and independently recalculate the released primary evidence |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Frozen NuCLS design, exact external result and independent verification |
+| [`reports/nucls_current_aanca_improvement.md`](reports/nucls_current_aanca_improvement.md) | Exploratory ranking candidates and fail-closed retraining decisions for the same AANCA model |
+| [`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) | Implemented two-queue, multi-rater, calibration, stability and adoption safeguards for the same AANCA system |
+| [`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml) | Machine-readable prospective policy; NuCLS is excluded from selection and fresh evidence is still required |
 | [`NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md`](NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md) | Publicly frozen NuCLS multi-rater protocol |
 | [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md) | Prospective requirements for a future blinded natural-case expert review |
+| [`PROSPECTIVE_WORKFLOW_PROTOCOL.md`](PROSPECTIVE_WORKFLOW_PROTOCOL.md) | Multi-site with/without-AANCA workflow and downstream evaluation required for real-use claims |
 | [`MVP_SCOPE.md`](MVP_SCOPE.md) | Reduced presentation boundary and acceptance checks |
 | [`DATASET_SETUP.md`](DATASET_SETUP.md) | PanNuke acquisition, integrity, QC, and licence gate |
 | [`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md) | Non-diagnostic scope, scientific limits, and responsible language |
@@ -481,6 +564,8 @@ Explicitly deferred:
 - real original-label audit execution;
 - execution of the published blinded natural-case protocol in
   [`EXPERT_REVIEW_PROTOCOL.md`](EXPERT_REVIEW_PROTOCOL.md);
+- fresh development execution of the safe-intervention policy in
+  [`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md);
 - newly recruited blinded expert evaluation;
 - broader external replication, prospective utility and clinical outcomes.
 

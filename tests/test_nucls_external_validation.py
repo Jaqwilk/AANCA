@@ -12,6 +12,7 @@ from histo_audit.external_validation.nucls import (
     CLASS_ORDER,
     _group_confusion_tensor,
     _macro_f1_from_confusions,
+    _nucls_audit_risk,
     load_frozen_nucls_config,
     prepare_nucls_subset,
 )
@@ -112,6 +113,46 @@ def test_group_confusion_bootstrap_uses_same_macro_f1_definition() -> None:
     ).macro_f1
 
     assert from_tensor == pytest.approx(from_public_metric)
+
+
+def test_nucls_score_strategy_preserves_frozen_score_and_supports_fold_safe_neighbours() -> None:
+    labels = np.asarray([0, 1, 2] * 5, dtype=np.int64)
+    groups = [f"g{index // 3}" for index in range(len(labels))]
+    sample_ids = [f"s{index}" for index in range(len(labels))]
+    probabilities = np.full((len(labels), 3), 0.1, dtype=np.float64)
+    probabilities[np.arange(len(labels)), labels] = 0.8
+    features = np.column_stack(
+        [labels.astype(np.float64), np.arange(len(labels), dtype=np.float64)]
+    )
+
+    frozen = _nucls_audit_risk(
+        features,
+        labels,
+        probabilities,
+        groups,
+        sample_ids,
+        method="one_minus_probability_of_observed_label",
+        n_splits=5,
+        split_seed=19,
+    )
+    neighbour = _nucls_audit_risk(
+        features,
+        labels,
+        probabilities,
+        groups,
+        sample_ids,
+        method="nearest_neighbour_disagreement",
+        n_splits=5,
+        split_seed=19,
+        neighbour_k=2,
+    )
+
+    assert np.array_equal(
+        frozen.risk_scores,
+        1.0 - probabilities[np.arange(len(labels)), labels],
+    )
+    assert neighbour.neighbour_evidence is not None
+    assert np.isfinite(neighbour.risk_scores).all()
 
 
 def test_repository_nucls_freeze_is_unchanged() -> None:

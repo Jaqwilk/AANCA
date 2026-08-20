@@ -26,11 +26,16 @@ import yaml
 from numpy.typing import NDArray
 from PIL import Image
 
+from histo_audit.auditing.strategies import (
+    GroupSafeAuditScoreResult,
+    group_safe_audit_scores,
+)
 from histo_audit.cross_validation.oof import (
     MultinomialLogisticRegression,
     make_group_stratified_fold_plan,
 )
 from histo_audit.evaluation.restoration import classification_metrics
+from histo_audit.evaluation.retraining_guard import evaluate_retraining_guard
 from histo_audit.representations.imagenet import (
     ResNet18EmbeddingConfig,
     extract_resnet18_embeddings,
@@ -509,6 +514,52 @@ def _oof_probabilities(
     }
 
 
+def _nucls_audit_risk(
+    features: NDArray[np.generic],
+    observed_labels: NDArray[np.int64],
+    probabilities: NDArray[np.generic],
+    group_ids: Sequence[str],
+    sample_ids: Sequence[str],
+    *,
+    method: str,
+    n_splits: int,
+    split_seed: int,
+    neighbour_k: int = 7,
+    neighbour_metric: str = "cosine",
+    hybrid_weights: tuple[float, float] = (0.5, 0.5),
+) -> GroupSafeAuditScoreResult:
+    """Recreate exact fold provenance and build one group-safe NuCLS risk vector."""
+
+    plan = make_group_stratified_fold_plan(
+        observed_labels,
+        group_ids,
+        n_splits=n_splits,
+        class_order=tuple(range(len(CLASS_ORDER))),
+        seed=split_seed,
+    )
+    fold_ids = np.full(len(observed_labels), -1, dtype=np.int64)
+    training_groups_by_fold: dict[int, tuple[str, ...]] = {}
+    for fold in plan.folds:
+        fold_ids[fold.holdout_indices] = fold.fold_id
+        training_groups_by_fold[fold.fold_id] = fold.training_groups
+    if np.any(fold_ids < 0):
+        raise RuntimeError("NuCLS score construction did not cover every sample")
+    return group_safe_audit_scores(
+        features,
+        observed_labels,
+        probabilities,
+        group_ids,
+        fold_ids,
+        training_groups_by_fold,
+        sample_ids=sample_ids,
+        method=method,
+        class_order=tuple(range(len(CLASS_ORDER))),
+        neighbour_k=neighbour_k,
+        neighbour_metric=neighbour_metric,
+        hybrid_weights=hybrid_weights,
+    )
+
+
 def _interval(values: Sequence[float], *, estimate: float, requested: int) -> IntervalSummary:
     array = np.asarray(values, dtype=np.float64)
     array = array[np.isfinite(array)]
@@ -543,7 +594,20 @@ def _ranking_validation(
         l2=float(model_config["l2"]),
         max_iter=int(model_config["max_iter"]),
     )
-    risk = 1.0 - probabilities[np.arange(len(observed)), observed]
+    score_result = _nucls_audit_risk(
+        features,
+        observed,
+        probabilities,
+        groups,
+        manifest["sample_id"].astype(str).tolist(),
+        method=str(ranking["score"]),
+        n_splits=int(ranking["folds"]),
+        split_seed=int(ranking["split_seed"]),
+        neighbour_k=int(ranking.get("neighbour_k", 7)),
+        neighbour_metric=str(ranking.get("neighbour_metric", "cosine")),
+        hybrid_weights=tuple(float(value) for value in ranking.get("hybrid_weights", (0.5, 0.5))),
+    )
+    risk = score_result.risk_scores
     prevalence = float(events.mean())
     ap = average_precision(events, risk)
     if ap is None:
@@ -642,6 +706,8 @@ def _ranking_validation(
             else "does not establish prioritisation of natural NP/P disagreements"
         ),
     }
+    if str(ranking["score"]) != "one_minus_probability_of_observed_label":
+        result["risk_strategy"] = score_result.as_dict()
     arrays: dict[str, NDArray[np.generic]] = {
         "observed_labels": observed,
         "reference_labels": reference,
@@ -757,6 +823,18 @@ def _downstream_validation(
     review_counts: list[dict[str, Any]] = []
     l2 = float(model_config["l2"])
     max_iter = int(model_config["max_iter"])
+    ranking_config = config["ranking"]
+    audit_method = str(downstream.get("audit_score", ranking_config["score"]))
+    audit_neighbour_k = int(downstream.get("neighbour_k", ranking_config.get("neighbour_k", 7)))
+    audit_neighbour_metric = str(
+        downstream.get("neighbour_metric", ranking_config.get("neighbour_metric", "cosine"))
+    )
+    audit_hybrid_weights = tuple(
+        float(value)
+        for value in downstream.get(
+            "hybrid_weights", ranking_config.get("hybrid_weights", (0.5, 0.5))
+        )
+    )
 
     for fold in outer.folds:
         train = fold.train_indices.astype(np.int64)
@@ -771,7 +849,20 @@ def _downstream_validation(
             l2=l2,
             max_iter=max_iter,
         )
-        inner_risk = 1.0 - inner_probabilities[np.arange(len(train)), observed[train]]
+        inner_score = _nucls_audit_risk(
+            matrix[train],
+            observed[train],
+            inner_probabilities,
+            train_groups,
+            manifest.iloc[train]["sample_id"].astype(str).tolist(),
+            method=audit_method,
+            n_splits=int(downstream["inner_audit_folds"]),
+            split_seed=int(downstream["inner_split_seed"]) + fold.fold_id,
+            neighbour_k=audit_neighbour_k,
+            neighbour_metric=audit_neighbour_metric,
+            hybrid_weights=audit_hybrid_weights,
+        )
+        inner_risk = inner_score.risk_scores
         review_count = budget_count(len(train), float(downstream["review_budget"]))
         guided_local = rank_indices(
             inner_risk,
@@ -809,19 +900,20 @@ def _downstream_validation(
             random_probabilities[repeat, test] = _fit_probabilities(
                 matrix, random_labels, train, test, l2=l2, max_iter=max_iter
             ).astype(np.float32)
-        review_counts.append(
-            {
-                "fold_id": fold.fold_id,
-                "training_groups": list(fold.training_groups),
-                "held_out_groups": list(fold.held_out_groups),
-                "training_count": len(train),
-                "test_count": len(test),
-                "review_count": review_count,
-                "guided_disagreements_corrected": len(guided_changed),
-                "random_disagreements_corrected_mean": float(np.mean(random_changed_counts)),
-                "inner_fold_evidence": inner_evidence,
-            }
-        )
+        review_record = {
+            "fold_id": fold.fold_id,
+            "training_groups": list(fold.training_groups),
+            "held_out_groups": list(fold.held_out_groups),
+            "training_count": len(train),
+            "test_count": len(test),
+            "review_count": review_count,
+            "guided_disagreements_corrected": len(guided_changed),
+            "random_disagreements_corrected_mean": float(np.mean(random_changed_counts)),
+            "inner_fold_evidence": inner_evidence,
+        }
+        if audit_method != "one_minus_probability_of_observed_label":
+            review_record["risk_strategy"] = inner_score.as_dict()
+        review_counts.append(review_record)
 
     arrays_to_check = [
         uncorrected_probabilities,
@@ -929,6 +1021,37 @@ def _downstream_validation(
             guided_uncorrected_differences, dtype=np.float64
         ),
     }
+    guard_config = downstream.get("application_guard")
+    if isinstance(guard_config, Mapping) and guard_config.get("enabled") is True:
+        guard = evaluate_retraining_guard(
+            reference,
+            uncorrected_probabilities,
+            guided_probabilities,
+            groups,
+            class_order=tuple(range(len(CLASS_ORDER))),
+            evidence_role=str(guard_config.get("evidence_role", "")),
+            n_iterations=int(guard_config.get("bootstrap_iterations", 2000)),
+            seed=int(guard_config.get("bootstrap_seed", 26082071)),
+            minimum_effect=float(guard_config.get("minimum_macro_f1_effect", 0.0)),
+        )
+        guarded_probabilities = (
+            guided_probabilities if guard.apply_candidate else uncorrected_probabilities
+        )
+        result["application_guard"] = guard.as_dict()
+        result["guarded_application"] = {
+            "selected_condition": (
+                "audit_guided_review" if guard.apply_candidate else "uncorrected_observed"
+            ),
+            "metrics": asdict(
+                classification_metrics(
+                    reference,
+                    guarded_probabilities,
+                    class_order=tuple(range(len(CLASS_ORDER))),
+                )
+            ),
+            "automatic_source_annotation_modification": False,
+        }
+        arrays["downstream_guarded_probabilities"] = guarded_probabilities
     return result, arrays
 
 

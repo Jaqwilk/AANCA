@@ -16,7 +16,12 @@ import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
 
-from histo_audit.auditing.scores import score_annotations
+from histo_audit.auditing.strategies import group_safe_audit_scores
+from histo_audit.auditing.two_queue import (
+    GROUP_SAFE_OOF_EVIDENCE,
+    QueueConstraints,
+    build_two_review_queues,
+)
 from histo_audit.cross_validation.oof import OOFResult, grouped_oof_logistic
 from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_text, sha256_file
 
@@ -42,6 +47,10 @@ class OriginalLabelAuditResult:
     top_overall_count: int
     top_per_class_count: int
     top_per_tissue_count: int
+    balanced_quality_queue_path: Path | None = None
+    balanced_queue_evidence_path: Path | None = None
+    balanced_quality_count: int = 0
+    balanced_quality_underfilled: bool = False
 
     def as_dict(self) -> dict[str, Any]:
         """Return JSON-compatible audit output evidence."""
@@ -210,6 +219,8 @@ def _report(
     top_overall_count: int,
     top_per_class_count: int,
     top_per_tissue_count: int,
+    balanced_quality_count: int,
+    balanced_quality_underfilled: bool,
 ) -> str:
     return f"""# Exploratory original-label audit
 
@@ -225,6 +236,8 @@ annotation error, and no source annotation was modified.
 - Top overall rows: {top_overall_count}
 - Top per observed class rows: {top_per_class_count}
 - Top per tissue rows: {top_per_tissue_count}
+- Balanced quality-control rows: {balanced_quality_count}
+- Balanced queue underfilled by registered quotas: {balanced_quality_underfilled}
 - Injected corruption: none; `observed_label` equals `pre_corruption_label` for every row
 - Final-reference groups: excluded from this audit and unavailable to OOF fitting
 
@@ -248,9 +261,17 @@ def audit_original_labels(
     model_seed: int = 227,
     representation: str = "frozen_features",
     method: str = "self_confidence",
+    neighbour_k: int = 7,
+    neighbour_metric: str = "cosine",
     top_count_overall: int = 100,
     top_count_per_class: int = 20,
     top_count_per_tissue: int = 20,
+    balanced_top_count: int | None = None,
+    balanced_max_per_group: int | None = None,
+    balanced_max_per_class: int | None = None,
+    balanced_max_per_tissue: int | None = None,
+    balanced_max_per_transition: int | None = None,
+    balanced_minimum_cosine_distance: float | None = None,
     l2: float = 1.0e-2,
     max_iter: int = 400,
 ) -> OriginalLabelAuditResult:
@@ -258,6 +279,8 @@ def audit_original_labels(
 
     if min(top_count_overall, top_count_per_class, top_count_per_tissue) <= 0:
         raise ValueError("all top-count limits must be positive")
+    if balanced_top_count is not None and balanced_top_count <= 0:
+        raise ValueError("balanced_top_count must be positive when supplied")
     destination = Path(output_directory).resolve()
     if destination.exists():
         raise FileExistsError(f"original-label audit output already exists: {destination}")
@@ -317,7 +340,20 @@ def audit_original_labels(
         l2=l2,
         max_iter=max_iter,
     )
-    risks = score_annotations(observed, oof.probabilities, method=method, class_order=classes)
+    score_result = group_safe_audit_scores(
+        matrix,
+        observed,
+        oof.probabilities,
+        frame["group_id"].astype(str).tolist(),
+        oof.fold_id,
+        oof.training_groups_by_fold,
+        sample_ids=frame["sample_id"].astype(str).tolist(),
+        method=method,
+        class_order=classes,
+        neighbour_k=neighbour_k,
+        neighbour_metric=neighbour_metric,
+    )
+    risks = score_result.risk_scores
     ranking = pd.DataFrame(
         {
             "sample_id": frame["sample_id"],
@@ -355,6 +391,39 @@ def audit_original_labels(
     )
     top_tissue = by_tissue[by_tissue["within_tissue_rank"] <= top_count_per_tissue]
     top_overall = ranking.head(top_count_overall)
+    balanced_queue = None
+    balanced_rows = pd.DataFrame()
+    balanced_constraints = None
+    if balanced_top_count is not None:
+        balanced_constraints = QueueConstraints(
+            requested_count=balanced_top_count,
+            max_per_group=balanced_max_per_group,
+            max_per_class=balanced_max_per_class,
+            max_per_tissue=balanced_max_per_tissue,
+            max_per_transition=balanced_max_per_transition,
+            minimum_cosine_distance=balanced_minimum_cosine_distance,
+        )
+        queues = build_two_review_queues(
+            risks,
+            frame["group_id"].astype(str).tolist(),
+            observed,
+            frame["sample_id"].astype(str).tolist(),
+            quality_constraints=balanced_constraints,
+            model_constraints=QueueConstraints(requested_count=balanced_top_count),
+            annotation_evidence_role=GROUP_SAFE_OOF_EVIDENCE,
+            proposed_labels=oof.predicted_class,
+            tissue_types=frame["tissue_type"].astype(str).tolist(),
+            embeddings=matrix,
+            minimum_annotation_score=float(np.min(risks)),
+        )
+        balanced_queue = queues.quality_control
+        ranking_by_id = ranking.set_index("sample_id", drop=False)
+        balanced_rows = ranking_by_id.loc[list(balanced_queue.selected_sample_ids)].copy()
+        balanced_rows.insert(
+            0,
+            "balanced_queue_rank",
+            np.arange(1, len(balanced_rows) + 1, dtype=np.int64),
+        )
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{destination.name}.", dir=destination.parent))
@@ -364,6 +433,38 @@ def audit_original_labels(
         atomic_write_text(staging / "top_overall.csv", _csv_text(top_overall))
         atomic_write_text(staging / "top_per_class.csv", _csv_text(top_class))
         atomic_write_text(staging / "top_per_tissue.csv", _csv_text(top_tissue))
+        if balanced_queue is not None and balanced_constraints is not None:
+            atomic_write_text(staging / "balanced_quality_queue.csv", _csv_text(balanced_rows))
+            atomic_write_json(
+                staging / "balanced_queue_evidence.json",
+                {
+                    "schema_version": 1,
+                    "purpose": "balanced annotation-quality review queue",
+                    "annotation_evidence_role": GROUP_SAFE_OOF_EVIDENCE,
+                    "constraints": asdict(balanced_constraints),
+                    "requested_count": balanced_queue.requested_count,
+                    "eligible_count": balanced_queue.eligible_count,
+                    "selected_count": balanced_queue.selected_count,
+                    "selected_sample_ids": list(balanced_queue.selected_sample_ids),
+                    "underfilled": balanced_queue.underfilled,
+                    "rejection_counts": balanced_queue.rejection_counts,
+                    "group_counts": balanced_queue.group_counts,
+                    "class_counts": balanced_queue.class_counts,
+                    "tissue_counts": balanced_queue.tissue_counts,
+                    "transition_counts": balanced_queue.transition_counts,
+                    "model_improvement_queue": {
+                        "available": False,
+                        "reason": (
+                            "no independently measured cross-fitted downstream utility was supplied"
+                        ),
+                    },
+                    "automatic_source_annotation_modification": False,
+                },
+            )
+        score_arrays = {
+            f"risk_component_{name}": values
+            for name, values in score_result.component_scores.items()
+        }
         np.savez_compressed(
             staging / "oof_predictions.npz",
             sample_ids=np.asarray(oof.sample_ids, dtype=np.str_),
@@ -373,7 +474,37 @@ def audit_original_labels(
             fold_id=oof.fold_id,
             coverage_count=oof.coverage_count,
             class_order=np.asarray(oof.class_order, dtype=np.int64),
+            risk_score=risks,
+            **score_arrays,
         )
+        if score_result.neighbour_evidence is not None:
+            neighbour = score_result.neighbour_evidence
+            atomic_write_json(
+                staging / "neighbour_evidence.json",
+                {
+                    "schema_version": 1,
+                    "strategy": score_result.as_dict(),
+                    "records": [
+                        {
+                            "sample_id": sample_id,
+                            "neighbour_ids": list(neighbour_ids),
+                            "neighbour_groups": list(neighbour_groups),
+                            "neighbour_distances": list(neighbour_distances),
+                            "suggested_class": int(suggested_class),
+                            "risk_score": float(risk_score),
+                        }
+                        for sample_id, neighbour_ids, neighbour_groups, neighbour_distances, suggested_class, risk_score in zip(
+                            oof.sample_ids,
+                            neighbour.neighbour_ids,
+                            neighbour.neighbour_groups,
+                            neighbour.neighbour_distances,
+                            neighbour.suggested_class,
+                            neighbour.risk_scores,
+                            strict=True,
+                        )
+                    ],
+                },
+            )
         provenance = _oof_provenance(oof)
         atomic_write_json(staging / "oof_provenance.json", provenance)
         manifest_after = sha256_file(manifest_path) if manifest_path is not None else None
@@ -416,7 +547,8 @@ def audit_original_labels(
                 "group_count": int(frame["group_id"].nunique()),
                 "observed_equals_pre_corruption": True,
                 "injected_corruption_count": 0,
-                "risk_method": method,
+                "risk_method": score_result.method,
+                "risk_strategy": score_result.as_dict(),
                 "risk_direction": "larger means more suspicious, not confirmed incorrect",
                 "review_recommendation_language": REVIEW_RECOMMENDATION,
                 "group_safe_oof": provenance,
@@ -424,6 +556,7 @@ def audit_original_labels(
                     "top_overall": len(top_overall),
                     "top_per_class": len(top_class),
                     "top_per_tissue": len(top_tissue),
+                    "balanced_quality": len(balanced_rows),
                 },
                 "outcome_metrics": "not_applicable_without_injected_or_genuine_expert_reference",
             },
@@ -433,10 +566,14 @@ def audit_original_labels(
             _report(
                 sample_count=len(frame),
                 group_count=int(frame["group_id"].nunique()),
-                method=method,
+                method=score_result.method,
                 top_overall_count=len(top_overall),
                 top_per_class_count=len(top_class),
                 top_per_tissue_count=len(top_tissue),
+                balanced_quality_count=len(balanced_rows),
+                balanced_quality_underfilled=(
+                    balanced_queue.underfilled if balanced_queue is not None else False
+                ),
             ),
         )
         destination.mkdir(exist_ok=False)
@@ -465,6 +602,16 @@ def audit_original_labels(
         top_overall_count=len(top_overall),
         top_per_class_count=len(top_class),
         top_per_tissue_count=len(top_tissue),
+        balanced_quality_queue_path=(
+            destination / "balanced_quality_queue.csv" if balanced_queue is not None else None
+        ),
+        balanced_queue_evidence_path=(
+            destination / "balanced_queue_evidence.json" if balanced_queue is not None else None
+        ),
+        balanced_quality_count=len(balanced_rows),
+        balanced_quality_underfilled=(
+            balanced_queue.underfilled if balanced_queue is not None else False
+        ),
     )
 
 

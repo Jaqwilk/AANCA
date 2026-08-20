@@ -2285,9 +2285,38 @@ def audit_original_command(
     model_seed: Annotated[int, typer.Option("--model-seed")] = 227,
     representation: Annotated[str, typer.Option("--representation")] = "frozen_features",
     method: Annotated[str, typer.Option("--method")] = "self_confidence",
+    neighbour_k: Annotated[int, typer.Option("--neighbour-k", min=1)] = 7,
+    neighbour_metric: Annotated[
+        str,
+        typer.Option("--neighbour-metric", help="Exact neighbour metric: cosine or euclidean."),
+    ] = "cosine",
     top_count_overall: Annotated[int, typer.Option("--top-count", min=1)] = 100,
     top_count_per_class: Annotated[int, typer.Option("--top-per-class", min=1)] = 20,
     top_count_per_tissue: Annotated[int, typer.Option("--top-per-tissue", min=1)] = 20,
+    balanced_top_count: Annotated[
+        int | None,
+        typer.Option(
+            "--balanced-top",
+            min=1,
+            help="Also emit a quota-constrained annotation-quality queue.",
+        ),
+    ] = None,
+    balanced_max_per_group: Annotated[
+        int | None, typer.Option("--balanced-max-per-group", min=1)
+    ] = None,
+    balanced_max_per_class: Annotated[
+        int | None, typer.Option("--balanced-max-per-class", min=1)
+    ] = None,
+    balanced_max_per_tissue: Annotated[
+        int | None, typer.Option("--balanced-max-per-tissue", min=1)
+    ] = None,
+    balanced_max_per_transition: Annotated[
+        int | None, typer.Option("--balanced-max-per-transition", min=1)
+    ] = None,
+    balanced_minimum_cosine_distance: Annotated[
+        float | None,
+        typer.Option("--balanced-min-cosine-distance", min=0.0, max=2.0),
+    ] = None,
     l2: Annotated[float, typer.Option("--l2", min=0.0)] = 1.0e-2,
     max_iter: Annotated[int, typer.Option("--max-iter", min=1)] = 400,
 ) -> None:
@@ -2338,9 +2367,17 @@ def audit_original_command(
                 "model_seed",
                 "representation",
                 "method",
+                "neighbour_k",
+                "neighbour_metric",
                 "top_count_overall",
                 "top_count_per_class",
                 "top_count_per_tissue",
+                "balanced_top_count",
+                "balanced_max_per_group",
+                "balanced_max_per_class",
+                "balanced_max_per_tissue",
+                "balanced_max_per_transition",
+                "balanced_minimum_cosine_distance",
                 "l2",
                 "max_iter",
             )
@@ -2391,9 +2428,17 @@ def audit_original_command(
                 model_seed=model_seed,
                 representation=representation,
                 method=method,
+                neighbour_k=neighbour_k,
+                neighbour_metric=neighbour_metric,
                 top_count_overall=top_count_overall,
                 top_count_per_class=top_count_per_class,
                 top_count_per_tissue=top_count_per_tissue,
+                balanced_top_count=balanced_top_count,
+                balanced_max_per_group=balanced_max_per_group,
+                balanced_max_per_class=balanced_max_per_class,
+                balanced_max_per_tissue=balanced_max_per_tissue,
+                balanced_max_per_transition=balanced_max_per_transition,
+                balanced_minimum_cosine_distance=balanced_minimum_cosine_distance,
                 l2=l2,
                 max_iter=max_iter,
             )
@@ -2481,6 +2526,16 @@ def build_review_package_command(
     top_count: Annotated[int, typer.Option("--top", min=1)] = 100,
     random_count: Annotated[int, typer.Option("--random", min=1)] = 100,
     seed: Annotated[int, typer.Option("--seed")] = 509,
+    selection_plan_path: Annotated[
+        Path | None,
+        typer.Option(
+            "--selection-plan",
+            help=(
+                "Frozen CSV/JSON plan with sample_id, selection_source "
+                "(top_ranked/random), and match_stratum for an exact-matched comparator."
+            ),
+        ),
+    ] = None,
 ) -> None:
     """Build a package; emit readiness only for a verified sealed real-data audit."""
 
@@ -2546,6 +2601,11 @@ def build_review_package_command(
             private_unblinding_key_path=_resolve_from_root(root, private_unblinding_key_path),
             study_outcome_eligible=eligibility is not None,
             eligibility_evidence=(eligibility.package_evidence() if eligibility else None),
+            selection_plan=(
+                _resolve_from_root(root, selection_plan_path)
+                if selection_plan_path is not None
+                else None
+            ),
         )
         validation = validate_blinded_review_package(
             result.package_directory,

@@ -185,3 +185,120 @@ external-validation tests passed (`5 passed`). The fresh complete local suite pa
 with `1070 passed, 1 skipped` in 587.51 seconds; lint and formatting also passed for
 all 164 maintained Python files. A fresh Ubuntu / Windows CI result must be recorded
 before this portability correction is closed.
+
+## Incremental improvement of the current AANCA model
+
+No replacement repository or “v2” was created. The same original-label audit now
+supports `nearest_neighbour_disagreement` and `fixed_hybrid` in addition to the
+existing probability scores. Neighbour outputs preserve the exact reference sample,
+source group and distance for every ranked nucleus and validate that the query source
+group is absent.
+
+The frozen NuCLS result remains byte-identical and scientifically unchanged. A
+separate `post_outcome_exploratory` analysis of the preserved evidence produced:
+
+- primary Unbiased Control neighbour score: AP `0.068910`, 4/41 at 5%, AP-difference
+  interval `[0.008527, 0.079894]`, precision-difference interval
+  `[0.018415, 0.150843]`; both exploratory gates passed;
+- secondary Evaluation neighbour score: AP `0.072560`, 2/46 at 5%, intervals
+  `[-0.011768, 0.052766]` and `[-0.099889, 0.075346]`; gates failed;
+- the candidate therefore was not promoted to the default;
+- the retraining guard rejected the frozen guided candidate in Unbiased Control
+  (`-0.014633`, interval `[-0.026683, -0.002544]`) and Evaluation (`-0.008364`,
+  interval `[-0.034640, 0.033899]`);
+- even the full-consensus training candidate was rejected in both subsets.
+
+The implemented runtime action is `retain_uncorrected` whenever independent
+whole-group validation is adverse, neutral or uncertain. This fixes the unsafe
+application policy; it does not turn the saved adverse outcome into an improvement.
+Recalculation command:
+
+```text
+uv run python scripts/analyze_nucls_current_model.py --format markdown
+```
+
+Machine logic is in `src/histo_audit/auditing/strategies.py` and
+`src/histo_audit/evaluation/retraining_guard.py`; exact results and the prospective
+claim boundary are in `reports/nucls_current_aanca_improvement.md` and
+`PROSPECTIVE_WORKFLOW_PROTOCOL.md`.
+
+Validation after implementation:
+
+- complete maintained suite: `1077 passed, 1 skipped` in 784.00 seconds;
+- `ruff check .`: passed;
+- `ruff format --check .`: 171 files already formatted;
+- current-model recalculation: `promoted_to_new_default: false`,
+  `frozen_external_result_changed: false`,
+  `retraining_application_is_fail_closed: true`;
+- independent frozen NuCLS verifier: both subsets and all file identities passed,
+  with the unchanged conclusion `primary_claim_conclusion: not_supported`;
+- `histo-audit audit original --help`: passed and exposes `--neighbour-k` and
+  `--neighbour-metric` for non-stage exploratory execution.
+
+## Fail-closed intervention layer for the current AANCA
+
+The existing AANCA repository and model workflow were extended in place; no new
+project or replacement “v2” was created. The saved NuCLS outcome remains immutable,
+and neither its adverse downstream result nor its exposed external labels are used
+to tune or select the new policy.
+
+The current implementation now provides:
+
+- two explicitly separate queues: an annotation-quality queue based only on exact
+  group-safe OOF evidence, and a model-improvement queue that remains unavailable
+  unless a cross-fitted development estimate supplies both measured expected utility
+  and a conservative lower bound;
+- deterministic review caps by source group, class, tissue and transition, with an
+  optional feature-space diversity constraint, so a high-scoring cluster cannot
+  consume the review budget silently;
+- an exact matched-random review comparator and a blinded package selection plan;
+  construction fails instead of returning a partial or unmatched control sample;
+- preservation of all expert votes and derived interventions `keep`, `soft_label`,
+  `downweight`, `exclude` and `hard_change`; hard changes are disabled by default and
+  require at least two votes and two-thirds agreement when explicitly enabled;
+- disjoint-development-group comparison of unchanged labels, gated hard correction,
+  soft labels, downweighted hard labels and soft labels with abstention;
+- a multicriteria retraining guard: a candidate must have a positive macro-F1 lower
+  confidence bound and must not violate registered important-class recall margins;
+  otherwise the executable action is `retain_uncorrected`;
+- group-cross-fitted temperature calibration that accepts only newly collected
+  expert development labels paired with group-safe OOF probabilities, plus a
+  multi-model, multi-checkpoint stability signal that filters transient spikes;
+- a nested group-cross-fitted development-utility estimator. It can learn only from
+  genuinely measured intervention outcomes and cannot manufacture utility targets
+  or consume the final external test;
+- one frozen intervention policy in
+  `configs/current_aanca_intervention_policy.yaml`, with the operational and claim
+  boundaries documented in `CURRENT_AANCA_SAFE_INTERVENTION.md`.
+
+The pathology-encoder route remains a gated candidate route, not an asserted
+improvement. UNI/CTransPath-derived representations may enter development comparison
+only after provenance, licensing, group independence and OOF requirements pass. No
+encoder, score, calibration or intervention is promoted from the adverse NuCLS test.
+
+Final validation of this in-place improvement:
+
+- complete maintained suite: `1100 passed, 1 skipped` in 569.45 seconds; the skip is
+  the documented Windows/POSIX file-deletion sharing test;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 186 maintained Python files already formatted;
+- independent frozen NuCLS verifier: file identities, manifests, ranking outcomes,
+  random controls, downstream metrics and frozen bootstraps all passed, with the
+  unchanged conclusion `primary_claim_conclusion: not_supported`;
+- current-model analysis: no replacement project, no changed frozen outcome, no
+  promoted neighbour candidate and `retain_uncorrected` for both saved retraining
+  candidates;
+- real synthetic `audit original` execution: 300 samples in 60 source groups,
+  group-safe OOF provenance accepted, 16 of 20 requested balanced review items
+  selected under the declared caps and diversity constraints, and the underfilled
+  budget reported explicitly;
+- real matched-package execution: two ranked and two random items, exact 1:1 matching
+  in every recorded stratum, valid private linkage and 12 generated review assets;
+- synthetic data reuse, smoke experiment and five-file presentation verification all
+  completed successfully; the article package remains `DEMO_COMPLETE`.
+
+This engineering closes the unsafe-correction and evaluation-policy defects. It does
+not supply the still-missing empirical evidence: natural-error detection, operational
+benefit and clinical utility still require a new prospective, blinded, multi-rater,
+multi-site study on untouched cases. Until that study is executed, those claims remain
+prohibited.

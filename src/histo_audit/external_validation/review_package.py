@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import html
 import io
+import json
 import os
 import shutil
 import tempfile
@@ -269,13 +271,18 @@ def build_blinded_review_package(
     private_unblinding_key_path: str | Path | None = None,
     study_outcome_eligible: bool = False,
     eligibility_evidence: Mapping[str, Any] | None = None,
+    selection_plan: TableInput | None = None,
+    selection_source_column: str = "selection_source",
+    selection_stratum_column: str = "match_stratum",
 ) -> ReviewPackageResult:
     """Select exact disjoint top/random cohorts and build blinded static artifacts.
 
     The reviewer-facing directory never contains original sample IDs, ranking
     scores, selection cohorts, source paths, model suggestions, or
     ``pre_corruption_label``.  A private linkage key is written as a sibling by
-    default and must be withheld until responses are locked.
+    default and must be withheld until responses are locked.  A supplied selection
+    plan may replace uniform random sampling with a previously frozen exact-matched
+    comparator; its cohort membership remains private.
     """
 
     if top_count <= 0 or random_count <= 0:
@@ -359,15 +366,89 @@ def build_blinded_review_package(
             f"{required} are required"
         )
 
-    top = eligible_frame.iloc[:top_count].copy()
-    random_pool = eligible_frame.iloc[top_count:].copy()
-    if len(random_pool) < random_count:
-        raise ValueError("insufficient disjoint non-top rows for the requested random cohort")
     rng = np.random.default_rng(seed)
-    random_positions = rng.choice(len(random_pool), size=random_count, replace=False)
-    random_selection = random_pool.iloc[np.sort(random_positions)].copy()
-    top["__selection_source"] = "top_ranked"
-    random_selection["__selection_source"] = "random"
+    selection_plan_sha256: str | None = None
+    if selection_plan is None:
+        top = eligible_frame.iloc[:top_count].copy()
+        random_pool = eligible_frame.iloc[top_count:].copy()
+        if len(random_pool) < random_count:
+            raise ValueError("insufficient disjoint non-top rows for the requested random cohort")
+        random_positions = rng.choice(len(random_pool), size=random_count, replace=False)
+        random_selection = random_pool.iloc[np.sort(random_positions)].copy()
+        top["__selection_source"] = "top_ranked"
+        random_selection["__selection_source"] = "random"
+        top["__matching_stratum"] = ""
+        random_selection["__matching_stratum"] = ""
+        comparator_sampling = "uniform_random_from_non_top"
+    else:
+        plan, _ = _read_table(selection_plan, role="selection-plan")
+        _validate_identifier_column(plan, sample_id_column, role="selection-plan")
+        if selection_source_column not in plan.columns:
+            raise ValueError(f"selection-plan table is missing {selection_source_column!r}")
+        if selection_stratum_column not in plan.columns:
+            raise ValueError(
+                f"matched selection-plan table is missing {selection_stratum_column!r}"
+            )
+        plan = plan[[sample_id_column, selection_source_column, selection_stratum_column]].copy()
+        plan[sample_id_column] = plan[sample_id_column].astype(str)
+        plan[selection_source_column] = plan[selection_source_column].astype(str)
+        plan[selection_stratum_column] = plan[selection_stratum_column].astype(str)
+        if (plan[selection_stratum_column].str.strip() == "").any():
+            raise ValueError("matched selection-plan strata cannot be empty")
+        sources = set(plan[selection_source_column])
+        if sources != {"top_ranked", "random"}:
+            raise ValueError("selection plan must contain exactly top_ranked and random cohorts")
+        planned_top = plan[plan[selection_source_column] == "top_ranked"]
+        planned_random = plan[plan[selection_source_column] == "random"]
+        if len(planned_top) != top_count or len(planned_random) != random_count:
+            raise ValueError("selection-plan cohort counts differ from top/random counts")
+        stratum_counts = (
+            plan.groupby([selection_stratum_column, selection_source_column])
+            .size()
+            .unstack(fill_value=0)
+        )
+        if (
+            "top_ranked" not in stratum_counts.columns
+            or "random" not in stratum_counts.columns
+            or not stratum_counts["top_ranked"].equals(stratum_counts["random"])
+        ):
+            raise ValueError(
+                "selection plan is not one-to-one matched within every declared stratum"
+            )
+        indexed = eligible_frame.set_index(sample_id_column, drop=False)
+        missing_plan_ids = sorted(set(plan[sample_id_column]).difference(indexed.index))
+        if missing_plan_ids:
+            raise ValueError(
+                "selection plan contains samples without complete eligible assets: "
+                f"{missing_plan_ids}"
+            )
+        top = indexed.loc[planned_top[sample_id_column].tolist()].copy()
+        random_selection = indexed.loc[planned_random[sample_id_column].tolist()].copy()
+        top["__selection_source"] = "top_ranked"
+        random_selection["__selection_source"] = "random"
+        stratum_by_id = dict(
+            zip(
+                plan[sample_id_column],
+                plan[selection_stratum_column],
+                strict=True,
+            )
+        )
+        top["__matching_stratum"] = [stratum_by_id[str(value)] for value in top[sample_id_column]]
+        random_selection["__matching_stratum"] = [
+            stratum_by_id[str(value)] for value in random_selection[sample_id_column]
+        ]
+        canonical_plan = sorted(
+            (
+                str(row[sample_id_column]),
+                str(row[selection_source_column]),
+                str(row[selection_stratum_column]),
+            )
+            for _, row in plan.iterrows()
+        )
+        selection_plan_sha256 = hashlib.sha256(
+            json.dumps(canonical_plan, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+        ).hexdigest()
+        comparator_sampling = "predeclared_exact_matched_random"
     selected = pd.concat((top, random_selection), ignore_index=True)
     mixed = selected.iloc[rng.permutation(len(selected))].reset_index(drop=True)
     mixed["__review_id"] = [f"review-{index + 1:04d}" for index in range(len(mixed))]
@@ -407,6 +488,7 @@ def build_blinded_review_package(
                     "selection_source": str(row["__selection_source"]),
                     "rank_position_among_joined": int(row["__rank_position"]),
                     "ranking_score": float(row[score_column]),
+                    "matching_stratum": str(row["__matching_stratum"]),
                 }
             )
 
@@ -444,6 +526,11 @@ def build_blinded_review_package(
                 "random_count": random_count,
                 "total_count": required,
                 "excluded_without_displayable_assets": excluded_without_assets,
+                "comparator_sampling": comparator_sampling,
+                "selection_plan_sha256": selection_plan_sha256,
+                "selection_plan_matching_stratum_column": (
+                    selection_stratum_column if selection_plan is not None else None
+                ),
                 "asset_roles": list(asset_roles),
                 "review_options": list(review_options),
                 "blinding": {
@@ -471,6 +558,7 @@ def build_blinded_review_package(
                     "selection_source",
                     "rank_position_among_joined",
                     "ranking_score",
+                    "matching_stratum",
                 ),
                 key_rows,
             ),

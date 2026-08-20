@@ -1,5 +1,11 @@
 """Annotation-risk scoring interfaces."""
 
+from .calibration import (
+    NEW_EXPERT_DEVELOPMENT_LABELS,
+    CrossFittedCalibrationResult,
+    FrozenTemperatureScaler,
+    cross_fitted_temperature_calibration,
+)
 from .ensemble import (
     EnsembleDisagreementResult,
     PrimaryEnsembleRisk,
@@ -15,18 +21,46 @@ from .scores import (
     fixed_hybrid_score,
     score_annotations,
 )
+from .stability import PersistentRiskResult, persistent_group_safe_risk
+from .strategies import GroupSafeAuditScoreResult, group_safe_audit_scores
+from .two_queue import (
+    CROSS_FITTED_UTILITY_EVIDENCE,
+    GROUP_SAFE_OOF_EVIDENCE,
+    BalancedReviewQueue,
+    MatchedRandomComparator,
+    QueueConstraints,
+    TwoReviewQueues,
+    build_two_review_queues,
+    draw_matched_random_comparator,
+)
 
 __all__ = [
+    "CROSS_FITTED_UTILITY_EVIDENCE",
+    "GROUP_SAFE_OOF_EVIDENCE",
+    "NEW_EXPERT_DEVELOPMENT_LABELS",
+    "BalancedReviewQueue",
     "CleanlabScoreResult",
+    "CrossFittedCalibrationResult",
     "EnsembleDisagreementResult",
     "FixedHybridDropOneResult",
+    "FrozenTemperatureScaler",
+    "GroupSafeAuditScoreResult",
+    "MatchedRandomComparator",
     "NeighbourDisagreementResult",
+    "PersistentRiskResult",
     "PrimaryEnsembleRisk",
+    "QueueConstraints",
+    "TwoReviewQueues",
+    "build_two_review_queues",
     "cleanlab_scores",
+    "cross_fitted_temperature_calibration",
+    "draw_matched_random_comparator",
     "ensemble_disagreement",
     "fixed_hybrid_drop_one_ablations",
     "fixed_hybrid_score",
     "fold_safe_neighbour_disagreement",
+    "group_safe_audit_scores",
+    "persistent_group_safe_risk",
     "predeclared_ensemble_risk",
     "score_annotations",
 ]

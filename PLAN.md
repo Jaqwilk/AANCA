@@ -134,6 +134,76 @@ Status: complete (`EXTERNAL_VALIDATION_COMPLETE`)
 Completion means the genuine multi-rater evaluation ran and was preserved. It does
 not mean that AANCA detected biological truth or that a pathologist was wrong.
 
+### M12 — Incremental safety improvement of the current AANCA model
+
+Status: complete as engineering and post-outcome exploratory analysis; no new
+scientific completion stage claimed
+
+- keep the frozen NuCLS result and existing AANCA project unchanged as evidence;
+- expose the already implemented fold-safe neighbour and fixed-hybrid scores in the
+  current original-label audit workflow;
+- persist exact neighbour identities, distances and excluded-group provenance;
+- require a positive lower whole-group confidence bound before a reviewed-label
+  retraining candidate may replace the uncorrected model;
+- re-evaluate all declared ranking candidates on both saved NuCLS subsets;
+- do not promote a candidate selected after outcome inspection unless it passes the
+  declared rule on every subset and is subsequently frozen on fresh data.
+
+The neighbour score passed the primary Unbiased Control ranking gates but failed the
+Evaluation sensitivity gates, so it remains an available exploratory strategy rather
+than a new default. The fail-closed guard retained the uncorrected model for every
+saved correction candidate. This improves runtime safety, not the historical result.
+
+### M14 — Safe review-to-training policy for the current AANCA implementation
+
+Status: complete as engineering; prospective scientific execution remains open and
+no new completion stage is claimed
+
+- keep NuCLS permanently unavailable for method, threshold, encoder, calibration or
+  review-budget selection;
+- maintain separate annotation-quality and model-improvement queues;
+- leave the model-improvement queue unavailable without measured, nested
+  group-cross-fitted development utility and a positive lower bound;
+- balance review selection by strongest source group, class, tissue, proposed
+  transition and optional embedding diversity;
+- enforce an exact 1:1 matched-random control plan before blinded package creation;
+- preserve raw reviewer votes, ambiguity and abstention; keep hard changes disabled
+  by default and require at least two independent votes when prospectively enabled;
+- compare unchanged, hard, soft, downweighted and abstention-aware training policies
+  only on disjoint development groups;
+- require a positive macro-F1 group-bootstrap lower bound and registered
+  non-degradation for every important class before adoption;
+- evaluate calibration only with new expert development labels and stability only
+  from 3-5 group-safe model histories;
+- retain pathology-encoder availability and provenance gates; do not select an
+  encoder on a final test.
+
+Implementation and exact unresolved evidence requirements are recorded in
+[`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) and
+[`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml).
+
+### M15 — New-data controlled external benchmark on MoNuSAC
+
+Status: frozen and implementation-tested; real metric execution pending
+
+- pin the official MoNuSAC train and test archives by SHA-256;
+- exclude the two patient identifiers appearing in both archives from development
+  only and leave the official test intact;
+- create deterministic 10% symmetric corruption only in development;
+- compute all audit scores with five-fold patient-group-safe OOF predictions;
+- compare the earlier global queue with balanced self-confidence, fold-safe neighbour
+  and fixed-hybrid queues at the same 5% review budget;
+- compare the primary balanced neighbour queue against exact matched-random review;
+- train every downstream condition on development and evaluate once on untouched test
+  patients;
+- require positive whole-patient confidence bounds against both uncorrected and
+  matched-random baselines plus registered per-class recall non-degradation;
+- retain the result without post-test tuning or natural-error claims.
+
+The frozen protocol is
+[`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md); the machine configuration is
+[`configs/monusac_current_aanca_external.yaml`](configs/monusac_current_aanca_external.yaml).
+
 ## Open scientific milestones
 
 These require new evidence and cannot be completed by software refactoring.
@@ -159,6 +229,16 @@ Target stage: no completion status claimed yet
 - allocate folds without `pre_corruption_label`;
 - preserve group and final-fold boundaries;
 - compare against the accepted benchmark as a sensitivity analysis, not a rewrite.
+
+### M13 — Prospective current-system workflow comparison
+
+Target stage: no completion status claimed yet
+
+Execute [`PROSPECTIVE_WORKFLOW_PROTOCOL.md`](PROSPECTIVE_WORKFLOW_PROTOCOL.md) with
+newly recruited reviewers, patient/WSI-separated arms, multiple sites and a fully
+untouched external-site downstream test. The system under study remains the current
+AANCA implementation. No real-use or model-improvement claim is allowed before that
+evidence exists.
 
 ## Standard validation order
 

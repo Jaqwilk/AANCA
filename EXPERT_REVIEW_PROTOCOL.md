@@ -44,6 +44,15 @@ must be named explicitly when stronger identifiers are unavailable.
 5. Record every inclusion, exclusion, duplicate, and asset failure before review.
 6. Use group-aware inference at the strongest reliable patient/WSI/patch level.
 
+The maintained implementation can now enforce this design instead of relying only
+on prose. `build_two_review_queues` applies predeclared caps for group, observed
+class, tissue and proposed transition, with optional cosine-distance diversity.
+`draw_matched_random_comparator` returns no partial control when an exact stratum is
+under-populated. Its private records can be passed to
+`external build-review-package --selection-plan`; the package builder verifies equal
+top/random counts inside every non-empty `match_stratum` and records a canonical
+SHA-256 of the plan.
+
 Top-ranked and random cases may not be replaced after review starts except under the
 prespecified technical-exclusion rule. Replacements retain the original frozen order
 and are recorded in an append-only exclusion log.
@@ -63,6 +72,12 @@ and are recorded in an append-only exclusion log.
 
 The maintained package builder enforces reviewer-facing blinding and stores the
 private unblinding key outside the review package.
+
+If review responses are later used for model development, individual label votes
+must also remain available. Derived training actions default to keep, soft label,
+downweight or exclude. A hard change is disabled by default and requires a
+prospectively enabled rule, at least two independent label votes, and the frozen
+agreement fraction. No derived action rewrites the source annotation.
 
 ## Allowed responses
 

@@ -644,6 +644,12 @@ def test_original_label_audit_is_group_safe_ranked_and_read_only(tmp_path: Path)
         top_count_overall=5,
         top_count_per_class=2,
         top_count_per_tissue=3,
+        balanced_top_count=6,
+        balanced_max_per_group=1,
+        balanced_max_per_class=3,
+        balanced_max_per_tissue=3,
+        balanced_max_per_transition=3,
+        balanced_minimum_cosine_distance=0.0,
     )
 
     assert sha256_file(manifest_path) == before
@@ -651,6 +657,14 @@ def test_original_label_audit_is_group_safe_ranked_and_read_only(tmp_path: Path)
     assert result.top_overall_count == 5
     assert result.top_per_class_count == 4
     assert result.top_per_tissue_count == 6
+    assert result.balanced_quality_count == 6
+    assert result.balanced_quality_underfilled is False
+    assert result.balanced_quality_queue_path is not None
+    assert result.balanced_quality_queue_path.is_file()
+    assert result.balanced_queue_evidence_path is not None
+    balanced_evidence = json.loads(result.balanced_queue_evidence_path.read_text(encoding="utf-8"))
+    assert balanced_evidence["model_improvement_queue"]["available"] is False
+    assert max(balanced_evidence["group_counts"].values()) == 1
     ranking = pd.read_csv(result.ranking_all_path)
     assert ranking["risk_score"].is_monotonic_decreasing
     assert "tissue_type" in ranking
@@ -680,6 +694,37 @@ def test_original_label_audit_rejects_injected_corruption(tmp_path: Path) -> Non
             class_order=(0, 1),
             n_splits=5,
         )
+
+
+def test_original_label_audit_can_persist_fold_safe_neighbour_evidence(tmp_path: Path) -> None:
+    frame = _original_manifest()
+    rng = np.random.default_rng(53)
+    features = np.column_stack(
+        [frame["observed_label"].to_numpy(dtype=float), rng.normal(size=len(frame))]
+    )
+
+    result = audit_original_labels(
+        frame,
+        features,
+        frame["sample_id"].tolist(),
+        tmp_path / "neighbour-audit",
+        final_reference_group_ids={"final-group"},
+        class_order=(0, 1),
+        n_splits=5,
+        method="nearest_neighbour_disagreement",
+        neighbour_k=3,
+    )
+
+    metadata = json.loads(result.metadata_path.read_text(encoding="utf-8"))
+    evidence = json.loads(
+        (result.output_directory / "neighbour_evidence.json").read_text(encoding="utf-8")
+    )
+    assert metadata["risk_method"] == "nearest_neighbour_disagreement"
+    assert metadata["risk_strategy"]["neighbour_k"] == 3
+    assert len(evidence["records"]) == len(frame)
+    group_by_sample = dict(zip(frame["sample_id"], frame["group_id"], strict=True))
+    for record in evidence["records"]:
+        assert group_by_sample[record["sample_id"]] not in record["neighbour_groups"]
 
 
 def test_original_label_audit_rejects_conflicting_tissue_aliases(tmp_path: Path) -> None:
