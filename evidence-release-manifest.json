@@ -1,0 +1,30 @@
+{
+  "accepted_run_id": "20260727T133947.089370Z_pannuke_primary_orphan_recovery",
+  "assets": [
+    {
+      "completed_cells": 185,
+      "name": "aanca-primary-evidence-v1.zip",
+      "sha256": "7241104c749e5899b23aa89af1dcbff0effcefe61e044d0b233d320136d115fc",
+      "size_bytes": 358518237,
+      "scope": "primary_statistics_subgroups_bootstrap_and_h4_restoration"
+    },
+    {
+      "completed_cells": 185,
+      "name": "aanca-primary-rankings-v1.zip",
+      "sha256": "a5b4189583ea39a1aa82fd587f4adae2b8cc5d71e9aa45ed2c6b0337f7185319",
+      "size_bytes": 1512550075,
+      "scope": "all_completed_cell_rankings_and_artifact_manifests"
+    },
+    {
+      "completed_cells": 185,
+      "name": "aanca-primary-oof-v1.zip",
+      "sha256": "79056c703401eaaf455212d86abe9e58eedd6376871ee78a8da95e33eed5a1a4",
+      "size_bytes": 878046730,
+      "scope": "all_completed_cell_oof_probabilities_fold_provenance_and_controls"
+    }
+  ],
+  "contains_raw_pannuke_data": false,
+  "release_tag": "primary-evidence-v1",
+  "retained_model_checkpoints": false,
+  "schema_version": 1
+}

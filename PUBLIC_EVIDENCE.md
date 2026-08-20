@@ -1,0 +1,65 @@
+# Public primary-study evidence
+
+The GitHub release [`primary-evidence-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1)
+publishes the retained, licence-compatible numeric evidence behind the AANCA PanNuke
+results. It is rooted in the accepted run
+`20260727T133947.089370Z_pannuke_primary_orphan_recovery` and is separate from the
+small presentation extract committed under `artifacts/mvp_demo`.
+
+## Downloaded evidence
+
+The release is split into three independently checksum-verifiable assets:
+
+| Asset | Contents | Size | SHA-256 |
+| --- | --- | ---: | --- |
+| `aanca-primary-evidence-v1.zip` | Primary statistics, 2,000-draw group bootstrap, subgroup table, H4 restoration arrays, manifests and independent verifier | 358,518,237 bytes | `7241104c749e5899b23aa89af1dcbff0effcefe61e044d0b233d320136d115fc` |
+| `aanca-primary-rankings-v1.zip` | All 185 completed-cell ranking tables, per-cell artifact manifests and cell index | 1,512,550,075 bytes | `a5b4189583ea39a1aa82fd587f4adae2b8cc5d71e9aa45ed2c6b0337f7185319` |
+| `aanca-primary-oof-v1.zip` | All 185 completed-cell OOF probability arrays, fold provenance, per-cell manifests and frozen matrix controls | 878,046,730 bytes | `79056c703401eaaf455212d86abe9e58eedd6376871ee78a8da95e33eed5a1a4` |
+
+The machine-readable copy of this table is
+[`evidence-release-manifest.json`](evidence-release-manifest.json). GitHub source
+history and the release tag provide the trusted anchor for those asset identities;
+the manifests inside each archive bind individual result files to the accepted run.
+
+## Recalculate H1-H7
+
+Download and extract `aanca-primary-evidence-v1.zip`, then run the verifier from a
+checkout of this release tag:
+
+```text
+uv sync --dev
+uv run python scripts/verify_primary_evidence.py PATH/TO/aanca-primary-evidence-v1
+```
+
+The verifier does not import `histo_audit`. It uses only the standard library and
+NumPy to:
+
+1. verify the fixed byte size and SHA-256 of every statistical and restoration file;
+2. verify the saved manifests and canonical statistics-payload identity;
+3. independently recalculate all 33 available preregistered comparison bootstrap
+   means, 95% intervals, one-sided p-values and within-family Holm corrections;
+4. confirm that the three H6 comparisons remain explicitly unavailable rather than
+   being estimated;
+5. independently recalculate the adverse H4 macro-F1 comparison from all 100 frozen
+   random-review repetitions.
+
+The ranking and OOF assets make the sample-level inputs inspectable. A reviewer can
+check group IDs, fold coverage, pre-corruption and observed labels, injected-event
+flags, model probabilities and every published audit score for each completed cell.
+
+## What is and is not included
+
+The release contains derived numeric evidence and textual provenance. It does not
+contain PanNuke images, masks, raw dataset archives or patient identifiers. Reviewers
+must obtain PanNuke lawfully from its official source to retrain models from images.
+
+Fold models were fitted to produce OOF probabilities and were not retained as
+checkpoints in the accepted run. The public OOF arrays are therefore the immutable
+saved model outputs; model retraining remains a separate operation governed by
+[`DATASET_SETUP.md`](DATASET_SETUP.md). This limitation is stated explicitly rather
+than implying that unavailable checkpoints were published.
+
+Publishing these artifacts makes the reported H1-H7 numbers independently
+recalculable and the OOF/ranking evidence publicly inspectable. It does not create
+expert validation, external validation or evidence that natural annotation
+disagreement is a pathology error.
