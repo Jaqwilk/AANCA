@@ -10377,3 +10377,213 @@ and supervisor before the one authorized Q replacement write.
   `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_table_content_20260819_145523_206`.
 - No scientific evidence, metric, label, dataset, accepted run, frozen authority or
   completion status changed.
+
+## 2026-08-19 - Long-form article layout revision
+
+- Reworked the presentation into a long-form article hierarchy informed by the
+  referenced Anthropic Institute article: centered narrative rail, selectively wide
+  evidence figures, compact fact and metric rows, and a static seven-finding sequence
+  in normal document flow instead of a pinned carousel.
+- Preserved the adverse H4 result as the lead finding and retained all H1-H7 answers,
+  all 36 comparison entries, H2 subgroup evidence, seed disclosure, integrity rules,
+  QC, provenance, reproducibility commands, author context and interpretation limits.
+- Updated navigation labels to `Study`, `Method`, `Findings`, `Evidence`, `Reproduce`
+  and `Author`. Removed the decorative hero caption. Added owner-requested official
+  linked institution marks and retained accessible text alternatives.
+- Inspected the revision in Chromium at desktop and 390 by 844 mobile widths. The
+  narrative and static findings remained readable and the generated five-file package
+  verified as `DEMO_COMPLETE` with scientific status `PRIMARY_STUDY_COMPLETE`.
+- No full project test suite was run for this presentation-only iteration at the
+  owner's request. No scientific evidence, metric, label, dataset, accepted run,
+  frozen authority or completion status changed.
+
+## 2026-08-19 - Expanded article narrative and exact reading order
+
+- Added evidence-bounded explanatory prose for the method, metric interpretation,
+  H4, the H1-H7 finding map, comparison atlas, subgroup ranges, repeated seed paths,
+  integrity controls, evidence provenance, PanNuke QC, interpretation limits,
+  reproducibility and author context.
+- Enforced the requested article order in both layout and the browser DOM: thesis
+  and scope, method, how to read results, H4, H1-H7, detailed evidence, QC and
+  limitations, reproducibility, and author.
+- No new metric, causal explanation, expert judgement or scientific claim was added.
+  The generated package was built and visually inspected in Chromium; the full
+  project test suite was not run at the owner's request.
+
+## 2026-08-19 - Unified article typography and reduced labels
+
+- Measured the rendered opening section in Chromium at 1440 px. Its lead resolves to
+  Inter 29 px / 500 / 42.92 px with -0.87 px tracking; body copy resolves to Inter
+  16 px / 400 / 27.84 px with -0.128 px tracking.
+- Applied those exact heading and body levels to the subsequent article chapters,
+  H1-H7 question-and-answer copy, reproduction introduction and author copy.
+- Removed the requested chapter kickers, command-step labels and the generated H4/H2
+  chart labels, including `Downstream outcome`, `Truncated axis` and `Descriptive
+  heterogeneity`.
+- Rebuilt and verified the canonical five-file package. The verifier reports
+  `status=valid`, presentation status `DEMO_COMPLETE`, scientific status
+  `PRIMARY_STUDY_COMPLETE` and manifest root
+  `e722f231c706874e63c29658f6403e3a12b9fa8aa92a708777e72f1d4bb313bb`.
+- Per the owner's instruction, no full project test suite or unrelated validation
+  command was run. No scientific evidence, metric, label, dataset, accepted run,
+  frozen authority or completion status changed.
+
+## 2026-08-19 - Corrected full article-copy parity
+
+- Corrected the remaining visual mismatch: lower-section text had matched the
+  reference font metrics but still inherited a darker colour and different spacing.
+- Chromium now reports exact parity between the opening thesis and a representative
+  lower section: both headings are Inter 29 px / 500 / 42.92 px on a 640 px measure;
+  both body styles are Inter 16 px / 400 / 27.84 px with colour `rgb(208, 214, 224)`.
+- Rebuilt and verified the canonical package with manifest root
+  `307ec95d5da7d49d0bad83030eb5d9cf92baba115dcccc7a38b5c3c3590939cf`.
+  No full project test suite was run at the owner's request.
+
+## 2026-08-19 - Minimal continuous-article cleanup
+
+- Removed the method section's 540-viewport scroll height and sticky presentation
+  behaviour. The five method stages now remain visible in a normal static section.
+- Reduced global section padding, method and findings spacing, fact/metric row padding,
+  reproduction spacing and author/footer spacing. Disabled chapter reveal transitions
+  so article text is present immediately instead of appearing as the viewport moves.
+- Removed decorative section separators, row rules, card frames, remaining chapter
+  kickers and footer dividers. Kept evidence-bearing plot lines, table structure,
+  interactive boundaries, the QC image boundary and code boxes.
+- Chromium readback measured one continuous 20,759 px desktop document with all 14
+  article sections present once in the DOM. The canonical five-file package verifies
+  as `DEMO_COMPLETE`, scientific status `PRIMARY_STUDY_COMPLETE`, manifest root
+  `05b3e8ee203eea58ec7544ef4ea4dc076e6185dac329aed90c44b76b50d955ec`.
+- No full project test suite was run at the owner's request. No scientific evidence,
+  metric, label, dataset, accepted run, frozen authority or completion status changed.
+
+## 2026-08-19 - Findings animation restored
+
+- Restored the desktop pinned progression for “What the study actually learned.”
+  while retaining the current minimalist layout and exact 29 px / 16 px typography.
+- Chromium confirmed a sticky 6,480 px sequence with exactly one visible finding at
+  a time. Mobile and reduced-motion fallbacks remain complete static lists.
+- Rebuilt and verified the canonical five-file package with manifest root
+  `0d5a665ec8097bc1b0c9b09ff343b9d0790316c24706e012698b5020fe830790`.
+  No full project test suite was run at the owner's request.
+
+## 2026-08-19 - Whole-page coherence pass
+
+- Audited every desktop article destination and the mobile findings/author layouts in
+  Chromium. Corrected the method's stale scroll instruction and moved experimental
+  integrity after evidence and PanNuke QC, beside the interpretation boundaries.
+- Removed the nested width reduction in the findings sequence. Desktop heading,
+  question and answer now share the 640 px rail; mobile heading and questions share
+  the 331 px rail at x=22 with zero horizontal overflow.
+- The first finding and full answer are visible on entry, direct hash navigation lands
+  at the first finding, and one 500 px wheel gesture advances exactly to the second
+  question. Desktop retains one visible finding at a time; mobile retains all seven
+  in normal flow.
+- Rebuilt and verified the canonical five-file package as `DEMO_COMPLETE`, scientific
+  status `PRIMARY_STUDY_COMPLETE`, manifest root
+  `a465c40e7a1fad3ecf717977b64a101be6ed51634295404a84765e56100850ff`.
+- No full project test suite was run at the owner's request. No scientific evidence,
+  metric, label, dataset, accepted run, frozen authority or completion status changed.
+
+## 2026-08-19 - Author introduction alignment
+
+- Centered the author heading and both descriptive paragraphs on the shared 640 px
+  editorial rail. The wider institution records remain unchanged below that text.
+- Rebuilt and verified the canonical package with manifest root
+  `d7729d6f8eb3c5bb8d5ab93809e175047cc913301248794f9661551935fe2367`.
+  No full project test suite was run at the owner's request.
+
+## 2026-08-19 - Footer boundary
+
+- Added one centered, low-contrast 640 px rule above the footer without restoring
+  any of the removed section dividers.
+- Rebuilt and verified the canonical package with manifest root
+  `32758024f3f6640d7229b658ddc09ab6ebf111948b256edfad99ed75d9862ca3`.
+
+## 2026-08-19 - Minimal chapter separators
+
+- Added centered, 640 px, 7.5%-white rules only before the method, findings, PanNuke
+  QC/limitations, reproducibility and author chapters. Evidence subsections remain
+  continuous and the footer retains its slightly stronger 10%-white boundary.
+- Rebuilt and verified the canonical package with manifest root
+  `d300a6bb4890f0021df1cd3240d4354612ef85574f7e99a9e619f4ba8f8ab947`.
+
+## 2026-08-19 - Separator contrast correction
+
+- Increased major chapter rules from 7.5% to 16% white. Increased the footer rule to
+  18% white and extended it across the full available footer width.
+- Rebuilt and verified the canonical package with manifest root
+  `ab1d1a25c4c861f616ddc5f23912526bcdaea8765a25fe22ca81b59bee91a6dd`.
+
+## 2026-08-19 - Launcher and narrative compaction
+
+- Fixed the dependency-free launcher's URL-to-file translation so the printed root
+  URL now returns HTTP 200 and serves the verified `index.html` on Windows.
+- Preserved the complete “What the study actually learned.” animation and all seven
+  findings while reducing its desktop height from 720vh to 560vh.
+- Removed the duplicated five-step method list, shortened the repeated H4 ledger
+  answer, collapsed exact seed hashes into an audit disclosure, shortened the atlas
+  and full-table viewports, and consolidated responsible-use footer copy.
+- Rebuilt and verified the canonical five-file package as `DEMO_COMPLETE`, scientific
+  status `PRIMARY_STUDY_COMPLETE`, manifest root
+  `ff7b36ed496f7d596f0e1f7da070221f37a3c4c1bcd065dceae1f54b32eecc55`.
+- Targeted Chromium QA found HTTP 200, zero console errors, zero mobile horizontal
+  overflow, seven visible mobile findings and a working desktop H1-to-H2 transition.
+  No full project test suite was run at the owner's request.
+
+## 2026-08-20 - Portability, public evidence boundary and article consolidation
+
+- Changed `histo-audit experiment smoke` so its default run root is the isolated,
+  portable `artifacts/smoke_runs`. The tracked historical primary registry remains
+  unchanged and is no longer part of the public synthetic quick-start.
+- Removed the unconditional non-portable `msvcrt` collection failure while keeping
+  the native Windows tests active on Windows. Updated the synthetic capsule fixture
+  to derive the actual runtime-interpreter ancestor chain instead of assuming one
+  user's `AppData` installation path.
+- Added `.github/workflows/scientific-software.yml` for Ubuntu and Windows with the
+  locked environment, Ruff, the complete test suite and an isolated synthetic smoke.
+  This workflow is configured locally but has not run on GitHub until these changes
+  are committed and pushed.
+- Added `REPRODUCIBILITY.md` and tightened the README. They now distinguish package
+  verification, synthetic software reproduction and primary-study recomputation;
+  disclose that the public checkout lacks the full primary OOF/ranking/bootstrap
+  evidence; and record the July-freeze/public-history boundary without claiming an
+  independently timestamped preregistration.
+- The article now states the pre-corruption fold-balance caveat, source-patch rather
+  than patient/WSI independence, bootstrap rather than independent replication, the
+  missing expert/external evidence and the `amended_or_exploratory` interpretation.
+  The four duplicated metric cards were removed, repeated H4/QC/integrity prose was
+  shortened, and the duplicate complete table moved to one optional audit disclosure.
+- Preserved the complete “What the study actually learned.” desktop animation and
+  all seven findings. Browser source, DOM and visual ordering now agree on detailed
+  evidence, QC, integrity, interpretation, reproducibility and author.
+- The deterministic synthetic generator completed with configuration SHA-256
+  `853f69cc4495cd85f3ef5459ab24ccac8cb8cad3fdb0589112de77dcdc58d7cf`.
+  The isolated smoke completed as
+  `20260820T122403.500928Z_synthetic_smoke_8fb62ef79c`; its 300 samples remain
+  software-validation evidence only.
+- Full validation passed **2,395 tests with one expected platform skip and zero
+  failures in 869.77 s**. Ruff check passed, Ruff format confirmed 210 files, and
+  `git diff --check` passed. A final focused presentation regression passed **6/6**.
+- Chromium QA at 1,440 by 900 and 390 by 844 found zero horizontal overflow. The
+  closed table retained all 36 rows when opened, mobile exposed all seven findings,
+  and desktop retained exactly one visible animated finding. Captures are stored in
+  `output/playwright/aanca-repro-evidence-desktop.png`,
+  `output/playwright/aanca-repro-evidence-mobile.png` and
+  `output/playwright/aanca-findings-animation-retained.png`.
+- The canonical five-file package verifies as `DEMO_COMPLETE` with scientific status
+  `PRIMARY_STUDY_COMPLETE`, file count 5 and manifest root
+  `c908171d2b762d626f0196f52f8719b10aa102137724f31e90cb96ac5c4869a0`.
+- No expert labels, patient/WSI identifiers, external dataset, primary metric or
+  source annotation were created or changed. Those outstanding limitations require
+  new governed research rather than a presentation or portability patch.
+- Hostinger verification connected successfully over SFTP/SSH. The final deployment
+  reran the package verifier, created remote backup `20260820-144451`, replaced only
+  the configured `public_html` mapping and passed the HTTPS page and asset checks.
+  Live readback returned HTTP 200, the exact manifest root above, the retained
+  findings animation and the corrected package README. The prior deployed state is
+  also recoverable as remote backup `20260820-144117`.
+- Moved four superseded candidate packages plus the synthetic-generator and smoke
+  validation outputs out of the working tree to the recoverable temporary directory
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_20260820_repro_validation_1443`.
+- Kept the immediately preceding canonical package as the recoverable local backup
+  `C:\Users\NATAN\AppData\Local\Temp\AANCA_mvp_demo_backup_readme_20260820_1455`.

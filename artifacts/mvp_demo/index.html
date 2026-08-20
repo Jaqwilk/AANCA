@@ -336,7 +336,7 @@ footer { padding: 56px var(--page-pad); border-top: 1px solid var(--line); color
   --editorial: 640px;
   --figure: 1160px;
   --wide: 1320px;
-  --section-space: clamp(104px, 11vw, 164px);
+  --section-space: clamp(64px, 7vw, 96px);
 }
 body { font-size: 16px; line-height: 1.68; }
 html.motion-enhanced { scroll-behavior: auto; }
@@ -355,7 +355,7 @@ html.motion-enhanced { scroll-behavior: auto; }
 .menu-button { min-width: 44px; min-height: 44px; border-color: var(--line-strong); }
 
 .hero { min-height: min(900px,100svh); padding-top: 60px; border: 0; }
-.hero::after { content: ""; position: absolute; left: 50%; bottom: 0; width: min(640px,calc(100% - 48px)); height: 1px; background: var(--line); transform: translateX(-50%); }
+.hero::after { display: none; }
 #hero-canvas { inset: 60px 0 0; height: calc(100% - 60px); }
 #hero-canvas[hidden] { display: none !important; }
 .hero-shell { min-height: calc(min(900px,100svh) - 60px); grid-template-columns: minmax(0,1.03fr) minmax(360px,.97fr); }
@@ -389,19 +389,21 @@ html.motion-enhanced { scroll-behavior: auto; }
 .research-question p { margin: 0; color: var(--ink); font-size: clamp(20px,2.25vw,29px); font-weight: 500; line-height: 1.43; letter-spacing: -.026em; text-wrap: balance; }
 
 .section { position: relative; padding: var(--section-space) 0; border: 0; scroll-margin-top: 60px; }
-.section::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
+.section::before { display: none; }
 .section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto 54px; }
 h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spacing: -.038em; }
 .section-deck { max-width: none; margin: 20px auto 0; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; text-wrap: pretty; }
 .chapter-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin: -20px auto 56px; }
 .chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; text-wrap: pretty; }
 
-.journey { position: relative; height: 540vh; scroll-margin-top: 60px; }
-.journey::before { content: ""; position: absolute; top: 0; left: 50%; width: min(640px,calc(100% - 2 * var(--page-pad))); height: 1px; background: var(--line); transform: translateX(-50%); }
-.journey-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 72px 0 44px; }
+.journey { position: relative; height: auto; padding: var(--section-space) 0; scroll-margin-top: 60px; }
+.journey::before { display: none; }
+.journey-sticky { position: static; min-height: 0; display: grid; place-items: center; overflow: visible; padding: 0; }
+html.motion-enhanced .journey { height: auto !important; }
+html.motion-enhanced .journey-sticky { position: static !important; min-height: 0 !important; overflow: visible !important; padding: 0 !important; }
 html:not(.motion-enhanced) .journey { height: auto; padding: var(--section-space) 0; }
 html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
-.journey-grid { width: min(var(--wide),calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(560px,1.12fr) minmax(360px,.88fr); gap: clamp(52px,6vw,92px); align-items: center; }
+.journey-grid { width: min(1080px,calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(500px,1.05fr) minmax(340px,.95fr); gap: clamp(40px,5vw,68px); align-items: center; }
 .journey-visual { min-width: 0; }
 .journey-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
 .journey-lane-bg { fill: var(--surface-1); stroke: var(--line); stroke-width: 1.2; }
@@ -451,7 +453,7 @@ html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; pa
 .learned-word { display: inline-block; margin-right: .27em; }
 
 @media (min-width: 901px) {
-  html.motion-enhanced .learned-story { height: 980vh; padding: 0; }
+  html.motion-enhanced .learned-story { height: 560vh; padding: 0; }
   html.motion-enhanced .learned-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 76px 0 48px; box-sizing: border-box; }
   html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(390px,1fr); align-content: center; max-height: 820px; }
   html.motion-enhanced .learned-heading { margin-bottom: 48px; }
@@ -551,7 +553,7 @@ input, select { min-height: 44px; }
 .forest-track { height: 18px; }
 .forest-label { font-size: 10px; line-height: 1.3; }
 #benchmarks .forest-plot {
-  max-height: min(62svh,680px);
+  max-height: min(48svh,520px);
   padding-top: 12px;
   padding-bottom: 12px;
   border-top: 0;
@@ -624,7 +626,7 @@ th, td { padding: 8px 10px; }
 .comparison-id { margin-top: 2px; font-size: 8px; line-height: 1.25; }
 .status-pill { padding: 2px 5px; font-size: 8px; }
 #evidence .table-wrap {
-  max-height: min(60svh,620px);
+  max-height: min(50svh,540px);
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
@@ -633,7 +635,7 @@ th, td { padding: 8px 10px; }
 footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: var(--ink-subtle); font-size: 11px; }
 .footer-inner { width: min(var(--wide),100%); margin-inline: auto; display: block; }
 .footer-divider { width: min(640px,100%); height: 1px; margin: 0 auto 56px; background: var(--line); }
-.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(3,1fr); gap: 48px; }
+.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(2,1fr); gap: 48px; }
 .footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
 .footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
@@ -674,7 +676,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
   .hero-copy { padding-top: 122px; }
   .hypothesis-ledger { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1.25fr repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1.25fr 1fr; }
   .footer-column:last-child { grid-column: 2 / -1; }
 }
 @media (min-width: 901px) and (max-height: 720px) {
@@ -745,6 +747,410 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   #seed-audit table tr { padding: 9px 0; }
   #seed-audit table td { grid-template-columns: 76px 1fr; gap: 8px; padding: 3px 0; }
 }
+
+/* Long-form article layout: one narrative rail with evidence figures breaking wide. */
+main { display: flex; flex-direction: column; }
+#overview { order: 10; }
+#study-facts { order: 20; }
+#research-question { order: 30; }
+#method { order: 40; }
+#reading { order: 60; }
+#results { order: 70; }
+#benchmarks { order: 80; }
+#subgroups { order: 90; }
+#seed-audit { order: 100; }
+#evidence { order: 110; }
+#quality { order: 120; }
+#integrity { order: 125; }
+#interpretation { order: 130; }
+#use { order: 140; }
+#author { order: 150; }
+main > [id] { scroll-margin-top: 72px; }
+.narrative { padding: clamp(70px,7vw,92px) 0 34px; }
+.study-at-a-glance, .section { padding: clamp(56px,6vw,82px) 0; }
+.section-heading, .article-copy, .chapter-copy {
+  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
+  margin-inline: auto;
+}
+.section-heading { margin-bottom: 34px; }
+.section-heading h2,
+.method-context h2,
+.reproduction-intro h2,
+.learned-heading h2,
+.author-profile h2,
+.journey-copy .display {
+  font-family: var(--sans);
+  font-size: clamp(22px,2.15vw,29px);
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: -.03em;
+}
+.section-deck,
+.article-copy p,
+.chapter-copy p,
+.method-context p,
+.reproduction-intro p,
+.author-lede,
+.author-copy {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.74;
+  letter-spacing: -.008em;
+}
+.section-deck {
+  margin-top: 32px;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+.section-heading:has(.section-deck) { margin-bottom: 22px; }
+.chapter-copy { margin-top: 0; }
+.chapter-copy p { margin-bottom: 24px; color: var(--ink-muted); }
+.chapter-copy p + p, .method-context p + p, .reproduction-intro p + p { margin-top: 0; }
+.article-copy .lede { font-size: clamp(22px,2.15vw,29px); line-height: 1.48; }
+.scope-note { margin-top: 30px; padding: 0; border: 0; background: transparent; }
+
+.study-specs {
+  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 0;
+  border-top: 0;
+  border-bottom: 0;
+  background: transparent;
+}
+.spec-card {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 5px 24px;
+  padding: 13px 0;
+  border-bottom: 0;
+  background: transparent;
+}
+.spec-card:last-child { border-bottom: 0; }
+.spec-card span { grid-row: 1 / span 2; margin: 4px 0 0; }
+.spec-card strong { font-size: 16px; line-height: 1.35; }
+.spec-card small { max-width: 520px; font-size: 12px; line-height: 1.55; }
+
+.research-question {
+  width: min(760px,calc(100% - 2 * var(--page-pad)));
+  display: block;
+  margin: 20px auto clamp(52px,6vw,78px);
+  padding: 0 0 0 22px;
+  border: 0;
+  border-left: 2px solid var(--accent);
+  background: transparent;
+}
+.research-question span { display: block; margin-bottom: 12px; }
+.research-question p {
+  max-width: 710px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: clamp(22px,2.15vw,29px);
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: -.03em;
+}
+
+.method-context { padding: 0 0 clamp(42px,5vw,64px); }
+.method-context .section-kicker { margin-bottom: 18px; }
+.method-context h2, .reproduction-intro h2 {
+  max-width: 650px;
+  margin: 0 0 32px;
+}
+.method-context p, .reproduction-intro p { margin: 0; color: var(--ink-muted); }
+.method-context p + p, .reproduction-intro p + p { margin-top: 24px; }
+.chapter-copy + .reading-grid, .chapter-copy + .figure-width,
+.chapter-copy + .wide-width { margin-top: 28px; }
+.result-afterword { margin-top: 34px; }
+.findings-intro { margin-bottom: clamp(48px,5vw,70px); }
+.findings-intro .section-kicker { margin-bottom: 20px; }
+
+.reading-grid {
+  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 0;
+  border-top: 0;
+  border-bottom: 0;
+  background: transparent;
+}
+.reading-card {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 34px 180px 1fr;
+  gap: 18px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 0;
+  background: transparent;
+}
+.reading-card:last-child { border-bottom: 0; }
+.reading-card h3 { margin: 0; font-size: 15px; }
+.reading-card p { margin: 0; font-size: 12px; line-height: 1.58; }
+
+.article-findings.learned-story { height: auto !important; padding: 0 !important; }
+.motion-enhanced .article-findings .learned-sticky,
+.article-findings .learned-sticky {
+  position: static !important;
+  min-height: 0 !important;
+  display: block !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+.motion-enhanced .article-findings .learned-shell,
+.article-findings .learned-shell { display: block !important; max-height: none !important; }
+.article-findings .learned-heading { margin-bottom: 28px !important; }
+.article-findings .learned-heading { width: 100%; margin-inline: 0; }
+.motion-enhanced .article-findings .learned-stage,
+.article-findings .learned-stage { min-height: 0 !important; overflow: visible !important; }
+.motion-enhanced .article-findings .hypothesis-ledger,
+.article-findings .hypothesis-ledger {
+  position: static !important;
+  height: auto !important;
+  display: block !important;
+  border-top: 0 !important;
+}
+.motion-enhanced .article-findings .hypothesis-row,
+.article-findings .hypothesis-row {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  padding: 24px 0 28px !important;
+  border-bottom: 0 !important;
+}
+.article-findings .hypothesis-row .hypothesis-title {
+  max-width: 640px;
+  font-family: var(--sans);
+  font-size: clamp(22px,2.15vw,29px);
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: -.03em;
+}
+.article-findings .hypothesis-row .learned-answer {
+  margin-top: 24px;
+  color: var(--ink-muted);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.74;
+  letter-spacing: -.008em;
+}
+.article-findings .learned-answer-visual { display: none !important; }
+.article-findings .sr-only {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+.result-layout, .seed-panel, .h4-chart, .h2-chart, .forest-plot,
+.stats-grid, .claim-grid, .always-visible-evidence, .repo-card {
+  border-radius: 0;
+}
+.h4-chart, .h2-chart, .forest-plot, .seed-panel,
+.always-visible-evidence, .repo-card { border-color: transparent; }
+.provenance { padding-top: 0; border-top: 0; }
+.reproduction-intro { width: min(var(--editorial),100%); margin: 0 auto 38px; }
+.author-section { padding-top: clamp(60px,7vw,88px); }
+.journey-intro {
+  color: var(--ink-muted);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.74;
+  letter-spacing: -.008em;
+}
+.author-lede { margin-top: 42px; color: var(--ink-muted); }
+.author-copy { max-width: 680px; margin: 24px 0 0; color: var(--ink-muted); }
+.author-profile {
+  width: min(var(--editorial),100%);
+  max-width: var(--editorial);
+  margin-inline: auto;
+}
+.repo-command h3 { margin-top: 0; }
+
+@media (max-width: 720px) {
+  .narrative { padding-top: 72px; }
+  .study-at-a-glance, .section { padding: 54px 0; }
+  .section-heading { margin-bottom: 28px; }
+  .spec-card { grid-template-columns: 86px 1fr; gap: 5px 16px; }
+  .reading-card { grid-template-columns: 30px 1fr; gap: 6px 14px; }
+  .reading-card p { grid-column: 2; }
+  .research-question { padding-left: 20px; }
+  .article-findings .hypothesis-row { padding: 20px 0 24px !important; }
+}
+
+/* Minimal article pass: whitespace carries hierarchy; rules remain only inside data and code. */
+.section-kicker { display: none !important; }
+.gsap-ready .reveal,
+html.motion-enhanced .reveal {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+.journey-steps, .journey-step { border: 0; }
+.journey-steps { margin-top: 24px; }
+.journey-step { padding-top: 12px; padding-bottom: 12px; }
+html.motion-enhanced .journey-stage-group,
+html.motion-enhanced .journey-connector {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  stroke-dashoffset: 0 !important;
+}
+.research-question {
+  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
+  padding-left: 0;
+  border-left: 0;
+}
+.h4-chart, .h2-chart, .forest-plot, .seed-panel,
+.always-visible-evidence, .stats-grid, .claim-card, .repo-card,
+.author-credentials, .credential-record, .credential-proof,
+.usage-grid, .repo-command, .footer-bottom {
+  border: 0 !important;
+}
+.h4-chart, .h2-chart, .seed-panel { padding-top: 22px; padding-bottom: 22px; }
+.stats-grid { gap: 18px clamp(28px,4vw,52px); }
+.stat { min-height: 0; padding: 12px 0; border: 0 !important; }
+.rules { gap: 8px clamp(28px,4vw,52px); }
+.rule { padding: 16px 0; border: 0; }
+.claim-card { padding: 18px 0; }
+.evidence-label-row { border-bottom: 0; }
+.repo-card { padding: 24px 0; }
+.usage-grid { gap: 18px; }
+.repo-command { padding: 12px 0 !important; }
+.author-credentials { margin-top: clamp(40px,5vw,58px); }
+.credential-record { padding: 19px 0; }
+.credential-proof { padding-top: 0; }
+.footer-divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0 auto 48px;
+  background: rgba(255,255,255,.18);
+}
+.journey#method::before,
+#results::before,
+#quality::before,
+#use::before,
+#author::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
+  height: 1px;
+  background: rgba(255,255,255,.16);
+  transform: translateX(-50%);
+}
+.footer-bottom { margin-top: 32px; padding-top: 0; }
+.seed-copy { width: min(var(--editorial),100%); margin: 0 auto; }
+.seed-copy h3 { font-size: 18px; }
+.seed-copy p { max-width: 640px; font-size: 16px; line-height: 1.74; }
+.seed-evidence {
+  width: min(var(--editorial),100%);
+  margin: 26px auto 0 !important;
+  border-color: var(--line-strong) !important;
+  background: transparent !important;
+}
+.seed-evidence > summary { padding: 15px 0 !important; }
+.seed-evidence[open] > summary { border-bottom-color: var(--line) !important; }
+.comparison-details {
+  margin-top: 10px !important;
+  border-color: var(--line-strong) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.comparison-details > summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0 !important;
+  color: var(--ink-muted) !important;
+}
+.comparison-details > summary span { color: var(--ink-subtle); font-weight: 400; }
+.comparison-details[open] > summary { border-bottom-color: var(--line) !important; }
+.comparison-details .table-tools { padding-inline: 0; }
+@media (max-width: 720px) {
+  .comparison-details > summary { flex-direction: column; gap: 6px; }
+}
+
+/* The single retained presentation sequence: seven findings, one at a time. */
+@media (min-width: 901px) {
+  html.motion-enhanced #learned-story.article-findings {
+    height: 560vh !important;
+    padding: 0 !important;
+  }
+  html.motion-enhanced #learned-story .learned-sticky {
+    position: sticky !important;
+    top: 0 !important;
+    min-height: 100svh !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    padding: 64px 0 40px !important;
+    box-sizing: border-box;
+  }
+  html.motion-enhanced #learned-story .learned-shell {
+    display: grid !important;
+    grid-template-rows: auto minmax(390px,1fr) !important;
+    align-content: center !important;
+    max-height: 820px !important;
+  }
+  html.motion-enhanced #learned-story .learned-heading {
+    margin-bottom: 36px !important;
+  }
+  html.motion-enhanced #learned-story .learned-stage {
+    min-height: 390px !important;
+    overflow: hidden !important;
+  }
+  html.motion-enhanced #learned-story .hypothesis-ledger {
+    position: relative !important;
+    height: 100% !important;
+    display: block !important;
+    border: 0 !important;
+  }
+  html.motion-enhanced #learned-story .hypothesis-row {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    visibility: hidden;
+    opacity: 0;
+    transform: none;
+    padding: 8px 0 26px !important;
+    border: 0 !important;
+  }
+  html.motion-enhanced #learned-story .learned-answer-visual {
+    display: block !important;
+  }
+  html.motion-enhanced #learned-story .hypothesis-row:first-child .learned-word {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  html.motion-enhanced #learned-story .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .site-header { transform: none !important; }
   .brand-label, .journey-stage-group, .journey-connector, .journey-step { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
@@ -775,7 +1181,7 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
   <div class="nav-shell">
     <a class="brand" href="#top" aria-label="AANCA: back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evidence">Evidence</a><a href="#use">Use</a><a href="#author">Author</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Findings</a><a href="#evidence">Evidence</a><a href="#use">Reproduce</a><a href="#author">Author</a></nav>
   </div>
 </header>
 
@@ -788,7 +1194,6 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
       <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Released <time datetime="2026-08-18">18 August 2026</time></span></div>
     </div>
-    <span class="hero-visual-label" aria-hidden="true">Source annotations stay fixed → review evidence is ranked<br>Conceptual workflow · not benchmark data</span>
   </div>
 </section>
 
@@ -803,8 +1208,8 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
     </div>
   </section>
 
-  <section class="study-at-a-glance" aria-labelledby="study-title">
-    <div class="section-heading reveal"><p class="section-kicker">Study at a glance</p><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define both what the results measure and what they do not measure.</p></div>
+  <section class="study-at-a-glance" id="study-facts" aria-labelledby="study-title">
+    <div class="section-heading reveal"><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define both what the results measure and what they do not measure.</p></div>
     <div class="study-specs reveal">
       <article class="spec-card"><span>Data</span><strong>PanNuke</strong><small>Verified official release; five positive nucleus classes across 19 tissue types.</small></article>
       <article class="spec-card"><span>Unit</span><strong>Already segmented nuclei</strong><small>Class-label consistency only. Segmentation quality and diagnosis are outside scope.</small></article>
@@ -814,12 +1219,19 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
     </div>
   </section>
 
-  <div class="research-question reveal">
-    <span>Research question</span>
+  <div class="research-question reveal" id="research-question">
     <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review, and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
   </div>
 
   <section class="journey story" id="method" aria-labelledby="journey-title" data-active-stage="0">
+    <div class="article-copy method-context reveal">
+      <p class="section-kicker">Method</p>
+      <h2>A controlled audit begins by preserving what the model is allowed to know.</h2>
+      <p>The benchmark does not ask a classifier to overwrite a pathologist's annotation. It creates a controlled setting in which a known subset of labels is changed intentionally, while the source record, reference label and corruption metadata remain separate and immutable.</p>
+      <p>All development splits are made by <code>group_id</code>, at least at source-patch level. A nucleus can be scored only by a model that was trained without that nucleus and without every other nucleus from the same source patch. This produces one group-safe out-of-fold probability vector for every audited instance.</p>
+      <p>Those probabilities are converted into review-priority scores. The primary self-confidence score asks how little probability the model assigns to the observed label; complementary methods add likelihood, margin, ambiguity and fold-safe neighbourhood evidence. Higher scores mean earlier review, never automatic correction.</p>
+      <p>Finally, guided and random review receive the same integer budget. The benchmark measures whether injected changes appear earlier in the guided queue and then asks a separate question: whether restoring only the reviewed injected changes improves a downstream classifier on the untouched final reference fold.</p>
+    </div>
     <div class="journey-sticky"><div class="journey-grid">
       <div class="journey-visual">
         <svg viewBox="0 0 760 680" role="img" aria-labelledby="method-graphic-title method-graphic-desc">
@@ -881,105 +1293,76 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
       </div>
 
       <div class="journey-copy">
-        <p class="section-kicker">How the benchmark works</p>
         <h2 id="journey-title" class="display">One controlled question, unfolded step by step.</h2>
-        <p class="journey-intro">Each stage adds evidence while preserving the source record. Scroll to build the complete benchmark; the graphic remains fully visible on mobile and in reduced-motion mode.</p>
-        <ol class="journey-steps">
-          <li class="journey-step is-active" data-journey-copy="0" data-index="01"><small>Reference</small><h3>Keep label states immutable and separate</h3><p>Each nucleus retains its source patch, experimental reference class and observed class.</p></li>
-          <li class="journey-step" data-journey-copy="1" data-index="02"><small>Intervention</small><h3>Inject a change the benchmark can verify</h3><p>Four frozen mechanisms create objective positives without changing the raw source files.</p></li>
-          <li class="journey-step" data-journey-copy="2" data-index="03"><small>Prediction</small><h3>Score only with unseen source groups</h3><p>No model may train on the scored nucleus or any other nucleus from its source patch.</p></li>
-          <li class="journey-step" data-journey-copy="3" data-index="04"><small>Triage</small><h3>Rank suspicion under an equal budget</h3><p>Guided and random review inspect the same number of cases; only their ordering differs.</p></li>
-          <li class="journey-step" data-journey-copy="4" data-index="05"><small>Evaluation</small><h3>Measure retrieval, then defer the decision</h3><p>Average precision and fixed-budget metrics score the queue. An expert still decides what a case means.</p></li>
-        </ol>
-        <div aria-hidden="true" style="height:1px;background:#23252a;margin-top:22px;overflow:hidden"><span id="journey-indicator" style="display:block;width:100%;height:1px;background:#5e6ad2;transform:scaleX(.02);transform-origin:left"></span></div>
+        <p class="journey-intro">The diagram shows the complete governed path: preserve the reference, create a known intervention, predict without source-patch leakage, rank an equal review budget and measure retrieval while leaving the final decision to an expert.</p>
       </div>
     </div></div>
   </section>
 
   <section class="section" id="reading">
-    <div class="section-heading reveal"><p class="section-kicker">How to read the evidence</p><h2>Four quantities answer four different questions.</h2><p class="section-deck">Separating them prevents a strong ranking result from being mistaken for clinical or downstream utility.</p></div>
-    <div class="reading-grid reveal">
-      <article class="reading-card"><span>01</span><h3>Average precision</h3><p>Asks whether injected label changes appear early across the entire ranked list. Higher is better; at 0% corruption it is not applicable.</p></article>
-      <article class="reading-card"><span>02</span><h3>Recall at 5%</h3><p>Asks how many injected changes are found when an expert can review only the first 5% of the queue.</p></article>
-      <article class="reading-card"><span>03</span><h3>Random-review baseline</h3><p>Uses the identical integer budget over 100 deterministic repetitions, making the operational comparison fair.</p></article>
-      <article class="reading-card"><span>04</span><h3>Restoration utility</h3><p>Asks a separate downstream question: after simulated review, does restoring found injected changes improve final-fold macro-F1?</p></article>
+    <div class="section-heading reveal"><h2>Four quantities answer four different questions.</h2><p class="section-deck">Separating them prevents a strong ranking result from being mistaken for clinical or downstream utility.</p></div>
+    <div class="chapter-copy reveal">
+      <p>Average precision describes the complete ordering of the review queue. Recall at the primary 5% budget describes the operational slice an expert would actually inspect. The random-review baseline tells us whether that prioritisation is better than spending the same review effort without a model.</p>
+      <p>Restoration utility is deliberately separate. It asks what happens after simulated review when found injected changes are restored and the downstream classifier is retrained. A ranking can retrieve controlled inconsistencies efficiently while still failing to improve the later classifier.</p>
+      <p>Intervals and adjusted tests also answer different questions. The displayed 95% intervals come from paired whole-group bootstrap resampling; registered Holm-adjusted values are one-sided. At 0% corruption, average precision is not applicable because the controlled positive event does not exist.</p>
     </div>
   </section>
 
   <section class="section" id="results">
-    <div class="section-heading reveal"><p class="section-kicker">Primary downstream test · H4</p><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
+    <div class="section-heading reveal"><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
     <div class="chapter-copy reveal"><p>The H4 experiment restored exactly the same 5% review budget under audit-guided and random selection, then trained the same downstream model and evaluated it on the untouched final reference fold. Audit-guided restoration was not favoured.</p></div>
     <div class="figure-width reveal result-layout">
-      <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span><span>Adverse to the registered hypothesis</span></div><span class="result-number">-0.002156</span><p>Audit-guided restoration produced macro-F1 <strong>0.524431</strong>, below the random-review mean of <strong>0.526587</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>0.216 percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
-      <div class="h4-chart" role="group" aria-label="Complete registered H4 downstream result"><div class="chart-title-row"><div><span class="chart-label">Downstream outcome</span><h3>Macro-F1 after equal-budget label restoration</h3></div><span class="axis-warning">Truncated axis</span></div><div class="metric-axis"><span>0.523</span><span>Macro-F1</span><span>0.539</span></div><div class="metric-row"><span class="metric-name">Reference · uncorrupted</span><span class="metric-track" role="img" aria-label="Reference · uncorrupted: 0.537499432225"><span class="metric-dot" style="--x:93.1034%"></span></span><strong>0.537499</strong></div><div class="metric-row"><span class="metric-name">Baseline · corrupted labels</span><span class="metric-track" role="img" aria-label="Baseline · corrupted labels: 0.526716539926"><span class="metric-dot" style="--x:21.9732%"></span></span><strong>0.526717</strong></div><div class="metric-row"><span class="metric-name">Random review · mean</span><span class="metric-track" role="img" aria-label="Random review · mean: 0.5265870806"><span class="metric-dot" style="--x:21.1192%"></span></span><strong>0.526587</strong></div><div class="metric-row"><span class="metric-name">Audit-guided review</span><span class="metric-track" role="img" aria-label="Audit-guided review: 0.524431020933"><span class="metric-dot" style="--x:6.8966%"></span></span><strong>0.524431</strong></div><div class="difference-panel"><div class="difference-heading"><span>Audit-guided minus random review</span><strong>-0.002156</strong></div><div class="difference-track" style="--zero:90.3226%;--low:9.6774%;--high:51.0382%;--point:29.4979%" role="img" aria-label="Difference -0.00215605966659; 95% CI -0.00285863831075 to -0.0013925186648"><span class="difference-zero"></span><span class="difference-ci"></span><span class="difference-point"></span></div><div class="difference-axis"><span>-0.0032</span><span>0</span><span>0.0003</span></div><p><strong>95% CI [-0.002859, -0.001393]</strong> · 100 random-review repetitions</p></div></div>
+      <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span></div><span class="result-number">-0.002156</span><p>Audit-guided restoration produced macro-F1 <strong>0.524431</strong>, below the random-review mean of <strong>0.526587</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>0.216 percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
+      <div class="h4-chart" role="group" aria-label="Complete registered H4 downstream result"><div class="chart-title-row"><div><h3>Macro-F1 after equal-budget label restoration</h3></div></div><div class="metric-axis"><span>0.523</span><span>Macro-F1</span><span>0.539</span></div><div class="metric-row"><span class="metric-name">Reference · uncorrupted</span><span class="metric-track" role="img" aria-label="Reference · uncorrupted: 0.537499432225"><span class="metric-dot" style="--x:93.1034%"></span></span><strong>0.537499</strong></div><div class="metric-row"><span class="metric-name">Baseline · corrupted labels</span><span class="metric-track" role="img" aria-label="Baseline · corrupted labels: 0.526716539926"><span class="metric-dot" style="--x:21.9732%"></span></span><strong>0.526717</strong></div><div class="metric-row"><span class="metric-name">Random review · mean</span><span class="metric-track" role="img" aria-label="Random review · mean: 0.5265870806"><span class="metric-dot" style="--x:21.1192%"></span></span><strong>0.526587</strong></div><div class="metric-row"><span class="metric-name">Audit-guided review</span><span class="metric-track" role="img" aria-label="Audit-guided review: 0.524431020933"><span class="metric-dot" style="--x:6.8966%"></span></span><strong>0.524431</strong></div><div class="difference-panel"><div class="difference-heading"><span>Audit-guided minus random review</span><strong>-0.002156</strong></div><div class="difference-track" style="--zero:90.3226%;--low:9.6774%;--high:51.0382%;--point:29.4979%" role="img" aria-label="Difference -0.00215605966659; 95% CI -0.00285863831075 to -0.0013925186648"><span class="difference-zero"></span><span class="difference-ci"></span><span class="difference-point"></span></div><div class="difference-axis"><span>-0.0032</span><span>0</span><span>0.0003</span></div><p><strong>95% CI [-0.002859, -0.001393]</strong> · 100 random-review repetitions</p></div></div>
+    </div>
+    <div class="chapter-copy result-afterword reveal">
+      <p>This result does not erase the ranking evidence. It shows that retrieving more injected label changes near the front of a queue and improving final-fold classification are not interchangeable objectives. The first evaluates triage efficiency; the second depends on how the reviewed cases affect a later training distribution.</p>
+      <p>Only reviewed injected corruptions were restored; unreviewed observations remained unchanged, and all downstream conditions used the same representation, learner, seeds, review count and untouched final fold. The adverse direction is retained without selecting a post-result explanation.</p>
     </div>
   </section>
 
   <section class="section learned-section" id="benchmarks">
-    <div class="learned-story" id="learned-story">
+    <div class="chapter-copy findings-intro reveal">
+      <p class="section-kicker">The remaining registered questions</p>
+      <p>H1 through H7 were designed to separate retrieval, heterogeneity, corruption difficulty, restoration, score combination, representation availability and target highlighting. Reading them together prevents one favourable comparison from becoming the story of the entire study.</p>
+      <p>The pattern is mixed. H1 supports better-than-random prioritisation inside the controlled benchmark, H5 favours the fixed hybrid, and H3 indicates that some injected mechanisms were harder to retrieve. H4 is adverse, H7 is unresolved, and H6 is unavailable because no pathology encoder passed the frozen eligibility gates.</p>
+      <p>Each answer below states the conclusion, the exact saved evidence and the interpretation boundary. None of the positive ranking results establishes that a naturally occurring annotation is wrong.</p>
+    </div>
+    <div class="learned-story article-findings" id="learned-story">
       <div class="learned-sticky"><div class="learned-shell">
         <div class="section-heading learned-heading"><h2>What the study actually learned.</h2></div>
         <div class="learned-stage" role="region" aria-label="Seven preregistered research questions and their answers">
-          <div class="hypothesis-ledger" role="group" aria-roledescription="carousel" aria-label="Preregistered findings"><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Can the audit score find injected label changes earlier than random review?</h3><p class="learned-answer"><span class="sr-only">Yes, within this controlled benchmark. Self-confidence ranking beat random review in all 12 registered comparisons: average-precision gains ranged from 0.036206 to 0.301884, and every saved 95% bootstrap interval was above zero. This means injected changes were prioritised more efficiently; it does not prove that a natural annotation is wrong. Byte-identical instance-dependent seeds are not independent replications.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">controlled</span><span class="learned-word">benchmark.</span><span class="learned-word">Self-confidence</span><span class="learned-word">ranking</span><span class="learned-word">beat</span><span class="learned-word">random</span><span class="learned-word">review</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons:</span><span class="learned-word">average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.036206</span><span class="learned-word">to</span><span class="learned-word">0.301884,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">means</span><span class="learned-word">injected</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">prioritised</span><span class="learned-word">more</span><span class="learned-word">efficiently;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">prove</span><span class="learned-word">that</span><span class="learned-word">a</span><span class="learned-word">natural</span><span class="learned-word">annotation</span><span class="learned-word">is</span><span class="learned-word">wrong.</span><span class="learned-word">Byte-identical</span><span class="learned-word">instance-dependent</span><span class="learned-word">seeds</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">independent</span><span class="learned-word">replications.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Where did ranking performance vary?</h3><p class="learned-answer"><span class="sr-only">Across 32,760 reportable subgroup estimates, ranking performance varied with nucleus class, tissue, corruption mechanism and corruption rate. The practical lesson is that audit difficulty depends on context. These are descriptive summaries only: the study did not register an omnibus test and cannot interpret the variation as a causal biological effect.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Across</span><span class="learned-word">32,760</span><span class="learned-word">reportable</span><span class="learned-word">subgroup</span><span class="learned-word">estimates,</span><span class="learned-word">ranking</span><span class="learned-word">performance</span><span class="learned-word">varied</span><span class="learned-word">with</span><span class="learned-word">nucleus</span><span class="learned-word">class,</span><span class="learned-word">tissue,</span><span class="learned-word">corruption</span><span class="learned-word">mechanism</span><span class="learned-word">and</span><span class="learned-word">corruption</span><span class="learned-word">rate.</span><span class="learned-word">The</span><span class="learned-word">practical</span><span class="learned-word">lesson</span><span class="learned-word">is</span><span class="learned-word">that</span><span class="learned-word">audit</span><span class="learned-word">difficulty</span><span class="learned-word">depends</span><span class="learned-word">on</span><span class="learned-word">context.</span><span class="learned-word">These</span><span class="learned-word">are</span><span class="learned-word">descriptive</span><span class="learned-word">summaries</span><span class="learned-word">only:</span><span class="learned-word">the</span><span class="learned-word">study</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">register</span><span class="learned-word">an</span><span class="learned-word">omnibus</span><span class="learned-word">test</span><span class="learned-word">and</span><span class="learned-word">cannot</span><span class="learned-word">interpret</span><span class="learned-word">the</span><span class="learned-word">variation</span><span class="learned-word">as</span><span class="learned-word">a</span><span class="learned-word">causal</span><span class="learned-word">biological</span><span class="learned-word">effect.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Which injected changes were harder to retrieve?</h3><p class="learned-answer"><span class="sr-only">Confusion-targeted and instance-dependent changes were harder to rank than symmetric changes, meaning their average precision was lower. All 6 registered point differences favoured symmetric corruption; five saved 95% intervals were above zero and one crossed zero. This describes the controlled benchmark and does not establish that one natural error type is universally harder.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Confusion-targeted</span><span class="learned-word">and</span><span class="learned-word">instance-dependent</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">harder</span><span class="learned-word">to</span><span class="learned-word">rank</span><span class="learned-word">than</span><span class="learned-word">symmetric</span><span class="learned-word">changes,</span><span class="learned-word">meaning</span><span class="learned-word">their</span><span class="learned-word">average</span><span class="learned-word">precision</span><span class="learned-word">was</span><span class="learned-word">lower.</span><span class="learned-word">All</span><span class="learned-word">6</span><span class="learned-word">registered</span><span class="learned-word">point</span><span class="learned-word">differences</span><span class="learned-word">favoured</span><span class="learned-word">symmetric</span><span class="learned-word">corruption;</span><span class="learned-word">five</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">were</span><span class="learned-word">above</span><span class="learned-word">zero</span><span class="learned-word">and</span><span class="learned-word">one</span><span class="learned-word">crossed</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">describes</span><span class="learned-word">the</span><span class="learned-word">controlled</span><span class="learned-word">benchmark</span><span class="learned-word">and</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">establish</span><span class="learned-word">that</span><span class="learned-word">one</span><span class="learned-word">natural</span><span class="learned-word">error</span><span class="learned-word">type</span><span class="learned-word">is</span><span class="learned-word">universally</span><span class="learned-word">harder.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did a better review queue improve the later classifier?</h3><p class="learned-answer"><span class="sr-only">No. With the same 5% review budget, audit-guided restoration produced macro-F1 0.524431, compared with the random-review mean of 0.526587. The difference was -0.002156, with a saved 95% interval from -0.002859 to -0.001393. The central lesson is that better retrieval did not translate into better downstream classification here.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No.</span><span class="learned-word">With</span><span class="learned-word">the</span><span class="learned-word">same</span><span class="learned-word">5%</span><span class="learned-word">review</span><span class="learned-word">budget,</span><span class="learned-word">audit-guided</span><span class="learned-word">restoration</span><span class="learned-word">produced</span><span class="learned-word">macro-F1</span><span class="learned-word">0.524431,</span><span class="learned-word">compared</span><span class="learned-word">with</span><span class="learned-word">the</span><span class="learned-word">random-review</span><span class="learned-word">mean</span><span class="learned-word">of</span><span class="learned-word">0.526587.</span><span class="learned-word">The</span><span class="learned-word">difference</span><span class="learned-word">was</span><span class="learned-word">-0.002156,</span><span class="learned-word">with</span><span class="learned-word">a</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">interval</span><span class="learned-word">from</span><span class="learned-word">-0.002859</span><span class="learned-word">to</span><span class="learned-word">-0.001393.</span><span class="learned-word">The</span><span class="learned-word">central</span><span class="learned-word">lesson</span><span class="learned-word">is</span><span class="learned-word">that</span><span class="learned-word">better</span><span class="learned-word">retrieval</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">translate</span><span class="learned-word">into</span><span class="learned-word">better</span><span class="learned-word">downstream</span><span class="learned-word">classification</span><span class="learned-word">here.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did combining two ranking signals help?</h3><p class="learned-answer"><span class="sr-only">Yes, for review prioritisation. The equal-weight combination of self-confidence and fold-safe nearest-neighbour disagreement outperformed self-confidence alone in all 12 registered comparisons. Average-precision gains ranged from 0.020983 to 0.065502, and every saved 95% bootstrap interval was above zero. This supports the fixed hybrid within this benchmark; it does not authorise automatic correction or diagnosis.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">for</span><span class="learned-word">review</span><span class="learned-word">prioritisation.</span><span class="learned-word">The</span><span class="learned-word">equal-weight</span><span class="learned-word">combination</span><span class="learned-word">of</span><span class="learned-word">self-confidence</span><span class="learned-word">and</span><span class="learned-word">fold-safe</span><span class="learned-word">nearest-neighbour</span><span class="learned-word">disagreement</span><span class="learned-word">outperformed</span><span class="learned-word">self-confidence</span><span class="learned-word">alone</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons.</span><span class="learned-word">Average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.020983</span><span class="learned-word">to</span><span class="learned-word">0.065502,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">supports</span><span class="learned-word">the</span><span class="learned-word">fixed</span><span class="learned-word">hybrid</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">benchmark;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">authorise</span><span class="learned-word">automatic</span><span class="learned-word">correction</span><span class="learned-word">or</span><span class="learned-word">diagnosis.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Could a pathology-specific encoder be evaluated fairly?</h3><p class="learned-answer"><span class="sr-only">No result is available. None of the candidate pathology encoders passed every frozen access, licence, reproducibility, hardware and smoke-test gate, so all 3 registered H6 entries remain unavailable. They are not zero or negative results, and no substitute was selected after the other outcomes became visible.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">result</span><span class="learned-word">is</span><span class="learned-word">available.</span><span class="learned-word">None</span><span class="learned-word">of</span><span class="learned-word">the</span><span class="learned-word">candidate</span><span class="learned-word">pathology</span><span class="learned-word">encoders</span><span class="learned-word">passed</span><span class="learned-word">every</span><span class="learned-word">frozen</span><span class="learned-word">access,</span><span class="learned-word">licence,</span><span class="learned-word">reproducibility,</span><span class="learned-word">hardware</span><span class="learned-word">and</span><span class="learned-word">smoke-test</span><span class="learned-word">gate,</span><span class="learned-word">so</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">registered</span><span class="learned-word">H6</span><span class="learned-word">entries</span><span class="learned-word">remain</span><span class="learned-word">unavailable.</span><span class="learned-word">They</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">zero</span><span class="learned-word">or</span><span class="learned-word">negative</span><span class="learned-word">results,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">substitute</span><span class="learned-word">was</span><span class="learned-word">selected</span><span class="learned-word">after</span><span class="learned-word">the</span><span class="learned-word">other</span><span class="learned-word">outcomes</span><span class="learned-word">became</span><span class="learned-word">visible.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did highlighting the target nucleus add useful signal?</h3><p class="learned-answer"><span class="sr-only">No clear benefit was detected. Across three seeds, the average-precision differences ranged from -0.005371 to 0.002997; all 3 saved 95% intervals crossed zero, and no Holm-adjusted one-sided p-value was below 0.05. In this benchmark, explicit highlighting did not improve ranking over the context representation.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">clear</span><span class="learned-word">benefit</span><span class="learned-word">was</span><span class="learned-word">detected.</span><span class="learned-word">Across</span><span class="learned-word">three</span><span class="learned-word">seeds,</span><span class="learned-word">the</span><span class="learned-word">average-precision</span><span class="learned-word">differences</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">-0.005371</span><span class="learned-word">to</span><span class="learned-word">0.002997;</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">crossed</span><span class="learned-word">zero,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">Holm-adjusted</span><span class="learned-word">one-sided</span><span class="learned-word">p-value</span><span class="learned-word">was</span><span class="learned-word">below</span><span class="learned-word">0.05.</span><span class="learned-word">In</span><span class="learned-word">this</span><span class="learned-word">benchmark,</span><span class="learned-word">explicit</span><span class="learned-word">highlighting</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">improve</span><span class="learned-word">ranking</span><span class="learned-word">over</span><span class="learned-word">the</span><span class="learned-word">context</span><span class="learned-word">representation.</span></span></p></article></div>
+          <div class="hypothesis-ledger" aria-label="Preregistered findings"><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Can the audit score find injected label changes earlier than random review?</h3><p class="learned-answer"><span class="sr-only">Yes, within this controlled benchmark. Self-confidence ranking beat random review in all 12 registered comparisons: average-precision gains ranged from 0.036206 to 0.301884, and every saved 95% bootstrap interval was above zero. This means injected changes were prioritised more efficiently; it does not prove that a natural annotation is wrong. Byte-identical instance-dependent seeds are not independent replications.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">controlled</span><span class="learned-word">benchmark.</span><span class="learned-word">Self-confidence</span><span class="learned-word">ranking</span><span class="learned-word">beat</span><span class="learned-word">random</span><span class="learned-word">review</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons:</span><span class="learned-word">average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.036206</span><span class="learned-word">to</span><span class="learned-word">0.301884,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">means</span><span class="learned-word">injected</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">prioritised</span><span class="learned-word">more</span><span class="learned-word">efficiently;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">prove</span><span class="learned-word">that</span><span class="learned-word">a</span><span class="learned-word">natural</span><span class="learned-word">annotation</span><span class="learned-word">is</span><span class="learned-word">wrong.</span><span class="learned-word">Byte-identical</span><span class="learned-word">instance-dependent</span><span class="learned-word">seeds</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">independent</span><span class="learned-word">replications.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Where did ranking performance vary?</h3><p class="learned-answer"><span class="sr-only">Across 32,760 reportable subgroup estimates, ranking performance varied with nucleus class, tissue, corruption mechanism and corruption rate. The practical lesson is that audit difficulty depends on context. These are descriptive summaries only: the study did not register an omnibus test and cannot interpret the variation as a causal biological effect.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Across</span><span class="learned-word">32,760</span><span class="learned-word">reportable</span><span class="learned-word">subgroup</span><span class="learned-word">estimates,</span><span class="learned-word">ranking</span><span class="learned-word">performance</span><span class="learned-word">varied</span><span class="learned-word">with</span><span class="learned-word">nucleus</span><span class="learned-word">class,</span><span class="learned-word">tissue,</span><span class="learned-word">corruption</span><span class="learned-word">mechanism</span><span class="learned-word">and</span><span class="learned-word">corruption</span><span class="learned-word">rate.</span><span class="learned-word">The</span><span class="learned-word">practical</span><span class="learned-word">lesson</span><span class="learned-word">is</span><span class="learned-word">that</span><span class="learned-word">audit</span><span class="learned-word">difficulty</span><span class="learned-word">depends</span><span class="learned-word">on</span><span class="learned-word">context.</span><span class="learned-word">These</span><span class="learned-word">are</span><span class="learned-word">descriptive</span><span class="learned-word">summaries</span><span class="learned-word">only:</span><span class="learned-word">the</span><span class="learned-word">study</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">register</span><span class="learned-word">an</span><span class="learned-word">omnibus</span><span class="learned-word">test</span><span class="learned-word">and</span><span class="learned-word">cannot</span><span class="learned-word">interpret</span><span class="learned-word">the</span><span class="learned-word">variation</span><span class="learned-word">as</span><span class="learned-word">a</span><span class="learned-word">causal</span><span class="learned-word">biological</span><span class="learned-word">effect.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Which injected changes were harder to retrieve?</h3><p class="learned-answer"><span class="sr-only">Confusion-targeted and instance-dependent changes were harder to rank than symmetric changes, meaning their average precision was lower. All 6 registered point differences favoured symmetric corruption; five saved 95% intervals were above zero and one crossed zero. This describes the controlled benchmark and does not establish that one natural error type is universally harder.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Confusion-targeted</span><span class="learned-word">and</span><span class="learned-word">instance-dependent</span><span class="learned-word">changes</span><span class="learned-word">were</span><span class="learned-word">harder</span><span class="learned-word">to</span><span class="learned-word">rank</span><span class="learned-word">than</span><span class="learned-word">symmetric</span><span class="learned-word">changes,</span><span class="learned-word">meaning</span><span class="learned-word">their</span><span class="learned-word">average</span><span class="learned-word">precision</span><span class="learned-word">was</span><span class="learned-word">lower.</span><span class="learned-word">All</span><span class="learned-word">6</span><span class="learned-word">registered</span><span class="learned-word">point</span><span class="learned-word">differences</span><span class="learned-word">favoured</span><span class="learned-word">symmetric</span><span class="learned-word">corruption;</span><span class="learned-word">five</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">were</span><span class="learned-word">above</span><span class="learned-word">zero</span><span class="learned-word">and</span><span class="learned-word">one</span><span class="learned-word">crossed</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">describes</span><span class="learned-word">the</span><span class="learned-word">controlled</span><span class="learned-word">benchmark</span><span class="learned-word">and</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">establish</span><span class="learned-word">that</span><span class="learned-word">one</span><span class="learned-word">natural</span><span class="learned-word">error</span><span class="learned-word">type</span><span class="learned-word">is</span><span class="learned-word">universally</span><span class="learned-word">harder.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did a better review queue improve the later classifier?</h3><p class="learned-answer"><span class="sr-only">No. The main result above reports the complete comparison. At the same 5% review budget, audit-guided restoration was lower by -0.002156 macro-F1, so better retrieval did not translate into better downstream classification here.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No.</span><span class="learned-word">The</span><span class="learned-word">main</span><span class="learned-word">result</span><span class="learned-word">above</span><span class="learned-word">reports</span><span class="learned-word">the</span><span class="learned-word">complete</span><span class="learned-word">comparison.</span><span class="learned-word">At</span><span class="learned-word">the</span><span class="learned-word">same</span><span class="learned-word">5%</span><span class="learned-word">review</span><span class="learned-word">budget,</span><span class="learned-word">audit-guided</span><span class="learned-word">restoration</span><span class="learned-word">was</span><span class="learned-word">lower</span><span class="learned-word">by</span><span class="learned-word">-0.002156</span><span class="learned-word">macro-F1,</span><span class="learned-word">so</span><span class="learned-word">better</span><span class="learned-word">retrieval</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">translate</span><span class="learned-word">into</span><span class="learned-word">better</span><span class="learned-word">downstream</span><span class="learned-word">classification</span><span class="learned-word">here.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did combining two ranking signals help?</h3><p class="learned-answer"><span class="sr-only">Yes, for review prioritisation. The equal-weight combination of self-confidence and fold-safe nearest-neighbour disagreement outperformed self-confidence alone in all 12 registered comparisons. Average-precision gains ranged from 0.020983 to 0.065502, and every saved 95% bootstrap interval was above zero. This supports the fixed hybrid within this benchmark; it does not authorise automatic correction or diagnosis.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">Yes,</span><span class="learned-word">for</span><span class="learned-word">review</span><span class="learned-word">prioritisation.</span><span class="learned-word">The</span><span class="learned-word">equal-weight</span><span class="learned-word">combination</span><span class="learned-word">of</span><span class="learned-word">self-confidence</span><span class="learned-word">and</span><span class="learned-word">fold-safe</span><span class="learned-word">nearest-neighbour</span><span class="learned-word">disagreement</span><span class="learned-word">outperformed</span><span class="learned-word">self-confidence</span><span class="learned-word">alone</span><span class="learned-word">in</span><span class="learned-word">all</span><span class="learned-word">12</span><span class="learned-word">registered</span><span class="learned-word">comparisons.</span><span class="learned-word">Average-precision</span><span class="learned-word">gains</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">0.020983</span><span class="learned-word">to</span><span class="learned-word">0.065502,</span><span class="learned-word">and</span><span class="learned-word">every</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">bootstrap</span><span class="learned-word">interval</span><span class="learned-word">was</span><span class="learned-word">above</span><span class="learned-word">zero.</span><span class="learned-word">This</span><span class="learned-word">supports</span><span class="learned-word">the</span><span class="learned-word">fixed</span><span class="learned-word">hybrid</span><span class="learned-word">within</span><span class="learned-word">this</span><span class="learned-word">benchmark;</span><span class="learned-word">it</span><span class="learned-word">does</span><span class="learned-word">not</span><span class="learned-word">authorise</span><span class="learned-word">automatic</span><span class="learned-word">correction</span><span class="learned-word">or</span><span class="learned-word">diagnosis.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Could a pathology-specific encoder be evaluated fairly?</h3><p class="learned-answer"><span class="sr-only">No result is available. None of the candidate pathology encoders passed every frozen access, licence, reproducibility, hardware and smoke-test gate, so all 3 registered H6 entries remain unavailable. They are not zero or negative results, and no substitute was selected after the other outcomes became visible.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">result</span><span class="learned-word">is</span><span class="learned-word">available.</span><span class="learned-word">None</span><span class="learned-word">of</span><span class="learned-word">the</span><span class="learned-word">candidate</span><span class="learned-word">pathology</span><span class="learned-word">encoders</span><span class="learned-word">passed</span><span class="learned-word">every</span><span class="learned-word">frozen</span><span class="learned-word">access,</span><span class="learned-word">licence,</span><span class="learned-word">reproducibility,</span><span class="learned-word">hardware</span><span class="learned-word">and</span><span class="learned-word">smoke-test</span><span class="learned-word">gate,</span><span class="learned-word">so</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">registered</span><span class="learned-word">H6</span><span class="learned-word">entries</span><span class="learned-word">remain</span><span class="learned-word">unavailable.</span><span class="learned-word">They</span><span class="learned-word">are</span><span class="learned-word">not</span><span class="learned-word">zero</span><span class="learned-word">or</span><span class="learned-word">negative</span><span class="learned-word">results,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">substitute</span><span class="learned-word">was</span><span class="learned-word">selected</span><span class="learned-word">after</span><span class="learned-word">the</span><span class="learned-word">other</span><span class="learned-word">outcomes</span><span class="learned-word">became</span><span class="learned-word">visible.</span></span></p></article><article class="hypothesis-row" data-learned-slide><h3 class="hypothesis-title">Did highlighting the target nucleus add useful signal?</h3><p class="learned-answer"><span class="sr-only">No clear benefit was detected. Across three seeds, the average-precision differences ranged from -0.005371 to 0.002997; all 3 saved 95% intervals crossed zero, and no Holm-adjusted one-sided p-value was below 0.05. In this benchmark, explicit highlighting did not improve ranking over the context representation.</span><span class="learned-answer-visual" aria-hidden="true"><span class="learned-word">No</span><span class="learned-word">clear</span><span class="learned-word">benefit</span><span class="learned-word">was</span><span class="learned-word">detected.</span><span class="learned-word">Across</span><span class="learned-word">three</span><span class="learned-word">seeds,</span><span class="learned-word">the</span><span class="learned-word">average-precision</span><span class="learned-word">differences</span><span class="learned-word">ranged</span><span class="learned-word">from</span><span class="learned-word">-0.005371</span><span class="learned-word">to</span><span class="learned-word">0.002997;</span><span class="learned-word">all</span><span class="learned-word">3</span><span class="learned-word">saved</span><span class="learned-word">95%</span><span class="learned-word">intervals</span><span class="learned-word">crossed</span><span class="learned-word">zero,</span><span class="learned-word">and</span><span class="learned-word">no</span><span class="learned-word">Holm-adjusted</span><span class="learned-word">one-sided</span><span class="learned-word">p-value</span><span class="learned-word">was</span><span class="learned-word">below</span><span class="learned-word">0.05.</span><span class="learned-word">In</span><span class="learned-word">this</span><span class="learned-word">benchmark,</span><span class="learned-word">explicit</span><span class="learned-word">highlighting</span><span class="learned-word">did</span><span class="learned-word">not</span><span class="learned-word">improve</span><span class="learned-word">ranking</span><span class="learned-word">over</span><span class="learned-word">the</span><span class="learned-word">context</span><span class="learned-word">representation.</span></span></p></article></div>
         </div>
       </div></div>
     </div>
-    <div class="section-heading reveal" style="margin-top:var(--section-space)"><p class="section-kicker">Comparison atlas</p><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
+    <div class="section-heading reveal" style="margin-top:var(--section-space)"><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
+    <div class="chapter-copy reveal"><p>The atlas is the transition from narrative findings to detailed evidence. Rows remain grouped by hypothesis so that effect direction, interval width, unavailable cells and repeated seed structure can be inspected together instead of reduced to a single headline number.</p><p>The plot is intentionally bounded inside the article. Scrolling within it reveals all 36 registered entries while keeping the surrounding explanation in view; the complete numeric record appears later in the evidence table.</p></div>
     <div class="wide-width reveal"><div class="forest-plot" role="region" aria-label="Scrollable forest plot of all H1, H3, H5, H6 and H7 comparisons" tabindex="0"><div class="forest-axis" aria-hidden="true"><span>-0.037</span><span>Average-precision difference · zero means no difference</span><span>0.338</span></div><div class="forest-group"><span>H1</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_404">Self-confidence vs random review · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:82.0957%;--high:88.9685%;--point:85.6951%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 404: difference 0.28438693; 95% CI 0.27090819 to 0.29664458; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.284387</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_405">Self-confidence vs random review · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:84.1609%;--high:90.6189%;--point:87.4598%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 405: difference 0.29099513; 95% CI 0.27864193 to 0.30282472; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290995</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_confusion_seed_406">Self-confidence vs random review · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:83.9353%;--high:90.7099%;--point:87.3828%" role="img" aria-label="Self-confidence vs random review · Confusion-targeted · Seed 406: difference 0.29070679; 95% CI 0.27779688 to 0.30316542; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.290707</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_404">Self-confidence vs random review · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:86.9017%;--high:93.8596%;--point:90.3675%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 404: difference 0.3018835; 95% CI 0.28890514 to 0.31496022; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301884</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_405">Self-confidence vs random review · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:85.3365%;--high:92.1047%;--point:88.7012%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 405: difference 0.29564363; 95% CI 0.28304403 to 0.30838859; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.295644</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_group_conditional_seed_406">Self-confidence vs random review · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:84.6003%;--high:91.4444%;--point:88.0297%" role="img" aria-label="Self-confidence vs random review · Group-conditional · Seed 406: difference 0.293129; 95% CI 0.2802873 to 0.30591595; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.293129</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_404">Self-confidence vs random review · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 404: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_405">Self-confidence vs random review · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 405: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_instance_dependent_seed_406">Self-confidence vs random review · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:18.0523%;--high:20.8476%;--point:19.4190%" role="img" aria-label="Self-confidence vs random review · Instance-dependent · Seed 406: difference 0.036205919; 95% CI 0.03108809 to 0.041555304; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.036206</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_404">Self-confidence vs random review · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:84.5371%;--high:91.2342%;--point:87.9905%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 404: difference 0.29298231; 95% CI 0.28005035 to 0.3051288; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.292982</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_405">Self-confidence vs random review · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:86.0009%;--high:92.6146%;--point:89.3480%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 405: difference 0.29806568; 95% CI 0.2855318 to 0.310298; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.298066</span></div><div class="forest-row"><span class="forest-label" title="h1_self_confidence_minus_random_symmetric_seed_406">Self-confidence vs random review · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:86.8325%;--high:93.7940%;--point:90.3430%" role="img" aria-label="Self-confidence vs random review · Symmetric · Seed 406: difference 0.30179169; 95% CI 0.28864598 to 0.31471441; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.301792</span></div><div class="forest-group"><span>H3</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_404">Symmetric vs confusion-targeted corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:9.7768%;--high:14.2085%;--point:12.0457%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 404: difference 0.0085953737; 95% CI 9.9036784e-05 to 0.016694072; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.008595</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_405">Symmetric vs confusion-targeted corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:9.5121%;--high:13.7387%;--point:11.6385%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 405: difference 0.0070705489; 95% CI -0.00089208538 to 0.014935145; one-sided Holm-adjusted p 0.047976012"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.007071</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_confusion_seed_406">Symmetric vs confusion-targeted corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:10.5041%;--high:14.9800%;--point:12.7105%" role="img" aria-label="Symmetric vs confusion-targeted corruption · Seed 406: difference 0.011084902; 95% CI 0.0028225339 to 0.019583405; one-sided Holm-adjusted p 0.010494753"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.011085</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_404">Symmetric vs instance-dependent corruption · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:74.5151%;--high:81.9037%;--point:78.3215%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 404: difference 0.25677515; 95% CI 0.24252166 to 0.27018944; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.256775</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_405">Symmetric vs instance-dependent corruption · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:76.0361%;--high:83.1931%;--point:79.6603%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 405: difference 0.26178842; 95% CI 0.24821729 to 0.27501768; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.261788</span></div><div class="forest-row"><span class="forest-label" title="h3_symmetric_minus_instance_dependent_seed_406">Symmetric vs instance-dependent corruption · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:76.8320%;--high:84.3237%;--point:80.6345%" role="img" aria-label="Symmetric vs instance-dependent corruption · Seed 406: difference 0.2654366; 95% CI 0.2511977 to 0.27925147; one-sided Holm-adjusted p 0.0029985007"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.265437</span></div><div class="forest-group"><span>H5</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_404">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:22.2215%;--high:25.3817%;--point:23.7830%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404: difference 0.052547547; 95% CI 0.046700138 to 0.058533895; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.052548</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_405">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:22.6984%;--high:26.0588%;--point:24.3336%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405: difference 0.054609071; 95% CI 0.048486094 to 0.061069565; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054609</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_confusion_seed_406">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:22.5971%;--high:25.9067%;--point:24.1988%" role="img" aria-label="Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406: difference 0.054104282; 95% CI 0.048106562 to 0.060499839; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.054104</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_404">Fixed hybrid vs self-confidence · Group-conditional · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.1199%;--high:27.5766%;--point:25.8447%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 404: difference 0.060267882; 95% CI 0.053808946 to 0.066753113; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.060268</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_405">Fixed hybrid vs self-confidence · Group-conditional · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.4399%;--high:28.8327%;--point:27.1444%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 405: difference 0.065134664; 95% CI 0.058751824 to 0.071456854; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065135</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_group_conditional_seed_406">Fixed hybrid vs self-confidence · Group-conditional · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.5041%;--high:28.9433%;--point:27.2425%" role="img" aria-label="Fixed hybrid vs self-confidence · Group-conditional · Seed 406: difference 0.065501914; 95% CI 0.05899227 to 0.071871124; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.065502</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_404">Fixed hybrid vs self-confidence · Instance-dependent · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 404: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_405">Fixed hybrid vs self-confidence · Instance-dependent · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 405: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_instance_dependent_seed_406">Fixed hybrid vs self-confidence · Instance-dependent · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:14.6862%;--high:16.0185%;--point:15.3538%" role="img" aria-label="Fixed hybrid vs self-confidence · Instance-dependent · Seed 406: difference 0.020983063; 95% CI 0.018483003 to 0.023472166; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.020983</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_404">Fixed hybrid vs self-confidence · Symmetric · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:24.8271%;--high:28.1649%;--point:26.4655%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 404: difference 0.062592367; 95% CI 0.056457192 to 0.068956186; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.062592</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_405">Fixed hybrid vs self-confidence · Symmetric · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:25.1742%;--high:28.6723%;--point:26.9390%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 405: difference 0.064365613; 95% CI 0.057757172 to 0.070856071; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064366</span></div><div class="forest-row"><span class="forest-label" title="h5_hybrid_minus_self_confidence_symmetric_seed_406">Fixed hybrid vs self-confidence · Symmetric · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:25.3355%;--high:28.7690%;--point:27.0166%" role="img" aria-label="Fixed hybrid vs self-confidence · Symmetric · Seed 406: difference 0.064656233; 95% CI 0.058360871 to 0.071218164; one-sided Holm-adjusted p 0.0059970015"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.064656</span></div><div class="forest-group"><span>H6</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_404">Pathology encoder vs ImageNet · Seed 404</span><span class="forest-track forest-track-empty"><span>Unavailable by frozen design</span></span><span class="forest-value">Unavailable</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_405">Pathology encoder vs ImageNet · Seed 405</span><span class="forest-track forest-track-empty"><span>Unavailable by frozen design</span></span><span class="forest-value">Unavailable</span></div><div class="forest-row is-unavailable"><span class="forest-label" title="h6_pathology_minus_imagenet_seed_406">Pathology encoder vs ImageNet · Seed 406</span><span class="forest-track forest-track-empty"><span>Unavailable by frozen design</span></span><span class="forest-value">Unavailable</span></div><div class="forest-group"><span>H7</span><span>Point estimate and saved 95% bootstrap interval</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_404">Target-highlighted vs context · Seed 404</span><span class="forest-track" style="--zero:9.7503%;--low:8.3986%;--high:12.6309%;--point:10.5506%" role="img" aria-label="Target-highlighted vs context · Seed 404: difference 0.0029966605; 95% CI -0.0050617132 to 0.010786598; one-sided Holm-adjusted p 0.72263868"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">0.002997</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_405">Target-highlighted vs context · Seed 405</span><span class="forest-track" style="--zero:9.7503%;--low:7.5672%;--high:11.9576%;--point:9.7493%" role="img" aria-label="Target-highlighted vs context · Seed 405: difference -3.9385653e-06; 95% CI -0.0081752246 to 0.008265313; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.000004</span></div><div class="forest-row"><span class="forest-label" title="h7_highlighted_minus_context_seed_406">Target-highlighted vs context · Seed 406</span><span class="forest-track" style="--zero:9.7503%;--low:6.1404%;--high:10.5863%;--point:8.3160%" role="img" aria-label="Target-highlighted vs context · Seed 406: difference -0.0053711783; 95% CI -0.013518192 to 0.0031302878; one-sided Holm-adjusted p 0.96451774"><span class="forest-zero"></span><span class="forest-ci"></span><span class="forest-point"></span></span><span class="forest-value">-0.005371</span></div></div><p class="fine"><strong>Statistical reading.</strong> Registered Holm-adjusted p-values are one-sided, while the displayed 95% intervals are two-sided summaries. Those two summaries need not produce identical verbal labels.</p></div>
   </section>
 
   <section class="section" id="subgroups">
-    <div class="section-heading reveal"><p class="section-kicker">H2 · descriptive heterogeneity</p><h2>Saved performance estimates varied across contexts.</h2><p class="section-deck">The saved subgroup estimates span nucleus classes, tissues, corruption mechanisms and corruption rates. They describe where performance differed in this benchmark; they do not establish a causal biological dependency.</p></div>
-    <div class="chapter-copy reveal"><p>Subgroup average precision is reported only when the preregistered support rule is met: at least 100 samples and at least 10 injected corruptions. Otherwise the study retains counts without inventing an unstable estimate.</p></div>
-    <div class="figure-width reveal"><div class="h2-chart"><div class="chart-title-row"><div><span class="chart-label">Descriptive heterogeneity</span><h3>Observed average-precision ranges</h3></div></div><div class="range-axis"><span>0 AP</span><span>Range across saved subgroup estimates</span><span>1 AP</span></div><div class="range-row"><span class="range-name">Nucleus class</span><span class="range-track" style="--low:1.3587%;--high:85.5146%" role="img" aria-label="Nucleus class: 6300 reportable estimates, AP range 0.013587 to 0.855146, 175 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>6,300</strong><small>reported</small></span><span class="range-values">0.0136-0.8551</span></div><div class="range-row"><span class="range-name">Tissue type</span><span class="range-track" style="--low:1.8489%;--high:77.1235%" role="img" aria-label="Tissue type: 23940 reportable estimates, AP range 0.0184891 to 0.771235, 665 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>23,940</strong><small>reported</small></span><span class="range-values">0.0185-0.7712</span></div><div class="range-row"><span class="range-name">Corruption mechanism</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption mechanism: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><div class="range-row"><span class="range-name">Corruption rate</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption rate: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><p class="chart-note"><strong>32,760</strong> reportable estimates from <strong>33,670</strong> saved rows. These ranges are descriptive. They are not an omnibus test or a biological ranking.</p></div></div>
+    <div class="section-heading reveal"><h2>Saved performance estimates varied across contexts.</h2><p class="section-deck">The saved subgroup estimates span nucleus classes, tissues, corruption mechanisms and corruption rates. They describe where performance differed in this benchmark; they do not establish a causal biological dependency.</p></div>
+    <div class="chapter-copy reveal"><p>Subgroup average precision is reported only when the preregistered support rule is met: at least 100 samples and at least 10 injected corruptions. Otherwise the study retains counts without inventing an unstable estimate.</p><p>The ranges expose heterogeneity that would disappear inside one aggregate score. They are descriptive, not a biological ranking: the preregistration did not define an omnibus test that could support a causal explanation for tissue, class, mechanism or corruption-rate differences.</p></div>
+    <div class="figure-width reveal"><div class="h2-chart"><div class="chart-title-row"><div><h3>Observed average-precision ranges</h3></div></div><div class="range-axis"><span>0 AP</span><span>Range across saved subgroup estimates</span><span>1 AP</span></div><div class="range-row"><span class="range-name">Nucleus class</span><span class="range-track" style="--low:1.3587%;--high:85.5146%" role="img" aria-label="Nucleus class: 6300 reportable estimates, AP range 0.013587 to 0.855146, 175 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>6,300</strong><small>reported</small></span><span class="range-values">0.0136-0.8551</span></div><div class="range-row"><span class="range-name">Tissue type</span><span class="range-track" style="--low:1.8489%;--high:77.1235%" role="img" aria-label="Tissue type: 23940 reportable estimates, AP range 0.0184891 to 0.771235, 665 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>23,940</strong><small>reported</small></span><span class="range-values">0.0185-0.7712</span></div><div class="range-row"><span class="range-name">Corruption mechanism</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption mechanism: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><div class="range-row"><span class="range-name">Corruption rate</span><span class="range-track" style="--low:3.3052%;--high:64.2852%" role="img" aria-label="Corruption rate: 1260 reportable estimates, AP range 0.0330524 to 0.642852, 35 not applicable"><span class="range-line"></span><span class="range-start"></span><span class="range-end"></span></span><span class="range-count"><strong>1,260</strong><small>reported</small></span><span class="range-values">0.0331-0.6429</span></div><p class="chart-note"><strong>32,760</strong> reportable estimates from <strong>33,670</strong> saved rows. These ranges are descriptive. They are not an omnibus test or a biological ranking.</p></div></div>
   </section>
 
   <section class="section" id="seed-audit">
-    <div class="section-heading reveal"><p class="section-kicker">Reproducibility disclosure</p><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The three rows are retained for auditability, but the byte-identical files are not independent realisations and must not be interpreted as three replications.</p></div>
+    <div class="section-heading reveal"><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The three rows are retained for auditability, but the byte-identical files are not independent realisations and must not be interpreted as three replications.</p></div>
     <div class="figure-width reveal">
-      <div class="seed-panel">
-        <svg viewBox="0 0 680 390" role="img" aria-labelledby="seed-title seed-desc"><title id="seed-title">Seeds 404, 405 and 406 produced byte-identical files</title><desc id="seed-desc">Three seed paths converge on one ranking hash and one out-of-fold prediction hash.</desc>
-          <g font-family="Inter, sans-serif" font-size="13" fill="#d0d6e0"><rect x="34" y="42" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="75">Seed 404</text><rect x="34" y="168" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="201">Seed 405</text><rect x="34" y="294" width="126" height="54" rx="10" fill="#141516" stroke="#34343a"/><text x="72" y="327">Seed 406</text></g>
-          <g fill="none" stroke="#5e6ad2" stroke-width="2"><path d="M160 69H270Q310 69 310 109V168"/><path d="M160 195H310"/><path d="M160 321H270Q310 321 310 281V222"/></g><circle cx="310" cy="195" r="18" fill="#5e6ad2"/><path d="M328 195H404" stroke="#828fff" stroke-width="2"/>
-          <g font-family="Inter, sans-serif"><rect x="404" y="130" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="154" fill="#8a8f98" font-size="11">IDENTICAL RANKING SHA-256</text><text x="428" y="174" fill="#d0d6e0" font-size="12">69766d68a24679b5…</text><rect x="404" y="204" width="238" height="58" rx="10" fill="#141516" stroke="#34343a"/><text x="428" y="228" fill="#8a8f98" font-size="11">IDENTICAL OOF SHA-256</text><text x="428" y="248" fill="#d0d6e0" font-size="12">730459794225e338…</text></g>
-        </svg>
-        <div class="seed-copy"><h3>One deterministic output, preserved three times.</h3><p>The complete ranking and out-of-fold prediction files match byte for byte. That limitation narrows how the instance-dependent results should be interpreted.</p><p><code>ranking 69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b</code><br><code>OOF 730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958</code></p></div>
-      </div>
-      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete seed identities</span><span>Always visible · exact traceability</span></div><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody><tr><td>404</td><td><code>primary_0187_53201213be77</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>405</td><td><code>primary_0193_afae7a244238</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>406</td><td><code>primary_0199_6029f5261b38</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr></tbody></table></div></div>
-    </div>
-  </section>
-
-  <section class="section" id="integrity">
-    <div class="section-heading reveal"><p class="section-kicker">Experimental integrity</p><h2>The design limits outcome-informed model selection.</h2><p class="section-deck">The model, split, feature and statistical rules were frozen before outcome interpretation. Because outcomes were later exposed during recovery, this accepted result is reported as exploratory rather than as an untouched confirmatory analysis.</p></div>
-    <div class="wide-width reveal">
-      <div class="stats-grid"><div class="stat"><strong>185/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>0</strong><span>failed required cells</span></div><div class="stat"><strong>36</strong><span>preregistered comparison entries retained</span></div><div class="stat"><strong>2,000</strong><span>paired group-bootstrap iterations</span></div></div>
-      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level, never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
-    </div>
-  </section>
-
-  <section class="section" id="interpretation">
-    <div class="section-heading reveal"><p class="section-kicker">Interpretation boundary</p><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
-    <div class="figure-width reveal claim-grid">
-      <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in H1.</li><li>The preregistered fixed hybrid exceeded self-confidence in all 12 H5 comparisons.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
-      <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That better ranking automatically improves downstream classification; H4 was adverse.</li><li>Patient/WSI independence, clinical validity, expert agreement or external generalisation.</li></ul></article>
-    </div>
-  </section>
-
-  <section class="section" id="quality">
-    <div class="section-heading reveal"><p class="section-kicker">PanNuke quality control</p><h2>The source masks remained untouched.</h2><p class="section-deck">The validator measured cross-class overlaps and unlabeled regions, retained them in provenance and applied one frozen eligibility policy. It never arbitrated an overlap class or reconstructed the supplied background.</p></div>
-    <div class="wide-width reveal">
-      <div class="stats-grid"><div class="stat"><strong>7,901</strong><span>validated PanNuke patches</span></div><div class="stat"><strong>4,318</strong><span>cross-class overlap pixels</span></div><div class="stat"><strong>10,486,091</strong><span>unlabeled / void pixels</span></div><div class="stat"><strong>1,411</strong><span>overlap-touching instances flagged</span></div></div>
-      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Deterministic quality-control overlay</span><span>1512 x 3840 px · source preview</span></div><div class="qc-frame"><div class="qc-toolbar"><span>Cropped representative preview · normal, overlap, void and exclusion cases</span><a href="pannuke_mask_qc_overlays.png" target="_blank" rel="noopener">Open the original image ↗</a></div><div class="qc-preview"><img loading="lazy" decoding="async" fetchpriority="low" width="1512" height="3840" src="pannuke_mask_qc_overlays.png" alt="Deterministic PanNuke quality-control overlays showing images and mask boundaries"></div></div></div>
+      <div class="seed-copy"><h3>One deterministic output, preserved through three registered paths.</h3><p>The ranking and out-of-fold prediction files match byte for byte. The disclosure changes interpretation, not the stored record: these rows document one realisation rather than three replications.</p></div>
+      <details class="evidence-details seed-evidence"><summary>Inspect exact seed identities and SHA-256 hashes</summary><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody><tr><td>404</td><td><code>primary_0187_53201213be77</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>405</td><td><code>primary_0193_afae7a244238</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr><tr><td>406</td><td><code>primary_0199_6029f5261b38</code></td><td><code title="69766d68a24679b510b3e63e0eb039207119ff1d96953dafe31cfa51f74d276b">69766d68a24679b5…</code></td><td><code title="730459794225e338834568d4d7bf574b65c38b634726e787d9121f818d702958">730459794225e338…</code></td></tr></tbody></table></div></details>
     </div>
   </section>
 
   <section class="section" id="evidence">
-    <div class="section-heading reveal"><p class="section-kicker">Evidence and provenance</p><h2>Every displayed result remains inspectable.</h2><p class="section-deck">The complete table is visible immediately and retains readable comparison names, exact raw identifiers, fixed precision, intervals, multiplicity-adjusted p-values and bootstrap counts.</p></div>
+    <div class="section-heading reveal"><h2>Every displayed result remains inspectable.</h2><p class="section-deck">Machine-readable summaries, exact identifiers and the complete 36-entry table remain available for audit. Package verification checks the published files; it does not recompute the primary study.</p></div>
+    <div class="chapter-copy reveal"><p>Every value in the article is read from the accepted sealed run and carried into <code>evidence.json</code>. The table below traces each statement to its hypothesis, raw identifier, seed, point difference, confidence interval, adjusted p-value and bootstrap count.</p><p>The timestamped July freeze records a null commit, a dirty tree and untracked files; the first public Git commit followed on 19 August 2026. Internal hashes preserve file identity, but the later public history is not independent evidence that outcomes were unseen.</p><p>The public repository also omits the full primary OOF predictions, rankings, bootstrap arrays and checkpoints. It can verify report consistency and reproduce the synthetic workflow, but it cannot independently recompute H1-H7 from a checkout alone. The exact boundary and validation plan are documented in the repository's <code>REPRODUCIBILITY.md</code>.</p></div>
     <div class="wide-width reveal">
-      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Complete H1 / H3 / H5 / H6 / H7 comparison table</span><span>33 reported · 3 unavailable</span></div>
+      <details class="evidence-details comparison-details"><summary>Inspect the complete H1 / H3 / H5 / H6 / H7 table <span>33 reported · 3 unavailable</span></summary>
         <div class="table-tools"><label>Hypothesis<select id="filter-hypothesis"><option value="ALL">All hypotheses</option><option>H1</option><option>H3</option><option>H5</option><option>H6</option><option>H7</option></select></label><label>Status<select id="filter-status"><option value="ALL">All statuses</option><option value="reported">Reported</option><option value="not_available_frozen_optional_cell">Unavailable</option></select></label><label>Search<input id="filter-search" type="search" placeholder="Name, seed or comparison ID"></label><span class="table-count" id="table-count">36 / 36 rows</span></div>
         <div class="table-wrap" role="region" aria-label="Complete comparison results" tabindex="0"><table id="comparison-table"><colgroup><col style="width:7%"><col style="width:35%"><col style="width:11%"><col style="width:11%"><col style="width:19%"><col style="width:10%"><col style="width:7%"></colgroup><thead><tr><th>Hypothesis</th><th>Comparison</th><th>Status</th><th style="text-align:right">Δ AP</th><th style="text-align:right">95% bootstrap CI</th><th style="text-align:right">Holm-adjusted p</th><th style="text-align:right">Iterations</th></tr></thead><tbody><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.284387</td><td class="numeric" data-label="95% bootstrap CI">[0.270908, 0.296645]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.290995</td><td class="numeric" data-label="95% bootstrap CI">[0.278642, 0.302825]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Confusion-targeted · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.290707</td><td class="numeric" data-label="95% bootstrap CI">[0.277797, 0.303165]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.301884</td><td class="numeric" data-label="95% bootstrap CI">[0.288905, 0.314960]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.295644</td><td class="numeric" data-label="95% bootstrap CI">[0.283044, 0.308389]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Group-conditional · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_group_conditional_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.293129</td><td class="numeric" data-label="95% bootstrap CI">[0.280287, 0.305916]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Instance-dependent · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.036206</td><td class="numeric" data-label="95% bootstrap CI">[0.031088, 0.041555]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 404</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.292982</td><td class="numeric" data-label="95% bootstrap CI">[0.280050, 0.305129]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 405</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.298066</td><td class="numeric" data-label="95% bootstrap CI">[0.285532, 0.310298]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H1" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H1</span></td><td data-label="Comparison"><span class="comparison-name">Self-confidence vs random review · Symmetric · Seed 406</span><code class="comparison-id">h1_self_confidence_minus_random_symmetric_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.301792</td><td class="numeric" data-label="95% bootstrap CI">[0.288646, 0.314714]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 404</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.008595</td><td class="numeric" data-label="95% bootstrap CI">[0.000099, 0.016694]</td><td class="numeric" data-label="Holm-adjusted p">0.047976</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 405</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.007071</td><td class="numeric" data-label="95% bootstrap CI">[-0.000892, 0.014935]</td><td class="numeric" data-label="Holm-adjusted p">0.047976</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs confusion-targeted corruption · Seed 406</span><code class="comparison-id">h3_symmetric_minus_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.011085</td><td class="numeric" data-label="95% bootstrap CI">[0.002823, 0.019583]</td><td class="numeric" data-label="Holm-adjusted p">0.010495</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 404</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.256775</td><td class="numeric" data-label="95% bootstrap CI">[0.242522, 0.270189]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 405</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.261788</td><td class="numeric" data-label="95% bootstrap CI">[0.248217, 0.275018]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H3" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H3</span></td><td data-label="Comparison"><span class="comparison-name">Symmetric vs instance-dependent corruption · Seed 406</span><code class="comparison-id">h3_symmetric_minus_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.265437</td><td class="numeric" data-label="95% bootstrap CI">[0.251198, 0.279251]</td><td class="numeric" data-label="Holm-adjusted p">0.002999</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.052548</td><td class="numeric" data-label="95% bootstrap CI">[0.046700, 0.058534]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.054609</td><td class="numeric" data-label="95% bootstrap CI">[0.048486, 0.061070]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Confusion-targeted · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_confusion_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.054104</td><td class="numeric" data-label="95% bootstrap CI">[0.048107, 0.060500]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.060268</td><td class="numeric" data-label="95% bootstrap CI">[0.053809, 0.066753]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.065135</td><td class="numeric" data-label="95% bootstrap CI">[0.058752, 0.071457]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Group-conditional · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_group_conditional_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.065502</td><td class="numeric" data-label="95% bootstrap CI">[0.058992, 0.071871]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Instance-dependent · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_instance_dependent_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.020983</td><td class="numeric" data-label="95% bootstrap CI">[0.018483, 0.023472]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 404</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.062592</td><td class="numeric" data-label="95% bootstrap CI">[0.056457, 0.068956]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 405</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.064366</td><td class="numeric" data-label="95% bootstrap CI">[0.057757, 0.070856]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H5" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H5</span></td><td data-label="Comparison"><span class="comparison-name">Fixed hybrid vs self-confidence · Symmetric · Seed 406</span><code class="comparison-id">h5_hybrid_minus_self_confidence_symmetric_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.064656</td><td class="numeric" data-label="95% bootstrap CI">[0.058361, 0.071218]</td><td class="numeric" data-label="Holm-adjusted p">0.005997</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 404</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_404</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">Unavailable</td><td class="numeric" data-label="95% bootstrap CI">Unavailable</td><td class="numeric" data-label="Holm-adjusted p">Unavailable</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 405</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_405</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">Unavailable</td><td class="numeric" data-label="95% bootstrap CI">Unavailable</td><td class="numeric" data-label="Holm-adjusted p">Unavailable</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H6" data-status="not_available_frozen_optional_cell" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H6</span></td><td data-label="Comparison"><span class="comparison-name">Pathology encoder vs ImageNet · Seed 406</span><code class="comparison-id">h6_pathology_minus_imagenet_seed_406</code></td><td data-label="Status"><span class="status-pill is-unavailable">Unavailable</span></td><td class="numeric" data-label="Δ AP">Unavailable</td><td class="numeric" data-label="95% bootstrap CI">Unavailable</td><td class="numeric" data-label="Holm-adjusted p">Unavailable</td><td class="numeric" data-label="Iterations">0</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="404"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 404</span><code class="comparison-id">h7_highlighted_minus_context_seed_404</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">0.002997</td><td class="numeric" data-label="95% bootstrap CI">[-0.005062, 0.010787]</td><td class="numeric" data-label="Holm-adjusted p">0.722639</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="405"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 405</span><code class="comparison-id">h7_highlighted_minus_context_seed_405</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">-0.000004</td><td class="numeric" data-label="95% bootstrap CI">[-0.008175, 0.008265]</td><td class="numeric" data-label="Holm-adjusted p">0.964518</td><td class="numeric" data-label="Iterations">2,000</td></tr><tr data-comparison-row data-hypothesis="H7" data-status="reported" data-seed="406"><td data-label="Hypothesis"><span class="hypothesis-chip">H7</span></td><td data-label="Comparison"><span class="comparison-name">Target-highlighted vs context · Seed 406</span><code class="comparison-id">h7_highlighted_minus_context_seed_406</code></td><td data-label="Status"><span class="status-pill is-reported">Reported</span></td><td class="numeric" data-label="Δ AP">-0.005371</td><td class="numeric" data-label="95% bootstrap CI">[-0.013518, 0.003130]</td><td class="numeric" data-label="Holm-adjusted p">0.964518</td><td class="numeric" data-label="Iterations">2,000</td></tr></tbody></table></div>
-      </div>
+      </details>
       <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
       <div class="provenance" style="margin-top:64px">
         <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li></ul><p>No patient- or WSI-level independence is claimed because the released metadata do not support it. Separation is guaranteed at source-patch level.</p></div>
@@ -988,29 +1371,55 @@ footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: 
     </div>
   </section>
 
+  <section class="section" id="quality">
+    <div class="section-heading reveal"><h2>The source masks remained untouched.</h2><p class="section-deck">The validator measured cross-class overlaps and unlabeled regions, retained them in provenance and applied one frozen eligibility policy. It never arbitrated an overlap class or reconstructed the supplied background.</p></div>
+    <div class="chapter-copy reveal"><p>Before any primary split is frozen, the inspector verifies folds, shapes, channels, class order, instance identifiers and representative overlays. Cross-class overlaps, void pixels and affected instances are recorded rather than silently corrected.</p><p>The overlay is evidence about ingestion and representation, not improved segmentation. Eligibility flags may follow the frozen policy, but the raw masks and source annotations remain unchanged.</p></div>
+    <div class="wide-width reveal">
+      <div class="stats-grid"><div class="stat"><strong>7,901</strong><span>validated PanNuke patches</span></div><div class="stat"><strong>4,318</strong><span>cross-class overlap pixels</span></div><div class="stat"><strong>10,486,091</strong><span>unlabeled / void pixels</span></div><div class="stat"><strong>1,411</strong><span>overlap-touching instances flagged</span></div></div>
+      <div class="always-visible-evidence"><div class="evidence-label-row"><span>Deterministic quality-control overlay</span><span>1512 x 3840 px · source preview</span></div><div class="qc-frame"><div class="qc-toolbar"><span>Cropped representative preview · normal, overlap, void and exclusion cases</span><a href="pannuke_mask_qc_overlays.png" target="_blank" rel="noopener">Open the original image ↗</a></div><div class="qc-preview"><img loading="lazy" decoding="async" fetchpriority="low" width="1512" height="3840" src="pannuke_mask_qc_overlays.png" alt="Deterministic PanNuke quality-control overlays showing images and mask boundaries"></div></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="integrity">
+    <div class="section-heading reveal"><h2>The design limits outcome-informed model selection.</h2><p class="section-deck">The model, split, feature and statistical rules were frozen before outcome interpretation. Because outcomes were later exposed during recovery, this accepted result is reported as exploratory rather than as an untouched confirmatory analysis.</p></div>
+    <div class="chapter-copy reveal"><p>Source groups stay together, each audit score is out of fold, the final reference fold is withheld from selection, and every label state remains separate. The matrix retained all 36 comparison entries; unavailable optional pathology cells were not replaced with estimates.</p><p>Outcome exposure during technical recovery does not change the stored measurements, but it narrows what can responsibly be claimed. The accepted primary analysis is therefore permanently described as amended and exploratory.</p></div>
+    <div class="wide-width reveal">
+      <div class="stats-grid"><div class="stat"><strong>185/185</strong><span>required primary cells completed</span></div><div class="stat"><strong>0</strong><span>failed required cells</span></div><div class="stat"><strong>36</strong><span>preregistered comparison entries retained</span></div><div class="stat"><strong>2,000</strong><span>paired group-bootstrap iterations</span></div></div>
+      <div class="rules"><div class="rule"><b>Group-safe splitting</b><p>Every split uses <code>group_id</code>, at least at source-patch level, never individual nuclei.</p></div><div class="rule"><b>Out-of-fold ranking</b><p>Primary model-based audit scores come from predictions made for source groups excluded from model fitting.</p></div><div class="rule"><b>Untouched final reference</b><p>The final reference fold is uncorrupted and unavailable for model selection, calibration or review-budget tuning.</p></div><div class="rule"><b>Separate label states</b><p><code>pre_corruption_label</code>, <code>observed_label</code>, <code>is_injected_corruption</code> and corruption metadata remain distinct.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="interpretation">
+    <div class="section-heading reveal"><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
+    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency, expert disagreement or biological truth. The bootstrap quantifies uncertainty within this dataset; it is not an independent replication.</p><p>Splits separate source patches, not verified patients or whole slides. Their controlled allocation also used the pre-corruption reference label for balance. That label was not a model input, but it is benchmark-only information unavailable in a real audit.</p><p>External validity still requires blinded multi-rater review, patient- or WSI-level grouping where identifiers permit it, a genuinely external dataset and a prospectively defined evaluation of the ranked queue.</p></div>
+    <div class="figure-width reveal claim-grid">
+      <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in H1.</li><li>The preregistered fixed hybrid exceeded self-confidence in all 12 H5 comparisons.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
+      <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That better ranking automatically improves downstream classification; H4 was adverse.</li><li>Patient/WSI independence, clinical validity, expert agreement or external generalisation.</li></ul></article>
+    </div>
+  </section>
+
   <section class="section" id="use">
     <div class="repo-shell">
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package; it does not retrain a model or recalculate any primary result. The separate synthetic path exercises the portable software workflow.</p><p>Independent primary recomputation requires a lawful PanNuke copy and full prediction and statistical artifacts that are not currently distributed in the public repository. The repository never downloads the dataset silently or relaxes the scientific gates.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
           <div><span class="repo-path">github.com / Jaqwilk</span><span class="repo-title">AANCA</span></div>
           <a class="repo-link" href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">View repository ↗</a>
         </div>
-        <p class="repo-description">The repository contains the scientific specification, preregistration, source code, tests, reproducible command-line workflows and this checksum-verifiable presentation. Raw PanNuke binaries, full runs, embeddings and checkpoints are intentionally not distributed.</p>
+        <p class="repo-description">The repository contains the scientific specification, source code, cross-platform software checks, synthetic workflows and this checksum-verifiable presentation. Raw PanNuke binaries and the full primary OOF, bootstrap, embedding and checkpoint artifacts are not distributed, so the public checkout does not independently recompute H1-H7.</p>
         <div class="repo-tags"><span>Python 3.12</span><span>group-safe OOF</span><span>immutable evidence</span><span>research only</span></div>
       </article>
 
       <div class="usage-grid">
-        <article class="repo-command"><span>01 · Present</span><h3>Verify and open locally</h3><p>Check the package, serve it locally and open the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
+        <article class="repo-command"><h3>Verify and open locally</h3><p>Check the package, serve it locally and open the article.</p><pre>git clone https://github.com/Jaqwilk/AANCA.git
 cd AANCA
 python scripts/present_demo.py</pre></article>
-        <article class="repo-command"><span>02 · Verify</span><h3>Check without a browser</h3><p>Validate the package without starting a server.</p><pre>python scripts/present_demo.py `
-  --verify-only</pre></article>
-        <article class="repo-command"><span>03 · Exercise</span><h3>Run the synthetic smoke path</h3><p>Exercise the software with deterministic synthetic data.</p><pre>uv sync --dev
+        <article class="repo-command"><h3>Check without a browser</h3><p>Validate the presentation package without recomputing the study.</p><pre>python scripts/present_demo.py --verify-only</pre></article>
+        <article class="repo-command"><h3>Run the synthetic smoke path</h3><p>Exercise the software with deterministic synthetic data.</p><pre>uv sync --dev
 uv run histo-audit doctor
-uv run histo-audit data generate-synthetic `
-  --config configs\smoke.yaml
-uv run histo-audit experiment smoke</pre></article>
+uv run histo-audit data generate-synthetic --config configs/smoke.yaml
+uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></article>
       </div>
       <p class="usage-note">Real PanNuke runs require a lawful local dataset and the governed setup in <a href="https://github.com/Jaqwilk/AANCA/blob/main/DATASET_SETUP.md">DATASET_SETUP.md</a>.</p>
     </div>
@@ -1021,6 +1430,7 @@ uv run histo-audit experiment smoke</pre></article>
       <div class="author-profile reveal">
         <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
         <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
+        <p class="author-copy">The project combines a frozen scientific specification, controlled data interventions, group-safe evaluation, machine-readable provenance and an inspectable presentation layer. Its purpose is to demonstrate a reproducible research workflow while keeping the final interpretation with qualified experts.</p>
       </div>
 
       <aside class="author-credentials reveal" aria-label="Education and credentials">
@@ -1050,10 +1460,9 @@ uv run histo-audit experiment smoke</pre></article>
 
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
-    <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review.</p></div>
+    <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
     <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Release: 18 August 2026</p><p>Dataset: PanNuke</p><p>Primary frozen-feature benchmark completed; confirmatory and external validation pending.</p></div>
-    <div class="footer-column"><h3>Responsible use</h3><p>Non-diagnostic research only</p><p>No automatic annotation changes</p><p>No claim that an annotator was wrong</p><p>No patient/WSI independence claim</p></div>
-    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="README.md">Presentation package notes</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
   </div>
   <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
 </div></footer>
@@ -1067,6 +1476,19 @@ uv run histo-audit experiment smoke</pre></article>
   const scrollEngine = window.ScrollTrigger;
   const motionAvailable = Boolean(gsapEngine && scrollEngine && !reduced);
   if (gsapEngine && scrollEngine) gsapEngine.registerPlugin(scrollEngine);
+
+  const article = document.getElementById('main');
+  const articleOrder = [
+    'overview', 'study-facts', 'research-question', 'method', 'reading', 'results',
+    'benchmarks', 'subgroups', 'seed-audit', 'evidence', 'quality', 'integrity',
+    'interpretation', 'use', 'author',
+  ];
+  if (article) {
+    articleOrder.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) article.appendChild(section);
+    });
+  }
 
   const header = document.getElementById('site-header');
   const brandLabel = document.querySelector('.brand-label');
@@ -1230,7 +1652,7 @@ uv run histo-audit experiment smoke</pre></article>
       let learnedSlideThresholds = [0];
       let learnedSettleThresholds = [0];
       let learnedSettledIndex = 0;
-      const learnedWords = learnedSlides.flatMap(slide => [
+      const learnedWords = learnedSlides.slice(1).flatMap(slide => [
         ...slide.querySelectorAll('.learned-word'),
       ]);
       const nearestSettleIndex = value => {
@@ -1282,14 +1704,14 @@ uv run histo-audit experiment smoke</pre></article>
             {autoAlpha: 0, y: 72, scale: .988},
             {autoAlpha: 1, y: 0, scale: 1, duration: .48, ease: 'power3.out'}
           );
+          learnedTimeline.to({}, {duration: .14});
+          learnedTimeline.to(words, {
+            autoAlpha: 1,
+            duration: .08,
+            stagger: .012,
+            ease: 'power1.out',
+          });
         }
-        learnedTimeline.to({}, {duration: .14});
-        learnedTimeline.to(words, {
-          autoAlpha: 1,
-          duration: .08,
-          stagger: .012,
-          ease: 'power1.out',
-        });
         learnedSettleTimes.push(learnedTimeline.duration());
         learnedTimeline.to({}, {duration: 1.38});
         if (index < learnedSlides.length - 1) {
@@ -1307,6 +1729,16 @@ uv run histo-audit experiment smoke</pre></article>
       learnedSettleThresholds = learnedSettleTimes.map(time => time / learnedDuration);
       setLearnedState(0);
       scrollEngine.refresh();
+
+      const alignLearnedHash = () => {
+        if (window.location.hash !== '#learned-story') return;
+        window.requestAnimationFrame(() => {
+          const trigger = learnedTimeline.scrollTrigger;
+          if (trigger) window.scrollTo(0, trigger.start);
+        });
+      };
+      alignLearnedHash();
+      window.addEventListener('hashchange', alignLearnedHash);
 
       let learnedScrollTween;
       let learnedWheelTimer;
@@ -1392,6 +1824,7 @@ uv run histo-audit experiment smoke</pre></article>
       learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false});
 
       return () => {
+        window.removeEventListener('hashchange', alignLearnedHash);
         learnedStory.removeEventListener('wheel', onLearnedWheel);
         window.clearTimeout(learnedWheelTimer);
         if (learnedScrollTween) learnedScrollTween.kill();

@@ -1722,9 +1722,15 @@ def smoke_command(
     project_root: Annotated[Path, typer.Option("--project-root", file_okay=False)] = Path("."),
     config_path: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/smoke.yaml"),
     runs_root: Annotated[
-        Path | None,
-        typer.Option("--runs-root", help="Optional run root; defaults to artifacts/runs."),
-    ] = None,
+        Path,
+        typer.Option(
+            "--runs-root",
+            help=(
+                "Run root for synthetic validation; defaults to the portable, "
+                "isolated artifacts/smoke_runs registry."
+            ),
+        ),
+    ] = Path("artifacts/smoke_runs"),
 ) -> None:
     """Execute the deterministic core pipeline as an immutable tracked run."""
 
@@ -1732,7 +1738,7 @@ def smoke_command(
 
     root = project_root.resolve()
     config_file = _resolve_from_root(root, config_path)
-    resolved_runs_root = _resolve_from_root(root, runs_root) if runs_root else None
+    resolved_runs_root = _resolve_from_root(root, runs_root)
     try:
         result = execute_synthetic_smoke(
             project_root=root,

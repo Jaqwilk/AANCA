@@ -4,7 +4,6 @@ import copy
 import ctypes
 import hashlib
 import inspect
-import msvcrt
 import os
 import queue
 import stat
@@ -16,6 +15,12 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
+
+if os.name == "nt":
+    import msvcrt
+else:
+    msvcrt = None
+
 from carrier_import_guard import PACKAGE_IMPORT_ROOT, import_exact
 
 terminal = import_exact(

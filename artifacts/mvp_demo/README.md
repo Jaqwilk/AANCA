@@ -38,10 +38,11 @@ animation libraries.
 The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
 pixel ratio, and respects reduced-motion and data-saving preferences.
 
-The complete 36-entry comparison atlas and evidence table stay immediately
-available inside compact, keyboard-scrollable viewports. On narrow screens, each
-evidence entry becomes a labelled two-column record without dropping any saved
-identifier, interval, adjusted p-value, or unavailable result.
+The complete 36-entry comparison atlas remains immediately available inside a
+compact, keyboard-scrollable viewport. The duplicate numeric table stays one
+native disclosure control away. On narrow screens, each evidence entry becomes a
+labelled two-column record without dropping any saved identifier, interval,
+adjusted p-value, or unavailable result.
 
 Scientific status: `PRIMARY_STUDY_COMPLETE`. Presentation status:
 `DEMO_COMPLETE`. The primary analysis is permanently labelled

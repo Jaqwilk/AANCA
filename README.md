@@ -13,6 +13,7 @@ that may warrant expert review—without changing source labels.
   <img alt="Scientific status: PRIMARY_STUDY_COMPLETE" src="https://img.shields.io/badge/science-PRIMARY__STUDY__COMPLETE-238636">
   <img alt="Research only, non-diagnostic" src="https://img.shields.io/badge/use-research_only_%7C_non--diagnostic-C2410C">
   <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml"><img alt="Presentation integrity workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Cross-platform scientific software workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
 </p>
 
 <p align="center">
@@ -20,6 +21,7 @@ that may warrant expert review—without changing source labels.
   <a href="#evidence-at-a-glance">Evidence</a> ·
   <a href="#how-it-works">Method</a> ·
   <a href="#command-line-interface">CLI</a> ·
+  <a href="REPRODUCIBILITY.md">Reproducibility</a> ·
   <a href="#documentation-map">Documentation</a> ·
   <a href="#scope-ethics-and-limitations">Limitations</a>
 </p>
@@ -68,10 +70,13 @@ relabelling system.
 
 The accepted primary run is
 `20260727T133947.089370Z_pannuke_primary_orphan_recovery`. Its full run directory
-is intentionally local and ignored by Git; the compact checked-in presentation
-contains a machine-readable, checksum-bound evidence snapshot.
+is local and ignored by Git; the compact checked-in presentation contains a
+machine-readable, checksum-bound evidence snapshot. Consequently, the public
+repository supports package verification and synthetic software reproduction,
+but it does **not** currently support independent recomputation of H1-H7 from the
+full OOF predictions and bootstrap arrays.
 
-See [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
+See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
 exact boundary and saved evidence.
 
@@ -79,16 +84,15 @@ exact boundary and saved evidence.
 
 The checked-in article is designed for both a research presentation and a close
 technical reading. Its English narrative uses one centered 640 px editorial
-column, a scroll-driven five-stage serpentine explanation of the benchmark, and
-visible evidence panels that never require disclosure clicks. The findings section
+column and a compact five-stage diagram of the benchmark. The findings section
 contains only its title, seven registered questions, and their complete answers.
 On motion-capable desktops, each answer resolves word by word and becomes a firm
 scroll stop before the next question can enter from below. A single gesture cannot
 skip multiple questions. On narrow screens, with reduced motion, or without GSAP,
-all seven answers become an immediately visible static article. The complete
-comparison atlas and evidence table remain immediately present inside compact,
-keyboard-scrollable viewports; the evidence rows become labelled two-column
-records on narrow screens and can be filtered by hypothesis, status, or free text.
+all seven answers become an immediately visible static article. The comparison
+atlas remains visible; the duplicate 36-entry numeric table sits in one optional
+audit disclosure and remains keyboard-scrollable and filterable when opened. Its
+rows become labelled two-column records on narrow screens.
 The atlas uses ordinary-flow headings, so internal scrolling cannot place an axis
 or group label over a data row. Repeated row rules are removed; whitespace and one
 subtle boundary between hypothesis groups provide the remaining structure.
@@ -245,10 +249,15 @@ The full research workflow uses Python 3.12 and
 ~~~powershell
 uv sync --dev
 uv run histo-audit doctor
-uv run histo-audit data generate-synthetic --config configs\smoke.yaml
+uv run histo-audit data generate-synthetic --config configs/smoke.yaml
 uv run histo-audit experiment smoke
-uv run histo-audit experiment smoke --config configs\smoke_zero.yaml
+uv run histo-audit experiment smoke --config configs/smoke_zero.yaml
 ~~~
+
+The smoke commands use `artifacts/smoke_runs` by default. This isolated registry
+is intentionally separate from the checked-in historical primary ledger, whose
+absolute Windows paths describe the original workstation and are not portable.
+Use `--runs-root <clean-directory>` to select another caller-owned location.
 
 Synthetic success validates the software pipeline only. It must not be described
 as real-data, primary, confirmatory, expert-reviewed, or clinical validation.
@@ -399,6 +408,15 @@ Key limitations include:
   failures, and calibration can change audit rankings.
 - PanNuke labels are quality-controlled reference annotations, not guaranteed
   biological truth.
+- Controlled OOF fold allocation used the pre-corruption reference labels. Those
+  labels were not model inputs, but they are benchmark-only information and can
+  make fold balance more favourable than in a real audit.
+- The timestamped July freeze artifacts were created before the repository's first
+  public commit on 19 August 2026. Their internal hashes preserve file identity,
+  but public Git history is not independent proof of prospective preregistration.
+- The public package omits the full primary OOF predictions, per-cell data and
+  bootstrap arrays, so its checksums verify the published files rather than the
+  correctness or independent reproducibility of the original computation.
 - External multi-rater or blinded expert validation is still required before making
   claims about naturally occurring annotation inconsistency.
 - Human disagreement and insufficient context must be preserved rather than forced
@@ -441,10 +459,12 @@ Before submitting a change:
 .venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
 ~~~
 
-The `Presentation integrity` GitHub Actions workflow also runs the dependency-free
-five-file package verifier on every push to `main` and every pull request. It is a
-fast remote guard for the checked-in article; the complete scientific gate set
-above remains mandatory for material local changes.
+GitHub Actions separates two claims. `Presentation integrity` runs the
+dependency-free five-file package verifier. `Scientific software` is configured to
+install the locked environment on Ubuntu and Windows, run linting, formatting, the complete
+test suite and the deterministic synthetic workflow in a clean registry. Neither
+workflow recomputes the PanNuke primary study; that requires the licensed dataset
+and the unpublished full run artifacts described in `REPRODUCIBILITY.md`.
 
 Mandatory scientific invariants live in [`AGENTS.md`](AGENTS.md) and
 [`SPEC.md`](SPEC.md). Material changes must update the corresponding evidence in

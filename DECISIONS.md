@@ -5846,3 +5846,141 @@ Decisions are conservative, reversible where possible, and amended rather than s
 - This decision changes presentation copy and layout only. It does not change a
   registered hypothesis, evidence value, metric, annotation, accepted run, frozen
   authority or completion status.
+
+## 2026-08-19 - Reframe the presentation as a long-form research article
+
+- Use the information architecture of a long-form research article: establish the
+  study boundary first, explain the controlled method and metrics, lead findings
+  with the adverse H4 result, then present H1-H7, detailed comparisons, subgroup
+  evidence, limitations, provenance, reproducibility and author context.
+- Keep narrative content on one centered 640 px reading rail. Allow charts, the
+  method figure, QC and evidence tables to break wider only when their information
+  density requires it.
+- Use the exact reader-facing order: thesis and scope, method, metric interpretation,
+  H4, H1-H7, detailed evidence, QC and limitations, reproducibility, then author.
+  Add connective prose before and after evidence figures so the page reads as an
+  article rather than a sequence of self-contained presentation modules.
+- Replace the desktop H1-H7 pinned carousel with seven complete findings in normal
+  document flow. Replace repeated fact and metric cards with compact editorial rows.
+  Keep the complete comparison atlas and evidence table in bounded keyboard-scrollable
+  viewports.
+- At the owner's explicit request, supersede the earlier typographic-only institution
+  treatment. Use the publicly served official Kozminski University and Uniwersytet
+  Młodzieżowy marks as linked optional web assets, retain textual alternatives and
+  keep the no-endorsement statement.
+- This is a presentation-only reorganisation. It changes no scientific evidence,
+  metric, label, dataset, accepted run, frozen authority or completion status.
+
+## 2026-08-19 - Unify the article typography and remove chapter kickers
+
+- Use the opening thesis as the typographic reference for every later article
+  heading: Inter, desktop 29 px, weight 500, line height 1.48 and letter spacing
+  -0.03em. Use Inter 16 px, weight 400, line height 1.74 and letter spacing
+  -0.008em for the associated explanatory copy.
+- Remove the requested small chapter, chart and command-step labels so hierarchy is
+  carried by the article heading, prose and whitespace. Keep specialised numeric,
+  tabular and code typography where it communicates evidence rather than promotion.
+- This is a presentation-only typographic decision. It changes no scientific
+  evidence, metric, label, dataset, accepted run, frozen authority or completion
+  status.
+
+- Treat the reference as a complete article-copy pattern, not only a font-size
+  sample: later narrative sections also inherit its 640 px reading measure, text
+  colours, 42 px heading-to-copy gap and 24 px paragraph rhythm.
+
+## 2026-08-19 - Remove presentation mechanics from the article layout
+
+- Replace the 540-viewport method scroll sequence with one static method section.
+  Keep the complete five-stage diagram and explanation visible without requiring a
+  staged animation.
+- Remove generic section dividers, repeated row rules, chapter kickers and reveal
+  transitions. Use a reduced vertical rhythm and content width to establish hierarchy.
+- Retain boundaries that encode or protect information: chart scales and intervals,
+  table structure, interactive controls, the QC image boundary and command code boxes.
+- This is a presentation-only layout decision. It changes no scientific evidence,
+  metric, label, dataset, accepted run, frozen authority or completion status.
+
+## 2026-08-19 - Retain one animated findings sequence
+
+- Restore the desktop scroll sequence only for “What the study actually learned.”
+  Seven registered findings advance one at a time and their answer text is revealed
+  progressively. Keep the current 29 px heading and 16 px answer typography.
+- Preserve the static complete sequence below 901 px and when reduced motion is
+  requested. Keep the method and every other article chapter static and minimal.
+- This changes presentation behaviour only, not evidence, wording, ordering or any
+  scientific status.
+
+## 2026-08-19 - Final coherence pass for the article flow
+
+- Place experimental integrity with QC and limitations, after the detailed evidence,
+  so the visual order matches the declared research-article reading order.
+- Align the animated findings heading, question and answer to one 640 px desktop rail
+  and one shared mobile rail. Show the complete first answer immediately; preserve
+  progressive transitions for findings two through seven.
+- Correct the static method copy so it no longer instructs the reader to build a
+  scroll animation that has been removed. Align direct `#learned-story` navigation to
+  the first finding.
+- This is a presentation-only coherence repair. It changes no result, scientific
+  wording, evidence identity, metric, status or frozen rule.
+
+- Center the author introduction on the same 640 px editorial rail as the article
+  body, while retaining the wider credential layout below it.
+- Retain one low-contrast 640 px rule above the footer as the sole decorative boundary
+  between the article and site-level information.
+- Use the same low-contrast editorial rule only at major chapter transitions: method,
+  findings, QC/limitations, reproducibility and author. Do not separate every evidence
+  subsection or paragraph group.
+- Render chapter rules at 16% white for clear visibility on black. Render the footer
+  boundary slightly stronger at 18% white and across the full footer width.
+
+## 2026-08-19 - Compact the article without removing the findings sequence
+
+- Retain the complete seven-screen desktop sequence for “What the study actually
+  learned.”, but reduce its scroll distance from 720 to 560 viewport heights.
+- Let the five-stage diagram carry the method instead of repeating all five stages
+  in an adjacent list. Keep H4's complete chart and interpretation in the primary
+  result; use its H1-H7 entry only as a concise cross-reference.
+- Treat exact seed IDs and hashes as audit detail behind a native disclosure while
+  leaving the one-realisation limitation visible. Shorten the atlas and evidence
+  viewports, and reduce four footer columns to three with one responsible-use note.
+- Bind local HTTP paths explicitly to the verified presentation root so the launcher's
+  printed `/` URL resolves consistently on Windows. No evidence or scientific status
+  changes as part of this presentation and launcher repair.
+
+## 2026-08-20 - Separate software portability from primary-study reproducibility
+
+- Route the public synthetic smoke command to `artifacts/smoke_runs` by default.
+  Preserve `artifacts/runs/registry.csv` as a historical workstation ledger rather
+  than rewriting its original absolute paths or allowing a quick-start to append to
+  it accidentally.
+- Add an Ubuntu and Windows scientific-software workflow that installs the locked
+  environment, runs lint and format checks, executes the full test suite and runs
+  the deterministic smoke path in a clean registry. Keep Windows-native handle
+  custody tests explicit and retain all portable tests on non-Windows systems.
+- Treat presentation verification, synthetic software reproduction and independent
+  primary recomputation as three different claims. The five-file verifier proves
+  package identity only; the smoke path exercises synthetic software only; neither
+  recomputes H1-H7.
+- Publish a dedicated reproducibility boundary that records the missing full OOF,
+  ranking, bootstrap and checkpoint artifacts, the gap between the July local freeze
+  and the first public commit, and the benchmark-only use of pre-corruption labels
+  for fold balance.
+- Do not attempt to close methodological evidence gaps with code or wording. Blinded
+  multi-rater review, patient/WSI identifiers, external data and prospective
+  validation remain new research work.
+
+## 2026-08-20 - Reduce repetition while preserving the seven-finding animation
+
+- Keep “What the study actually learned.” as the only pinned desktop sequence and
+  retain all H1-H7 answers. Keep all seven answers in ordinary flow on mobile and
+  under reduced motion.
+- Remove the four metric cards after the same metrics have been explained in prose.
+  Shorten the repeated H4, subgroup, integrity and QC explanations without removing
+  a result or limitation.
+- Keep the complete comparison atlas visible, but place the duplicate 36-entry
+  numeric table in one native audit disclosure. Keep its filters, exact identifiers,
+  intervals, adjusted p-values and bootstrap counts available when opened.
+- Make source order, browser DOM order and visual order identical: evidence, QC,
+  integrity and interpretation now precede reproducibility and author context.
+- These changes do not alter a registered hypothesis, frozen configuration, metric,
+  accepted run, source annotation or scientific completion status.

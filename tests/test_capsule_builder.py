@@ -2962,17 +2962,19 @@ def _prepare_exact_q_e(
         ],
         interpreter=True,
     )
-    user_profile = Path.home()
+    user_profile = Path.home().resolve()
     if runtime_python_override is None:
-        runtime_python_ancestor_paths = [
-            user_profile,
-            user_profile / "AppData",
-            user_profile / "AppData" / "Local",
-            user_profile / "AppData" / "Local" / "Programs",
-            user_profile / "AppData" / "Local" / "Programs" / "Python",
-            user_profile / "AppData" / "Local" / "Programs" / "Python" / "Python312",
-        ]
-        assert runtime_python_path == runtime_python_ancestor_paths[-1] / "python.exe"
+        runtime_parent = runtime_python_path.parent.resolve()
+        try:
+            relative_parent = runtime_parent.relative_to(user_profile)
+            runtime_anchor = user_profile
+        except ValueError:
+            runtime_anchor = Path(runtime_parent.anchor)
+            relative_parent = runtime_parent.relative_to(runtime_anchor)
+        runtime_python_ancestor_paths = [runtime_anchor]
+        for part in relative_parent.parts:
+            runtime_python_ancestor_paths.append(runtime_python_ancestor_paths[-1] / part)
+        assert runtime_parent == runtime_python_ancestor_paths[-1]
     else:
         runtime_python_ancestor_paths = [runtime_python_path.parent]
     runtime_python_leaf = _leaf_lease(

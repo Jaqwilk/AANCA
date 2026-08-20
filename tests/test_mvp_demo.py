@@ -378,9 +378,10 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' in html
     assert "#hero-canvas[hidden]" in html
-    assert ">Results</a>" in html
-    assert "Source annotations stay fixed" in html
-    assert "Conceptual workflow · not benchmark data" in html
+    assert ">Findings</a>" in html
+    assert ">Reproduce</a>" in html
+    assert "Source annotations stay fixed" not in html
+    assert "Conceptual workflow · not benchmark data" not in html
     assert "threejs-review-queue" in html
     assert "immutable-source-ranked-review" in html
     assert "SOURCE PATCH" in html
@@ -392,25 +393,28 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "What the study actually learned" in html
     assert html.count('<article class="hypothesis-row" data-learned-slide>') == 7
     assert "Can the audit score find injected label changes earlier than random review?" in html
-    assert "The central lesson is that better retrieval did not translate" in html
+    assert "so better retrieval did not translate" in html
     assert "They are not zero or negative results" in html
     assert "all 3 saved 95% intervals crossed zero" in html
     assert "Can ranking beat random review?" not in html
-    assert 'aria-roledescription="carousel"' in html
+    assert 'class="learned-story article-findings" id="learned-story"' in html
+    assert 'aria-roledescription="carousel"' not in html
     assert 'aria-roledescription="slide"' not in html
     assert "let learnedSlideThresholds = [0]" in html
     assert "let learnedSettleThresholds = [0]" in html
     assert "learnedSlideStarts.map(start => start / learnedDuration)" in html
     assert "learnedSettleTimes.map(time => time / learnedDuration)" in html
+    assert "learnedSlides.slice(1).flatMap" in html
+    assert "if (window.location.hash !== '#learned-story') return" in html
     assert "const activationDistance = beforeFirstAnswer ? 60 : 360" in html
     assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" in html
-    assert "height: 980vh" in html
+    assert "height: 560vh" in html
     assert "scrub: true" in html
     assert "filter: 'blur(4px)'" not in html
     assert "Editorial surfaces: structure with rhythm and rules" in html
     assert ".repo-card::before { display: none; }" in html
-    assert "max-height: min(60svh,620px)" in html
-    assert "max-height: min(62svh,680px)" in html
+    assert "max-height: min(50svh,540px)" in html
+    assert "max-height: min(48svh,520px)" in html
     assert 'aria-label="Scrollable forest plot' in html
     assert 'comparisons" tabindex="0"' in html
     assert "#benchmarks .forest-axis {\n  position: static;" in html
@@ -431,11 +435,27 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
     assert "33 reported · 3 unavailable" in html
+    assert '<details class="evidence-details comparison-details">' in html
+    assert "Inspect the complete H1 / H3 / H5 / H6 / H7 table" in html
+    assert '<div class="reading-grid reveal">' not in html
+    assert "benchmark-only information unavailable in a real audit" in html
+    assert "it cannot independently recompute H1-H7 from a checkout alone" in html
+    assert "verifies the five-file presentation package" in html
+    assert 'href="#evidence">Reproducibility boundary</a>' in html
+    assert (
+        html.index('id="evidence"')
+        < html.index('id="quality"')
+        < html.index('id="integrity"')
+        < html.index('id="interpretation"')
+        < html.index('id="use"')
+    )
+    assert "'method', 'reading', 'results'" in html
+    assert "'evidence', 'quality', 'integrity'" in html
     assert "github.com/Jaqwilk/AANCA" in html
     assert "View repository" in html
     assert 'class="brand-label"' in html
     assert '<div class="reading-progress"' not in html
-    assert "<details" not in html
+    assert "Inspect exact seed identities and SHA-256 hashes" in html
     assert 'class="forest-plot"' in html
     assert 'role="group" aria-label="Complete registered H4 downstream result"' in html
     assert 'id="filter-hypothesis"' in html

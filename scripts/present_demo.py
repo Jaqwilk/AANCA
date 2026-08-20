@@ -10,8 +10,9 @@ import sys
 import webbrowser
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import unquote, urlsplit
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = PROJECT_ROOT / "artifacts" / "mvp_demo"
@@ -29,6 +30,26 @@ _PRESENTATION_HEADERS = (
 
 class _PresentationRequestHandler(SimpleHTTPRequestHandler):
     """Serve the verified package with presentation-safe response headers."""
+
+    def __init__(self, *args: Any, directory: str | None = None, **kwargs: Any) -> None:
+        """Bind URL translation to the verified package root on every platform."""
+
+        self._presentation_root = Path(directory or ".").resolve(strict=True)
+        super().__init__(*args, directory=str(self._presentation_root), **kwargs)
+
+    def translate_path(self, path: str) -> str:
+        """Translate a request without relying on platform-specific slash handling."""
+
+        requested = PurePosixPath(unquote(urlsplit(path).path))
+        parts = [part for part in requested.parts if part not in {"/", ""}]
+        if any(part in {".", ".."} or "\\" in part or ":" in part for part in parts):
+            return str(self._presentation_root / "__not_found__")
+        candidate = self._presentation_root.joinpath(*parts).resolve()
+        try:
+            candidate.relative_to(self._presentation_root)
+        except ValueError:
+            return str(self._presentation_root / "__not_found__")
+        return str(candidate)
 
     def version_string(self) -> str:
         """Avoid disclosing the Python runtime in the local server banner."""
