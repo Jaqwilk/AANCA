@@ -259,3 +259,9 @@ The first execution attempt stopped before manifest preparation or metric execut
 because the official LZW-compressed TIFF files require `imagecodecs`. Adding that
 decoder is an input-compatibility correction only; the frozen scientific
 configuration, labels, seeds, budgets, models and success rules remain unchanged.
+
+The next attempt also stopped before metric execution because the first crop
+implementation reflect-padded an entire tile for every nucleus and exhausted local
+memory. Crop construction now slices the local window first and reflect-pads only a
+missing border. The selected centre, 64-by-64 geometry and resulting pixel values are
+unchanged; this is a resource correction, not an analytical amendment.

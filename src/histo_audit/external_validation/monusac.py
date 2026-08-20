@@ -194,10 +194,13 @@ def _fixed_crop(
     if not (0 <= centre_x < image.shape[1] and 0 <= centre_y < image.shape[0]):
         raise ValueError("MoNuSAC crop centre lies outside the image")
     half = size // 2
-    padded = np.pad(image, ((half, half), (half, half), (0, 0)), mode="reflect")
-    shifted_x = centre_x + half
-    shifted_y = centre_y + half
-    crop = padded[shifted_y - half : shifted_y + half, shifted_x - half : shifted_x + half]
+    x_indices = np.pad(np.arange(image.shape[1]), (half, half), mode="reflect")[
+        centre_x : centre_x + size
+    ]
+    y_indices = np.pad(np.arange(image.shape[0]), (half, half), mode="reflect")[
+        centre_y : centre_y + size
+    ]
+    crop = image[y_indices[:, None], x_indices[None, :]]
     if crop.shape != (size, size, 3):
         raise RuntimeError("MoNuSAC fixed crop has an unexpected shape")
     return np.asarray(crop, dtype=np.uint8)

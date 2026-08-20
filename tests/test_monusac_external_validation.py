@@ -10,10 +10,30 @@ import tifffile
 from histo_audit.external_validation.monusac import (
     CLASS_ORDER,
     MoNuSACPreparedData,
+    _fixed_crop,
     load_frozen_monusac_config,
     prepare_monusac_split,
     run_monusac_controlled_external,
 )
+
+
+def test_local_monusac_crop_matches_full_reflection_padding() -> None:
+    image = np.arange(70 * 80 * 3, dtype=np.uint16).reshape(70, 80, 3).astype(np.uint8)
+    size = 64
+    half = size // 2
+    padded = np.pad(image, ((half, half), (half, half), (0, 0)), mode="reflect")
+    for centre_x, centre_y in ((0, 0), (1, 68), (79, 69), (40, 35)):
+        expected = padded[
+            centre_y : centre_y + size,
+            centre_x : centre_x + size,
+        ]
+        actual = _fixed_crop(
+            image,
+            centre_x=centre_x,
+            centre_y=centre_y,
+            size=size,
+        )
+        assert np.array_equal(actual, expected)
 
 
 def _xml_text(*, include_ambiguous: bool = False) -> str:
