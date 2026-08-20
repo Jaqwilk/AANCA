@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "study_id": "nucls_natural_label_external_validation_v1",
+  "frozen_at_utc": "2026-08-20T17:11:25.3807230Z",
+  "parent_repository_commit": "42d12bbbbd48ad3fe8b12f7cc85a0044a7164e71",
+  "outcome_tables_inspected_before_freeze": false,
+  "downloaded_outcome_tables_present_at_freeze": false,
+  "official_nucls_source_commit_inspected": "a87ac50c05cbc8ea11a41516be819f6b31436be7",
+  "frozen_files": {
+    "NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md": "5158120461be55a2e0ee25eb7e0107f8413791a963d501e3f38107d935143ce3",
+    "configs/nucls_external_validation.yaml": "dd6da42e83e6abe93ca2a9f95975e10ea742edbae272e51d6195a39b02376549"
+  },
+  "claim_boundary": "Natural NP/P multi-rater disagreement is an external reference signal, not guaranteed biological truth and not proof that a pathologist was wrong."
+}

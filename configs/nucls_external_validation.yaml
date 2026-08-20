@@ -1,0 +1,86 @@
+schema_version: 1
+study_id: nucls_natural_label_external_validation_v1
+freeze_state: frozen_before_outcome_inspection
+outcome_tables_inspected_before_freeze: false
+authorities:
+  paper_doi: 10.1093/gigascience/giac037
+  supporting_data_doi: 10.5524/102207
+  official_repository: https://github.com/PathologyDataScience/NuCLS
+  official_repository_commit: a87ac50c05cbc8ea11a41516be819f6b31436be7
+  license: CC0-1.0
+datasets:
+  primary:
+    name: unbiased_control
+    raw_folder_id: 14vJDmJGbz2qaOLrE5aZftck9LYHPUuTK
+    np_truth_folder_id: 1us3G_uftQT3_JWHjMM-YXSfOBOxCpx8G
+    p_truth_folder_id: 18xdNNWfZWH7R975Nh7bK8DmzBenI0C5l
+    algorithmic_suggestions_shown: false
+  secondary:
+    name: evaluation
+    raw_folder_id: 1gvjlC9lPYUyf03X2ddWKscqUcEMEsIFX
+    np_truth_folder_id: 1-cYZ3yjJtRnvfMMLR2rN4Ow50zmlZTBJ
+    p_truth_folder_id: 1U8SrL8ChE7ByXa6cgN2Tm5jYjb565zV8
+    algorithmic_suggestions_shown: true
+labels:
+  observed_authority: EM_inferred_label_NPs
+  reference_authority: EM_inferred_label_Ps
+  class_order: [tumor_any, nonTIL_stromal, sTIL]
+  class_codes:
+    tumor_any: 0
+    nonTIL_stromal: 1
+    sTIL: 2
+  excluded: [undetected, AMBIGUOUS, other_nucleus]
+grouping:
+  priority: [tcga_patient, whole_slide, fov]
+  max_missing_patient_or_slide_fraction: 0.05
+  allow_nucleus_level_split: false
+representation:
+  crop_size: 64
+  crop_anchor: np_derived_anchor_centre
+  padding: reflection
+  encoder: torchvision_resnet18_imagenet1k_v1
+  output_dimension: 512
+  frozen: true
+  input_variant: context_rgb
+model:
+  kind: balanced_multinomial_logistic_regression
+  l2: 0.01
+  max_iter: 400
+ranking:
+  score: one_minus_probability_of_observed_label
+  folds: 5
+  split_seed: 26082026
+  budgets: [0.05, 0.10, 0.20]
+  primary_budget: 0.05
+  random_repetitions: 1000
+  random_seed: 26082027
+  bootstrap_iterations: 2000
+  bootstrap_seed: 26082031
+  success_conditions:
+    - ap_minus_prevalence_ci95_lower_gt_0
+    - precision_at_5_percent_minus_prevalence_ci95_lower_gt_0
+downstream:
+  outer_folds: 5
+  outer_split_seed: 26082041
+  inner_audit_folds: 4
+  inner_split_seed: 26082043
+  review_budget: 0.05
+  random_repetitions: 100
+  random_seed_start: 26082100
+  primary_metric: macro_f1
+  secondary_metrics: [accuracy, balanced_accuracy]
+  bootstrap_iterations: 2000
+  bootstrap_seed: 26082051
+  conditions:
+    - uncorrected_observed
+    - random_review
+    - audit_guided_review
+    - pathologist_reference_ceiling
+  success_conditions:
+    - guided_minus_mean_random_macro_f1_ci95_lower_gt_0
+    - guided_minus_uncorrected_macro_f1_ci95_lower_gt_0
+reporting:
+  preserve_adverse_and_null_results: true
+  permit_pathologist_error_claim: false
+  permit_clinical_claim: false
+  permit_automatic_source_changes: false
