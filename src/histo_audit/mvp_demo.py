@@ -1327,7 +1327,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
 <header class="site-header" id="site-header">
   <div class="nav-shell">
     <a class="brand" href="#top" aria-label="AANCA: back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
-    <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span class="menu-button-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
     <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Findings</a><a href="#evidence">Evidence</a><a href="#current-stage">Status</a><a href="#use">Reproduce</a><a href="#author">Author</a></nav>
   </div>
 </header>
@@ -2233,20 +2233,20 @@ try {
   sourceLabel.position.set(-1.50, 1.78, 0);
   auditField.add(sourceLabel);
 
-  const nucleusCount = 72;
+  const nucleusCount = 36;
   const sourceNuclei = [];
   const sourcePositions = [];
   for (let index = 0; index < nucleusCount; index += 1) {
     const angle = random() * Math.PI * 2;
     const radius = Math.sqrt(random());
     const position = new THREE.Vector3(
-      -.70 + Math.cos(angle) * radius * 1.08,
-      Math.sin(angle) * radius * 1.42,
-      -.05 + (random() - .5) * .16,
+      -.70 + Math.cos(angle) * radius * 1.02,
+      Math.sin(angle) * radius * 1.28,
+      -.04 + (random() - .5) * .08,
     );
     const nucleus = makeNucleus(index % blobVariants.length, {queueCopy: false});
-    const baseScale = .068 + random() * .052;
-    const stretch = .78 + random() * .58;
+    const baseScale = .078 + random() * .042;
+    const stretch = .84 + random() * .42;
     nucleus.position.copy(position);
     nucleus.rotation.z = random() * Math.PI;
     nucleus.userData.baseScale = baseScale;
@@ -2258,10 +2258,10 @@ try {
     auditField.add(nucleus);
   }
 
-  const selectedIndices = [8, 47, 20, 60, 34, 67];
+  const selectedIndices = [7, 19, 28];
   const queuePositions = selectedIndices.map((_, index) => new THREE.Vector3(
     1.55,
-    1.15 - index * .47,
+    .92 - index * .58,
     .08,
   ));
 
@@ -2272,7 +2272,7 @@ try {
   const queueSlotMaterial = new THREE.LineBasicMaterial({
     color: 0x666b75,
     transparent: true,
-    opacity: .24,
+    opacity: .28,
     depthWrite: false,
   });
   selectedIndices.forEach((sourceIndex, index) => {
@@ -2297,43 +2297,19 @@ try {
     auditField.add(copy);
   });
 
-  const reticle = new THREE.Group();
-  const reticleMaterial = new THREE.MeshBasicMaterial({
-    color: 0x7f8cff,
+  const selectRingMaterial = new THREE.MeshBasicMaterial({
+    color: 0xb4bbff,
     transparent: true,
-    opacity: .9,
+    opacity: 0,
+    side: THREE.DoubleSide,
     depthWrite: false,
   });
-  const reticleOffsets = [[-.18, .18], [.18, .18], [-.18, -.18], [.18, -.18]];
-  reticleOffsets.forEach(([x, y]) => {
-    const tile = new THREE.Mesh(new THREE.PlaneGeometry(.075, .075), reticleMaterial);
-    tile.position.set(x, y, .24);
-    tile.rotation.z = Math.PI / 4;
-    reticle.add(tile);
-  });
-  reticle.visible = false;
-  auditField.add(reticle);
-
-  const classSignals = new THREE.Group();
-  const signalMaterials = [];
-  for (let index = 0; index < 5; index += 1) {
-    const angle = -Math.PI / 2 + index * Math.PI * 2 / 5;
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xa5adff,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-    });
-    const signal = new THREE.Mesh(new THREE.CircleGeometry(.022, 12), material);
-    signal.position.set(Math.cos(angle) * .29, Math.sin(angle) * .29, .25);
-    signalMaterials.push(material);
-    classSignals.add(signal);
-  }
-  classSignals.visible = false;
-  auditField.add(classSignals);
+  const selectRing = new THREE.Mesh(new THREE.RingGeometry(.19, .205, 48), selectRingMaterial);
+  selectRing.visible = false;
+  auditField.add(selectRing);
 
   const trailMaterial = new THREE.LineBasicMaterial({
-    color: 0x7d89f4,
+    color: 0x8290f5,
     transparent: true,
     opacity: 0,
     depthWrite: false,
@@ -2356,11 +2332,11 @@ try {
 
   const backgroundGeometry = new THREE.BufferGeometry();
   const backgroundPositions = [];
-  for (let index = 0; index < 240; index += 1) {
+  for (let index = 0; index < 48; index += 1) {
     backgroundPositions.push(
-      (random() - .5) * 12,
-      (random() - .5) * 7,
-      -1.5 - random() * 2,
+      (random() - .5) * 10,
+      (random() - .5) * 5.5,
+      -1.6 - random() * 1.4,
     );
   }
   backgroundGeometry.setAttribute(
@@ -2369,14 +2345,14 @@ try {
   );
   const background = new THREE.Points(
     backgroundGeometry,
-    new THREE.PointsMaterial({color: 0x62666d, size: .014, transparent: true, opacity: .34}),
+    new THREE.PointsMaterial({color: 0x4f5359, size: .012, transparent: true, opacity: .22}),
   );
   scene.add(background);
 
-  const itemDuration = 1.55;
+  const itemDuration = 1.9;
   const activeDuration = selectedIndices.length * itemDuration;
-  const holdDuration = 2.2;
-  const fadeDuration = 1.15;
+  const holdDuration = 1.8;
+  const fadeDuration = 1.0;
   const cycleDuration = activeDuration + holdDuration + fadeDuration;
   const sourcePoint = new THREE.Vector3();
   const targetPoint = new THREE.Vector3();
@@ -2386,8 +2362,8 @@ try {
   const queueCurve = (source, target) => {
     controlPoint.set(
       (source.x + target.x) / 2,
-      source.y + (target.y >= source.y ? .34 : -.34),
-      .34,
+      (source.y + target.y) / 2 + .22,
+      .28,
     );
     return new THREE.QuadraticBezierCurve3(source, controlPoint.clone(), target);
   };
@@ -2404,9 +2380,9 @@ try {
       : 1;
 
     sourceNuclei.forEach((nucleus, index) => {
-      const breath = reduced ? 1 : 1 + Math.sin(elapsed * .72 + nucleus.userData.phase) * .035;
+      const breath = reduced ? 1 : 1 + Math.sin(elapsed * .55 + nucleus.userData.phase) * .02;
       const selectedPosition = selectedIndices.indexOf(index);
-      const alreadyQueued = selectedPosition >= 0 && cycle >= selectedPosition * itemDuration + 1.18;
+      const alreadyQueued = selectedPosition >= 0 && cycle >= selectedPosition * itemDuration + 1.35;
       const isActive = activeIndex >= 0 && selectedIndices[activeIndex] === index;
       const baseScale = nucleus.userData.baseScale * breath;
       nucleus.scale.set(
@@ -2415,75 +2391,64 @@ try {
         baseScale,
       );
       nucleus.userData.fillMaterial.color.setHex(isActive ? 0x5662c2 : 0x323641);
-      nucleus.userData.fillMaterial.opacity = isActive ? .52 : alreadyQueued ? .25 : .19;
+      nucleus.userData.fillMaterial.opacity = isActive ? .48 : alreadyQueued ? .22 : .18;
       nucleus.userData.outlineMaterial.color.setHex(
         isActive ? 0xaab2ff : alreadyQueued ? 0x7985df : 0x707786,
       );
-      nucleus.userData.outlineMaterial.opacity = isActive ? .96 : alreadyQueued ? .55 : .38;
+      nucleus.userData.outlineMaterial.opacity = isActive ? .95 : alreadyQueued ? .5 : .36;
     });
 
     queueCopies.forEach((copy, index) => {
       const local = cycle - index * itemDuration;
-      if (local < .42 || cycleFade <= 0) {
+      if (local < .5 || cycleFade <= 0) {
         copy.visible = false;
         return;
       }
-      const movement = smooth((local - .48) / .67);
+      const movement = smooth((local - .55) / .75);
       sourcePoint.copy(sourcePositions[selectedIndices[index]]);
       targetPoint.copy(queuePositions[index]);
       const curve = queueCurve(sourcePoint, targetPoint);
       curve.getPoint(movement, animatedPoint);
       copy.position.copy(animatedPoint);
       copy.visible = true;
-      const appearing = smooth((local - .42) / .18);
+      const appearing = smooth((local - .5) / .16);
       copy.userData.fillMaterial.opacity = .58 * appearing * cycleFade;
       copy.userData.outlineMaterial.opacity = .94 * appearing * cycleFade;
-      const scale = .10 + .018 * smooth((local - .52) / .55);
+      const scale = .11 + .016 * smooth((local - .6) / .5);
       copy.scale.setScalar(scale);
     });
 
     if (activeIndex >= 0) {
       const activeSource = sourcePositions[selectedIndices[activeIndex]];
-      reticle.position.copy(activeSource);
-      reticle.rotation.z = elapsed * .34;
-      reticle.scale.setScalar(.88 + Math.sin(activePhase * Math.PI) * .18);
-      reticleMaterial.opacity = (.38 + Math.sin(activePhase * Math.PI) * .62) * cycleFade;
-      reticle.visible = activePhase < .82;
+      selectRing.position.copy(activeSource);
+      selectRing.position.z = .18;
+      selectRing.visible = activePhase < .88;
+      selectRingMaterial.opacity = (.55 + Math.sin(activePhase * Math.PI) * .35) * cycleFade;
 
-      classSignals.position.copy(activeSource);
-      classSignals.rotation.z = -elapsed * .12;
-      classSignals.visible = activePhase > .10 && activePhase < .72;
-      signalMaterials.forEach((material, index) => {
-        const stagger = smooth((activePhase - .12 - index * .035) / .18);
-        const withdraw = 1 - smooth((activePhase - .55) / .17);
-        material.opacity = .78 * stagger * withdraw * cycleFade;
-      });
-
-      if (activePhase > .30 && activePhase < .90) {
-        const movement = smooth((activePhase - .31) / .47);
+      if (activePhase > .28 && activePhase < .92) {
+        const movement = smooth((activePhase - .28) / .52);
         const curve = queueCurve(activeSource, queuePositions[activeIndex]);
         const trailPoints = [];
-        for (let pointIndex = 0; pointIndex <= 24; pointIndex += 1) {
-          trailPoints.push(curve.getPoint(movement * pointIndex / 24));
+        for (let pointIndex = 0; pointIndex <= 18; pointIndex += 1) {
+          trailPoints.push(curve.getPoint(movement * pointIndex / 18));
         }
         trailGeometry.setFromPoints(trailPoints);
-        trailMaterial.opacity = .46 * (1 - movement * .52) * cycleFade;
+        trailMaterial.opacity = .72 * (1 - movement * .35) * cycleFade;
         trail.visible = true;
       } else {
         trail.visible = false;
       }
     } else {
-      reticle.visible = false;
-      classSignals.visible = false;
+      selectRing.visible = false;
       trail.visible = false;
     }
 
-    const firstArrived = cycle >= 1.18;
+    const firstArrived = cycle >= 1.35;
     reviewRing.visible = firstArrived && cycleFade > 0;
     reviewRingMaterial.opacity = firstArrived
-      ? (.25 + (reduced ? .18 : Math.sin(elapsed * 2.1) * .10)) * cycleFade
+      ? (.22 + (reduced ? .12 : Math.sin(elapsed * 1.4) * .06)) * cycleFade
       : 0;
-    reviewRing.scale.setScalar(reduced ? 1 : 1 + Math.sin(elapsed * 2.1) * .045);
+    reviewRing.scale.setScalar(reduced ? 1 : 1 + Math.sin(elapsed * 1.4) * .03);
   };
 
   const resize = () => {
@@ -2505,21 +2470,6 @@ try {
 
   let heroVisible = true;
 
-  if (window.gsap && window.ScrollTrigger && !reduced) {
-    window.addEventListener('pointermove', event => {
-      if (!heroVisible) return;
-      const x = event.clientX / Math.max(1, window.innerWidth) - .5;
-      const y = event.clientY / Math.max(1, window.innerHeight) - .5;
-      window.gsap.to(auditField.rotation, {
-        x: -y * .08,
-        y: x * .14,
-        duration: 1.1,
-        ease: 'power2.out',
-        overwrite: true,
-      });
-    }, {passive: true});
-  }
-
   const timer = new THREE.Timer();
   timer.connect(document);
   const render = () => {
@@ -2527,8 +2477,8 @@ try {
     const elapsed = timer.getElapsed();
     updateScene(elapsed);
     if (!reduced) {
-      auditField.rotation.z = Math.sin(elapsed * .16) * .012;
-      background.rotation.z = elapsed * .004;
+      auditField.rotation.z = Math.sin(elapsed * .12) * .008;
+      background.rotation.z = elapsed * .002;
     }
     renderer.render(scene, camera);
   };
@@ -2669,25 +2619,23 @@ _MVP_SCRIPT = r"""
   setHeaderVisible(true, true);
   window.addEventListener('scroll', updateChrome, {passive: true});
 
-  menuButton.addEventListener('click', () => {
-    const open = !navLinks.classList.contains('is-open');
+  const setMenuOpen = open => {
     navLinks.classList.toggle('is-open', open);
     menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.textContent = open ? 'Close' : 'Menu';
+    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuButton.addEventListener('click', () => {
+    setMenuOpen(!navLinks.classList.contains('is-open'));
     setHeaderVisible(true);
   });
   navLinks.addEventListener('click', event => {
     if (event.target instanceof HTMLAnchorElement) {
-      navLinks.classList.remove('is-open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.textContent = 'Menu';
+      setMenuOpen(false);
     }
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
-      navLinks.classList.remove('is-open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.textContent = 'Menu';
+      setMenuOpen(false);
       menuButton.focus();
     }
   });

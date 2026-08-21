@@ -5,11 +5,11 @@ Updated: 21 August 2026
 ## Presentation UI note (21 August 2026)
 
 The checked-in `artifacts/mvp_demo` package was polished into a single long-form
-article layout: one CSS rhythm, normal-flow findings with subtle entrance motion (no
-sticky scroll theatre), a typography-only hero masthead, the conceptual WebGL
-review-queue figure under Method, aligned footer and current-evidence chapters
-generated from NuCLS, MoNuSAC and PUMA authorities. The five-file package verifies
-cleanly. No cleanup quarantine remains.
+article layout: one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`),
+shared section hairlines instead of stacked pseudo-rules, typography-only hero
+masthead, Method WebGL figure with a quieter review-queue animation, aligned footer
+and current-evidence chapters from NuCLS, MoNuSAC and PUMA authorities. The
+five-file package verifies cleanly. No cleanup quarantine remains.
 
 ## Current scientific stage
 

@@ -475,10 +475,13 @@ Status: accepted presentation decision; no scientific stage change
 The professor-facing demo is a long-form article, not a scroll-hijacked product page.
 Findings remain in normal document flow and receive only a subtle per-answer entrance
 animation; mobile, reduced-motion and script-free readers receive the complete static
-content. The hero is a typography-only masthead; the optional WebGL review-queue
-illustration sits in Method as a captioned figure. Navigation chrome remains. No
-multi-screen empty scroll theatre is permitted. The pre-polish rollback was removed
-after the current generated package passed final verification.
+content. Vertical rhythm uses one token scale for paragraph, text-to-media and section
+gaps; section separators are single hairlines, not stacked decorative rules. The hero
+is a typography-only masthead; the optional WebGL review-queue illustration sits in
+Method as a captioned figure with a simplified selection path (no particle spray or
+pointer parallax). Navigation chrome remains. No multi-screen empty scroll theatre is
+permitted. The pre-polish rollback was removed after the current generated package
+passed final verification.
 
 ## D034 — Generate the public article from every current evidence authority
 
