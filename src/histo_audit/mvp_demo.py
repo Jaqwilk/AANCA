@@ -1340,7 +1340,7 @@ def _render_study_specs() -> str:
             f"<span>{html.escape(label)}</span>"
             '<div class="spec-copy">'
             f'<img class="spec-icon" src="{src}" alt="" aria-hidden="true" '
-            'width="72" height="72" decoding="async">'
+            'width="60" height="60" decoding="async">'
             f"<strong>{html.escape(title)}</strong>"
             f"<small>{html.escape(description)}</small>"
             "</div>"
@@ -1611,7 +1611,7 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     <div class="section-heading reveal"><h2>Three registered seeds produced one realisation.</h2><p class="section-deck">The three rows are retained for auditability, but the byte-identical files are not independent realisations and must not be interpreted as three replications.</p></div>
     <div class="figure-width reveal">
       <div class="seed-copy"><h3>One deterministic output, preserved through three registered paths.</h3><p>The ranking and out-of-fold prediction files match byte for byte. The disclosure changes interpretation, not the stored record: these rows document one realisation rather than three replications.</p></div>
-      <details class="evidence-details seed-evidence"><summary>Inspect exact seed identities and SHA-256 hashes</summary><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody>__SEED_ROWS__</tbody></table></div></details>
+      <details class="evidence-details seed-evidence"><summary><span class="seed-summary-icon" aria-hidden="true">#</span><span class="seed-summary-copy"><strong>Inspect exact seed identities and SHA-256 hashes</strong><small>Three registered paths · one byte-identical realisation</small></span><span class="seed-summary-action" aria-hidden="true">View evidence</span></summary><div class="table-wrap"><table class="compact"><thead><tr><th>Seed</th><th>Cell ID</th><th>Ranking SHA-256</th><th>OOF SHA-256</th></tr></thead><tbody>__SEED_ROWS__</tbody></table></div></details>
     </div>
   </section>
 

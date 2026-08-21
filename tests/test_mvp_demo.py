@@ -752,6 +752,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'class="brand-label"' in html
     assert '<div class="reading-progress"' not in html
     assert "Inspect exact seed identities and SHA-256 hashes" in html
+    assert 'class="seed-summary-icon"' in html
+    assert 'class="seed-summary-action"' in html
     assert 'class="forest-plot"' in html
     assert 'role="group" aria-label="Complete registered H4 downstream result"' in html
     assert 'id="filter-hypothesis"' in html

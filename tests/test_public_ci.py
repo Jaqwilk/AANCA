@@ -21,4 +21,5 @@ def test_scientific_workflow_runs_the_documented_type_gate() -> None:
     tests = workflow.index("- name: Run the complete test suite")
 
     assert install_end < type_check < tests
+    assert "if: runner.os == 'Windows'" in workflow[type_check:tests]
     assert "run: uv run mypy src" in workflow[type_check:tests]

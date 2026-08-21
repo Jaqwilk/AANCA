@@ -944,15 +944,18 @@ Public clarifications:
 - `PROFESSOR_BRIEF.md`, `CONTRIBUTIONS.md`, `CITATION.cff` and `LICENSE` record the
   one-page assessment, author/AI roles, citation metadata and code/data rights
   boundary. No custom domain or archival DOI is claimed before the owner creates it;
-- GitHub Actions now runs `mypy` on both supported operating systems before the full
-  suite.
+- GitHub Actions now runs `mypy` against the maintained Windows target before its
+  full suite. Linux still runs the complete runtime test suite; intentional Win32 API
+  calls are not misclassified by Linux typeshed. Missing-import suppression is
+  limited to the two optional, runtime-guarded research dependencies
+  `huggingface_hub` and `transformers`.
 
 Final local evidence:
 
 - complete suite: `1150 passed, 1 skipped` in 754.70 seconds; the single skip is the
   documented Windows/POSIX open-file rename difference;
 - final demo/CI regression after source and stylesheet stabilisation: `11 passed` in
-  0.85 seconds;
+  0.98 seconds;
 - `uv run ruff check .`: passed;
 - `uv run ruff format --check .`: all 216 maintained Python files formatted;
 - `uv run mypy src`: no issues in 103 source files;
@@ -960,7 +963,7 @@ Final local evidence:
   benchmark-icon assets;
 - standalone launcher verification: valid five-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `454061b520780ab1a083b1429b410a1b57452919f57184a91b22af43d27b2327`;
+  `88c70b9d427eccc41473b8877ff80e26cb293d041d0b58e37b246c6fdd2c4271`;
 - final Playwright desktop and 390 px mobile readback: no horizontal overflow,
   console error or warning; all five benchmark icons and the static Method SVG
   rendered, lazy images loaded after traversal, every reveal became visible, and the
@@ -969,7 +972,7 @@ Final local evidence:
 Hostinger publication:
 
 - connectivity and the local five-file seal were verified before upload;
-- the preceding live release was backed up under ID `20260821-215505`;
+- the preceding live release was backed up under ID `20260821-220316`;
 - the package was deployed in replace mode to
   `mediumaquamarine-wombat-125861.hostingersite.com`;
 - the page, evidence and external animation assets returned HTTP 200;
