@@ -1,6 +1,14 @@
 # AANCA status
 
-Updated: 20 August 2026
+Updated: 21 August 2026
+
+## Presentation UI note (21 August 2026)
+
+The checked-in `artifacts/mvp_demo` package was polished into a single long-form
+article layout: one CSS rhythm, static findings Q&A (no sticky scroll theatre),
+contained hero figure, aligned footer, and simplified motion. Nav chrome was left
+unchanged. Restore the pre-polish package from
+`C:\Users\NATAN\Documents\AANCA_cleanup_quarantine_20260821\final_validation_generated\artifacts__mvp_demo_backup_20260821_pre_article`.
 
 ## Current scientific stage
 
@@ -12,6 +20,13 @@ Updated: 20 August 2026
 - An additional prospectively frozen controlled-external MoNuSAC benchmark
   completed; its retrieval gate passed, but the registered combined success rule
   was **not supported**.
+- The frozen autoresearch-selected candidate completed a genuinely new-source PUMA
+  controlled external confirmation. All seven prospective gates passed and the
+  independent verifier accepted the result. This supports controlled-noise transfer,
+  not natural/pathologist-error detection.
+- A post-confirmation PUMA realism stress found positive aggregate downstream lower
+  bounds in all nine scenarios but full per-class safety in only one. Unreviewed
+  natural-data `flag_exclude` remains prohibited.
 - `DEMO_COMPLETE`: the checksum-verifiable static article package is built and
   deployed.
 - `CONFIRMATORY_COMPLETE`: not reached.
@@ -20,6 +35,134 @@ Stage completion records that the prescribed evaluation ran and its evidence was
 preserved. It does not mean the result was favourable. AANCA remains a
 non-diagnostic research prototype, never modifies source annotations automatically,
 and has not proved natural pathology errors, pathologist errors or clinical utility.
+
+## PUMA new-source controlled confirmation
+
+Study: `puma_new_data_confirmation_v1`
+
+The candidate
+`78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe`
+was frozen before the official PUMA archives were downloaded or any PUMA metric was
+calculated. The official public release was hash-verified and mapped to its tumor,
+lymphocyte/plasma-cell and other primary classes. A deterministic stratified split
+placed 144 ROI/case groups (67,032 nuclei) in development and 62 groups (30,397
+nuclei) in the final partition with no overlap.
+
+Frozen controlled-corruption retrieval:
+
+- 10% symmetric development corruption under four seeds;
+- 5% queue, 3,352 reviews per seed and 13,408 review decisions total;
+- AANCA precision `0.5377386634844868` versus exact matched-random
+  `0.2143794749403341`;
+- difference `+0.3233591885441528`, 95% whole-group interval
+  `[0.2592505925988822, 0.3849444213529693]`;
+- 7,210 injected changes found.
+
+Frozen downstream result on untouched final groups:
+
+- AANCA `flag_exclude` macro F1 `0.6463102793504962`;
+- unchanged corrupted-training macro F1 `0.6398841192645623`;
+- exact matched-random exclusion macro F1 `0.6382432313302706`;
+- AANCA minus unchanged `+0.006426160085933802`, interval
+  `[0.003657212432103269, 0.009365455935978527]`;
+- AANCA minus matched random `+0.008067048020225648`, interval
+  `[0.0040931053452727805, 0.011946725717818258]`;
+- all seed directions were positive, every primary class-recall lower bound was at
+  least `-0.01`, all 44 fits converged and all seven gates passed.
+
+Independent verification rebuilt the official manifest and group split, confirmed
+source labels unchanged, checked every corruption field, OOF group allocation,
+complete-group neighbour exclusion and exact matched controls, and recomputed every
+metric and 3,000-draw bootstrap decision. Evidence identities:
+
+| Artifact | SHA-256 |
+| --- | --- |
+| Results | `e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92` |
+| Numeric evidence | `5f6d2d0fc65d95ee245d98c82b80547f0e0cf06c278acc40b48f44020e8c59d4` |
+| Run authority | `c016dde668d6c7c2bdcbf6aad79d13892012cdd5b6ba87cd9d391d21ac4cf95b` |
+| Verification record | `2f4b6d6c64d8dfa493a89be0111ca8752257dabce808d4d9fa35933cdd9c5d68` |
+
+The accepted conclusion is `controlled_noise_transfer_supported`. PUMA publishes
+final expert-checked labels but no paired natural pre/post review states, so natural
+error detection, pathologist error and real workflow benefit remain untested.
+
+## PUMA post-confirmation realism and clean-label stress
+
+Study: `puma_realism_stress_v1`
+
+After the primary PUMA outcome was opened, the unchanged candidate was subjected to
+nine explicitly exploratory scenarios: clean labels; symmetric 1%, 2.5% and 5%;
+directional 5% and 10%; group-conditional 5% and 10%; and independent
+geometry-dependent 5% corruption. Candidate selection and rescue were prohibited.
+
+- every scenario had a positive macro-F1 lower bound versus unchanged and exact
+  matched-random training;
+- only `group_conditional_10pct` passed all registered gates;
+- the other eight failed only the per-class recall non-degradation rule;
+- on clean labels, macro F1 increased by `+0.004540`, interval
+  `[+0.000322, +0.009156]`, but `other` recall fell by `-0.013733`, interval
+  `[-0.025390, -0.002789]`;
+- the geometry-dependent generator used released bounding-box geometry and was
+  recorded as independently separated from the pixel ResNet auditor;
+- all stress models converged and source annotations remained unchanged.
+
+Stress evidence identities:
+
+| Artifact | SHA-256 |
+| --- | --- |
+| Frozen stress config | `00214940ee2cc1faf51202e23fe800a7f42a4f9b2936dae26bbfe20e3ee2555a` |
+| Results | `0091c14075e7304e0a6effef5a398c32c692f40aaefe7ee7d0b126a101cf7892` |
+| Numeric evidence | `186861575266985b4e1071190a957fd45769752e69e138633e94fa3be6eb4d39` |
+
+The policy consequence is binding: aggregate benefit cannot override a class-safety
+failure, and natural-data action remains `retain_uncorrected` until reviewer-gated
+interventions pass a fresh class-safe external study.
+
+## PUMA audit-time-label sensitivity
+
+Study: `puma_audit_time_label_sensitivity_v1`
+
+The PUMA primary OOF plan used pre-corruption labels for group stratification. This
+post-confirmation sensitivity kept the candidate, seeds, final groups, queue,
+intervention and success rule fixed but rebuilt every seed's audit folds and exact
+neighbours using only `observed_label`. PUMA outcomes were already known, so the
+result is exploratory and cannot serve as independent confirmation.
+
+- only 22.21%-33.08% of row-level fold assignments matched the original plan;
+- AANCA precision was `0.5381861575178998` versus exact matched random
+  `0.21515513126491645`;
+- retrieval advantage was `+0.3230310262529833`, interval
+  `[0.25973397585007, 0.38131225104714983]`;
+- AANCA minus unchanged macro F1 was `+0.00667944296150233`, interval
+  `[0.004141475700661824, 0.009505712132344529]`;
+- AANCA minus matched random was `+0.009069355900155174`, interval
+  `[0.005855100059258797, 0.01246062687290453]`;
+- all seed directions, every class-recall guard, convergence and observed-label
+  group/neighbour guard passed.
+
+| Artifact | SHA-256 |
+| --- | --- |
+| Frozen config | `ed6fd1e85d15604efc331b634a0d7604ca2675ba58345aa31386c266781e661f` |
+| Results | `8f524b236995a495048a0955ebf930e14e732a1214d3856d3711571af13fd5cd` |
+| Numeric evidence | `aad24975c29f004e6f5b44575ea5b3d97daa1122457277cca902d69f36e64903` |
+
+The accepted sensitivity conclusion is that the controlled PUMA result does not
+depend on access to a clean fold-assignment label. Natural errors and real workflow
+benefit remain unevaluated.
+
+## NuCLS supervised-QC pairing feasibility
+
+The official raw SQLite source was downloaded and inspected under the prospective
+pairing protocol. It contains one class state per stable annotation element and no
+previous-label, replacement-label or revision-history table. The official corrected
+and uncorrected releases are different FOV quality tiers, and repeated element IDs
+arise only where geometry intersects multiple FOV records. No stable ID carries two
+class labels.
+
+The paired natural pre/post endpoint is therefore `unavailable`; comparing unmatched
+cohorts or inferring former labels would be confounded or circular. The report is
+`reports/nucls_supervised_qc_feasibility.md`, and natural-data action remains
+`retain_uncorrected`.
 
 ## Accepted PanNuke primary evidence
 
@@ -409,3 +552,215 @@ Publication evidence:
   `68de15f65a0e69c111f660354b05e2439666b613a3ce2e2482303b5baa681bbb`;
 - deployed presentation manifest root:
   `113e3e8d20cf86dcde4afb09ffd9eb21f9aa78ab3733364e13c26d04945a8827`.
+
+## Bounded autoresearch development search
+
+Study: `monusac_aanca_expanded_development_v1`
+
+Date completed: 2026-08-21
+
+Role: controlled development only; no completion stage or real-use claim added
+
+The implementation adapted the fixed-evaluator, bounded-trial, append-only-ledger
+and keep/discard mechanics of `karpathy/autoresearch` while retaining AANCA's stricter
+patient grouping, nested OOF audit evidence, exact matched control and untouched-test
+rules. The official MoNuSAC test, both NuCLS subsets and the PanNuke final fold were
+unavailable to candidate generation, screening and selection.
+
+Executed search:
+
+- all 44 eligible official MoNuSAC training patients were used only in nested
+  development;
+- 240 ranking configurations and 160 downstream configurations were screened;
+- 12 finalists were frozen before their complete results;
+- full evaluation used five outer patient folds, four inner audit folds, four
+  corruption seeds, five exact matched-random repetitions and 3,000 whole-patient
+  bootstrap draws;
+- the search covered 64 px, 128 px, multiscale, morphology/statistics and Phikon-v2
+  views; probability, neighbour and fixed-hybrid risks; 0.5%-10% budgets; restoration,
+  weighting, downweighting and exclusion; and downstream regularisation/class
+  weighting;
+- two candidates passed every registered gate. The simpler best passing candidate
+  without known TCGA encoder-pretraining overlap was selected.
+
+Frozen candidate:
+
+`78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe`
+
+- multiscale 64+128 px ImageNet ResNet-18 context;
+- unbalanced L2 `0.1` audit model;
+- fixed hybrid risk with self-confidence weight `0.6`, fold-safe 31-neighbour
+  disagreement weight `0.4`;
+- relaxed balanced 5% queue;
+- `flag_exclude`: selected controlled-training rows receive zero weight while source
+  annotations remain unchanged;
+- balanced L2 `0.01` downstream model.
+
+Selected controlled-development result:
+
+- candidate macro F1 `0.5471943284781748`;
+- unchanged corrupted-training macro F1 `0.5041042261017459`;
+- exact matched-random macro F1 `0.492794942022801`;
+- candidate minus unchanged `+0.04309010237642889`, 95% whole-patient interval
+  `[+0.03255265089898305, +0.05506540367582292]`;
+- candidate minus exact matched random `+0.054399386455373844`, interval
+  `[+0.034938293224264415, +0.07550715895022347]`;
+- all four corruption-seed differences were positive against both comparators;
+- retrieval precision `0.9479659014179609`, difference over exact matched random
+  `+0.40395003376097227`, interval
+  `[+0.36055964504995774, +0.4489032325505159]`;
+- the lowest important-class recall lower bound was `-0.0064620394516020745`, above
+  the frozen `-0.01` safety limit;
+- all five frozen success gates passed.
+
+The development intervals exclude zero but are not independent post-selection
+confirmation intervals. They establish a strong selected development result, not
+natural pathologist-error detection or real-use superiority.
+
+Authority and verification:
+
+| Evidence | SHA-256 |
+| --- | --- |
+| Expanded config | `370b7135858682d0dea52c035768b2fed72acc1fe74a1ddd67996780ad703692` |
+| Patient partition | `93087764cf5ce3dd62474ac4da790ff6871d2deff6291d508e02c49ec75f2d2d` |
+| Runtime-only amendment | `2e14a57c72dac193bac8c3179baa90e66b4271a4d3a4fef8f4f8cc0610324a98` |
+| Parent authority | `3ef82963925cea7d20332f13488578ded5eba1df750c52cb55cef69521580042` |
+| Append-only parent ledger | `1e5378ebbb1a02cdd003fd6bed96d78a200b53be210b746c1477d46a2025e728` |
+| Selected candidate record | `229bc293b3ba7c3909423178552f5f3789f00411223c2f87b5185eee1542487d` |
+| Convergence evidence | `d10fbcb3179abe6058ae43231663f3aeefc7d754c40bac2bfa6fdea1a4abae38` |
+
+`scripts/verify_aanca_selected_candidate.py` rebuilt the frozen candidate from the
+pinned archive and authority. It reproduced all stored summary metrics exactly and
+reported `220/220` converged fits: 100 hard-label and 120 weighted fits. The detailed
+local artifact is 50,604 bytes and reports no final-test use, natural-error evaluation
+or source-label modification.
+
+The selected record is checksum-validated and always loads as development-only with
+`executable_action_until_new_confirmation: retain_uncorrected`. A measured-utility
+queue is implemented as
+`percentile(annotation_inconsistency_score) × max(utility_lower_bound, 0)` and fails
+closed without group-safe OOF audit evidence and nested cross-fitted measured expert
+utility. The PUMA controlled new-source confirmation is complete and positive. The
+natural-case configuration remains `INITIALISED` because no paired blinded expert
+outcomes or prospective multi-site workflow responses are present.
+
+Final validation for this development-search work:
+
+- focused autoresearch, runtime-amendment, frozen-candidate, measured-utility and
+  current-policy tests: `23 passed` in 3.59 seconds;
+- runtime-amendment analyser: all 12 frozen finalists complete, selected candidate
+  unchanged, executable action `retain_uncorrected`;
+- selected-candidate convergence verifier: exact metric reproduction and `220/220`
+  converged fits;
+- complete maintained suite: `1125 passed, 1 skipped` in 582.39 seconds; the skip is
+  the documented Windows/POSIX open-file rename difference;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 206 maintained Python files formatted;
+- `git diff --check`: passed.
+
+## Final validation for the PUMA and expert-assessment update
+
+Executed on 2026-08-21 after all code, policy and evidence changes:
+
+- focused PUMA confirmation, realism stress, audit-time-label sensitivity, memory,
+  current-policy and future-protocol tests: `19 passed`;
+- complete maintained suite: `1141 passed, 1 skipped` in 579.83 seconds; the single
+  skip is the documented Windows/POSIX open-file rename difference;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 216 maintained Python files formatted;
+- independent PUMA verifier: official manifest rebuilt, zero development/final
+  overlap, source labels unchanged, corruption fields exact, every query group
+  excluded from its neighbours, exact matched controls, retrieval/downstream metrics
+  and 3,000-draw bootstrap recalculated; all seven gates passed;
+- NuCLS supervised-QC feasibility verifier: official 27,648,000-byte SQLite source
+  re-read, 0 stable element IDs with multiple class labels, paired pre/post endpoint
+  unavailable and fail-closed action `retain_uncorrected`;
+- PUMA audit-time-label sensitivity: all seven gates passed with observed-label OOF
+  allocation; no candidate or claim-boundary change;
+- PUMA stress: all nine aggregate downstream intervals positive, one scenario passed
+  all class-safety gates, and eight failures retained without post-outcome tuning;
+- selected-candidate verifier: frozen metrics reproduced exactly, final external test
+  unused and all `220/220` fits converged; convergence evidence remained
+  `d10fbcb3179abe6058ae43231663f3aeefc7d754c40bac2bfa6fdea1a4abae38`;
+- deterministic synthetic data returned `verified_existing`;
+- synthetic smoke run `20260821T100430.181783Z_synthetic_smoke_6bc44efa2c` completed
+  successfully with metrics, report and figures;
+- `git diff --check`: passed before the status-only append and is rerun at handoff.
+
+## Repository maintenance and retention audit — 2026-08-21
+
+Engineering maintenance M21 is complete without changing the scientific completion
+stage or expanding any claim. The active repository now keeps one authoritative copy
+of released evidence and only the accepted full PanNuke pilot and primary run.
+
+Executed cleanup:
+
+- re-verified the accepted primary recovery and accepted pilot before retiring older
+  run directories; both integrity checks were valid with no missing, added or changed
+  paths and roots `8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4`
+  and `37a9cdc4aab1eb74dc6e86555dfeb96f7682d8bc17bdb0e3a12ec6ab18254666`;
+- moved 18 interrupted, ineligible, smoke and rehearsal runs plus superseded caches,
+  preview builds and test output to
+  `C:\Users\NATAN\Documents\AANCA_cleanup_quarantine_20260821`;
+- first quarantined 4,222 identified files totalling about 43.78 GiB, then
+  permanently removed the verified superseded-run, cache, QA, smoke and non-release
+  classes after the same-volume quarantine exhausted `C:`; approximately 43.79 GiB
+  was physically reclaimed;
+- retained only the five-file, 3.245 MiB
+  `mvp_demo_before_author_section/` rollback copy outside the repository; the
+  permanently deleted classified material is not recoverable;
+- reduced active `artifacts/` from about 92.1 GiB to 48.456 GiB and retained only the
+  133,735-byte release hero under `output/`;
+- removed the redundant tracked QA evidence mirror, nine superseded screenshots,
+  orphaned capsule scaffolding, stale machine-local reports, the empty notebooks
+  placeholder and the duplicate presentation CI workflow;
+- moved static package verification into the Linux leg of the maintained
+  cross-platform scientific workflow;
+- configured the three 41–78 MB PUMA numeric-evidence archives for Git LFS while
+  retaining their independently verifiable content;
+- consolidated NumPy archive publication, confusion-derived macro-F1/recall, figure
+  saving and checksum-pinned YAML loading; deliberately independent frozen
+  publication and verifier implementations remain separate;
+- reduced the measured maintained package categories from 104,231 to 104,116 Python
+  lines while adding shared validation and tests;
+- extracted the stable presentation stylesheet into one packaged asset, reducing
+  the consistently measured nonblank count in `mvp_demo.py` to 4,060 lines and the
+  complete nonblank Python workspace from 155,697 to 154,589 lines (net `-1,108`);
+  the stylesheet has 810 nonblank lines.
+
+Validation and corrections:
+
+- an early focused run found two failures because PyYAML parsed unquoted frozen dates
+  as `date` objects; ISO-8601 normalisation was added and all affected tests passed;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: 215 files already formatted;
+- `uv run pytest`: `1145 passed, 1 skipped` in 837.69 seconds; the single skip is the
+  documented Windows/POSIX open-file rename difference;
+- after the presentation extraction, the focused suite passed `58` tests in 47.03
+  seconds; an earlier attempt had produced no accepted result because a full disk
+  interrupted pytest while writing its cache;
+- `uv build --wheel`: passed and the built wheel contained the extracted presentation
+  stylesheet;
+- `uv run histo-audit data generate-synthetic --config configs/smoke.yaml`: generated
+  deterministic definition
+  `791fe34c3bb9042b73badd8209afa1b2b673922e20f2da2da28e9a70d67525b2`;
+- `uv run histo-audit experiment smoke`: completed run
+  `20260821T111042.663068Z_synthetic_smoke_4d457ebe70`;
+- `python -I scripts/present_demo.py --verify-only`: valid `DEMO_COMPLETE` five-file
+  package with root
+  `1e4e403e08aefc8e9d2e4b18a1b44d24c30c4ab4df106fba45addfd598ca2b4b`;
+- `uv run python scripts/verify_puma_new_data_confirmation.py`: verified; all seven
+  frozen gates and all 44 model-convergence checks passed;
+- `uv run python scripts/verify_nucls_supervised_qc_feasibility.py`: paired pre/post
+  endpoint correctly unavailable, `retain_uncorrected` retained;
+- `uv run python scripts/verify_aanca_selected_candidate.py`: exact stored metrics
+  reproduced, `220/220` fits converged, final external test unused and source
+  annotations unchanged;
+- direct system-Python attempts to run those three package-dependent verifiers were
+  rejected with `ModuleNotFoundError`; they produced no evidence and were rerun in
+  the pinned `uv` environment as listed above;
+- workflow YAML parsing and `git diff --check`: passed before this append and are
+  rerun immediately before publication.
+
+The complete retention inventory and rollback boundary are in
+[`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md).

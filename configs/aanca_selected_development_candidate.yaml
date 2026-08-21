@@ -1,0 +1,95 @@
+schema_version: 1
+record_id: aanca_expanded_development_candidate_20260821
+project: AANCA
+replacement_project_or_v2: false
+role: development_candidate_only
+
+candidate:
+  feature_view: resnet18_multiscale_64_128
+  audit_l2: 0.1
+  audit_class_weight_balanced: false
+  risk_method: fixed_hybrid
+  neighbour_k: 31
+  hybrid_self_confidence_weight: 0.6
+  queue_preset: balanced_relaxed
+  review_budget: 0.05
+  intervention: flag_exclude
+  downstream_l2: 0.01
+  downstream_class_weight_balanced: true
+candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+
+selection_authority:
+  parent_study_id: monusac_aanca_expanded_development_v1
+  parent_config_sha256: 370b7135858682d0dea52c035768b2fed72acc1fe74a1ddd67996780ad703692
+  partition_sha256: 93087764cf5ce3dd62474ac4da790ff6871d2deff6291d508e02c49ec75f2d2d
+  runtime_amendment_id: monusac_aanca_expanded_full_runtime_amendment_v1
+  runtime_amendment_sha256: 2e14a57c72dac193bac8c3179baa90e66b4271a4d3a4fef8f4f8cc0610324a98
+  parent_authority_sha256: 3ef82963925cea7d20332f13488578ded5eba1df750c52cb55cef69521580042
+  parent_ledger_sha256: 1e5378ebbb1a02cdd003fd6bed96d78a200b53be210b746c1477d46a2025e728
+
+development_evidence:
+  dataset: MoNuSAC2020_official_train_only
+  evaluated_patient_groups: 44
+  nested_outer_folds: 5
+  audit_inner_folds: 4
+  corruption_seeds: [26082170, 26082171, 26082172, 26082173]
+  matched_random_repetitions: 5
+  bootstrap_iterations: 3000
+  candidate_macro_f1: 0.5471943284781748
+  uncorrected_macro_f1: 0.5041042261017459
+  mean_matched_random_macro_f1: 0.492794942022801
+  candidate_minus_uncorrected_macro_f1: 0.04309010237642889
+  candidate_minus_uncorrected_interval_95: [0.03255265089898305, 0.05506540367582292]
+  candidate_minus_matched_random_macro_f1: 0.054399386455373844
+  candidate_minus_matched_random_interval_95: [0.034938293224264415, 0.07550715895022347]
+  candidate_minus_uncorrected_by_corruption_seed:
+    - 0.03682908075990343
+    - 0.04768383886227834
+    - 0.04487867097312831
+    - 0.04296881891040549
+  candidate_minus_matched_random_by_corruption_seed:
+    - 0.043195627787227964
+    - 0.05955051465776168
+    - 0.05706089502289369
+    - 0.05779050835361205
+  candidate_minus_uncorrected_recall:
+    epithelial: 0.056453350570997596
+    lymphocyte: 0.05996208204067563
+    macrophage: 0.009325044404973365
+    neutrophil: 0.014943457189014575
+  candidate_minus_uncorrected_recall_intervals_95:
+    epithelial: [0.04482020259563077, 0.06727646150526582]
+    lymphocyte: [0.04492077093928812, 0.07473450353522691]
+    macrophage: [-0.0064620394516020745, 0.024464609781390586]
+    neutrophil: [-0.0010316376900227663, 0.029601077675088412]
+  candidate_precision: 0.9479659014179609
+  mean_matched_random_precision: 0.5440158676569885
+  candidate_minus_matched_random_precision: 0.40395003376097227
+  candidate_minus_matched_random_precision_interval_95:
+    - 0.36055964504995774
+    - 0.4489032325505159
+  reviewed_decisions_across_nested_folds_and_seeds: 23696
+  injected_changes_found_across_nested_folds_and_seeds: 22463
+  all_five_success_gates_passed: true
+  all_four_seed_directions_positive: true
+  selected_candidate_has_known_tcga_encoder_pretraining_overlap: false
+  final_external_test_used: false
+  natural_error_detection_evaluated: false
+
+claim_boundary:
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  real_use_superiority_proven: false
+  clinical_utility_proven: false
+  automatic_annotation_change_permitted: false
+  source_annotations_modified: false
+
+activation:
+  controlled_development_implementation_available: true
+  external_confirmation_complete: false
+  executable_action_until_new_confirmation: retain_uncorrected
+  required_next_evidence:
+    - genuinely_new_patient_or_wsi_grouped_external_data
+    - independent_blinded_multi_rater_review
+    - prospective_equal_budget_workflow_comparison
+    - untouched_external_downstream_test

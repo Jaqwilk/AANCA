@@ -1,0 +1,78 @@
+schema_version: 1
+study_id: puma_new_data_confirmation_v1
+project: AANCA
+replacement_project_or_v2: false
+freeze_date: 2026-08-21
+outcomes_opened_at_freeze: false
+
+data:
+  record_url: https://zenodo.org/records/15050523
+  challenge_url: https://puma.grand-challenge.org/dataset/
+  licence: CC0
+  image_archive:
+    name: 01_training_dataset_tif_ROIs.zip
+    md5: 1e16d440f0f94156fd5c0ea3f082bd90
+  nuclei_archive:
+    name: 01_training_dataset_geojson_nuclei.zip
+    md5: 1f695c66db9461251c581e850f73c044
+  case_group: complete_official_roi_identifier
+  strata: [primary, metastatic]
+
+split:
+  salt: AANCA-PUMA-FINAL-V1
+  final_cases_per_stratum: 31
+  development_cases_per_stratum: 72
+  final_labels_unavailable_to_selection: true
+
+labels:
+  primary_class_order: [tumor, lymphocyte, other]
+  primary_mapping:
+    tumor: [tumor]
+    lymphocyte: [lymphocyte, plasma_cell]
+    other: [stroma, vascular_endothelium, histiocyte, melanophage, neutrophil, apoptotic, epithelium]
+  secondary_native_ten_class: descriptive_only
+
+candidate:
+  record: configs/aanca_selected_development_candidate.yaml
+  sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  feature_view: resnet18_multiscale_64_128
+  audit_l2: 0.1
+  audit_class_weight_balanced: false
+  risk_method: fixed_hybrid
+  neighbour_k: 31
+  hybrid_self_confidence_weight: 0.6
+  queue_preset: balanced_relaxed
+  review_budget: 0.05
+  intervention: flag_exclude
+  downstream_l2: 0.01
+  downstream_class_weight_balanced: true
+
+corruption:
+  fraction: 0.10
+  mechanism: symmetric
+  seeds: [26082170, 26082171, 26082172, 26082173]
+  audit_folds: 4
+  independent_feature_spaces_required: true
+
+evaluation:
+  matched_random_repetitions: 5
+  bootstrap_iterations: 3000
+  bootstrap_unit: case_id
+  final_case_count: 62
+
+success_requires_all:
+  - retrieval_precision_lower_bound_gt_matched_random
+  - downstream_macro_f1_lower_bound_gt_unchanged
+  - downstream_macro_f1_lower_bound_gt_matched_random
+  - all_four_seed_directions_positive_against_both_controls
+  - every_primary_class_recall_lower_bound_gte_minus_0_01
+  - all_required_models_converged
+  - all_hash_group_split_and_final_fold_guards_passed
+
+claim_boundary:
+  controlled_noise_transfer_if_positive: true
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  clinical_utility_proven: false
+  automatic_annotation_change_permitted: false
+

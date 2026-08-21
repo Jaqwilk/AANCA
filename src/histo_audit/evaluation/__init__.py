@@ -14,6 +14,8 @@ from .restoration import (
     RestorationResult,
     classification_metrics,
     evaluate_downstream_restoration,
+    macro_f1_from_confusion,
+    per_class_recall_from_confusion,
     restore_reviewed_labels,
 )
 from .retraining_guard import (
@@ -58,5 +60,7 @@ __all__ = [
     "evaluate_multicriteria_retraining_guard",
     "evaluate_retraining_guard",
     "fit_review_intervention_model",
+    "macro_f1_from_confusion",
+    "per_class_recall_from_confusion",
     "restore_reviewed_labels",
 ]

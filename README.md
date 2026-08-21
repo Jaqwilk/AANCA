@@ -11,10 +11,9 @@ that may warrant expert review—without changing source labels.
   <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
   <img alt="Presentation status: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
   <img alt="Scientific status: PRIMARY_STUDY_COMPLETE" src="https://img.shields.io/badge/science-PRIMARY__STUDY__COMPLETE-238636">
-  <img alt="External validation completed with null or adverse result" src="https://img.shields.io/badge/external-COMPLETE_%7C_not_supported-8B5CF6">
+  <img alt="Controlled new-source PUMA result supported; natural validation incomplete" src="https://img.shields.io/badge/external-PUMA_controlled_supported-8B5CF6">
   <img alt="Research only, non-diagnostic" src="https://img.shields.io/badge/use-research_only_%7C_non--diagnostic-C2410C">
-  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml"><img alt="Presentation integrity workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/presentation-integrity.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Cross-platform scientific software workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Presentation integrity and cross-platform scientific software workflow" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
 </p>
 
 <p align="center">
@@ -64,7 +63,8 @@ relabelling system.
 | Presentation | `DEMO_COMPLETE` — static, responsive, checksum-verifiable MVP |
 | Scientific boundary | `PRIMARY_STUDY_COMPLETE` |
 | External multi-rater evaluation | `EXTERNAL_VALIDATION_COMPLETE` — frozen NuCLS claims not supported |
-| New-data controlled external benchmark | Completed on MoNuSAC — retrieval gate passed; downstream and class-safety gates failed |
+| New-data controlled external benchmark | Frozen PUMA confirmation passed all seven gates; controlled-noise transfer supported |
+| Bounded autoresearch development | 400 screens and 12 full nested patient-group evaluations completed; one development-only candidate passed every frozen gate |
 | Primary matrix | 185/185 required cells completed; 0 required failures |
 | Optional primary cells | 37 pathology-encoder cells skipped under the frozen availability rule |
 | Statistical output | 36 preregistered H1/H3/H5/H6/H7 entries: 33 numeric results and 3 explicitly unavailable H6 entries; 2,000 group-bootstrap iterations where applicable |
@@ -100,6 +100,52 @@ from matched-random restoration and the registered class-recall safeguard failed
 The overall frozen decision is therefore **not supported**. Exact results and the
 independent readback are in
 [`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md).
+
+After that test was sealed, a separate bounded development search used only the 44
+eligible official MoNuSAC training patients. It screened 400 registered combinations
+and evaluated 12 finalists with nested patient-group separation. The selected 5%
+`flag_exclude` policy increased controlled-development macro-F1 from `0.504104` to
+`0.547194`: `+0.043090`, 95% whole-patient interval `[+0.032553, +0.055065]`.
+It also exceeded its exact matched-random comparator by `+0.054399`, interval
+`[+0.034938, +0.075507]`, with positive effects in all four registered seeds. Both
+registered development intervals excluded zero, but because this was an adaptive
+development search they are not independent confirmatory intervals. The exact
+search and selection record is in
+[`reports/aanca_autoresearch_expanded_development_results.md`](reports/aanca_autoresearch_expanded_development_results.md).
+An exact rerun reproduced the saved metrics and all `220/220` optimiser fits
+converged.
+
+That candidate was then frozen and evaluated without PUMA tuning on the official
+PUMA melanoma source. The hash split used 144 development ROI/case groups (67,032
+nuclei) and 62 untouched final groups (30,397 nuclei). AANCA review precision was
+`0.537739`, versus `0.214379` for exact matched random. On the final groups,
+`flag_exclude` improved macro F1 by `+0.006426` over unchanged corrupted training,
+95% whole-group interval `[+0.003657, +0.009365]`, and by `+0.008067` over exact
+matched-random exclusion, interval `[+0.004093, +0.011947]`. Every frozen retrieval,
+downstream, seed-direction, class-safety, convergence and source/split gate passed,
+and the independent verifier accepted the package. The complete result is in
+[`reports/puma_new_data_confirmation_results.md`](reports/puma_new_data_confirmation_results.md).
+
+This is positive new-source evidence for controlled annotation noise, not a claim
+that natural pathologist errors were detected. PUMA publishes final expert-checked
+labels without paired natural pre/post reviews. A later exploratory stress found
+positive aggregate macro-F1 lower bounds in all nine clean and controlled-corruption
+scenarios, but only one passed every class-recall safeguard. In particular, clean
+5% exclusion reduced recall of the heterogeneous `other` class despite improving
+macro F1. Exact stress results are in
+[`reports/puma_realism_stress_results.md`](reports/puma_realism_stress_results.md),
+and the natural-data action remains `retain_uncorrected`.
+
+The primary controlled fold allocation used pre-corruption labels, which are not
+available in a real audit. A separately frozen post-confirmation sensitivity rebuilt
+folds and exact neighbours from `observed_label` only. All seven sensitivity gates
+still passed: macro F1 improved by `+0.006679` over unchanged and `+0.009069` over
+matched random, with positive intervals and all class safeguards intact. See
+[`reports/puma_audit_time_label_sensitivity_results.md`](reports/puma_audit_time_label_sensitivity_results.md).
+
+The full expert assessment—including the evidence ladder, implementation review,
+claim boundary and in-place path to a blinded multi-site study—is in
+[`reports/aanca_expert_system_assessment_2026-08-21.md`](reports/aanca_expert_system_assessment_2026-08-21.md).
 
 See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), [`MVP_SCOPE.md`](MVP_SCOPE.md), [`STATUS.md`](STATUS.md), and
 [`artifacts/mvp_demo/evidence.json`](artifacts/mvp_demo/evidence.json) for the
@@ -196,6 +242,23 @@ rules and could not rescue the primary outcome.
 This is a controlled-corruption test, not a natural-error study. It does not show
 that a pathologist was wrong or that AANCA improves a model in real use.
 
+### Bounded development search after the frozen test
+
+| Development-only outcome | Selected result |
+| --- | --- |
+| Search extent | 240 ranking screens, 160 downstream screens and 12 full nested patient-group finalists |
+| Selected policy | Multiscale 64/128 px ResNet-18 features; fixed hybrid ranking; 5% review; `flag_exclude` |
+| Controlled-change retrieval | Precision 0.947966; exact-matched-random difference +0.403950, CI [+0.360560, +0.448903] |
+| Downstream vs no review | Macro-F1 +0.043090, CI [+0.032553, +0.055065] — passed |
+| Downstream vs matched random | Macro-F1 +0.054399, CI [+0.034938, +0.075507] — passed |
+| Important-class safety | All registered recall lower bounds remained above the frozen -0.01 margin |
+| Permitted claim | Significant improvement in nested controlled MoNuSAC development only |
+
+Candidate selection never read the official MoNuSAC test outcome. The test had
+already been disclosed and remains permanently unavailable as confirmation for this
+candidate. Source labels are unchanged, and the frozen record cannot authorise
+automatic exclusion on natural data.
+
 ### Incremental improvement of the current AANCA model
 
 This repository improves the same AANCA implementation; it does not replace it with
@@ -217,7 +280,9 @@ expected downstream benefit. The quality queue can be quota-balanced by source
 group, class, tissue, proposed transition and embedding diversity. The
 model-improvement queue is unavailable until genuinely measured development
 interventions produce nested group-cross-fitted utility estimates with a positive
-lower bound. Multi-rater review can derive keep, soft-label, downweight, exclude and
+lower bound. Once those inputs exist, its priority is the percentile annotation-
+inconsistency score multiplied by the positive conservative utility lower bound;
+without either input it fails closed. Multi-rater review can derive keep, soft-label, downweight, exclude and
 strictly gated hard-change views without mutating source annotations. Candidate
 training policies are compared only on independent development groups, and adoption
 requires both a positive macro-F1 lower bound and registered recall non-degradation
@@ -530,11 +595,17 @@ AANCA/
 | [`PLAN.md`](PLAN.md) | Milestones, gates, acceptance criteria, and deferred work |
 | [`STATUS.md`](STATUS.md) | Executed commands, evidence, blockers, and current handoff |
 | [`DECISIONS.md`](DECISIONS.md) | Current binding rationale; full history remains in Git |
+| [`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md) | Cleanup inventory, retention boundary, code consolidation and recoverable quarantine |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Download and independently recalculate the released primary evidence |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Frozen NuCLS design, exact external result and independent verification |
 | [`reports/nucls_current_aanca_improvement.md`](reports/nucls_current_aanca_improvement.md) | Exploratory ranking candidates and fail-closed retraining decisions for the same AANCA model |
 | [`MONUSAC_TEST_PROTOCOL.md`](MONUSAC_TEST_PROTOCOL.md) | Prospectively frozen controlled-external new-data protocol |
 | [`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md) | Exact MoNuSAC result, claim boundary and independent evidence identities |
+| [`AANCA_AUTORESEARCH_EXPANDED_PROTOCOL.md`](AANCA_AUTORESEARCH_EXPANDED_PROTOCOL.md) | Frozen bounded-search spaces, screens, nested evaluation and selection rule |
+| [`reports/aanca_autoresearch_expanded_development_results.md`](reports/aanca_autoresearch_expanded_development_results.md) | Exact 400-screen development search and selected-candidate result |
+| [`configs/aanca_selected_development_candidate.yaml`](configs/aanca_selected_development_candidate.yaml) | Checksum-frozen identity and policy of the selected development candidate |
+| [`AANCA_MEASURED_UTILITY_PROTOCOL.md`](AANCA_MEASURED_UTILITY_PROTOCOL.md) | Cross-fitted measured-utility requirements for the model-improvement queue |
+| [`AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md`](AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md) | One-shot new-cohort confirmation and real-use claim ladder |
 | [`CURRENT_AANCA_SAFE_INTERVENTION.md`](CURRENT_AANCA_SAFE_INTERVENTION.md) | Implemented two-queue, multi-rater, calibration, stability and adoption safeguards for the same AANCA system |
 | [`configs/current_aanca_intervention_policy.yaml`](configs/current_aanca_intervention_policy.yaml) | Machine-readable prospective policy; NuCLS is excluded from selection and fresh evidence is still required |
 | [`NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md`](NUCLS_EXTERNAL_VALIDATION_PREREGISTRATION.md) | Publicly frozen NuCLS multi-rater protocol |
@@ -620,11 +691,10 @@ Before submitting a change:
 .venv\Scripts\python.exe -m histo_audit demo verify --output-dir artifacts\mvp_demo
 ~~~
 
-GitHub Actions separates two claims. `Presentation integrity` runs the
-dependency-free five-file package verifier. `Scientific software` is configured to
-install the locked environment on Ubuntu and Windows, run linting, formatting, the complete
-test suite and the deterministic synthetic workflow in a clean registry. Neither
-workflow retrains the PanNuke primary study. The release described in
+One `Scientific software` workflow verifies the dependency-free five-file package,
+then installs the locked environment on Ubuntu and Windows and runs linting,
+formatting, the complete test suite and the deterministic synthetic workflow in a
+clean registry. It does not retrain the PanNuke primary study. The release described in
 `REPRODUCIBILITY.md` supports independent result recalculation; a full image-to-result
 replication still requires the licensed dataset.
 
@@ -640,14 +710,13 @@ ignored by Git, but they are not disposable build cache. In particular, do **not
 run `git clean -fdX`: it would also target licensed raw data and the immutable run
 lineage required to reproduce the accepted evidence.
 
-Routine cleanup is limited to tool caches (`.mypy_cache`, `.playwright-cli`,
+Routine cleanup covers tool caches (`.mypy_cache`, `.playwright-cli`,
 `.pytest_cache`, `.ruff_cache`, `__pycache__`), `dist`, non-canonical
-`artifacts/mvp_demo_*` previews and unselected browser-QA output. The canonical
-five-file package remains in `artifacts/mvp_demo`; the repository retains only six
-professor-release captures and three final-audit captures under
-`output/playwright`. Data, embeddings, run directories, authorities and evidence
-reports must be preserved unless a separately reviewed retention decision says
-otherwise.
+`artifacts/mvp_demo_*` previews and browser-QA output other than the README hero.
+The canonical five-file package remains in `artifacts/mvp_demo`. Raw data, reusable
+embeddings, the accepted run, frozen authorities and evidence reports are preserved;
+an older run may be removed only after proving that the accepted run contains every
+relative payload path and after recording the decision in `DECISIONS.md`.
 
 ## Data terms, software licence, and citation
 

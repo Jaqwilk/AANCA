@@ -1,1 +1,0 @@
-{"allowed_modes":["run-confirmatory","verify-preterminal","verify-terminal"],"automatic_retry_allowed":false,"generic_histo_audit_cli_allowed":false,"policy":"original_confirmatory_sealed_execution_capsule_v1","schema_version":1,"source_policy":"every_regular_python_file_under_final_histo_audit_tree_v1"}

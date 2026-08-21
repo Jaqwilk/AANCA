@@ -231,6 +231,45 @@ def restore_reviewed_labels(
     )
 
 
+def macro_f1_from_confusion(confusion: NDArray[np.integer]) -> float:
+    """Return unweighted multiclass F1 from a square confusion matrix."""
+
+    matrix = np.asarray(confusion, dtype=np.float64)
+    if matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1] or not len(matrix):
+        raise ValueError("confusion matrix must be non-empty and square")
+    true_positive = np.diag(matrix)
+    predicted = matrix.sum(axis=0)
+    actual = matrix.sum(axis=1)
+    precision = np.divide(
+        true_positive, predicted, out=np.zeros_like(true_positive), where=predicted > 0
+    )
+    recall = np.divide(true_positive, actual, out=np.zeros_like(true_positive), where=actual > 0)
+    f1 = np.divide(
+        2.0 * precision * recall,
+        precision + recall,
+        out=np.zeros_like(precision),
+        where=(precision + recall) > 0,
+    )
+    return float(f1.mean())
+
+
+def per_class_recall_from_confusion(
+    confusion: NDArray[np.integer],
+) -> NDArray[np.float64]:
+    """Return class recall, using NaN for classes absent from the reference."""
+
+    matrix = np.asarray(confusion, dtype=np.float64)
+    if matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1] or not len(matrix):
+        raise ValueError("confusion matrix must be non-empty and square")
+    actual = matrix.sum(axis=1)
+    return np.divide(
+        np.diag(matrix),
+        actual,
+        out=np.full(len(matrix), np.nan, dtype=np.float64),
+        where=actual > 0,
+    )
+
+
 def classification_metrics(
     reference_labels: Sequence[int] | NDArray[np.integer],
     probabilities: NDArray[np.generic],

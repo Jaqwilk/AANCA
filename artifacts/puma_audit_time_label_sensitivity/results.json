@@ -1,0 +1,287 @@
+{
+  "all_sensitivity_gates_passed": true,
+  "candidate_changed": false,
+  "candidate_sha256": "78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe",
+  "claim_boundary": {
+    "automatic_annotation_change_permitted": false,
+    "clinical_utility_proven": false,
+    "independent_confirmation": false,
+    "natural_error_detection_proven": false,
+    "pathologist_error_detection_proven": false
+  },
+  "config_sha256": "ed6fd1e85d15604efc331b634a0d7604ca2675ba58345aa31386c266781e661f",
+  "disposition": "post_confirmation_exploratory_sensitivity_only",
+  "downstream": {
+    "bootstrap_iterations": 3000,
+    "candidate_macro_f1": 0.6465635622260648,
+    "candidate_minus_matched_random_by_corruption_seed": [
+      0.009163926882000295,
+      0.009535466768984757,
+      0.006449250363838144,
+      0.0111287795857975
+    ],
+    "candidate_minus_matched_random_interval_95": [
+      0.005855100059258797,
+      0.01246062687290453
+    ],
+    "candidate_minus_matched_random_macro_f1": 0.009069355900155174,
+    "candidate_minus_uncorrected_by_corruption_seed": [
+      0.008105640393209268,
+      0.007325259143116769,
+      0.0036857988533951502,
+      0.007601073456288132
+    ],
+    "candidate_minus_uncorrected_interval_95": [
+      0.004141475700661824,
+      0.009505712132344529
+    ],
+    "candidate_minus_uncorrected_macro_f1": 0.00667944296150233,
+    "candidate_minus_uncorrected_recall": {
+      "lymphocyte": -0.0020605424846394937,
+      "other": 0.0017834849295522703,
+      "tumor": 0.014447756251035004
+    },
+    "candidate_minus_uncorrected_recall_intervals_95": {
+      "lymphocyte": [
+        -0.007513722432951412,
+        0.003384156627439482
+      ],
+      "other": [
+        -0.004983390647237134,
+        0.008633737794764207
+      ],
+      "tumor": [
+        0.00943212219814891,
+        0.019786298246069797
+      ]
+    },
+    "evaluated_case_groups": 62,
+    "mean_matched_random_macro_f1": 0.6374942063259096,
+    "uncorrected_macro_f1": 0.6398841192645623
+  },
+  "fold_assignment_label_source": "observed_label",
+  "natural_error_detection_evaluated": false,
+  "parent_config_sha256": "434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30",
+  "parent_runtime_amendment_sha256": "d93bb2a353e0cdc931edf432fc8b83a82a67857aa90fe95e473ccedd732d0d07",
+  "pathologist_error_detection_proven": false,
+  "per_seed": [
+    {
+      "all_models_converged": true,
+      "average_precision": 0.4418964291102137,
+      "configuration_hash": "50e332acae713b5965363e22d156253b08bc1ad3d27781e0df7f2fb0cadc1240",
+      "fold_assignment_label_source": "observed_label",
+      "fold_ids_sha256": "521537f9415f2bc84e7f32d49773cd33492fb170572252be21c1e4e17149e063",
+      "fraction_matching_primary_reference_label_folds": 0.3148645423081513,
+      "injected_count": 6703,
+      "injected_found": 1820,
+      "neighbour_evidence": {
+        "backend": "exact_fold_safe_torch_float32_cosine",
+        "boundary_tie_full_scan_rows": 4,
+        "device": "cuda",
+        "distances_sha256": "e5ba2ee67dc95b0484799dff9a901f0bbf18116ba640b18bfa920e0b85eb7d50",
+        "folds": [
+          {
+            "fold_id": 0,
+            "query_count": 16859,
+            "reference_count": 50173
+          },
+          {
+            "fold_id": 1,
+            "query_count": 16743,
+            "reference_count": 50289
+          },
+          {
+            "fold_id": 2,
+            "query_count": 16538,
+            "reference_count": 50494
+          },
+          {
+            "fold_id": 3,
+            "query_count": 16892,
+            "reference_count": 50140
+          }
+        ],
+        "indices_sha256": "784619cc7eeb195863cb0f67705ab402fe997d52a83787bdf0c3f6b842a89449",
+        "k": 31,
+        "query_chunk_size": 256
+      },
+      "precision": 0.5429594272076372,
+      "query_groups_excluded_from_neighbours": true,
+      "queue_underfilled": false,
+      "reviewed_count": 3352,
+      "seed": 26082170
+    },
+    {
+      "all_models_converged": true,
+      "average_precision": 0.4539335973086242,
+      "configuration_hash": "42f55496f82bc1704adc9ea28ffbcc13c906de10fc32d1f9e9c6c0947e4d38a0",
+      "fold_assignment_label_source": "observed_label",
+      "fold_ids_sha256": "a375a9ec3a2085751507aa7314674fb628f80809703b3b6a72547dabdcf7fcff",
+      "fraction_matching_primary_reference_label_folds": 0.2550722043203246,
+      "injected_count": 6703,
+      "injected_found": 1821,
+      "neighbour_evidence": {
+        "backend": "exact_fold_safe_torch_float32_cosine",
+        "boundary_tie_full_scan_rows": 1,
+        "device": "cuda",
+        "distances_sha256": "f9fdf7bfa328a9d9a9a01e2c8a6c95556c82a7cc78dcfb3330f4d01f500f699f",
+        "folds": [
+          {
+            "fold_id": 0,
+            "query_count": 16926,
+            "reference_count": 50106
+          },
+          {
+            "fold_id": 1,
+            "query_count": 16800,
+            "reference_count": 50232
+          },
+          {
+            "fold_id": 2,
+            "query_count": 16674,
+            "reference_count": 50358
+          },
+          {
+            "fold_id": 3,
+            "query_count": 16632,
+            "reference_count": 50400
+          }
+        ],
+        "indices_sha256": "a728f816b93e8aaf610c46a0472f2ac7b7840aca04e561611b2a5f15bca362aa",
+        "k": 31,
+        "query_chunk_size": 256
+      },
+      "precision": 0.5432577565632458,
+      "query_groups_excluded_from_neighbours": true,
+      "queue_underfilled": false,
+      "reviewed_count": 3352,
+      "seed": 26082171
+    },
+    {
+      "all_models_converged": true,
+      "average_precision": 0.44481172043732986,
+      "configuration_hash": "f3c60554d6e1dd61ccf21c559528aa5327583b863ecd995d5d5d19a06703c4a3",
+      "fold_assignment_label_source": "observed_label",
+      "fold_ids_sha256": "039b7d7b4c7b486f3b2b0a5f2da3f801b34f96ff3c1b4152b408b45e1846d184",
+      "fraction_matching_primary_reference_label_folds": 0.3307673946771691,
+      "injected_count": 6703,
+      "injected_found": 1730,
+      "neighbour_evidence": {
+        "backend": "exact_fold_safe_torch_float32_cosine",
+        "boundary_tie_full_scan_rows": 4,
+        "device": "cuda",
+        "distances_sha256": "2c375d0617a299ece93cdaba3360aa375ddf9dd31512e6434589ad9b0fc891e8",
+        "folds": [
+          {
+            "fold_id": 0,
+            "query_count": 16907,
+            "reference_count": 50125
+          },
+          {
+            "fold_id": 1,
+            "query_count": 16645,
+            "reference_count": 50387
+          },
+          {
+            "fold_id": 2,
+            "query_count": 16837,
+            "reference_count": 50195
+          },
+          {
+            "fold_id": 3,
+            "query_count": 16643,
+            "reference_count": 50389
+          }
+        ],
+        "indices_sha256": "80a2509cc5056522e8ee093355fb4cf95c7310f7c09eab2e08b1dde08ac37704",
+        "k": 31,
+        "query_chunk_size": 256
+      },
+      "precision": 0.516109785202864,
+      "query_groups_excluded_from_neighbours": true,
+      "queue_underfilled": false,
+      "reviewed_count": 3352,
+      "seed": 26082172
+    },
+    {
+      "all_models_converged": true,
+      "average_precision": 0.4611787240898812,
+      "configuration_hash": "054c7a063cc367c1b973795ccfdd202795a8f63caa8ea44d2a2cd54bda2ab91d",
+      "fold_assignment_label_source": "observed_label",
+      "fold_ids_sha256": "e69acd234c2477b2ba03cde66cd310e15087fa54ddea734b9165c2345803648f",
+      "fraction_matching_primary_reference_label_folds": 0.22214763098221746,
+      "injected_count": 6703,
+      "injected_found": 1845,
+      "neighbour_evidence": {
+        "backend": "exact_fold_safe_torch_float32_cosine",
+        "boundary_tie_full_scan_rows": 3,
+        "device": "cuda",
+        "distances_sha256": "80fc2c7db3294773a96bf5de98666d1196b7d87a78080d3de534086499300cc5",
+        "folds": [
+          {
+            "fold_id": 0,
+            "query_count": 16574,
+            "reference_count": 50458
+          },
+          {
+            "fold_id": 1,
+            "query_count": 16808,
+            "reference_count": 50224
+          },
+          {
+            "fold_id": 2,
+            "query_count": 16645,
+            "reference_count": 50387
+          },
+          {
+            "fold_id": 3,
+            "query_count": 17005,
+            "reference_count": 50027
+          }
+        ],
+        "indices_sha256": "335927cf712fdf80b56f66c69191fb8dcaa11b7d87532e2e4785683663483561",
+        "k": 31,
+        "query_chunk_size": 256
+      },
+      "precision": 0.5504176610978521,
+      "query_groups_excluded_from_neighbours": true,
+      "queue_underfilled": false,
+      "reviewed_count": 3352,
+      "seed": 26082173
+    }
+  ],
+  "pre_corruption_label_used_for_fold_assignment": false,
+  "project": "AANCA",
+  "replacement_project_or_v2": false,
+  "retrieval": {
+    "bootstrap_iterations": 3000,
+    "candidate_minus_matched_random_precision": 0.3230310262529833,
+    "candidate_precision": 0.5381861575178998,
+    "differences_by_corruption_seed": [
+      0.32881861575178994,
+      0.326909307875895,
+      0.3014319809069213,
+      0.334964200477327
+    ],
+    "injected_changes_found": 7216,
+    "interval_95": [
+      0.25973397585007,
+      0.38131225104714983
+    ],
+    "matched_random_repetitions": 5,
+    "mean_matched_random_precision": 0.21515513126491645,
+    "reviewed_decisions": 13408
+  },
+  "schema_version": 1,
+  "source_annotations_modified": false,
+  "study_id": "puma_audit_time_label_sensitivity_v1",
+  "success_conditions": {
+    "all_folds_use_observed_labels_and_exclude_query_groups": true,
+    "all_four_seed_directions_positive_against_both_controls": true,
+    "all_required_models_converged": true,
+    "downstream_macro_f1_lower_bound_gt_matched_random": true,
+    "downstream_macro_f1_lower_bound_gt_unchanged": true,
+    "every_primary_class_recall_lower_bound_gte_minus_0_01": true,
+    "retrieval_precision_lower_bound_gt_matched_random": true
+  }
+}

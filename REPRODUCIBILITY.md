@@ -23,10 +23,11 @@ ranking, restoration, statistics and artifact plumbing; it is not PanNuke eviden
 The data-generation command is idempotent: an identical existing package is verified
 and reused, while any changed, partial or unexpected artifact fails closed.
 
-The `Scientific software` GitHub Actions workflow is configured to execute lint,
-formatting, the complete test suite and this synthetic workflow on both Ubuntu and Windows. Tests
-that exercise Windows-native handle custody are explicitly skipped on non-Windows
-systems rather than failing during test collection.
+The `Scientific software` GitHub Actions workflow first verifies the sealed static
+package, then executes lint, formatting, the complete test suite and this synthetic
+workflow on both Ubuntu and Windows. Tests that exercise Windows-native handle
+custody are explicitly skipped on non-Windows systems rather than failing during
+test collection.
 
 ## What package verification proves
 

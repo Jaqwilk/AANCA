@@ -76,6 +76,7 @@ from histo_audit.utils.run_tracking import (
     RunTracker,
     atomic_write_bytes,
     atomic_write_json,
+    atomic_write_npz,
     atomic_write_text,
     verify_run_integrity,
 )
@@ -2403,9 +2404,7 @@ def _sample_order_sha256(sample_ids: Sequence[str]) -> str:
 
 
 def _write_npz(path: Path, **arrays: Any) -> Path:
-    stream = io.BytesIO()
-    np.savez_compressed(stream, **arrays)
-    return atomic_write_bytes(path, stream.getvalue())
+    return atomic_write_npz(path, arrays)
 
 
 def _is_final_sensitive_path(path: str) -> bool:
@@ -4202,19 +4201,21 @@ def run_pannuke_pilot(
                 "final_reference_groups": oof.final_reference_groups,
             },
         )
-        np.savez_compressed(
+        atomic_write_npz(
             tracker.run_directory / "oof_predictions.npz",
-            sample_ids=np.asarray(audit_ids, dtype=np.str_),
-            group_ids=np.asarray(audit_groups, dtype=np.str_),
-            pre_corruption_label=corruption.pre_corruption_labels,
-            observed_label=corruption.observed_labels,
-            is_injected_corruption=corruption.is_injected_corruption,
-            probabilities=oof.probabilities,
-            predicted_class=oof.predicted_class,
-            fold_id=oof.fold_id,
-            self_confidence=self_confidence,
-            cleanlab_risk=cleanlab.risk_scores,
-            nearest_neighbour_disagreement=neighbours.risk_scores,
+            {
+                "sample_ids": np.asarray(audit_ids, dtype=np.str_),
+                "group_ids": np.asarray(audit_groups, dtype=np.str_),
+                "pre_corruption_label": corruption.pre_corruption_labels,
+                "observed_label": corruption.observed_labels,
+                "is_injected_corruption": corruption.is_injected_corruption,
+                "probabilities": oof.probabilities,
+                "predicted_class": oof.predicted_class,
+                "fold_id": oof.fold_id,
+                "self_confidence": self_confidence,
+                "cleanlab_risk": cleanlab.risk_scores,
+                "nearest_neighbour_disagreement": neighbours.risk_scores,
+            },
         )
         cleanlab_evidence = _write_cleanlab_audit_evidence(
             tracker.run_directory,

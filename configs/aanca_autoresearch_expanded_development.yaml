@@ -1,0 +1,172 @@
+schema_version: 1
+study_id: monusac_aanca_expanded_development_v1
+project: AANCA
+replacement_project_or_v2: false
+disposition: post_lockbox_expanded_development_only_method_search
+
+concept_source:
+  repository: https://github.com/karpathy/autoresearch
+  pinned_commit: 228791fb499afffb54b46200aca536f79142f117
+  adapted_principles:
+    - fixed_evaluator
+    - bounded_trials
+    - append_only_experiment_ledger
+    - automatic_keep_discard
+    - simplicity_tiebreak
+
+data:
+  dataset: MoNuSAC2020
+  permitted_split: official_train_only
+  group_id: tcga_patient_id
+  excluded_patients: [TCGA-A2-A0ES, TCGA-MP-A4T7]
+  expected_patient_groups_after_exclusion: 44
+  expected_sample_id_prefix: monusac-train-
+  source_annotations_modified: false
+  previous_internal_lockbox_status: opened_and_permanently_ineligible_for_confirmation
+  forbidden_inputs:
+    - previous_internal_lockbox_outcomes_for_candidate_generation
+    - official_monusac_test
+    - frozen_nucls_unbiased
+    - frozen_nucls_evaluation
+    - pannuke_final_fold_outcomes
+    - saved_external_test_probabilities
+
+partition:
+  method: nested_stratified_group_kfold
+  seed: 26082160
+  discovery_outer_folds: 5
+  audit_inner_folds: 4
+  internal_lockbox_enabled: false
+  all_official_train_patients_are_development_only: true
+  reference_label_permitted_for_partition_only: true
+
+controlled_corruption:
+  mechanism: symmetric_random_corruption
+  rate: 0.10
+  discovery_seeds: [26082170, 26082171, 26082172, 26082173]
+  source_annotations_modified: false
+
+representations:
+  required:
+    - resnet18_context_64
+    - resnet18_context_64_plus_stats
+    - resnet18_context_128
+    - resnet18_context_128_plus_stats
+    - resnet18_multiscale_64_128
+    - resnet18_multiscale_64_128_plus_stats
+    - phikon_v2_context_128
+    - phikon_v2_context_128_plus_stats
+    - phikon_v2_resnet18_multiscale
+  resnet18:
+    weights: IMAGENET1K_V1
+    input_variant: rgb
+    output_dimension_each_scale: 512
+    scales_px: [64, 128]
+    frozen: true
+  phikon_v2:
+    repository: owkin/phikon-v2
+    revision: 2ae989a9c40cffaa27f0a6cb29cc94d1d6f9a5fd
+    model_safetensors_sha256: 261ae680fa699b3b951597fd57aa19c02ef735805acb104b93af69b36d928569
+    model_lfs_object_oid: 941e973207791afdaad9d3b4c4773429ecf6b93095835307d4a83c9c9ba81ce0
+    model_safetensors_bytes: 1213455560
+    licence: Owkin-Phikon-v2-Non-Commercial
+    permitted_use: non_commercial_university_research_only
+    output_dimension: 1024
+    source_context_px: 128
+    processor_backend: saved_slow_processor_use_fast_false
+    frozen: true
+    tcga_pretraining_overlap_limitation: true
+
+candidate_space:
+  audit_l2: [0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3]
+  audit_class_weight_balanced: [true, false]
+  risk_methods:
+    probability: [self_confidence, prediction_margin, predictive_entropy]
+    neighbour:
+      k: [3, 7, 15, 31, 63]
+      metric: [cosine]
+    hybrid:
+      neighbour_k: [7, 15, 31]
+      self_confidence_weights: [0.2, 0.4, 0.6, 0.8]
+  queue_presets:
+    global: null
+    balanced_current:
+      max_per_group_fraction: 0.05
+      max_per_class_fraction: 0.40
+      max_per_tissue_fraction: 0.35
+      max_per_transition_fraction: 0.20
+      minimum_cosine_distance: 0.01
+    balanced_relaxed:
+      max_per_group_fraction: 0.10
+      max_per_class_fraction: 0.50
+      max_per_tissue_fraction: 0.50
+      max_per_transition_fraction: 0.30
+      minimum_cosine_distance: 0.0
+    balanced_diverse:
+      max_per_group_fraction: 0.05
+      max_per_class_fraction: 0.35
+      max_per_tissue_fraction: 0.35
+      max_per_transition_fraction: 0.20
+      minimum_cosine_distance: 0.02
+    rare_class_protective:
+      max_per_group_fraction: 0.04
+      max_per_class_fraction: 0.30
+      max_per_tissue_fraction: 0.30
+      max_per_transition_fraction: 0.15
+      minimum_cosine_distance: 0.025
+  review_budgets: [0.005, 0.01, 0.015, 0.025, 0.05, 0.075, 0.10]
+  interventions:
+    - controlled_restore
+    - controlled_restore_selected_weight_0_5
+    - controlled_restore_selected_weight_2
+    - controlled_restore_selected_weight_4
+    - flag_downweight_0_5
+    - flag_exclude
+  downstream_l2: [0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3]
+  downstream_class_weight_balanced: [true, false]
+
+successive_halving:
+  ranking_screen_max_trials: 240
+  ranking_screen_max_finalists: 40
+  downstream_screen_max_trials: 160
+  full_nested_max_finalists: 12
+  screen_outer_folds: 2
+  screen_corruption_seeds: 1
+  full_corruption_seeds: 4
+  fixed_trial_budget_seconds: 420
+  status_values: [keep, discard, crash, timeout]
+
+controls:
+  matched_random_fields: [observed_class, organ, proposed_transition]
+  enforce_disjoint_exact_comparator_capacity_before_selection: true
+  matched_random_repetitions_screen: 1
+  matched_random_repetitions_full: 5
+  bootstrap_iterations_screen: 300
+  bootstrap_iterations_full: 3000
+  bootstrap_seed: 26082180
+
+adoption_guard:
+  minimum_macro_f1_effect: 0.0
+  minimum_per_class_recall_effect: -0.01
+  important_classes: [0, 1, 2, 3]
+  success_requires_all:
+    - retrieval_lower_bound_gt_zero_vs_exact_matched_random
+    - downstream_lower_bound_gt_zero_vs_uncorrected
+    - downstream_lower_bound_gt_zero_vs_exact_matched_random
+    - every_important_class_recall_lower_bound_gte_minus_0_01
+    - direction_consistent_across_corruption_seeds
+  failure_action: retain_uncorrected
+
+selection:
+  external_test_selection_permitted: false
+  internal_lockbox_selection_permitted: false
+  output_role: development_candidate_only
+  implement_only_behind_fail_closed_policy_guard: true
+
+claim_boundary:
+  natural_error_detection_claim_permitted: false
+  pathologist_error_claim_permitted: false
+  clinical_or_operational_utility_claim_permitted: false
+  automatic_annotation_change_permitted: false
+  internal_lockbox_is_external_confirmation: false
+  controlled_corruption_result_is_natural_error_evidence: false

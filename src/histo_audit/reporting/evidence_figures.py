@@ -8,8 +8,6 @@ from __future__ import annotations
 
 import csv
 import json
-import os
-import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,6 +18,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from histo_audit.data.targets import extract_target_crop
+from histo_audit.reporting.figures import save_figure
 
 matplotlib.use("Agg", force=True)
 import matplotlib.pyplot as plt
@@ -199,23 +198,6 @@ def _load_bootstrap_evidence(path: Path) -> _BootstrapEvidence:
         metric_b=metric_b,
         differences=differences,
     )
-
-
-def _save_figure(figure: Any, destination: Path) -> None:
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
-    )
-    os.close(descriptor)
-    temporary = Path(temporary_name)
-    try:
-        figure.savefig(temporary, format="png", dpi=140, bbox_inches="tight")
-        os.replace(temporary, destination)
-    except BaseException:
-        temporary.unlink(missing_ok=True)
-        raise
-    finally:
-        plt.close(figure)
 
 
 def _strings(value: NDArray[np.generic], name: str) -> NDArray[np.str_]:
@@ -609,7 +591,7 @@ def _example_grid(
     )
     figure.tight_layout(rect=(0.0, 0.02, 1.0, 0.97))
     path = output_directory / filename
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key=key,
         title=title,
@@ -679,7 +661,7 @@ def _precision_recall_figure(evidence: _Evidence, output_directory: Path) -> Evi
     axis.legend(fontsize=7.2, ncols=2)
     figure.tight_layout()
     path = output_directory / "precision_recall_curves.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key="precision_recall_curves",
         title="Precision-recall curves",
@@ -742,7 +724,7 @@ def _bootstrap_figure(metrics: Mapping[str, Any], output_directory: Path) -> Evi
     axis.grid(axis="x", alpha=0.2)
     figure.tight_layout()
     path = output_directory / "paired_bootstrap_interval.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key="paired_bootstrap_interval",
         title="Paired hybrid-versus-self-confidence bootstrap interval",
@@ -858,7 +840,7 @@ def _paired_method_difference_figure(
     axis.grid(axis="x", alpha=0.2)
     figure.tight_layout()
     path = output_directory / "paired_method_differences.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key="paired_method_differences",
         title="Paired method differences",
@@ -910,7 +892,7 @@ def _paired_bootstrap_distribution_figure(
     axis.grid(axis="y", alpha=0.2)
     figure.tight_layout()
     path = output_directory / "paired_bootstrap_distribution.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key="paired_bootstrap_distribution",
         title="Paired bootstrap distribution",
@@ -1058,7 +1040,7 @@ def _subgroup_figure(
         y=0.995,
     )
     path = output_directory / filename
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key=key,
         title=f"{dimension.replace('_', ' ').title()} results and support",
@@ -1149,7 +1131,7 @@ def _neighbour_grid(evidence: _Evidence, output_directory: Path) -> EvidenceFigu
     )
     figure.subplots_adjust(left=0.03, right=0.98, bottom=0.04, top=0.91, hspace=0.35, wspace=0.18)
     path = output_directory / "fold_safe_neighbour_explanation_grid.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return EvidenceFigureArtifact(
         key="fold_safe_neighbour_explanation_grid",
         title="Fold-safe nearest-neighbour explanation grid",

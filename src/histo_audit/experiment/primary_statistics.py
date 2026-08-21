@@ -12,7 +12,6 @@ import csv
 import io
 import json
 import os
-import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -39,7 +38,12 @@ from histo_audit.statistics.review import (
     random_review_baseline,
     rank_indices,
 )
-from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_text, sha256_file
+from histo_audit.utils.run_tracking import (
+    atomic_write_json,
+    atomic_write_npz,
+    atomic_write_text,
+    sha256_file,
+)
 
 _STATISTICS_FILE = "primary_statistics.json"
 _BOOTSTRAP_FILE = "primary_bootstrap_evidence.npz"
@@ -590,22 +594,6 @@ def _read_json(path: Path, role: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{role} must be a JSON object: {path}")
     return value
-
-
-def _atomic_npz(path: Path, arrays: Mapping[str, NDArray[np.generic]]) -> Path:
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(descriptor, "wb") as stream:
-            np.savez_compressed(stream, **arrays)  # type: ignore[arg-type]
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary_name, path)
-    except BaseException:
-        Path(temporary_name).unlink(missing_ok=True)
-        raise
-    return path
 
 
 def _csv_text(rows: Sequence[Mapping[str, Any]]) -> str:
@@ -1743,7 +1731,7 @@ def aggregate_primary_statistics(
         if (run_path / name).exists():
             raise FileExistsError(f"primary statistics never overwrite an artifact: {name}")
     computed = _compute_statistics(run_path, controls)
-    bootstrap_path = _atomic_npz(run_path / _BOOTSTRAP_FILE, computed.bootstrap_arrays)
+    bootstrap_path = atomic_write_npz(run_path / _BOOTSTRAP_FILE, computed.bootstrap_arrays)
     subgroups_path = atomic_write_text(run_path / _SUBGROUP_FILE, _csv_text(computed.subgroup_rows))
     statistics_path = atomic_write_json(run_path / _STATISTICS_FILE, computed.payload)
     manifest_path = atomic_write_json(

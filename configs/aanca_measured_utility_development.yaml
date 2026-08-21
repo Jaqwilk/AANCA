@@ -1,0 +1,69 @@
+schema_version: 1
+study_id: aanca_measured_downstream_utility_development_v1
+project: AANCA
+replacement_project_or_v2: false
+execution_status: INITIALISED
+
+evidence:
+  required_source: newly_collected_independent_expert_review_development_cases
+  strongest_group_order: [patient_id, whole_slide_id, source_patch_id]
+  minimum_independent_reviewers: 2
+  preserve_raw_votes: true
+  synthetic_corruption_unlocks_natural_case_queue: false
+  forbidden_outcome_sources:
+    - nucls_frozen_external_results
+    - monusac_official_test
+    - monusac_opened_internal_lockbox
+    - pannuke_final_reference_fold
+    - future_external_confirmation_test
+
+nested_design:
+  outer_folds: 5
+  inner_utility_measurement_folds: 4
+  split_unit: strongest_available_group
+  outer_evaluation_unavailable_to_all_selection: true
+  utility_target_evaluated_outside_intervention_source_group: true
+  utility_unit_fields: [source_group, observed_class, proposed_transition, risk_bin]
+  utility_target: patient_balanced_validation_log_loss_reduction_per_review_decision
+  macro_f1_is_adoption_outcome_not_utility_training_target: true
+
+utility_estimator:
+  implementation: histo_audit.evaluation.downstream_utility.estimate_cross_fitted_downstream_utility
+  target_evidence_role: measured_development_intervention_utility
+  model: l2_ridge
+  l2_candidates: [0.1, 1.0, 10.0]
+  lower_bound_method: one_sided_nested_conformal_residual
+  alpha: 0.05
+  final_external_test_used: false
+
+model_improvement_queue:
+  implementation: histo_audit.auditing.utility_queue.build_measured_utility_queue
+  priority: percentile_annotation_inconsistency_score_times_positive_utility_lower_bound
+  minimum_utility_lower_bound: 0.0
+  unavailable_without_cross_fitted_measured_utility: true
+  budgets: [0.025, 0.05, 0.075, 0.10]
+  balance_dimensions: [source_group, observed_class, proposed_transition, tissue_type]
+  exact_matched_random_control: true
+
+interventions:
+  - retain_observed_label
+  - flag_exclude
+  - flag_downweight_0_5
+  - independent_reviewer_soft_label
+  - prospectively_gated_hard_reviewed_label
+
+adoption_guard:
+  bootstrap_unit: strongest_available_group
+  bootstrap_iterations: 3000
+  minimum_macro_f1_effect: 0.0
+  minimum_per_class_recall_effect: -0.01
+  require_positive_vs_exact_matched_random: true
+  require_direction_consistency: true
+  require_model_convergence: true
+  failure_action: retain_uncorrected
+
+claim_boundary:
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  real_workflow_superiority_proven: false
+  automatic_annotation_change_permitted: false

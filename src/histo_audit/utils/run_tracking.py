@@ -32,6 +32,7 @@ from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal, cast
 
+import numpy as np
 import yaml
 
 from histo_audit.config import config_sha256, resolve_config
@@ -169,6 +170,34 @@ def atomic_write_json(
         sort_keys=True,
     )
     return atomic_write_text(path, f"{content}\n")
+
+
+def atomic_write_npz(
+    path: str | Path,
+    arrays: Mapping[str, Any],
+    *,
+    compressed: bool = True,
+) -> Path:
+    """Durably replace one NumPy archive, compressed by default."""
+
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
+    )
+    temporary_path = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as stream:
+            writer = np.savez_compressed if compressed else np.savez
+            writer(stream, **dict(arrays))
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary_path, destination)
+        _fsync_directory(destination.parent)
+    except BaseException:
+        temporary_path.unlink(missing_ok=True)
+        raise
+    return destination
 
 
 def atomic_write_yaml(path: str | Path, value: Mapping[str, Any]) -> Path:
@@ -5375,6 +5404,7 @@ __all__ = [
     "assert_run_mutable",
     "atomic_write_bytes",
     "atomic_write_json",
+    "atomic_write_npz",
     "atomic_write_text",
     "atomic_write_yaml",
     "attest_external_validation_ready",

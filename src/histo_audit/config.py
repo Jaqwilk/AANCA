@@ -13,6 +13,7 @@ import json
 import os
 import tempfile
 from collections.abc import Mapping
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,8 @@ def _plain_value(value: Any, *, location: str = "config") -> Any:
         return value
     if isinstance(value, Path):
         return str(value)
+    if isinstance(value, (date, datetime)):
+        return value.isoformat()
     raise ValueError(f"{location} contains an unsupported value of type {type(value).__name__}")
 
 
@@ -57,21 +60,42 @@ def resolve_config(config: Mapping[str, Any]) -> Config:
     return resolved
 
 
-def load_config(path: str | Path) -> Config:
-    """Load one YAML configuration and require a non-empty mapping root."""
+def load_config_with_file_sha256(path: str | Path) -> tuple[Config, str]:
+    """Load one YAML mapping together with its exact file SHA-256."""
 
     config_path = Path(path).expanduser()
     if not config_path.is_file():
         raise FileNotFoundError(f"configuration file does not exist: {config_path}")
     try:
-        loaded = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+        raw = config_path.read_bytes()
+        loaded = yaml.safe_load(raw)
     except yaml.YAMLError as exc:
         raise ValueError(f"invalid YAML configuration at {config_path}: {exc}") from exc
     if not isinstance(loaded, Mapping):
         raise ValueError(f"configuration root must be a mapping: {config_path}")
     if not loaded:
         raise ValueError(f"configuration must not be empty: {config_path}")
-    return resolve_config(loaded)
+    return resolve_config(loaded), hashlib.sha256(raw).hexdigest()
+
+
+def load_config(path: str | Path) -> Config:
+    """Load one YAML configuration and require a non-empty mapping root."""
+
+    return load_config_with_file_sha256(path)[0]
+
+
+def load_pinned_config(
+    path: str | Path,
+    expected_sha256: str,
+    *,
+    role: str = "frozen configuration",
+) -> tuple[Config, str]:
+    """Load a YAML mapping only when its exact byte identity is frozen."""
+
+    config, digest = load_config_with_file_sha256(path)
+    if digest != expected_sha256:
+        raise RuntimeError(f"{role} changed after freeze")
+    return config, digest
 
 
 def canonical_config_bytes(config: Mapping[str, Any]) -> bytes:
@@ -151,6 +175,8 @@ __all__ = [
     "configuration_sha256",
     "hash_config",
     "load_config",
+    "load_config_with_file_sha256",
+    "load_pinned_config",
     "load_yaml_config",
     "resolve_config",
     "save_resolved_config",

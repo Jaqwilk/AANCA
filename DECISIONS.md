@@ -295,3 +295,175 @@ not change an input, score, selection, model, seed, budget, metric or decision. 
 second complete execution produced byte-identical results, report and source
 inventory. Pin the final package and require the independent standard-library/NumPy
 verifier to recalculate every published gate.
+
+## D025 — Use a bounded autoresearch loop only inside controlled development
+
+Status: binding after expanded development execution
+
+Adopt the useful mechanics of `karpathy/autoresearch`—a fixed evaluator, bounded
+candidate space, append-only keep/discard ledger and simple passing-winner rule—while
+preserving AANCA's stronger patient-group, OOF, untouched-test and claim-boundary
+requirements. The official MoNuSAC test is permanently unavailable to this search.
+Representations, rankings, budgets, interventions and downstream hyperparameters may
+compete only in nested development on the official training patients.
+
+The initial full-candidate time allowance proved too short for the declared
+multiscale candidates. Before any full-candidate outcome was available, freeze a
+runtime-only amendment that raises the allowance to 10,800 seconds without changing
+the candidate set, metric, seed, data partition, selection rule or scientific gate.
+Record timed-out and exact-comparator-capacity candidates as fail-closed rather than
+silently replacing them.
+
+## D026 — Freeze the passing 5% exclusion policy as a development candidate
+
+Status: selected for untouched confirmation; natural-data activation prohibited
+
+Select candidate
+`78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe`:
+multiscale 64/128 px ResNet-18 features, unbalanced L2=0.1 audit model, fixed hybrid
+ranking with 31 neighbours and 0.6 self-confidence weight, relaxed balanced 5% queue,
+`flag_exclude`, and balanced L2=0.01 downstream model. It passed the frozen
+whole-patient comparisons against unchanged and exact matched random, four-seed
+direction rule and important-class recall safeguard.
+
+`flag_exclude` is an experimental controlled-data training view, not permission to
+delete or rewrite a source annotation. The checksum-frozen candidate loader must
+reject altered authority fields, an altered candidate identity or a missing/mismatched
+sibling checksum. Loading this development record always returns
+`natural_data_activation_permitted = false`.
+
+Require a clean rerun that records every optimiser flag before accepting the frozen
+record. The rerun reproduced the stored metrics and all 220 fits converged. Preserve
+the detailed convergence artifact and its SHA-256 in the result report; any later
+non-convergence fails the candidate closed.
+
+## D027 — Rank model-improvement review by inconsistency times measured utility
+
+Status: software implemented; empirical inputs and new confirmation remain open
+
+Do not treat annotation inconsistency as downstream utility. Once nested
+group-cross-fitted expert intervention outcomes exist, define model-improvement
+priority as the percentile-normalised annotation-inconsistency score multiplied by
+the positive conservative utility lower bound. A missing OOF audit score, missing
+cross-fitted utility, non-independent group identity or non-positive lower bound
+fails closed. This queue may never manufacture targets from pre-corruption labels or
+from a disclosed final test.
+
+Freeze the selected development candidate before acquiring the next authorised
+external archive. The next untouched cohort can test controlled downstream
+generalisation, but only a separate blinded multi-rater natural-case study and a
+prospective multi-site workflow comparison can support natural-error or real-use
+claims.
+
+## D028 — Accept PUMA as positive controlled new-source confirmation
+
+Status: binding after prospectively frozen execution and independent verification
+
+Use the official PUMA public release under its recorded CC0 authority. Group by the
+complete source ROI/case identifier, stratify primary and metastatic melanoma, and
+freeze 144 development and 62 final groups by deterministic hash before metrics.
+Map the official native labels to the challenge's tumor, lymphocyte/plasma-cell and
+other primary classes. Do not use PUMA to modify the candidate selected on MoNuSAC
+development.
+
+The frozen candidate passed every registered PUMA gate. Retrieval precision exceeded
+exact matched random by `+0.323359`, interval `[+0.259251, +0.384944]`.
+Downstream macro F1 exceeded unchanged corrupted training by `+0.006426`, interval
+`[+0.003657, +0.009365]`, and exact matched-random exclusion by `+0.008067`,
+interval `[+0.004093, +0.011947]`. All four seed directions, all primary class
+safeguards, all 44 fits and the source/split guards passed. The independent verifier
+recomputed the saved result.
+
+Accept the claim `controlled_noise_transfer_supported` for this candidate and
+setting. Do not infer natural annotation errors, pathologist errors, clinical
+utility or permission to alter source labels. PUMA contains final expert-checked
+annotations without paired natural pre/post review states.
+
+## D029 — Record NuCLS supervised-QC pairing as unavailable
+
+Status: binding after official raw-asset feasibility inspection
+
+The official uncorrected and corrected single-rater releases are different FOV
+quality tiers, not two label states for the same set of nuclei. The raw SQLite
+database contains one class field per stable annotation element and no previous
+label, replacement label or revision-history table. Repeated element identifiers
+come from geometries crossing FOV records and never expose two distinct class states.
+
+Do not compare unmatched corrected and uncorrected cohorts, infer former labels from
+`correction_*` names or treat final QC metadata as an auditor input. Such analyses
+would confound source composition or leak the outcome. Preserve the prospective
+protocol and publish the endpoint as explicitly unavailable. Natural-data action
+remains `retain_uncorrected`.
+
+## D030 — Make the PUMA class-safety stress binding on natural intervention
+
+Status: binding after post-confirmation exploratory execution
+
+The unchanged candidate had a positive whole-group macro-F1 lower bound versus both
+unchanged and exact matched-random training in all nine clean and corrupted PUMA
+stress scenarios. Only the 10% group-conditional scenario passed every gate. The
+other eight failed exclusively because at least one class-recall lower bound breached
+`-0.01`. On clean labels, `other` recall fell by `-0.013733`, interval
+`[-0.025390, -0.002789]`, despite positive aggregate macro F1.
+
+Do not tune or replace the candidate using the opened PUMA final groups. Treat the
+stress as robustness and hazard identification only. Keep `flag_exclude` as a
+controlled experimental arm and prohibit unreviewed exclusion on natural data.
+Future reviewer-gated development must predeclare per-class and transition caps,
+minimum retained counts and a class-specific no-action rule. A positive global
+metric may never override a failed class-safety bound.
+
+## D031 — Retain observed-label fold allocation as the realistic sensitivity
+
+Status: binding after post-confirmation exploratory execution
+
+The prospective PUMA benchmark used pre-corruption reference labels only to
+stratify development OOF groups. Although every fold remained group-safe and final
+groups were untouched, a natural audit does not possess that label. Freeze one
+post-confirmation sensitivity that rebuilds both OOF models and exact neighbour
+reference sets per seed from `observed_label` only. Do not change any candidate,
+queue, intervention, final group, metric or gate.
+
+All seven sensitivity gates passed despite only 22.21%-33.08% row-level fold
+agreement with the primary plan. Retrieval advantage over exact matched random was
+`+0.323031`, interval `[+0.259734, +0.381312]`; downstream improvement over unchanged
+was `+0.006679`, interval `[+0.004141, +0.009506]`; and improvement over matched
+random was `+0.009069`, interval `[+0.005855, +0.012461]`. Every class safeguard and
+fit converged.
+
+Use `observed_label` as the required fold-assignment authority for future natural
+studies. Preserve this result as post-confirmation sensitivity only; it cannot become
+a second independent PUMA confirmation or natural-error claim.
+
+## D032 — Keep one authoritative copy and quarantine superseded local products
+
+Status: binding engineering-retention decision; no scientific stage change
+
+Retain raw inputs, frozen specifications, accepted run evidence, reusable embeddings,
+independent-verification arrays and the release demo. Remove tracked mirrors,
+machine-local reports, orphaned scaffolding and superseded browser captures from the
+maintained repository. Preserve historical path references inside sealed provenance;
+never rewrite immutable records to conceal that an older local run was retired.
+
+The accepted recovered primary run and accepted pilot may be the only full PanNuke
+runs kept in the active workspace after both pass complete integrity verification.
+Interrupted, ineligible, smoke and rehearsal runs may be moved to the dated external
+quarantine. This is a recoverable local operation and does not reclaim disk space
+until the owner explicitly deletes that quarantine.
+
+Large PUMA numeric evidence remains public and independently verifiable but is stored
+with Git LFS. Consolidate only behaviorally equivalent helpers. Keep create-only
+frozen-cache publication, confirmatory evidence publication and standalone verifier
+metrics independent where that separation is itself an integrity control. The full
+inventory and rollback location are recorded in
+[`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md).
+
+## D033 — Presentation article layout over sticky theatre
+
+Status: accepted presentation decision; no scientific stage change
+
+The professor-facing demo is a long-form article, not a scroll-hijacked product page.
+Findings render as a static question/answer list. Motion is limited to subtle section
+reveals and the optional hero WebGL figure. Navigation chrome stays as previously
+designed. The pre-polish package is preserved at
+`artifacts/mvp_demo_backup_20260821_pre_article`.

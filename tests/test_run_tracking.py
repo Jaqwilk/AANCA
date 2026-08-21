@@ -12,7 +12,12 @@ from typing import Any
 import numpy as np
 import pytest
 
-from histo_audit.config import config_sha256, load_config
+from histo_audit.config import (
+    config_sha256,
+    load_config,
+    load_config_with_file_sha256,
+    load_pinned_config,
+)
 from histo_audit.data.targets import extract_target_crop, highlight_target, mask_bbox
 from histo_audit.experiment.smoke import run_synthetic_smoke
 from histo_audit.reporting import build_synthetic_report, smoke_runner
@@ -23,6 +28,7 @@ from histo_audit.reporting.reconciliation import (
 from histo_audit.utils.run_tracking import (
     RunTracker,
     append_registry_row,
+    atomic_write_npz,
     capture_governance_tree,
     capture_source_tree,
     is_run_immutable,
@@ -39,6 +45,36 @@ def test_yaml_config_hash_is_semantic_and_order_independent(tmp_path: Path) -> N
     second.write_text("name: smoke\nseed: {split: 2}\n", encoding="utf-8")
 
     assert config_sha256(load_config(first)) == config_sha256(load_config(second))
+
+
+def test_config_loader_returns_exact_file_identity_and_enforces_pin(tmp_path: Path) -> None:
+    path = tmp_path / "frozen.yaml"
+    raw = b"schema_version: 1\nfreeze_date: 2026-08-21\nvalue: frozen\n"
+    path.write_bytes(raw)
+
+    config, digest = load_config_with_file_sha256(path)
+
+    assert config == {"schema_version": 1, "freeze_date": "2026-08-21", "value": "frozen"}
+    assert digest == hashlib.sha256(raw).hexdigest()
+    assert load_pinned_config(path, digest) == (config, digest)
+    with pytest.raises(RuntimeError, match="changed after freeze"):
+        load_pinned_config(path, "0" * 64)
+
+
+@pytest.mark.parametrize("compressed", [False, True])
+def test_atomic_npz_supports_both_archive_modes(tmp_path: Path, compressed: bool) -> None:
+    destination = tmp_path / "arrays.npz"
+    arrays = {
+        "ids": np.asarray(["a", "b"], dtype=np.str_),
+        "values": np.asarray([1.5, 2.5], dtype=np.float64),
+    }
+
+    assert atomic_write_npz(destination, arrays, compressed=compressed) == destination
+    with np.load(destination, allow_pickle=False) as saved:
+        assert set(saved.files) == set(arrays)
+        for name, expected in arrays.items():
+            np.testing.assert_array_equal(saved[name], expected)
+    assert list(tmp_path.glob(".arrays.npz.*.tmp")) == []
 
 
 def test_completed_run_is_unique_registered_and_immutable(tmp_path: Path) -> None:

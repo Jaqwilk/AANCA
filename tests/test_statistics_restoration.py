@@ -6,6 +6,8 @@ import pytest
 from histo_audit.corruption.controlled import apply_controlled_corruption
 from histo_audit.evaluation.restoration import (
     evaluate_downstream_restoration,
+    macro_f1_from_confusion,
+    per_class_recall_from_confusion,
     restore_reviewed_labels,
 )
 from histo_audit.statistics.review import (
@@ -77,6 +79,19 @@ class _MutatingEstimatorFactory(_RecordingEstimatorFactory):
     ) -> _MutatingEstimator:
         self.calls.append((class_order, model_seed))
         return _MutatingEstimator(self, class_order, model_seed)
+
+
+def test_shared_confusion_metrics_cover_absent_and_misclassified_classes() -> None:
+    confusion = np.asarray([[2, 0, 0], [1, 1, 0], [0, 0, 0]], dtype=np.int64)
+
+    assert macro_f1_from_confusion(confusion) == pytest.approx((0.8 + 2.0 / 3.0) / 3.0)
+    np.testing.assert_allclose(
+        per_class_recall_from_confusion(confusion),
+        np.asarray([1.0, 0.5, np.nan]),
+        equal_nan=True,
+    )
+    with pytest.raises(ValueError, match="non-empty and square"):
+        macro_f1_from_confusion(np.zeros((2, 3), dtype=np.int64))
 
 
 def test_budget_calculations_and_lift() -> None:

@@ -11,8 +11,6 @@ import csv
 import hashlib
 import json
 import math
-import os
-import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,7 +26,7 @@ from histo_audit.experiment.confirmatory_core import (
 )
 from histo_audit.experiment.study_contracts import ConfirmatoryCell
 from histo_audit.statistics.review import average_precision
-from histo_audit.utils.run_tracking import atomic_write_json, sha256_file
+from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_npz, sha256_file
 
 _STATISTICS_FILE = "paired_statistics.json"
 _BOOTSTRAP_FILE = "paired_bootstrap_evidence.npz"
@@ -795,25 +793,6 @@ def _statistics_payload(
     }
 
 
-def _atomic_npz(path: Path, arrays: Mapping[str, NDArray[np.generic]]) -> Path:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    os.close(descriptor)
-    temporary = Path(temporary_name)
-    try:
-        with temporary.open("wb") as stream:
-            np.savez_compressed(stream, **cast(dict[str, Any], dict(arrays)))
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        temporary.unlink(missing_ok=True)
-        raise
-    return path
-
-
 def _arrays_equal(actual: NDArray[np.generic], expected: NDArray[np.generic]) -> bool:
     return bool(
         actual.dtype == expected.dtype
@@ -833,7 +812,7 @@ def aggregate_confirmatory_statistics(
         if (run / name).exists():
             raise FileExistsError(f"confirmatory statistics never overwrite {name}")
     computed = _compute_statistics(run, controls)
-    bootstrap_path = _atomic_npz(run / _BOOTSTRAP_FILE, computed.arrays)
+    bootstrap_path = atomic_write_npz(run / _BOOTSTRAP_FILE, computed.arrays)
     statistics_path = atomic_write_json(
         run / _STATISTICS_FILE,
         _statistics_payload(computed, controls, sha256_file(bootstrap_path)),

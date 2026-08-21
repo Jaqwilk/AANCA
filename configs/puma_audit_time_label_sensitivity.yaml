@@ -1,0 +1,41 @@
+schema_version: 1
+study_id: puma_audit_time_label_sensitivity_v1
+project: AANCA
+replacement_project_or_v2: false
+freeze_date: 2026-08-21
+disposition: post_confirmation_exploratory_sensitivity_only
+primary_puma_result_opened_before_freeze: true
+candidate_selection_or_change_permitted: false
+
+parent:
+  config_sha256: 434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30
+  runtime_amendment_sha256: d93bb2a353e0cdc931edf432fc8b83a82a67857aa90fe95e473ccedd732d0d07
+  candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  primary_results_sha256: e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92
+  primary_evidence_arrays_sha256: 5f6d2d0fc65d95ee245d98c82b80547f0e0cf06c278acc40b48f44020e8c59d4
+
+fold_assignment:
+  label_source: observed_label
+  pre_corruption_label_available: false
+  folds: 4
+  split_seed: 26082190
+  recompute_fold_safe_neighbours_for_every_corruption_seed: true
+
+corruption:
+  mechanism: symmetric_random_corruption
+  fraction: 0.10
+  seeds: [26082170, 26082171, 26082172, 26082173]
+
+evaluation:
+  review_budget: 0.05
+  matched_random_repetitions: 5
+  bootstrap_iterations: 3000
+  bootstrap_seed: 26082320
+  require_same_primary_success_gates: true
+
+claim_boundary:
+  independent_confirmation: false
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  clinical_utility_proven: false
+  automatic_annotation_change_permitted: false

@@ -2,11 +2,127 @@ schema_version: 1
 policy_id: current_aanca_safe_review_and_training_policy
 project: AANCA
 replacement_project_or_v2: false
-disposition: prospective_development_policy_not_yet_executed
+disposition: controlled_new_source_confirmation_supported_natural_activation_prohibited
 frozen_nucls_result:
   remains_immutable: true
   allowed_for_method_or_threshold_selection: false
   conclusion: ranking_and_downstream_claims_not_supported
+
+expanded_controlled_development:
+  study_id: monusac_aanca_expanded_development_v1
+  role: post_lockbox_development_only
+  all_official_train_patients_used_as_development: true
+  official_monusac_test_used: false
+  ranking_screens: 240
+  downstream_screens: 160
+  frozen_finalists: 12
+  passing_finalists: 2
+  selected_candidate_record: configs/aanca_selected_development_candidate.yaml
+  selected_candidate_record_sha256: 229bc293b3ba7c3909423178552f5f3789f00411223c2f87b5185eee1542487d
+  selected_candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  selected_policy:
+    representation: resnet18_multiscale_64_128
+    audit_l2: 0.1
+    audit_class_weight_balanced: false
+    risk: fixed_hybrid
+    self_confidence_weight: 0.6
+    neighbour_disagreement_weight: 0.4
+    neighbour_k: 31
+    queue: balanced_relaxed
+    review_budget: 0.05
+    training_intervention: flag_exclude
+    downstream_l2: 0.01
+    downstream_class_weight_balanced: true
+  selected_result:
+    candidate_macro_f1: 0.5471943284781748
+    unchanged_macro_f1: 0.5041042261017459
+    exact_matched_random_macro_f1: 0.492794942022801
+    candidate_minus_unchanged: 0.04309010237642889
+    candidate_minus_unchanged_interval_95: [0.03255265089898305, 0.05506540367582292]
+    candidate_minus_exact_matched_random: 0.054399386455373844
+    candidate_minus_exact_matched_random_interval_95: [0.034938293224264415, 0.07550715895022347]
+    retrieval_precision: 0.9479659014179609
+    retrieval_precision_gain_vs_exact_matched_random: 0.40395003376097227
+    retrieval_precision_gain_interval_95: [0.36055964504995774, 0.4489032325505159]
+    development_intervals_are_not_independent_post_selection_confirmation: true
+  convergence_verification:
+    artifact: artifacts/autoresearch/monusac_aanca_expanded_convergence_v1.json
+    artifact_sha256: d10fbcb3179abe6058ae43231663f3aeefc7d754c40bac2bfa6fdea1a4abae38
+    fit_count: 220
+    hard_label_fit_count: 100
+    weighted_fit_count: 120
+    all_models_converged: true
+    frozen_metrics_reproduced_exactly: true
+  all_registered_development_gates_passed: true
+  controlled_external_confirmation_complete: true
+  natural_error_detection_evaluated: false
+  executable_action_on_natural_data: retain_uncorrected
+
+puma_controlled_external_confirmation:
+  study_id: puma_new_data_confirmation_v1
+  role: prospectively_frozen_new_source_controlled_noise_confirmation
+  development_cases: 144
+  final_cases: 62
+  development_nuclei: 67032
+  final_nuclei: 30397
+  corruption_fraction: 0.10
+  corruption_seeds: [26082170, 26082171, 26082172, 26082173]
+  review_budget: 0.05
+  retrieval_precision: 0.5377386634844868
+  exact_matched_random_precision: 0.2143794749403341
+  retrieval_precision_difference: 0.3233591885441528
+  retrieval_precision_difference_interval_95: [0.2592505925988822, 0.3849444213529693]
+  candidate_macro_f1: 0.6463102793504962
+  unchanged_macro_f1: 0.6398841192645623
+  exact_matched_random_macro_f1: 0.6382432313302706
+  candidate_minus_unchanged: 0.006426160085933802
+  candidate_minus_unchanged_interval_95: [0.003657212432103269, 0.009365455935978527]
+  candidate_minus_exact_matched_random: 0.008067048020225648
+  candidate_minus_exact_matched_random_interval_95: [0.0040931053452727805, 0.011946725717818258]
+  all_seven_frozen_gates_passed: true
+  independent_verification_passed: true
+  results_sha256: e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92
+  evidence_arrays_sha256: 5f6d2d0fc65d95ee245d98c82b80547f0e0cf06c278acc40b48f44020e8c59d4
+  verification_sha256: 2f4b6d6c64d8dfa493a89be0111ca8752257dabce808d4d9fa35933cdd9c5d68
+  source_annotations_modified: false
+  controlled_noise_transfer_supported: true
+  natural_error_detection_evaluated: false
+
+puma_post_confirmation_stress:
+  study_id: puma_realism_stress_v1
+  role: post_confirmation_exploratory_stress_only
+  candidate_changed: false
+  scenario_count: 9
+  scenarios_with_positive_macro_f1_lower_bound_vs_unchanged: 9
+  scenarios_with_positive_macro_f1_lower_bound_vs_matched_random: 9
+  scenarios_passing_every_registered_gate: 1
+  passing_scenario: group_conditional_10pct
+  class_recall_safety_failures: 8
+  clean_label_other_recall_effect: -0.013732833957552981
+  clean_label_other_recall_interval_95: [-0.025389778615167228, -0.0027894707822914014]
+  result_sha256: 0091c14075e7304e0a6effef5a398c32c692f40aaefe7ee7d0b126a101cf7892
+  evidence_arrays_sha256: 186861575266985b4e1071190a957fd45769752e69e138633e94fa3be6eb4d39
+  natural_data_policy_consequence: retain_uncorrected_until_expert_review
+
+puma_audit_time_label_sensitivity:
+  study_id: puma_audit_time_label_sensitivity_v1
+  role: post_confirmation_exploratory_sensitivity_only
+  fold_assignment_label_source: observed_label
+  pre_corruption_label_used_for_fold_assignment: false
+  candidate_changed: false
+  retrieval_precision: 0.5381861575178998
+  retrieval_precision_difference_vs_exact_matched_random: 0.3230310262529833
+  retrieval_precision_difference_interval_95: [0.25973397585007, 0.38131225104714983]
+  candidate_minus_unchanged_macro_f1: 0.00667944296150233
+  candidate_minus_unchanged_interval_95: [0.004141475700661824, 0.009505712132344529]
+  candidate_minus_exact_matched_random_macro_f1: 0.009069355900155174
+  candidate_minus_exact_matched_random_interval_95: [0.005855100059258797, 0.01246062687290453]
+  all_seven_sensitivity_gates_passed: true
+  config_sha256: ed6fd1e85d15604efc331b634a0d7604ca2675ba58345aa31386c266781e661f
+  results_sha256: 8f524b236995a495048a0955ebf930e14e732a1214d3856d3711571af13fd5cd
+  evidence_arrays_sha256: aad24975c29f004e6f5b44575ea5b3d97daa1122457277cca902d69f36e64903
+  independent_confirmation: false
+  natural_error_detection_evaluated: false
 
 claim_boundary:
   score_name: annotation_inconsistency_score
@@ -15,7 +131,8 @@ claim_boundary:
   diagnostic_or_clinical_claims_permitted: false
 
 representations:
-  selection_data: fresh_group_separated_development_only
+  selection_data: monusac_official_train_patient_group_nested_development_only
+  selected_controlled_development_view: resnet18_multiscale_64_128
   required_inputs:
     - target_nucleus_rgb
     - exact_target_mask_or_contour
@@ -24,6 +141,7 @@ representations:
     - tissue_type
     - neighbouring_cell_context_when_lawfully_available
   candidates:
+    - resnet18_multiscale_64_128
     - imagenet_resnet18_context_plus_target_morphometrics
     - UNI
     - CTransPath
@@ -59,6 +177,8 @@ review_queues:
     available_without_downstream_utility: true
   model_improvement:
     input: nested_group_cross_fitted_measured_development_intervention_utility
+    priority: percentile_annotation_inconsistency_score_times_positive_utility_lower_bound
+    implementation: histo_audit.auditing.utility_queue.build_measured_utility_queue
     require_lower_bound_gt: 0.0
     unavailable_without_measured_utility: true
   balance_dimensions:
@@ -93,6 +213,9 @@ expert_review:
 
 development_training_comparison:
   final_external_test_used_for_selection: false
+  selected_controlled_development_intervention: flag_exclude
+  selected_controlled_development_budget: 0.05
+  selected_controlled_development_candidate_is_not_natural_data_authority: true
   candidates:
     - uncorrected_observed_labels
     - gated_hard_changes
@@ -116,12 +239,18 @@ development_training_comparison:
     action_on_adverse_neutral_uncertain_or_unavailable: retain_uncorrected
 
 new_final_test:
+  frozen_candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  protocol: AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md
   sites_required_for_multisite_claim: 3
   patient_or_wsi_groups: determine_by_prospective_power_calculation
-  source: new_external_site_not_used_for_development
+  source: official_puma_public_cases_not_used_for_candidate_development
   unavailable_for_encoder_threshold_queue_calibration_or_training_selection: true
   success_requires_all:
     - top_k_beats_exact_matched_random_control
     - intervention_model_beats_uncorrected_model
     - no_important_class_breaches_registered_recall_non_degradation_limit
-  current_execution_status: not_executed
+  current_execution_status: controlled_new_source_complete
+  controlled_success_rule_met: true
+  natural_case_confirmation_status: not_executed
+  prospective_multisite_workflow_status: not_executed
+  executable_action_on_natural_data: retain_uncorrected

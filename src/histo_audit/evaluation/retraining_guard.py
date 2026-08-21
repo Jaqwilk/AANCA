@@ -8,7 +8,11 @@ from dataclasses import asdict, dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-from .restoration import classification_metrics
+from .restoration import (
+    classification_metrics,
+    macro_f1_from_confusion,
+    per_class_recall_from_confusion,
+)
 
 INDEPENDENT_GROUP_VALIDATION = "independent_group_validation"
 
@@ -95,43 +99,6 @@ def _group_confusions(
     return output
 
 
-def _macro_f1(confusion: NDArray[np.integer]) -> float:
-    matrix = np.asarray(confusion, dtype=np.float64)
-    true_positive = np.diag(matrix)
-    predicted_count = matrix.sum(axis=0)
-    actual_count = matrix.sum(axis=1)
-    precision = np.divide(
-        true_positive,
-        predicted_count,
-        out=np.zeros_like(true_positive),
-        where=predicted_count > 0,
-    )
-    recall = np.divide(
-        true_positive,
-        actual_count,
-        out=np.zeros_like(true_positive),
-        where=actual_count > 0,
-    )
-    f1 = np.divide(
-        2.0 * precision * recall,
-        precision + recall,
-        out=np.zeros_like(precision),
-        where=(precision + recall) > 0,
-    )
-    return float(f1.mean())
-
-
-def _per_class_recall(confusion: NDArray[np.integer]) -> NDArray[np.float64]:
-    matrix = np.asarray(confusion, dtype=np.float64)
-    actual_count = matrix.sum(axis=1)
-    return np.divide(
-        np.diag(matrix),
-        actual_count,
-        out=np.full(len(matrix), np.nan, dtype=np.float64),
-        where=actual_count > 0,
-    )
-
-
 def evaluate_retraining_guard(
     reference_labels: Sequence[int] | NDArray[np.integer],
     uncorrected_probabilities: NDArray[np.generic],
@@ -192,9 +159,9 @@ def evaluate_retraining_guard(
     differences = np.empty(n_iterations, dtype=np.float64)
     for index in range(n_iterations):
         sampled = rng.integers(0, len(unique_groups), size=len(unique_groups))
-        differences[index] = _macro_f1(candidate_confusions[sampled].sum(axis=0)) - _macro_f1(
-            baseline_confusions[sampled].sum(axis=0)
-        )
+        differences[index] = macro_f1_from_confusion(
+            candidate_confusions[sampled].sum(axis=0)
+        ) - macro_f1_from_confusion(baseline_confusions[sampled].sum(axis=0))
     interval = (
         float(np.quantile(differences, 0.025)),
         float(np.quantile(differences, 0.975)),
@@ -297,8 +264,12 @@ def evaluate_multicriteria_retraining_guard(
         rng = np.random.default_rng(seed)
         for _ in range(n_iterations):
             sampled = rng.integers(0, len(unique_groups), size=len(unique_groups))
-            baseline_recall = _per_class_recall(baseline_confusions[sampled].sum(axis=0))
-            candidate_recall = _per_class_recall(candidate_confusions[sampled].sum(axis=0))
+            baseline_recall = per_class_recall_from_confusion(
+                baseline_confusions[sampled].sum(axis=0)
+            )
+            candidate_recall = per_class_recall_from_confusion(
+                candidate_confusions[sampled].sum(axis=0)
+            )
             for label in selected_classes:
                 column = class_columns[label]
                 difference = candidate_recall[column] - baseline_recall[column]

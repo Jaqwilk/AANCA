@@ -4,11 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import tempfile
 from pathlib import Path
-
-import numpy as np
 
 from histo_audit.external_validation.monusac import (
     extract_monusac_embeddings,
@@ -17,23 +13,12 @@ from histo_audit.external_validation.monusac import (
     render_monusac_report,
     run_monusac_controlled_external,
 )
-from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_text, sha256_file
-
-
-def _atomic_npz(path: Path, arrays: dict[str, np.ndarray]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp.npz", dir=path.parent
-    )
-    os.close(descriptor)
-    temporary = Path(temporary_name)
-    try:
-        np.savez_compressed(temporary, **arrays)
-        with temporary.open("r+b") as stream:
-            os.fsync(stream.fileno())
-        os.replace(temporary, path)
-    finally:
-        temporary.unlink(missing_ok=True)
+from histo_audit.utils.run_tracking import (
+    atomic_write_json,
+    atomic_write_npz,
+    atomic_write_text,
+    sha256_file,
+)
 
 
 def _verify_archive(path: Path, expected_sha256: str, role: str) -> None:
@@ -134,7 +119,7 @@ def main() -> int:
     inventory_path = output_root / "source_inventory.json"
     atomic_write_json(results_path, result)
     atomic_write_text(report_path, render_monusac_report(result))
-    _atomic_npz(evidence_path, arrays)
+    atomic_write_npz(evidence_path, arrays)
     atomic_write_json(
         inventory_path,
         {

@@ -1,0 +1,133 @@
+schema_version: 1
+study_id: monusac_aanca_development_autoresearch_v1
+project: AANCA
+replacement_project_or_v2: false
+disposition: post_external_development_only_method_search
+
+concept_source:
+  repository: https://github.com/karpathy/autoresearch
+  pinned_commit: 228791fb499afffb54b46200aca536f79142f117
+  adapted_principles:
+    - fixed_evaluator
+    - bounded_trials
+    - append_only_experiment_ledger
+    - automatic_keep_discard
+    - simplicity_tiebreak
+
+data:
+  dataset: MoNuSAC2020
+  permitted_split: official_train_only
+  group_id: tcga_patient_id
+  excluded_patients: [TCGA-A2-A0ES, TCGA-MP-A4T7]
+  expected_patient_groups_after_exclusion: 44
+  expected_sample_id_prefix: monusac-train-
+  source_annotations_modified: false
+  forbidden_inputs:
+    - official_monusac_test
+    - frozen_nucls_unbiased
+    - frozen_nucls_evaluation
+    - pannuke_final_fold_outcomes
+    - saved_external_test_probabilities
+
+partition:
+  method: stratified_group_kfold
+  seed: 26082120
+  folds: 3
+  internal_lockbox_fold: 0
+  discovery_outer_folds: 4
+  audit_inner_folds: 4
+  reference_label_permitted_for_partition_only: true
+
+controlled_corruption:
+  mechanism: symmetric_random_corruption
+  rate: 0.10
+  discovery_seeds: [26082130, 26082131, 26082132]
+  source_annotations_modified: false
+
+feature_views:
+  required:
+    - resnet18_context_64
+    - resnet18_context_64_plus_stats
+  optional_after_provenance_gate:
+    - resnet18_context_128
+    - resnet18_multiscale_64_128
+    - verified_pathology_context
+
+candidate_space:
+  audit_l2: [0.001, 0.01, 0.1]
+  audit_class_weight_balanced: [true, false]
+  risk_methods:
+    probability: [self_confidence, prediction_margin, predictive_entropy]
+    neighbour:
+      k: [3, 7, 15, 31]
+      metric: [cosine]
+    hybrid:
+      neighbour_k: [7, 15]
+      self_confidence_weights: [0.25, 0.5, 0.75]
+  queue_presets:
+    global: null
+    balanced_current:
+      max_per_group_fraction: 0.05
+      max_per_class_fraction: 0.40
+      max_per_tissue_fraction: 0.35
+      max_per_transition_fraction: 0.20
+      minimum_cosine_distance: 0.01
+    balanced_relaxed:
+      max_per_group_fraction: 0.10
+      max_per_class_fraction: 0.50
+      max_per_tissue_fraction: 0.50
+      max_per_transition_fraction: 0.30
+      minimum_cosine_distance: 0.0
+    balanced_diverse:
+      max_per_group_fraction: 0.05
+      max_per_class_fraction: 0.35
+      max_per_tissue_fraction: 0.35
+      max_per_transition_fraction: 0.20
+      minimum_cosine_distance: 0.02
+  review_budgets: [0.01, 0.025, 0.05, 0.075, 0.10, 0.15, 0.20]
+  interventions:
+    - controlled_restore
+    - controlled_restore_selected_weight_0_5
+    - flag_downweight_0_5
+    - flag_exclude
+  downstream_l2: [0.001, 0.01, 0.1]
+  downstream_class_weight_balanced: [true, false]
+
+successive_halving:
+  ranking_screen_max_trials: 160
+  ranking_screen_max_finalists: 32
+  downstream_screen_max_trials: 96
+  full_nested_max_finalists: 8
+  screen_outer_folds: 2
+  screen_corruption_seeds: 1
+  full_corruption_seeds: 3
+  fixed_trial_budget_seconds: 300
+  status_values: [keep, discard, crash, timeout]
+
+controls:
+  matched_random_fields: [observed_class, organ, proposed_transition]
+  matched_random_repetitions_screen: 1
+  matched_random_repetitions_full: 5
+  matched_random_repetitions_lockbox: 20
+  bootstrap_iterations_screen: 300
+  bootstrap_iterations_full: 2000
+  bootstrap_seed: 26082140
+
+adoption_guard:
+  minimum_macro_f1_effect: 0.0
+  minimum_per_class_recall_effect: -0.01
+  important_classes: [0, 1, 2, 3]
+  success_requires_all:
+    - retrieval_lower_bound_gt_zero_vs_exact_matched_random
+    - downstream_lower_bound_gt_zero_vs_uncorrected
+    - downstream_lower_bound_gt_zero_vs_exact_matched_random
+    - every_important_class_recall_lower_bound_gte_minus_0_01
+    - direction_consistent_across_corruption_seeds
+  failure_action: retain_uncorrected
+
+claim_boundary:
+  natural_error_detection_claim_permitted: false
+  pathologist_error_claim_permitted: false
+  clinical_or_operational_utility_claim_permitted: false
+  automatic_annotation_change_permitted: false
+  internal_lockbox_is_external_confirmation: false

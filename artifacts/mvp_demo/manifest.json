@@ -1,8 +1,10 @@
 {
+  "schema_version": 2,
+  "policy": "aanca_presentation_complete_h1_h7_selected_source_readback_v2",
   "files": [
     {
       "path": "README.md",
-      "sha256": "bd25cb49a39138ae15cd57de2ba0383da74d70a1a45b4d08a90a9bef824fece3",
+      "sha256": "78c4bd60fe0b06a06327bb594f00e2b3f4ccba92f8b2e3ebd1388a102e7a9a6d",
       "size_bytes": 4595
     },
     {
@@ -12,8 +14,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "5871a7a8f7c620a7dcd8ed0b8f10c948bf7cdfdc125928f5577cd768076aaae8",
-      "size_bytes": 223814
+      "sha256": "36263b7755b85d98c5a208e74d0bd5d1db9288d321aa6d9a6d77fb3ed122c723",
+      "size_bytes": 166203
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -21,7 +23,5 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "113e3e8d20cf86dcde4afb09ffd9eb21f9aa78ab3733364e13c26d04945a8827",
-  "policy": "aanca_presentation_complete_h1_h7_selected_source_readback_v2",
-  "schema_version": 2
+  "manifest_root_sha256": "1e4e403e08aefc8e9d2e4b18a1b44d24c30c4ab4df106fba45addfd598ca2b4b"
 }

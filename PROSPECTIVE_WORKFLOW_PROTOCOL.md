@@ -1,7 +1,14 @@
 # Prospective workflow protocol for the current AANCA system
 
-Status: **designed but not executed**  
+Status: **designed but not executed; controlled PUMA transfer is complete but does
+not replace this human workflow study**
 System under study: the existing AANCA project, not a replacement or “v2”
+
+Frozen development candidate: `78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe`
+(multiscale 64+128 px, fixed hybrid, balanced 5% queue, `flag_exclude`). This
+candidate passed all nested controlled-development gates and all seven frozen PUMA
+controlled new-source gates. It remains inactive on natural data and may not be
+changed after prospective outcomes are opened.
 
 This protocol defines the new evidence needed to test whether AANCA helps in a real
 annotation-review workflow and whether reviewed changes improve a downstream model.
@@ -32,6 +39,9 @@ outcome is inspected.
 - A separate blinded adjudication panel establishes the study reference after both
   arms are locked. Disagreement and insufficient context remain reportable outcomes,
   not forced truth labels.
+- The controlled-development `flag_exclude` result does not authorise automatic
+  exclusion in this workflow. A reviewer decision or a separately frozen study arm
+  is required before a case receives zero training weight.
 
 ## Frozen outcomes
 
@@ -72,6 +82,16 @@ The annotation-quality queue and model-improvement queue remain separate. The la
 is unavailable until measured development interventions support nested
 group-cross-fitted per-case utility estimates whose lower bounds exceed zero. A high
 annotation-inconsistency score alone cannot authorise retraining.
+Its frozen priority is the product of the audit-risk percentile and the positive
+cross-fitted utility lower bound, as defined in
+`AANCA_MEASURED_UTILITY_PROTOCOL.md`.
+
+The post-confirmation PUMA stress gives a specific safety requirement for this
+study. Positive aggregate macro F1 coexisted with an adverse recall interval for a
+single class in eight of nine scenarios, including clean labels. Review capacity,
+intervention and analysis must therefore preserve predeclared per-class and
+proposed-transition caps, minimum retained counts and class-specific stopping
+guards. A global positive metric can never override a breached class-recall bound.
 
 ## Claim boundary
 

@@ -1865,7 +1865,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AANCA is a reproducible, non-diagnostic framework for ranking potentially inconsistent nucleus annotations for expert review.">
   <meta name="author" content="Natan Smogór">
-  <meta name="date" content="2026-08-20">
+  <meta name="date" content="2026-08-21">
   <meta name="theme-color" content="#010102">
   <meta name="referrer" content="no-referrer">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -1887,13 +1887,16 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell">
     <div class="hero-copy">
       <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-20">20 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-21">21 August 2026</time></span></div>
+    </div>
+    <div class="hero-figure hero-animate" aria-hidden="true">
+      <canvas id="hero-canvas"></canvas>
+      <p class="hero-figure-caption">Conceptual review-queue field · illustration, not benchmark data</p>
     </div>
   </div>
 </section>
@@ -1994,8 +1997,7 @@ def _render_html_v4(evidence: dict[str, Any]) -> str:
       </div>
 
       <div class="journey-copy">
-        <h2 id="journey-title" class="display">One controlled question, unfolded step by step.</h2>
-        <p class="journey-intro">The diagram shows the complete governed path: preserve the reference, create a known intervention, predict without source-patch leakage, rank an equal review budget and measure retrieval while leaving the final decision to an expert.</p>
+        <p class="journey-intro" id="journey-title">The diagram shows the complete governed path: preserve the reference, create a known intervention, predict without source-patch leakage, rank an equal review budget and measure retrieval while leaving the final decision to an expert.</p>
       </div>
     </div></div>
   </section>
@@ -2162,7 +2164,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 20 August 2026</p><p>Dataset: PanNuke</p><p>Primary frozen-feature benchmark completed; confirmatory and external validation pending.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Dataset: PanNuke</p><p>Primary frozen-feature benchmark completed; confirmatory and external validation pending.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
   </div>
   <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
@@ -2671,18 +2673,13 @@ def _render_hypothesis_ledger_v4(
     )
     slides: list[str] = []
     for _, title, detail in entries:
-        visual_words = "".join(
-            f'<span class="learned-word">{html.escape(word)}</span>' for word in detail.split()
-        )
         slides.append(
             '<article class="hypothesis-row" data-learned-slide>'
             + '<h3 class="hypothesis-title">'
             + html.escape(title)
-            + '</h3><p class="learned-answer"><span class="sr-only">'
+            + '</h3><p class="learned-answer">'
             + html.escape(detail)
-            + '</span><span class="learned-answer-visual" aria-hidden="true">'
-            + visual_words
-            + "</span></p></article>"
+            + "</p></article>"
         )
     return "".join(slides)
 
@@ -3569,9 +3566,9 @@ try {
     renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
     camera.aspect = Math.max(.1, rect.width / Math.max(1, rect.height));
     camera.updateProjectionMatrix();
-    const mobile = rect.width < 720;
-    auditField.position.set(mobile ? .18 : 2.16, mobile ? -2.05 : -.02, 0);
-    auditField.scale.setScalar(mobile ? .42 : rect.width < 1000 ? .73 : .92);
+    const mobile = rect.width < 560;
+    auditField.position.set(mobile ? .05 : .12, mobile ? -.08 : 0, 0);
+    auditField.scale.setScalar(mobile ? .52 : rect.height < 260 ? .58 : .68);
   };
   resize();
   window.addEventListener('resize', resize, {passive: true});
@@ -3648,854 +3645,8 @@ try {
 """
 
 
-_MVP_CSS_V4 = (
-    _MVP_CSS_V3
-    + r"""
-/* Professor-facing editorial release: centered reading rhythm + cumulative method story. */
-:root {
-  --ink-tertiary: #7b8089;
-  --prose: 640px;
-  --editorial: 640px;
-  --figure: 1160px;
-  --wide: 1320px;
-  --section-space: clamp(64px, 7vw, 96px);
-}
-body { font-size: 16px; line-height: 1.68; }
-html.motion-enhanced { scroll-behavior: auto; }
-.site-header { height: 60px; border: 0; background: rgba(1,1,2,.82); backdrop-filter: blur(20px) saturate(125%); will-change: transform; }
-.site-header.is-scrolled { border: 0; }
-.nav-shell { height: 60px; }
-.brand { min-height: 44px; gap: 9px; font-size: 14px; }
-.brand-mark { position: relative; z-index: 2; width: 19px; height: 19px; flex: 0 0 19px; }
-.brand-word-clip { display: block; width: 51px; overflow: hidden; }
-.brand-label { display: block; transform-origin: left center; }
-.nav-links { gap: 25px; }
-.nav-links a { min-height: 44px; display: inline-flex; align-items: center; font-size: 12px; letter-spacing: .01em; }
-.nav-links a::after { display: none; }
-.nav-links a.is-active { color: var(--accent-hover); }
-.reading-progress { display: none !important; }
-.menu-button { min-width: 44px; min-height: 44px; border-color: var(--line-strong); }
-
-.hero { min-height: min(900px,100svh); padding-top: 60px; border: 0; }
-.hero::after { display: none; }
-#hero-canvas { inset: 60px 0 0; height: calc(100% - 60px); }
-#hero-canvas[hidden] { display: none !important; }
-.hero-shell { min-height: calc(min(900px,100svh) - 60px); grid-template-columns: minmax(0,1.03fr) minmax(360px,.97fr); }
-.hero-copy { max-width: 680px; padding: 86px 0 100px; }
-.hero h1 { max-width: 680px; margin-top: 18px; font-size: clamp(42px,5vw,64px); line-height: 1.035; letter-spacing: -.048em; }
-.hero-lead { max-width: 630px; margin-top: 24px; font-size: clamp(16px,1.35vw,19px); line-height: 1.62; }
-.hero-byline { margin-top: 30px; }
-.author-jump { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
-.author-jump strong { color: var(--ink-muted); font-weight: 550; }
-.author-jump:hover strong, .author-jump:focus-visible strong { color: var(--ink); }
-.author-jump:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; border-radius: 2px; }
-.hero-visual-label { bottom: 38px; }
-.eyebrow, .section-kicker, .chart-label { font-size: 10px; letter-spacing: .09em; }
-
-.article-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin-inline: auto; }
-.narrative { padding: var(--section-space) 0; }
-.narrative .lede { margin: 0 0 42px; color: var(--ink); font-size: clamp(23px,2.4vw,31px); font-weight: 500; line-height: 1.38; letter-spacing: -.03em; text-wrap: balance; }
-.article-copy p { margin: 0 0 24px; color: var(--ink-muted); font-size: clamp(16px,1.35vw,18px); line-height: 1.72; letter-spacing: -.008em; }
-.article-copy p:last-child { margin-bottom: 0; }
-.article-copy strong { color: var(--ink); font-weight: 550; }
-.scope-note { margin-top: 44px; padding-top: 24px; font-size: 13px; line-height: 1.65; }
-.study-at-a-glance { padding: 0 0 var(--section-space); }
-.study-at-a-glance .section-heading { margin-bottom: 42px; }
-.study-specs { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(5,1fr); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); gap: 1px; }
-.spec-card { min-height: 158px; padding: 24px 21px; background: var(--surface-1); }
-.spec-card span { display: block; margin-bottom: 24px; color: var(--accent-hover); font: 500 10px/1.3 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-.spec-card strong { display: block; color: var(--ink); font-size: 14px; font-weight: 550; line-height: 1.45; }
-.spec-card small { display: block; margin-top: 7px; color: var(--ink-subtle); font-size: 11px; line-height: 1.5; }
-.research-question { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto var(--section-space); padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.research-question span { display: block; margin-bottom: 16px; color: var(--accent-hover); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
-.research-question p { margin: 0; color: var(--ink); font-size: clamp(20px,2.25vw,29px); font-weight: 500; line-height: 1.43; letter-spacing: -.026em; text-wrap: balance; }
-
-.section { position: relative; padding: var(--section-space) 0; border: 0; scroll-margin-top: 60px; }
-.section::before { display: none; }
-.section-heading { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: 0 auto 54px; }
-h2, .display { font-size: clamp(32px,3.7vw,48px); line-height: 1.12; letter-spacing: -.038em; }
-.section-deck { max-width: none; margin: 20px auto 0; font-size: clamp(16px,1.35vw,18px); line-height: 1.68; text-wrap: pretty; }
-.chapter-copy { width: min(var(--prose),calc(100% - 2 * var(--page-pad))); margin: -20px auto 56px; }
-.chapter-copy p { margin: 0 0 20px; color: var(--ink-subtle); font-size: 16px; line-height: 1.7; text-wrap: pretty; }
-
-.journey { position: relative; height: auto; padding: var(--section-space) 0; scroll-margin-top: 60px; }
-.journey::before { display: none; }
-.journey-sticky { position: static; min-height: 0; display: grid; place-items: center; overflow: visible; padding: 0; }
-html.motion-enhanced .journey { height: auto !important; }
-html.motion-enhanced .journey-sticky { position: static !important; min-height: 0 !important; overflow: visible !important; padding: 0 !important; }
-html:not(.motion-enhanced) .journey { height: auto; padding: var(--section-space) 0; }
-html:not(.motion-enhanced) .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
-.journey-grid { width: min(1080px,calc(100% - 2 * var(--page-pad))); display: grid; grid-template-columns: minmax(500px,1.05fr) minmax(340px,.95fr); gap: clamp(40px,5vw,68px); align-items: center; }
-.journey-visual { min-width: 0; }
-.journey-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
-.journey-lane-bg { fill: var(--surface-1); stroke: var(--line); stroke-width: 1.2; }
-.journey-lane-edge { fill: none; stroke: rgba(255,255,255,.045); stroke-width: 1; }
-.journey-stage-no { fill: var(--accent-hover); font: 500 11px var(--mono); letter-spacing: .04em; }
-.journey-stage-title { fill: var(--ink); font: 600 15px var(--sans); letter-spacing: -.01em; }
-.journey-stage-meta { fill: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-.journey-rail { fill: none; stroke: var(--line-strong); stroke-width: 1.4; stroke-linecap: round; }
-.journey-rail-accent { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; }
-.journey-connector { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
-.journey-node { fill: var(--accent); }
-.journey-node-muted { fill: var(--line-strong); }
-.journey-icon-line { fill: none; stroke: var(--ink-muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.journey-stage-group { transform-origin: center; }
-.journey-copy .section-kicker { margin-bottom: 15px; }
-.journey-copy .display { max-width: 480px; font-size: clamp(32px,3.45vw,46px); }
-.journey-intro { max-width: 500px; margin: 20px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.62; }
-.journey-steps { margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-.journey-step { position: relative; padding: 17px 0 17px 46px; border-bottom: 1px solid var(--line); opacity: 1; }
-.journey-step::before { content: attr(data-index); position: absolute; left: 0; top: 19px; color: var(--ink-tertiary); font: 500 10px var(--mono); }
-.journey-step small { display: block; margin-bottom: 4px; color: var(--ink-tertiary); font: 500 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-.journey-step h3 { margin: 0 0 5px; font-size: 14px; font-weight: 600; letter-spacing: -.012em; }
-.journey-step p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.52; }
-.motion-enhanced .journey-step { opacity: 1; }
-.journey-step.is-active { opacity: 1 !important; }
-.journey-step.is-active::before, .journey-step.is-active small { color: var(--accent-hover); }
-
-.reading-grid { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--line); }
-.reading-card { min-height: 240px; padding: 28px; background: var(--surface-1); }
-.reading-card span { color: var(--accent-hover); font: 500 10px var(--mono); }
-.reading-card h3 { margin: 34px 0 12px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
-.reading-card p { margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
-
-.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
-.learned-section { padding-top: 0; }
-.learned-section::before { display: none; }
-.learned-story { padding: var(--section-space) 0 0; }
-.learned-sticky { width: 100%; }
-.learned-shell { width: min(var(--editorial),calc(100% - 2 * var(--page-pad))); margin: auto; }
-.learned-heading { width: 100%; margin-bottom: clamp(58px,7vw,86px); }
-.learned-stage { position: relative; }
-.hypothesis-ledger { display: grid; gap: clamp(68px,9vw,112px); overflow: visible; border: 0; border-radius: 0; background: transparent; }
-.hypothesis-row { min-height: 0; margin: 0; padding: 0; border: 0; background: transparent; }
-.hypothesis-row .hypothesis-title { max-width: 680px; margin: 0; color: var(--ink); font-size: clamp(28px,3.15vw,42px); font-weight: 560; line-height: 1.14; letter-spacing: -.038em; text-wrap: balance; }
-.hypothesis-row .learned-answer { max-width: 680px; margin: 28px 0 0; color: var(--ink-muted); font-size: clamp(16px,1.5vw,19px); line-height: 1.7; letter-spacing: -.008em; text-wrap: pretty; }
-.learned-answer-visual { display: block; }
-.learned-word { display: inline-block; margin-right: .27em; }
-
-@media (min-width: 901px) {
-  html.motion-enhanced .learned-story { height: 560vh; padding: 0; }
-  html.motion-enhanced .learned-sticky { position: sticky; top: 0; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: 76px 0 48px; box-sizing: border-box; }
-  html.motion-enhanced .learned-shell { display: grid; grid-template-rows: auto minmax(390px,1fr); align-content: center; max-height: 820px; }
-  html.motion-enhanced .learned-heading { margin-bottom: 48px; }
-  html.motion-enhanced .learned-stage { min-height: 390px; overflow: hidden; }
-  html.motion-enhanced .hypothesis-ledger { position: relative; height: 100%; border: 0; }
-  html.motion-enhanced .hypothesis-row { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 10px 0 30px; border: 0; visibility: hidden; opacity: 0; }
-  html.motion-enhanced .learned-word { opacity: 0; }
-}
-
-.always-visible-evidence { margin-top: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
-.evidence-label-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 12px; font-weight: 500; }
-.evidence-label-row span:last-child { color: var(--ink-tertiary); font: 400 9px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-.qc-frame { border: 0; border-radius: 0; }
-.qc-preview { position: relative; max-height: 760px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
-.qc-preview::after { display: none; }
-.qc-preview img { border: 0; border-radius: 0; }
-.qc-toolbar a { min-height: 40px; display: inline-flex; align-items: center; }
-.table-wrap { scrollbar-color: var(--line-strong) var(--surface-1); }
-.table-wrap:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
-.table-tools { border-top: 0; }
-input, select { min-height: 44px; }
-.provenance a, .usage-note a { min-height: 28px; display: inline-flex; align-items: center; }
-
-.repo-shell { width: min(var(--figure),calc(100% - 2 * var(--page-pad))); margin: auto; }
-.repo-card { position: relative; padding: clamp(28px,4vw,48px); border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface-1); overflow: hidden; }
-.repo-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: var(--accent); }
-.repo-top { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
-.repo-icon { width: 40px; height: 40px; color: var(--ink); }
-.repo-path { display: block; color: var(--ink-tertiary); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
-.repo-title { display: block; margin-top: 3px; color: var(--ink); font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
-.repo-link { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--surface-2); font-size: 12px; font-weight: 550; text-decoration: none; }
-.repo-description { max-width: 760px; margin: 30px 0 0; color: var(--ink-subtle); font-size: 14px; line-height: 1.7; }
-.repo-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-.repo-tags span { padding: 5px 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink-subtle); font: 400 10px var(--mono); }
-.usage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
-.repo-command { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-1); }
-.repo-command > span { color: var(--accent-hover); font: 500 10px var(--mono); }
-.repo-command h3 { margin: 20px 0 8px; font-size: 15px; font-weight: 600; }
-.repo-command p { min-height: 58px; margin: 0 0 18px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
-.repo-command pre { min-height: 124px; margin: 0; padding: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-muted); background: var(--canvas); font: 400 10px/1.65 var(--mono); white-space: pre-wrap; }
-.usage-note { margin: 24px 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
-
-.author-shell { width: min(900px,calc(100% - 2 * var(--page-pad))); margin: auto; }
-.author-profile { max-width: 720px; }
-.author-profile h2 { max-width: 660px; margin: 0; font-size: clamp(34px,4.2vw,50px); }
-.author-lede { max-width: 670px; margin: 24px 0 0; color: var(--ink-muted); font-size: clamp(16px,1.35vw,19px); line-height: 1.65; letter-spacing: -.01em; }
-.author-credentials { margin-top: clamp(58px,7vw,82px); border-top: 1px solid var(--line); }
-.credential-record { display: grid; grid-template-columns: 110px minmax(220px,1fr) minmax(260px,.9fr); gap: 8px 32px; padding: 27px 0; border-bottom: 1px solid var(--line); }
-.credential-heading { grid-column: 1; grid-row: 1 / span 2; display: flex; align-items: center; }
-.credential-logo { width: 116px; min-height: 56px; display: flex; align-items: center; }
-.credential-logo img { display: block; width: 116px; max-height: 56px; object-fit: contain; object-position: left center; }
-.credential-record h3 { grid-column: 2; margin: 0; color: var(--ink); font-size: clamp(20px,2vw,25px); font-weight: 560; line-height: 1.22; letter-spacing: -.03em; }
-.credential-record h3 a { color: inherit; text-decoration: none; }
-.credential-record h3 a:hover, .credential-record h3 a:focus-visible { color: var(--accent-hover); }
-.credential-record h3 a:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 5px; border-radius: 2px; }
-.credential-course { grid-column: 2; margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 1.55; }
-.credential-meta { grid-column: 3; grid-row: 1 / span 2; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; align-self: center; margin: 0; }
-.credential-meta div { padding: 0; }
-.credential-meta dt { color: var(--ink-tertiary); font: 500 9px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-.credential-meta dd { margin: 6px 0 0; color: var(--ink-muted); font-size: 12px; line-height: 1.5; }
-.credential-proof { grid-column: 2 / -1; display: flex; gap: 12px; align-items: center; margin-top: 13px; padding-top: 17px; border-top: 1px solid var(--line); }
-.credential-proof svg { width: 27px; height: 27px; flex: 0 0 27px; fill: none; stroke: var(--accent-hover); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.credential-proof strong { display: block; color: var(--ink-muted); font-size: 11px; font-weight: 600; }
-.credential-proof span { display: block; margin-top: 3px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.45; }
-.institution-note { max-width: 650px; margin: 17px 0 0 142px; color: var(--ink-tertiary); font-size: 10px; line-height: 1.55; }
-
-/* Editorial surfaces: structure with rhythm and rules, not nested cards. */
-.study-specs, .reading-grid {
-  gap: 1px;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: var(--line);
-  overflow: visible;
-}
-.spec-card, .reading-card { background: var(--canvas); }
-.spec-card { min-height: 132px; padding: 21px 18px; }
-.spec-card span { margin-bottom: 18px; }
-.reading-card { min-height: 190px; padding: 24px 22px; }
-.reading-card h3 { margin-top: 27px; }
-.result-layout { gap: clamp(42px,5vw,72px); align-items: center; }
-.result-lead { padding: 0; border: 0; border-radius: 0; background: transparent; }
-.h4-chart, .h2-chart, .forest-plot, .seed-panel {
-  padding: clamp(28px,3.4vw,44px) 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-}
-.metric-dot { border-color: var(--canvas); }
-.metric-row { min-height: 42px; border-top: 0; }
-.range-row { min-height: 50px; border-top: 0; }
-.forest-group { margin: 20px 0 6px; padding-top: 14px; }
-.forest-row { min-height: 38px; gap: 16px; }
-.forest-track { height: 18px; }
-.forest-label { font-size: 10px; line-height: 1.3; }
-#benchmarks .forest-plot {
-  max-height: min(48svh,520px);
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border-top: 0;
-  border-bottom: 0;
-  overflow: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-}
-#benchmarks .forest-axis {
-  position: static;
-  z-index: auto;
-  padding: 0 0 12px;
-  margin: 0 0 4px;
-  background: transparent;
-}
-#benchmarks .forest-group {
-  position: static;
-  z-index: auto;
-  top: auto;
-  padding-bottom: 4px;
-  background: transparent;
-}
-#benchmarks .forest-axis + .forest-group { margin-top: 0; padding-top: 0; border-top: 0; }
-#benchmarks .forest-row { border-top: 0; }
-#benchmarks .forest-plot:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 4px; }
-.always-visible-evidence {
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-  overflow: visible;
-}
-.qc-frame { padding: 0; border: 0; border-radius: 0; background: transparent; }
-.stats-grid {
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  overflow: visible;
-}
-.stat { background: transparent; }
-.stat { min-height: 108px; padding: 20px; }
-.rules { gap: 0 clamp(38px,5vw,72px); border: 0; background: transparent; }
-.rule { padding: 26px 0; border-top: 1px solid var(--line); background: transparent; }
-.claim-grid { gap: clamp(42px,6vw,84px); border: 0; border-radius: 0; background: transparent; overflow: visible; }
-.claim-card { padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: transparent; }
-.repo-card {
-  padding: 34px 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-}
-.repo-card::before { display: none; }
-.usage-grid { gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.repo-command { padding: 21px clamp(20px,2.3vw,30px) 22px; border: 0; border-left: 1px solid var(--line); border-radius: 0; background: transparent; }
-.repo-command:first-child { padding-left: 0; border-left: 0; }
-.repo-command:last-child { padding-right: 0; }
-.repo-command h3 { margin: 13px 0 6px; }
-.repo-command p { min-height: 0; margin-bottom: 0; }
-.repo-command pre { min-height: 0; margin-top: 14px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-1); }
-.usage-note { max-width: 760px; margin-top: 15px; font-size: 11px; }
-.evidence-label-row { padding: 12px 0; }
-.table-tools { padding: 12px 0; }
-table { font-size: 10px; }
-th, td { padding: 8px 10px; }
-.comparison-name { font-size: 10px; line-height: 1.32; }
-.comparison-id { margin-top: 2px; font-size: 8px; line-height: 1.25; }
-.status-pill { padding: 2px 5px; font-size: 8px; }
-#evidence .table-wrap {
-  max-height: min(50svh,540px);
-  overflow: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-}
-
-footer { position: relative; padding: 0 var(--page-pad) 48px; border: 0; color: var(--ink-subtle); font-size: 11px; }
-.footer-inner { width: min(var(--wide),100%); margin-inline: auto; display: block; }
-.footer-divider { width: min(640px,100%); height: 1px; margin: 0 auto 56px; background: var(--line); }
-.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(2,1fr); gap: 48px; }
-.footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
-.footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
-.footer-column h3 { margin: 0 0 15px; color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-.footer-column p, .footer-column a { display: block; margin: 0 0 8px; color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
-.footer-column a { min-height: 32px; display: flex; align-items: center; margin-bottom: 0; }
-.footer-column a:hover { color: var(--ink); }
-.footer-bottom { display: flex; justify-content: space-between; gap: 32px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-subtle); font-size: 11px; line-height: 1.58; }
-.footer-bottom span { max-width: 560px; }
-
-.gsap-ready .reveal { visibility: hidden; }
-@media (max-width: 1120px) {
-  .study-specs { grid-template-columns: repeat(3,1fr); }
-  .spec-card:nth-child(n+4) { min-height: 142px; }
-  .stats-grid { grid-template-columns: repeat(2,1fr); }
-  .stat:nth-child(2n) { border-right: 0; }
-  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-  .journey-grid { grid-template-columns: minmax(500px,1.05fr) minmax(330px,.95fr); gap: 44px; }
-  .reading-grid { grid-template-columns: repeat(2,1fr); }
-  .usage-grid { grid-template-columns: 1fr 1fr; }
-  .repo-command:last-child { grid-column: 1 / -1; }
-  .repo-command:nth-child(3) { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
-  .author-shell { grid-template-columns: 1fr; gap: 64px; }
-  .author-profile { max-width: 760px; }
-}
-@media (max-width: 1200px) {
-  .journey { height: auto; padding: var(--section-space) 0; }
-  .journey-sticky { position: static; min-height: 0; padding: 0; overflow: visible; }
-  .journey-grid { grid-template-columns: 1fr; }
-  .journey-visual { order: 2; }
-  .journey-copy { order: 1; }
-  .journey-copy .display, .journey-intro { max-width: 680px; }
-  .journey-step, .motion-enhanced .journey-step { opacity: 1 !important; }
-  .journey-stage-group, .journey-connector { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
-}
-@media (max-width: 900px) {
-  .hero { min-height: 850px; }
-  .hero-shell { min-height: 790px; grid-template-columns: 1fr; }
-  .hero-copy { padding-top: 122px; }
-  .hypothesis-ledger { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1.25fr 1fr; }
-  .footer-column:last-child { grid-column: 2 / -1; }
-}
-@media (min-width: 901px) and (max-height: 720px) {
-  html.motion-enhanced .learned-sticky { padding: 62px 0 22px; }
-  html.motion-enhanced .learned-heading { margin-bottom: 22px; }
-  html.motion-enhanced .learned-heading h2 { font-size: 34px; }
-  html.motion-enhanced .learned-stage { min-height: 340px; }
-  html.motion-enhanced .hypothesis-row { padding: 20px 0 22px; }
-  html.motion-enhanced .hypothesis-row .hypothesis-title { margin: 0; font-size: 29px; }
-  html.motion-enhanced .hypothesis-row .learned-answer { margin-top: 19px; font-size: 14px; line-height: 1.52; }
-}
-@media (max-width: 720px) {
-  :root { --page-pad: 22px; --section-space: 96px; }
-  .brand, .menu-button { position: relative; z-index: 2; }
-  .nav-links { z-index: 1; top: 66px; left: 12px; right: 12px; padding: 10px 18px 16px; border: 1px solid var(--line); border-radius: 12px; background: #0f1011; }
-  .hero { min-height: 810px; }
-  .hero-shell { min-height: 750px; }
-  .hero-copy { padding-top: 104px; }
-  .hero h1 { font-size: clamp(38px,12vw,50px); }
-  .hero-lead { font-size: 15px; }
-  .narrative .lede { font-size: 23px; }
-  .article-copy p { font-size: 16px; }
-  .study-specs { grid-template-columns: 1fr 1fr; }
-  .spec-card { min-height: 148px; }
-  .spec-card:last-child { grid-column: 1 / -1; }
-  .research-question { padding: 28px 0; }
-  h2, .display { font-size: clamp(31px,10vw,42px); }
-  .section-heading { margin-bottom: 42px; }
-  .journey-grid { gap: 44px; }
-  .journey-visual svg { width: 112%; margin-left: -6%; }
-  .journey-step { padding-left: 40px; }
-  .reading-grid, .usage-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr; }
-  .stat { border-right: 0; border-bottom: 1px solid var(--line); }
-  .stat:last-child { border-bottom: 0; }
-  .reading-card { min-height: 0; }
-  .repo-command:last-child { grid-column: auto; }
-  .repo-command, .repo-command:first-child, .repo-command:last-child { padding: 23px 0; border-left: 0; }
-  .repo-command + .repo-command { border-top: 1px solid var(--line); }
-  .repo-top { grid-template-columns: auto 1fr; }
-  .repo-link { grid-column: 1 / -1; justify-self: start; }
-  .repo-command p { min-height: 0; }
-  .credential-record { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
-  .credential-heading { grid-column: 1; grid-row: auto; flex-direction: row; align-items: center; margin-bottom: 14px; }
-  .credential-record h3, .credential-course, .credential-meta, .credential-proof { grid-column: 1; grid-row: auto; }
-  .credential-meta { margin-top: 18px; }
-  .credential-proof { margin-top: 15px; }
-  .institution-note { margin-left: 0; }
-  .hypothesis-row { min-height: 0; }
-  .metric-axis, .range-axis { font-size: 10px; }
-  .evidence-label-row { align-items: flex-start; flex-direction: column; gap: 5px; }
-  .qc-preview { max-height: 620px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 34px; }
-  .footer-column:last-child { grid-column: auto; }
-  .footer-column a { min-height: 44px; }
-  .footer-bottom { flex-direction: column; }
-  #comparison-table td[data-label="Comparison"] .comparison-id { grid-column: 2; margin-top: -4px; }
-  #comparison-table tr {
-    display: grid;
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 10px 16px;
-    padding: 12px 0;
-  }
-  #comparison-table td { display: block; min-width: 0; padding: 0; }
-  #comparison-table td::before { display: block; margin-bottom: 3px; }
-  #comparison-table td[data-label="Comparison"] { grid-column: 1 / -1; }
-  #comparison-table td[data-label="Comparison"] .comparison-id { margin-top: 3px; }
-  #seed-audit table tr { padding: 9px 0; }
-  #seed-audit table td { grid-template-columns: 76px 1fr; gap: 8px; padding: 3px 0; }
-}
-
-/* Long-form article layout: one narrative rail with evidence figures breaking wide. */
-main { display: flex; flex-direction: column; }
-#overview { order: 10; }
-#study-facts { order: 20; }
-#research-question { order: 30; }
-#method { order: 40; }
-#reading { order: 60; }
-#results { order: 70; }
-#benchmarks { order: 80; }
-#subgroups { order: 90; }
-#seed-audit { order: 100; }
-#evidence { order: 110; }
-#quality { order: 120; }
-#integrity { order: 125; }
-#interpretation { order: 130; }
-#use { order: 140; }
-#author { order: 150; }
-main > [id] { scroll-margin-top: 72px; }
-.narrative { padding: clamp(70px,7vw,92px) 0 34px; }
-.study-at-a-glance, .section { padding: clamp(56px,6vw,82px) 0; }
-.section-heading, .article-copy, .chapter-copy {
-  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
-  margin-inline: auto;
-}
-.section-heading { margin-bottom: 34px; }
-.section-heading h2,
-.method-context h2,
-.reproduction-intro h2,
-.learned-heading h2,
-.author-profile h2,
-.journey-copy .display {
-  font-family: var(--sans);
-  font-size: clamp(22px,2.15vw,29px);
-  font-weight: 500;
-  line-height: 1.48;
-  letter-spacing: -.03em;
-}
-.section-deck,
-.article-copy p,
-.chapter-copy p,
-.method-context p,
-.reproduction-intro p,
-.author-lede,
-.author-copy {
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.74;
-  letter-spacing: -.008em;
-}
-.section-deck {
-  margin-top: 32px;
-  color: var(--ink-muted);
-  text-wrap: pretty;
-}
-.section-heading:has(.section-deck) { margin-bottom: 22px; }
-.chapter-copy { margin-top: 0; }
-.chapter-copy p { margin-bottom: 24px; color: var(--ink-muted); }
-.chapter-copy p + p, .method-context p + p, .reproduction-intro p + p { margin-top: 0; }
-.article-copy .lede { font-size: clamp(22px,2.15vw,29px); line-height: 1.48; }
-.scope-note { margin-top: 30px; padding: 0; border: 0; background: transparent; }
-
-.study-specs {
-  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
-  grid-template-columns: 1fr;
-  gap: 0;
-  border: 0;
-  border-top: 0;
-  border-bottom: 0;
-  background: transparent;
-}
-.spec-card {
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 118px 1fr;
-  gap: 5px 24px;
-  padding: 13px 0;
-  border-bottom: 0;
-  background: transparent;
-}
-.spec-card:last-child { border-bottom: 0; }
-.spec-card span { grid-row: 1 / span 2; margin: 4px 0 0; }
-.spec-card strong { font-size: 16px; line-height: 1.35; }
-.spec-card small { max-width: 520px; font-size: 12px; line-height: 1.55; }
-
-.research-question {
-  width: min(760px,calc(100% - 2 * var(--page-pad)));
-  display: block;
-  margin: 20px auto clamp(52px,6vw,78px);
-  padding: 0 0 0 22px;
-  border: 0;
-  border-left: 2px solid var(--accent);
-  background: transparent;
-}
-.research-question span { display: block; margin-bottom: 12px; }
-.research-question p {
-  max-width: 710px;
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: clamp(22px,2.15vw,29px);
-  font-weight: 500;
-  line-height: 1.48;
-  letter-spacing: -.03em;
-}
-
-.method-context { padding: 0 0 clamp(42px,5vw,64px); }
-.method-context .section-kicker { margin-bottom: 18px; }
-.method-context h2, .reproduction-intro h2 {
-  max-width: 650px;
-  margin: 0 0 32px;
-}
-.method-context p, .reproduction-intro p { margin: 0; color: var(--ink-muted); }
-.method-context p + p, .reproduction-intro p + p { margin-top: 24px; }
-.chapter-copy + .reading-grid, .chapter-copy + .figure-width,
-.chapter-copy + .wide-width { margin-top: 28px; }
-.result-afterword { margin-top: 34px; }
-.findings-intro { margin-bottom: clamp(48px,5vw,70px); }
-.findings-intro .section-kicker { margin-bottom: 20px; }
-
-.reading-grid {
-  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
-  grid-template-columns: 1fr;
-  gap: 0;
-  border: 0;
-  border-top: 0;
-  border-bottom: 0;
-  background: transparent;
-}
-.reading-card {
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 34px 180px 1fr;
-  gap: 18px;
-  align-items: baseline;
-  padding: 12px 0;
-  border-bottom: 0;
-  background: transparent;
-}
-.reading-card:last-child { border-bottom: 0; }
-.reading-card h3 { margin: 0; font-size: 15px; }
-.reading-card p { margin: 0; font-size: 12px; line-height: 1.58; }
-
-.article-findings.learned-story { height: auto !important; padding: 0 !important; }
-.motion-enhanced .article-findings .learned-sticky,
-.article-findings .learned-sticky {
-  position: static !important;
-  min-height: 0 !important;
-  display: block !important;
-  padding: 0 !important;
-  overflow: visible !important;
-}
-.motion-enhanced .article-findings .learned-shell,
-.article-findings .learned-shell { display: block !important; max-height: none !important; }
-.article-findings .learned-heading { margin-bottom: 28px !important; }
-.article-findings .learned-heading { width: 100%; margin-inline: 0; }
-.motion-enhanced .article-findings .learned-stage,
-.article-findings .learned-stage { min-height: 0 !important; overflow: visible !important; }
-.motion-enhanced .article-findings .hypothesis-ledger,
-.article-findings .hypothesis-ledger {
-  position: static !important;
-  height: auto !important;
-  display: block !important;
-  border-top: 0 !important;
-}
-.motion-enhanced .article-findings .hypothesis-row,
-.article-findings .hypothesis-row {
-  position: static !important;
-  inset: auto !important;
-  display: block !important;
-  visibility: visible;
-  opacity: 1;
-  transform: none;
-  padding: 24px 0 28px !important;
-  border-bottom: 0 !important;
-}
-.article-findings .hypothesis-row .hypothesis-title {
-  max-width: 640px;
-  font-family: var(--sans);
-  font-size: clamp(22px,2.15vw,29px);
-  font-weight: 500;
-  line-height: 1.48;
-  letter-spacing: -.03em;
-}
-.article-findings .hypothesis-row .learned-answer {
-  margin-top: 24px;
-  color: var(--ink-muted);
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.74;
-  letter-spacing: -.008em;
-}
-.article-findings .learned-answer-visual { display: none !important; }
-.article-findings .sr-only {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  clip: auto !important;
-  white-space: normal !important;
-}
-
-.result-layout, .seed-panel, .h4-chart, .h2-chart, .forest-plot,
-.stats-grid, .claim-grid, .always-visible-evidence, .repo-card {
-  border-radius: 0;
-}
-.h4-chart, .h2-chart, .forest-plot, .seed-panel,
-.always-visible-evidence, .repo-card { border-color: transparent; }
-.provenance { padding-top: 0; border-top: 0; }
-.reproduction-intro { width: min(var(--editorial),100%); margin: 0 auto 38px; }
-.author-section { padding-top: clamp(60px,7vw,88px); }
-.journey-intro {
-  color: var(--ink-muted);
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.74;
-  letter-spacing: -.008em;
-}
-.author-lede { margin-top: 42px; color: var(--ink-muted); }
-.author-copy { max-width: 680px; margin: 24px 0 0; color: var(--ink-muted); }
-.author-profile {
-  width: min(var(--editorial),100%);
-  max-width: var(--editorial);
-  margin-inline: auto;
-}
-.repo-command h3 { margin-top: 0; }
-
-@media (max-width: 720px) {
-  .narrative { padding-top: 72px; }
-  .study-at-a-glance, .section { padding: 54px 0; }
-  .section-heading { margin-bottom: 28px; }
-  .spec-card { grid-template-columns: 86px 1fr; gap: 5px 16px; }
-  .reading-card { grid-template-columns: 30px 1fr; gap: 6px 14px; }
-  .reading-card p { grid-column: 2; }
-  .research-question { padding-left: 20px; }
-  .article-findings .hypothesis-row { padding: 20px 0 24px !important; }
-}
-
-/* Minimal article pass: whitespace carries hierarchy; rules remain only inside data and code. */
-.section-kicker { display: none !important; }
-.gsap-ready .reveal,
-html.motion-enhanced .reveal {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-}
-.journey-steps, .journey-step { border: 0; }
-.journey-steps { margin-top: 24px; }
-.journey-step { padding-top: 12px; padding-bottom: 12px; }
-html.motion-enhanced .journey-stage-group,
-html.motion-enhanced .journey-connector {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-  stroke-dashoffset: 0 !important;
-}
-.research-question {
-  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
-  padding-left: 0;
-  border-left: 0;
-}
-.h4-chart, .h2-chart, .forest-plot, .seed-panel,
-.always-visible-evidence, .stats-grid, .claim-card, .repo-card,
-.author-credentials, .credential-record, .credential-proof,
-.usage-grid, .repo-command, .footer-bottom {
-  border: 0 !important;
-}
-.h4-chart, .h2-chart, .seed-panel { padding-top: 22px; padding-bottom: 22px; }
-.stats-grid { gap: 18px clamp(28px,4vw,52px); }
-.stat { min-height: 0; padding: 12px 0; border: 0 !important; }
-.rules { gap: 8px clamp(28px,4vw,52px); }
-.rule { padding: 16px 0; border: 0; }
-.claim-card { padding: 18px 0; }
-.evidence-label-row { border-bottom: 0; }
-.repo-card { padding: 24px 0; }
-.usage-grid { gap: 18px; }
-.repo-command { padding: 12px 0 !important; }
-.author-credentials { margin-top: clamp(40px,5vw,58px); }
-.credential-record { padding: 19px 0; }
-.credential-proof { padding-top: 0; }
-.footer-divider {
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin: 0 auto 48px;
-  background: rgba(255,255,255,.18);
-}
-.journey#method::before,
-#results::before,
-#quality::before,
-#use::before,
-#author::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  display: block;
-  width: min(var(--editorial),calc(100% - 2 * var(--page-pad)));
-  height: 1px;
-  background: rgba(255,255,255,.16);
-  transform: translateX(-50%);
-}
-.footer-bottom { margin-top: 32px; padding-top: 0; }
-.seed-copy { width: min(var(--editorial),100%); margin: 0 auto; }
-.seed-copy h3 { font-size: 18px; }
-.seed-copy p { max-width: 640px; font-size: 16px; line-height: 1.74; }
-.seed-evidence {
-  width: min(var(--editorial),100%);
-  margin: 26px auto 0 !important;
-  border-color: var(--line-strong) !important;
-  background: transparent !important;
-}
-.seed-evidence > summary { padding: 15px 0 !important; }
-.seed-evidence[open] > summary { border-bottom-color: var(--line) !important; }
-.comparison-details {
-  margin-top: 10px !important;
-  border-color: var(--line-strong) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-}
-.comparison-details > summary {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 18px 0 !important;
-  color: var(--ink-muted) !important;
-}
-.comparison-details > summary span { color: var(--ink-subtle); font-weight: 400; }
-.comparison-details[open] > summary { border-bottom-color: var(--line) !important; }
-.comparison-details .table-tools { padding-inline: 0; }
-@media (max-width: 720px) {
-  .comparison-details > summary { flex-direction: column; gap: 6px; }
-}
-
-/* The single retained presentation sequence: seven findings, one at a time. */
-@media (min-width: 901px) {
-  html.motion-enhanced #learned-story.article-findings {
-    height: 560vh !important;
-    padding: 0 !important;
-  }
-  html.motion-enhanced #learned-story .learned-sticky {
-    position: sticky !important;
-    top: 0 !important;
-    min-height: 100svh !important;
-    display: grid !important;
-    place-items: center !important;
-    overflow: hidden !important;
-    padding: 64px 0 40px !important;
-    box-sizing: border-box;
-  }
-  html.motion-enhanced #learned-story .learned-shell {
-    display: grid !important;
-    grid-template-rows: auto minmax(390px,1fr) !important;
-    align-content: center !important;
-    max-height: 820px !important;
-  }
-  html.motion-enhanced #learned-story .learned-heading {
-    margin-bottom: 36px !important;
-  }
-  html.motion-enhanced #learned-story .learned-stage {
-    min-height: 390px !important;
-    overflow: hidden !important;
-  }
-  html.motion-enhanced #learned-story .hypothesis-ledger {
-    position: relative !important;
-    height: 100% !important;
-    display: block !important;
-    border: 0 !important;
-  }
-  html.motion-enhanced #learned-story .hypothesis-row {
-    position: absolute !important;
-    inset: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    visibility: hidden;
-    opacity: 0;
-    transform: none;
-    padding: 8px 0 26px !important;
-    border: 0 !important;
-  }
-  html.motion-enhanced #learned-story .learned-answer-visual {
-    display: block !important;
-  }
-  html.motion-enhanced #learned-story .hypothesis-row:first-child .learned-word {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  html.motion-enhanced #learned-story .sr-only {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0,0,0,0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .site-header { transform: none !important; }
-  .brand-label, .journey-stage-group, .journey-connector, .journey-step { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
-  .gsap-ready .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; }
-}
-@media print {
-  .site-header, .menu-button, #hero-canvas { display: none !important; }
-  .hero { min-height: auto; padding-top: 48px; }
-  .hero-shell { min-height: auto; grid-template-columns: 1fr; }
-  .journey { height: auto; padding: 72px 0; }
-  .journey-sticky { position: static; min-height: 0; padding: 0; }
-  .journey-grid { grid-template-columns: 1fr; }
-  .learned-story { height: auto !important; padding: 72px 0 0 !important; }
-  .learned-sticky { position: static !important; min-height: 0 !important; padding: 0 !important; overflow: visible !important; }
-  .learned-shell { display: block !important; max-height: none !important; }
-  .learned-stage { min-height: 0 !important; border: 0 !important; overflow: visible !important; }
-  .hypothesis-ledger { position: static !important; height: auto !important; border: 0 !important; }
-  .hypothesis-row { position: static !important; visibility: visible !important; opacity: 1 !important; transform: none !important; padding: 32px 0 !important; border: 0 !important; }
-  .learned-word { visibility: visible !important; opacity: 1 !important; transform: none !important; }
-  .journey-stage-group, .journey-connector, .journey-step, .reveal { visibility: visible !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
-  .section, .repo-card, .hypothesis-row, .credential-record { break-inside: avoid; }
-}
-"""
+_MVP_CSS_V4 = (Path(__file__).resolve().parent / "assets" / "mvp_presentation.css").read_text(
+    encoding="utf-8"
 )
 
 
@@ -4511,8 +3662,8 @@ _MVP_SCRIPT_V4 = r"""
   const article = document.getElementById('main');
   const articleOrder = [
     'overview', 'study-facts', 'research-question', 'method', 'reading', 'results',
-    'benchmarks', 'subgroups', 'seed-audit', 'evidence', 'quality', 'integrity',
-    'interpretation', 'use', 'author',
+    'benchmarks', 'subgroups', 'seed-audit', 'evidence', 'external-validation',
+    'new-data-test', 'quality', 'integrity', 'interpretation', 'use', 'author',
   ];
   if (article) {
     articleOrder.forEach(id => {
@@ -4539,22 +3690,26 @@ _MVP_SCRIPT_V4 = r"""
         ease: visible ? 'power3.out' : 'power2.in',
         overwrite: true,
       });
-      if (visible) {
-        gsapEngine.fromTo(brandLabel, {x: -17, autoAlpha: 0}, {
-          x: 0,
-          autoAlpha: 1,
-          duration: immediate ? .01 : .46,
-          delay: immediate ? 0 : .09,
-          ease: 'power3.out',
-          overwrite: true,
-        });
-      } else {
-        gsapEngine.to(brandLabel, {x: -14, autoAlpha: 0, duration: .16, overwrite: true});
+      if (brandLabel) {
+        if (visible) {
+          gsapEngine.fromTo(brandLabel, {x: -17, autoAlpha: 0}, {
+            x: 0,
+            autoAlpha: 1,
+            duration: immediate ? .01 : .46,
+            delay: immediate ? 0 : .09,
+            ease: 'power3.out',
+            overwrite: true,
+          });
+        } else {
+          gsapEngine.to(brandLabel, {x: -14, autoAlpha: 0, duration: .16, overwrite: true});
+        }
       }
     } else {
       header.style.transform = visible ? 'translateY(0)' : 'translateY(-112%)';
-      brandLabel.style.opacity = visible ? '1' : '0';
-      brandLabel.style.transform = visible ? 'translateX(0)' : 'translateX(-14px)';
+      if (brandLabel) {
+        brandLabel.style.opacity = visible ? '1' : '0';
+        brandLabel.style.transform = visible ? 'translateX(0)' : 'translateX(-14px)';
+      }
     }
   };
 
@@ -4597,374 +3752,76 @@ _MVP_SCRIPT_V4 = r"""
     }
   });
 
-  const journey = document.getElementById('method');
-  const journeyGroups = [...document.querySelectorAll('.journey-stage-group')];
-  const journeyConnectors = [...document.querySelectorAll('.journey-connector')];
-  const journeySteps = [...document.querySelectorAll('[data-journey-copy]')];
-  const setJourneyStage = (active, progress = 1) => {
-    const next = Math.max(0, Math.min(4, active));
-    journey.dataset.activeStage = String(next);
-    journeyGroups.forEach((group, index) => {
-      group.classList.toggle('is-active', index === next);
-      group.classList.toggle('is-complete', index < next);
-      if (motionAvailable && window.innerWidth > 1200) {
-        gsapEngine.to(group, {
-          autoAlpha: index === next ? 1 : index < next ? .56 : .035,
-          x: index > next ? (index % 2 ? 30 : -30) : 0,
-          scale: index === next ? 1 : .985,
-          duration: .48,
-          ease: 'power3.out',
-          overwrite: true,
-        });
-      }
-    });
-    journeyConnectors.forEach((connector, index) => {
-      const visible = index < next;
-      if (motionAvailable && window.innerWidth > 1200) {
-        gsapEngine.to(connector, {
-          strokeDashoffset: visible ? 0 : 1,
-          opacity: visible ? .9 : .08,
-          duration: .5,
-          ease: 'power2.out',
-          overwrite: true,
-        });
-      }
-    });
-    journeySteps.forEach((step, index) => step.classList.toggle('is-active', index === next));
-    const indicator = document.getElementById('journey-indicator');
-    if (indicator) indicator.style.transform = `scaleX(${Math.max(.02, progress)})`;
-  };
+  document.querySelectorAll('[data-learned-slide]').forEach(slide => {
+    slide.removeAttribute('aria-hidden');
+  });
 
   if (motionAvailable) {
     root.classList.add('motion-enhanced', 'gsap-ready');
-    journeyConnectors.forEach(connector => gsapEngine.set(connector, {strokeDashoffset: 1, opacity: .08}));
-    setJourneyStage(0, 0);
-    const mobileJourney = window.matchMedia('(max-width: 1200px)');
-    const journeyTrigger = scrollEngine.create({
-      trigger: journey,
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: self => {
-        if (mobileJourney.matches) setJourneyStage(4, 1);
-        else setJourneyStage(Math.min(4, Math.floor(self.progress * 4.9999)), self.progress);
-      },
-      onLeaveBack: () => setJourneyStage(mobileJourney.matches ? 4 : 0, mobileJourney.matches ? 1 : 0),
-    });
-    const syncJourneyMode = () => {
-      if (mobileJourney.matches) setJourneyStage(4, 1);
-      else {
-        scrollEngine.refresh();
-        const progress = Math.max(0, Math.min(1, journeyTrigger.progress));
-        setJourneyStage(Math.min(4, Math.floor(progress * 4.9999)), progress);
-      }
-    };
-    mobileJourney.addEventListener('change', syncJourneyMode);
-    syncJourneyMode();
-  } else {
-    setJourneyStage(4, 1);
-  }
-
-  const learnedStory = document.getElementById('learned-story');
-  const learnedSlides = [...document.querySelectorAll('[data-learned-slide]')];
-  let learnedActiveIndex = -1;
-  const setLearnedState = active => {
-    const next = Math.max(0, Math.min(learnedSlides.length - 1, active));
-    if (next === learnedActiveIndex) return;
-    learnedSlides.forEach((slide, index) => {
-      if (index === next) slide.removeAttribute('aria-hidden');
-      else slide.setAttribute('aria-hidden', 'true');
-    });
-    learnedActiveIndex = next;
-  };
-
-  if (motionAvailable && learnedStory && learnedSlides.length) {
-    const learnedMedia = gsapEngine.matchMedia();
-    learnedMedia.add('(min-width: 901px)', () => {
-      let learnedSlideThresholds = [0];
-      let learnedSettleThresholds = [0];
-      let learnedSettledIndex = 0;
-      const learnedWords = learnedSlides.slice(1).flatMap(slide => [
-        ...slide.querySelectorAll('.learned-word'),
-      ]);
-      const nearestSettleIndex = value => {
-        let nearest = 0;
-        let distance = Infinity;
-        learnedSettleThresholds.forEach((threshold, index) => {
-          const nextDistance = Math.abs(value - threshold);
-          if (nextDistance < distance) {
-            nearest = index;
-            distance = nextDistance;
-          }
-        });
-        return nearest;
-      };
-      const learnedTimeline = gsapEngine.timeline({
-        defaults: {ease: 'power4.out'},
-        scrollTrigger: {
-          trigger: learnedStory,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-          invalidateOnRefresh: true,
-          onRefresh: self => {
-            learnedSettledIndex = nearestSettleIndex(self.progress);
-          },
-          onUpdate: self => {
-            let active = 0;
-            learnedSlideThresholds.forEach((threshold, index) => {
-              if (self.progress + .0001 >= threshold) active = index;
-            });
-            setLearnedState(active);
-          },
-        },
-      });
-
-      gsapEngine.set(learnedSlides, {autoAlpha: 0, y: 72, scale: .988});
-      gsapEngine.set(learnedSlides[0], {autoAlpha: 1, y: 0, scale: 1});
-      gsapEngine.set(learnedWords, {autoAlpha: 0});
-      const learnedSlideStarts = [];
-      const learnedSettleTimes = [];
-      learnedSlides.forEach((slide, index) => {
-        learnedSlideStarts.push(learnedTimeline.duration());
-        const words = slide.querySelectorAll('.learned-word');
-        if (index === 0) {
-          learnedTimeline.set(slide, {autoAlpha: 1, y: 0, scale: 1});
-        } else {
-          learnedTimeline.fromTo(
-            slide,
-            {autoAlpha: 0, y: 72, scale: .988},
-            {autoAlpha: 1, y: 0, scale: 1, duration: .48, ease: 'power3.out'}
-          );
-          learnedTimeline.to({}, {duration: .14});
-          learnedTimeline.to(words, {
-            autoAlpha: 1,
-            duration: .08,
-            stagger: .012,
-            ease: 'power1.out',
-          });
-        }
-        learnedSettleTimes.push(learnedTimeline.duration());
-        learnedTimeline.to({}, {duration: 1.38});
-        if (index < learnedSlides.length - 1) {
-          learnedTimeline.to(slide, {
-            autoAlpha: 0,
-            y: -82,
-            scale: .988,
-            duration: .44,
-            ease: 'power4.inOut',
-          });
-        }
-      });
-      const learnedDuration = learnedTimeline.duration();
-      learnedSlideThresholds = learnedSlideStarts.map(start => start / learnedDuration);
-      learnedSettleThresholds = learnedSettleTimes.map(time => time / learnedDuration);
-      setLearnedState(0);
-      scrollEngine.refresh();
-
-      const alignLearnedHash = () => {
-        if (window.location.hash !== '#learned-story') return;
-        window.requestAnimationFrame(() => {
-          const trigger = learnedTimeline.scrollTrigger;
-          if (trigger) window.scrollTo(0, trigger.start);
-        });
-      };
-      alignLearnedHash();
-      window.addEventListener('hashchange', alignLearnedHash);
-
-      let learnedScrollTween;
-      let learnedWheelTimer;
-      let learnedWheelAccumulator = 0;
-      let learnedWheelDirection = 0;
-      let learnedWheelConsumed = false;
-      let learnedWheelQuiet = true;
-      let learnedTransitioning = false;
-      const releaseLearnedWheel = () => {
-        if (!learnedWheelQuiet || learnedTransitioning) return;
-        learnedWheelAccumulator = 0;
-        learnedWheelDirection = 0;
-        learnedWheelConsumed = false;
-      };
-      const scheduleLearnedWheelRelease = () => {
-        learnedWheelQuiet = false;
-        window.clearTimeout(learnedWheelTimer);
-        learnedWheelTimer = window.setTimeout(() => {
-          learnedWheelQuiet = true;
-          releaseLearnedWheel();
-        }, 180);
-      };
-      const moveLearnedTo = targetIndex => {
-        const trigger = learnedTimeline.scrollTrigger;
-        if (!trigger) return;
-        const next = Math.max(0, Math.min(learnedSlides.length - 1, targetIndex));
-        const targetY = trigger.start
-          + (trigger.end - trigger.start) * learnedSettleThresholds[next];
-        const scrollState = {y: window.scrollY};
-        learnedTransitioning = true;
-        if (learnedScrollTween) learnedScrollTween.kill();
-        learnedScrollTween = gsapEngine.to(scrollState, {
-          y: targetY,
-          duration: .58,
-          ease: 'power2.inOut',
-          overwrite: true,
-          onUpdate: () => window.scrollTo(0, scrollState.y),
-          onComplete: () => {
-            learnedSettledIndex = next;
-            learnedTransitioning = false;
-            setLearnedState(next);
-            releaseLearnedWheel();
-          },
-        });
-      };
-      const normaliseWheelDelta = event => {
-        if (event.deltaMode === 1) return event.deltaY * 16;
-        if (event.deltaMode === 2) return event.deltaY * window.innerHeight;
-        return event.deltaY;
-      };
-      const onLearnedWheel = event => {
-        if (event.ctrlKey || !learnedTimeline.scrollTrigger) return;
-        const delta = normaliseWheelDelta(event);
-        if (Math.abs(delta) < .5) return;
-        const trigger = learnedTimeline.scrollTrigger;
-        const currentY = window.scrollY;
-        const direction = delta > 0 ? 1 : -1;
-        const inside = currentY >= trigger.start - 2 && currentY <= trigger.end + 2;
-        if (!inside) return;
-        const beforeFirstAnswer = trigger.progress < learnedSettleThresholds[0] - .002;
-        const atFirstExit = direction < 0 && learnedSettledIndex === 0;
-        const atLastExit = direction > 0
-          && learnedSettledIndex === learnedSlides.length - 1
-          && !beforeFirstAnswer;
-        if (!learnedTransitioning && (atFirstExit || atLastExit)) return;
-
-        event.preventDefault();
-        scheduleLearnedWheelRelease();
-        if (learnedWheelConsumed) return;
-        if (learnedWheelDirection && learnedWheelDirection !== direction) {
-          learnedWheelAccumulator = 0;
-        }
-        learnedWheelDirection = direction;
-        learnedWheelAccumulator += Math.abs(delta);
-        const activationDistance = beforeFirstAnswer ? 60 : 360;
-        if (learnedWheelAccumulator < activationDistance) return;
-        learnedWheelConsumed = true;
-        const target = beforeFirstAnswer
-          ? 0
-          : learnedSettledIndex + direction;
-        moveLearnedTo(target);
-      };
-      learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false});
-
-      return () => {
-        window.removeEventListener('hashchange', alignLearnedHash);
-        learnedStory.removeEventListener('wheel', onLearnedWheel);
-        window.clearTimeout(learnedWheelTimer);
-        if (learnedScrollTween) learnedScrollTween.kill();
-        if (learnedTimeline.scrollTrigger) learnedTimeline.scrollTrigger.kill();
-        learnedTimeline.kill();
-        gsapEngine.set(learnedSlides, {clearProps: 'all'});
-        gsapEngine.set(learnedWords, {clearProps: 'all'});
-        learnedSlides.forEach(slide => slide.removeAttribute('aria-hidden'));
-        learnedActiveIndex = -1;
-      };
-    });
-  }
-
-  const revealItems = [...document.querySelectorAll('.reveal')];
-  if (motionAvailable) {
-    gsapEngine.set(revealItems, {autoAlpha: 0, y: 24});
+    const revealItems = [...document.querySelectorAll('.reveal')];
+    gsapEngine.set(revealItems, {autoAlpha: 0, y: 18});
     revealItems.forEach(item => {
       gsapEngine.to(item, {
         autoAlpha: 1,
         y: 0,
-        duration: .82,
-        ease: 'power3.out',
-        scrollTrigger: {trigger: item, start: 'top 87%', once: true},
+        duration: .55,
+        ease: 'power2.out',
+        scrollTrigger: {trigger: item, start: 'top 88%', once: true},
+        onComplete: () => item.classList.add('is-shown'),
       });
     });
     gsapEngine.from('.hero-animate', {
       autoAlpha: 0,
-      y: 26,
-      duration: .9,
-      stagger: .095,
-      ease: 'power3.out',
-      delay: .12,
+      y: 18,
+      duration: .7,
+      stagger: .08,
+      ease: 'power2.out',
+      delay: .08,
     });
-    gsapEngine.to('#hero-canvas', {
-      yPercent: 9,
-      opacity: .62,
-      ease: 'none',
-      scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5},
-    });
-    document.querySelectorAll('.h4-chart, .h2-chart, .forest-plot').forEach(chart => {
-      const marks = chart.querySelectorAll(
-        '.metric-dot, .difference-ci, .difference-point, .range-line, .range-start, ' +
-        '.range-end, .forest-ci, .forest-point'
-      );
-      gsapEngine.from(marks, {
-        scale: 0,
-        duration: .48,
-        stagger: .012,
-        ease: 'back.out(1.55)',
-        scrollTrigger: {trigger: chart, start: 'top 84%', once: true},
+    if (document.querySelector('#hero-canvas')) {
+      gsapEngine.to('#hero-canvas', {
+        yPercent: 6,
+        ease: 'none',
+        scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true},
       });
-    });
-    document.querySelectorAll('.spec-card, .reading-card, .repo-command, .rule').forEach((card, index) => {
-      gsapEngine.from(card, {
-        y: 18,
-        autoAlpha: 0,
-        duration: .62,
-        delay: Math.min(index % 5, 4) * .035,
-        ease: 'power2.out',
-        scrollTrigger: {trigger: card, start: 'top 102%', once: true},
-      });
-    });
-    document.querySelectorAll('main section[id]').forEach(section => {
-      const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
-      if (!link) return;
+    }
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
       scrollEngine.create({
-        trigger: section,
-        start: 'top 46%',
-        end: 'bottom 46%',
+        trigger: target,
+        start: 'top 35%',
+        end: 'bottom 35%',
         onToggle: self => link.classList.toggle('is-active', self.isActive),
       });
     });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => scrollEngine.refresh());
-    }
   }
 
-  const hypothesisFilter = document.getElementById('filter-hypothesis');
-  const statusFilter = document.getElementById('filter-status');
-  const searchFilter = document.getElementById('filter-search');
-  const comparisonRows = [...document.querySelectorAll('[data-comparison-row]')];
-  const tableCount = document.getElementById('table-count');
-  let tableRefreshRequest = 0;
-  const scheduleTableRefresh = () => {
-    if (!motionAvailable) return;
-    if (tableRefreshRequest) cancelAnimationFrame(tableRefreshRequest);
-    tableRefreshRequest = requestAnimationFrame(() => {
-      tableRefreshRequest = 0;
-      scrollEngine.refresh();
-    });
-  };
   const filterTable = () => {
-    const hypothesis = hypothesisFilter.value;
-    const status = statusFilter.value;
-    const query = searchFilter.value.trim().toLowerCase();
+    const hypothesis = document.getElementById('filter-hypothesis');
+    const status = document.getElementById('filter-status');
+    const search = document.getElementById('filter-search');
+    const count = document.getElementById('table-count');
+    const rows = [...document.querySelectorAll('[data-comparison-row]')];
+    if (!hypothesis || !status || !search || !count) return;
+    const query = search.value.trim().toLowerCase();
     let visible = 0;
-    comparisonRows.forEach(row => {
-      const matches = (hypothesis === 'ALL' || row.dataset.hypothesis === hypothesis) &&
-        (status === 'ALL' || row.dataset.status === status) &&
-        (!query || row.textContent.toLowerCase().includes(query));
-      row.hidden = !matches;
-      if (matches) visible += 1;
+    rows.forEach(row => {
+      const hypOk = hypothesis.value === 'ALL' || row.dataset.hypothesis === hypothesis.value;
+      const statusOk = status.value === 'ALL' || row.dataset.status === status.value;
+      const hay = row.textContent.toLowerCase();
+      const searchOk = !query || hay.includes(query);
+      const show = hypOk && statusOk && searchOk;
+      row.hidden = !show;
+      if (show) visible += 1;
     });
-    tableCount.textContent = `${visible} / ${comparisonRows.length} rows`;
-    scheduleTableRefresh();
+    count.textContent = `${visible} / ${rows.length} rows`;
   };
-  [hypothesisFilter, statusFilter, searchFilter].forEach(control =>
-    control.addEventListener('input', filterTable));
-  filterTable();
+  ['filter-hypothesis', 'filter-status', 'filter-search'].forEach(id => {
+    const control = document.getElementById(id);
+    if (control) control.addEventListener('input', filterTable);
+  });
 })();
 """
 
@@ -5254,7 +4111,7 @@ only `index.html`: the QC image, machine-readable evidence and checksum manifest
 separate files in the same package. Repository links require reviewer access when
 the GitHub repository is private.
 
-Author: Natan Smogór. Updated: 20 August 2026.
+Author: Natan Smogór. Updated: 21 August 2026.
 
 The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,

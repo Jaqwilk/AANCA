@@ -48,7 +48,7 @@ from histo_audit.statistics.review import (
     draw_group_bootstrap_indices,
     rank_indices,
 )
-from histo_audit.utils.run_tracking import atomic_write_json, sha256_file
+from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_npz, sha256_file
 
 CLASS_ORDER = ("tumor_any", "nonTIL_stromal", "sTIL")
 CLASS_CODES = {name: index for index, name in enumerate(CLASS_ORDER)}
@@ -1101,13 +1101,15 @@ def run_nucls_external_validation(
         ranking, ranking_arrays = _ranking_validation(prepared.manifest, matrix, config)
         downstream, downstream_arrays = _downstream_validation(prepared.manifest, matrix, config)
         evidence_path = staging / "numeric_evidence.npz"
-        np.savez_compressed(
+        atomic_write_npz(
             evidence_path,
-            sample_ids=prepared.manifest["sample_id"].to_numpy(dtype=np.str_),
-            group_ids=prepared.manifest["group_id"].to_numpy(dtype=np.str_),
-            embeddings=matrix,
-            **ranking_arrays,
-            **downstream_arrays,
+            {
+                "sample_ids": prepared.manifest["sample_id"].to_numpy(dtype=np.str_),
+                "group_ids": prepared.manifest["group_id"].to_numpy(dtype=np.str_),
+                "embeddings": matrix,
+                **ranking_arrays,
+                **downstream_arrays,
+            },
         )
         result = {
             "schema_version": 1,

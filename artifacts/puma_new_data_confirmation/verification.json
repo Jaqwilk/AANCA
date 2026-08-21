@@ -1,0 +1,28 @@
+{
+  "all_44_models_converged": true,
+  "all_matched_random_controls_exact_and_disjoint": true,
+  "all_neighbours_exclude_complete_query_case": true,
+  "all_seven_frozen_success_gates_passed": true,
+  "candidate_sha256": "78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe",
+  "class_order": [
+    "tumor",
+    "lymphocyte",
+    "other"
+  ],
+  "config_sha256": "434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30",
+  "controlled_corruption_fields_exact": true,
+  "development_final_case_overlap": false,
+  "downstream_metrics_and_bootstrap_recomputed": true,
+  "evidence_arrays_sha256": "5f6d2d0fc65d95ee245d98c82b80547f0e0cf06c278acc40b48f44020e8c59d4",
+  "natural_error_detection_evaluated": false,
+  "official_manifest_rebuilt": true,
+  "pathologist_error_detection_proven": false,
+  "results_sha256": "e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92",
+  "retrieval_metrics_recomputed": true,
+  "run_authority_sha256": "c016dde668d6c7c2bdcbf6aad79d13892012cdd5b6ba87cd9d391d21ac4cf95b",
+  "runtime_amendment_sha256": "d93bb2a353e0cdc931edf432fc8b83a82a67857aa90fe95e473ccedd732d0d07",
+  "schema_version": 1,
+  "source_reference_labels_unchanged": true,
+  "study_id": "puma_new_data_confirmation_v1",
+  "verified": true
+}

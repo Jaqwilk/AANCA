@@ -42,7 +42,7 @@ class SyntheticFigureSet:
     manifest_path: Path | None
 
 
-def _save_figure(figure: Any, destination: Path) -> None:
+def save_figure(figure: Any, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary_name = tempfile.mkstemp(
         prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
@@ -159,7 +159,7 @@ def _representation_figure(
     )
     figure.tight_layout(rect=(0.0, 0.0, 1.0, 0.86))
     path = output_directory / "target_representation_example.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     return FigureArtifact(
         key="target_representation_example",
         title="Target-nucleus representation example",
@@ -222,7 +222,7 @@ def _prediction_figures(
     _bar_annotations(axis, [float(value) for value in class_counts])
     figure.tight_layout()
     path = output_directory / "class_distribution.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="class_distribution",
@@ -245,7 +245,7 @@ def _prediction_figures(
     _bar_annotations(axis, [float(value) for value in tissue_counts])
     figure.tight_layout()
     path = output_directory / "tissue_distribution.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="tissue_distribution",
@@ -265,7 +265,7 @@ def _prediction_figures(
     _bar_annotations(axis, [float(value) for value in fold_counts])
     figure.tight_layout()
     path = output_directory / "oof_fold_distribution.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="oof_fold_distribution",
@@ -305,7 +305,7 @@ def _prediction_figures(
     figure.colorbar(image, ax=axis, label="Injected nuclei")
     figure.tight_layout()
     path = output_directory / "corruption_transition_matrix.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="corruption_transition_matrix",
@@ -432,7 +432,7 @@ def _zero_corruption_figures(
     axis.legend(fontsize=8)
     figure.tight_layout()
     path = output_directory / "score_distribution_by_method.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="score_distribution_by_method",
@@ -486,7 +486,7 @@ def _zero_corruption_figures(
     axis.legend(fontsize=7.5, ncols=2)
     figure.tight_layout()
     path = output_directory / "false_alerts_vs_review_budget.png"
-    _save_figure(figure, path)
+    save_figure(figure, path)
     artifacts.append(
         FigureArtifact(
             key="false_alerts_vs_review_budget",
@@ -550,7 +550,7 @@ def _metrics_figures(
             )
         figure.tight_layout()
         path = output_directory / "average_precision_by_method.png"
-        _save_figure(figure, path)
+        save_figure(figure, path)
         artifacts.append(
             FigureArtifact(
                 key="average_precision_by_method",
@@ -605,7 +605,7 @@ def _metrics_figures(
         axis.legend(fontsize=7.5, ncols=2)
         figure.tight_layout()
         path = output_directory / filename
-        _save_figure(figure, path)
+        save_figure(figure, path)
         artifacts.append(
             FigureArtifact(
                 key=key,
@@ -691,7 +691,7 @@ def _metrics_figures(
             _bar_annotations(axis, downstream_values, decimals=3)
             figure.tight_layout()
             path = output_directory / "downstream_macro_f1.png"
-            _save_figure(figure, path)
+            save_figure(figure, path)
             artifacts.append(
                 FigureArtifact(
                     key="downstream_macro_f1",

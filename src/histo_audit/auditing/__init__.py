@@ -33,11 +33,17 @@ from .two_queue import (
     build_two_review_queues,
     draw_matched_random_comparator,
 )
+from .utility_queue import (
+    UTILITY_PRODUCT_PRIORITY,
+    MeasuredUtilityQueueResult,
+    build_measured_utility_queue,
+)
 
 __all__ = [
     "CROSS_FITTED_UTILITY_EVIDENCE",
     "GROUP_SAFE_OOF_EVIDENCE",
     "NEW_EXPERT_DEVELOPMENT_LABELS",
+    "UTILITY_PRODUCT_PRIORITY",
     "BalancedReviewQueue",
     "CleanlabScoreResult",
     "CrossFittedCalibrationResult",
@@ -46,11 +52,13 @@ __all__ = [
     "FrozenTemperatureScaler",
     "GroupSafeAuditScoreResult",
     "MatchedRandomComparator",
+    "MeasuredUtilityQueueResult",
     "NeighbourDisagreementResult",
     "PersistentRiskResult",
     "PrimaryEnsembleRisk",
     "QueueConstraints",
     "TwoReviewQueues",
+    "build_measured_utility_queue",
     "build_two_review_queues",
     "cleanlab_scores",
     "cross_fitted_temperature_calibration",

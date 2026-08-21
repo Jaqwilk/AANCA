@@ -1,0 +1,66 @@
+schema_version: 1
+amendment_id: monusac_aanca_expanded_full_runtime_amendment_v1
+frozen_at: "2026-08-21T05:02:36.1601933+02:00"
+parent_study_id: monusac_aanca_expanded_development_v1
+parent_output_root: artifacts/autoresearch/monusac_aanca_expanded_development_v1_r1
+parent_config_path: configs/aanca_autoresearch_expanded_development.yaml
+parent_config_sha256: 370b7135858682d0dea52c035768b2fed72acc1fe74a1ddd67996780ad703692
+partition_sha256: 93087764cf5ce3dd62474ac4da790ff6871d2deff6291d508e02c49ec75f2d2d
+
+reason:
+  category: computational_runtime_only
+  trigger: second_full_candidate_crossed_original_420_second_budget_before_metrics_were_available
+  scientific_evaluator_changed: false
+  candidate_selection_changed: false
+  folds_seeds_controls_bootstrap_or_success_gates_changed: false
+
+clerical_erratum:
+  corrected_at: "2026-08-21T05:40:05.5006626+02:00"
+  detected_before_second_full_candidate_metrics_available: true
+  field: full_finalists_in_frozen_order[0]
+  correction: replace_manually_transcribed_suffix_with_exact_parent_ledger_hash
+  candidate_identity_or_order_changed: false
+
+runtime_budget:
+  original_seconds_per_candidate: 420
+  amended_seconds_per_candidate: 10800
+  derivation:
+    slowest_screen_seconds: 273.679556899995
+    maximum_full_to_screen_fit_multiplier: 23.333333333333332
+    safety_multiplier: 1.5
+    calculated_upper_seconds: 9578.784491499824
+    rounded_up_seconds: 10800
+
+full_finalists_in_frozen_order:
+  - ba572cd4aed1367a723dd8f66b51961f48f66ff8791d021cbffe9ccb201b3ee6
+  - e12b1120b8f6cbfcbffb197eb4396e55ea9d55e1e697b4c978761a6c3f156369
+  - 654a46ba33f65293be8b522971fe26948e4753eed7a935356409cad9308e2a17
+  - e1622805327a44b17f0f71bc37f8490d6e3af7fe93a1347d2c2e96a6a6bf706c
+  - d5d3b5eab5d2403b59b33d884173dcb8fcbed4c06a484a47928921609bb3a705
+  - 08b58d6bbbd545464df94f0092b28ba944e4226660b366e2c8773a5da45c91bb
+  - 0197e7546724d3c591a069df86e2f9e39b39fabc1980585868f3a0c32643a2fd
+  - 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  - 21c09a7d090b4db4896a78a0da9d18987a1e6aefb606c0fcc97e935604362360
+  - a0ae130e7b16e3f174472eaea6f36185a9696c4b5c533b7756f6df5bf018fe27
+  - 5570417439b1c6bf8618e26f395093b9ec47179ea9eb18d81c07bf0a342a0a3a
+  - b46926d2f21b4dc399da4b90bc8e863e3cc93f4dc00e63722735b38a060b14cd
+
+eligibility:
+  require_exact_parent_config_sha256: true
+  require_exact_partition_sha256: true
+  require_exact_evaluator_and_dependency_hashes_from_parent_authority: true
+  require_candidate_in_frozen_ordered_manifest: true
+  require_complete_probabilities_and_summaries: true
+  require_elapsed_seconds_lte: 10800
+  include_every_frozen_finalist: true
+  permit_partial_or_cherry_picked_analysis: false
+  recompute_gate_conjunction_from_recorded_success_gates: true
+  retain_original_parent_status_unchanged: true
+
+claim_boundary:
+  role: development_candidate_selection_only
+  final_external_test_used: false
+  natural_error_detection_proven: false
+  real_use_superiority_proven: false
+  source_annotations_modified: false
+  executable_action_until_new_confirmation: retain_uncorrected

@@ -369,7 +369,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "20 August 2026" in html
+    assert "21 August 2026" in html
     assert "gsap@3.15.0" in html
     assert "three@0.185.1" in html
     assert "import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')" in html
@@ -388,7 +388,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "REVIEW QUEUE" in html
     assert 'class="journey story"' in html
     assert 'class="journey-connector"' in html
-    assert "One controlled question, unfolded step by step" in html
+    assert "One controlled question, unfolded step by step" not in html
+    assert '<p class="journey-intro" id="journey-title">' in html
     assert "Saved performance estimates varied across contexts" in html
     assert "What the study actually learned" in html
     assert html.count('<article class="hypothesis-row" data-learned-slide>') == 7
@@ -400,27 +401,29 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'class="learned-story article-findings" id="learned-story"' in html
     assert 'aria-roledescription="carousel"' not in html
     assert 'aria-roledescription="slide"' not in html
-    assert "let learnedSlideThresholds = [0]" in html
-    assert "let learnedSettleThresholds = [0]" in html
-    assert "learnedSlideStarts.map(start => start / learnedDuration)" in html
-    assert "learnedSettleTimes.map(time => time / learnedDuration)" in html
-    assert "learnedSlides.slice(1).flatMap" in html
-    assert "if (window.location.hash !== '#learned-story') return" in html
-    assert "const activationDistance = beforeFirstAnswer ? 60 : 360" in html
-    assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" in html
-    assert "height: 560vh" in html
+    assert "let learnedSlideThresholds = [0]" not in html
+    assert "let learnedSettleThresholds = [0]" not in html
+    assert "learnedSlideStarts.map(start => start / learnedDuration)" not in html
+    assert "learnedSettleTimes.map(time => time / learnedDuration)" not in html
+    assert "learnedSlides.slice(1).flatMap" not in html
+    assert "if (window.location.hash !== '#learned-story') return" not in html
+    assert "const activationDistance = beforeFirstAnswer ? 60 : 360" not in html
+    assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" not in html
+    assert "height: 560vh" not in html
+    assert "/* Findings as static Q&A */" in html
+    assert ".learned-story {\n  height: auto !important; padding: 0 !important;" in html
     assert "scrub: true" in html
     assert "filter: 'blur(4px)'" not in html
-    assert "Editorial surfaces: structure with rhythm and rules" in html
+    assert "Editorial surfaces: structure with rhythm and rules" not in html
     assert ".repo-card::before { display: none; }" in html
-    assert "max-height: min(50svh,540px)" in html
-    assert "max-height: min(48svh,520px)" in html
+    assert "max-height: min(50svh, 540px)" in html
+    assert "max-height: min(56svh, 620px)" in html
     assert 'aria-label="Scrollable forest plot' in html
     assert 'comparisons" tabindex="0"' in html
-    assert "#benchmarks .forest-axis {\n  position: static;" in html
-    assert "#benchmarks .forest-row { border-top: 0; }" in html
-    assert "html.motion-enhanced .learned-story" in html
-    assert "html.motion-enhanced .learned-word" in html
+    assert ".metric-axis, .range-axis, .forest-axis {" in html
+    assert "#benchmarks .forest-plot {" in html
+    assert "html.motion-enhanced .learned-story" not in html
+    assert "html.motion-enhanced .learned-word" not in html
     assert 'id="learned-current"' not in html
     assert 'class="learned-progress"' not in html
     assert 'class="hypothesis-row-head"' not in html
@@ -429,7 +432,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "12 / 12 positive differences" not in html
     assert "Automated Auditing of Nucleus Class Annotations" in html
     assert "Automated nucleus-annotation auditing" not in html
-    assert "--prose: 640px" in html
+    assert "--prose: 640px" not in html
     assert "--editorial: 640px" in html
     assert "\N{EM DASH}" not in html
     assert "\N{EN DASH}" not in html
@@ -451,7 +454,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
         < html.index('id="use"')
     )
     assert "'method', 'reading', 'results'" in html
-    assert "'evidence', 'quality', 'integrity'" in html
+    assert "'evidence', 'external-validation'," in html
+    assert "'new-data-test', 'quality', 'integrity'" in html
     assert "github.com/Jaqwilk/AANCA" in html
     assert "View repository" in html
     assert 'class="brand-label"' in html
@@ -468,12 +472,12 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
     assert "python scripts/present_demo.py" in html
     assert "Repository links require reviewer access" in readme
-    assert ".journey-stage-group, .journey-connector, .journey-step" in html
-    assert "html:not(.motion-enhanced) .journey" in html
-    assert "const journeyTrigger = scrollEngine.create" in html
-    assert "Math.min(1, journeyTrigger.progress)" in html
+    assert ".journey-stage-group { opacity: 1 !important; transform: none !important; }" in html
+    assert ".journey { height: auto !important; }" in html
+    assert "const journeyTrigger = scrollEngine.create" not in html
+    assert "Math.min(1, journeyTrigger.progress)" not in html
     assert 'role="region" aria-label="Complete comparison results" tabindex="0"' in html
-    assert "stroke-dashoffset: 0 !important" in html
+    assert "stroke-dasharray: none; stroke-dashoffset: 0;" in html
     assert verify_mvp_presentation(artifacts.output_directory)["status"] == "valid"
     assert source_hashes == {
         path: hashlib.sha256(path.read_bytes()).hexdigest() for path in source_hashes

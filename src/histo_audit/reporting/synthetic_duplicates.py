@@ -11,8 +11,6 @@ from __future__ import annotations
 import csv
 import io
 import json
-import os
-import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,6 +26,7 @@ from histo_audit.data.duplicates import (
     find_perceptual_duplicate_candidates,
     perceptual_hash,
 )
+from histo_audit.reporting.figures import save_figure
 from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_text, sha256_file
 
 matplotlib.use("Agg", force=True)
@@ -365,23 +364,6 @@ def _csv_text(rows: Sequence[Mapping[str, Any]]) -> str:
     return stream.getvalue()
 
 
-def _save_figure(figure: Any, destination: Path) -> None:
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent
-    )
-    os.close(descriptor)
-    temporary = Path(temporary_name)
-    try:
-        figure.savefig(temporary, format="png", dpi=140, bbox_inches="tight")
-        os.replace(temporary, destination)
-    except BaseException:
-        temporary.unlink(missing_ok=True)
-        raise
-    finally:
-        plt.close(figure)
-
-
 def _render_figure(
     payload: Mapping[str, Any],
     unique: _UniquePatchEvidence,
@@ -425,7 +407,7 @@ def _render_figure(
             fontsize=10,
             color="#52616b",
         )
-        _save_figure(figure, destination)
+        save_figure(figure, destination)
         return
 
     shown = candidates[: max(1, min(max_pairs, len(candidates)))]
@@ -465,7 +447,7 @@ def _render_figure(
         fontsize=11,
     )
     figure.tight_layout(rect=(0.0, 0.0, 1.0, 0.94))
-    _save_figure(figure, destination)
+    save_figure(figure, destination)
 
 
 def audit_synthetic_duplicate_patches(

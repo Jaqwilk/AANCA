@@ -23,7 +23,12 @@ from histo_audit.auditing.two_queue import (
     build_two_review_queues,
 )
 from histo_audit.cross_validation.oof import OOFResult, grouped_oof_logistic
-from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_text, sha256_file
+from histo_audit.utils.run_tracking import (
+    atomic_write_json,
+    atomic_write_npz,
+    atomic_write_text,
+    sha256_file,
+)
 
 ManifestInput = str | Path | pd.DataFrame
 REVIEW_RECOMMENDATION = "recommended for expert review as a potentially inconsistent annotation"
@@ -465,17 +470,19 @@ def audit_original_labels(
             f"risk_component_{name}": values
             for name, values in score_result.component_scores.items()
         }
-        np.savez_compressed(
+        atomic_write_npz(
             staging / "oof_predictions.npz",
-            sample_ids=np.asarray(oof.sample_ids, dtype=np.str_),
-            observed_label=observed,
-            probabilities=oof.probabilities,
-            predicted_class=oof.predicted_class,
-            fold_id=oof.fold_id,
-            coverage_count=oof.coverage_count,
-            class_order=np.asarray(oof.class_order, dtype=np.int64),
-            risk_score=risks,
-            **score_arrays,
+            {
+                "sample_ids": np.asarray(oof.sample_ids, dtype=np.str_),
+                "observed_label": observed,
+                "probabilities": oof.probabilities,
+                "predicted_class": oof.predicted_class,
+                "fold_id": oof.fold_id,
+                "coverage_count": oof.coverage_count,
+                "class_order": np.asarray(oof.class_order, dtype=np.int64),
+                "risk_score": risks,
+                **score_arrays,
+            },
         )
         if score_result.neighbour_evidence is not None:
             neighbour = score_result.neighbour_evidence

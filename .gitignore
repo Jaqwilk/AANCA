@@ -11,6 +11,7 @@ htmlcov/
 *.egg-info/
 build/
 dist/
+tmp/
 
 # Local secrets and editor/OS state
 .env
@@ -48,6 +49,8 @@ artifacts/checkpoints/**
 artifacts/runs/**
 artifacts/smoke_runs/**
 artifacts/ci-smoke-runs/**
+artifacts/qa/**
+artifacts/autoresearch/**
 artifacts/review_packages/**
 artifacts/synthetic_core/**
 artifacts/resource_control/**
@@ -76,19 +79,12 @@ artifacts/duplicate_audit/.superseded/**
 # Generated environment exports and transient logs
 reports/doctor_latest.json
 reports/doctor_latest.txt
+reports/doctor.json
 *.log
 
 # Browser QA is transient by default. Keep only the deliberately selected release
-# and final-audit captures; any new retained capture must be added explicitly.
+# hero; any additional retained capture must be added explicitly.
+output/research/**
 output/playwright/**
 !output/playwright/
-!output/playwright/aanca-professor-release-footer.png
-!output/playwright/aanca-professor-release-findings-carousel.png
 !output/playwright/aanca-professor-release-hero.png
-!output/playwright/aanca-professor-release-method-mid.png
-!output/playwright/aanca-professor-release-mobile-menu.png
-!output/playwright/aanca-professor-release-mobile-use-after-filter.png
-!output/playwright/aanca-professor-release-qc.png
-!output/playwright/aanca-full-layout-audit-20260819.png
-!output/playwright/aanca-mobile-layout-audit-20260819.png
-!output/playwright/aanca-reduced-motion-audit-20260819.png

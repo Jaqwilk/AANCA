@@ -55,6 +55,7 @@ from histo_audit.statistics.review import (
     rank_indices,
     subgroup_average_precision,
 )
+from histo_audit.utils.run_tracking import atomic_write_npz
 
 _ZERO_CORRUPTION_REASON = (
     "No injected corruptions are present; controlled detection AP, recall, and lift are undefined."
@@ -114,25 +115,6 @@ def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
         with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as stream:
             json.dump(payload, stream, indent=2, sort_keys=True, default=_json_default)
             stream.write("\n")
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary_name, path)
-    except BaseException:
-        with suppress(FileNotFoundError):
-            os.unlink(temporary_name)
-        raise
-
-
-def _atomic_npz(path: Path, arrays: Mapping[str, np.ndarray]) -> None:
-    """Write a compressed NumPy archive without exposing a partial artifact."""
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    handle, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(handle, "wb") as stream:
-            np.savez_compressed(stream, **arrays)  # type: ignore[arg-type]
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary_name, path)
@@ -922,7 +904,7 @@ def run_synthetic_smoke(
             flattened_draw_indices = np.concatenate(shared_bootstrap_draws).astype(np.int64)
         else:
             flattened_draw_indices = np.empty(0, dtype=np.int64)
-        _atomic_npz(
+        atomic_write_npz(
             bootstrap_evidence_path,
             {
                 "schema_version": np.asarray(1, dtype=np.int64),
@@ -961,37 +943,41 @@ def run_synthetic_smoke(
             },
         )
         _atomic_json(metrics_path, metrics)
-        np.savez_compressed(
+        atomic_write_npz(
             predictions_path,
-            sample_ids=np.asarray(audit_sample_ids, dtype=np.str_),
-            group_ids=np.asarray(audit_group_ids, dtype=np.str_),
-            tissue_type=np.asarray(tissue_types, dtype=np.str_),
-            pre_corruption_label=corruption.pre_corruption_labels,
-            observed_label=corruption.observed_labels,
-            is_injected_corruption=corruption.is_injected_corruption,
-            probabilities=oof.probabilities,
-            predicted_class=oof.predicted_class,
-            fold_id=oof.fold_id,
-            class_order=np.asarray(oof.class_order, dtype=np.int64),
-            cleanlab_available=np.asarray(cleanlab.available, dtype=bool),
-            cleanlab_quality_score=(
-                cleanlab.quality_scores
-                if cleanlab.quality_scores is not None
-                else np.empty(0, dtype=np.float64)
-            ),
-            cleanlab_risk_score=(
-                cleanlab.risk_scores
-                if cleanlab.risk_scores is not None
-                else np.empty(0, dtype=np.float64)
-            ),
-            cleanlab_issue_flag=(
-                cleanlab.issue_mask if cleanlab.issue_mask is not None else np.empty(0, dtype=bool)
-            ),
-            cleanlab_suggested_class=(
-                cleanlab.suggested_class
-                if cleanlab.suggested_class is not None
-                else np.empty(0, dtype=np.int64)
-            ),
+            {
+                "sample_ids": np.asarray(audit_sample_ids, dtype=np.str_),
+                "group_ids": np.asarray(audit_group_ids, dtype=np.str_),
+                "tissue_type": np.asarray(tissue_types, dtype=np.str_),
+                "pre_corruption_label": corruption.pre_corruption_labels,
+                "observed_label": corruption.observed_labels,
+                "is_injected_corruption": corruption.is_injected_corruption,
+                "probabilities": oof.probabilities,
+                "predicted_class": oof.predicted_class,
+                "fold_id": oof.fold_id,
+                "class_order": np.asarray(oof.class_order, dtype=np.int64),
+                "cleanlab_available": np.asarray(cleanlab.available, dtype=bool),
+                "cleanlab_quality_score": (
+                    cleanlab.quality_scores
+                    if cleanlab.quality_scores is not None
+                    else np.empty(0, dtype=np.float64)
+                ),
+                "cleanlab_risk_score": (
+                    cleanlab.risk_scores
+                    if cleanlab.risk_scores is not None
+                    else np.empty(0, dtype=np.float64)
+                ),
+                "cleanlab_issue_flag": (
+                    cleanlab.issue_mask
+                    if cleanlab.issue_mask is not None
+                    else np.empty(0, dtype=bool)
+                ),
+                "cleanlab_suggested_class": (
+                    cleanlab.suggested_class
+                    if cleanlab.suggested_class is not None
+                    else np.empty(0, dtype=np.int64)
+                ),
+            },
         )
         order = rank_indices(hybrid, tie_break_ids=audit_sample_ids)
         with rankings_path.open("w", encoding="utf-8", newline="") as stream:
@@ -1159,7 +1145,7 @@ def run_synthetic_smoke(
                 corruption.configuration_hash, dtype=np.str_
             ),
         }
-        _atomic_npz(dataset_evidence_path, evidence_arrays)
+        atomic_write_npz(dataset_evidence_path, evidence_arrays)
 
         corruption_rows = corruption.manifest_rows(audit_sample_ids, audit_group_ids)
         corruption_row_by_sample = {str(row["sample_id"]): row for row in corruption_rows}
@@ -1282,18 +1268,20 @@ def run_synthetic_smoke(
             output_size=48,
             padding=example_record.crop_padding,
         )
-        np.savez_compressed(
+        atomic_write_npz(
             representation_example_path,
-            sample_id=np.asarray(example_record.sample_id, dtype=np.str_),
-            target_instance_id=np.asarray(example_record.instance_id, dtype=np.int64),
-            full_patch=example_image,
-            full_target_mask=example_mask,
-            source_bbox=np.asarray(example_record.bbox, dtype=np.int64),
-            crop_source_box=np.asarray(example_crop.source_box, dtype=np.int64),
-            target_crop=example_crop.image,
-            crop_target_mask=example_crop.target_mask,
-            highlighted_full_patch=highlight_target(example_image, example_mask),
-            highlighted_crop=highlight_target(example_crop.image, example_crop.target_mask),
+            {
+                "sample_id": np.asarray(example_record.sample_id, dtype=np.str_),
+                "target_instance_id": np.asarray(example_record.instance_id, dtype=np.int64),
+                "full_patch": example_image,
+                "full_target_mask": example_mask,
+                "source_bbox": np.asarray(example_record.bbox, dtype=np.int64),
+                "crop_source_box": np.asarray(example_crop.source_box, dtype=np.int64),
+                "target_crop": example_crop.image,
+                "crop_target_mask": example_crop.target_mask,
+                "highlighted_full_patch": highlight_target(example_image, example_mask),
+                "highlighted_crop": highlight_target(example_crop.image, example_crop.target_mask),
+            },
         )
         report_inputs = {
             **report_inputs,

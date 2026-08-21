@@ -5,8 +5,6 @@ from __future__ import annotations
 import csv
 import io
 import json
-import os
-import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
@@ -69,6 +67,7 @@ from histo_audit.statistics.review import (
 from histo_audit.utils.run_tracking import (
     RunTracker,
     atomic_write_json,
+    atomic_write_npz,
     atomic_write_text,
     sha256_file,
     verify_run_integrity,
@@ -736,23 +735,6 @@ class SyntheticPrimaryFixtureResult:
     completion_evidence_path: Path
     reconciliation_path: Path
     matrix_cell_count: int
-
-
-def _atomic_npz(path: Path, arrays: Mapping[str, NDArray[np.generic]]) -> Path:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(descriptor, "wb") as stream:
-            np.savez_compressed(stream, **arrays)  # type: ignore[arg-type]
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary_name, path)
-    except BaseException:
-        Path(temporary_name).unlink(missing_ok=True)
-        raise
-    return path
 
 
 def _write_csv(path: Path, fieldnames: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> Path:
@@ -1877,7 +1859,7 @@ def _save_restoration(
             "evaluation": downstream.as_dict(),
         },
     )
-    arrays_path = _atomic_npz(
+    arrays_path = atomic_write_npz(
         output_directory / "restoration_evidence.npz",
         {
             "class_order": np.asarray(class_order, dtype=np.int64),
@@ -2276,7 +2258,7 @@ def _execute_primary_matrix_core(
                 for comparison in controls.paired_method_comparisons
             }
             flattened_draws, draw_offsets = _flatten_draws(draws)
-            oof_path = _atomic_npz(
+            oof_path = atomic_write_npz(
                 cell_directory / "oof_predictions.npz",
                 {
                     "sample_ids": np.asarray(inputs.audit_sample_ids, dtype=np.str_),
@@ -2297,7 +2279,7 @@ def _execute_primary_matrix_core(
                     ),
                 },
             )
-            risks_path = _atomic_npz(
+            risks_path = atomic_write_npz(
                 cell_directory / "risk_scores.npz",
                 {name: values for name, values in risks.items()},
             )
@@ -2328,7 +2310,7 @@ def _execute_primary_matrix_core(
                     bootstrap_arrays["metric_hybrid"] = paired.metric_a
                     bootstrap_arrays["metric_self_confidence"] = paired.metric_b
                     bootstrap_arrays["differences"] = paired.differences
-            bootstrap_path = _atomic_npz(
+            bootstrap_path = atomic_write_npz(
                 cell_directory / "bootstrap_evidence.npz", bootstrap_arrays
             )
             independence_path = atomic_write_json(
@@ -2373,7 +2355,7 @@ def _execute_primary_matrix_core(
                 neighbour_offsets[neighbour_row_index + 1] = neighbour_offsets[
                     neighbour_row_index
                 ] + len(neighbour_row)
-            neighbour_path = _atomic_npz(
+            neighbour_path = atomic_write_npz(
                 cell_directory / "neighbour_evidence.npz",
                 {
                     "sample_ids": np.asarray(inputs.audit_sample_ids, dtype=np.str_),
@@ -2398,7 +2380,7 @@ def _execute_primary_matrix_core(
                     "metric": np.asarray([neighbours.metric], dtype=np.str_),
                 },
             )
-            cleanlab_path = _atomic_npz(
+            cleanlab_path = atomic_write_npz(
                 cell_directory / "cleanlab_evidence.npz",
                 {
                     "available": np.asarray(cleanlab.available, dtype=np.bool_),

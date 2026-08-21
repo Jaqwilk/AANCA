@@ -36,6 +36,7 @@ from histo_audit.pannuke.publication import (
     rollback_owned_publications,
 )
 from histo_audit.pannuke.validation import verify_raw_inventory_unchanged
+from histo_audit.utils.run_tracking import atomic_write_npz
 
 from . import cache_provenance as cache_provenance_module
 from . import engineered as engineered_module
@@ -161,19 +162,6 @@ def _atomic_write_json(path: Path, value: dict[str, Any]) -> None:
         with temporary.open("x", encoding="utf-8", newline="\n") as handle:
             handle.write(_strict_json_text(value, indent=2))
             handle.write("\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    finally:
-        temporary.unlink(missing_ok=True)
-
-
-def _atomic_write_npz(path: Path, arrays: dict[str, NDArray[np.generic]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
-    try:
-        with temporary.open("xb") as handle:
-            np.savez_compressed(handle, **cast(Any, arrays))
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temporary, path)
@@ -517,7 +505,7 @@ def _write_crop_chunk(
             "metadata_json": np.asarray(_strict_json_text(batch.metadata), dtype=np.str_),
         }
     )
-    _atomic_write_npz(path, arrays)
+    atomic_write_npz(path, arrays)
     variable_sha = sha256_file(path)
     digest, fixed_hashes = _crop_chunk_digest(maps, start, stop, variable_sha)
     return digest, fixed_hashes, variable_sha

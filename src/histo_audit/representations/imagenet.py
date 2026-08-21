@@ -206,6 +206,12 @@ def _uint8_rgb(images: NDArray[np.generic]) -> NDArray[np.uint8]:
     array = np.asarray(images)
     if array.ndim != 4 or array.shape[0] == 0 or array.shape[-1] != 3:
         raise ValueError("images must have non-empty shape (n, height, width, 3)")
+    # Production crop caches are already uint8.  Casting a multi-gigabyte uint8
+    # tensor to float64 merely to round it can require eight times the source
+    # memory and force paging or allocation failure.  This exact fast path keeps
+    # the same values and only copies when the source strides are non-contiguous.
+    if array.dtype == np.uint8:
+        return np.ascontiguousarray(array)
     if not np.issubdtype(array.dtype, np.number) or not np.isfinite(array).all():
         raise ValueError("images must contain finite numeric RGB values")
     converted = array.astype(np.float64)
@@ -248,7 +254,9 @@ def _array_sha256(array: NDArray[np.generic]) -> str:
     digest = hashlib.sha256()
     digest.update(str(contiguous.shape).encode("ascii"))
     digest.update(contiguous.dtype.str.encode("ascii"))
-    digest.update(contiguous.tobytes())
+    # A memoryview preserves the previous byte-for-byte digest without allocating
+    # another full-size ``bytes`` object for large image tensors.
+    digest.update(memoryview(contiguous).cast("B"))
     return digest.hexdigest()
 
 

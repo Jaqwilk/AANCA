@@ -1,0 +1,64 @@
+schema_version: 1
+study_id: aanca_genuinely_new_external_confirmation_v1
+project: AANCA
+execution_status: EXTERNAL_VALIDATION_COMPLETE
+candidate_source: expanded_autoresearch_selected_development_candidate
+candidate_frozen: true
+candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+candidate_record: configs/aanca_selected_development_candidate.yaml
+candidate_record_sha256: 229bc293b3ba7c3909423178552f5f3789f00411223c2f87b5185eee1542487d
+
+data:
+  authorised_archive_present: true
+  preferred_public_compatibility_dataset: PUMA
+  official_access_url: https://zenodo.org/records/15050523
+  source_inventory_sha256: f3c3eff2c52336b64bc8dd04600791e3569165f71edf3212ea58ab46a729a08f
+  licence_recorded: true
+  required_group_order: [patient_id, whole_slide_id, source_patch_id]
+  final_source_cohort_locked_before_outcomes: true
+  frozen_protocol: AANCA_PUMA_NEW_DATA_PROTOCOL.md
+  frozen_config: configs/puma_new_data_confirmation.yaml
+  forbid_previously_opened_final_sets:
+    - monusac_official_test
+    - nucls_unbiased_control
+    - nucls_evaluation
+    - pannuke_final_reference_fold
+
+expert_reference:
+  required_for_natural_inconsistency_claim: true
+  minimum_independent_qualified_reviewers: 2
+  blinded_adjudication: true
+  raw_votes_preserved: true
+  automatic_source_annotation_changes: false
+
+real_use:
+  prospective: true
+  minimum_sites_for_multisite_claim: 3
+  equal_review_budget_control: exact_matched_random_or_standard_practice
+  workflow_and_downstream_endpoints_frozen_before_review: true
+
+success_requires_all:
+  - top_k_whole_group_lower_bound_gt_exact_matched_control
+  - downstream_macro_f1_whole_group_lower_bound_gt_unchanged
+  - every_important_class_recall_lower_bound_gte_minus_0_01
+  - registered_repeat_or_site_consistency
+  - all_required_models_converged
+
+current_claims:
+  controlled_noise_transfer_supported: true
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  real_workflow_superiority_proven: false
+  clinical_utility_proven: false
+  executable_action: retain_uncorrected
+
+controlled_execution:
+  study_id: puma_new_data_confirmation_v1
+  result: supported
+  final_case_groups: 62
+  final_nuclei: 30397
+  all_frozen_gates_passed: true
+  independently_verified: true
+  report: reports/puma_new_data_confirmation_results.md
+  natural_expert_reference_available: false
+  prospective_real_workflow_executed: false

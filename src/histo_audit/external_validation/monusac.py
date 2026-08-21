@@ -14,7 +14,6 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import tifffile
-import yaml
 from numpy.typing import NDArray
 
 from histo_audit.auditing.strategies import GroupSafeAuditScoreResult, group_safe_audit_scores
@@ -25,12 +24,17 @@ from histo_audit.auditing.two_queue import (
     build_two_review_queues,
     draw_matched_random_comparator,
 )
+from histo_audit.config import load_config_with_file_sha256
 from histo_audit.corruption.controlled import apply_controlled_corruption
 from histo_audit.cross_validation.oof import (
     MultinomialLogisticRegression,
     make_group_stratified_fold_plan,
 )
-from histo_audit.evaluation.restoration import ClassificationMetrics, classification_metrics
+from histo_audit.evaluation.restoration import (
+    ClassificationMetrics,
+    classification_metrics,
+    macro_f1_from_confusion,
+)
 from histo_audit.evaluation.retraining_guard import (
     INDEPENDENT_GROUP_VALIDATION,
     evaluate_multicriteria_retraining_guard,
@@ -618,32 +622,6 @@ def _group_confusions(
     return output
 
 
-def _macro_f1(confusion: NDArray[np.integer]) -> float:
-    matrix = np.asarray(confusion, dtype=np.float64)
-    true_positive = np.diag(matrix)
-    predicted = matrix.sum(axis=0)
-    actual = matrix.sum(axis=1)
-    precision = np.divide(
-        true_positive,
-        predicted,
-        out=np.zeros_like(true_positive),
-        where=predicted > 0,
-    )
-    recall = np.divide(
-        true_positive,
-        actual,
-        out=np.zeros_like(true_positive),
-        where=actual > 0,
-    )
-    f1 = np.divide(
-        2.0 * precision * recall,
-        precision + recall,
-        out=np.zeros_like(precision),
-        where=(precision + recall) > 0,
-    )
-    return float(f1.mean())
-
-
 def _interval(values: Sequence[float]) -> tuple[float, float]:
     array = np.asarray(values, dtype=np.float64)
     array = array[np.isfinite(array)]
@@ -673,18 +651,19 @@ def _candidate_minus_random_bootstrap(
         ],
         axis=0,
     )
-    point_candidate = _macro_f1(candidate_confusions.sum(axis=0))
+    point_candidate = macro_f1_from_confusion(candidate_confusions.sum(axis=0))
     point_random = np.asarray(
-        [_macro_f1(confusions.sum(axis=0)) for confusions in random_confusions],
+        [macro_f1_from_confusion(confusions.sum(axis=0)) for confusions in random_confusions],
         dtype=np.float64,
     )
     rng = np.random.default_rng(seed)
     differences = np.empty(iterations, dtype=np.float64)
     for iteration in range(iterations):
         sampled = rng.integers(0, len(unique), size=len(unique))
-        candidate_value = _macro_f1(candidate_confusions[sampled].sum(axis=0))
+        candidate_value = macro_f1_from_confusion(candidate_confusions[sampled].sum(axis=0))
         random_values = [
-            _macro_f1(confusions[sampled].sum(axis=0)) for confusions in random_confusions
+            macro_f1_from_confusion(confusions[sampled].sum(axis=0))
+            for confusions in random_confusions
         ]
         differences[iteration] = candidate_value - float(np.mean(random_values))
     return {
@@ -800,8 +779,7 @@ def load_frozen_monusac_config(
     """Load the prospectively frozen configuration and return its byte identity."""
 
     path = Path(repository_root).resolve() / "configs/monusac_current_aanca_external.yaml"
-    raw = path.read_bytes()
-    config = yaml.safe_load(raw)
+    config, digest = load_config_with_file_sha256(path)
     if not isinstance(config, dict) or config.get("schema_version") != 1:
         raise ValueError("MoNuSAC frozen configuration is malformed")
     freeze = config.get("freeze")
@@ -813,7 +791,7 @@ def load_frozen_monusac_config(
         or freeze.get("parameters_may_change_after_outcome_execution") is not False
     ):
         raise ValueError("MoNuSAC configuration is not prospectively frozen")
-    return config, hashlib.sha256(raw).hexdigest()
+    return config, digest
 
 
 def run_monusac_controlled_external(

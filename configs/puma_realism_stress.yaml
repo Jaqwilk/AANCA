@@ -1,0 +1,53 @@
+schema_version: 1
+study_id: puma_realism_stress_v1
+project: AANCA
+replacement_project_or_v2: false
+freeze_date: 2026-08-21
+disposition: post_confirmation_exploratory_stress_only
+primary_puma_result_opened_before_freeze: true
+candidate_selection_or_change_permitted: false
+
+parent:
+  config_sha256: 434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30
+  runtime_amendment_sha256: d93bb2a353e0cdc931edf432fc8b83a82a67857aa90fe95e473ccedd732d0d07
+  candidate_sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  evidence_arrays_sha256: 5f6d2d0fc65d95ee245d98c82b80547f0e0cf06c278acc40b48f44020e8c59d4
+
+seeds: [26082170, 26082171, 26082172, 26082173]
+scenarios:
+  - {name: clean_labels, mechanism: symmetric_random_corruption, rate: 0.0, seed_count: 1}
+  - {name: symmetric_1pct, mechanism: symmetric_random_corruption, rate: 0.01, seed_count: 4}
+  - {name: symmetric_2_5pct, mechanism: symmetric_random_corruption, rate: 0.025, seed_count: 4}
+  - {name: symmetric_5pct, mechanism: symmetric_random_corruption, rate: 0.05, seed_count: 4}
+  - {name: targeted_5pct, mechanism: confusion_targeted_corruption, rate: 0.05, seed_count: 4}
+  - {name: targeted_10pct, mechanism: confusion_targeted_corruption, rate: 0.10, seed_count: 4}
+  - {name: group_conditional_5pct, mechanism: group_conditional_corruption, rate: 0.05, seed_count: 4}
+  - {name: group_conditional_10pct, mechanism: group_conditional_corruption, rate: 0.10, seed_count: 4}
+  - {name: instance_geometry_5pct, mechanism: instance_dependent_corruption, rate: 0.05, seed_count: 4}
+
+targeted_transition_matrix:
+  - [0.0, 0.15, 0.85]
+  - [0.10, 0.0, 0.90]
+  - [0.55, 0.45, 0.0]
+
+group_conditional:
+  salt: PUMA-STRESS-HIGH-V1
+  high_hash_prefix_exclusive: 40
+  high_weight: 4.0
+  low_weight: 0.5
+
+evaluation:
+  review_budget: 0.05
+  matched_random_repetitions: 5
+  bootstrap_iterations: 3000
+  bootstrap_seed: 26082220
+  clean_macro_f1_lower_safety_margin: -0.005
+  class_recall_lower_safety_margin: -0.01
+
+claim_boundary:
+  independent_confirmation: false
+  natural_error_detection_proven: false
+  pathologist_error_detection_proven: false
+  clinical_utility_proven: false
+  automatic_annotation_change_permitted: false
+

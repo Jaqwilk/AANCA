@@ -777,7 +777,7 @@ def generate_synthetic_command(
         SYNTHETIC_GENERATOR_SCHEMA_VERSION,
         synthetic_generator_code_sha256,
     )
-    from histo_audit.utils.run_tracking import atomic_write_json
+    from histo_audit.utils.run_tracking import atomic_write_json, atomic_write_npz
 
     root = project_root.resolve()
     try:
@@ -876,19 +876,7 @@ def generate_synthetic_command(
             status = "verified_existing"
         else:
             destination.mkdir(parents=True)
-            descriptor, temporary_name = tempfile.mkstemp(
-                prefix=".dataset.", suffix=".tmp", dir=destination
-            )
-            temporary_path = Path(temporary_name)
-            try:
-                with os.fdopen(descriptor, "wb") as handle:
-                    np.savez_compressed(handle, **arrays)
-                    handle.flush()
-                    os.fsync(handle.fileno())
-                os.replace(temporary_path, arrays_path)
-            except BaseException:
-                temporary_path.unlink(missing_ok=True)
-                raise
+            atomic_write_npz(arrays_path, arrays)
             atomic_write_json(manifest_path, manifest_payload)
             atomic_write_json(generation_path, generation_payload)
     except Exception as exc:

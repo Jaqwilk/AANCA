@@ -1,1 +1,0 @@
-{"allowed_modes":["run-confirmatory","verify-preterminal","verify-terminal"],"contract_status":"ready","dispatcher":"histo_audit.workflows.original_confirmatory_capsule_entry:_dispatch_original_confirmatory_capsule","policy":"original_confirmatory_execution_capsule_entry_contract_v1","schema_version":1}

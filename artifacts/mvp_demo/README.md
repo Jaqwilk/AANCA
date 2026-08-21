@@ -28,7 +28,7 @@ only `index.html`: the QC image, machine-readable evidence and checksum manifest
 separate files in the same package. Repository links require reviewer access when
 the GitHub repository is private.
 
-Author: Natan Smogór. Updated: 20 August 2026.
+Author: Natan Smogór. Updated: 21 August 2026.
 
 The responsive presentation is written in English and uses pinned GSAP and
 Three.js browser modules for progressive animation. Its evidence, navigation,

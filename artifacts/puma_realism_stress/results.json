@@ -1,0 +1,1276 @@
+{
+  "all_scenarios_passed": false,
+  "candidate_changed": false,
+  "candidate_sha256": "78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe",
+  "claim_boundary": {
+    "automatic_annotation_change_permitted": false,
+    "clinical_utility_proven": false,
+    "independent_confirmation": false,
+    "natural_error_detection_proven": false,
+    "pathologist_error_detection_proven": false
+  },
+  "disposition": "post_confirmation_exploratory_stress_only",
+  "geometry_auditor_independence": {
+    "auditor": {
+      "family": "frozen_imagenet_resnet18_pixels",
+      "feature_artifact_hash": "e553a8c25f4a1c29a34db2897beda7985b79a6aa71c23a41aaa7ab2439a0f235",
+      "fitted_data_hash": "43da82cd7a9584d1f7294a480b968b93f484cb0c4e8a17d8bb86dd1d9c653f88",
+      "implementation_hash": "078e103f35d4a785d1c9794b39df9e7ee69c77ee05fe63e46be011872528f64f",
+      "preprocessing_hash": "5c1092e10e2bc01c6f7c4bd36f37c79ad86fd595ab1b1c60e965e8bd0ccfbd4f",
+      "representation_name": "resnet18_multiscale_64_128",
+      "weights_hash": "fb3d09625824598365d3ef98d468e9666b6bf9020e1ed4c320298f3cce91009d"
+    },
+    "generator": {
+      "family": "released_annotation_geometry",
+      "feature_artifact_hash": "7a86aaf4078ac63121c4f9f0d66dbaed5ce9412ea6ec022a01571f9002351d2a",
+      "fitted_data_hash": "24ea3705b1dd9901c4a8bf989742cfe9402105b3023d68f431899bc017e07682",
+      "implementation_hash": "11f728796718e71f65242c36caf414b81ef6d8bd9882695eca572d178a290a56",
+      "preprocessing_hash": "69e779b09b90a63b31e7e87d61600ac57ac25bb3a45d361ef4c1c013efe7d32d",
+      "representation_name": "puma_released_bbox_geometry_v1",
+      "weights_hash": "ad4e93f2873752b7405b10a9b34d22cea584374fb3c6052f7a21804428639df4"
+    },
+    "independence_matrix_hash": "898a6e1713de2084237850123b6b6b1c17d647502daa96d0246ca465901488da",
+    "matrix_decision": "verified_independent",
+    "matrix_reason": "The generator uses only released bounding-box geometry and no pixels or learned weights; the auditor uses frozen pixel embeddings and no geometry columns.",
+    "matrix_version": "aanca-puma-stress-independence-v1",
+    "schema_version": 1
+  },
+  "natural_error_detection_evaluated": false,
+  "parent_config_sha256": "434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30",
+  "parent_runtime_amendment_sha256": "d93bb2a353e0cdc931edf432fc8b83a82a67857aa90fe95e473ccedd732d0d07",
+  "pathologist_error_detection_proven": false,
+  "primary_result_was_open_before_freeze": true,
+  "project": "AANCA",
+  "replacement_project_or_v2": false,
+  "scenario_count": 9,
+  "scenarios": [
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6581381026180847,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.007767754918606151
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.003612671345907284,
+          0.012248279983222594
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.007767754918606151,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.004539624116704166
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.00032230268740336975,
+          0.00915594345821843
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.004539624116704166,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.0020980068934512985,
+          "other": -0.013732833957552981,
+          "tumor": 0.019208478224871706
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.01071130573145409,
+            0.0052633273956644916
+          ],
+          "other": [
+            -0.025389778615167228,
+            -0.0027894707822914014
+          ],
+          "tumor": [
+            0.012247035508048182,
+            0.02702744709272525
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6503703476994785,
+        "uncorrected_macro_f1": 0.6535984785013805
+      },
+      "gates": {
+        "all_models_converged": true,
+        "clean_macro_f1_lower_bound_gte_minus_0_005": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false
+      },
+      "mechanism": "symmetric_random_corruption",
+      "name": "clean_labels",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": null,
+          "circularity_risk": false,
+          "configuration_hash": "f81118314cad2c7b04b43e7192684d9e402e947c3a9d9de1f5a7b3665fc61bb0",
+          "independence_status": "not_applicable",
+          "injected_count": 0,
+          "injected_found": 0,
+          "precision": 0.0,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        }
+      ],
+      "rate": 0.0,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.0,
+        "candidate_precision": 0.0,
+        "differences_by_corruption_seed": [
+          0.0
+        ],
+        "injected_changes_found": 0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.0,
+        "reviewed_decisions": 3352
+      },
+      "seeds": [
+        26082170
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6578523628487087,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.008121584655698455,
+          0.007657695052883717,
+          0.008736443570533492,
+          0.00801709533063033
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.004040866092971913,
+          0.012556314224212897
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.008133204652436499,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.006546167643337597,
+          0.004844700065524732,
+          0.006926050413641471,
+          0.005338472152968676
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.001819284107224716,
+          0.010259484343466364
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.005913847568868119,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.0023977221639441826,
+          "other": -0.01016586409844844,
+          "tumor": 0.019939835513606008
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.0103015978780252,
+            0.003781648440922694
+          ],
+          "other": [
+            -0.020158708246110265,
+            0.00021307805482420942
+          ],
+          "tumor": [
+            0.013549240728781983,
+            0.026440827872199518
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6497191581962722,
+        "uncorrected_macro_f1": 0.6519385152798406
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "symmetric_random_corruption",
+      "name": "symmetric_1pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.09019070243568295,
+          "circularity_risk": false,
+          "configuration_hash": "93e87611c7741f8e3f32afa88f8f0152afbc7cbba0d233631423da61ab0d83e8",
+          "independence_status": "not_applicable",
+          "injected_count": 670,
+          "injected_found": 263,
+          "precision": 0.07846062052505967,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.10066237497915458,
+          "circularity_risk": false,
+          "configuration_hash": "660b6b35325b5cc91cd535424a85213b2d0aea438eb045b4e51c90060a611de5",
+          "independence_status": "not_applicable",
+          "injected_count": 670,
+          "injected_found": 280,
+          "precision": 0.08353221957040573,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.08793432679982212,
+          "circularity_risk": false,
+          "configuration_hash": "2f086210cdda9bf94d249d316d23938d7e78113f58fdf751503212f40fe40854",
+          "independence_status": "not_applicable",
+          "injected_count": 670,
+          "injected_found": 263,
+          "precision": 0.07846062052505967,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.1114607611465121,
+          "circularity_risk": false,
+          "configuration_hash": "67fcc9c16f308685e9bf639dc05495db0e718bfaf1a293e1ae8bd62cf6110025",
+          "independence_status": "not_applicable",
+          "injected_count": 670,
+          "injected_found": 274,
+          "precision": 0.08174224343675418,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.01,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.06247016706443914,
+        "candidate_precision": 0.08054892601431982,
+        "differences_by_corruption_seed": [
+          0.06044152744630072,
+          0.06658711217183771,
+          0.058353221957040576,
+          0.06449880668257757
+        ],
+        "injected_changes_found": 1080,
+        "interval_95": [
+          0.04827502013379698,
+          0.07845807834032138
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.018078758949880668,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6544660164157249,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.007461567877977027,
+          0.00887323997379208,
+          0.006926856688297178,
+          0.00628732392869924
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.0038609898081019218,
+          0.010854942253631029
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.007387247117191381,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.005685708483935681,
+          0.0074149448984625055,
+          0.005121627363893655,
+          0.004561312343280499
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.002244646717497727,
+          0.009482858988199774
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.005695898272393085,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.0023977221639442936,
+          "other": -0.008471553415373645,
+          "tumor": 0.018601313683280885
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.009737521243936526,
+            0.003591960246080978
+          ],
+          "other": [
+            -0.018117760354235332,
+            0.0005663513853427916
+          ],
+          "tumor": [
+            0.012879479629742428,
+            0.024640143776244693
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6470787692985335,
+        "uncorrected_macro_f1": 0.6487701181433319
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "symmetric_random_corruption",
+      "name": "symmetric_2_5pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.20938946335496608,
+          "circularity_risk": false,
+          "configuration_hash": "1e748259be20fe5f4bc6743bdd475b9f1510322c4c408d72fafaac999f09c7af",
+          "independence_status": "not_applicable",
+          "injected_count": 1676,
+          "injected_found": 659,
+          "precision": 0.19659904534606204,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.19594261294064522,
+          "circularity_risk": false,
+          "configuration_hash": "a761b310e8af1eae94d3a898f7c3ab64e5ae5dd4713fd0ad6672396ce153bf8d",
+          "independence_status": "not_applicable",
+          "injected_count": 1676,
+          "injected_found": 647,
+          "precision": 0.19301909307875895,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.19563885447121648,
+          "circularity_risk": false,
+          "configuration_hash": "c4b8634ffa60a22d90ab2e79421c53a2ee69e2af0c34b01a24e929c3f6871b6b",
+          "independence_status": "not_applicable",
+          "injected_count": 1676,
+          "injected_found": 641,
+          "precision": 0.19122911694510739,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.19579178902417038,
+          "circularity_risk": false,
+          "configuration_hash": "e93a782b7aa410641e226143cb767d1e834427221c86a5512e3f6328203edefe",
+          "independence_status": "not_applicable",
+          "injected_count": 1676,
+          "injected_found": 659,
+          "precision": 0.19659904534606204,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.025,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.14558472553699284,
+        "candidate_precision": 0.1943615751789976,
+        "differences_by_corruption_seed": [
+          0.14707637231503579,
+          0.14164677804295944,
+          0.14164677804295941,
+          0.1519689737470167
+        ],
+        "injected_changes_found": 2606,
+        "interval_95": [
+          0.11589201970647571,
+          0.1776698192571105
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.048776849642004766,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6523081272012573,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.009860907586033751,
+          0.008905411740888103,
+          0.00668160129584594,
+          0.00817592813841661
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.005293881220832299,
+          0.011789529122944484
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.008405962190296101,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.007536152794296536,
+          0.006204023820512883,
+          0.005728689265478315,
+          0.005854523764394437
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.0034271805966573955,
+          0.009647417358012795
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.006330847411170543,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.0013112543084069506,
+          "other": -0.005082932049224165,
+          "tumor": 0.01726279185295576
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.007115350155671137,
+            0.0038537670672372697
+          ],
+          "other": [
+            -0.013026596141393633,
+            0.0028353825333665966
+          ],
+          "tumor": [
+            0.012326932117718598,
+            0.022353299947263344
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6439021650109612,
+        "uncorrected_macro_f1": 0.6459772797900868
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "symmetric_random_corruption",
+      "name": "symmetric_5pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3042082043434924,
+          "circularity_risk": false,
+          "configuration_hash": "d7f7691e63828ca780e411102bbebc78139ac1835db0c86081a22e0aaed48f52",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1125,
+          "precision": 0.3356205250596659,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3111116663099372,
+          "circularity_risk": false,
+          "configuration_hash": "224d1ce0f7bfc693942388fcab5884619f87cd17d3873fe213b13a21695f6822",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1126,
+          "precision": 0.33591885441527447,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.30869467687912655,
+          "circularity_risk": false,
+          "configuration_hash": "a3c33c2c67d9ed1d3d1d4f172126890c6fa237d99d5f27534d5d78d24b88de65",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1144,
+          "precision": 0.3412887828162291,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3274991521220811,
+          "circularity_risk": false,
+          "configuration_hash": "1c5789a651c4385f359642eb344b567090cef0b1f639bef2ce4e5d32272bfd91",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1193,
+          "precision": 0.3559069212410501,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.05,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.23836515513126494,
+        "candidate_precision": 0.3421837708830549,
+        "differences_by_corruption_seed": [
+          0.23186157517899764,
+          0.23221957040572794,
+          0.23699284009546537,
+          0.25238663484486873
+        ],
+        "injected_changes_found": 4588,
+        "interval_95": [
+          0.1922250169401827,
+          0.28599342874799955
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.10381861575178997,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.652137030436814,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.009721118045093569,
+          0.0063800866377551335,
+          0.007795379811904146,
+          0.007314767882743101
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.004285581432071283,
+          0.011348027908375784
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.007802838094373987,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.009300943222759872,
+          0.005635041365511406,
+          0.00714883697261226,
+          0.006392666760100529
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.0040136102905038214,
+          0.010364382579349204
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.007119372080246017,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.01049003446725616,
+          "other": 0.007223113964687,
+          "tumor": 0.01621405309929902
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.018333361599585873,
+            -0.00445362203960676
+          ],
+          "other": [
+            -0.0021882354195088757,
+            0.01593512176560127
+          ],
+          "tumor": [
+            0.011565466388244478,
+            0.020987715326621095
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.64433419234244,
+        "uncorrected_macro_f1": 0.645017658356568
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "confusion_targeted_corruption",
+      "name": "targeted_5pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.25089179898630054,
+          "circularity_risk": false,
+          "configuration_hash": "8f1451a55e42d295f1591c6e2f6b937d4cbdb04caddbf73b0557a22213a52d5e",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 983,
+          "precision": 0.2932577565632458,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.24396594429175228,
+          "circularity_risk": false,
+          "configuration_hash": "1b49ac54e352cc05e60128a159cd73ea7a92429e6c373f186edf052688bcb15a",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 951,
+          "precision": 0.2837112171837709,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.2456767447008789,
+          "circularity_risk": false,
+          "configuration_hash": "96524cb2ee47058b4b80c6414dfda35543fd8112917f5e163a7f24efe2d5b4a8",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 940,
+          "precision": 0.28042959427207637,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.2456890643382635,
+          "circularity_risk": false,
+          "configuration_hash": "9b7007dc8521089092a8a7179ebf01f833cee7460a28ebe0a369ae1e8df436b1",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 989,
+          "precision": 0.2950477326968974,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.05,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.17948985680190932,
+        "candidate_precision": 0.2881115751789976,
+        "differences_by_corruption_seed": [
+          0.18263723150357994,
+          0.17792362768496423,
+          0.1698090692124105,
+          0.18758949880668258
+        ],
+        "injected_changes_found": 3863,
+        "interval_95": [
+          0.13406616387648776,
+          0.2236104130639816
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.10862171837708831,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6473937563744407,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.005249354719818133,
+          0.006834563205757704,
+          0.007989998763278439,
+          0.007261873196427127
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.003345640929213173,
+          0.010613685842293337
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.006833947471320351,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.005570533593008076,
+          0.008645908401080149,
+          0.007832701698480493,
+          0.007125079010455337
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.004185087175932573,
+          0.01066431509379702
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.007293555675756014,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.014461261801288816,
+          "other": 0.016586409844836725,
+          "tumor": 0.012709057791024936
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.02130532088576753,
+            -0.009288953238067622
+          ],
+          "other": [
+            0.008552917153074373,
+            0.025534593244869654
+          ],
+          "tumor": [
+            0.007543998006790725,
+            0.01779401427779096
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6405598089031204,
+        "uncorrected_macro_f1": 0.6401002006986847
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "confusion_targeted_corruption",
+      "name": "targeted_10pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3652435300539377,
+          "circularity_risk": false,
+          "configuration_hash": "03c5c1ff69a01f9f182b6b0bed694ef872db2897be140d9e2a01c7f73bec3f12",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1535,
+          "precision": 0.4579355608591885,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3700364340795291,
+          "circularity_risk": false,
+          "configuration_hash": "2dcf824c7bc50cb776abc9e984dc2fcc5a418a5b8e8561740183a5be6d10a04d",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1566,
+          "precision": 0.4671837708830549,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.36979232812920587,
+          "circularity_risk": false,
+          "configuration_hash": "83ea6d0415d74924ea92053935f82a871f45272e12cbc9fbce0c9c6aa61ffc30",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1535,
+          "precision": 0.4579355608591885,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.36683034720935237,
+          "circularity_risk": false,
+          "configuration_hash": "27b54051cc8db7e3ca710629b61e207b16c8e20aac08dae173c92222cdb87444",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1553,
+          "precision": 0.4633054892601432,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.1,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.2699582338902148,
+        "candidate_precision": 0.46159009546539376,
+        "differences_by_corruption_seed": [
+          0.271599045346062,
+          0.2746420047732697,
+          0.26091885441527446,
+          0.27267303102625295
+        ],
+        "injected_changes_found": 6189,
+        "interval_95": [
+          0.2032503305567943,
+          0.3314480937647621
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.191631861575179,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6544799565553479,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.00811145938602209,
+          0.006171757625696772,
+          0.007550848966618728,
+          0.009896364321589468
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.004857670569481302,
+          0.011056059745440272
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.007932607574981765,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.004790369480271006,
+          0.0029958700075564115,
+          0.005883533833529797,
+          0.006915070000643175
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.0023047805149518834,
+          0.008028446273802768
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.0051462108305000975,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.002772366252060565,
+          "other": -0.006465132869627355,
+          "tumor": 0.016586631340729685
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.008880482617629361,
+            0.002447941270051251
+          ],
+          "other": [
+            -0.01419071244394055,
+            0.0008933623921341135
+          ],
+          "tumor": [
+            0.012144237760082761,
+            0.02111039352320185
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6465473489803661,
+        "uncorrected_macro_f1": 0.6493337457248477
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "group_conditional_corruption",
+      "name": "group_conditional_5pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3333212470459167,
+          "circularity_risk": false,
+          "configuration_hash": "e64f3c50ca0b4916f3a9a1c4a2e97017d10cf0eb97c6b746a501831bdc9cea96",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1219,
+          "precision": 0.3636634844868735,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.32685912621441865,
+          "circularity_risk": false,
+          "configuration_hash": "93de8527f07eacda8cc0c378b17c6abc6ca4134c7ff479e4b039fabc39b95bea",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1205,
+          "precision": 0.35948687350835323,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.33214723923507544,
+          "circularity_risk": false,
+          "configuration_hash": "b5fd151a84fd9daa28b703f0bb9a25da0ecad56771c212e126a1a4f9a520224d",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1182,
+          "precision": 0.35262529832935563,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.3131602302725677,
+          "circularity_risk": false,
+          "configuration_hash": "24b882e0a5359b4cecda69d5cb14d86b3dd68d8e206a916398350d23f035866d",
+          "independence_status": "not_applicable",
+          "injected_count": 3352,
+          "injected_found": 1163,
+          "precision": 0.34695704057279236,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.05,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.25207338902147974,
+        "candidate_precision": 0.3556831742243437,
+        "differences_by_corruption_seed": [
+          0.25757756563245826,
+          0.2600238663484487,
+          0.24815035799522675,
+          0.2425417661097852
+        ],
+        "injected_changes_found": 4769,
+        "interval_95": [
+          0.19703733902537499,
+          0.30761502737505275
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.10360978520286396,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": true,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.649727995536483,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.011159502187403136,
+          0.007438706710698795,
+          0.006346205602423827,
+          0.008334976609639444
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.004259127647706688,
+          0.012197209343604435
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.0083198477775413,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.007834581358173609,
+          0.005031669788006621,
+          0.0038914991576380897,
+          0.004176787283267758
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.002299209758764731,
+          0.008236488572300141
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.005233634396771519,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": -0.002172935711074464,
+          "other": -0.00022293561619401991,
+          "tumor": 0.012543467461500257
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            -0.007204401074788485,
+            0.0025365381238998843
+          ],
+          "other": [
+            -0.008077282739830096,
+            0.0072145221471880865
+          ],
+          "tumor": [
+            0.007226993008915077,
+            0.0182041817461267
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6414081477589417,
+        "uncorrected_macro_f1": 0.6444943611397115
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": true,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "group_conditional_corruption",
+      "name": "group_conditional_10pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.4626862590369097,
+          "circularity_risk": false,
+          "configuration_hash": "ade65f9a73b6f952d379ad57677c662212af35cf3a3dd579914bea2537f22a48",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1860,
+          "precision": 0.5548926014319809,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.47016132206314415,
+          "circularity_risk": false,
+          "configuration_hash": "dc593f4fd9cd20d2ee0af478137f7364da24caf1a1ddcab36396f82574df7b63",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1895,
+          "precision": 0.5653341288782816,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.468361363443856,
+          "circularity_risk": false,
+          "configuration_hash": "ac64f8e3439ac4ecb46507f6864e26961e642cc542eabfc902bf9e09f961b2f8",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1875,
+          "precision": 0.5593675417661098,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.4604147329209032,
+          "circularity_risk": false,
+          "configuration_hash": "9671c2a83428b538f645b2755fa27fb50b315979e15d9c57f313a2d17954fb78",
+          "independence_status": "not_applicable",
+          "injected_count": 6703,
+          "injected_found": 1830,
+          "precision": 0.5459427207637232,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.1,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.34421241050119333,
+        "candidate_precision": 0.5563842482100239,
+        "differences_by_corruption_seed": [
+          0.3445107398568019,
+          0.35149164677804295,
+          0.3499403341288783,
+          0.33090692124105014
+        ],
+        "injected_changes_found": 7460,
+        "interval_95": [
+          0.27712812051464836,
+          0.4058136611249569
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.21217183770883052,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    },
+    {
+      "all_scenario_gates_passed": false,
+      "downstream": {
+        "bootstrap_iterations": 3000,
+        "candidate_macro_f1": 0.6489698041279569,
+        "candidate_minus_matched_random_by_corruption_seed": [
+          0.00772744788506019,
+          0.007971993192427695,
+          0.007965958107329363,
+          0.008297260087108405
+        ],
+        "candidate_minus_matched_random_interval_95": [
+          0.004194070183809663,
+          0.012145297637629006
+        ],
+        "candidate_minus_matched_random_macro_f1": 0.007990664817981413,
+        "candidate_minus_uncorrected_by_corruption_seed": [
+          0.0058755181367562415,
+          0.0058755181367562415,
+          0.0058755181367562415,
+          0.0058755181367562415
+        ],
+        "candidate_minus_uncorrected_interval_95": [
+          0.0011049857743355349,
+          0.011000686518339282
+        ],
+        "candidate_minus_uncorrected_macro_f1": 0.0058755181367562415,
+        "candidate_minus_uncorrected_recall": {
+          "lymphocyte": 0.008991458114790962,
+          "other": -0.01694310683074729,
+          "tumor": 0.018601313683280885
+        },
+        "candidate_minus_uncorrected_recall_intervals_95": {
+          "lymphocyte": [
+            0.0024077428423105425,
+            0.0149711737293215
+          ],
+          "other": [
+            -0.028027930998259804,
+            -0.005871271848682382
+          ],
+          "tumor": [
+            0.011244261882282969,
+            0.02691196256463505
+          ]
+        },
+        "evaluated_case_groups": 62,
+        "mean_matched_random_macro_f1": 0.6409791393099755,
+        "uncorrected_macro_f1": 0.6430942859912007
+      },
+      "gates": {
+        "all_models_converged": true,
+        "all_seed_directions_positive": true,
+        "downstream_lower_bound_gt_matched_random": true,
+        "downstream_lower_bound_gt_unchanged": true,
+        "every_class_recall_lower_bound_gte_minus_0_01": false,
+        "retrieval_lower_bound_gt_matched_random": true
+      },
+      "mechanism": "instance_dependent_corruption",
+      "name": "instance_geometry_5pct",
+      "per_seed": [
+        {
+          "all_models_converged": true,
+          "average_precision": 0.13179553119420276,
+          "circularity_risk": false,
+          "configuration_hash": "62f306fac6fe3561d139710166f496292df4d8757ab55c7dd14cd5055cacdc80",
+          "independence_status": "verified_independent",
+          "injected_count": 3352,
+          "injected_found": 709,
+          "precision": 0.21151551312649164,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082170
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.13179553119420276,
+          "circularity_risk": false,
+          "configuration_hash": "202696ba0d11d3d43db4af21a9ee1253c14951a2e542e033f1d88f14d6205d0c",
+          "independence_status": "verified_independent",
+          "injected_count": 3352,
+          "injected_found": 709,
+          "precision": 0.21151551312649164,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082171
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.13179553119420276,
+          "circularity_risk": false,
+          "configuration_hash": "105519a9580f653b2b9ae04868136ddff50363741b0c3a95e825def112f842a4",
+          "independence_status": "verified_independent",
+          "injected_count": 3352,
+          "injected_found": 709,
+          "precision": 0.21151551312649164,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082172
+        },
+        {
+          "all_models_converged": true,
+          "average_precision": 0.13179553119420276,
+          "circularity_risk": false,
+          "configuration_hash": "3c05ab001ea17df9864057b969a56af0a5aba2016a73d1cd54b55be447b603b0",
+          "independence_status": "verified_independent",
+          "injected_count": 3352,
+          "injected_found": 709,
+          "precision": 0.21151551312649164,
+          "queue_underfilled": false,
+          "reviewed_count": 3352,
+          "seed": 26082173
+        }
+      ],
+      "rate": 0.05,
+      "retrieval": {
+        "bootstrap_iterations": 3000,
+        "candidate_minus_matched_random_precision": 0.11786992840095464,
+        "candidate_precision": 0.21151551312649164,
+        "differences_by_corruption_seed": [
+          0.11795942720763722,
+          0.11867541766109783,
+          0.11807875894988065,
+          0.11676610978520285
+        ],
+        "injected_changes_found": 2836,
+        "interval_95": [
+          0.08073533831496063,
+          0.1623234359492764
+        ],
+        "matched_random_repetitions": 5,
+        "mean_matched_random_precision": 0.093645584725537,
+        "reviewed_decisions": 13408
+      },
+      "seeds": [
+        26082170,
+        26082171,
+        26082172,
+        26082173
+      ],
+      "source_annotations_modified": false
+    }
+  ],
+  "schema_version": 1,
+  "source_annotations_modified": false,
+  "stress_config_sha256": "00214940ee2cc1faf51202e23fe800a7f42a4f9b2936dae26bbfe20e3ee2555a",
+  "study_id": "puma_realism_stress_v1"
+}

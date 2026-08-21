@@ -1,0 +1,28 @@
+schema_version: 1
+amendment_id: puma_new_data_runtime_amendment_v1
+parent_study_id: puma_new_data_confirmation_v1
+parent_config_sha256: 434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30
+freeze_date: 2026-08-21
+metric_outcomes_available_at_freeze: false
+candidate_changed: false
+success_gates_changed: false
+
+runtime:
+  audit_group_fold_seed: 26082190
+  matched_random_seed_start: 26082192
+  bootstrap_seed: 26082191
+  max_iter: 400
+  neighbour_backend: exact_fold_safe_torch_float32_cosine
+  neighbour_query_chunk_size: 256
+  deterministic_algorithms: true
+
+inspected_before_amendment:
+  official_archive_hashes: true
+  file_schema: true
+  aggregate_native_class_counts: true
+  aanca_scores: false
+  queue_membership: false
+  corruption_retrieval_metrics: false
+  downstream_predictions: false
+  final_fold_metrics: false
+

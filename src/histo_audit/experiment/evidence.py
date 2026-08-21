@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import os
-import tempfile
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
@@ -13,26 +11,12 @@ from numpy.typing import NDArray
 
 from histo_audit.auditing.neighbours import NeighbourDisagreementResult
 from histo_audit.evaluation.restoration import DownstreamEvaluation
+from histo_audit.utils.run_tracking import atomic_write_npz
 
 
 def _atomic_npz(path: Path, **arrays: Any) -> Path:
     """Write one compressed NPZ and atomically publish it at *path*."""
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
-    )
-    temporary_path = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "wb") as stream:
-            np.savez_compressed(stream, **arrays)
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary_path, path)
-    except BaseException:
-        temporary_path.unlink(missing_ok=True)
-        raise
-    return path
+    return atomic_write_npz(path, arrays)
 
 
 def write_neighbour_evidence(

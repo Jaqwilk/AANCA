@@ -1,0 +1,69 @@
+schema_version: 1
+study_id: nucls_supervised_qc_prospective_v1
+project: AANCA
+replacement_project_or_v2: false
+freeze_date: 2026-08-21
+outcomes_opened_at_freeze: false
+
+authorities:
+  dataset_page: https://sites.google.com/view/nucls/single-rater
+  code_repository: https://github.com/PathologyDataScience/NuCLS
+  uncorrected_folder_id: 1zEQCzaufsT14ZZAYVgg6gj4NjsIPrwcg
+  corrected_folder_id: 1eGlF9Dgu3WMEik4fqj0wJ13LKVufsfZ0
+  licence: CC0-1.0
+
+pairing:
+  fov_key: complete_official_filename_stem
+  group_id: tcga_patient_id
+  label_blind: true
+  preferred_key: official_stable_nucleus_id_with_geometry_check
+  fallback: deterministic_maximum_iou_one_to_one
+  minimum_iou: 0.50
+  sensitivity_iou: 0.70
+  unmatched_primary_status: excluded_and_reported
+
+labels:
+  observed_authority: official_uncorrected_single_rater
+  reference_authority: official_supervised_qc_single_rater
+  class_order: [tumor_any, nonTIL_stromal, sTIL]
+  exclude_unsupported_or_ambiguous: true
+  source_annotations_mutable: false
+
+candidate:
+  record: configs/aanca_selected_development_candidate.yaml
+  sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  feature_view: resnet18_multiscale_64_128
+  audit_l2: 0.1
+  audit_class_weight_balanced: false
+  risk_method: fixed_hybrid
+  neighbour_k: 31
+  hybrid_self_confidence_weight: 0.6
+  queue_preset: balanced_relaxed
+  review_budget: 0.05
+  intervention: expert_review_relabel
+  downstream_l2: 0.01
+  downstream_class_weight_balanced: true
+
+evaluation:
+  outer_patient_folds: 5
+  inner_patient_folds: 4
+  matched_random_repetitions: 5
+  bootstrap_iterations: 3000
+  bootstrap_unit: patient_id
+  corrected_labels_available_to_queue: false
+
+success_requires_all:
+  - ranking_precision_lower_bound_gt_matched_random
+  - downstream_macro_f1_lower_bound_gt_unchanged
+  - downstream_macro_f1_lower_bound_gt_matched_random_review
+  - at_least_four_of_five_outer_fold_directions_positive
+  - every_superclass_recall_lower_bound_gte_minus_0_01
+  - all_required_models_converged
+  - all_group_pairing_and_exclusion_audits_passed
+
+claim_boundary:
+  can_support_if_positive: supervised_qc_revision_prioritisation_in_studied_nucls_subset
+  pathologist_error_detection_proven: false
+  biological_truth_proven: false
+  prospective_clinical_utility_proven: false
+
