@@ -23,3 +23,18 @@ def test_scientific_workflow_runs_the_documented_type_gate() -> None:
     assert install_end < type_check < tests
     assert "if: runner.os == 'Windows'" in workflow[type_check:tests]
     assert "run: uv run mypy src" in workflow[type_check:tests]
+
+
+def test_closed_demo_sprite_assets_are_explicitly_publishable() -> None:
+    ignore_rules = set(
+        (Path(__file__).resolve().parents[1] / ".gitignore")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    )
+
+    assert {
+        "!artifacts/mvp_demo/assets/",
+        "!artifacts/mvp_demo/assets/hero/",
+        "!artifacts/mvp_demo/assets/hero/nuclei/",
+        "!artifacts/mvp_demo/assets/hero/nuclei/*.png",
+    } <= ignore_rules

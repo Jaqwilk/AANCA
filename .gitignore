@@ -65,6 +65,10 @@ artifacts/duplicate_audit/.superseded/**
 !artifacts/mvp_demo/index.html
 !artifacts/mvp_demo/manifest.json
 !artifacts/mvp_demo/pannuke_mask_qc_overlays.png
+!artifacts/mvp_demo/assets/
+!artifacts/mvp_demo/assets/hero/
+!artifacts/mvp_demo/assets/hero/nuclei/
+!artifacts/mvp_demo/assets/hero/nuclei/*.png
 
 # Generated environment exports and transient logs
 reports/doctor_latest.json

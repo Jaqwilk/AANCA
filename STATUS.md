@@ -13,8 +13,8 @@ checksum-bound local transparent nucleus sprites under
 `src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a paced audit pass,
 a short review queue of copies while source marks stay in place, then a nucleus →
 patch → four-patch study zoom. The four non-overlapping patches then rotate 45°,
-adopt the AANCA mark colour, then spin and grow into a colour wipe that reveals the
-cell field for the next cycle. The return is not a hard canvas cut. It does not claim
+adopt the AANCA mark colour, hold, then spin and grow before a brief black pause and
+soft reveal of the cell field for the next cycle. The return is not a hard canvas cut. It does not claim
 automatic diagnosis or label correction. Runtime rendering is capped at 60 frames per
 second and uses hardware-aware pixel and cache budgets rather than scaling work with a
 120–240 Hz display or an unnecessarily high device-pixel ratio.
@@ -1033,21 +1033,21 @@ Final validation:
 - `uv run mypy src`: no issues in 103 source files;
 - `git diff --check`: passed;
 - `node --check src/histo_audit/assets/hero-review-field.js`: passed;
-- the final 60 Hz render-cadence follow-up passed `11` focused demo/CI tests in
-  1.49 seconds; production exposed `390` rendered frames after 6.22 story seconds,
-  with all six sprites ready and no failed asset;
+- the final 60 Hz render-cadence and loop-timing follow-up passed `12` focused
+  demo/CI tests in 1.35 seconds; the browser readback exposed bounded frame counts,
+  all six sprites ready and no failed asset;
 - `uv build --wheel`: passed; the wheel contains the hero script, stylesheet and all
   six sprite assets;
 - standalone launcher verification: valid eleven-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`;
+  `3bf890c53a2d8fc08ad5c2335ed08801d23caadbf165074ed9019dbffb9575c4`;
 - local Playwright checks at 1280 x 720 and 390 x 844 found no horizontal overflow,
   console error or warning; the full-height canvas rendered and every sprite request
   returned HTTP 200.
 
 Hostinger publication:
 
-- the preceding live release was backed up under ID `20260822-000207`;
+- the preceding live release was backed up under ID `20260822-001045`;
 - the eleven-file package was deployed in replace mode to
   `mediumaquamarine-wombat-125861.hostingersite.com`;
 - direct SFTP readback matched all eleven local files byte for byte;
@@ -1059,12 +1059,14 @@ Hostinger publication:
 
 ## Dynamic loop pacing and constrained-device optimisation — 2026-08-22
 
-The presentation-only hero timing was tightened without changing any scientific
+The presentation-only hero timing was balanced without changing any scientific
 input, output, claim or completion stage. The four genuine desktop selections now
-complete their queue at about 12.6 seconds, the coloured AANCA mark appears at about
-17.7 seconds and the next loop begins at about 19.3 seconds. The final return remains
-deliberately much faster: the mark performs more than two additional rotations,
-expands to 20 times its settled scale and uses an accent wipe to hide the camera reset.
+complete their queue at about 12.6 seconds. The four-patch study then rotates and
+colours with continuous in/out easing; the completed mark holds visibly for about
+1.08 seconds. The final return performs more than two additional rotations over 1.35
+seconds, expands to 20 times its settled scale, fades to full black, holds black for
+about 0.64 seconds and softly reveals the reset field. The next loop begins after
+about 22.1 seconds.
 
 The renderer now:
 
@@ -1079,15 +1081,15 @@ The renderer now:
 
 Local browser evidence for the final candidate:
 
-- 1440 x 900 normal-motion loop: 19.327 seconds, 1,160 rendered frames after the
-  initial snapshot, 60.02 rendered frames per second, no overflow and no console or
-  page errors;
+- 1440 x 900 normal-motion loop: about 22.1 seconds, a measured completed-logo hold
+  of 1.08 seconds and black hold of 0.64 seconds, with no overflow, console warning or
+  page error;
 - simulated constrained phone: 390 x 844 CSS pixels, DPR 3, two logical processors,
   2 GB reported memory, data saver enabled and 4x CPU throttling; the constrained
-  profile selected DPR 1.25, completed its mobile loop in 16.901 seconds at 60.47
+  profile selected DPR 1.25, completed its mobile loop in 19.671 seconds at 59.94
   rendered frames per second, emitted no long tasks, errors or overflow;
 - focused demonstrator tests: `9 passed`;
 - final closed-package manifest root before canonical promotion:
-  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`.
+  `3bf890c53a2d8fc08ad5c2335ed08801d23caadbf165074ed9019dbffb9575c4`.
 
 This local refresh has not been redeployed to Hostinger in this change set.

@@ -587,10 +587,11 @@ non-selection scans are excluded from the story.
 After the patch zoom, reveal four separate square patches in a 2 x 2 grid. Preserve
 the AANCA mark's 8:3 tile-to-gap proportion, rotate the complete group exactly 45
 degrees and fade the tissue detail into `#5e6ad2`. Do not add a Canvas wordmark.
-After a short hold, drive the logo through more than two additional rotations while
-scaling it into a short accent colour wipe. Reset the camera behind that opaque wipe,
-reveal the unchanged field and continue directly into the next audit cycle without
-clearing the canvas. Under
+Hold the completed mark for about one second. Then drive it through more than two
+additional rotations with continuous in/out easing while scaling it into the camera.
+Fade to full black, keep that black frame briefly, reset the camera while it is hidden,
+then reveal the unchanged field and continue directly into the next audit cycle
+without clearing the canvas. Under
 reduced motion, render the completed static mark and do not run the loop.
 
 Keep the scan phase brisk enough to match the later transformations while retaining

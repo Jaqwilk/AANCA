@@ -51,14 +51,16 @@
       copyFlightMax: 1,
       queueComplete: 0.68,
       zoomToPatch: 2,
-      zoomToStudy: 1.55,
-      logoHold: 0.12,
-      logoRotate: 0.5,
-      logoColor: 0.32,
-      logoDisplay: 0.72,
-      returnSpinDive: 0.82,
-      returnRevealField: 0.28,
-      returnFieldHold: 0.12,
+      zoomToStudy: 1.85,
+      logoHold: 0.38,
+      logoRotate: 1.05,
+      logoColor: 0.65,
+      logoDisplay: 1,
+      returnSpinDive: 1.35,
+      returnFadeToBlack: 0.22,
+      returnBlackHold: 0.58,
+      returnRevealField: 0.46,
+      returnFieldHold: 0.14,
     }),
     renderProfiles: Object.freeze({
       constrained: Object.freeze({ dprCap: 1.25, pixelBudget: 2200000, cacheSize: 384 }),
@@ -410,8 +412,8 @@
     let previousLogoDetailAlpha = 1;
     let loopDiveScale = 1;
     let previousLoopDiveScale = 1;
-    let loopFlashAlpha = 0;
-    let previousLoopFlashAlpha = 0;
+    let loopBlackAlpha = 0;
+    let previousLoopBlackAlpha = 0;
     let loopFieldReset = false;
     let activeNucleusId = -1;
     let currentScanIndex = -1;
@@ -883,8 +885,8 @@
       previousLogoDetailAlpha = 1;
       loopDiveScale = 1;
       previousLoopDiveScale = 1;
-      loopFlashAlpha = 0;
-      previousLoopFlashAlpha = 0;
+      loopBlackAlpha = 0;
+      previousLoopBlackAlpha = 0;
       loopFieldReset = false;
       storyElapsed = 0;
       completed = false;
@@ -1073,7 +1075,7 @@
       logoColorProgress = 1;
       logoDetailAlpha = 0;
       loopDiveScale = 1;
-      loopFlashAlpha = 0;
+      loopBlackAlpha = 0;
       loopFieldReset = false;
       camera.goalScale = finalCamera.scale;
       camera.goalX = finalCamera.x;
@@ -1093,7 +1095,7 @@
       logoColorProgress = 0;
       logoDetailAlpha = 1;
       loopDiveScale = 1;
-      loopFlashAlpha = 0;
+      loopBlackAlpha = 0;
       loopFieldReset = false;
       camera.goalScale = initialCamera.scale;
       camera.goalX = initialCamera.x;
@@ -1117,7 +1119,7 @@
       previousLogoColorProgress = logoColorProgress;
       previousLogoDetailAlpha = logoDetailAlpha;
       previousLoopDiveScale = loopDiveScale;
-      previousLoopFlashAlpha = loopFlashAlpha;
+      previousLoopBlackAlpha = loopBlackAlpha;
     }
 
     function updateScan(deltaSeconds) {
@@ -1282,8 +1284,12 @@
 
       if (state === STATES.SETTLED) {
         const rotateStart = CONFIG.timings.logoHold;
-        const colorStart = rotateStart + CONFIG.timings.logoRotate;
-        const logoComplete = colorStart + CONFIG.timings.logoColor;
+        const rotateComplete = rotateStart + CONFIG.timings.logoRotate;
+        const colorStart = rotateStart + CONFIG.timings.logoRotate * 0.55;
+        const logoComplete = Math.max(
+          rotateComplete,
+          colorStart + CONFIG.timings.logoColor
+        );
         const sequenceDuration = logoComplete + CONFIG.timings.logoDisplay;
         const rotateRaw = clamp(
           (stateElapsed - rotateStart) / CONFIG.timings.logoRotate,
@@ -1302,9 +1308,9 @@
         camera.goalScale = lerp(studyCamera.scale, finalCamera.scale, cameraProgress);
         camera.goalX = lerp(studyCamera.x, finalCamera.x, cameraProgress);
         camera.goalY = lerp(studyCamera.y, finalCamera.y, cameraProgress);
-        logoRotation = (Math.PI / 4) * easeOutBack(rotateRaw);
-        logoColorProgress = easeOutCubic(colorRaw);
-        logoDetailAlpha = 1 - easeOutCubic(colorRaw);
+        logoRotation = (Math.PI / 4) * easeInOutCubic(rotateRaw);
+        logoColorProgress = easeInOutCubic(colorRaw);
+        logoDetailAlpha = 1 - easeInOutCubic(colorRaw);
 
         if (stateElapsed >= sequenceDuration) beginReturnToField();
         return;
@@ -1312,13 +1318,17 @@
 
       if (state === STATES.RETURN_TO_FIELD) {
         const spinDive = CONFIG.timings.returnSpinDive;
+        const fadeToBlack = CONFIG.timings.returnFadeToBlack;
+        const blackHold = CONFIG.timings.returnBlackHold;
         const revealField = CONFIG.timings.returnRevealField;
-        const sequenceDuration =
-          spinDive + revealField + CONFIG.timings.returnFieldHold;
+        const fadeComplete = spinDive + fadeToBlack;
+        const revealStart = fadeComplete + blackHold;
+        const revealComplete = revealStart + revealField;
+        const sequenceDuration = revealComplete + CONFIG.timings.returnFieldHold;
 
         if (stateElapsed < spinDive) {
           const rawProgress = clamp(stateElapsed / spinDive, 0, 1);
-          const diveProgress = easeInCubic(rawProgress);
+          const diveProgress = easeInOutCubic(rawProgress);
           camera.goalScale = finalCamera.scale;
           camera.goalX = finalCamera.x;
           camera.goalY = finalCamera.y;
@@ -1326,10 +1336,22 @@
           logoColorProgress = 1;
           logoDetailAlpha = 0;
           loopDiveScale = lerp(1, 20, diveProgress);
-          loopFlashAlpha = easeInCubic(clamp((rawProgress - 0.56) / 0.44, 0, 1));
+          loopBlackAlpha = 0;
           patchReveal = 1;
           siblingReveal = 1;
           fieldDim = 0.78;
+          return;
+        }
+
+        if (stateElapsed < fadeComplete) {
+          const fadeProgress = easeInOutCubic(
+            clamp((stateElapsed - spinDive) / fadeToBlack, 0, 1)
+          );
+          logoRotation = Math.PI / 4 + Math.PI * 4.5;
+          logoColorProgress = 1;
+          logoDetailAlpha = 0;
+          loopDiveScale = 20;
+          loopBlackAlpha = fadeProgress;
           return;
         }
 
@@ -1337,9 +1359,6 @@
           resetCamera(initialCamera);
           loopFieldReset = true;
         }
-        const revealProgress = easeOutCubic(
-          clamp((stateElapsed - spinDive) / revealField, 0, 1)
-        );
         camera.goalScale = initialCamera.scale;
         camera.goalX = initialCamera.x;
         camera.goalY = initialCamera.y;
@@ -1347,10 +1366,19 @@
         logoColorProgress = 0;
         logoDetailAlpha = 1;
         loopDiveScale = 1;
-        loopFlashAlpha = 1 - revealProgress;
         siblingReveal = 0;
         patchReveal = 0;
         fieldDim = 1;
+
+        if (stateElapsed < revealStart) {
+          loopBlackAlpha = 1;
+          return;
+        }
+
+        const revealProgress = easeInOutCubic(
+          clamp((stateElapsed - revealStart) / revealField, 0, 1)
+        );
+        loopBlackAlpha = 1 - revealProgress;
 
         if (stateElapsed >= sequenceDuration) restartLoopCycle();
         return;
@@ -1600,9 +1628,9 @@
         loopDiveScale,
         interpolation
       );
-      const renderedLoopFlashAlpha = lerp(
-        previousLoopFlashAlpha,
-        loopFlashAlpha,
+      const renderedLoopBlackAlpha = lerp(
+        previousLoopBlackAlpha,
+        loopBlackAlpha,
         interpolation
       );
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1633,10 +1661,10 @@
 
       context.restore();
 
-      if (renderedLoopFlashAlpha > 0.001) {
+      if (renderedLoopBlackAlpha > 0.001) {
         context.save();
-        context.globalAlpha = clamp(renderedLoopFlashAlpha, 0, 1);
-        context.fillStyle = COLORS.accent;
+        context.globalAlpha = clamp(renderedLoopBlackAlpha, 0, 1);
+        context.fillStyle = COLORS.canvas;
         context.fillRect(0, 0, width, height);
         context.restore();
       }
@@ -1656,8 +1684,8 @@
       previousLogoDetailAlpha = 0;
       loopDiveScale = 1;
       previousLoopDiveScale = 1;
-      loopFlashAlpha = 0;
-      previousLoopFlashAlpha = 0;
+      loopBlackAlpha = 0;
+      previousLoopBlackAlpha = 0;
       activeNucleusId = -1;
       queue = [];
       for (let index = 0; index < scanPlan.length; index += 1) {
@@ -1817,7 +1845,7 @@
         logoColorProgress,
         logoDetailAlpha,
         loopDiveScale,
-        loopFlashAlpha,
+        loopBlackAlpha,
         cycleCount,
       };
     }
