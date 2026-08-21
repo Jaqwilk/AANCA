@@ -1,6 +1,4 @@
 {
-  "schema_version": 3,
-  "policy": "aanca_presentation_current_evidence_readback_v3",
   "files": [
     {
       "path": "README.md",
@@ -14,8 +12,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "7e7e590fc3e67aa3693a07080d3075df9ae299e04e69656cba57beeef3b9c0d8",
-      "size_bytes": 173019
+      "sha256": "cbf5fdcc508f9cdef1d201f082df7e1e35ad72a0027a3c57101843c1555d62e4",
+      "size_bytes": 171075
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -23,5 +21,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "cba80425003ff0b39dca2e5b5cb914f1e1b35fa5912fa7d7abdf0640e187e513"
+  "manifest_root_sha256": "75d1bfa9c07c61cdf544f1f7ea144255cfce0fb2416fd2e750b1aba25d89ac4d",
+  "policy": "aanca_presentation_current_evidence_readback_v3",
+  "schema_version": 3
 }

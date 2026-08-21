@@ -538,6 +538,14 @@ def _make_release_sources(root: Path) -> None:
     )
 
 
+def test_checked_in_mvp_text_files_use_lf_bytes() -> None:
+    package = Path(__file__).resolve().parents[1] / "artifacts" / "mvp_demo"
+    for relative in ("index.html", "evidence.json", "README.md", "manifest.json"):
+        assert b"\r\n" not in (package / relative).read_bytes(), (
+            f"{relative} must be regenerated with LF bytes before sealing"
+        )
+
+
 def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     run, qc = _make_sources(tmp_path)
     source_hashes = {
