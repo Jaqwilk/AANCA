@@ -669,9 +669,17 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'RETURN_TO_FIELD: "RETURN_TO_FIELD"' in html
     assert "restartLoopCycle" in html
     assert "cycleCount" in html
-    assert "returnSpinDive: 0.82" in html
+    assert "logoRotate: 1.05" in html
+    assert "logoDisplay: 1" in html
+    assert "returnSpinDive: 1.35" in html
+    assert "returnFadeToBlack: 0.22" in html
+    assert "returnBlackHold: 0.58" in html
+    assert "returnRevealField: 0.46" in html
     assert "diveProgress * Math.PI * 4.5" in html
     assert "loopDiveScale = lerp(1, 20, diveProgress)" in html
+    assert "loopBlackAlpha" in html
+    assert "loopFlashAlpha" not in html
+    assert "context.fillStyle = COLORS.canvas" in html
     assert "easeOutBack" in html
     assert "intro: 0.92" in html
     assert "frameTravelMin: 0.82" in html
