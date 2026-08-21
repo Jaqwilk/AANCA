@@ -478,12 +478,17 @@ Findings remain in normal document flow and receive only a subtle per-answer ent
 animation; mobile, reduced-motion and script-free readers receive the complete static
 content. Vertical rhythm uses one token scale for paragraph, text-to-media and section
 gaps; section separators are single hairlines, not stacked decorative rules. The hero
-is a full-viewport typography masthead on a flat canvas with no decorative
-background layers. The Method figure is a
-static SVG schematic only; the previous WebGL review-queue animation was removed.
-Navigation chrome remains. No multi-screen empty scroll
-theatre is permitted. The pre-polish rollback was removed after the current generated
-package passed final verification.
+is a full-viewport typography masthead over an original Canvas 2D Second-Look
+Review Field (`src/histo_audit/assets/second_look_review_field.js`, inlined into
+the five-file package). The animation is decorative and non-interactive: source
+annotations remain in place while visual copies enter a short expert-review
+queue, then the field settles into a nucleus → patch → study composition. It must
+never imply automatic diagnosis, label correction or that a nucleus is a confirmed
+error. Reduced-motion users receive a static final frame. The Method figure remains a
+static SVG schematic only; the previous WebGL review-queue animation and the earlier
+square-grid Priority Review Scaffold stay removed. Navigation chrome remains.
+No multi-screen empty scroll theatre is permitted. The pre-polish rollback was removed
+after the current generated package passed final verification.
 
 ## D034 — Generate the public article from every current evidence authority
 
@@ -529,9 +534,10 @@ Status: implemented
 GitHub Actions must materialise Git LFS objects during checkout before any verifier
 or test reads the PUMA NPZ archives. A repository test guards the checkout contract.
 The Method figure is a static accessible SVG, so it has no WebGL or Three.js failure
-mode. The soft masthead atmosphere is CSS-only and must stop under reduced motion.
-The scientific article, evidence tables and “What the study actually learned”
-section remain ordinary document content and never depend on animation.
+mode. The decorative masthead Canvas 2D field must stop under reduced motion and
+render a static final frame instead. The scientific article, evidence tables and
+“What the study actually learned” section remain ordinary document content and never
+depend on animation.
 
 ## D037 — Freeze AANCA v1 scientifically; improve only public clarity and reproducibility
 
@@ -549,3 +555,16 @@ summary, author/AI contribution disclosure, type checking in CI, SRI for externa
 machine-readable citation metadata and an explicit code-rights boundary. A custom
 domain and archival DOI remain owner-controlled publication actions; do not claim
 either before it exists.
+
+## D038 — Keep dense evidence controls visually legible
+
+Status: implemented presentation decision; no new scientific stage
+
+Present compact numeric summaries on a shared centred axis so values and labels remain
+balanced at desktop, tablet and mobile widths. Treat the seed-identity disclosure as
+an explicit evidence control with a clear title, scope note and open-state affordance,
+while retaining the exact seed rows and SHA-256 values. Keep a full editorial gap
+between reproduction prose and the repository card.
+
+These are presentation-only rules. They do not change evidence, metrics, identifiers,
+claims, completion stages or the immutable source-annotation policy.

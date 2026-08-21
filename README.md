@@ -124,8 +124,9 @@ python scripts/present_demo.py --verify-only
 
 The article preserves the subtle “What the study actually learned.” reveal sequence,
 while mobile and reduced-motion users receive the same content in ordinary document
-flow. The Method review-queue figure is a static accessible SVG and the masthead uses
-only CSS atmosphere, so the article does not depend on WebGL or Three.js.
+flow. The Method review-queue figure is a static accessible SVG. The masthead uses an
+original, decorative Canvas 2D review-field animation with a static final frame for
+reduced-motion users; neither surface depends on WebGL or Three.js.
 
 ## Install and run the portable workflow
 

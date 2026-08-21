@@ -4,13 +4,16 @@ Updated: 21 August 2026
 
 ## Presentation UI note (21 August 2026)
 
-The checked-in `artifacts/mvp_demo` package was polished into a single long-form
-article layout: one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`),
-shared section hairlines, a full-viewport hero masthead on a flat canvas (no decorative background layers),
-benchmark fact icons embedded from `src/histo_audit/assets/benchmark/`,
-a static SVG Method schematic (WebGL animation removed),
-aligned footer and current-evidence chapters from NuCLS, MoNuSAC and PUMA
-authorities. The five-file package verifies cleanly. No cleanup quarantine remains.
+The checked-in `artifacts/mvp_demo` package remains a single long-form article:
+one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`), shared section
+hairlines, and a full-viewport hero masthead. The hero uses an original Canvas 2D
+Second-Look Review Field animation (canonical source
+`src/histo_audit/assets/second_look_review_field.js`, inlined into `index.html`).
+It shows many annotations, a calm audit pass, a short review queue of copies while
+source marks stay in place, then a nucleus → patch → study zoom. It does not claim
+automatic diagnosis or label correction. Benchmark fact icons still embed from
+`src/histo_audit/assets/benchmark/`. The Method schematic stays a static SVG
+(no WebGL). The five-file package verifies cleanly.
 
 ## Current scientific stage
 
@@ -955,7 +958,7 @@ Final local evidence:
 - complete suite: `1150 passed, 1 skipped` in 754.70 seconds; the single skip is the
   documented Windows/POSIX open-file rename difference;
 - final demo/CI regression after source and stylesheet stabilisation: `11 passed` in
-  0.98 seconds;
+  0.92 seconds;
 - `uv run ruff check .`: passed;
 - `uv run ruff format --check .`: all 216 maintained Python files formatted;
 - `uv run mypy src`: no issues in 103 source files;
@@ -963,7 +966,7 @@ Final local evidence:
   benchmark-icon assets;
 - standalone launcher verification: valid five-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `88c70b9d427eccc41473b8877ff80e26cb293d041d0b58e37b246c6fdd2c4271`;
+  `c2db7e0f5a7d9b8704e49725132e7a285ae14e7f7924a6015d9f9c4057e5759c`;
 - final Playwright desktop and 390 px mobile readback: no horizontal overflow,
   console error or warning; all five benchmark icons and the static Method SVG
   rendered, lazy images loaded after traversal, every reveal became visible, and the
@@ -972,9 +975,35 @@ Final local evidence:
 Hostinger publication:
 
 - connectivity and the local five-file seal were verified before upload;
-- the preceding live release was backed up under ID `20260821-220316`;
+- the preceding live release was backed up under ID `20260821-223531`;
 - the package was deployed in replace mode to
   `mediumaquamarine-wombat-125861.hostingersite.com`;
 - the page, evidence and external animation assets returned HTTP 200;
 - cache readback for `index.html`, `evidence.json`, `README.md` and `manifest.json`
   matched the local SHA-256 identities byte for byte.
+
+## Local presentation alignment pass — 2026-08-21
+
+Browser-comment follow-up changed only the generated presentation hierarchy:
+
+- the PanNuke QC and primary-integrity statistic grids now centre each value and its
+  label inside equal-height cells;
+- the exact seed-identity disclosure is a bordered evidence card with a hash marker,
+  scope note, visible action and rotating open-state chevron;
+- the repository card now starts after a full editorial gap below the reproduction
+  prose;
+- the scientific evidence, identifiers, completion stages and claim boundaries are
+  unchanged.
+
+The five-file package verifies with manifest root
+`c2db7e0f5a7d9b8704e49725132e7a285ae14e7f7924a6015d9f9c4057e5759c`.
+Playwright at 985 x 698 confirmed the centred QC and integrity grids, both seed-card
+states and the repository spacing.
+
+Validation after the alignment pass:
+
+- `uv run pytest`: `1150 passed, 1 skipped` in 724.65 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 216 maintained Python files formatted;
+- `python -I scripts/present_demo.py --verify-only`: valid five-file package.

@@ -639,6 +639,12 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "CONFIRMATORY_COMPLETE" in html
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' not in html
+    assert 'class="hero-review-canvas"' in html
+    assert 'aria-hidden="true"' in html
+    assert "Second-Look Review Field" in html
+    assert "prefers-reduced-motion" in html
+    assert "priority_review_scaffold" not in html
+    assert "priorityRate" not in html
     assert 'class="method-queue-diagram"' in html
     assert "Figure. Review-queue sketch (not study data)." in html
     assert "WebGL" not in html

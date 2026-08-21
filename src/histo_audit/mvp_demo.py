@@ -1412,6 +1412,7 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
+  <canvas class="hero-review-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell">
     <div class="hero-copy">
       <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
@@ -1748,6 +1749,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script>__HERO_SCRIPT__</script>
 <script>__SCRIPT__</script>
 </body>
 </html>
@@ -1755,6 +1757,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 
     replacements = {
         "__CSS__": _MVP_CSS,
+        "__HERO_SCRIPT__": _MVP_HERO_SCRIPT,
         "__SCRIPT__": _MVP_SCRIPT,
         "__STUDY_SPECS__": _render_study_specs(),
         "__H4_POINT__": html.escape(_format_metric(point_difference)),
@@ -2191,6 +2194,9 @@ def _render_hypothesis_ledger(
 _MVP_CSS = (Path(__file__).resolve().parent / "assets" / "mvp_presentation.css").read_text(
     encoding="utf-8"
 )
+_MVP_HERO_SCRIPT = (
+    Path(__file__).resolve().parent / "assets" / "second_look_review_field.js"
+).read_text(encoding="utf-8")
 
 
 _MVP_SCRIPT = r"""
