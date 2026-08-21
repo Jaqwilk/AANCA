@@ -447,9 +447,12 @@ never rewrite immutable records to conceal that an older local run was retired.
 
 The accepted recovered primary run and accepted pilot may be the only full PanNuke
 runs kept in the active workspace after both pass complete integrity verification.
-Interrupted, ineligible, smoke and rehearsal runs may be moved to the dated external
-quarantine. This is a recoverable local operation and does not reclaim disk space
-until the owner explicitly deletes that quarantine.
+Interrupted, ineligible, smoke and rehearsal runs were first moved to a dated,
+resolved quarantine. After integrity checks, the classified large superseded runs,
+caches and test products were permanently removed to reclaim disk space. The last
+small `mvp_demo_before_author_section/` rollback was removed after final package and
+browser verification; no cleanup quarantine remains and the deleted material is not
+recoverable.
 
 Large PUMA numeric evidence remains public and independently verifiable but is stored
 with Git LFS. Consolidate only behaviorally equivalent helpers. Keep create-only
@@ -463,7 +466,24 @@ inventory and rollback location are recorded in
 Status: accepted presentation decision; no scientific stage change
 
 The professor-facing demo is a long-form article, not a scroll-hijacked product page.
-Findings render as a static question/answer list. Motion is limited to subtle section
-reveals and the optional hero WebGL figure. Navigation chrome stays as previously
-designed. The pre-polish package is preserved at
-`artifacts/mvp_demo_backup_20260821_pre_article`.
+Findings remain in normal document flow and receive only a subtle per-answer entrance
+animation; mobile, reduced-motion and script-free readers receive the complete static
+content. The optional hero WebGL figure and navigation chrome remain. No multi-screen
+empty scroll theatre is permitted. The pre-polish rollback was removed after the
+current generated package passed final verification.
+
+## D034 — Generate the public article from every current evidence authority
+
+Status: binding presentation and reproducibility decision; no new scientific stage
+
+The checked-in article must be reproducible from the accepted PanNuke run, PanNuke QC
+and the tracked NuCLS, MoNuSAC, PUMA confirmation, PUMA stress, PUMA audit-time-label
+sensitivity and NuCLS paired-QC-feasibility authorities. Manual edits to generated
+metrics or stage text are not authoritative.
+
+Publish `EXTERNAL_VALIDATION_COMPLETE` as the current highest completed scientific
+stage, retain `PRIMARY_STUDY_COMPLETE` as the primary-study stage and explicitly show
+that `CONFIRMATORY_COMPLETE` is not reached. The natural-data action remains
+`retain_uncorrected`. Present the next work as the `INITIALISED` AANCA v2 research
+phase in `NEXT_PHASE.md`; this is a prospective evidence programme, not a retroactive
+upgrade of the current model or its claims.

@@ -513,7 +513,7 @@ def draw_matched_random_comparator(
         top_match_strata=tuple(rendered_stratum(int(index)) for index in selected),
         comparator_indices=comparator,
         comparator_sample_ids=tuple(identifiers[index] for index in comparator),
-        comparator_match_strata=tuple(rendered_stratum(index) for index in comparator),
+        comparator_match_strata=tuple(rendered_stratum(int(index)) for index in comparator),
         match_fields=fields,
         stratum_counts=rendered_counts,
         seed=seed,

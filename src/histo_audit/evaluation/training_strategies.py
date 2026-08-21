@@ -287,7 +287,7 @@ def compare_review_training_strategies(
                 validation_y,
                 baseline_probabilities,
                 probabilities,
-                validation_groups_array,
+                validation_groups_array.tolist(),
                 class_order=classes,
                 evidence_role=evidence_role,
                 important_classes=important_classes,

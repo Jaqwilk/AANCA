@@ -313,7 +313,229 @@ def _make_sources(root: Path) -> tuple[Path, Path]:
             "overlay_sha256": qc_records["pannuke_mask_qc_overlays.png"]["sha256"],
         },
     )
+    _make_release_sources(root)
     return run, qc
+
+
+def _make_release_sources(root: Path) -> None:
+    _write_json(
+        root / "artifacts/nucls_external_validation/unbiased-v1/results.json",
+        {
+            "study_id": "nucls_natural_label_external_validation_v1",
+            "status": "completed",
+            "subset": "unbiased_control",
+            "sample_count": 811,
+            "patient_group_count": 5,
+            "reference_interpretation": (
+                "natural NP-label disagreement relative to inferred pathologist consensus; "
+                "not guaranteed biological truth"
+            ),
+            "ranking": {
+                "success_conditions_met": False,
+                "natural_disagreement_count": 27,
+                "natural_disagreement_prevalence": 0.0332922318,
+                "average_precision": 0.0734890538,
+                "ap_minus_prevalence": {"interval_95": [0.0061054413, 0.2136240284]},
+                "budgets": {"0.05": {"precision": 0.0975609756}},
+                "precision_at_5_percent_minus_prevalence": {
+                    "interval_95": [-0.0300751880, 0.1540747029]
+                },
+            },
+            "downstream": {
+                "success_conditions_met": False,
+                "guided_minus_uncorrected_macro_f1": {
+                    "estimate": -0.0146333525,
+                    "interval_95": [-0.0266833146, -0.0024145967],
+                },
+            },
+            "claim_boundary": {
+                "automatic_source_changes_permitted": False,
+                "biological_truth_proven": False,
+                "clinical_utility_proven": False,
+                "pathologist_error_proven": False,
+            },
+        },
+    )
+    _write_json(
+        root / "artifacts/monusac_external_validation/results.json",
+        {
+            "study_id": "monusac_current_aanca_controlled_external_v1",
+            "analysis_disposition": "prospectively_frozen_controlled_external_benchmark",
+            "all_success_conditions_met": False,
+            "dataset": {
+                "name": "MoNuSAC2020",
+                "train_patient_groups": 44,
+                "train_eligible_nuclei": 29610,
+                "test_patient_groups": 25,
+                "test_eligible_nuclei": 15494,
+            },
+            "controlled_corruption": {
+                "exact_count": 2961,
+                "rate": 0.1,
+                "source_annotations_modified": False,
+            },
+            "primary_matched_random_retrieval": {
+                "top_reviewed": 1481,
+                "top_found": 1035,
+                "top_precision": 0.6988521269,
+                "mean_matched_random_precision": 0.5560094531,
+                "interval_95": [0.09918107, 0.1884913369],
+            },
+            "downstream": {
+                "metrics": {
+                    "nearest_neighbour_disagreement_balanced_review": {"macro_f1": 0.5093608506},
+                    "corrupted_uncorrected": {"macro_f1": 0.5038352361},
+                },
+                "adoption_guards": {
+                    "nearest_neighbour_disagreement_balanced_review": {
+                        "action": "retain_uncorrected",
+                        "macro_f1": {
+                            "candidate_minus_uncorrected_macro_f1": 0.0055256145,
+                            "interval_95": [-0.0015058735, 0.0128327507],
+                        },
+                    }
+                },
+                "primary_minus_mean_matched_random": {
+                    "candidate_minus_mean_matched_random_macro_f1": 0.0000309464,
+                    "interval_95": [-0.0086920112, 0.0084858125],
+                },
+            },
+            "success_conditions": {
+                "primary_top_k_beats_exact_matched_random_control": True,
+                "primary_intervention_macro_f1_ci95_lower_gt_corrupted_uncorrected": False,
+                "primary_intervention_macro_f1_ci95_lower_gt_mean_matched_random": False,
+                "no_important_class_recall_ci95_lower_below_minus_0_01": False,
+            },
+            "claim_boundary": {
+                "automatic_annotation_change_permitted": False,
+                "clinical_or_operational_utility_claim_permitted": False,
+                "natural_pathology_error_detection_claim_permitted": False,
+                "pathologist_error_claim_permitted": False,
+            },
+        },
+    )
+    puma_conditions = {
+        "all_four_seed_directions_positive_against_both_controls": True,
+        "all_hash_group_split_and_final_fold_guards_passed": True,
+        "all_required_models_converged": True,
+        "downstream_macro_f1_lower_bound_gt_matched_random": True,
+        "downstream_macro_f1_lower_bound_gt_unchanged": True,
+        "every_primary_class_recall_lower_bound_gte_minus_0_01": True,
+        "retrieval_precision_lower_bound_gt_matched_random": True,
+    }
+    _write_json(
+        root / "artifacts/puma_new_data_confirmation/results.json",
+        {
+            "study_id": "puma_new_data_confirmation_v1",
+            "analysis_disposition": "prospectively_frozen_new_source_controlled_confirmation",
+            "all_success_conditions_met": True,
+            "all_models_converged": True,
+            "natural_error_detection_evaluated": False,
+            "pathologist_error_detection_proven": False,
+            "replacement_project_or_v2": False,
+            "dataset": {
+                "name": "PUMA",
+                "final_case_groups": 62,
+                "final_nuclei": 30397,
+                "source_annotations_modified": False,
+            },
+            "retrieval": {
+                "candidate_precision": 0.5377386635,
+                "mean_matched_random_precision": 0.2143794749,
+                "candidate_minus_matched_random_precision": 0.3233591885,
+                "interval_95": [0.2592505926, 0.3849444214],
+            },
+            "downstream": {
+                "candidate_macro_f1": 0.6463102794,
+                "uncorrected_macro_f1": 0.6398841193,
+                "mean_matched_random_macro_f1": 0.6382432313,
+                "candidate_minus_uncorrected_macro_f1": 0.0064261601,
+                "candidate_minus_uncorrected_interval_95": [0.0036572124, 0.0093654559],
+                "candidate_minus_matched_random_macro_f1": 0.0080670480,
+                "candidate_minus_matched_random_interval_95": [0.0040931053, 0.0119467257],
+            },
+            "success_conditions": puma_conditions,
+            "claim_boundary": {
+                "automatic_annotation_change_permitted": False,
+                "clinical_utility_proven": False,
+                "controlled_noise_transfer_if_positive": True,
+                "natural_error_detection_proven": False,
+                "pathologist_error_detection_proven": False,
+            },
+        },
+    )
+    _write_json(
+        root / "artifacts/puma_new_data_confirmation/verification.json",
+        {
+            "study_id": "puma_new_data_confirmation_v1",
+            "verified": True,
+            "all_seven_frozen_success_gates_passed": True,
+            "all_44_models_converged": True,
+            "source_reference_labels_unchanged": True,
+        },
+    )
+    _write_json(
+        root / "artifacts/puma_realism_stress/results.json",
+        {
+            "study_id": "puma_realism_stress_v1",
+            "disposition": "post_confirmation_exploratory_stress_only",
+            "scenario_count": 9,
+            "all_scenarios_passed": False,
+            "candidate_changed": False,
+            "source_annotations_modified": False,
+            "natural_error_detection_evaluated": False,
+            "pathologist_error_detection_proven": False,
+            "scenarios": [
+                {
+                    "all_scenario_gates_passed": index == 0,
+                    "downstream": {"candidate_minus_uncorrected_interval_95": [0.001, 0.01]},
+                }
+                for index in range(9)
+            ],
+            "claim_boundary": {
+                "automatic_annotation_change_permitted": False,
+                "clinical_utility_proven": False,
+                "independent_confirmation": False,
+                "natural_error_detection_proven": False,
+                "pathologist_error_detection_proven": False,
+            },
+        },
+    )
+    _write_json(
+        root / "artifacts/puma_audit_time_label_sensitivity/results.json",
+        {
+            "study_id": "puma_audit_time_label_sensitivity_v1",
+            "disposition": "post_confirmation_exploratory_sensitivity_only",
+            "all_sensitivity_gates_passed": True,
+            "candidate_changed": False,
+            "fold_assignment_label_source": "observed_label",
+            "pre_corruption_label_used_for_fold_assignment": False,
+            "source_annotations_modified": False,
+            "natural_error_detection_evaluated": False,
+            "pathologist_error_detection_proven": False,
+            "success_conditions": puma_conditions,
+            "claim_boundary": {
+                "automatic_annotation_change_permitted": False,
+                "clinical_utility_proven": False,
+                "independent_confirmation": False,
+                "natural_error_detection_proven": False,
+                "pathologist_error_detection_proven": False,
+            },
+        },
+    )
+    _write_json(
+        root / "artifacts/nucls_supervised_qc_feasibility/results.json",
+        {
+            "study_id": "nucls_supervised_qc_prospective_v1",
+            "prospective_evaluation_status": "unavailable",
+            "failure_action": "retain_uncorrected",
+            "paired_nucleus_pre_post_label_available": False,
+            "natural_error_detection_evaluated": False,
+            "pathologist_error_detection_proven": False,
+            "source_annotations_modified": False,
+            "unavailable_reason": "fixture has no paired natural pre/post labels",
+        },
+    )
 
 
 def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
@@ -336,10 +558,18 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     html = artifacts.html_path.read_text(encoding="utf-8")
     readme = artifacts.readme_path.read_text(encoding="utf-8")
     assert evidence["presentation_status"] == "DEMO_COMPLETE"
-    assert evidence["scientific_status"] == "PRIMARY_STUDY_COMPLETE"
+    assert evidence["scientific_status"] == "EXTERNAL_VALIDATION_COMPLETE"
+    assert evidence["primary_study_status"] == "PRIMARY_STUDY_COMPLETE"
     assert evidence["analysis_disposition"] == "amended_or_exploratory"
     assert evidence["confirmatory_completed"] is False
-    assert evidence["external_validation_completed"] is False
+    assert evidence["external_validation_completed"] is True
+    assert evidence["external_validation"]["overall_conclusion"] == "not_supported"
+    assert evidence["controlled_external_benchmark"]["decision"] == "not_supported"
+    assert evidence["new_source_confirmation"]["all_success_conditions_met"] is True
+    assert evidence["realism_stress"]["all_class_safeguards_passed_count"] == 1
+    assert evidence["audit_time_label_sensitivity"]["all_sensitivity_gates_passed"] is True
+    assert evidence["natural_data_action"]["action"] == "retain_uncorrected"
+    assert evidence["next_phase"]["stage"] == "INITIALISED"
     assert len(evidence["primary"]["comparisons"]) == 36
     assert evidence["primary"]["h2_subgroups"]["reported_count"] == 4
     assert (
@@ -373,8 +603,10 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "gsap@3.15.0" in html
     assert "three@0.185.1" in html
     assert "import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')" in html
-    assert "DEMO_COMPLETE" not in html
-    assert "PRIMARY_STUDY_COMPLETE" not in html
+    assert "DEMO_COMPLETE" in html
+    assert "PRIMARY_STUDY_COMPLETE" in html
+    assert "EXTERNAL_VALIDATION_COMPLETE" in html
+    assert "CONFIRMATORY_COMPLETE" in html
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' in html
     assert "#hero-canvas[hidden]" in html
@@ -411,6 +643,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" not in html
     assert "height: 560vh" not in html
     assert "/* Findings as static Q&A */" in html
+    assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" in html
+    assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" in html
     assert ".learned-story {\n  height: auto !important; padding: 0 !important;" in html
     assert "scrub: true" in html
     assert "filter: 'blur(4px)'" not in html
@@ -437,20 +671,28 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EM DASH}" not in html
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
+    assert "The same system transferred under controlled noise" in html
+    assert "PUMA frozen new-source controlled confirmation" in html
+    assert "All seven frozen gates" in html
+    assert "AANCA v2 research phase" not in html
+    assert "provisionally named <strong>AANCA v2</strong>" in html
+    assert "retain_uncorrected" in html
     assert "33 reported · 3 unavailable" in html
     assert '<details class="evidence-details comparison-details">' in html
     assert "Inspect the complete H1 / H3 / H5 / H6 / H7 table" in html
     assert '<div class="reading-grid reveal">' not in html
-    assert "benchmark-only information unavailable in a real audit" in html
-    assert "evidence needed to recalculate H1-H7" in html
+    assert "Natural and operational validity still require" in html
+    assert "compact evidence and this checksum-verifiable presentation" in html
     assert "primary evidence release" in html
     assert "verifies the five-file presentation package" in html
     assert 'href="#evidence">Reproducibility boundary</a>' in html
     assert (
         html.index('id="evidence"')
+        < html.index('id="external-validation"')
         < html.index('id="quality"')
         < html.index('id="integrity"')
         < html.index('id="interpretation"')
+        < html.index('id="current-stage"')
         < html.index('id="use"')
     )
     assert "'method', 'reading', 'results'" in html
@@ -471,7 +713,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'fetchpriority="low" width="1512" height="3840"' in html
     assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
     assert "python scripts/present_demo.py" in html
-    assert "Repository links require reviewer access" in readme
+    assert "PUMA controlled confirmation passed all seven" in readme
+    assert "Natural-data action: `retain_uncorrected`" in readme
     assert ".journey-stage-group { opacity: 1 !important; transform: none !important; }" in html
     assert ".journey { height: auto !important; }" in html
     assert "const journeyTrigger = scrollEngine.create" not in html
@@ -502,6 +745,46 @@ def test_verify_mvp_rejects_tampering(tmp_path: Path) -> None:
     )
     artifacts.html_path.write_text("tampered", encoding="utf-8")
     with pytest.raises(ValueError, match="differs from its seal"):
+        verify_mvp_presentation(artifacts.output_directory)
+
+
+def test_build_rejects_changed_puma_confirmation_scope(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    path = tmp_path / "artifacts/puma_new_data_confirmation/results.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["all_success_conditions_met"] = False
+    _write_json(path, payload)
+
+    with pytest.raises(ValueError, match="PUMA confirmation evidence scope differs"):
+        build_mvp_presentation(
+            project_root=tmp_path,
+            run_directory=run,
+            qc_bundle_directory=qc,
+            output_directory=Path("artifacts/mvp_demo"),
+        )
+
+
+def test_verify_rejects_resealed_unsafe_natural_action(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    artifacts = build_mvp_presentation(
+        project_root=tmp_path,
+        run_directory=run,
+        qc_bundle_directory=qc,
+        output_directory=Path("artifacts/mvp_demo"),
+    )
+    evidence = json.loads(artifacts.evidence_path.read_text(encoding="utf-8"))
+    evidence["natural_data_action"]["action"] = "flag_exclude"
+    _write_json(artifacts.evidence_path, evidence)
+
+    manifest = json.loads(artifacts.manifest_path.read_text(encoding="utf-8"))
+    for index, record in enumerate(manifest["files"]):
+        if record["path"] == "evidence.json":
+            manifest["files"][index] = _file_record(artifacts.evidence_path, "evidence.json")
+            break
+    manifest["manifest_root_sha256"] = _canonical_sha256(manifest["files"])
+    _write_json(artifacts.manifest_path, manifest)
+
+    with pytest.raises(ValueError, match="MVP evidence scope differs"):
         verify_mvp_presentation(artifacts.output_directory)
 
 
@@ -612,6 +895,7 @@ def test_mvp_cli_build_and_verify(tmp_path: Path) -> None:
     )
     assert build.exit_code == 0, build.output
     assert '"status": "built_and_verified"' in build.output
+    assert '"scientific_status": "EXTERNAL_VALIDATION_COMPLETE"' in build.output
 
     verify = runner.invoke(
         app,

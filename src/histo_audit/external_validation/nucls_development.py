@@ -189,26 +189,27 @@ def analyze_saved_nucls_subset(
         }
 
     guard_config = development_config["retraining_guard"]
-    common_guard = {
-        "class_order": tuple(range(len(CLASS_ORDER))),
-        "evidence_role": str(guard_config["evidence_role"]),
-        "n_iterations": int(guard_config["bootstrap_iterations"]),
-        "seed": int(guard_config["bootstrap_seed"]),
-        "minimum_effect": float(guard_config["minimum_macro_f1_effect"]),
-    }
     frozen_guided_guard = evaluate_retraining_guard(
         reference,
         arrays["downstream_uncorrected_probabilities"],
         arrays["downstream_guided_probabilities"],
         groups,
-        **common_guard,
+        class_order=tuple(range(len(CLASS_ORDER))),
+        evidence_role=str(guard_config["evidence_role"]),
+        n_iterations=int(guard_config["bootstrap_iterations"]),
+        seed=int(guard_config["bootstrap_seed"]),
+        minimum_effect=float(guard_config["minimum_macro_f1_effect"]),
     )
     full_reference_guard = evaluate_retraining_guard(
         reference,
         arrays["downstream_uncorrected_probabilities"],
         arrays["downstream_reference_ceiling_probabilities"],
         groups,
-        **common_guard,
+        class_order=tuple(range(len(CLASS_ORDER))),
+        evidence_role=str(guard_config["evidence_role"]),
+        n_iterations=int(guard_config["bootstrap_iterations"]),
+        seed=int(guard_config["bootstrap_seed"]),
+        minimum_effect=float(guard_config["minimum_macro_f1_effect"]),
     )
     return {
         "artifact_root": root.as_posix(),

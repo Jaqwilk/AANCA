@@ -1,84 +1,68 @@
 # AANCA presentation MVP
 
-The package was generated from selected, checksum-verified sources in the accepted
-run `20260727T133947.089370Z_pannuke_primary_orphan_recovery`. From the repository root, the recommended presentation
-command is:
+This five-file, read-only article package was generated from checksum-verified
+PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
+authorities. The accepted PanNuke run is `20260727T133947.089370Z_pannuke_primary_orphan_recovery`.
+
+From the repository root, verify the complete package and open it locally:
 
 ```powershell
 python scripts/present_demo.py
 ```
 
-This standard-library launcher requires no project dependency installation. It
-verifies the closed package before serving it on `127.0.0.1` and opens the article
-in the default browser. No model run, dataset, or GPU is required. Use `--no-open`
-in headless environments and `--port 0` to select a free port.
-
-For verification without a browser or server, run:
+The launcher uses only the Python standard library. It verifies every packaged file
+before serving `127.0.0.1`; it never runs a model or changes data. For verification
+without a browser or server:
 
 ```powershell
 python scripts/present_demo.py --verify-only
 ```
 
-After installing the full research environment, the equivalent commands are
-`uv run histo-audit demo serve` and `uv run histo-audit demo verify`.
+With the project environment installed, `uv run histo-audit demo serve` and
+`uv run histo-audit demo verify` provide the equivalent CLI workflow.
 
-To share the presentation without repository access, compress and send this entire
-directory. The reviewer should extract every file and open `index.html`. Do not send
-only `index.html`: the QC image, machine-readable evidence and checksum manifest are
-separate files in the same package. Repository links require reviewer access when
-the GitHub repository is private.
+## Current scientific position
+
+- Primary study: `PRIMARY_STUDY_COMPLETE`; its accepted PanNuke analysis remains
+  permanently `amended_or_exploratory` and H4 was adverse.
+- External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
+  claims were not supported; MoNuSAC controlled retrieval passed but downstream and
+  class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
+  prospective gates.
+- Presentation: `DEMO_COMPLETE`.
+- Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
+- Natural-data action: `retain_uncorrected`.
+
+The positive PUMA result supports transfer under controlled label noise. It does not
+show that AANCA detects pathologist errors, discovers biological truth, improves a
+real laboratory workflow or is clinically useful. The software never modifies
+source annotations automatically; it ranks potentially inconsistent annotations
+for qualified expert review.
+
+## Package contents
+
+- `index.html` — responsive English article, including the retained “What the study
+  actually learned.” sequence;
+- `evidence.json` — sourced primary, external, controlled-confirmation, stress,
+  sensitivity, current-action and next-phase summaries;
+- `pannuke_mask_qc_overlays.png` — deterministic source-ingestion QC preview;
+- `README.md` — this handoff;
+- `manifest.json` — SHA-256 allowlist binding every other package file.
+
+The primary evidence retains all 36 registered H1/H3/H5/H6/H7 entries: 33 numeric
+results and three explicitly unavailable H6 cells. Displayed intervals, adjusted
+p-values, source hashes and external summaries are read from machine-readable
+authorities rather than retyped into the page.
+
+## Next phase
+
+The provisional AANCA v2 research phase requires: a new blinded multi-rater natural
+reference; nested group-safe measured-utility development; one prospectively frozen
+policy; one-shot untouched patient/WSI confirmation; and a prospective multi-site
+AANCA-versus-control workflow study. Promotion requires ranking, downstream
+confidence intervals, every-class safety and workflow utility to pass together.
+
+Source code, frozen protocols, configs, independent verifiers, evidence and the
+complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
 Author: Natan Smogór. Updated: 21 August 2026.
-
-The responsive presentation is written in English and uses pinned GSAP and
-Three.js browser modules for progressive animation. Its evidence, navigation,
-tables and scientific interpretation remain available when motion is reduced;
-network access is only needed for the optional web fonts, institution logos and
-animation libraries.
-The WebGL loop pauses while the hero or browser tab is not visible, uses a capped
-pixel ratio, and respects reduced-motion and data-saving preferences.
-
-The complete 36-entry comparison atlas remains immediately available inside a
-compact, keyboard-scrollable viewport. The duplicate numeric table stays one
-native disclosure control away. On narrow screens, each evidence entry becomes a
-labelled two-column record without dropping any saved identifier, interval,
-adjusted p-value, or unavailable result.
-
-Scientific status: `PRIMARY_STUDY_COMPLETE` and
-`EXTERNAL_VALIDATION_COMPLETE`. Presentation status: `DEMO_COMPLETE`. The PanNuke
-primary analysis is permanently labelled `amended_or_exploratory`; confirmatory CNN
-work and newly recruited blinded expert review were not run. The completed NuCLS
-multi-rater validation did not meet its frozen ranking or downstream success rules.
-The separately frozen MoNuSAC controlled-external test passed its injected-change
-retrieval gate but failed both downstream benefit gates and its class-recall safety
-gate; its overall decision is `not_supported`.
-
-This is a non-diagnostic research prototype. It identifies a potentially
-inconsistent annotation and recommends it for expert review; it never modifies
-source annotations or claims that a pathologist was wrong.
-
-`evidence.json` contains the sourced H1-H7 summary, the adverse H4 result,
-the complete H2 subgroup summary, the byte-identical instance-dependent seed
-disclosure, all 36 saved H1/H3/H5/H6/H7 comparisons and the completed null/adverse
-NuCLS external-validation summary, plus the completed MoNuSAC controlled-external
-result. P-values shown in the HTML are explicitly
-labelled one-sided and Holm-adjusted. `manifest.json` binds every other file in this
-package.
-
-Of the 36 preregistered comparison entries, 33 contain numeric results and the
-three H6 entries remain explicitly unavailable under the frozen encoder gate.
-The public `primary-evidence-v1` GitHub release contains all completed-cell OOF
-predictions and rankings, the full bootstrap and H4 restoration arrays. It supports
-independent recalculation of the saved comparison statistics; it does not include
-raw PanNuke binaries or fold checkpoints that were not retained.
-The checked-in NuCLS evidence and independent verifier are documented in
-`reports/nucls_external_validation_results.md`; they include derived arrays and
-portable source inventories, not raw NuCLS images.
-The checked-in MoNuSAC evidence and independent readback are documented in
-`reports/monusac_current_aanca_external_results.md`. Raw MoNuSAC images remain local
-under their own dataset terms and are not part of this presentation package.
-The same bundle is published as GitHub release
-`nucls-external-validation-v1` with SHA-256
-`e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`.
-Source code, setup guidance, specifications, tests, and the complete documentation
-map are available at <https://github.com/Jaqwilk/AANCA>.

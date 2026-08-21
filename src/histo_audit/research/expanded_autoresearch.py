@@ -295,8 +295,8 @@ def extract_phikon_v2_embeddings(
     if initial_batch_size <= 0:
         raise ValueError("Phikon-v2 batch size must be positive")
     try:
-        from huggingface_hub import snapshot_download  # type: ignore[import-not-found]
-        from transformers import (  # type: ignore[import-not-found]
+        from huggingface_hub import snapshot_download
+        from transformers import (
             AutoImageProcessor,
             AutoModel,
         )
@@ -311,12 +311,12 @@ def extract_phikon_v2_embeddings(
         snapshot_download(
             repo_id=model_id,
             revision=revision,
-            allow_patterns=(
+            allow_patterns=[
                 "config.json",
                 "preprocessor_config.json",
                 "model.safetensors",
                 "LICENSE.pdf",
-            ),
+            ],
         )
     ).resolve()
     model_path = snapshot / "model.safetensors"

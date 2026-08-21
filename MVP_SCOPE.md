@@ -2,6 +2,22 @@
 
 Date: 2026-08-18
 
+## Current-status addendum — 21 August 2026
+
+This file preserves the original presentation-scope decision. It is not the current
+scientific roadmap. Since that decision, the NuCLS multi-rater evaluation, MoNuSAC
+controlled external benchmark and frozen PUMA new-source controlled confirmation
+were completed. The generated package now reads those authorities, the PUMA realism
+stress, the audit-time-label sensitivity and the NuCLS paired-QC feasibility result
+into `evidence.json` and the article. The current highest completed scientific stage
+is `EXTERNAL_VALIDATION_COMPLETE`; `CONFIRMATORY_COMPLETE` remains unreached. The
+current release date is 21 August 2026 and the next-phase contract is
+[`NEXT_PHASE.md`](NEXT_PHASE.md).
+
+Statements below about external validation being deferred describe the state when
+this amendment was made on 18 August; they are retained as decision provenance, not
+as a present-tense project claim.
+
 This is a transparent presentation-scope amendment requested by the project
 owner. It reduces the deliverable to the smallest reproducible, presentable
 research prototype that uses the already completed PanNuke primary study. It

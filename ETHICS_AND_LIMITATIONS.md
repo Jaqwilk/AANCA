@@ -20,6 +20,21 @@ pathologist consensus rather than guaranteed biological truth. The completed sta
 therefore cannot be described as detection of natural errors, proof that a
 pathologist was wrong, clinical validation or real-use improvement.
 
+The frozen MoNuSAC controlled external benchmark retrieved injected changes more
+efficiently than matched random review, but its downstream interval crossed zero and
+its important-class safety rule failed. The frozen PUMA new-source controlled
+confirmation later passed all seven prospective retrieval, downstream, direction,
+convergence and every-class gates. This is stronger evidence that the current system
+transfers under controlled label noise; it is still not a natural-error experiment.
+PUMA publishes final expert-checked labels rather than paired natural pre/post review
+decisions.
+
+Post-confirmation PUMA stress retained positive aggregate downstream lower bounds in
+all nine scenarios, while only one scenario passed every class safeguard. Opened
+PUMA outcomes cannot be reused to tune and reconfirm a candidate. Natural data must
+remain `retain_uncorrected` until a new blinded multi-rater programme and prospective
+workflow pass the gates in [`NEXT_PHASE.md`](NEXT_PHASE.md).
+
 For the accepted instance-dependent 10% ImageNet-context logistic cells, seeds 404,
 405, and 406 produced byte-identical saved rankings and OOF predictions. Those rows
 are retained because the primary result is frozen, but they represent one

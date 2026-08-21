@@ -2,7 +2,8 @@
 
 This document distinguishes three different operations that must not be presented
 as equivalent: verifying the published article package, reproducing the synthetic
-software workflow, and independently recomputing the PanNuke primary study.
+software workflow, independently recomputing the PanNuke primary study, verifying
+external numeric evidence and re-executing a study from source images.
 
 ## What the public repository can reproduce
 
@@ -35,7 +36,9 @@ test collection.
 file sizes, SHA-256 identities and consistency of selected evidence fields. It can
 detect a changed or incomplete presentation package. It does not run a model,
 recompute a bootstrap, reload PanNuke or prove that the upstream analysis was
-scientifically correct.
+scientifically correct. The current package also fail-closed validates its NuCLS,
+MoNuSAC, PUMA, stress, sensitivity and natural-action summaries against the tracked
+authorities used at build time.
 
 ## Independently recalculating the saved primary results
 
@@ -65,6 +68,26 @@ replication of the entire experiment from images. PanNuke images and masks are n
 redistributed. Fold checkpoints were not retained in the accepted run, so model
 retraining still requires a lawful PanNuke copy and the frozen code/configuration.
 
+## Independently verifying later evidence
+
+The repository retains compact external authorities and the released arrays required
+by their independent verifiers. Run them in the locked project environment:
+
+```text
+uv run python scripts/verify_nucls_external_validation.py --json
+uv run python scripts/verify_monusac_external_validation.py
+uv run python scripts/verify_aanca_selected_candidate.py
+uv run python scripts/verify_puma_new_data_confirmation.py
+uv run python scripts/verify_nucls_supervised_qc_feasibility.py
+```
+
+The NuCLS and MoNuSAC executions did not support their complete frozen claims. The
+frozen PUMA candidate passed all seven new-source controlled-noise gates and its
+independent verifier rebuilt the official manifest, metrics, bootstrap and all 44
+convergence checks. Large PUMA arrays are tracked through Git LFS. These checks prove
+consistency of the released evidence; they do not create natural labels or clinical
+validation.
+
 ## Public-history disclosure
 
 The timestamped freeze artifact at
@@ -84,16 +107,19 @@ wording or adding tests:
    and an equal-sized random sample of naturally occurring, non-injected cases.
 2. Report agreement, ambiguity and abstention instead of forcing one expert truth.
 3. Repeat splitting at patient or WSI level when verified identifiers are available.
-4. Run a prospectively declared sensitivity analysis whose fold allocation uses
-   only labels available in a real audit. The accepted benchmark used
-   `pre_corruption_label` for fold balance; it was not a model input, but it is
-   benchmark-only information.
-5. Evaluate an external dataset and a downstream intervention defined before its
-   outcomes are inspected.
+4. Complete the corresponding PanNuke sensitivity whose fold allocation uses only
+   labels available in a real audit. The PUMA observed-label sensitivity has already
+   passed all seven gates, but it was post-confirmation and does not rewrite the
+   accepted PanNuke benchmark.
+5. Acquire a new natural-review cohort with stable paired multi-rater outcomes and
+   freeze one candidate before its outcomes are inspected. NuCLS was genuine but too
+   small and adverse; PUMA was new-source and positive but controlled.
 6. Independently replicate the complete image-to-result run in a separate environment;
    the public release now supports result recalculation and OOF/ranking inspection,
    but not a second independent execution of model training.
 
-Until those steps are completed, AANCA is a functioning research prototype and a
-synthetic-corruption benchmark. It is not expert-validated, externally validated,
-clinical, diagnostic or production-ready.
+Until those steps are completed, AANCA is a functioning research prototype with
+completed external evaluation and positive controlled-noise transfer evidence. It is
+not confirmatory for natural errors, clinically validated, diagnostic or
+production-ready. The next evidence programme is specified in
+[`NEXT_PHASE.md`](NEXT_PHASE.md).

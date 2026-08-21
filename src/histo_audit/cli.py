@@ -641,7 +641,7 @@ def build_mvp_demo_command(
             {
                 "status": "built_and_verified",
                 "presentation_status": "DEMO_COMPLETE",
-                "scientific_status": "PRIMARY_STUDY_COMPLETE",
+                "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
                 "output_directory": str(artifacts.output_directory),
                 "html": str(artifacts.html_path),
                 "evidence": str(artifacts.evidence_path),

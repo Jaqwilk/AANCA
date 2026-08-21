@@ -297,7 +297,8 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 #use::before,
 #author::before,
 #external-validation::before,
-#new-data-test::before {
+#new-data-test::before,
+#current-stage::before {
   content: "";
   position: absolute; top: 0; left: 50%;
   display: block;
@@ -484,6 +485,7 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 }
 .stat span { color: var(--ink-subtle); font-size: 12px; line-height: 1.45; }
 .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 48px; margin-top: 28px; border: 0; background: transparent; }
+.evidence-ledger, .phase-ledger { margin-top: 8px; }
 .rule { min-height: 0; padding: 18px 0; border-top: 1px solid var(--line); background: transparent; }
 .rule b { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
 .rule p { margin: 0; color: var(--ink-subtle); font-size: 13px; line-height: 1.6; }

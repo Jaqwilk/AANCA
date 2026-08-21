@@ -113,7 +113,10 @@ def _array_sha256(array: NDArray[np.generic]) -> str:
 
 
 def _canonical_frame_sha256(frame: pd.DataFrame) -> str:
-    records = frame.where(pd.notna(frame), None).to_dict(orient="records")
+    records = [
+        {str(key): None if bool(pd.isna(value)) else value for key, value in record.items()}
+        for record in frame.to_dict(orient="records")
+    ]
     return _semantic_sha256(records)
 
 

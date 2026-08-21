@@ -77,7 +77,7 @@ def group_safe_audit_scores(
     class_order: Sequence[int],
     neighbour_k: int = 7,
     neighbour_metric: str = "cosine",
-    hybrid_weights: tuple[float, float] = (0.5, 0.5),
+    hybrid_weights: Sequence[float] = (0.5, 0.5),
 ) -> GroupSafeAuditScoreResult:
     """Build a probability, neighbour, or fixed-hybrid audit score.
 

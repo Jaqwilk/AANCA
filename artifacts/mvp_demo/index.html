@@ -14,8 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23010102'/%3E%3Crect x='14' y='14' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='38' y='14' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='26' y='26' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3Crect x='14' y='38' width='12' height='12' rx='3' fill='%23828fff'/%3E%3Crect x='38' y='38' width='12' height='12' rx='3' fill='%235e6ad2'/%3E%3C/svg%3E">
   <title>AANCA: Automated Auditing of Nucleus Class Annotations</title>
-  <style>
-:root {
+  <style>:root {
   color-scheme: dark;
   --canvas: #010102;
   --surface-1: #0f1011;
@@ -314,7 +313,8 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 #use::before,
 #author::before,
 #external-validation::before,
-#new-data-test::before {
+#new-data-test::before,
+#current-stage::before {
   content: "";
   position: absolute; top: 0; left: 50%;
   display: block;
@@ -501,6 +501,7 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 }
 .stat span { color: var(--ink-subtle); font-size: 12px; line-height: 1.45; }
 .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 48px; margin-top: 28px; border: 0; background: transparent; }
+.evidence-ledger, .phase-ledger { margin-top: 8px; }
 .rule { min-height: 0; padding: 18px 0; border-top: 1px solid var(--line); background: transparent; }
 .rule b { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
 .rule p { margin: 0; color: var(--ink-subtle); font-size: 13px; line-height: 1.6; }
@@ -862,7 +863,7 @@ html.motion-enhanced .reveal,
   <div class="nav-shell">
     <a class="brand" href="#top" aria-label="AANCA: back to the beginning"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-word-clip"><span class="brand-label">AANCA</span></span></a>
     <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Findings</a><a href="#evidence">Evidence</a><a href="#use">Reproduce</a><a href="#author">Author</a></nav>
+    <nav class="nav-links" id="nav-links" aria-label="Presentation sections"><a href="#overview">Study</a><a href="#method">Method</a><a href="#results">Findings</a><a href="#evidence">Evidence</a><a href="#current-stage">Status</a><a href="#use">Reproduce</a><a href="#author">Author</a></nav>
   </div>
 </header>
 
@@ -888,7 +889,7 @@ html.motion-enhanced .reveal,
       <p>Large histopathology datasets contain many already segmented nucleus instances, each paired with a class label. Even careful annotation can include ambiguity, inconsistent conventions or ordinary data-entry noise. Reviewing every instance again is expensive, so the useful question is not “can a model declare a label wrong?” It is “can a model create a better review queue than random sampling?”</p>
       <p>AANCA evaluates that question under controlled conditions. It intentionally changes a known subset of class labels, hides that intervention from the auditor, and then measures whether the changed labels move toward the front of a fixed review queue. Because the benchmark records exactly what it changed, retrieval can be scored without pretending that model disagreement is biological truth.</p>
       <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>. It never means “confirmed error.”</p>
-      <div class="scope-note"><strong>Study boundary.</strong> This presentation reports the completed primary frozen-feature benchmark, the frozen NuCLS multi-rater evaluation and a separately frozen MoNuSAC controlled-external test on new images. NuCLS did not meet its ranking or downstream rules. MoNuSAC passed only the injected-change retrieval gate, not its downstream or class-safety gates. Confirmatory CNN experiments and newly recruited blinded expert review have not been performed. The accepted PanNuke analysis remains exploratory because outcomes were exposed during technical recovery.</div>
+      <div class="scope-note"><strong>Study boundary.</strong> The PanNuke primary benchmark, a frozen NuCLS multi-rater evaluation, a frozen MoNuSAC controlled benchmark and a new-source PUMA controlled confirmation have been completed. PUMA supports transfer under controlled label noise; NuCLS does not support natural-error or downstream-improvement claims. Blinded natural-case expert review and prospective clinical workflow evaluation have not been performed. The PanNuke primary analysis remains exploratory because outcomes were exposed during technical recovery.</div>
     </div>
   </section>
 
@@ -1048,31 +1049,68 @@ html.motion-enhanced .reveal,
       </details>
       <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
       <div class="provenance" style="margin-top:64px">
-        <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li><li><a href="https://doi.org/10.1109/TMI.2021.3085712">Verma et al. (2021), MoNuSAC2020</a> · DOI 10.1109/TMI.2021.3085712.</li></ul><p>PanNuke independence is guaranteed at source-patch level only. NuCLS and MoNuSAC keep complete TCGA patients together. NuCLS contains five patient groups per subset; the MoNuSAC final test contains 25. PanNuke metadata cannot rule out every cross-dataset patient overlap.</p></div>
-        <div><h3>Reproducibility identities</h3><dl class="hash-list"><div><dt>Accepted PanNuke run</dt><dd>20260727T133947.089370Z_pannuke_primary_orphan_recovery</dd></div><div><dt>PanNuke artifact root SHA-256</dt><dd>8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4</dd></div><div><dt>NuCLS primary evidence SHA-256</dt><dd>b03e578b5b4939dbb2554e26fedbd28515fb5c52e3353027f853cad03d3b75b9</dd></div><div><dt>NuCLS primary source inventory</dt><dd>50231468685a5662e008ced97abe57a0cd596b225d380173b64480a199e01386</dd></div><div><dt>MoNuSAC numeric evidence SHA-256</dt><dd>bda87a00b79db4962c71177a2dd3dea0c4c65b8b2d7299c577fd2ce4fdc1e8ec</dd></div><div><dt>MoNuSAC results SHA-256</dt><dd>b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4</dd></div><div><dt>QC overlay SHA-256</dt><dd>a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a</dd></div></dl></div>
+        <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li><li><a href="https://monusac-2020.grand-challenge.org/">MoNuSAC 2020</a> · controlled external benchmark source.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giaf011/8024182">Schuiveling et al. (2025), PUMA</a> · DOI 10.1093/gigascience/giaf011.</li></ul><p>Grouping follows the strongest identifiers available per dataset. No result is promoted beyond the grouping and reference-label evidence that the source actually provides.</p></div>
+        <div><h3>Reproducibility identities</h3><dl class="hash-list"><div><dt>Accepted run</dt><dd>20260727T133947.089370Z_pannuke_primary_orphan_recovery</dd></div><div><dt>Artifact root SHA-256</dt><dd>8c1c7b277d96889dc4fb45aee282e77e3d351f687990e03e6b57ec5f2313c7e4</dd></div><div><dt>Stage attestation SHA-256</dt><dd>5af827544502fbdf688a73916ec58b5dac0984c5a682a33ce6dfc97538228871</dd></div><div><dt>QC overlay SHA-256</dt><dd>a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a</dd></div></dl></div>
       </div>
     </div>
   </section>
 
   <section class="section" id="external-validation">
-    <div class="section-heading reveal"><h2>The external test did not establish natural-disagreement ranking or downstream benefit.</h2><p class="section-deck">A genuine multi-rater evaluation was completed on NuCLS. Completion records that the frozen study ran; it does not turn a null or adverse result into a success.</p></div>
-    <div class="chapter-copy reveal">
-      <p>The protocol was committed and publicly tagged before the NuCLS outcome tables were downloaded. The primary Unbiased Control subset paired the official inferred non-pathologist label with independently inferred pathologist consensus by exact <code>anchor_id</code>. It retained 811 nuclei from five TCGA patients, held each patient out as a complete group and found 27 natural NP/P disagreements. Consensus is an external reference signal, not guaranteed biological truth.</p>
-      <p>Average precision was <strong>0.073489</strong> against disagreement prevalence <strong>0.033292</strong>. The AP-minus-prevalence interval was above zero, but the frozen operational condition was not: at the 5% budget, 4 of 41 reviewed nuclei disagreed and the precision-minus-prevalence 95% interval was <strong>[-0.030075, 0.154075]</strong>. Because both conditions were required, the ranking claim was not supported.</p>
-      <p>The retrospective correction test was also negative. Guided review produced macro-F1 <strong>0.749335</strong>, compared with <strong>0.761085</strong> for mean random review and <strong>0.763969</strong> with labels left unchanged. Guided minus uncorrected was <strong>-0.014633</strong>, with 95% interval <strong>[-0.026683, -0.002415]</strong>. The secondary Evaluation subset also failed both frozen success rules and cannot rescue the primary result.</p>
-      <p><strong>Therefore AANCA has now been tested on genuine external multi-rater evidence, but it has not been shown to detect true pathology errors or improve a model in real use.</strong> The honest result is narrower: this frozen method did not provide sufficient evidence for prioritising NuCLS NP/P disagreements and was adverse against leaving labels unchanged in the primary downstream comparison.</p>
-      <div class="scope-note"><strong>Independent readback.</strong> The <a href="https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1" target="_blank" rel="noopener">public NuCLS evidence release</a> includes a verifier that checks fixed SHA-256 identities and recalculates every ranking, random baseline, downstream metric and group bootstrap without importing AANCA's analysis code. Its primary conclusion is <code>not_supported</code>.</div>
-    </div>
-  </section>
-
-  <section class="section" id="new-data-test">
-    <div class="section-heading reveal"><h2>On new MoNuSAC images, AANCA improved controlled-change triage but did not establish safer retraining.</h2><p class="section-deck">This protocol was frozen before metric execution. It tests artificial label changes on a new dataset, not naturally occurring pathology errors.</p></div>
-    <div class="chapter-copy reveal">
-      <p>The official MoNuSAC training release supplied development data and its official test release remained untouched until final evaluation. Complete TCGA patients defined every group. Two patient identities found in both official archives were removed from development only, leaving 29,610 eligible development nuclei from 44 patients and 15,494 final-test nuclei from 25 patients. Exactly 2,961 development labels were changed under the frozen 10% symmetric mechanism; source annotations themselves were never edited.</p>
-      <p>At the fixed 5% budget, the primary balanced neighbour queue reviewed 1,481 nuclei and found 1,035 injected changes. Its precision was <strong>0.698852</strong>. The gain over 20 exact class, organ and proposed-transition matched-random queues was <strong>+0.142843</strong>, with a 95% whole-patient interval of <strong>[+0.099181, +0.188491]</strong>. This registered retrieval condition passed.</p>
-      <p>The downstream result was more cautious. Training after primary review produced macro-F1 <strong>0.509361</strong> on the untouched test patients, compared with <strong>0.503835</strong> when corrupted labels were left unchanged. The difference was <strong>+0.005526</strong>, but its interval <strong>[-0.001506, +0.012833]</strong> crossed zero. Against mean exact-matched-random restoration the difference was <strong>+0.000031</strong>, with interval <strong>[-0.008692, +0.008486]</strong>. The important-class recall safeguard also failed.</p>
-      <p><strong>The result is a real improvement in controlled-change prioritisation on external images, but not proof of downstream benefit.</strong> Only one of four simultaneously required success conditions passed, so every executable adoption guard retained the uncorrected comparison. The fixed hybrid had the best ranking point estimate, but it was not the frozen primary and was not promoted after seeing the final result.</p>
-      <div class="scope-note"><strong>Independent readback.</strong> The checked-in <a href="https://github.com/Jaqwilk/AANCA/blob/main/reports/monusac_current_aanca_external_results.md" target="_blank" rel="noopener">MoNuSAC result</a> is bound to a 9.9 MB numeric package. A verifier that imports only the standard library and NumPy recalculates all four rankings, exact matched controls, downstream metrics and 2,000-draw whole-patient bootstrap gates. The full frozen experiment was run twice with identical scientific results.</div>
+    <div class="section-heading reveal"><h2>The same system transferred under controlled noise, but natural-case proof is still missing.</h2><p class="section-deck">Later evidence changes the overall assessment without rewriting the adverse PanNuke H4 result. Each study answers a different question and keeps its own frozen boundary.</p></div>
+    <div class="chapter-copy reveal"><p>NuCLS is the closest completed test of genuine multi-rater disagreement. Its five-patient result did not satisfy the frozen ranking gate and the guided intervention made downstream macro-F1 worse. MoNuSAC then showed strong controlled retrieval but no statistically supported downstream gain or complete class safety.</p><p>The unchanged selected AANCA candidate was next frozen before PUMA evaluation. On a previously unused histopathology source it passed every prospective retrieval, downstream, direction, convergence and class-safety gate under controlled corruption. That is meaningful evidence of controlled-noise transfer, but PUMA does not provide paired natural pre/post expert decisions and therefore cannot prove pathologist-error detection.</p></div>
+    <div class="figure-width reveal">
+      <div class="rules evidence-ledger">
+        <article class="rule">
+          <b>NuCLS natural multi-rater disagreement</b>
+          <p>On 5 patient groups and 811
+          nuclei, average precision was 0.073489. Precision at
+          the 5% review budget was 0.097561, but its
+          difference-from-prevalence interval crossed zero. Guided correction reduced
+          macro-F1 by 0.014633, with a 95%
+          interval [-0.026683, -0.002415]. The frozen natural-data
+          claims were not supported.</p>
+        </article>
+        <article class="rule">
+          <b>MoNuSAC controlled external benchmark</b>
+          <p>The frozen queue found 1,035 of
+          2,961 injected changes:
+          precision 0.698852 versus
+          0.556009 for matched
+          random review, with a positive difference interval
+          [0.099181, 0.188491]. Downstream
+          macro-F1 changed by +0.005526
+          [-0.001506, +0.012833], so the
+          benefit and class-safety gates failed. The prescribed action remained
+          <code>retain_uncorrected</code>.</p>
+        </article>
+        <article class="rule">
+          <b>PUMA frozen new-source controlled confirmation</b>
+          <p>The unchanged candidate was frozen before PUMA outcomes and evaluated on
+          62 held-out case/ROI groups. Queue precision was
+          0.537739 versus
+          0.214379; the difference was
+          +0.323359
+          [+0.259251, +0.384944]. Candidate macro-F1
+          was 0.646310, improving on unchanged
+          labels by +0.006426
+          [+0.003657, +0.009365] and matched random by
+          +0.008067
+          [+0.004093, +0.011947]. All seven frozen gates
+          passed. This supports controlled-noise transfer only.</p>
+        </article>
+        <article class="rule">
+          <b>Robustness and the remaining safety boundary</b>
+          <p>All 9 of
+          9 post-confirmation PUMA stress scenarios had a
+          positive aggregate downstream lower bound, but only
+          1 passed every class safeguard.
+          The <code>puma_audit_time_label_sensitivity_v1</code> observed-label
+          fold-allocation sensitivity passed all seven gates, but it was run after
+          PUMA outcomes were open. Natural paired pre/post NuCLS
+          evidence was unavailable, so the binding action is still
+          <code>retain_uncorrected</code>.</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -1095,24 +1133,37 @@ html.motion-enhanced .reveal,
   </section>
 
   <section class="section" id="interpretation">
-    <div class="section-heading reveal"><h2>What the evidence supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
-    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency, expert disagreement or biological truth. A bootstrap quantifies uncertainty within one dataset; it does not create an independent replication.</p><p>PanNuke splits separate source patches, not verified patients or whole slides. Its controlled allocation also used the pre-corruption reference label for balance. That label was not a model input, but it is benchmark-only information unavailable in a real audit.</p><p>The NuCLS study used genuine external multi-rater evidence, a protocol frozen before outcome download and complete TCGA-patient grouping. Its null/adverse result narrows the evidence. The separately frozen MoNuSAC test adds many new images and patient groups, but its positive result concerns injected changes and its downstream gates failed. Neither study establishes natural-error detection or operational utility. Those claims still require newly recruited blinded experts, prospective use across sites and outcomes defined before deployment.</p></div>
+    <div class="section-heading reveal"><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
+    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency, expert disagreement or biological truth. The positive PUMA result is an independent-source controlled transfer result, while the later stress analysis and observed-label sensitivity are exploratory because PUMA outcomes were already open.</p><p>Grouping strength differs by source: the primary PanNuke study guarantees source-patch separation, NuCLS uses patient groups, MoNuSAC uses patient groups and PUMA uses one ROI per case. These safeguards reduce leakage but do not transform a final expert reference label into guaranteed biological truth.</p><p>Natural and operational validity still require newly recruited blinded reviewers, ambiguity and abstention labels, a frozen policy evaluated on untouched patients or whole slides, and a prospective multi-site comparison of work with and without AANCA.</p></div>
     <div class="figure-width reveal claim-grid">
-      <article class="claim-card"><h3>Supported by the controlled benchmark</h3><ul><li>Registered group-safe rankings retrieved injected class-label changes more efficiently than random review in PanNuke H1.</li><li>The frozen MoNuSAC primary queue also beat exact matched random for injected-change retrieval on new images.</li><li>Every displayed number remains traceable to sealed machine-readable evidence.</li></ul></article>
-      <article class="claim-card"><h3>Not established by this study</h3><ul><li>That a naturally occurring annotation is wrong or that a pathologist made an error.</li><li>That guided correction safely improves downstream classification; PanNuke H4 and NuCLS were adverse, while MoNuSAC remained uncertain and failed class safety.</li><li>Clinical validity, prospective utility or broad real-world generalisation.</li></ul></article>
+      <article class="claim-card"><h3>Supported by current evidence</h3><ul><li>Group-safe rankings retrieve injected class-label changes more efficiently than matched random review.</li><li>The frozen current candidate transferred to new PUMA images and improved controlled-noise downstream macro-F1 with positive whole-group intervals.</li><li>Every displayed conclusion is read from checksum-bound machine-readable evidence.</li></ul></article>
+      <article class="claim-card"><h3>Not established</h3><ul><li>That a naturally occurring annotation is wrong, that a pathologist made an error or that model disagreement is biological truth.</li><li>That the intervention is uniformly class-safe across realistic corruption patterns; only one of nine stress scenarios passed every class safeguard.</li><li>Prospective workflow benefit, multi-site generalisation, clinical utility or permission to alter natural source labels automatically.</li></ul></article>
+    </div>
+  </section>
+
+  <section class="section" id="current-stage">
+    <div class="section-heading reveal"><h2>AANCA is externally evaluated, but not yet confirmatory or ready for real-use claims.</h2><p class="section-deck">Completion labels describe which governed evaluations ran. They do not turn a mixed result into efficacy.</p></div>
+    <div class="chapter-copy reveal"><p>The current project has reached <code>PRIMARY_STUDY_COMPLETE</code>, <code>EXTERNAL_VALIDATION_COMPLETE</code> and <code>DEMO_COMPLETE</code>. It has not reached <code>CONFIRMATORY_COMPLETE</code>. The binding natural-data action is <code>retain_uncorrected</code>: AANCA may prioritise cases for qualified review, but it may not silently exclude, relabel or overwrite them.</p><p>The next research phase is provisionally named <strong>AANCA v2</strong>. This is a prospective evidence programme for the same core auditing system, not a retroactive rename of the existing results. Opened PanNuke, NuCLS, MoNuSAC and PUMA outcomes may inform diagnosis of weaknesses, but they cannot serve as the untouched final confirmation for the next claim.</p></div>
+    <div class="figure-width reveal rules phase-ledger">
+      <article class="rule"><b>1 · Natural reference</b><p>Recruit independent blinded pathologists on new cases and preserve agreement, disagreement, ambiguity, abstention and insufficient-context outcomes instead of forcing one truth label.</p></article>
+      <article class="rule"><b>2 · Measured utility</b><p>Develop the review queue inside nested patient- or WSI-group cross-fitting using both inconsistency probability and conservatively estimated downstream benefit.</p></article>
+      <article class="rule"><b>3 · Prospective freeze</b><p>Freeze one representation, queue, intervention, review budget, class-safety rule and analysis plan before inspecting any new confirmation outcome.</p></article>
+      <article class="rule"><b>4 · Untouched confirmation</b><p>Run one-shot external validation on new patient or WSI groups. Ranking, downstream confidence intervals, every-class safety and convergence must all pass together.</p></article>
+      <article class="rule"><b>5 · Real workflow</b><p>Compare blinded multi-site review with and without AANCA, measuring time, agreement, accepted corrections, downstream performance and failure modes.</p></article>
+      <article class="rule"><b>Promotion boundary</b><p>Only the full sequence can support a claim about realistic natural-case improvement. Until then, AANCA remains a non-diagnostic expert-review prioritisation prototype.</p></article>
     </div>
   </section>
 
   <section class="section" id="use">
     <div class="repo-shell">
-      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package; it does not retrain a model or recalculate any scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The saved packages provide the OOF, ranking, bootstrap and restoration evidence needed to recalculate H1-H7, NuCLS and the MoNuSAC controlled-external result. <code>verify_nucls_external_validation.py</code> and <code>verify_monusac_external_validation.py</code> independently regenerate their metrics and group-bootstrap decisions. Retraining from images remains a separate operation requiring lawful dataset copies.</p></div>
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and the arrays required by independent verifiers. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
           <div><span class="repo-path">github.com / Jaqwilk</span><span class="repo-title">AANCA</span></div>
           <a class="repo-link" href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">View repository ↗</a>
         </div>
-        <p class="repo-description">The repository contains the scientific specification, source code, cross-platform checks, synthetic workflows and this checksum-verifiable presentation. Its evidence includes the full PanNuke statistics, the null/adverse NuCLS evaluation and the mixed MoNuSAC controlled-external result; raw dataset images and unretained fold checkpoints are not included.</p>
+        <p class="repo-description">The repository contains the scientific specification, maintained source code, frozen study configs, independent verifiers, compact evidence and this checksum-verifiable presentation. Licensed raw datasets, reusable local embeddings and unretained historical checkpoints are deliberately excluded.</p>
         <div class="repo-tags"><span>Python 3.12</span><span>group-safe OOF</span><span>immutable evidence</span><span>research only</span></div>
       </article>
 
@@ -1166,8 +1217,8 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Datasets: PanNuke, NuCLS and MoNuSAC</p><p>Primary, multi-rater and controlled-external evaluations completed. Natural-error and real-use improvement claims remain unsupported.</p></div>
-    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1" target="_blank" rel="noopener">NuCLS evidence release ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/reports/nucls_external_validation_results.md" target="_blank" rel="noopener">NuCLS validation result ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/reports/monusac_current_aanca_external_results.md" target="_blank" rel="noopener">MoNuSAC controlled result ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
+    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
   </div>
   <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
 </div></footer>
@@ -1186,7 +1237,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
   const articleOrder = [
     'overview', 'study-facts', 'research-question', 'method', 'reading', 'results',
     'benchmarks', 'subgroups', 'seed-audit', 'evidence', 'external-validation',
-    'new-data-test', 'quality', 'integrity', 'interpretation', 'use', 'author',
+    'new-data-test', 'quality', 'integrity', 'interpretation', 'current-stage', 'use', 'author',
   ];
   if (article) {
     articleOrder.forEach(id => {
@@ -1291,6 +1342,18 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         ease: 'power2.out',
         scrollTrigger: {trigger: item, start: 'top 88%', once: true},
         onComplete: () => item.classList.add('is-shown'),
+      });
+    });
+    document.querySelectorAll('[data-learned-slide]').forEach(row => {
+      const content = row.querySelectorAll('.hypothesis-title, .learned-answer');
+      gsapEngine.set(content, {autoAlpha: 0, y: 20});
+      gsapEngine.to(content, {
+        autoAlpha: 1,
+        y: 0,
+        duration: .62,
+        stagger: .08,
+        ease: 'power2.out',
+        scrollTrigger: {trigger: row, start: 'top 84%', once: true},
       });
     });
     gsapEngine.from('.hero-animate', {

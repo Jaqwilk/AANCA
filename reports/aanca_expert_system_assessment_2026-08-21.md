@@ -171,7 +171,10 @@ Remaining technical limitations are also clear:
 
 ## Best in-place path forward
 
-These changes extend the current AANCA system and do not require a V2.
+These changes extend the current AANCA system rather than discarding it. For public
+planning they are now consolidated under the working name “AANCA v2 research phase”
+in [`NEXT_PHASE.md`](../NEXT_PHASE.md); that name denotes the missing evidence
+programme, not a retroactive upgrade of the current model or results.
 
 ### 1. Keep natural deployment reviewer-gated
 

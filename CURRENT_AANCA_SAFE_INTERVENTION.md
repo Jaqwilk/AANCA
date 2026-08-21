@@ -170,6 +170,8 @@ The exact policy is machine-readable in
 The measured-utility and natural-workflow designs are frozen separately in
 [`AANCA_MEASURED_UTILITY_PROTOCOL.md`](AANCA_MEASURED_UTILITY_PROTOCOL.md) and
 [`AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md`](AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md).
+Their presentation-ready execution order and promotion ladder are consolidated in
+[`NEXT_PHASE.md`](NEXT_PHASE.md).
 The PUMA controlled study satisfied its simultaneous retrieval, downstream and
 class-safety rule. The remaining natural study must satisfy the same structure using
 blinded reviewer outcomes and a new external site. Until that study is executed,

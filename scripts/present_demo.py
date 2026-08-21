@@ -119,8 +119,8 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
 
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 2
-        or manifest.get("policy") != "aanca_presentation_complete_h1_h7_selected_source_readback_v2"
+        manifest.get("schema_version") != 3
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v3"
     ):
         raise ValueError("presentation manifest schema or policy differs")
     records = manifest.get("files")
@@ -158,7 +158,12 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     external_completed = evidence.get("external_validation_completed")
     external = evidence.get("external_validation")
     controlled = evidence.get("controlled_external_benchmark")
-    external_scope_valid = external_completed is False or (
+    puma = evidence.get("new_source_confirmation")
+    stress = evidence.get("realism_stress")
+    sensitivity = evidence.get("audit_time_label_sensitivity")
+    natural_action = evidence.get("natural_data_action")
+    next_phase = evidence.get("next_phase")
+    external_scope_valid = (
         external_completed is True
         and isinstance(external, dict)
         and external.get("completion_stage") == "EXTERNAL_VALIDATION_COMPLETE"
@@ -168,7 +173,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and isinstance(external.get("claim_boundary"), dict)
         and not any(external["claim_boundary"].values())
     )
-    controlled_scope_valid = external_completed is False or (
+    controlled_scope_valid = (
         isinstance(controlled, dict)
         and controlled.get("study_id") == "monusac_current_aanca_controlled_external_v1"
         and controlled.get("decision") == "not_supported"
@@ -188,13 +193,70 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and isinstance(controlled.get("claim_boundary"), dict)
         and not any(controlled["claim_boundary"].values())
     )
+    puma_scope_valid = (
+        isinstance(puma, dict)
+        and puma.get("study_id") == "puma_new_data_confirmation_v1"
+        and puma.get("decision") == "controlled_noise_transfer_supported"
+        and puma.get("all_success_conditions_met") is True
+        and puma.get("final_case_groups") == 62
+        and puma.get("success_conditions", {}).get(
+            "all_four_seed_directions_positive_against_both_controls"
+        )
+        is True
+        and puma.get("success_conditions", {}).get(
+            "every_primary_class_recall_lower_bound_gte_minus_0_01"
+        )
+        is True
+        and puma.get("claim_boundary", {}).get("controlled_noise_transfer_if_positive") is True
+        and puma.get("claim_boundary", {}).get("natural_error_detection_proven") is False
+        and puma.get("claim_boundary", {}).get("pathologist_error_detection_proven") is False
+        and puma.get("claim_boundary", {}).get("clinical_utility_proven") is False
+        and puma.get("verification", {}).get("verified") is True
+    )
+    stress_scope_valid = (
+        isinstance(stress, dict)
+        and stress.get("scenario_count") == 9
+        and stress.get("positive_aggregate_lower_bound_count") == 9
+        and stress.get("all_class_safeguards_passed_count") == 1
+        and stress.get("all_scenarios_passed") is False
+        and stress.get("candidate_changed") is False
+        and isinstance(stress.get("claim_boundary"), dict)
+        and not any(stress["claim_boundary"].values())
+    )
+    sensitivity_scope_valid = (
+        isinstance(sensitivity, dict)
+        and sensitivity.get("all_sensitivity_gates_passed") is True
+        and sensitivity.get("fold_assignment_label_source") == "observed_label"
+        and sensitivity.get("candidate_changed") is False
+        and isinstance(sensitivity.get("claim_boundary"), dict)
+        and not any(sensitivity["claim_boundary"].values())
+    )
+    natural_action_scope_valid = (
+        isinstance(natural_action, dict)
+        and natural_action.get("status") == "unavailable"
+        and natural_action.get("action") == "retain_uncorrected"
+    )
+    next_phase_scope_valid = (
+        isinstance(next_phase, dict)
+        and next_phase.get("stage") == "INITIALISED"
+        and next_phase.get("working_name") == "AANCA v2 research phase"
+        and next_phase.get("natural_auto_change_allowed") is False
+        and isinstance(next_phase.get("required_gates"), list)
+        and len(next_phase["required_gates"]) == 5
+    )
     if (
-        evidence.get("schema_version") != 2
+        evidence.get("schema_version") != 3
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
-        or evidence.get("scientific_status") != "PRIMARY_STUDY_COMPLETE"
+        or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
+        or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
         or not external_scope_valid
         or not controlled_scope_valid
+        or not puma_scope_valid
+        or not stress_scope_valid
+        or not sensitivity_scope_valid
+        or not natural_action_scope_valid
+        or not next_phase_scope_valid
         or not isinstance(primary, dict)
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"
@@ -212,7 +274,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     return {
         "status": "valid",
         "presentation_status": "DEMO_COMPLETE",
-        "scientific_status": "PRIMARY_STUDY_COMPLETE",
+        "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
         "external_validation_completed": external_completed,
         "manifest_root_sha256": manifest["manifest_root_sha256"],
         "file_count": len(expected_names),

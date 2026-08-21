@@ -176,7 +176,7 @@ def cross_fitted_temperature_calibration(
         raise ValueError("maximum_ece_increase must be finite and non-negative")
     plan = make_group_stratified_fold_plan(
         target,
-        groups,
+        groups.tolist(),
         n_splits=n_splits,
         class_order=classes,
         seed=split_seed,

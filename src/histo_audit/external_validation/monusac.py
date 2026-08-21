@@ -542,7 +542,7 @@ def _strategy_queues(
     scores = {
         name: group_safe_audit_scores(
             features,
-            observed,
+            observed.tolist(),
             probabilities,
             groups,
             fold_ids,
@@ -586,12 +586,12 @@ def _strategy_queues(
         queues = build_two_review_queues(
             scores[score_name].risk_scores,
             groups,
-            observed,
+            observed.tolist(),
             sample_ids,
             quality_constraints=constraints,
             model_constraints=QueueConstraints(requested_count=review_count),
             annotation_evidence_role=GROUP_SAFE_OOF_EVIDENCE,
-            proposed_labels=proposed,
+            proposed_labels=proposed.tolist(),
             tissue_types=manifest["organ"].astype(str).tolist(),
             embeddings=features,
         )
@@ -672,7 +672,7 @@ def _candidate_minus_random_bootstrap(
         "candidate_minus_mean_matched_random_macro_f1": float(
             point_candidate - point_random.mean()
         ),
-        "interval_95": list(_interval(differences)),
+        "interval_95": list(_interval(differences.tolist())),
         "iterations": iterations,
         "random_repetitions": len(random_probabilities),
     }

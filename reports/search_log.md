@@ -113,3 +113,20 @@ No bibliography entry was created for UNI2-h or H-optimus-0 because a separate p
 - Reported source-label or consensus labels are quality-controlled references, not guaranteed biological truth.
 - No source supports substituting nucleus-level random cross-validation for source-group-safe OOF predictions.
 - No source supports treating controlled injected corruption as evidence of natural-error prevalence or clinical utility.
+
+## PUMA source addendum — 21 August 2026
+
+The PUMA dataset publication was verified after the original bounded search because
+PUMA became the frozen new-source controlled confirmation dataset. Oxford Academic,
+PubMed and the official challenge page agree on the title, author list and dataset
+role. The peer-reviewed record is:
+
+- Mark Schuiveling, Hong Liu, Daniel Eek, Gerben E. Breimer, Karijn P. M.
+  Suijkerbuijk, Willeke A. M. Blokx and Mitko Veta;
+- “A novel dataset for nuclei and tissue segmentation in melanoma with baseline
+  nuclei segmentation and tissue segmentation benchmarks”;
+- GigaScience 14 (2025), article `giaf011`;
+- DOI `10.1093/gigascience/giaf011`.
+
+This addendum extends dataset provenance only. It does not turn final expert-checked
+PUMA labels into guaranteed biological truth or paired natural correction evidence.

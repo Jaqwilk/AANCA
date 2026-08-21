@@ -346,14 +346,16 @@ Status: completed engineering maintenance; no new scientific completion stage cl
 - preserve raw data, frozen authorities, accepted evidence and verifier inputs;
 - retain only the accepted primary and pilot run directories in the active run tree
   after full checksum verification;
-- move superseded and generated local products to a dated recoverable quarantine;
+- resolve superseded products into a dated quarantine, verify the retained
+  authorities, then permanently remove only classified non-authoritative bulk while
+  recording the deletion boundary;
 - remove public mirrors, stale machine reports, orphaned scaffolding and non-release
   visual captures;
 - consolidate behaviorally equivalent archive, metric, figure and pinned-config
   helpers while preserving deliberately independent verification code;
 - keep large PUMA evidence under Git LFS and publish the complete retention audit.
 
-The executed inventory and rollback boundary are in
+The executed inventory and final deletion boundary are in
 [`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md).
 
 ## Open scientific milestones
@@ -375,12 +377,13 @@ Execution requirements are defined in
 
 ### M10 — Audit-time-label sensitivity analysis
 
-Target stage: no completion status claimed yet
+Status: completed for the frozen PUMA controlled confirmation; still open for the
+accepted PanNuke primary benchmark
 
-- declare the analysis before execution;
-- allocate folds without `pre_corruption_label`;
-- preserve group and final-fold boundaries;
-- compare against the accepted benchmark as a sensitivity analysis, not a rewrite.
+The post-confirmation PUMA sensitivity rebuilt folds and neighbour reference sets
+from `observed_label` only. All seven sensitivity gates passed, but PUMA outcomes
+were already open, so this remains exploratory and does not become a second
+confirmation. A corresponding accepted-primary PanNuke analysis has not been run.
 
 ### M13 — Prospective current-system workflow comparison
 
@@ -415,6 +418,17 @@ Target stage: no completion status claimed yet
 The machine and procedural gates are defined in
 [`AANCA_MEASURED_UTILITY_PROTOCOL.md`](AANCA_MEASURED_UTILITY_PROTOCOL.md) and
 [`AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md`](AANCA_NEW_DATA_CONFIRMATION_PROTOCOL.md).
+
+### Consolidated next phase — AANCA v2 research programme
+
+Status: `INITIALISED`; no new efficacy stage claimed
+
+The remaining M9, PanNuke portion of M10, M13 and M17 work is presented as one
+promotion sequence in [`NEXT_PHASE.md`](NEXT_PHASE.md): new blinded natural-case
+multi-rater evidence, nested measured-utility development, one prospectively frozen
+candidate, untouched patient/WSI confirmation and a multi-site with/without-AANCA
+workflow study. The current natural-data action remains `retain_uncorrected` until
+every required aggregate, class-safety and workflow gate passes.
 
 ## Standard validation order
 

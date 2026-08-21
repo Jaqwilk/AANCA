@@ -30,15 +30,6 @@ data/synthetic/**
 data/manifests/*.parquet
 data/manifests/**/*.parquet
 data/manifests/raw_files_sha256.csv
-!data/raw/.gitkeep
-!data/raw/pannuke/
-!data/raw/pannuke/.gitkeep
-!data/raw/nucls/
-!data/raw/nucls/.gitkeep
-!data/interim/.gitkeep
-!data/processed/.gitkeep
-!data/synthetic/.gitkeep
-!data/manifests/.gitkeep
 
 # Generated experiment artifacts (registry structure remains reproducible)
 artifacts/embeddings/**
@@ -65,7 +56,6 @@ artifacts/duplicate_audit/*.npz
 artifacts/duplicate_audit/*.npz.metadata.json
 artifacts/duplicate_audit/.frozen_resnet18_duplicate_embeddings.resume/**
 artifacts/duplicate_audit/.superseded/**
-!artifacts/**/.gitkeep
 !artifacts/runs/registry.csv
 !artifacts/runs/run_dispositions.anchor.json
 !artifacts/runs/run_dispositions.jsonl
@@ -82,9 +72,7 @@ reports/doctor_latest.txt
 reports/doctor.json
 *.log
 
-# Browser QA is transient by default. Keep only the deliberately selected release
-# hero; any additional retained capture must be added explicitly.
+# Browser QA is always transient. The deliberately selected README image lives in
+# docs/assets rather than a generated output directory.
 output/research/**
 output/playwright/**
-!output/playwright/
-!output/playwright/aanca-professor-release-hero.png

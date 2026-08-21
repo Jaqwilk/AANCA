@@ -5,8 +5,9 @@
 The maintained AANCA workspace and public repository were reduced without changing
 source annotations, raw datasets, frozen scientific specifications, accepted result
 values, or claim boundaries. Cleanup was intentionally conservative: locally removed
-material was moved outside the repository into a recoverable quarantine rather than
-being permanently erased.
+material was first moved outside the repository into an exact dated quarantine and
+verified. Large superseded run, cache and test classes were then permanently erased
+to reclaim disk space; the final deletion boundary is stated below.
 
 No new scientific completion stage is claimed by this engineering maintenance.
 
@@ -23,7 +24,8 @@ The following material remains authoritative and was not removed:
   `20260727T133947.089370Z_pannuke_primary_orphan_recovery`;
 - reusable PanNuke, MoNuSAC, PUMA and expanded-development embeddings;
 - released NuCLS, MoNuSAC and PUMA evidence needed by independent verifiers;
-- the five-file static demo and its one deliberately retained README hero image.
+- the five-file static demo and its one deliberately retained README hero under
+  `docs/assets/`.
 
 The accepted primary and pilot directories were re-hashed after cleanup. Their
 integrity roots remained respectively
@@ -38,11 +40,14 @@ The Git cleanup removes only redundant, transient or unconsumed material:
 
 - the tracked `artifacts/qa/` mirror, which duplicated canonical evidence in
   `reports/` and had no maintained consumer;
-- nine superseded browser-audit screenshots; the selected release hero remains;
+- nine superseded browser-audit screenshots; the selected release hero was moved
+  from generated `output/` into `docs/assets/`;
 - orphaned capsule scaffolding (`capsule_builder.py`, `capsule_policy.json` and
   `entry_contract.json`) after its only dispatch consumer had already been retired;
 - four machine-local status snapshots (`doctor.json`, `environment_initial.txt`,
   `final_validation.md` and `hardware.json`) whose content is reproducible or stale;
+- the unconsumed M7 disk-space preflight snapshot, the superseded preliminary
+  external-review note and the disconnected geometric-audit future-work draft;
 - the empty notebooks placeholder;
 - the redundant presentation-only CI workflow after its package-verification gate
   was moved into the cross-platform scientific workflow.
@@ -50,7 +55,7 @@ The Git cleanup removes only redundant, transient or unconsumed material:
 Historical references to those paths inside immutable run provenance are retained
 as historical evidence and were not rewritten.
 
-## Local cleanup and rollback boundary
+## Local cleanup and deletion boundary
 
 The first conservative pass moved 4,222 identified files (about 43.78 GiB) to
 `C:\Users\NATAN\Documents\AANCA_cleanup_quarantine_20260821`. This inventory
@@ -65,14 +70,16 @@ deleted. The drive reported approximately 43.79 GiB reclaimed. Those deleted ite
 are not recoverable; all authoritative evidence listed above remains in the active
 repository.
 
-Only `mvp_demo_before_author_section/` remains in the quarantine as a rollback copy:
-five files totalling 3.245 MiB. It is not part of the maintained repository or public
-release.
+The last `mvp_demo_before_author_section/` rollback contained exactly five files and
+3,402,366 bytes. After the current package passed both independent verifiers and the
+desktop, mobile and reduced-motion browser audit, that obsolete copy and the now-empty
+quarantine root were permanently removed. No cleanup quarantine remains; the deleted
+material is not recoverable.
 
 The active `artifacts/` tree fell from about 92.1 GiB to 48.5 GiB. The remaining
 43.3 GiB run footprint is the accepted primary result plus the accepted pilot; the
-remaining 5.0 GiB embedding footprint is deliberately reusable. `output/` now
-contains only the 133,735-byte release hero.
+remaining 5.0 GiB embedding footprint is deliberately reusable. Generated `output/`
+is now entirely transient; the 133,735-byte release hero lives under `docs/assets/`.
 
 ## Pipeline consolidation
 
@@ -96,13 +103,14 @@ not merely call the implementation they are intended to audit.
 
 Across the maintained source-package categories measured before and after this
 refactor, Python code decreased from 104,231 to 104,116 lines (net `-115`) even after
-adding the shared validation logic. A separate presentation cleanup moved the stable
-styles out of the generator: the consistently measured nonblank count in
-`mvp_demo.py` fell to 4,060 lines and the complete measured nonblank Python workspace
-fell from 155,697 to 154,589 lines (net `-1,108`). The styles now live in one asset
-with 810 nonblank lines instead of a large embedded string. The goal was lower
-duplication and fewer failure paths, not artificial compression of frozen scientific
-contracts.
+adding the shared validation logic. The presentation cleanup then moved the stable
+styles out of the generator and removed three complete dead template generations,
+unused plotting/rendering helpers and obsolete version suffixes. After adding strict
+NuCLS, MoNuSAC and PUMA authority readback, `mvp_demo.py` contains 2,853 nonblank
+lines; the complete measured `src/`, `scripts/` and `tests/` Python workspace contains
+153,732 nonblank lines, down from 155,697 (net `-1,965`). The stylesheet contains 812
+nonblank lines. The goal was lower duplication and fewer failure paths, not artificial
+compression of frozen scientific contracts.
 
 ## GitHub storage policy
 
@@ -150,3 +158,24 @@ tests.
 The independent scripts require the pinned project environment and are therefore
 invoked as `uv run python scripts/<name>.py`. Direct system-Python invocations were
 rejected with `ModuleNotFoundError` and produced no scientific evidence.
+
+## Final presentation-readiness pass
+
+The final post-cleanup release supersedes the earlier gate counts above:
+
+- full suite: `1147 passed, 1 skipped` in 805.06 seconds;
+- Ruff lint and format: passed for 215 maintained Python files;
+- mypy: no issues in 103 source files;
+- wheel: built, installed in an isolated environment and exposed the complete CLI;
+- fresh synthetic run: completed successfully and its temporary products were
+  deleted after inspection;
+- primary, NuCLS, MoNuSAC, PUMA, selected-candidate and NuCLS-feasibility independent
+  verifiers: passed with their registered favourable, adverse and unavailable
+  outcomes unchanged;
+- current demo: five files, manifest root
+  `edbba03401c50eb4a2e0fd2e5a43c744b0726af6c6a6aaed3e5ee3d5c0e29426`;
+- browser QA: desktop, iPhone 15 and reduced motion passed without overflow, broken
+  images, missing anchors, duplicate IDs, console errors or failed page resources;
+- the subtle findings animation was observed, while reduced motion exposed all text
+  immediately and rendered the hero canvas statically;
+- Markdown link validation and `git diff --check`: passed.

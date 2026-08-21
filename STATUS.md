@@ -5,10 +5,11 @@ Updated: 21 August 2026
 ## Presentation UI note (21 August 2026)
 
 The checked-in `artifacts/mvp_demo` package was polished into a single long-form
-article layout: one CSS rhythm, static findings Q&A (no sticky scroll theatre),
-contained hero figure, aligned footer, and simplified motion. Nav chrome was left
-unchanged. Restore the pre-polish package from
-`C:\Users\NATAN\Documents\AANCA_cleanup_quarantine_20260821\final_validation_generated\artifacts__mvp_demo_backup_20260821_pre_article`.
+article layout: one CSS rhythm, normal-flow findings with subtle entrance motion (no
+sticky scroll theatre), a contained hero figure, aligned footer and current-evidence
+chapters generated from NuCLS, MoNuSAC and PUMA authorities. After the rebuilt
+five-file release passed both package verifiers and browser QA, the final obsolete
+pre-polish rollback was permanently removed. No cleanup quarantine remains.
 
 ## Current scientific stage
 
@@ -706,9 +707,10 @@ Executed cleanup:
   permanently removed the verified superseded-run, cache, QA, smoke and non-release
   classes after the same-volume quarantine exhausted `C:`; approximately 43.79 GiB
   was physically reclaimed;
-- retained only the five-file, 3.245 MiB
-  `mvp_demo_before_author_section/` rollback copy outside the repository; the
-  permanently deleted classified material is not recoverable;
+- temporarily retained the five-file, 3.245 MiB
+  `mvp_demo_before_author_section/` rollback outside the repository, then removed it
+  after final package and browser verification; the deleted material is not
+  recoverable;
 - reduced active `artifacts/` from about 92.1 GiB to 48.456 GiB and retained only the
   133,735-byte release hero under `output/`;
 - removed the redundant tracked QA evidence mirror, nine superseded screenshots,
@@ -762,5 +764,53 @@ Validation and corrections:
 - workflow YAML parsing and `git diff --check`: passed before this append and are
   rerun immediately before publication.
 
-The complete retention inventory and rollback boundary are in
+The complete retention inventory and final deletion boundary are in
 [`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md).
+
+## Presentation-ready release validation — 2026-08-21
+
+The final repository and article were regenerated from the current evidence
+authorities and validated after the retention audit. This pass changed no accepted
+scientific result and did not expand the claim boundary.
+
+Final gates:
+
+- `uv run pytest`: `1147 passed, 1 skipped` in 805.06 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 215 maintained Python files formatted;
+- `uv run mypy src`: no issues in 103 source files;
+- focused final demo regression after whitespace correction: `8 passed`;
+- `uv build --wheel`: passed; the isolated wheel installed successfully, exposed the
+  complete CLI and contained all required external-validation and presentation
+  modules (114 archive entries);
+- deterministic synthetic generation: definition
+  `791fe34c3bb9042b73badd8209afa1b2b673922e20f2da2da28e9a70d67525b2`;
+- synthetic smoke: completed run
+  `20260821T131337.066103Z_synthetic_smoke_9479d2b84a`; its generated dataset, run
+  and build products were removed after validation;
+- primary independent verifier: 33 reported comparisons and 3 explicitly
+  unavailable comparisons recalculated, including adverse H4
+  `-0.0021560596665870235`;
+- frozen NuCLS verifier: both subsets recalculated, primary natural and downstream
+  claims not supported;
+- MoNuSAC verifier: four ranking candidates and 2,000 whole-patient bootstrap draws
+  verified, combined success rule not supported;
+- PUMA verifier: official manifest rebuilt, all 44 fits converged and all seven
+  frozen controlled-new-source gates passed;
+- selected-candidate verifier: exact development metrics reproduced with `220/220`
+  converged fits and no final-test use;
+- NuCLS supervised-QC feasibility: official database re-read, no paired natural
+  pre/post nucleus label endpoint found, action `retain_uncorrected`;
+- final five-file demo passed both verifiers with manifest root
+  `edbba03401c50eb4a2e0fd2e5a43c744b0726af6c6a6aaed3e5ee3d5c0e29426`;
+- Playwright desktop, iPhone 15 and reduced-motion QA: no horizontal overflow,
+  broken images, missing anchors, duplicate IDs, console errors or warnings; all 13
+  page resources returned HTTP 200, mobile navigation worked, every reveal became
+  visible and the findings animation was observed while reduced motion remained
+  fully static and readable;
+- local Markdown links and `git diff --check`: passed.
+
+The noncanonical 3,402,366-byte pre-polish rollback and its now-empty quarantine
+root were deliberately removed after these checks. They are not recoverable; the
+verified current package and all authoritative evidence remain intact.

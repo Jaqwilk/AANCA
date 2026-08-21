@@ -1,7 +1,84 @@
 {
   "analysis_disposition": "amended_or_exploratory",
+  "audit_time_label_sensitivity": {
+    "all_sensitivity_gates_passed": true,
+    "candidate_changed": false,
+    "claim_boundary": {
+      "automatic_annotation_change_permitted": false,
+      "clinical_utility_proven": false,
+      "independent_confirmation": false,
+      "natural_error_detection_proven": false,
+      "pathologist_error_detection_proven": false
+    },
+    "disposition": "post_confirmation_exploratory_sensitivity_only",
+    "fold_assignment_label_source": "observed_label",
+    "source": {
+      "path": "artifacts/puma_audit_time_label_sensitivity/results.json",
+      "sha256": "8f524b236995a495048a0955ebf930e14e732a1214d3856d3711571af13fd5cd",
+      "size_bytes": 9944
+    },
+    "study_id": "puma_audit_time_label_sensitivity_v1"
+  },
   "automatic_annotation_changes": false,
   "confirmatory_completed": false,
+  "controlled_external_benchmark": {
+    "all_success_conditions_met": false,
+    "analysis_disposition": "prospectively_frozen_controlled_external_benchmark",
+    "claim_boundary": {
+      "clinical_or_operational_utility_proven": false,
+      "natural_pathology_error_detection_proven": false,
+      "pathologist_error_proven": false,
+      "source_annotations_modified": false
+    },
+    "dataset": "MoNuSAC2020",
+    "decision": "not_supported",
+    "development": {
+      "controlled_corruption_count": 2961,
+      "controlled_corruption_rate": 0.1,
+      "eligible_nuclei": 29610,
+      "patient_group_count": 44
+    },
+    "primary_downstream": {
+      "candidate_macro_f1": 0.5093608506212538,
+      "corrupted_uncorrected_macro_f1": 0.5038352361344909,
+      "minus_corrupted_uncorrected_interval_95": [
+        -0.001505873468356683,
+        0.012832750726675505
+      ],
+      "minus_corrupted_uncorrected_macro_f1": 0.00552561448676292,
+      "minus_mean_matched_random_interval_95": [
+        -0.0086920112069291,
+        0.008485812521403327
+      ],
+      "minus_mean_matched_random_macro_f1": 3.0946417352573086e-05
+    },
+    "primary_ranking": {
+      "changes_found": 1035,
+      "difference_interval_95": [
+        0.0991810700012709,
+        0.18849133691115186
+      ],
+      "mean_matched_random_precision": 0.5560094530722484,
+      "precision": 0.6988521269412559,
+      "reviewed_count": 1481
+    },
+    "source": {
+      "path": "artifacts/monusac_external_validation/results.json",
+      "sha256": "b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4",
+      "size_bytes": 33249
+    },
+    "study_id": "monusac_current_aanca_controlled_external_v1",
+    "success_conditions": {
+      "important_class_recall_non_degradation": false,
+      "primary_downstream_beats_corrupted_uncorrected": false,
+      "primary_downstream_beats_mean_matched_random": false,
+      "primary_top_k_beats_exact_matched_random": true
+    },
+    "test": {
+      "eligible_nuclei": 15494,
+      "patient_group_count": 25
+    }
+  },
   "diagnostic_system": false,
   "external_validation": {
     "claim_boundary": {
@@ -17,6 +94,7 @@
         0.21362402839313893
       ],
       "average_precision": 0.07348905384277785,
+      "downstream_success_conditions_met": false,
       "guided_minus_uncorrected_macro_f1": -0.014633352536513322,
       "guided_minus_uncorrected_macro_f1_interval_95": [
         -0.026683314580239315,
@@ -32,75 +110,108 @@
       ],
       "ranking_success_conditions_met": false,
       "sample_count": 811,
-      "subset": "unbiased_control",
-      "downstream_success_conditions_met": false
+      "subset": "unbiased_control"
     },
     "reference_interpretation": "natural NP-label disagreement relative to inferred pathologist consensus; not guaranteed biological truth",
+    "source": {
+      "path": "artifacts/nucls_external_validation/unbiased-v1/results.json",
+      "sha256": "a931100a57e8d4b2a34a0216f047de8aa9d21c7275bc1beafd3b361fd955e9f6",
+      "size_bytes": 19653
+    },
     "study_id": "nucls_natural_label_external_validation_v1"
   },
-  "controlled_external_benchmark": {
-    "all_success_conditions_met": false,
-    "analysis_disposition": "prospectively_frozen_controlled_external_benchmark",
+  "external_validation_completed": true,
+  "natural_data_action": {
+    "action": "retain_uncorrected",
+    "reason": "official corrected and uncorrected single-rater releases are distinct FOV quality tiers and the raw database preserves no paired pre/post class label per nucleus",
+    "source": {
+      "path": "artifacts/nucls_supervised_qc_feasibility/results.json",
+      "sha256": "e95dd1416ad2be08126aa710a4d00ff999a4cb25936fcf1f9fc1f71f62d36229",
+      "size_bytes": 2949
+    },
+    "status": "unavailable",
+    "study_id": "nucls_supervised_qc_prospective_v1"
+  },
+  "new_source_confirmation": {
+    "all_success_conditions_met": true,
+    "analysis_disposition": "prospectively_frozen_new_source_controlled_confirmation",
     "claim_boundary": {
-      "clinical_or_operational_utility_proven": false,
-      "natural_pathology_error_detection_proven": false,
-      "pathologist_error_proven": false,
-      "source_annotations_modified": false
+      "automatic_annotation_change_permitted": false,
+      "clinical_utility_proven": false,
+      "controlled_noise_transfer_if_positive": true,
+      "natural_error_detection_proven": false,
+      "pathologist_error_detection_proven": false
     },
-    "dataset": "MoNuSAC2020",
-    "decision": "not_supported",
-    "development": {
-      "controlled_corruption_count": 2961,
-      "controlled_corruption_rate": 0.1,
-      "controlled_corruption_seed": 26082080,
-      "eligible_nuclei": 29610,
-      "patient_group_count": 44
-    },
-    "evidence": {
-      "artifact_manifest_sha256": "e4b1c0c327bba39f98677fc5e6f742f4158c77d0b0ba660ee29f5378b7510e7b",
-      "numeric_evidence_sha256": "bda87a00b79db4962c71177a2dd3dea0c4c65b8b2d7299c577fd2ce4fdc1e8ec",
-      "results_sha256": "b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4",
-      "source_inventory_sha256": "2b84809ea064552c8d011e17c32b86c6a47e0870f7d3801ef9c15ba1eeb87b0d",
-      "verifier": "scripts/verify_monusac_external_validation.py"
-    },
-    "primary_downstream": {
-      "corrupted_uncorrected_macro_f1": 0.5038352361344909,
-      "minus_corrupted_uncorrected_interval_95": [
-        -0.001505873468356683,
-        0.012832750726675505
+    "dataset": "PUMA",
+    "decision": "controlled_noise_transfer_supported",
+    "downstream": {
+      "candidate_macro_f1": 0.6463102793504962,
+      "mean_matched_random_macro_f1": 0.6382432313302706,
+      "minus_matched_random": 0.008067048020225648,
+      "minus_matched_random_interval_95": [
+        0.0040931053452727805,
+        0.011946725717818258
       ],
-      "minus_corrupted_uncorrected_macro_f1": 0.00552561448676292,
-      "minus_mean_matched_random_interval_95": [
-        -0.0086920112069291,
-        0.008485812521403327
+      "minus_uncorrected": 0.006426160085933802,
+      "minus_uncorrected_interval_95": [
+        0.003657212432103269,
+        0.009365455935978527
       ],
-      "minus_mean_matched_random_macro_f1": 0.000030946417352573086,
-      "neighbour_review_macro_f1": 0.5093608506212538
+      "uncorrected_macro_f1": 0.6398841192645623
     },
-    "primary_ranking": {
-      "average_precision": 0.6581415388588143,
-      "injected_found": 1035,
-      "precision_at_5_percent": 0.6988521269412559,
-      "precision_minus_matched_random": 0.1428426738690075,
-      "precision_minus_matched_random_interval_95": [
-        0.0991810700012709,
-        0.18849133691115186
+    "final_case_groups": 62,
+    "final_nuclei": 30397,
+    "retrieval": {
+      "candidate_precision": 0.5377386634844868,
+      "difference": 0.3233591885441528,
+      "interval_95": [
+        0.2592505925988822,
+        0.3849444213529693
       ],
-      "reviewed_count": 1481
+      "mean_matched_random_precision": 0.2143794749403341
     },
-    "study_id": "monusac_current_aanca_controlled_external_v1",
+    "sources": {
+      "results": {
+        "path": "artifacts/puma_new_data_confirmation/results.json",
+        "sha256": "e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92",
+        "size_bytes": 42958
+      },
+      "verification": {
+        "path": "artifacts/puma_new_data_confirmation/verification.json",
+        "sha256": "2f4b6d6c64d8dfa493a89be0111ca8752257dabce808d4d9fa35933cdd9c5d68",
+        "size_bytes": 1268
+      }
+    },
+    "study_id": "puma_new_data_confirmation_v1",
     "success_conditions": {
-      "important_class_recall_non_degradation": false,
-      "primary_downstream_beats_corrupted_uncorrected": false,
-      "primary_downstream_beats_mean_matched_random": false,
-      "primary_top_k_beats_exact_matched_random": true
+      "all_four_seed_directions_positive_against_both_controls": true,
+      "all_hash_group_split_and_final_fold_guards_passed": true,
+      "all_required_models_converged": true,
+      "downstream_macro_f1_lower_bound_gt_matched_random": true,
+      "downstream_macro_f1_lower_bound_gt_unchanged": true,
+      "every_primary_class_recall_lower_bound_gte_minus_0_01": true,
+      "retrieval_precision_lower_bound_gt_matched_random": true
     },
-    "untouched_final_test": {
-      "eligible_nuclei": 15494,
-      "patient_group_count": 25
+    "verification": {
+      "all_44_models_converged": true,
+      "all_seven_frozen_success_gates_passed": true,
+      "source_reference_labels_unchanged": true,
+      "verified": true
     }
   },
-  "external_validation_completed": true,
+  "next_phase": {
+    "natural_auto_change_allowed": false,
+    "promotion_rule": "promote only if ranking, downstream confidence intervals, class safety and prospective workflow utility all pass",
+    "required_gates": [
+      "blinded multi-rater natural-case reference with ambiguity and abstention",
+      "nested group-safe measured-utility queue development",
+      "one policy frozen before any new confirmation outcomes",
+      "one-shot untouched patient or WSI external confirmation",
+      "prospective multi-site AANCA-versus-control workflow evaluation"
+    ],
+    "stage": "INITIALISED",
+    "working_name": "AANCA v2 research phase"
+  },
   "pannuke_qc": {
     "cross_class_overlap_patch_count": 575,
     "cross_class_overlap_pixel_count": 4318,
@@ -828,12 +939,71 @@
     "stage_attestation_verification_sha256": "e19f17b14a375e8e048e1d2fc3060c19831e4259c8311831d88f75753024c768",
     "statistics_sha256": "c3685fe9863fd73b1298f0558212cb5267b07c3ce6e4e4f37018dec55c115ac0"
   },
-  "schema_version": 2,
-  "scientific_status": "PRIMARY_STUDY_COMPLETE",
+  "primary_study_status": "PRIMARY_STUDY_COMPLETE",
+  "realism_stress": {
+    "all_class_safeguards_passed_count": 1,
+    "all_scenarios_passed": false,
+    "candidate_changed": false,
+    "claim_boundary": {
+      "automatic_annotation_change_permitted": false,
+      "clinical_utility_proven": false,
+      "independent_confirmation": false,
+      "natural_error_detection_proven": false,
+      "pathologist_error_detection_proven": false
+    },
+    "disposition": "post_confirmation_exploratory_stress_only",
+    "positive_aggregate_lower_bound_count": 9,
+    "scenario_count": 9,
+    "source": {
+      "path": "artifacts/puma_realism_stress/results.json",
+      "sha256": "0091c14075e7304e0a6effef5a398c32c692f40aaefe7ee7d0b126a101cf7892",
+      "size_bytes": 45553
+    },
+    "study_id": "puma_realism_stress_v1"
+  },
+  "schema_version": 3,
+  "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
-    "primary_run": "C:\\Users\\NATAN\\Documents\\AANCA\\artifacts\\runs\\20260727T133947.089370Z_pannuke_primary_orphan_recovery",
-    "qc_bundle": "C:\\Users\\NATAN\\Documents\\AANCA\\reports\\pannuke_qc",
+    "primary_run": "artifacts/runs/20260727T133947.089370Z_pannuke_primary_orphan_recovery",
+    "qc_bundle": "reports/pannuke_qc",
     "qc_bundle_manifest_sha256": "0b188ecc586ed772b29845e15e169fb492ed8d2ad0f5b1a6643531ccee10857f",
-    "qc_overlay_sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a"
+    "qc_overlay_sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a",
+    "released_evidence": {
+      "monusac_external": {
+        "path": "artifacts/monusac_external_validation/results.json",
+        "sha256": "b2724e3e0baedcd0f1eb0fc7dfae127bf3789b03ac626d2701477ff4bae8e7d4",
+        "size_bytes": 33249
+      },
+      "nucls_external": {
+        "path": "artifacts/nucls_external_validation/unbiased-v1/results.json",
+        "sha256": "a931100a57e8d4b2a34a0216f047de8aa9d21c7275bc1beafd3b361fd955e9f6",
+        "size_bytes": 19653
+      },
+      "nucls_qc_feasibility": {
+        "path": "artifacts/nucls_supervised_qc_feasibility/results.json",
+        "sha256": "e95dd1416ad2be08126aa710a4d00ff999a4cb25936fcf1f9fc1f71f62d36229",
+        "size_bytes": 2949
+      },
+      "puma_confirmation": {
+        "path": "artifacts/puma_new_data_confirmation/results.json",
+        "sha256": "e547d77a2ae5bffdaed9f64f83c369292fe11cd2e8a305d02fc3d2271131dd92",
+        "size_bytes": 42958
+      },
+      "puma_label_sensitivity": {
+        "path": "artifacts/puma_audit_time_label_sensitivity/results.json",
+        "sha256": "8f524b236995a495048a0955ebf930e14e732a1214d3856d3711571af13fd5cd",
+        "size_bytes": 9944
+      },
+      "puma_realism_stress": {
+        "path": "artifacts/puma_realism_stress/results.json",
+        "sha256": "0091c14075e7304e0a6effef5a398c32c692f40aaefe7ee7d0b126a101cf7892",
+        "size_bytes": 45553
+      },
+      "puma_verification": {
+        "path": "artifacts/puma_new_data_confirmation/verification.json",
+        "sha256": "2f4b6d6c64d8dfa493a89be0111ca8752257dabce808d4d9fa35933cdd9c5d68",
+        "size_bytes": 1268
+      }
+    }
   }
 }

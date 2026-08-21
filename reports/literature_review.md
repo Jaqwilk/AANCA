@@ -16,6 +16,17 @@ The closest prior work divides into four groups. Confident Learning and Cleanlab
 
 The original PanNuke conference chapter reports a semi-automatically constructed pan-cancer nucleus dataset and describes 455 visual fields, 216.4K labelled nuclei, 19 tissue types, and expert validation ([Gamper et al., 2019](https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2), DOI `10.1007/978-3-030-23937-4_2`). The later extension preprint describes approximately 200K nuclei in five positive classes and, in the full text, reports 481 visual fields and 189,744 exhaustively annotated nuclei ([Gamper et al., 2020](https://arxiv.org/abs/2003.10778), arXiv `2003.10778`). These figures refer to different stages/descriptions and should not be collapsed into one supposedly definitive release count.
 
+### Current external-source addendum — PUMA
+
+The later PUMA source used by AANCA is documented by Schuiveling et al. in
+GigaScience ([2025](https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giaf011/8024182),
+DOI `10.1093/gigascience/giaf011`). The paper describes melanoma ROIs with nucleus
+and tissue annotations and the official challenge benchmark; the project additionally
+binds the exact acquired archives and licence authority in its frozen PUMA protocol.
+PUMA provides final expert-checked annotations, not stable paired natural pre/post
+review decisions, so it is suitable for controlled transfer but not proof of natural
+pathologist-error detection.
+
 The archived official [Tissue Image Analytics PanNuke metrics repository](https://github.com/TissueImageAnalytics/PanNuke-metrics) documents the mask shape as `N × 256 × 256 × C` and lists positive-class indices 0–4 as neoplastic, inflammatory, connective tissue, dead, and non-neoplastic epithelial. This is strong implementation evidence, but the project should still read the actual downloaded arrays, inspect whether and how background is represented, verify the fold files, and save hashes before freezing any loader assumption. The old [University of Warwick PanNuke page](https://warwick.ac.uk/fac/sci/dcs/research/tia/data/pannuke/) now points generally to Tissue Image Analytics and does not expose a clearly current download route in the page inspected on the search date.
 
 Consequences for this project:

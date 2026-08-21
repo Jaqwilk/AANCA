@@ -18,7 +18,7 @@ import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -350,16 +350,20 @@ def prepare_nucls_subset(
         if image_path is None:
             exclude("missing_exact_np_rgb_image")
             continue
-        coordinates = np.asarray([row.xmin, row.ymin, row.xmax, row.ymax], dtype=np.float64)
-        if not np.isfinite(coordinates).all() or row.xmax <= row.xmin or row.ymax <= row.ymin:
+        xmin = float(cast(Any, row.xmin))
+        ymin = float(cast(Any, row.ymin))
+        xmax = float(cast(Any, row.xmax))
+        ymax = float(cast(Any, row.ymax))
+        coordinates = np.asarray([xmin, ymin, xmax, ymax], dtype=np.float64)
+        if not np.isfinite(coordinates).all() or xmax <= xmin or ymax <= ymin:
             exclude("invalid_np_anchor_box")
             continue
         if image_path not in image_cache:
             with Image.open(image_path) as opened:
                 image_cache[image_path] = np.asarray(opened.convert("RGB"), dtype=np.uint8)
         image = image_cache[image_path]
-        centre_x = math.floor((float(row.xmin) + float(row.xmax)) / 2.0)
-        centre_y = math.floor((float(row.ymin) + float(row.ymax)) / 2.0)
+        centre_x = math.floor((xmin + xmax) / 2.0)
+        centre_y = math.floor((ymin + ymax) / 2.0)
         if not (0 <= centre_x < image.shape[1] and 0 <= centre_y < image.shape[0]):
             exclude("np_anchor_centre_outside_rgb")
             continue
@@ -380,11 +384,13 @@ def prepare_nucls_subset(
                 "reference_label": int(reference_code),
                 "reference_label_name": reference_name,
                 "natural_disagreement": bool(observed_code != reference_code),
-                "xmin": float(row.xmin),
-                "ymin": float(row.ymin),
-                "xmax": float(row.xmax),
-                "ymax": float(row.ymax),
-                "np_contour_file": Path(row.contour_file).relative_to(np_root).as_posix(),
+                "xmin": xmin,
+                "ymin": ymin,
+                "xmax": xmax,
+                "ymax": ymax,
+                "np_contour_file": Path(str(cast(Any, row.contour_file)))
+                .relative_to(np_root)
+                .as_posix(),
                 "np_rgb_file": image_path.relative_to(np_root).as_posix(),
                 "p_truth_master_file": master_path.relative_to(p_root).as_posix(),
             }
@@ -526,7 +532,7 @@ def _nucls_audit_risk(
     split_seed: int,
     neighbour_k: int = 7,
     neighbour_metric: str = "cosine",
-    hybrid_weights: tuple[float, float] = (0.5, 0.5),
+    hybrid_weights: Sequence[float] = (0.5, 0.5),
 ) -> GroupSafeAuditScoreResult:
     """Recreate exact fold provenance and build one group-safe NuCLS risk vector."""
 
@@ -915,7 +921,7 @@ def _downstream_validation(
             review_record["risk_strategy"] = inner_score.as_dict()
         review_counts.append(review_record)
 
-    arrays_to_check = [
+    arrays_to_check: list[NDArray[np.generic]] = [
         uncorrected_probabilities,
         guided_probabilities,
         reference_probabilities,
@@ -983,7 +989,7 @@ def _downstream_validation(
         guided_random_interval.interval_95[0] > 0.0
         and guided_uncorrected_interval.interval_95[0] > 0.0
     )
-    result = {
+    result: dict[str, Any] = {
         "primary_metric": "macro_f1",
         "uncorrected_observed": asdict(uncorrected_metrics),
         "audit_guided_review": asdict(guided_metrics),
@@ -1008,7 +1014,7 @@ def _downstream_validation(
             else "does not establish retrospective downstream utility"
         ),
     }
-    arrays = {
+    arrays: dict[str, NDArray[np.generic]] = {
         "downstream_uncorrected_probabilities": uncorrected_probabilities,
         "downstream_guided_probabilities": guided_probabilities,
         "downstream_reference_ceiling_probabilities": reference_probabilities,

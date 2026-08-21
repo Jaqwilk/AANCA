@@ -252,6 +252,7 @@ def evaluate_multicriteria_retraining_guard(
         for label in selected_classes
     }
 
+    intervals: dict[int, tuple[float, float] | None]
     if len(unique_groups) < 2:
         intervals = {label: None for label in selected_classes}
         valid_iterations = {label: 0 for label in selected_classes}
@@ -290,12 +291,16 @@ def evaluate_multicriteria_retraining_guard(
 
     independent = evidence_role == INDEPENDENT_GROUP_VALIDATION
     minimum_valid_iterations = int(np.ceil(n_iterations * minimum_valid_iteration_fraction))
-    class_pass = independent and all(
-        intervals[label] is not None
-        and intervals[label][0] >= minimum_per_class_recall_effect
-        and valid_iterations[label] >= minimum_valid_iterations
-        for label in selected_classes
-    )
+
+    def class_interval_passes(label: int) -> bool:
+        interval = intervals[label]
+        return (
+            interval is not None
+            and interval[0] >= minimum_per_class_recall_effect
+            and valid_iterations[label] >= minimum_valid_iterations
+        )
+
+    class_pass = independent and all(class_interval_passes(label) for label in selected_classes)
     apply_candidate = macro.apply_candidate and class_pass
     if not independent:
         reason = "evidence is not independent group-held-out validation; guard failed closed"
