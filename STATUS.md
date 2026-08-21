@@ -814,3 +814,20 @@ Final gates:
 The noncanonical 3,402,366-byte pre-polish rollback and its now-empty quarantine
 root were deliberately removed after these checks. They are not recoverable; the
 verified current package and all authoritative evidence remain intact.
+
+## Publication record — 2026-08-21
+
+- release-content commit
+  `b3d6eba64dd3b9ae70fa01cde11777fdd844dedc` was pushed to GitHub `main` and
+  confirmed by remote ref readback;
+- the five-file package was deployed in replace mode to
+  `mediumaquamarine-wombat-125861.hostingersite.com` after a remote backup was
+  created with ID `20260821-153206`;
+- the deployed page, `evidence.json` and all declared runtime assets returned HTTP
+  200;
+- direct SFTP readback matched the local SHA-256 for all five source files;
+- Hostinger `hcdn` recompresses the served PNG representation, while the source PNG
+  stored in `public_html` remains byte-identical to the manifest-bound local file;
+- production Playwright readback on desktop and iPhone 15 found no horizontal
+  overflow, hidden reveal, broken image, console error or warning. The current
+  status, AANCA v2 plan and complete findings section were present.
