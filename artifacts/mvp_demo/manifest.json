@@ -1,6 +1,4 @@
 {
-  "schema_version": 3,
-  "policy": "aanca_presentation_current_evidence_readback_v3",
   "files": [
     {
       "path": "README.md",
@@ -23,5 +21,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "454061b520780ab1a083b1429b410a1b57452919f57184a91b22af43d27b2327"
+  "manifest_root_sha256": "454061b520780ab1a083b1429b410a1b57452919f57184a91b22af43d27b2327",
+  "policy": "aanca_presentation_current_evidence_readback_v3",
+  "schema_version": 3
 }

@@ -960,7 +960,7 @@ Final local evidence:
   benchmark-icon assets;
 - standalone launcher verification: valid five-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `d112c3953401d319822711dc933f7578d364964c3f3a6da1118086d7fb95f8b6`;
+  `454061b520780ab1a083b1429b410a1b57452919f57184a91b22af43d27b2327`;
 - final Playwright desktop and 390 px mobile readback: no horizontal overflow,
   console error or warning; all five benchmark icons and the static Method SVG
   rendered, lazy images loaded after traversal, every reveal became visible, and the
@@ -969,7 +969,7 @@ Final local evidence:
 Hostinger publication:
 
 - connectivity and the local five-file seal were verified before upload;
-- the preceding live release was backed up under ID `20260821-215253`;
+- the preceding live release was backed up under ID `20260821-215505`;
 - the package was deployed in replace mode to
   `mediumaquamarine-wombat-125861.hostingersite.com`;
 - the page, evidence and external animation assets returned HTTP 200;
