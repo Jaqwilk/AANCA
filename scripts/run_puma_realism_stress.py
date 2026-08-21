@@ -144,7 +144,7 @@ def _render_report(result: dict[str, Any]) -> str:
         "",
         (
             "This is exploratory post-confirmation evidence. The frozen candidate and its "
-            "prospective PUMA result were not changed."
+            "frozen PUMA result were not changed."
         ),
         "",
         "| Scenario | AANCA - unchanged macro-F1 (95% CI) | AANCA - matched random | Retrieval advantage | Gates | Failed guard |",

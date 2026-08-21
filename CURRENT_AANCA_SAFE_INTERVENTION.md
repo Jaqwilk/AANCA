@@ -52,13 +52,14 @@ but remains inactive on natural data until the expert-review protocol succeeds.
 
 The candidate was frozen before the official PUMA archives were acquired or any
 PUMA score was calculated. On 144 development and 62 final ROI/case groups, all
-seven prospectively frozen controlled-noise gates passed. The 5% AANCA queue had
+seven registered controlled-noise gates passed. The 5% AANCA queue had
 precision `0.537739` versus `0.214379` for exact matched random. On untouched final
 groups, `flag_exclude` improved macro F1 by `+0.006426` over unchanged corrupted
 training (95% whole-group interval `[+0.003657, +0.009365]`) and by `+0.008067`
 over exact matched-random exclusion (`[+0.004093, +0.011947]`). Every seed direction
 was positive, all primary class-recall lower bounds stayed above `-0.01`, all 44
-fits converged and the independent verifier passed.
+fits converged and the scoped PUMA evidence-readback verifier passed. That verifier
+checks saved predictions and decisions; it is not a second image-to-result retraining.
 
 This supports controlled-noise transfer on a genuinely new histopathology source.
 It does not activate natural-data exclusion because PUMA provides final

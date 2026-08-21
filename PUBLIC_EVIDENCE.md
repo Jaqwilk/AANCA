@@ -107,7 +107,7 @@ made an error.
 
 The controlled MoNuSAC authority is
 [`artifacts/monusac_external_validation/results.json`](artifacts/monusac_external_validation/results.json)
-with its independent arrays and verifier. Run:
+with its released numeric arrays and independent recalculation script. Run:
 
 ```text
 uv run python scripts/verify_monusac_external_validation.py
@@ -119,8 +119,8 @@ did not. The overall registered decision is `not_supported` and the action is
 
 The frozen PUMA new-source confirmation is rooted at
 [`artifacts/puma_new_data_confirmation/results.json`](artifacts/puma_new_data_confirmation/results.json).
-The three large numeric archives are Git LFS objects because the independent verifier
-uses their full arrays. After `git lfs pull`, run:
+The three large numeric archives are Git LFS objects because the evidence-readback
+script uses their full arrays. After `git lfs pull`, run:
 
 ```text
 uv run python scripts/verify_aanca_selected_candidate.py
@@ -128,11 +128,19 @@ uv run python scripts/verify_puma_new_data_confirmation.py
 uv run python scripts/verify_nucls_supervised_qc_feasibility.py
 ```
 
-The PUMA verifier independently rebuilds the official manifest and confirms the
-retrieval, downstream, group-bootstrap, class-safety, source-integrity and 44 model
-convergence checks. All seven frozen PUMA gates passed. The related stress and
-observed-label sensitivity authorities are tracked under `artifacts/`; they preserve
-their explicitly exploratory post-confirmation status.
+The PUMA verifier rebuilds the official manifest and confirms the retrieval,
+downstream, group-bootstrap, class-safety, source-integrity and 44 recorded model
+convergence checks. It imports maintained PUMA helpers and reads saved predictions;
+it does not independently retrain 44 models from source images. All seven frozen
+PUMA gates passed. The related stress and observed-label sensitivity authorities are
+tracked under `artifacts/`; they preserve their explicitly exploratory
+post-confirmation status.
+
+The PUMA protocol, configuration and result first entered public Git history
+together in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Local authorities
+record the intended freeze-before-metrics sequence, but that commit is not an
+independent pre-outcome timestamp. This limits the chronology claim without changing
+the saved controlled result.
 
 PUMA supports controlled-noise transfer only. It does not contain the paired natural
 pre/post expert outcomes required for a pathologist-error or real-workflow claim, and

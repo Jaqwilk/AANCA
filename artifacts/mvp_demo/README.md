@@ -28,7 +28,8 @@ With the project environment installed, `uv run histo-audit demo serve` and
 - External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
   claims were not supported; MoNuSAC controlled retrieval passed but downstream and
   class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
-  prospective gates.
+  registered gates. Its protocol and result entered public history together, so the
+  public repository does not independently prove the pre-outcome timing.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
@@ -62,7 +63,7 @@ policy; one-shot untouched patient/WSI confirmation; and a prospective multi-sit
 AANCA-versus-control workflow study. Promotion requires ranking, downstream
 confidence intervals, every-class safety and workflow utility to pass together.
 
-Source code, frozen protocols, configs, independent verifiers, evidence and the
+Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
 Author: Natan Smogór. Updated: 21 August 2026.

@@ -26,7 +26,9 @@ and reused, while any changed, partial or unexpected artifact fails closed.
 
 The `Scientific software` GitHub Actions workflow first verifies the sealed static
 package, then executes lint, formatting, the complete test suite and this synthetic
-workflow on both Ubuntu and Windows. Tests that exercise Windows-native handle
+workflow on both Ubuntu and Windows. Checkout materialises the tracked Git LFS
+objects before package verification and tests; the large PUMA archives must therefore
+be real NPZ data rather than pointer text. Tests that exercise Windows-native handle
 custody are explicitly skipped on non-Windows systems rather than failing during
 test collection.
 
@@ -68,10 +70,10 @@ replication of the entire experiment from images. PanNuke images and masks are n
 redistributed. Fold checkpoints were not retained in the accepted run, so model
 retraining still requires a lawful PanNuke copy and the frozen code/configuration.
 
-## Independently verifying later evidence
+## Verifying later saved evidence
 
 The repository retains compact external authorities and the released arrays required
-by their independent verifiers. Run them in the locked project environment:
+by their scoped verification scripts. Run them in the locked project environment:
 
 ```text
 uv run python scripts/verify_nucls_external_validation.py --json
@@ -81,12 +83,16 @@ uv run python scripts/verify_puma_new_data_confirmation.py
 uv run python scripts/verify_nucls_supervised_qc_feasibility.py
 ```
 
-The NuCLS and MoNuSAC executions did not support their complete frozen claims. The
-frozen PUMA candidate passed all seven new-source controlled-noise gates and its
-independent verifier rebuilt the official manifest, metrics, bootstrap and all 44
-convergence checks. Large PUMA arrays are tracked through Git LFS. These checks prove
-consistency of the released evidence; they do not create natural labels or clinical
-validation.
+The NuCLS and MoNuSAC executions did not support their complete frozen claims. Their
+verification scripts recalculate the released numeric evidence without importing
+the analysis package. The frozen PUMA candidate passed all seven new-source
+controlled-noise gates. Its verifier rebuilds the official manifest, checks group and
+neighbour exclusions, and recomputes saved-evidence metrics, bootstrap decisions and
+the 44 recorded convergence flags. It imports maintained PUMA helpers and consumes
+saved predictions; it does **not** independently retrain those 44 models from source
+images. Large PUMA arrays are tracked through Git LFS. These checks prove consistency
+of the released evidence within their stated scope; they do not constitute a second
+image-to-result replication, create natural labels or establish clinical validation.
 
 ## Public-history disclosure
 
@@ -97,6 +103,13 @@ commit is dated 19 August 2026. The July manifests and hashes preserve the ident
 and ordering of the local files that were frozen, but the later public history is
 not an independent timestamping service and cannot prove that outcomes were unseen.
 The accepted analysis is consequently retained as `amended_or_exploratory`.
+
+The PUMA protocol, configuration and result similarly first appeared together in
+public commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Local authorities record
+the intended freeze-before-metrics sequence, but the public Git history does not
+independently prove it. PUMA is therefore described as a frozen controlled
+new-source confirmation with a public-timestamp limitation, not as independently
+time-stamped prospective preregistration.
 
 ## Methodological limits that require new evidence
 

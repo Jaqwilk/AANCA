@@ -1,6 +1,7 @@
 # AANCA
 
 <p align="center">
+  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Scientific software CI" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
   <img alt="Scientific stage: EXTERNAL_VALIDATION_COMPLETE" src="https://img.shields.io/badge/science-EXTERNAL__VALIDATION__COMPLETE-238636">
   <img alt="Presentation stage: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
   <img alt="Natural-data action: retain uncorrected" src="https://img.shields.io/badge/natural%20action-retain__uncorrected-B45309">
@@ -26,7 +27,7 @@ detects real pathologist errors or improves clinical work.
 | PanNuke primary controlled benchmark | `PRIMARY_STUDY_COMPLETE`; ranking evidence was positive, H4 downstream restoration was adverse | The accepted analysis is permanently `amended_or_exploratory` because outcomes were exposed during recovery |
 | NuCLS genuine multi-rater disagreement | `EXTERNAL_VALIDATION_COMPLETE`; frozen ranking gate failed and guided correction changed macro-F1 by `-0.014633`, 95% CI `[-0.026683, -0.002415]` | Natural-error and downstream-improvement claims were not supported |
 | MoNuSAC controlled external benchmark | Retrieval precision `0.698852` versus `0.556009` matched random; downstream difference `+0.005526`, 95% CI `[-0.001506, +0.012833]` | Retrieval passed, but downstream and class-safety gates failed; action remained `retain_uncorrected` |
-| PUMA frozen new-source controlled confirmation | All seven prospective gates passed on 62 held-out case/ROI groups | Supports controlled-noise transfer, not natural/pathologist-error detection |
+| PUMA frozen new-source controlled confirmation | All seven registered gates passed on 62 held-out case/ROI groups | Supports controlled-noise transfer, not natural/pathologist-error detection; public Git history does not independently timestamp the freeze before results |
 | PUMA post-confirmation realism stress | Positive aggregate downstream lower bounds in 9/9 scenarios; every class safeguard passed in only 1/9 | Useful robustness evidence and a binding class-safety warning; exploratory only |
 | PUMA observed-label fold sensitivity | All seven sensitivity gates passed with audit-time labels; candidate unchanged | Shows the controlled PUMA result did not depend on clean labels for fold allocation; not independent confirmation |
 | Prospective natural-case workflow | Not executed | `CONFIRMATORY_COMPLETE`, clinical utility and automatic natural-data intervention are not claimed |
@@ -43,9 +44,17 @@ The exact frozen PUMA endpoint was:
 
 These values are read from
 [`artifacts/puma_new_data_confirmation/results.json`](artifacts/puma_new_data_confirmation/results.json)
-and independently checked by
+and checked by the PUMA evidence-readback script
 [`scripts/verify_puma_new_data_confirmation.py`](scripts/verify_puma_new_data_confirmation.py).
 Source PUMA annotations remained unchanged.
+
+The PUMA protocol, configuration and result first entered public Git history together
+in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Internal authorities record
+the intended pre-outcome ordering, but GitHub is not independent proof of that timing.
+The PUMA verifier rebuilds the source manifest and recomputes saved-evidence metrics
+and decisions; it imports maintained project helpers and does not retrain all 44
+models from source images. These are explicit reproducibility limits, not missing
+positive results.
 
 ## What the project can claim
 
@@ -54,7 +63,7 @@ Current evidence supports the following statements:
 - group-safe AANCA queues retrieve injected class-label changes more efficiently
   than equal-budget matched random review;
 - the frozen selected candidate transferred to previously unused PUMA images under
-  the prospectively defined controlled-noise experiment;
+  the registered controlled-noise experiment;
 - in that PUMA experiment the intervention improved downstream macro-F1 over both
   unchanged labels and matched-random intervention with positive whole-group 95%
   intervals;
@@ -107,7 +116,9 @@ python scripts/present_demo.py --verify-only
 ~~~
 
 The article preserves the “What the study actually learned.” animation, while mobile
-and reduced-motion users receive the same content in ordinary document flow.
+and reduced-motion users receive the same content in ordinary document flow. Its
+conceptual WebGL figure has an inline static fallback, so disabling WebGL or blocking
+the Three.js module does not leave an empty panel.
 
 ## Install and run the portable workflow
 
@@ -160,8 +171,11 @@ uv run python scripts/verify_puma_new_data_confirmation.py
 uv run python scripts/verify_nucls_supervised_qc_feasibility.py
 ~~~
 
-The primary verifier uses the checksum-bound `primary-evidence-v1` release. External
-verifiers use the tracked compact result authorities and released numeric arrays.
+The primary verifier uses the checksum-bound `primary-evidence-v1` release and does
+not import the analysis package. NuCLS and MoNuSAC verifiers independently recalculate
+their saved numeric evidence. The PUMA script is deliberately described more narrowly
+as an evidence readback: it imports maintained AANCA helpers, consumes saved
+predictions and convergence flags, and does not independently retrain the 44 models.
 
 ### Re-execute from images
 
@@ -179,7 +193,7 @@ presentation role:
 - maintained Python source, tests, dependency lock and CI;
 - frozen protocols, configs, decisions and status records;
 - compact reports, manifests and result authorities;
-- Git LFS numeric arrays required by independent PUMA verification;
+- Git LFS numeric arrays required by the PUMA evidence readback;
 - the checksum-verifiable static presentation and one deliberate README image.
 
 It excludes raw/licensed datasets, local virtual environments, reusable embeddings,
@@ -204,7 +218,7 @@ AANCA/
 │   ├── representations/      # image, morphology and embedding features
 │   └── workflows/            # gates, preregistration and review workflow
 ├── configs/                  # frozen and portable study definitions
-├── scripts/                  # launchers, runners and independent verifiers
+├── scripts/                  # launchers, runners and scoped verification scripts
 ├── tests/                    # unit, integration, CLI and portability tests
 ├── artifacts/                # compact published evidence and static article
 ├── reports/                  # human-readable results and provenance
@@ -254,7 +268,7 @@ claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 | [`DECISIONS.md`](DECISIONS.md) | Binding scientific and engineering rationale |
 | [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md) | Frozen primary and confirmatory analysis definitions |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Primary evidence release and independent recalculation |
-| [`reports/aanca_expert_system_assessment_2026-08-21.md`](reports/aanca_expert_system_assessment_2026-08-21.md) | Expert assessment of the complete current system |
+| [`reports/aanca_internal_technical_assessment_2026-08-21.md`](reports/aanca_internal_technical_assessment_2026-08-21.md) | Internal evidence assessment; explicitly not external peer review |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Genuine multi-rater result and boundary |
 | [`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md) | Controlled MoNuSAC result |
 | [`reports/puma_new_data_confirmation_results.md`](reports/puma_new_data_confirmation_results.md) | Frozen PUMA confirmation |

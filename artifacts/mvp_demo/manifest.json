@@ -2,18 +2,18 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "bb4142e63310762dcae2d8913d34a02c6f2c299f0418599dd0809430af55a34c",
-      "size_bytes": 3151
+      "sha256": "29eaa3deab9353036a976e2b3a18d7ee1f639441860dd3d5b976bc58c5c574fe",
+      "size_bytes": 3293
     },
     {
       "path": "evidence.json",
-      "sha256": "929c65a3eb7ab818b6b371daa1519c9f6ed5aeb0ca28dc5481230e600b6ed1ba",
-      "size_bytes": 36368
+      "sha256": "16f0c33aab80b2fe00ffbeabf58dc02adcee1a0473803b714b92d6d056b7218a",
+      "size_bytes": 36674
     },
     {
       "path": "index.html",
-      "sha256": "d7c4b8ec7b859dae2c0685c5ec57c889503f287db8dbc7e80eef5e04a83f31e0",
-      "size_bytes": 166477
+      "sha256": "8129f08af8566c393a533a06257102b0d48f7ab5e590183aee5cdd177a2feda1",
+      "size_bytes": 170892
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -21,7 +21,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "edbba03401c50eb4a2e0fd2e5a43c744b0726af6c6a6aaed3e5ee3d5c0e29426",
+  "manifest_root_sha256": "2ead3c5febb7fe904294b045563013778ac91190f981a5dbdf1b17cd172ddada",
   "policy": "aanca_presentation_current_evidence_readback_v3",
   "schema_version": 3
 }

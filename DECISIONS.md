@@ -357,7 +357,7 @@ claims.
 
 ## D028 — Accept PUMA as positive controlled new-source confirmation
 
-Status: binding after prospectively frozen execution and independent verification
+Status: binding after workflow-frozen execution and scoped evidence readback
 
 Use the official PUMA public release under its recorded CC0 authority. Group by the
 complete source ROI/case identifier, stratify primary and metastatic melanoma, and
@@ -371,8 +371,15 @@ exact matched random by `+0.323359`, interval `[+0.259251, +0.384944]`.
 Downstream macro F1 exceeded unchanged corrupted training by `+0.006426`, interval
 `[+0.003657, +0.009365]`, and exact matched-random exclusion by `+0.008067`,
 interval `[+0.004093, +0.011947]`. All four seed directions, all primary class
-safeguards, all 44 fits and the source/split guards passed. The independent verifier
-recomputed the saved result.
+safeguards, all 44 fits and the source/split guards passed. The PUMA readback script
+recomputed the saved-evidence result.
+
+The protocol, configuration and result first appeared together in public commit
+`c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Local authorities record the
+intended freeze-before-metrics order, but the public Git history is not an independent
+pre-outcome timestamp. The PUMA readback imports maintained project helpers and does
+not independently retrain all 44 models from source images. These limits must travel
+with every public description of the PUMA result.
 
 Accept the claim `controlled_noise_transfer_supported` for this candidate and
 setting. Do not infer natural annotation errors, pathologist errors, clinical
@@ -417,7 +424,7 @@ metric may never override a failed class-safety bound.
 
 Status: binding after post-confirmation exploratory execution
 
-The prospective PUMA benchmark used pre-corruption reference labels only to
+The frozen PUMA benchmark used pre-corruption reference labels only to
 stratify development OOF groups. Although every fold remained group-safe and final
 groups were untouched, a natural audit does not possess that label. Freeze one
 post-confirmation sensitivity that rebuilds both OOF models and exact neighbour
@@ -454,8 +461,8 @@ small `mvp_demo_before_author_section/` rollback was removed after final package
 browser verification; no cleanup quarantine remains and the deleted material is not
 recoverable.
 
-Large PUMA numeric evidence remains public and independently verifiable but is stored
-with Git LFS. Consolidate only behaviorally equivalent helpers. Keep create-only
+Large PUMA numeric evidence remains public, checksum-verifiable and available for the
+scoped evidence readback, but is stored with Git LFS. Consolidate only behaviorally equivalent helpers. Keep create-only
 frozen-cache publication, confirmatory evidence publication and standalone verifier
 metrics independent where that separation is itself an integrity control. The full
 inventory and rollback location are recorded in
@@ -468,9 +475,10 @@ Status: accepted presentation decision; no scientific stage change
 The professor-facing demo is a long-form article, not a scroll-hijacked product page.
 Findings remain in normal document flow and receive only a subtle per-answer entrance
 animation; mobile, reduced-motion and script-free readers receive the complete static
-content. The optional hero WebGL figure and navigation chrome remain. No multi-screen
-empty scroll theatre is permitted. The pre-polish rollback was removed after the
-current generated package passed final verification.
+content. The hero is a typography-only masthead; the optional WebGL review-queue
+illustration sits in Method as a captioned figure. Navigation chrome remains. No
+multi-screen empty scroll theatre is permitted. The pre-polish rollback was removed
+after the current generated package passed final verification.
 
 ## D034 — Generate the public article from every current evidence authority
 
@@ -487,3 +495,31 @@ that `CONFIRMATORY_COMPLETE` is not reached. The natural-data action remains
 `retain_uncorrected`. Present the next work as the `INITIALISED` AANCA v2 research
 phase in `NEXT_PHASE.md`; this is a prospective evidence programme, not a retroactive
 upgrade of the current model or its claims.
+
+## D035 — Reserve independence claims for the operation actually performed
+
+Status: accepted
+
+Use **independent recalculation** only when a verifier does not import the analysis
+package and recomputes its stated numeric evidence, as in the primary, NuCLS and
+MoNuSAC scripts. Describe the PUMA script as a **scoped evidence readback**: it
+rebuilds the official manifest, checks group and neighbour exclusions, and
+recalculates decisions from saved predictions, but imports maintained PUMA helpers
+and does not rerun the 44 trainings from source images.
+
+Describe PUMA as a frozen controlled new-source confirmation. Do not call its public
+history independently time-stamped or publicly preregistered, because protocol and
+result entered GitHub together. This terminology correction does not alter any
+metric, artifact identity or controlled conclusion.
+
+## D036 — Fail visibly and accessibly at publication boundaries
+
+Status: implemented
+
+GitHub Actions must materialise Git LFS objects during checkout before any verifier
+or test reads the PUMA NPZ archives. A repository test guards the checkout contract.
+The optional WebGL Method figure must retain the same layout and caption when WebGL,
+Three.js or the rendering context is unavailable; an inline static schematic is the
+required fallback. The scientific article, evidence tables and “What the study
+actually learned” section remain ordinary document content and never depend on
+WebGL.

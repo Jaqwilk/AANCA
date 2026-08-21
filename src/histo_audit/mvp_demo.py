@@ -1340,10 +1340,6 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
       <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-21">21 August 2026</time></span></div>
     </div>
-    <div class="hero-figure hero-animate" aria-hidden="true">
-      <canvas id="hero-canvas"></canvas>
-      <p class="hero-figure-caption">Conceptual review-queue field · illustration, not benchmark data</p>
-    </div>
   </div>
 </section>
 
@@ -1382,6 +1378,29 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p>Those probabilities are converted into review-priority scores. The primary self-confidence score asks how little probability the model assigns to the observed label; complementary methods add likelihood, margin, ambiguity and fold-safe neighbourhood evidence. Higher scores mean earlier review, never automatic correction.</p>
       <p>Finally, guided and random review receive the same integer budget. The benchmark measures whether injected changes appear earlier in the guided queue and then asks a separate question: whether restoring only the reviewed injected changes improves a downstream classifier on the untouched final reference fold.</p>
     </div>
+    <figure class="method-queue-figure rail-figure reveal">
+      <div class="method-queue-stage" aria-hidden="true">
+        <svg id="hero-fallback" class="method-queue-fallback" viewBox="0 0 960 300" preserveAspectRatio="xMidYMid meet" focusable="false">
+          <defs>
+            <linearGradient id="fallback-flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7884df" stop-opacity=".08"/><stop offset=".55" stop-color="#8d98f4" stop-opacity=".72"/><stop offset="1" stop-color="#7884df" stop-opacity=".18"/></linearGradient>
+          </defs>
+          <rect class="fallback-panel" x="42" y="43" width="525" height="214" rx="10"/>
+          <rect class="fallback-panel" x="647" y="43" width="270" height="214" rx="10"/>
+          <text class="fallback-label" x="66" y="72">SOURCE PATCH</text>
+          <text class="fallback-label" x="671" y="72">REVIEW QUEUE</text>
+          <g class="fallback-nuclei">
+            <ellipse cx="115" cy="119" rx="22" ry="17"/><ellipse cx="184" cy="104" rx="17" ry="22"/><ellipse cx="250" cy="137" rx="25" ry="18"/><ellipse cx="328" cy="103" rx="19" ry="16"/><ellipse cx="405" cy="131" rx="23" ry="25"/><ellipse cx="493" cy="105" rx="18" ry="20"/>
+            <ellipse cx="132" cy="198" rx="18" ry="23"/><ellipse cx="211" cy="209" rx="25" ry="17"/><ellipse cx="300" cy="190" rx="17" ry="21"/><ellipse cx="380" cy="210" rx="24" ry="18"/><ellipse cx="474" cy="196" rx="20" ry="24"/>
+          </g>
+          <ellipse class="fallback-selected" cx="405" cy="131" rx="31" ry="33"/>
+          <path class="fallback-path" d="M438 131 C528 131 564 95 653 95"/>
+          <g class="fallback-queue"><rect x="674" y="87" width="205" height="30" rx="6"/><rect x="674" y="130" width="205" height="30" rx="6"/><rect x="674" y="173" width="205" height="30" rx="6"/></g>
+          <g class="fallback-ranks"><text x="687" y="107">01</text><text x="687" y="150">02</text><text x="687" y="193">03</text></g>
+        </svg>
+        <canvas id="hero-canvas"></canvas>
+      </div>
+      <figcaption>Figure. Conceptual review-queue field. Illustration only, not benchmark data; a static schematic remains available without WebGL.</figcaption>
+    </figure>
     <div class="journey-sticky"><div class="journey-grid">
       <div class="journey-visual">
         <svg viewBox="0 0 760 680" role="img" aria-labelledby="method-graphic-title method-graphic-desc">
@@ -1522,7 +1541,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
 
   <section class="section" id="external-validation">
     <div class="section-heading reveal"><h2>The same system transferred under controlled noise, but natural-case proof is still missing.</h2><p class="section-deck">Later evidence changes the overall assessment without rewriting the adverse PanNuke H4 result. Each study answers a different question and keeps its own frozen boundary.</p></div>
-    <div class="chapter-copy reveal"><p>NuCLS is the closest completed test of genuine multi-rater disagreement. Its five-patient result did not satisfy the frozen ranking gate and the guided intervention made downstream macro-F1 worse. MoNuSAC then showed strong controlled retrieval but no statistically supported downstream gain or complete class safety.</p><p>The unchanged selected AANCA candidate was next frozen before PUMA evaluation. On a previously unused histopathology source it passed every prospective retrieval, downstream, direction, convergence and class-safety gate under controlled corruption. That is meaningful evidence of controlled-noise transfer, but PUMA does not provide paired natural pre/post expert decisions and therefore cannot prove pathologist-error detection.</p></div>
+    <div class="chapter-copy reveal"><p>NuCLS is the closest completed test of genuine multi-rater disagreement. Its five-patient result did not satisfy the frozen ranking gate and the guided intervention made downstream macro-F1 worse. MoNuSAC then showed strong controlled retrieval but no statistically supported downstream gain or complete class safety.</p><p>The unchanged selected AANCA candidate was next frozen before PUMA evaluation. On a previously unused histopathology source it passed all seven registered retrieval, downstream, direction, convergence and class-safety gates under controlled corruption. That is meaningful evidence of controlled-noise transfer, but PUMA does not provide paired natural pre/post expert decisions and therefore cannot prove pathologist-error detection.</p><p><strong>Public-history limit.</strong> The PUMA protocol, configuration and result first appeared together in public commit <code>c5bd44193b2abd67bc7e7f1bd9384aa87435d500</code>. Internal authorities record the intended freeze-before-metrics ordering, but GitHub does not independently timestamp that sequence. The PUMA evidence-readback script rebuilds the manifest and recomputes decisions from saved arrays; it imports maintained project helpers and does not retrain all 44 models from source images.</p></div>
 __CURRENT_EVIDENCE__
   </section>
 
@@ -1546,7 +1565,7 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="interpretation">
     <div class="section-heading reveal"><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
-    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency, expert disagreement or biological truth. The positive PUMA result is an independent-source controlled transfer result, while the later stress analysis and observed-label sensitivity are exploratory because PUMA outcomes were already open.</p><p>Grouping strength differs by source: the primary PanNuke study guarantees source-patch separation, NuCLS uses patient groups, MoNuSAC uses patient groups and PUMA uses one ROI per case. These safeguards reduce leakage but do not transform a final expert reference label into guaranteed biological truth.</p><p>Natural and operational validity still require newly recruited blinded reviewers, ambiguity and abstention labels, a frozen policy evaluated on untouched patients or whole slides, and a prospective multi-site comparison of work with and without AANCA.</p></div>
+    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency, expert disagreement or biological truth. The positive PUMA result is a new-source controlled transfer result, while the later stress analysis and observed-label sensitivity are exploratory because PUMA outcomes were already open.</p><p>Grouping strength differs by source: the primary PanNuke study guarantees source-patch separation, NuCLS uses patient groups, MoNuSAC uses patient groups and PUMA uses one ROI per case. These safeguards reduce leakage but do not transform a final expert reference label into guaranteed biological truth.</p><p>Natural and operational validity still require newly recruited blinded reviewers, ambiguity and abstention labels, a frozen policy evaluated on untouched patients or whole slides, and a prospective multi-site comparison of work with and without AANCA.</p></div>
     <div class="figure-width reveal claim-grid">
       <article class="claim-card"><h3>Supported by current evidence</h3><ul><li>Group-safe rankings retrieve injected class-label changes more efficiently than matched random review.</li><li>The frozen current candidate transferred to new PUMA images and improved controlled-noise downstream macro-F1 with positive whole-group intervals.</li><li>Every displayed conclusion is read from checksum-bound machine-readable evidence.</li></ul></article>
       <article class="claim-card"><h3>Not established</h3><ul><li>That a naturally occurring annotation is wrong, that a pathologist made an error or that model disagreement is biological truth.</li><li>That the intervention is uniformly class-safe across realistic corruption patterns; only one of nine stress scenarios passed every class safeguard.</li><li>Prospective workflow benefit, multi-site generalisation, clinical utility or permission to alter natural source labels automatically.</li></ul></article>
@@ -1568,14 +1587,14 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="use">
     <div class="repo-shell">
-      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and the arrays required by independent verifiers. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, NuCLS and MoNuSAC scripts independently recalculate their stated saved evidence. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
           <div><span class="repo-path">github.com / Jaqwilk</span><span class="repo-title">AANCA</span></div>
           <a class="repo-link" href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">View repository ↗</a>
         </div>
-        <p class="repo-description">The repository contains the scientific specification, maintained source code, frozen study configs, independent verifiers, compact evidence and this checksum-verifiable presentation. Licensed raw datasets, reusable local embeddings and unretained historical checkpoints are deliberately excluded.</p>
+        <p class="repo-description">The repository contains the scientific specification, maintained source code, frozen study configs, scoped verification scripts, compact evidence and this checksum-verifiable presentation. Licensed raw datasets, reusable local embeddings and unretained historical checkpoints are deliberately excluded.</p>
         <div class="repo-tags"><span>Python 3.12</span><span>group-safe OOF</span><span>immutable evidence</span><span>research only</span></div>
       </article>
 
@@ -2067,13 +2086,38 @@ def _render_hypothesis_ledger(
 
 _MVP_THREE_SCRIPT = r"""
 const canvas = document.getElementById('hero-canvas');
+const fallback = document.getElementById('hero-fallback');
+const stage = canvas ? canvas.closest('.method-queue-stage') : null;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const disableCanvas = () => {
-  canvas.hidden = true;
-  canvas.dataset.renderer = 'unavailable';
-  canvas.dataset.animationState = 'unavailable';
+const disableCanvas = (reason = 'unavailable') => {
+  if (canvas) {
+    canvas.hidden = true;
+    canvas.dataset.renderer = 'unavailable';
+    canvas.dataset.animationState = 'unavailable';
+  }
+  if (fallback) fallback.hidden = false;
+  if (stage) {
+    stage.dataset.renderer = 'static-fallback';
+    stage.dataset.fallbackReason = reason;
+  }
+};
+const supportsWebGL = () => {
+  if (!window.WebGLRenderingContext) return false;
+  const probe = document.createElement('canvas');
+  try {
+    return Boolean(
+      probe.getContext('webgl2')
+      || probe.getContext('webgl')
+      || probe.getContext('experimental-webgl')
+    );
+  } catch (_error) {
+    return false;
+  }
 };
 
+if (!canvas || !fallback || !supportsWebGL()) {
+  disableCanvas('webgl-unavailable');
+} else {
 import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js').then(THREE => {
 try {
   const renderer = new THREE.WebGLRenderer({
@@ -2519,15 +2563,25 @@ try {
     }, {rootMargin: '160px 0px'});
     visibilityObserver.observe(canvas);
   }
+  canvas.addEventListener('webglcontextlost', event => {
+    event.preventDefault();
+    if (frameRequest) window.cancelAnimationFrame(frameRequest);
+    frameRequest = 0;
+    disableCanvas('webgl-context-lost');
+  }, {passive: false});
   document.addEventListener('visibilitychange', syncRenderLoop);
   if (reduced) window.addEventListener('resize', render, {passive: true});
+  render();
+  fallback.hidden = true;
+  stage.dataset.renderer = 'threejs-review-queue';
   syncRenderLoop();
   canvas.dataset.renderer = 'threejs-review-queue';
   canvas.dataset.story = 'immutable-source-ranked-review';
 } catch (_error) {
-  disableCanvas();
+  disableCanvas('renderer-unavailable');
 }
-}).catch(disableCanvas);
+}).catch(() => disableCanvas('module-unavailable'));
+}
 """
 
 
@@ -2676,13 +2730,6 @@ _MVP_SCRIPT = r"""
       ease: 'power2.out',
       delay: .08,
     });
-    if (document.querySelector('#hero-canvas')) {
-      gsapEngine.to('#hero-canvas', {
-        yPercent: 6,
-        ease: 'none',
-        scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true},
-      });
-    }
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
       const id = link.getAttribute('href').slice(1);
       const target = document.getElementById(id);
@@ -2756,7 +2803,8 @@ With the project environment installed, `uv run histo-audit demo serve` and
 - External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
   claims were not supported; MoNuSAC controlled retrieval passed but downstream and
   class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
-  prospective gates.
+  registered gates. Its protocol and result entered public history together, so the
+  public repository does not independently prove the pre-outcome timing.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
@@ -2790,7 +2838,7 @@ policy; one-shot untouched patient/WSI confirmation; and a prospective multi-sit
 AANCA-versus-control workflow study. Promotion requires ranking, downstream
 confidence intervals, every-class safety and workflow utility to pass together.
 
-Source code, frozen protocols, configs, independent verifiers, evidence and the
+Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
 Author: Natan Smogór. Updated: 21 August 2026.
@@ -2852,6 +2900,7 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
     sensitivity = evidence.get("audit_time_label_sensitivity")
     natural_action = evidence.get("natural_data_action")
     next_phase = evidence.get("next_phase")
+    publication_limits = evidence.get("publication_limits")
     external_scope_valid = (
         external_completed is True
         and isinstance(external, dict)
@@ -2933,6 +2982,15 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         and isinstance(next_phase.get("required_gates"), list)
         and len(next_phase["required_gates"]) == 5
     )
+    publication_limits_valid = (
+        isinstance(publication_limits, dict)
+        and publication_limits.get("puma_public_preoutcome_timestamp_available") is False
+        and publication_limits.get("puma_first_public_combined_commit")
+        == "c5bd44193b2abd67bc7e7f1bd9384aa87435d500"
+        and publication_limits.get("puma_verifier_retrains_models_from_images") is False
+        and publication_limits.get("puma_verifier_scope")
+        == "saved_evidence_readback_with_maintained_helpers"
+    )
     if (
         evidence.get("schema_version") != 3
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
@@ -2946,6 +3004,7 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         or not sensitivity_scope_valid
         or not natural_action_scope_valid
         or not next_phase_scope_valid
+        or not publication_limits_valid
         or not isinstance(primary, dict)
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"
@@ -3015,6 +3074,12 @@ def build_mvp_presentation(
         "realism_stress": release_evidence["realism_stress"],
         "audit_time_label_sensitivity": release_evidence["audit_time_label_sensitivity"],
         "natural_data_action": release_evidence["natural_data_action"],
+        "publication_limits": {
+            "puma_public_preoutcome_timestamp_available": False,
+            "puma_first_public_combined_commit": ("c5bd44193b2abd67bc7e7f1bd9384aa87435d500"),
+            "puma_verifier_retrains_models_from_images": False,
+            "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers",
+        },
         "next_phase": {
             "stage": "INITIALISED",
             "working_name": "AANCA v2 research phase",

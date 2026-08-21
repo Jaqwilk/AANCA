@@ -1,7 +1,9 @@
-# Expert assessment of the current AANCA system
+# Internal technical assessment of the current AANCA system
 
 **Assessment date:** 2026-08-21  
 **System:** the existing AANCA implementation, not a replacement or V2  
+**Review status:** project-maintainer evidence review; not external peer review,
+independent expert endorsement or clinical certification  
 **Decision:** scientifically credible research prototype; controlled new-source
 model benefit supported; natural-error and real-workflow benefit not yet established
 
@@ -20,7 +22,7 @@ The strongest justified statement is now:
 
 > The frozen AANCA candidate prioritised controlled label changes and produced a
 > small but statistically supported downstream macro-F1 improvement on a new
-> histopathology source, PUMA, while passing the prospectively frozen aggregate and
+> histopathology source, PUMA, while passing all registered aggregate and
 > class-safety gates of that study.
 
 The requested stronger statement is not yet justified:
@@ -35,19 +37,19 @@ labels, not paired labels before and after natural quality control. The official
 NuCLS single-rater assets were inspected specifically for such pairing, but they do
 not retain two class states for the same nucleus.
 
-## Expert scorecard
+## Evidence-status scorecard
 
-| Area | Assessment | Reason |
-| --- | ---: | --- |
-| Scientific design for a controlled annotation audit | 8.5/10 | Correct group separation, OOF scoring, explicit controls, immutable labels and conservative gates |
-| Reproducibility and engineering | 9/10 | Frozen configurations, hashes, independent verifier, convergence evidence, complete tests and fail-closed behaviour |
-| Controlled new-source evidence | 8/10 | All seven frozen PUMA gates passed on 62 held-out ROI/case groups, but the effect is modest and corruption remains synthetic |
-| Natural annotation-error evidence | 3/10 | NuCLS multi-rater evidence is real disagreement evidence, but the combined frozen success rule failed and downstream performance was adverse |
-| Prospective operational readiness | 2/10 | No blinded with/without-AANCA workflow, independent sites, qualified new reviewers or external-site operational test has run |
+| Area | Evidence status | Reason |
+| --- | --- | --- |
+| Scientific design for a controlled annotation audit | **Supported** | Correct group separation, OOF scoring, explicit controls, immutable labels and conservative gates |
+| Reproducibility and engineering | **Partially supported** | Configurations, hashes, saved-evidence recalculation, tests and fail-closed behaviour are public; a second image-to-result training execution is not published |
+| Controlled new-source evidence | **Supported with limitations** | All seven registered PUMA gates passed on 62 held-out ROI/case groups, but the effect is modest, corruption remains synthetic and the public commit history is not a pre-outcome timestamp |
+| Natural annotation-error evidence | **Not supported** | NuCLS contains genuine multi-rater disagreement, but the combined frozen success rule failed and downstream performance was adverse |
+| Prospective operational readiness | **Not evaluated** | No blinded with/without-AANCA workflow, independent sites, qualified new reviewers or external-site operational test has run |
 
-The low last two scores do not mean that the code is poor. They measure missing
-empirical authority: the project currently has much stronger controlled evidence
-than natural-workflow evidence.
+This is an internal evidence classification, not a grade. It separates properties
+that are directly inspectable from claims that still require independent people,
+new cases or a second execution environment.
 
 ## Evidence ladder
 
@@ -57,7 +59,7 @@ than natural-workflow evidence.
 | NuCLS multi-rater | Natural disagreement with inferred multi-rater reference | Frozen ranking rule not fully supported; guided-minus-unchanged macro-F1 `-0.014633`, 95% interval `[-0.026683, -0.002415]` | Honest negative natural-disagreement result; no error claim |
 | MoNuSAC frozen external | New images with controlled 10% corruption | Retrieval passed; downstream `+0.005526` interval crossed zero and class safety failed | Controlled retrieval transfer, not model improvement |
 | MoNuSAC bounded development | Adaptive search within 44 training patients | Selected candidate `+0.043090` vs unchanged and `+0.054399` vs matched random, both intervals positive | Candidate selection only; not independent confirmation |
-| PUMA prospective confirmation | Frozen candidate on a previously unused official melanoma source | All seven gates passed; details below | Controlled new-source downstream improvement |
+| PUMA frozen controlled confirmation | Frozen candidate on a previously unused official melanoma source | All seven registered gates passed; details below | Controlled new-source downstream improvement, with the public-timestamp limitation below |
 | PUMA audit-time-label sensitivity | Repeat with OOF allocation using only labels available at audit time | All seven sensitivity gates passed despite materially different folds | Original controlled result does not depend on clean labels for fold allocation |
 | PUMA realism stress | Clean, rare, directional, group-clustered and geometry-dependent controlled scenarios | Aggregate downstream intervals were positive in all nine; only one of nine passed every class-safety gate | Exploratory robustness plus a concrete class-safety warning |
 | NuCLS supervised-QC feasibility | Whether public data retain paired pre/post QC labels for identical nuclei | Unavailable: one class state per stable element; corrected and uncorrected releases are different FOV tiers | No natural pre/post conclusion |
@@ -90,13 +92,29 @@ seeds; final labels remained untouched.
 - all four seed directions were positive against both controls;
 - every class-recall lower bound remained above the frozen `-0.01` margin;
 - all 44 required fits converged;
-- the independent verifier passed every source, split, OOF, neighbour, comparator,
-  metric and bootstrap guard.
+- the PUMA evidence-readback verifier passed every source, split, OOF, neighbour,
+  comparator, metric and bootstrap guard available in the saved package.
 
-This is the first independent new-source result in the repository that supports both
+This is the first previously unused-source result in the repository that supports both
 retrieval and downstream controlled-noise transfer. The effect is real under the
 registered analysis but small in absolute macro-F1 terms. It is not a natural-label
 intervention result.
+
+### Public timing and verification scope
+
+The PUMA protocol, configuration and result first appeared together in public Git
+history in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. The retained local
+authorities record that the candidate and gates were frozen before PUMA metrics were
+calculated, but GitHub does not provide an independent pre-outcome timestamp for that
+ordering. The responsible description is therefore **frozen controlled
+confirmation**, not publicly time-stamped prospective preregistration.
+
+The PUMA verifier rebuilds the released manifest, checks group separation and exact
+neighbour exclusions, and recomputes metrics, controls and bootstrap decisions from
+saved arrays. It imports maintained AANCA helpers, consumes saved predictions and
+convergence flags, and does not independently retrain all 44 models from source
+images. This makes the result strongly auditable but is not a second independent
+image-to-result replication.
 
 The primary PUMA OOF fold plan was stratified using pre-corruption labels. That is
 valid inside a controlled benchmark but unavailable in a real audit. A separately

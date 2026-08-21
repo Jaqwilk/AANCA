@@ -1,4 +1,4 @@
-"""Run the prospectively frozen PUMA confirmation without tuning on its outcome."""
+"""Run the frozen PUMA confirmation without tuning on its outcome."""
 
 from __future__ import annotations
 

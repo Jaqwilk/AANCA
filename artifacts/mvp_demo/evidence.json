@@ -940,6 +940,12 @@
     "statistics_sha256": "c3685fe9863fd73b1298f0558212cb5267b07c3ce6e4e4f37018dec55c115ac0"
   },
   "primary_study_status": "PRIMARY_STUDY_COMPLETE",
+  "publication_limits": {
+    "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
+    "puma_public_preoutcome_timestamp_available": false,
+    "puma_verifier_retrains_models_from_images": false,
+    "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers"
+  },
   "realism_stress": {
     "all_class_safeguards_passed_count": 1,
     "all_scenarios_passed": false,

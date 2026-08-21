@@ -1,4 +1,4 @@
-"""Independently verify the frozen PUMA evidence arrays and reported decision."""
+"""Read back the frozen PUMA evidence arrays and reported decision."""
 
 from __future__ import annotations
 

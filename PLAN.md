@@ -266,7 +266,7 @@ supported, no natural-error or clinical status claimed
 - use 144 development ROI/case groups and keep 62 final groups unavailable to every
   candidate, score, queue and model decision;
 - retain source labels and use controlled corruption only in development;
-- independently verify official manifests, zero split overlap, OOF folds, neighbour
+- separately verify official manifests, zero split overlap, OOF folds, neighbour
   exclusion, exact controls, stored predictions, metrics and bootstrap gates.
 
 Executed result:
@@ -280,10 +280,16 @@ Executed result:
   interval `[+0.004093, +0.011947]`;
 - all seed directions, every primary class-recall safeguard, convergence and all
   source/split/hash gates passed;
-- the independent verifier accepted the evidence package;
+- the scoped PUMA evidence-readback verifier accepted the saved package; it does not
+  independently retrain the 44 models from source images;
 - because PUMA does not publish paired natural pre/post expert reviews, the result
   supports controlled transfer only and natural-data action remains
   `retain_uncorrected`.
+
+Public chronology limitation: the PUMA protocol, configuration and result first
+appeared together in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`.
+Local authorities record the intended freeze-before-metrics order, but public Git
+history does not independently timestamp it.
 
 The frozen protocol and result are
 [`AANCA_PUMA_NEW_DATA_PROTOCOL.md`](AANCA_PUMA_NEW_DATA_PROTOCOL.md) and

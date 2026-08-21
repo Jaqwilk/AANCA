@@ -569,6 +569,12 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert evidence["realism_stress"]["all_class_safeguards_passed_count"] == 1
     assert evidence["audit_time_label_sensitivity"]["all_sensitivity_gates_passed"] is True
     assert evidence["natural_data_action"]["action"] == "retain_uncorrected"
+    assert evidence["publication_limits"] == {
+        "puma_public_preoutcome_timestamp_available": False,
+        "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
+        "puma_verifier_retrains_models_from_images": False,
+        "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers",
+    }
     assert evidence["next_phase"]["stage"] == "INITIALISED"
     assert len(evidence["primary"]["comparisons"]) == 36
     assert evidence["primary"]["h2_subgroups"]["reported_count"] == 4
@@ -609,7 +615,15 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "CONFIRMATORY_COMPLETE" in html
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' in html
+    assert 'id="hero-fallback"' in html
     assert "#hero-canvas[hidden]" in html
+    assert ".method-queue-fallback[hidden]" in html
+    assert "static schematic remains available without WebGL" in html
+    assert "const supportsWebGL = () =>" in html
+    assert "stage.dataset.renderer = 'static-fallback'" in html
+    assert "disableCanvas('webgl-unavailable')" in html
+    assert "fallback.hidden = true" in html
+    assert "webgl-context-lost" in html
     assert ">Findings</a>" in html
     assert ">Reproduce</a>" in html
     assert "Source annotations stay fixed" not in html
@@ -646,7 +660,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" in html
     assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" in html
     assert ".learned-story {\n  height: auto !important; padding: 0 !important;" in html
-    assert "scrub: true" in html
+    assert "scrub: true" not in html
     assert "filter: 'blur(4px)'" not in html
     assert "Editorial surfaces: structure with rhythm and rules" not in html
     assert ".repo-card::before { display: none; }" in html
@@ -674,6 +688,11 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "The same system transferred under controlled noise" in html
     assert "PUMA frozen new-source controlled confirmation" in html
     assert "All seven frozen gates" in html
+    assert "passed all seven registered retrieval" in html
+    assert "Public-history limit" in html
+    assert "c5bd44193b2abd67bc7e7f1bd9384aa87435d500" in html
+    assert "does not retrain all 44 models" in html
+    assert "every prospective retrieval" not in html
     assert "AANCA v2 research phase" not in html
     assert "provisionally named <strong>AANCA v2</strong>" in html
     assert "retain_uncorrected" in html

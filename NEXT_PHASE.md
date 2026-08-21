@@ -8,8 +8,10 @@ the same core annotation-auditing system
 
 ## Purpose
 
-The current AANCA system has passed a prospectively frozen new-source PUMA test under
-controlled label corruption. It has not shown that it detects true natural
+The current AANCA system has passed all registered gates in a frozen new-source PUMA
+test under controlled label corruption. The protocol and result entered public Git
+history together, so the repository does not independently timestamp the pre-outcome
+order. It has not shown that it detects true natural
 annotation errors, improves qualified expert review or is safe across sites. The
 next phase is designed to answer those missing questions without tuning on opened
 PanNuke, NuCLS, MoNuSAC or PUMA final outcomes.

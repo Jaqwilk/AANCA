@@ -6,10 +6,10 @@ Updated: 21 August 2026
 
 The checked-in `artifacts/mvp_demo` package was polished into a single long-form
 article layout: one CSS rhythm, normal-flow findings with subtle entrance motion (no
-sticky scroll theatre), a contained hero figure, aligned footer and current-evidence
-chapters generated from NuCLS, MoNuSAC and PUMA authorities. After the rebuilt
-five-file release passed both package verifiers and browser QA, the final obsolete
-pre-polish rollback was permanently removed. No cleanup quarantine remains.
+sticky scroll theatre), a typography-only hero masthead, the conceptual WebGL
+review-queue figure under Method, aligned footer and current-evidence chapters
+generated from NuCLS, MoNuSAC and PUMA authorities. The five-file package verifies
+cleanly. No cleanup quarantine remains.
 
 ## Current scientific stage
 
@@ -22,9 +22,10 @@ pre-polish rollback was permanently removed. No cleanup quarantine remains.
   completed; its retrieval gate passed, but the registered combined success rule
   was **not supported**.
 - The frozen autoresearch-selected candidate completed a genuinely new-source PUMA
-  controlled external confirmation. All seven prospective gates passed and the
-  independent verifier accepted the result. This supports controlled-noise transfer,
-  not natural/pathologist-error detection.
+  controlled external confirmation. All seven registered gates passed and the scoped
+  PUMA evidence-readback verifier accepted the saved result. This supports
+  controlled-noise transfer, not natural/pathologist-error detection or a second
+  image-to-result replication.
 - A post-confirmation PUMA realism stress found positive aggregate downstream lower
   bounds in all nine scenarios but full per-class safety in only one. Unreviewed
   natural-data `flag_exclude` remains prohibited.
@@ -86,6 +87,14 @@ metric and 3,000-draw bootstrap decision. Evidence identities:
 The accepted conclusion is `controlled_noise_transfer_supported`. PUMA publishes
 final expert-checked labels but no paired natural pre/post review states, so natural
 error detection, pathologist error and real workflow benefit remain untested.
+
+Public-history and verification scope: the PUMA protocol, configuration and result
+first appeared together in commit
+`c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Local authorities record the
+intended freeze-before-metrics order, but GitHub does not independently timestamp
+it. `scripts/verify_puma_new_data_confirmation.py` rebuilds the manifest and
+recalculates saved-evidence decisions while importing maintained PUMA helpers; it
+does not retrain all 44 models from source images.
 
 ## PUMA post-confirmation realism and clean-label stress
 
@@ -831,3 +840,65 @@ verified current package and all authoritative evidence remain intact.
 - production Playwright readback on desktop and iPhone 15 found no horizontal
   overflow, hidden reveal, broken image, console error or warning. The current
   status, AANCA v2 plan and complete findings section were present.
+
+## Public-audit remediation and republish — 2026-08-21
+
+The repository and article were corrected against the later public audit without
+changing any frozen metric, source label, candidate, gate or scientific completion
+stage.
+
+Implemented corrections:
+
+- GitHub Actions checkout now sets `lfs: true`, so the three tracked PUMA NPZ files
+  are materialised before package verification and tests; a repository regression
+  test guards this requirement;
+- the Method review-queue animation remains unchanged when WebGL works, while an
+  inline static SVG replaces the canvas when WebGL, Three.js or the rendering
+  context is unavailable;
+- the “What the study actually learned.” section and its seven findings remain in
+  normal article flow;
+- `reports/aanca_expert_system_assessment_2026-08-21.md` was replaced by
+  `reports/aanca_internal_technical_assessment_2026-08-21.md`; it now identifies
+  itself as a project-maintainer review rather than external peer review and removes
+  subjective numeric grades;
+- public documentation now records that the PUMA protocol, configuration and result
+  first appeared together in commit
+  `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`, so GitHub does not independently
+  prove the intended pre-outcome timing;
+- the PUMA verifier is consistently described as a scoped saved-evidence readback:
+  it imports maintained PUMA helpers and consumes saved predictions and convergence
+  flags, rather than independently retraining all 44 models from source images;
+- `evidence.json` fail-closed records both limitations under `publication_limits`.
+
+Final local gates:
+
+- focused demo, CI and PUMA regression: `15 passed`;
+- complete maintained suite: `1148 passed, 1 skipped` in 587.52 seconds; the single
+  skip is the documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: 216 files formatted;
+- `uv run mypy src`: no issues in 103 source files;
+- `git diff --check`: passed;
+- deterministic synthetic generation: definition
+  `791fe34c3bb9042b73badd8209afa1b2b673922e20f2da2da28e9a70d67525b2`;
+- isolated smoke run
+  `20260821T144259.150479Z_synthetic_smoke_b7b0689fa9`: completed with
+  `success: true` outside the repository;
+- final five-file presentation: valid, manifest root
+  `2ead3c5febb7fe904294b045563013778ac91190f981a5dbdf1b17cd172ddada`;
+- Playwright desktop WebGL, forced-no-WebGL and 390 px mobile checks: no horizontal
+  overflow, console errors or warnings; the normal renderer reported
+  `threejs-review-queue`, and the forced-no-WebGL run reported
+  `static-fallback` / `webgl-unavailable` with the canvas hidden and fallback shown.
+
+Hostinger publication:
+
+- previous live version backed up as `20260821-164856`;
+- package deployed in replace mode to
+  `mediumaquamarine-wombat-125861.hostingersite.com`;
+- page, `evidence.json` and every declared external animation asset returned HTTP
+  200;
+- cache-busted production readback contained the static fallback, public-history
+  disclosure and complete findings section;
+- production `index.html`, `evidence.json`, `README.md` and `manifest.json` matched
+  the local SHA-256 identities byte for byte.

@@ -131,7 +131,7 @@ def _md5_file(path: Path) -> str:
 def load_frozen_puma_config(
     repository_root: str | Path,
 ) -> tuple[dict[str, Any], str, dict[str, Any], str]:
-    """Load and verify both prospectively frozen PUMA authority files."""
+    """Load and verify both frozen PUMA authority files."""
 
     root = Path(repository_root).resolve()
     config_path = root / "configs" / "puma_new_data_confirmation.yaml"
@@ -139,7 +139,7 @@ def load_frozen_puma_config(
     config, config_sha256 = load_pinned_config(
         config_path,
         "434452cf94dce9cf9ce88edd79761686821043c53d64ccb00c02a3a547bdef30",
-        role="PUMA prospective configuration",
+        role="PUMA frozen configuration",
     )
     amendment, amendment_sha256 = load_pinned_config(
         amendment_path,
@@ -147,7 +147,7 @@ def load_frozen_puma_config(
         role="PUMA runtime amendment",
     )
     if not isinstance(config, dict) or config.get("schema_version") != 1:
-        raise ValueError("PUMA prospective configuration is malformed")
+        raise ValueError("PUMA frozen configuration is malformed")
     if not isinstance(amendment, dict) or amendment.get("schema_version") != 1:
         raise ValueError("PUMA runtime amendment is malformed")
     if (
@@ -176,7 +176,7 @@ def _case_stratum(case_id: str) -> str:
 def frozen_puma_case_split(
     case_ids: Sequence[str], config: Mapping[str, Any]
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
-    """Apply the prospectively frozen, source-stratified case split."""
+    """Apply the frozen, source-stratified case split."""
 
     unique = tuple(sorted(set(str(value) for value in case_ids)))
     if len(unique) != len(case_ids):

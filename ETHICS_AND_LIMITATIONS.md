@@ -23,11 +23,14 @@ pathologist was wrong, clinical validation or real-use improvement.
 The frozen MoNuSAC controlled external benchmark retrieved injected changes more
 efficiently than matched random review, but its downstream interval crossed zero and
 its important-class safety rule failed. The frozen PUMA new-source controlled
-confirmation later passed all seven prospective retrieval, downstream, direction,
+confirmation later passed all seven registered retrieval, downstream, direction,
 convergence and every-class gates. This is stronger evidence that the current system
 transfers under controlled label noise; it is still not a natural-error experiment.
 PUMA publishes final expert-checked labels rather than paired natural pre/post review
-decisions.
+decisions. Its protocol and result entered public Git history together, so GitHub
+does not independently timestamp the intended pre-outcome freeze. Its readback script
+checks saved predictions and decisions but is not a second 44-model retraining from
+source images.
 
 Post-confirmation PUMA stress retained positive aggregate downstream lower bounds in
 all nine scenarios, while only one scenario passed every class safeguard. Opened
