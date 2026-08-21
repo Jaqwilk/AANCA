@@ -16,7 +16,21 @@ from urllib.parse import unquote, urlsplit
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = PROJECT_ROOT / "artifacts" / "mvp_demo"
-OUTPUT_FILES = ("README.md", "evidence.json", "index.html", "pannuke_mask_qc_overlays.png")
+HERO_NUCLEUS_FILES = (
+    "assets/hero/nuclei/nucleus-compact.png",
+    "assets/hero/nuclei/nucleus-elongated.png",
+    "assets/hero/nuclei/nucleus-kidney.png",
+    "assets/hero/nuclei/nucleus-bilobed.png",
+    "assets/hero/nuclei/nucleus-irregular.png",
+    "assets/hero/nuclei/nucleus-flattened.png",
+)
+OUTPUT_FILES = (
+    "README.md",
+    "evidence.json",
+    "index.html",
+    "pannuke_mask_qc_overlays.png",
+    *HERO_NUCLEUS_FILES,
+)
 
 _PRESENTATION_HEADERS = (
     ("Cache-Control", "no-store"),
@@ -114,13 +128,19 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     if not directory.is_dir() or directory.is_symlink():
         raise ValueError("presentation output is not a regular directory")
     expected_names = sorted((*OUTPUT_FILES, "manifest.json"))
-    if sorted(path.name for path in directory.iterdir()) != expected_names:
+    package_entries = tuple(directory.rglob("*"))
+    if any(path.is_symlink() for path in package_entries):
+        raise ValueError("presentation output contains a symlink")
+    actual_names = sorted(
+        path.relative_to(directory).as_posix() for path in package_entries if path.is_file()
+    )
+    if actual_names != expected_names:
         raise ValueError("presentation output allowlist differs")
 
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 3
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v3"
+        manifest.get("schema_version") != 4
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v4"
     ):
         raise ValueError("presentation manifest schema or policy differs")
     records = manifest.get("files")

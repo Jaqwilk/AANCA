@@ -54,8 +54,26 @@ _SELECTED_RUN_FILES = (
     "restoration_index.json",
     "status.json",
 )
-_OUTPUT_FILES = ("README.md", "evidence.json", "index.html", "pannuke_mask_qc_overlays.png")
 _BENCHMARK_ICON_DIR = Path(__file__).resolve().parent / "assets" / "benchmark"
+_HERO_NUCLEUS_DIR = Path(__file__).resolve().parent / "assets" / "hero" / "nuclei"
+_HERO_NUCLEUS_FILENAMES = (
+    "nucleus-compact.png",
+    "nucleus-elongated.png",
+    "nucleus-kidney.png",
+    "nucleus-bilobed.png",
+    "nucleus-irregular.png",
+    "nucleus-flattened.png",
+)
+_HERO_NUCLEUS_OUTPUTS = tuple(
+    f"assets/hero/nuclei/{filename}" for filename in _HERO_NUCLEUS_FILENAMES
+)
+_OUTPUT_FILES = (
+    "README.md",
+    "evidence.json",
+    "index.html",
+    "pannuke_mask_qc_overlays.png",
+    *_HERO_NUCLEUS_OUTPUTS,
+)
 _BENCHMARK_FACTS: tuple[tuple[str, str, str, str], ...] = (
     (
         "Data",
@@ -1412,12 +1430,11 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <canvas class="hero-review-canvas" aria-hidden="true"></canvas>
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shell">
     <div class="hero-copy">
-      <p class="eyebrow hero-animate">Automated Auditing of Nucleus Class Annotations</p>
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
-      <p class="hero-lead hero-animate">A reproducible, group-safe framework that ranks each <em>potentially inconsistent annotation</em> and recommends the highest-priority cases for expert review without rewriting the source labels.</p>
+      <p class="hero-lead hero-animate">A group-safe framework that ranks <em>potentially inconsistent annotations</em> for expert review without changing source labels.</p>
       <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-21">21 August 2026</time></span></div>
     </div>
   </div>
@@ -1680,7 +1697,7 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="use">
     <div class="repo-shell">
-      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the five-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, NuCLS and MoNuSAC scripts independently recalculate their stated saved evidence. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the eleven-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, NuCLS and MoNuSAC scripts independently recalculate their stated saved evidence. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
@@ -2194,9 +2211,9 @@ def _render_hypothesis_ledger(
 _MVP_CSS = (Path(__file__).resolve().parent / "assets" / "mvp_presentation.css").read_text(
     encoding="utf-8"
 )
-_MVP_HERO_SCRIPT = (
-    Path(__file__).resolve().parent / "assets" / "second_look_review_field.js"
-).read_text(encoding="utf-8")
+_MVP_HERO_SCRIPT = (Path(__file__).resolve().parent / "assets" / "hero-review-field.js").read_text(
+    encoding="utf-8"
+)
 
 
 _MVP_SCRIPT = r"""
@@ -2382,7 +2399,7 @@ def _render_readme(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     return f"""# AANCA presentation MVP
 
-This five-file, read-only article package was generated from checksum-verified
+This eleven-file, read-only article package was generated from checksum-verified
 PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
 authorities. The accepted PanNuke run is `{primary["run_id"]}`.
 
@@ -2440,6 +2457,8 @@ third-party validation.
 - `evidence.json` — sourced primary, external, controlled-confirmation, stress,
   sensitivity, current-action and next-phase summaries;
 - `pannuke_mask_qc_overlays.png` — deterministic source-ingestion QC preview;
+- `assets/hero/nuclei/` — six checksum-bound transparent PNG sprites used by the
+  decorative Canvas 2D hero;
 - `README.md` — this handoff;
 - `manifest.json` — SHA-256 allowlist binding every other package file.
 
@@ -2473,8 +2492,8 @@ def _build_output_manifest(directory: Path) -> dict[str, Any]:
         for relative in sorted(_OUTPUT_FILES)
     ]
     return {
-        "schema_version": 3,
-        "policy": "aanca_presentation_current_evidence_readback_v3",
+        "schema_version": 4,
+        "policy": "aanca_presentation_current_evidence_readback_v4",
         "files": records,
         "manifest_root_sha256": _canonical_sha256(records),
     }
@@ -2486,14 +2505,19 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
     directory = Path(output_directory).resolve(strict=True)
     if not directory.is_dir() or directory.is_symlink():
         raise ValueError("MVP output is not a regular directory")
-    actual_names = sorted(path.name for path in directory.iterdir())
+    package_entries = tuple(directory.rglob("*"))
+    if any(path.is_symlink() for path in package_entries):
+        raise ValueError("MVP output contains a symlink")
+    actual_names = sorted(
+        path.relative_to(directory).as_posix() for path in package_entries if path.is_file()
+    )
     expected_names = sorted((*_OUTPUT_FILES, "manifest.json"))
     if actual_names != expected_names:
         raise ValueError("MVP output allowlist differs")
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 3
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v3"
+        manifest.get("schema_version") != 4
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v4"
     ):
         raise ValueError("MVP manifest schema or policy differs")
     records = manifest.get("files")
@@ -2681,6 +2705,20 @@ def build_mvp_presentation(
     primary = _validate_primary_sources(run_path)
     qc, overlay_source, qc_manifest = _validate_qc_sources(qc_path)
     release_evidence = _load_release_evidence(root)
+    hero_nucleus_assets = []
+    for filename, relative in zip(_HERO_NUCLEUS_FILENAMES, _HERO_NUCLEUS_OUTPUTS, strict=True):
+        source = _HERO_NUCLEUS_DIR / filename
+        if not source.is_file() or source.is_symlink():
+            raise ValueError(f"hero nucleus asset is missing or not regular: {filename}")
+        if not source.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"):
+            raise ValueError(f"hero nucleus asset is not a PNG: {filename}")
+        hero_nucleus_assets.append(
+            {
+                "path": relative,
+                "sha256": sha256_file(source),
+                "size_bytes": source.stat().st_size,
+            }
+        )
     evidence = {
         "schema_version": 3,
         "presentation_status": "DEMO_COMPLETE",
@@ -2731,6 +2769,7 @@ def build_mvp_presentation(
             "qc_bundle": _project_relative_path(root, qc_path, role="QC bundle"),
             "qc_bundle_manifest_sha256": sha256_file(qc_path / "artifact_manifest.json"),
             "qc_overlay_sha256": qc_manifest["overlay_sha256"],
+            "hero_nucleus_assets": hero_nucleus_assets,
             "released_evidence": release_evidence["source_records"],
         },
     }
@@ -2744,6 +2783,8 @@ def build_mvp_presentation(
         )
         atomic_write_text(staging / "README.md", _render_readme(evidence))
         atomic_write_bytes(staging / "pannuke_mask_qc_overlays.png", overlay_source.read_bytes())
+        for filename, relative in zip(_HERO_NUCLEUS_FILENAMES, _HERO_NUCLEUS_OUTPUTS, strict=True):
+            atomic_write_bytes(staging / relative, (_HERO_NUCLEUS_DIR / filename).read_bytes())
         manifest = _build_output_manifest(staging)
         atomic_write_json(staging / "manifest.json", manifest)
         os.replace(staging, output)

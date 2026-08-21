@@ -1,6 +1,6 @@
 # AANCA status
 
-Updated: 21 August 2026
+Updated: 22 August 2026
 
 ## Presentation UI note (21 August 2026)
 
@@ -8,12 +8,18 @@ The checked-in `artifacts/mvp_demo` package remains a single long-form article:
 one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`), shared section
 hairlines, and a full-viewport hero masthead. The hero uses an original Canvas 2D
 Second-Look Review Field animation (canonical source
-`src/histo_audit/assets/second_look_review_field.js`, inlined into `index.html`).
-It shows many annotations, a calm audit pass, a short review queue of copies while
-source marks stay in place, then a nucleus → patch → study zoom. It does not claim
-automatic diagnosis or label correction. Benchmark fact icons still embed from
-`src/histo_audit/assets/benchmark/`. The Method schematic stays a static SVG
-(no WebGL). The five-file package verifies cleanly.
+`src/histo_audit/assets/hero-review-field.js`, inlined into `index.html`) and six
+checksum-bound local transparent nucleus sprites under
+`src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a paced audit pass,
+a short review queue of copies while source marks stay in place, then a nucleus →
+patch → four-patch study zoom. The four non-overlapping patches then rotate 45°,
+adopt the AANCA mark colour, then spin and grow into a colour wipe that reveals the
+cell field for the next cycle. The return is not a hard canvas cut. It does not claim
+automatic diagnosis or label correction. Runtime rendering is capped at 60 frames per
+second and uses hardware-aware pixel and cache budgets rather than scaling work with a
+120–240 Hz display or an unnecessarily high device-pixel ratio.
+Benchmark fact icons still embed from `src/histo_audit/assets/benchmark/`. The Method
+schematic stays a static SVG (no WebGL). The eleven-file package verifies cleanly.
 
 ## Current scientific stage
 
@@ -1007,3 +1013,81 @@ Validation after the alignment pass:
 - `uv run ruff check .`: passed;
 - `uv run ruff format --check .`: all 216 maintained Python files formatted;
 - `python -I scripts/present_demo.py --verify-only`: valid five-file package.
+
+## Sprite-backed hero package refresh — 2026-08-21
+
+The presentation-only Second-Look Review Field was refreshed without changing an
+AANCA v1 candidate, split, label, metric, confidence interval, success gate or
+scientific completion stage. The canonical Canvas 2D source is now
+`src/histo_audit/assets/hero-review-field.js`. Six local transparent nucleus PNGs are
+copied into the generated article and bound by the closed manifest, replacing the
+procedural nucleus drawing while preserving the same non-diagnostic expert-review
+metaphor and the static reduced-motion state.
+
+Final validation:
+
+- `uv run pytest`: `1150 passed, 1 skipped` in 665.81 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 216 maintained Python files formatted;
+- `uv run mypy src`: no issues in 103 source files;
+- `git diff --check`: passed;
+- `node --check src/histo_audit/assets/hero-review-field.js`: passed;
+- the final 60 Hz render-cadence follow-up passed `11` focused demo/CI tests in
+  1.49 seconds; production exposed `390` rendered frames after 6.22 story seconds,
+  with all six sprites ready and no failed asset;
+- `uv build --wheel`: passed; the wheel contains the hero script, stylesheet and all
+  six sprite assets;
+- standalone launcher verification: valid eleven-file package, scientific status
+  `EXTERNAL_VALIDATION_COMPLETE`, manifest root
+  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`;
+- local Playwright checks at 1280 x 720 and 390 x 844 found no horizontal overflow,
+  console error or warning; the full-height canvas rendered and every sprite request
+  returned HTTP 200.
+
+Hostinger publication:
+
+- the preceding live release was backed up under ID `20260822-000207`;
+- the eleven-file package was deployed in replace mode to
+  `mediumaquamarine-wombat-125861.hostingersite.com`;
+- direct SFTP readback matched all eleven local files byte for byte;
+- the Hostinger CDN served all PNGs successfully but recompressed their public HTTP
+  representation, while `index.html`, `evidence.json`, `README.md` and
+  `manifest.json` remained byte-identical to local sources;
+- production Playwright readback found no horizontal overflow, console error or
+  warning and observed the running `SELECT_AND_CLONE` hero state.
+
+## Dynamic loop pacing and constrained-device optimisation — 2026-08-22
+
+The presentation-only hero timing was tightened without changing any scientific
+input, output, claim or completion stage. The four genuine desktop selections now
+complete their queue at about 12.6 seconds, the coloured AANCA mark appears at about
+17.7 seconds and the next loop begins at about 19.3 seconds. The final return remains
+deliberately much faster: the mark performs more than two additional rotations,
+expands to 20 times its settled scale and uses an accent wipe to hide the camera reset.
+
+The renderer now:
+
+- caps Canvas work at 60 rendered frames per second even on 120–240 Hz displays;
+- retains a fixed 60 Hz simulation step so timing does not depend on refresh rate;
+- selects constrained, balanced or high render profiles from available hardware,
+  memory and data-saver signals;
+- bounds Canvas pixels and pre-rendered patch-cache size per profile;
+- continues to use decoded local sprite caches, `createImageBitmap` where available,
+  zero per-frame DOM mutation, and visibility/intersection suspension;
+- preserves the static completed mark under `prefers-reduced-motion`.
+
+Local browser evidence for the final candidate:
+
+- 1440 x 900 normal-motion loop: 19.327 seconds, 1,160 rendered frames after the
+  initial snapshot, 60.02 rendered frames per second, no overflow and no console or
+  page errors;
+- simulated constrained phone: 390 x 844 CSS pixels, DPR 3, two logical processors,
+  2 GB reported memory, data saver enabled and 4x CPU throttling; the constrained
+  profile selected DPR 1.25, completed its mobile loop in 16.901 seconds at 60.47
+  rendered frames per second, emitted no long tasks, errors or overflow;
+- focused demonstrator tests: `9 passed`;
+- final closed-package manifest root before canonical promotion:
+  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`.
+
+This local refresh has not been redeployed to Hostinger in this change set.

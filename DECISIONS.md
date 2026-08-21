@@ -479,14 +479,17 @@ animation; mobile, reduced-motion and script-free readers receive the complete s
 content. Vertical rhythm uses one token scale for paragraph, text-to-media and section
 gaps; section separators are single hairlines, not stacked decorative rules. The hero
 is a full-viewport typography masthead over an original Canvas 2D Second-Look
-Review Field (`src/histo_audit/assets/second_look_review_field.js`, inlined into
-the five-file package). The animation is decorative and non-interactive: source
-annotations remain in place while visual copies enter a short expert-review
-queue, then the field settles into a nucleus → patch → study composition. It must
-never imply automatic diagnosis, label correction or that a nucleus is a confirmed
-error. Reduced-motion users receive a static final frame. The Method figure remains a
-static SVG schematic only; the previous WebGL review-queue animation and the earlier
-square-grid Priority Review Scaffold stay removed. Navigation chrome remains.
+Review Field (`src/histo_audit/assets/hero-review-field.js`, inlined into the
+eleven-file package). Six local transparent PNG nucleus sprites are copied into the
+closed package and bound by its manifest; the animation never depends on an external
+image host. The animation is decorative and non-interactive: source annotations
+remain in place while visual copies enter a short expert-review queue, then the field
+settles into a nucleus → patch → four-patch study composition and finally resolves
+into the AANCA mark. It must never imply automatic diagnosis, label
+correction or that a nucleus is a confirmed error. Reduced-motion users receive a
+static final frame. The Method figure remains a static SVG schematic only; the
+previous WebGL review-queue animation and the earlier square-grid Priority Review
+Scaffold stay removed. Navigation chrome remains.
 No multi-screen empty scroll theatre is permitted. The pre-polish rollback was removed
 after the current generated package passed final verification.
 
@@ -568,3 +571,38 @@ between reproduction prose and the repository card.
 
 These are presentation-only rules. They do not change evidence, metrics, identifiers,
 claims, completion stages or the immutable source-annotation policy.
+
+## D039 — Resolve the decorative review field into the AANCA identity
+
+Status: implemented presentation decision; no new scientific stage
+
+Build the hero field from a new Canvas 2D implementation and six local PNG nucleus
+sprites. Brightness adjustment is applied once while preparing each runtime sprite
+cache so the supplied dark-cell artwork remains legible without changing the sealed
+source PNG files. The review story must keep marked source instances in place and move
+only identical visual copies into the expert-review queue. The audit frame visits only
+the four desktop or three mobile instances that are actually copied; decorative
+non-selection scans are excluded from the story.
+
+After the patch zoom, reveal four separate square patches in a 2 x 2 grid. Preserve
+the AANCA mark's 8:3 tile-to-gap proportion, rotate the complete group exactly 45
+degrees and fade the tissue detail into `#5e6ad2`. Do not add a Canvas wordmark.
+After a short hold, drive the logo through more than two additional rotations while
+scaling it into a short accent colour wipe. Reset the camera behind that opaque wipe,
+reveal the unchanged field and continue directly into the next audit cycle without
+clearing the canvas. Under
+reduced motion, render the completed static mark and do not run the loop.
+
+Keep the scan phase brisk enough to match the later transformations while retaining
+continuous easing for frame travel, inspection, cloning and queue flight. Decouple
+simulation time from display refresh rate and cap expensive Canvas rendering at 60
+frames per second. Select bounded Canvas-pixel and patch-cache budgets from available
+hardware, memory and data-saver signals; high-DPI or high-refresh screens must not
+multiply work without a visible benefit. Pre-decode the six local sprites, use
+`createImageBitmap` when available, avoid per-frame DOM updates and suspend the loop
+when the hero is outside the viewport or the page is hidden.
+
+Keep the hero copy left aligned in a wider 1320 px rail, remove its redundant visible
+eyebrow, and use a shorter non-diagnostic explanation so the animation has a clear
+right-side field. These changes affect presentation only and do not alter annotations,
+evidence, metrics, scientific claims or completion stages.

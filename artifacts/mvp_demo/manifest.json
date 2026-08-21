@@ -2,18 +2,48 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "edee674b454eb1b680cb1a18bea04029b2485c171b132519d68c0de43faaff92",
-      "size_bytes": 3859
+      "sha256": "160398058bd64c7a5961512567d7179545a15b3c6bd891ee31cdbb2e386f32cf",
+      "size_bytes": 3973
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-bilobed.png",
+      "sha256": "6f3547e9ca873d3b436c30829983f3f8b75cdef71e2d13feb70b8cd1ec5fac33",
+      "size_bytes": 1222501
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-compact.png",
+      "sha256": "fa5f3f61bba6d509fbb923efff7c160a04204a7d4b00d8ac712f8d505d9eec45",
+      "size_bytes": 1570355
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-elongated.png",
+      "sha256": "17f5d449d82d604e01b91f19ae3ac876b1584523dc729e674527a289346d3866",
+      "size_bytes": 1708042
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-flattened.png",
+      "sha256": "354b5f9accbddc2b7188abe65ba97cd008d52e71dab05bec1fb3b8174268ab5b",
+      "size_bytes": 1805225
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-irregular.png",
+      "sha256": "142f75900fccd1242cc063b1c0ee4d02ed97ddaf3efa65e21ef629fdaa397b83",
+      "size_bytes": 1284733
+    },
+    {
+      "path": "assets/hero/nuclei/nucleus-kidney.png",
+      "sha256": "3ed26fe1475011b8acc5b3447039eb7642f609633b08f94d8706e0ae84494482",
+      "size_bytes": 1444775
     },
     {
       "path": "evidence.json",
-      "sha256": "ef376de3d2051e83cc2f472717b27846b95e43975340393266ba8f0739dc75e5",
-      "size_bytes": 37008
+      "sha256": "26d8b042f43a01af08a1d97ae81929c113385f930c9c9bb0c875e9476f323748",
+      "size_bytes": 38194
     },
     {
       "path": "index.html",
-      "sha256": "bc16d87df657f2a67cc3cd8da19970ac94142c6b4679b96a1dcbe454e212b57d",
-      "size_bytes": 630876
+      "sha256": "635387592746a5b64c8d3d68f4416654d4e3a56fd0f6f02d7a641415c630a3af",
+      "size_bytes": 660669
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -21,7 +51,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "c2db7e0f5a7d9b8704e49725132e7a285ae14e7f7924a6015d9f9c4057e5759c",
-  "policy": "aanca_presentation_current_evidence_readback_v3",
-  "schema_version": 3
+  "manifest_root_sha256": "abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9",
+  "policy": "aanca_presentation_current_evidence_readback_v4",
+  "schema_version": 4
 }
