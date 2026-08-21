@@ -975,6 +975,38 @@
   "schema_version": 3,
   "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
+    "hero_nucleus_assets": [
+      {
+        "path": "assets/hero/nuclei/nucleus-compact.png",
+        "sha256": "fa5f3f61bba6d509fbb923efff7c160a04204a7d4b00d8ac712f8d505d9eec45",
+        "size_bytes": 1570355
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-elongated.png",
+        "sha256": "17f5d449d82d604e01b91f19ae3ac876b1584523dc729e674527a289346d3866",
+        "size_bytes": 1708042
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-kidney.png",
+        "sha256": "3ed26fe1475011b8acc5b3447039eb7642f609633b08f94d8706e0ae84494482",
+        "size_bytes": 1444775
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-bilobed.png",
+        "sha256": "6f3547e9ca873d3b436c30829983f3f8b75cdef71e2d13feb70b8cd1ec5fac33",
+        "size_bytes": 1222501
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-irregular.png",
+        "sha256": "142f75900fccd1242cc063b1c0ee4d02ed97ddaf3efa65e21ef629fdaa397b83",
+        "size_bytes": 1284733
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-flattened.png",
+        "sha256": "354b5f9accbddc2b7188abe65ba97cd008d52e71dab05bec1fb3b8174268ab5b",
+        "size_bytes": 1805225
+      }
+    ],
     "primary_run": "artifacts/runs/20260727T133947.089370Z_pannuke_primary_orphan_recovery",
     "qc_bundle": "reports/pannuke_qc",
     "qc_bundle_manifest_sha256": "0b188ecc586ed772b29845e15e169fb492ed8d2ad0f5b1a6643531ccee10857f",

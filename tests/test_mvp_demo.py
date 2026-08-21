@@ -577,6 +577,20 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert evidence["realism_stress"]["all_class_safeguards_passed_count"] == 1
     assert evidence["audit_time_label_sensitivity"]["all_sensitivity_gates_passed"] is True
     assert evidence["natural_data_action"]["action"] == "retain_uncorrected"
+    hero_assets = evidence["source_files"]["hero_nucleus_assets"]
+    assert [record["path"] for record in hero_assets] == [
+        "assets/hero/nuclei/nucleus-compact.png",
+        "assets/hero/nuclei/nucleus-elongated.png",
+        "assets/hero/nuclei/nucleus-kidney.png",
+        "assets/hero/nuclei/nucleus-bilobed.png",
+        "assets/hero/nuclei/nucleus-irregular.png",
+        "assets/hero/nuclei/nucleus-flattened.png",
+    ]
+    for record in hero_assets:
+        packaged_asset = artifacts.output_directory / record["path"]
+        assert packaged_asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+        assert packaged_asset.stat().st_size == record["size_bytes"]
+        assert hashlib.sha256(packaged_asset.read_bytes()).hexdigest() == record["sha256"]
     assert evidence["publication_limits"] == {
         "puma_public_preoutcome_timestamp_available": False,
         "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
@@ -639,9 +653,46 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "CONFIRMATORY_COMPLETE" in html
     assert "amended_or_exploratory" not in html
     assert 'id="hero-canvas"' not in html
-    assert 'class="hero-review-canvas"' in html
+    assert 'class="hero-canvas"' in html
+    assert "hero-review-canvas" not in html
     assert 'aria-hidden="true"' in html
     assert "Second-Look Review Field" in html
+    assert 'PRELOAD: "PRELOAD"' in html
+    assert 'SETTLED: "SETTLED"' in html
+    assert "canvas2d-png-sprites" in html
+    assert "window.createImageBitmap" in html
+    assert "Math.random" not in html
+    assert "nucleus-compact.png" in html
+    assert "nucleus-flattened.png" in html
+    assert "gridSpacing = patchSize * 1.375" in html
+    assert "logoRotation = (Math.PI / 4)" in html
+    assert 'RETURN_TO_FIELD: "RETURN_TO_FIELD"' in html
+    assert "restartLoopCycle" in html
+    assert "cycleCount" in html
+    assert "returnSpinDive: 0.82" in html
+    assert "diveProgress * Math.PI * 4.5" in html
+    assert "loopDiveScale = lerp(1, 20, diveProgress)" in html
+    assert "easeOutBack" in html
+    assert "intro: 0.92" in html
+    assert "frameTravelMin: 0.82" in html
+    assert "copyFlightMax: 1" in html
+    assert "detectRenderQuality" in html
+    assert "pixelBudget: 2200000" in html
+    assert "Math.max(0.75, Math.min(deviceDpr, renderProfile.dprCap, budgetDpr))" in html
+    assert "qualityTier" in html
+    assert "renderDpr" in html
+    assert "drawWordmark" not in html
+    assert "fillTrackedText" not in html
+    assert "auditCount: 4" in html
+    assert "auditCount: 3" in html
+    assert "selectedScanPositions: Object.freeze([0, 1, 2, 3])" in html
+    assert "selectedScanPositions: Object.freeze([0, 1, 2])" in html
+    assert '<p class="eyebrow hero-animate">' not in html
+    assert (
+        "A group-safe framework that ranks <em>potentially inconsistent annotations</em> "
+        "for expert review without changing source labels."
+    ) in html
+    assert "recommends the highest-priority cases" not in html
     assert "prefers-reduced-motion" in html
     assert "priority_review_scaffold" not in html
     assert "priorityRate" not in html
@@ -735,7 +786,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Natural and operational validity still require" in html
     assert "compact evidence and this checksum-verifiable presentation" in html
     assert "primary evidence release" in html
-    assert "verifies the five-file presentation package" in html
+    assert "verifies the eleven-file presentation package" in html
     assert 'href="#evidence">Reproducibility boundary</a>' in html
     assert "One-page project brief" in html
     assert "Contributions and AI use" in html
@@ -902,7 +953,7 @@ def test_verified_mvp_http_server_serves_only_the_closed_package(tmp_path: Path)
             assert response.headers["X-Frame-Options"] == "DENY"
         assert payload.startswith(b"<!doctype html>")
         assert verification["status"] == "valid"
-        assert verification["file_count"] == 5
+        assert verification["file_count"] == 11
     finally:
         server.shutdown()
         server.server_close()

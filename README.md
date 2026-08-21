@@ -108,8 +108,9 @@ code and tests.
 
 ## Open the presentation
 
-The checked-in English article is a closed, five-file package. It needs no dataset,
-GPU or project dependency installation:
+The checked-in English article is a closed, eleven-file package: five document and
+evidence files plus six checksum-bound hero sprites. It needs no dataset, GPU or
+project dependency installation:
 
 ~~~powershell
 python scripts/present_demo.py
@@ -124,9 +125,12 @@ python scripts/present_demo.py --verify-only
 
 The article preserves the subtle “What the study actually learned.” reveal sequence,
 while mobile and reduced-motion users receive the same content in ordinary document
-flow. The Method review-queue figure is a static accessible SVG. The masthead uses an
-original, decorative Canvas 2D review-field animation with a static final frame for
-reduced-motion users; neither surface depends on WebGL or Three.js.
+flow. The Method review-queue figure is a static accessible SVG. The masthead uses a
+decorative Canvas 2D review-field animation built from six local transparent PNG
+sprites; it keeps source instances in place, forms a four-patch study, and resolves
+into the AANCA mark before a fast spinning dive reveals the field as a continuous loop.
+Reduced-motion users receive the static mark immediately; neither surface depends on
+WebGL or Three.js.
 
 ## Install and run the portable workflow
 

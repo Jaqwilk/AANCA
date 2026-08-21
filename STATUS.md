@@ -8,12 +8,16 @@ The checked-in `artifacts/mvp_demo` package remains a single long-form article:
 one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`), shared section
 hairlines, and a full-viewport hero masthead. The hero uses an original Canvas 2D
 Second-Look Review Field animation (canonical source
-`src/histo_audit/assets/second_look_review_field.js`, inlined into `index.html`).
-It shows many annotations, a calm audit pass, a short review queue of copies while
-source marks stay in place, then a nucleus → patch → study zoom. It does not claim
-automatic diagnosis or label correction. Benchmark fact icons still embed from
-`src/histo_audit/assets/benchmark/`. The Method schematic stays a static SVG
-(no WebGL). The five-file package verifies cleanly.
+`src/histo_audit/assets/hero-review-field.js`, inlined into `index.html`) and six
+checksum-bound local transparent nucleus sprites under
+`src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a calm audit pass,
+a short review queue of copies while source marks stay in place, then a nucleus →
+patch → four-patch study zoom. The four non-overlapping patches then rotate 45°,
+adopt the AANCA mark colour, then spin and grow into a colour wipe that reveals the
+cell field for the next cycle. The return is not a hard canvas cut. It does not claim
+automatic diagnosis or label correction.
+Benchmark fact icons still embed from `src/histo_audit/assets/benchmark/`. The Method
+schematic stays a static SVG (no WebGL). The eleven-file package verifies cleanly.
 
 ## Current scientific stage
 
@@ -1007,3 +1011,43 @@ Validation after the alignment pass:
 - `uv run ruff check .`: passed;
 - `uv run ruff format --check .`: all 216 maintained Python files formatted;
 - `python -I scripts/present_demo.py --verify-only`: valid five-file package.
+
+## Sprite-backed hero package refresh — 2026-08-21
+
+The presentation-only Second-Look Review Field was refreshed without changing an
+AANCA v1 candidate, split, label, metric, confidence interval, success gate or
+scientific completion stage. The canonical Canvas 2D source is now
+`src/histo_audit/assets/hero-review-field.js`. Six local transparent nucleus PNGs are
+copied into the generated article and bound by the closed manifest, replacing the
+procedural nucleus drawing while preserving the same non-diagnostic expert-review
+metaphor and the static reduced-motion state.
+
+Final validation:
+
+- `uv run pytest`: `1150 passed, 1 skipped` in 665.81 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 216 maintained Python files formatted;
+- `uv run mypy src`: no issues in 103 source files;
+- `git diff --check`: passed;
+- `node --check src/histo_audit/assets/hero-review-field.js`: passed;
+- `uv build --wheel`: passed; the wheel contains the hero script, stylesheet and all
+  six sprite assets;
+- standalone launcher verification: valid eleven-file package, scientific status
+  `EXTERNAL_VALIDATION_COMPLETE`, manifest root
+  `bc214f4c7f52fca1d9226178e0236804e6001eb45bae2b5e4075f947a5ff736e`;
+- local Playwright checks at 1280 x 720 and 390 x 844 found no horizontal overflow,
+  console error or warning; the full-height canvas rendered and every sprite request
+  returned HTTP 200.
+
+Hostinger publication:
+
+- the preceding live release was backed up under ID `20260821-235353`;
+- the eleven-file package was deployed in replace mode to
+  `mediumaquamarine-wombat-125861.hostingersite.com`;
+- direct SFTP readback matched all eleven local files byte for byte;
+- the Hostinger CDN served all PNGs successfully but recompressed their public HTTP
+  representation, while `index.html`, `evidence.json`, `README.md` and
+  `manifest.json` remained byte-identical to local sources;
+- production Playwright readback found no horizontal overflow, console error or
+  warning and observed the running `SCAN` hero state.
