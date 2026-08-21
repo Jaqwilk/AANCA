@@ -679,8 +679,11 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "detectRenderQuality" in html
     assert "pixelBudget: 2200000" in html
     assert "Math.max(0.75, Math.min(deviceDpr, renderProfile.dprCap, budgetDpr))" in html
+    assert "renderIntervalSeconds: 1 / 60" in html
+    assert "renderAccumulator %= CONFIG.renderIntervalSeconds" in html
     assert "qualityTier" in html
     assert "renderDpr" in html
+    assert "renderedFrameCount" in html
     assert "drawWordmark" not in html
     assert "fillTrackedText" not in html
     assert "auditCount: 4" in html

@@ -35,6 +35,7 @@
     seed: 0x4a11ca27,
     breakpoint: 720,
     fixedStepSeconds: 1 / 60,
+    renderIntervalSeconds: 1 / 60,
     maxFrameDeltaSeconds: 0.05,
     cameraSubstepSeconds: 0.012,
     timings: Object.freeze({
@@ -475,6 +476,8 @@
     let pageVisible = !document.hidden;
     let previousFrameTimestamp = 0;
     let accumulator = 0;
+    let renderAccumulator = 0;
+    let renderedFrameCount = 0;
 
     function setState(nextState) {
       state = nextState;
@@ -1569,6 +1572,7 @@
     }
 
     function renderScene(interpolation) {
+      renderedFrameCount += 1;
       const renderedCameraScale = lerp(
         camera.previousScale,
         camera.scale,
@@ -1680,6 +1684,7 @@
       const deltaSeconds = Math.min(rawDeltaSeconds, CONFIG.maxFrameDeltaSeconds);
       previousFrameTimestamp = timestamp;
       accumulator += deltaSeconds;
+      renderAccumulator += deltaSeconds;
 
       while (accumulator >= CONFIG.fixedStepSeconds) {
         snapshotInterpolants();
@@ -1688,6 +1693,11 @@
         accumulator -= CONFIG.fixedStepSeconds;
       }
 
+      if (renderAccumulator + 0.0005 < CONFIG.renderIntervalSeconds) {
+        animationFrame = window.requestAnimationFrame(frameLoop);
+        return;
+      }
+      renderAccumulator %= CONFIG.renderIntervalSeconds;
       renderScene(accumulator / CONFIG.fixedStepSeconds);
       if (completed) {
         stopLoop(false);
@@ -1711,6 +1721,7 @@
       running = true;
       previousFrameTimestamp = 0;
       accumulator = 0;
+      renderAccumulator = 0;
       animationFrame = window.requestAnimationFrame(frameLoop);
     }
 
@@ -1723,6 +1734,7 @@
       if (resetTiming) {
         previousFrameTimestamp = 0;
         accumulator = 0;
+        renderAccumulator = 0;
       }
     }
 
@@ -1797,6 +1809,7 @@
         failedAssetCount: sprites.length - readyAssetCount,
         qualityTier,
         renderDpr: dpr,
+        renderedFrameCount,
         cameraScale: camera.scale,
         patchReveal,
         siblingReveal,

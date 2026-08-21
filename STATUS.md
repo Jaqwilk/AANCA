@@ -1,6 +1,6 @@
 # AANCA status
 
-Updated: 21 August 2026
+Updated: 22 August 2026
 
 ## Presentation UI note (21 August 2026)
 
@@ -10,12 +10,14 @@ hairlines, and a full-viewport hero masthead. The hero uses an original Canvas 2
 Second-Look Review Field animation (canonical source
 `src/histo_audit/assets/hero-review-field.js`, inlined into `index.html`) and six
 checksum-bound local transparent nucleus sprites under
-`src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a calm audit pass,
+`src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a paced audit pass,
 a short review queue of copies while source marks stay in place, then a nucleus →
 patch → four-patch study zoom. The four non-overlapping patches then rotate 45°,
 adopt the AANCA mark colour, then spin and grow into a colour wipe that reveals the
 cell field for the next cycle. The return is not a hard canvas cut. It does not claim
-automatic diagnosis or label correction.
+automatic diagnosis or label correction. Runtime rendering is capped at 60 frames per
+second and uses hardware-aware pixel and cache budgets rather than scaling work with a
+120–240 Hz display or an unnecessarily high device-pixel ratio.
 Benchmark fact icons still embed from `src/histo_audit/assets/benchmark/`. The Method
 schematic stays a static SVG (no WebGL). The eleven-file package verifies cleanly.
 
@@ -1031,18 +1033,21 @@ Final validation:
 - `uv run mypy src`: no issues in 103 source files;
 - `git diff --check`: passed;
 - `node --check src/histo_audit/assets/hero-review-field.js`: passed;
+- the final 60 Hz render-cadence follow-up passed `11` focused demo/CI tests in
+  1.49 seconds; production exposed `390` rendered frames after 6.22 story seconds,
+  with all six sprites ready and no failed asset;
 - `uv build --wheel`: passed; the wheel contains the hero script, stylesheet and all
   six sprite assets;
 - standalone launcher verification: valid eleven-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `bc214f4c7f52fca1d9226178e0236804e6001eb45bae2b5e4075f947a5ff736e`;
+  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`;
 - local Playwright checks at 1280 x 720 and 390 x 844 found no horizontal overflow,
   console error or warning; the full-height canvas rendered and every sprite request
   returned HTTP 200.
 
 Hostinger publication:
 
-- the preceding live release was backed up under ID `20260821-235353`;
+- the preceding live release was backed up under ID `20260822-000207`;
 - the eleven-file package was deployed in replace mode to
   `mediumaquamarine-wombat-125861.hostingersite.com`;
 - direct SFTP readback matched all eleven local files byte for byte;
@@ -1050,4 +1055,39 @@ Hostinger publication:
   representation, while `index.html`, `evidence.json`, `README.md` and
   `manifest.json` remained byte-identical to local sources;
 - production Playwright readback found no horizontal overflow, console error or
-  warning and observed the running `SCAN` hero state.
+  warning and observed the running `SELECT_AND_CLONE` hero state.
+
+## Dynamic loop pacing and constrained-device optimisation — 2026-08-22
+
+The presentation-only hero timing was tightened without changing any scientific
+input, output, claim or completion stage. The four genuine desktop selections now
+complete their queue at about 12.6 seconds, the coloured AANCA mark appears at about
+17.7 seconds and the next loop begins at about 19.3 seconds. The final return remains
+deliberately much faster: the mark performs more than two additional rotations,
+expands to 20 times its settled scale and uses an accent wipe to hide the camera reset.
+
+The renderer now:
+
+- caps Canvas work at 60 rendered frames per second even on 120–240 Hz displays;
+- retains a fixed 60 Hz simulation step so timing does not depend on refresh rate;
+- selects constrained, balanced or high render profiles from available hardware,
+  memory and data-saver signals;
+- bounds Canvas pixels and pre-rendered patch-cache size per profile;
+- continues to use decoded local sprite caches, `createImageBitmap` where available,
+  zero per-frame DOM mutation, and visibility/intersection suspension;
+- preserves the static completed mark under `prefers-reduced-motion`.
+
+Local browser evidence for the final candidate:
+
+- 1440 x 900 normal-motion loop: 19.327 seconds, 1,160 rendered frames after the
+  initial snapshot, 60.02 rendered frames per second, no overflow and no console or
+  page errors;
+- simulated constrained phone: 390 x 844 CSS pixels, DPR 3, two logical processors,
+  2 GB reported memory, data saver enabled and 4x CPU throttling; the constrained
+  profile selected DPR 1.25, completed its mobile loop in 16.901 seconds at 60.47
+  rendered frames per second, emitted no long tasks, errors or overflow;
+- focused demonstrator tests: `9 passed`;
+- final closed-package manifest root before canonical promotion:
+  `abdc787ce1ac45f7c2afb1e51b716e4af552a44e4c0325c88b19873fc27ed8b9`.
+
+This local refresh has not been redeployed to Hostinger in this change set.

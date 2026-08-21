@@ -589,9 +589,18 @@ the AANCA mark's 8:3 tile-to-gap proportion, rotate the complete group exactly 4
 degrees and fade the tissue detail into `#5e6ad2`. Do not add a Canvas wordmark.
 After a short hold, drive the logo through more than two additional rotations while
 scaling it into a short accent colour wipe. Reset the camera behind that opaque wipe,
-reveal the unchanged field and
-continue directly into the next audit cycle without clearing the canvas. Under
+reveal the unchanged field and continue directly into the next audit cycle without
+clearing the canvas. Under
 reduced motion, render the completed static mark and do not run the loop.
+
+Keep the scan phase brisk enough to match the later transformations while retaining
+continuous easing for frame travel, inspection, cloning and queue flight. Decouple
+simulation time from display refresh rate and cap expensive Canvas rendering at 60
+frames per second. Select bounded Canvas-pixel and patch-cache budgets from available
+hardware, memory and data-saver signals; high-DPI or high-refresh screens must not
+multiply work without a visible benefit. Pre-decode the six local sprites, use
+`createImageBitmap` when available, avoid per-frame DOM updates and suspend the loop
+when the hero is outside the viewport or the page is hidden.
 
 Keep the hero copy left aligned in a wider 1320 px rail, remove its redundant visible
 eyebrow, and use a shorter non-diagnostic explanation so the animation has a clear

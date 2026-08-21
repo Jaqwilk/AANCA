@@ -129,6 +129,8 @@ flow. The Method review-queue figure is a static accessible SVG. The masthead us
 decorative Canvas 2D review-field animation built from six local transparent PNG
 sprites; it keeps source instances in place, forms a four-patch study, and resolves
 into the AANCA mark before a fast spinning dive reveals the field as a continuous loop.
+Canvas rendering is capped at 60 frames per second and uses hardware-aware pixel and
+cache budgets so high-refresh and high-DPI screens do not multiply work unnecessarily.
 Reduced-motion users receive the static mark immediately; neither surface depends on
 WebGL or Three.js.
 
