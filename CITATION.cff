@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use AANCA, cite this software record and the dataset-specific sources listed in the repository."
+title: "AANCA: Automated Auditing of Nucleus Class Annotations"
+type: software
+authors:
+  - family-names: "Smogór"
+    given-names: "Natan"
+version: 0.1.0
+date-released: 2026-08-21
+repository-code: "https://github.com/Jaqwilk/AANCA"
+url: "https://mediumaquamarine-wombat-125861.hostingersite.com/"
+abstract: >-
+  A reproducible, non-diagnostic research prototype for ranking potentially
+  inconsistent nucleus class annotations for qualified expert review using
+  group-safe out-of-fold evidence. Current positive evidence concerns controlled
+  label-noise transfer and does not establish natural pathologist-error detection
+  or clinical utility.

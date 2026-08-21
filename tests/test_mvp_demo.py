@@ -580,8 +580,13 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert evidence["publication_limits"] == {
         "puma_public_preoutcome_timestamp_available": False,
         "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
+        "puma_partition": "aanca_defined_144_development_62_final_of_206_public_rois",
+        "puma_official_hidden_challenge_test_used": False,
+        "puma_downstream_intervention": "flag_exclude_top_5_percent_training_rows",
+        "puma_flagged_rows_expert_reviewed_or_relabelled": False,
         "puma_verifier_retrains_models_from_images": False,
         "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers",
+        "puma_verifier_is_third_party_validation": False,
     }
     assert evidence["next_phase"]["stage"] == "INITIALISED"
     assert len(evidence["primary"]["comparisons"]) == 36
@@ -598,7 +603,10 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert evidence["primary"]["inference"]["p_value_sidedness"] == "one_sided"
     assert "potentially inconsistent annotation" in html
     assert "recommended for expert review" in html
-    assert "Better triage did not improve the downstream model" in html
+    assert (
+        "On the original PanNuke benchmark, better triage did not improve the downstream model"
+        in html
+    )
     assert "Holm-adjusted p" in html
     assert "not independent realisations" in html
     assert "Natan Smogór" in html
@@ -615,29 +623,30 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "do not imply institutional endorsement of AANCA" in html
     assert "21 August 2026" in html
     assert "gsap@3.15.0" in html
-    assert "three@0.185.1" in html
-    assert "import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')" in html
+    assert (
+        'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'
+        in html
+    )
+    assert (
+        'integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF"'
+        in html
+    )
+    assert html.count('crossorigin="anonymous"') == 2
+    assert "three@0.185.1" not in html
     assert "DEMO_COMPLETE" in html
     assert "PRIMARY_STUDY_COMPLETE" in html
     assert "EXTERNAL_VALIDATION_COMPLETE" in html
     assert "CONFIRMATORY_COMPLETE" in html
     assert "amended_or_exploratory" not in html
-    assert 'id="hero-canvas"' in html
-    assert 'id="hero-fallback"' in html
-    assert "#hero-canvas[hidden]" in html
-    assert ".method-queue-fallback[hidden]" in html
-    assert "static schematic remains available without WebGL" in html
-    assert "const supportsWebGL = () =>" in html
-    assert "stage.dataset.renderer = 'static-fallback'" in html
-    assert "disableCanvas('webgl-unavailable')" in html
-    assert "fallback.hidden = true" in html
-    assert "webgl-context-lost" in html
+    assert 'id="hero-canvas"' not in html
+    assert 'class="method-queue-diagram"' in html
+    assert "Figure. Review-queue sketch (not study data)." in html
+    assert "WebGL" not in html
     assert ">Findings</a>" in html
     assert ">Reproduce</a>" in html
     assert "Source annotations stay fixed" not in html
     assert "Conceptual workflow · not benchmark data" not in html
-    assert "threejs-review-queue" in html
-    assert "immutable-source-ranked-review" in html
+    assert "threejs-review-queue" not in html
     assert "SOURCE PATCH" in html
     assert "REVIEW QUEUE" in html
     assert 'class="journey story"' in html
@@ -687,6 +696,14 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Move through one registered question at a time" not in html
     assert "12 / 12 positive differences" not in html
     assert "Automated Auditing of Nucleus Class Annotations" in html
+    assert "90-second summary" in html
+    assert "AANCA ranks existing nucleus annotations for human review" in html
+    assert "precision <strong>0.5377</strong> versus <strong>0.2144</strong>" in html
+    assert "improved downstream macro-F1 by <strong>+0.0064</strong>" in html
+    assert "The 144/62 development/final partition is an AANCA-defined split" in html
+    assert "It is not the official hidden PUMA challenge test set" in html
+    assert "The downstream intervention was <code>flag_exclude</code>" in html
+    assert "They were not reviewed, corrected or automatically relabelled by an expert" in html
     assert "Automated nucleus-annotation auditing" not in html
     assert "--prose: 640px" not in html
     assert "--editorial: 640px" in html
@@ -694,12 +711,13 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
     assert "The same system transferred under controlled noise" in html
-    assert "PUMA frozen new-source controlled confirmation" in html
-    assert "All seven frozen gates" in html
-    assert "passed all seven registered retrieval" in html
+    assert "PUMA internally frozen new-source controlled confirmation" in html
+    assert "All seven internally" in html
+    assert "passed all seven internally pre-specified retrieval" in html
     assert "Public-history limit" in html
     assert "c5bd44193b2abd67bc7e7f1bd9384aa87435d500" in html
     assert "does not retrain all 44 models" in html
+    assert "It is not third-party validation" in html
     assert "every prospective retrieval" not in html
     assert "AANCA v2 research phase" not in html
     assert "provisionally named <strong>AANCA v2</strong>" in html
@@ -713,6 +731,10 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "primary evidence release" in html
     assert "verifies the five-file presentation package" in html
     assert 'href="#evidence">Reproducibility boundary</a>' in html
+    assert "One-page project brief" in html
+    assert "Contributions and AI use" in html
+    assert "PUMA public evidence commit" in html
+    assert hashlib.sha256(artifacts.evidence_path.read_bytes()).hexdigest() in html
     assert (
         html.index('id="evidence"')
         < html.index('id="external-validation"')
@@ -734,13 +756,20 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'role="group" aria-label="Complete registered H4 downstream result"' in html
     assert 'id="filter-hypothesis"' in html
     assert "prefers-reduced-motion" in html
-    assert "document.addEventListener('visibilitychange', syncRenderLoop)" in html
-    assert "canvas.dataset.animationState = 'paused'" in html
-    assert "powerPreference: 'low-power'" in html
     assert 'fetchpriority="low" width="1512" height="3840"' in html
     assert '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' in html
+    assert '<meta name="viewport" content="width=device-width, initial-scale=1">' in html
+    assert '<a class="skip" href="#main">Skip to content</a>' in html
+    assert 'aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"' in html
+    assert '<title id="queue-figure-title">' in html
+    assert '<desc id="queue-figure-desc">' in html
+    assert "@media (max-width: 720px)" in html
     assert "python scripts/present_demo.py" in html
     assert "PUMA controlled confirmation passed all seven" in readme
+    assert "internally pre-specified gates" in readme
+    assert "AANCA-defined split of the 206 public" in readme
+    assert "not the official hidden PUMA challenge test set" in readme
+    assert "not\nthird-party validation" in readme
     assert "Natural-data action: `retain_uncorrected`" in readme
     assert ".journey-stage-group { opacity: 1 !important; transform: none !important; }" in html
     assert ".journey { height: auto !important; }" in html

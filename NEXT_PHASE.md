@@ -8,7 +8,7 @@ the same core annotation-auditing system
 
 ## Purpose
 
-The current AANCA system has passed all registered gates in a frozen new-source PUMA
+The current AANCA system has passed all internally pre-specified gates in an internally frozen new-source PUMA
 test under controlled label corruption. The protocol and result entered public Git
 history together, so the repository does not independently timestamp the pre-outcome
 order. It has not shown that it detects true natural

@@ -27,7 +27,7 @@ detects real pathologist errors or improves clinical work.
 | PanNuke primary controlled benchmark | `PRIMARY_STUDY_COMPLETE`; ranking evidence was positive, H4 downstream restoration was adverse | The accepted analysis is permanently `amended_or_exploratory` because outcomes were exposed during recovery |
 | NuCLS genuine multi-rater disagreement | `EXTERNAL_VALIDATION_COMPLETE`; frozen ranking gate failed and guided correction changed macro-F1 by `-0.014633`, 95% CI `[-0.026683, -0.002415]` | Natural-error and downstream-improvement claims were not supported |
 | MoNuSAC controlled external benchmark | Retrieval precision `0.698852` versus `0.556009` matched random; downstream difference `+0.005526`, 95% CI `[-0.001506, +0.012833]` | Retrieval passed, but downstream and class-safety gates failed; action remained `retain_uncorrected` |
-| PUMA frozen new-source controlled confirmation | All seven registered gates passed on 62 held-out case/ROI groups | Supports controlled-noise transfer, not natural/pathologist-error detection; public Git history does not independently timestamp the freeze before results |
+| PUMA internally frozen new-source controlled confirmation | All seven internally pre-specified gates passed on 62 held-out case/ROI groups | Supports controlled-noise transfer, not natural/pathologist-error detection; public Git history does not independently timestamp the freeze before results |
 | PUMA post-confirmation realism stress | Positive aggregate downstream lower bounds in 9/9 scenarios; every class safeguard passed in only 1/9 | Useful robustness evidence and a binding class-safety warning; exploratory only |
 | PUMA observed-label fold sensitivity | All seven sensitivity gates passed with audit-time labels; candidate unchanged | Shows the controlled PUMA result did not depend on clean labels for fold allocation; not independent confirmation |
 | Prospective natural-case workflow | Not executed | `CONFIRMATORY_COMPLETE`, clinical utility and automatic natural-data intervention are not claimed |
@@ -42,6 +42,13 @@ The exact frozen PUMA endpoint was:
 - candidate minus matched random `+0.008067`, 95% CI
   `[+0.004093, +0.011947]`.
 
+The 144/62 development/final partition is an AANCA-defined split of the 206 public
+PUMA ROIs. It is not the official hidden PUMA challenge test set.
+
+The downstream intervention was `flag_exclude`: the highest-ranked 5% of training
+instances were omitted from downstream training. They were not reviewed, corrected
+or automatically relabelled by an expert. Source annotations remained unchanged.
+
 These values are read from
 [`artifacts/puma_new_data_confirmation/results.json`](artifacts/puma_new_data_confirmation/results.json)
 and checked by the PUMA evidence-readback script
@@ -51,9 +58,9 @@ Source PUMA annotations remained unchanged.
 The PUMA protocol, configuration and result first entered public Git history together
 in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Internal authorities record
 the intended pre-outcome ordering, but GitHub is not independent proof of that timing.
-The PUMA verifier rebuilds the source manifest and recomputes saved-evidence metrics
-and decisions; it imports maintained project helpers and does not retrain all 44
-models from source images. These are explicit reproducibility limits, not missing
+The PUMA verifier is a project-coupled evidence-readback script that recomputes
+metrics from saved predictions but does not retrain all 44 models. It is not
+third-party validation. These are explicit reproducibility limits, not missing
 positive results.
 
 ## What the project can claim
@@ -115,10 +122,10 @@ the package without opening a browser:
 python scripts/present_demo.py --verify-only
 ~~~
 
-The article preserves the “What the study actually learned.” animation, while mobile
-and reduced-motion users receive the same content in ordinary document flow. Its
-conceptual WebGL figure has an inline static fallback, so disabling WebGL or blocking
-the Three.js module does not leave an empty panel.
+The article preserves the subtle “What the study actually learned.” reveal sequence,
+while mobile and reduced-motion users receive the same content in ordinary document
+flow. The Method review-queue figure is a static accessible SVG and the masthead uses
+only CSS atmosphere, so the article does not depend on WebGL or Three.js.
 
 ## Install and run the portable workflow
 
@@ -268,6 +275,8 @@ claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 | [`DECISIONS.md`](DECISIONS.md) | Binding scientific and engineering rationale |
 | [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md) | Frozen primary and confirmatory analysis definitions |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Primary evidence release and independent recalculation |
+| [`PROFESSOR_BRIEF.md`](PROFESSOR_BRIEF.md) | One-page problem, method, strongest result, negative evidence and next experiment |
+| [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Author contribution and AI-assistance disclosure |
 | [`reports/aanca_internal_technical_assessment_2026-08-21.md`](reports/aanca_internal_technical_assessment_2026-08-21.md) | Internal evidence assessment; explicitly not external peer review |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Genuine multi-rater result and boundary |
 | [`reports/monusac_current_aanca_external_results.md`](reports/monusac_current_aanca_external_results.md) | Controlled MoNuSAC result |
@@ -305,14 +314,21 @@ CC BY-NC-SA 4.0 specifically to the recorded PanNuke `masks/` directory; it does
 establish identical terms for every source file. PUMA is recorded under its official
 CC0 authority. Review each source before use.
 
-This repository does not include a standalone general-purpose open-source `LICENSE`.
-Do not assume rights beyond the research-prototype statement in
-[`pyproject.toml`](pyproject.toml), the dataset terms and dependency licences.
+The project code and original documentation are covered by the explicit
+all-rights-reserved [`LICENSE`](LICENSE). It grants no general reuse permission and
+does not apply to datasets, pretrained weights, dependencies, logos or other
+third-party materials. Their separate terms remain controlling.
 
 The verified project bibliography is
 [`references/references.bib`](references/references.bib).
+Machine-readable citation metadata are available in [`CITATION.cff`](CITATION.cff).
+No DOI has been assigned yet; DOI publication requires an owner-controlled archival
+release, for example through Zenodo. The current public demo uses the configured
+Hostinger subdomain; a custom domain has not been claimed.
 
 ## Author
 
-Research, implementation and presentation by **Natan Smogór**. Updated
-21 August 2026.
+Research direction, review and final scientific responsibility: **Natan Smogór**.
+AI-assisted tools supported implementation, testing, orchestration, documentation
+and presentation; they supplied no expert labels and are not independent validators.
+See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 21 August 2026.

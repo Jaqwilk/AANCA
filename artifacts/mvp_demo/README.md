@@ -28,8 +28,9 @@ With the project environment installed, `uv run histo-audit demo serve` and
 - External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
   claims were not supported; MoNuSAC controlled retrieval passed but downstream and
   class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
-  registered gates. Its protocol and result entered public history together, so the
-  public repository does not independently prove the pre-outcome timing.
+  internally pre-specified gates. Its protocol and result entered public history
+  together, so the public repository does not independently prove the pre-outcome
+  timing.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
@@ -39,6 +40,16 @@ show that AANCA detects pathologist errors, discovers biological truth, improves
 real laboratory workflow or is clinically useful. The software never modifies
 source annotations automatically; it ranks potentially inconsistent annotations
 for qualified expert review.
+
+The 144/62 development/final partition is an AANCA-defined split of the 206 public
+PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream
+intervention was `flag_exclude`: the highest-ranked 5% of controlled training
+instances were omitted from downstream training. They were not reviewed, corrected
+or automatically relabelled by an expert.
+
+The PUMA verifier is a project-coupled evidence-readback script that recomputes
+metrics from saved predictions but does not retrain all 44 models. It is not
+third-party validation.
 
 ## Package contents
 

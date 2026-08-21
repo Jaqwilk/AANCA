@@ -1,9 +1,15 @@
-# Prospective PUMA new-data confirmation protocol
+# Internally frozen PUMA new-data confirmation protocol
 
 **Freeze date:** 2026-08-21 (Europe/Warsaw)  
 **State at freeze:** official record metadata and paper inspected; image and nuclei
 archives not downloaded or opened  
 **Project:** the existing AANCA system; this is not a replacement project or V2
+
+**Publication chronology clarification:** this document was recorded internally as
+frozen before PUMA outcomes; public Git history does not independently verify that
+timing. The protocol, configuration and result first appeared together in public
+commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. This clarification changes no
+model, parameter, split, gate or result.
 
 ## Purpose
 
@@ -37,6 +43,9 @@ the untouched final set. The remaining 72 per stratum form the audit/training se
 No final image, label or derived feature may affect model, threshold, budget,
 mapping or candidate selection.
 
+The resulting 144/62 development/final partition is an AANCA-defined split of the
+206 public PUMA ROIs. It is not the official hidden PUMA challenge test set.
+
 Use the official PUMA three-class benchmark mapping as primary:
 
 - `tumor` = tumor;
@@ -60,6 +69,10 @@ without PUMA tuning:
 - intervention `flag_exclude`;
 - balanced downstream logistic L2 `0.01`.
 
+Under `flag_exclude`, the highest-ranked 5% of controlled training instances are
+omitted from downstream fitting. They are not reviewed, corrected or automatically
+relabelled by an expert, and source annotations remain unchanged.
+
 On the 144 audit/training cases only, inject deterministic 10% symmetric class
 corruption with seeds `26082170`, `26082171`, `26082172`, `26082173`. Permanently
 separate final label, observed corrupted label and injection metadata. Produce all
@@ -70,7 +83,7 @@ For each seed compare the AANCA exclusion with the unchanged corrupted training 
 and five exact matched-random exclusions at the same budget. Fit all downstream arms
 identically and evaluate once on the 62 untouched, uncorrupted final cases.
 
-## Frozen success gates
+## Internally pre-specified success gates
 
 Use 3,000 whole-case bootstrap replicates. Success requires all of:
 
@@ -84,4 +97,3 @@ Use 3,000 whole-case bootstrap replicates. Success requires all of:
 A positive result supports transfer of controlled annotation-noise improvement to
 PUMA. It does not support natural-error, clinical, diagnostic or biological-truth
 claims, and never permits automatic modification of source annotations.
-

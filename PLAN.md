@@ -91,7 +91,9 @@ Status: complete (`DEMO_COMPLETE`)
 - all H1-H7 findings, H4, QC, limitations and author section retained;
 - full saved statistics, H4, OOF and rankings published in
   `primary-evidence-v1`;
-- independent verifier recalculates all available comparisons and H4.
+- a standalone evidence recalculator that does not import the primary analysis
+  package recalculates all available comparisons and H4; this is not third-party
+  validation.
 
 ## Completed engineering milestone
 
@@ -126,7 +128,8 @@ Status: complete (`EXTERNAL_VALIDATION_COMPLETE`)
 - the Unbiased Control subset was primary and Evaluation subset secondary;
 - both ranking and downstream success rules were evaluated without post-outcome
   tuning;
-- portable source inventories, numeric evidence and an independent verifier are
+- portable source inventories, numeric evidence and a standalone checked-in
+  recalculator are
   published;
 - the primary result is retained as null/adverse: it does not establish natural
   disagreement prioritisation or downstream improvement.
@@ -208,7 +211,7 @@ Executed result:
 - it did not exceed mean exact-matched-random restoration and the registered
   important-class recall safeguard failed;
 - all four conditions were required, so the final action is `retain_uncorrected`;
-- the checked-in independent verifier recalculates the metrics and all frozen
+- the checked-in standalone evidence recalculator recomputes the metrics and all frozen
   bootstrap decisions without importing AANCA analysis code.
 
 The frozen protocol is

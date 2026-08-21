@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Reproducible auditing of potentially inconsistent nucleus class annotations"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
-license = { text = "Research prototype; dataset and pretrained-weight licences remain separate" }
+license = { file = "LICENSE" }
 authors = [{ name = "Natan Smogór" }]
 dependencies = [
   "cleanlab>=2.7,<3",

@@ -6,13 +6,17 @@ results. It is rooted in the accepted run
 `20260727T133947.089370Z_pannuke_primary_orphan_recovery` and is separate from the
 small presentation extract committed under `artifacts/mvp_demo`.
 
+Here, “standalone evidence recalculator” describes software separation: it does not
+import the primary analysis package. It is not third-party validation, external peer
+review or a second laboratory replication.
+
 ## Downloaded evidence
 
 The release is split into three independently checksum-verifiable assets:
 
 | Asset | Contents | Size | SHA-256 |
 | --- | --- | ---: | --- |
-| `aanca-primary-evidence-v1.zip` | Primary statistics, 2,000-draw group bootstrap, subgroup table, H4 restoration arrays, manifests and independent verifier | 358,518,237 bytes | `7241104c749e5899b23aa89af1dcbff0effcefe61e044d0b233d320136d115fc` |
+| `aanca-primary-evidence-v1.zip` | Primary statistics, 2,000-draw group bootstrap, subgroup table, H4 restoration arrays, manifests and standalone evidence recalculator | 358,518,237 bytes | `7241104c749e5899b23aa89af1dcbff0effcefe61e044d0b233d320136d115fc` |
 | `aanca-primary-rankings-v1.zip` | All 185 completed-cell ranking tables, per-cell artifact manifests and cell index | 1,512,550,075 bytes | `a5b4189583ea39a1aa82fd587f4adae2b8cc5d71e9aa45ed2c6b0337f7185319` |
 | `aanca-primary-oof-v1.zip` | All 185 completed-cell OOF probability arrays, fold provenance, per-cell manifests and frozen matrix controls | 878,046,730 bytes | `79056c703401eaaf455212d86abe9e58eedd6376871ee78a8da95e33eed5a1a4` |
 
@@ -71,7 +75,7 @@ The separate external study is checked in under
 [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md).
 The immutable
 [`nucls-external-validation-v1`](https://github.com/Jaqwilk/AANCA/releases/tag/nucls-external-validation-v1)
-release contains the same derived evidence and independent verifier in one archive
+release contains the same derived evidence and standalone recalculator in one archive
 (4,001,323 bytes; SHA-256
 `e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`).
 It contains two frozen result bundles:

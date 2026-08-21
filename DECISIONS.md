@@ -157,8 +157,9 @@ inspection to turn this result positive. `EXTERNAL_VALIDATION_COMPLETE` records
 execution and publication, not efficacy.
 
 Publish portable source inventories, canonical paired manifests, numeric evidence,
-all random and bootstrap arrays, and an independent verifier that imports neither
-the AANCA package nor scikit-learn.
+all random and bootstrap arrays, and a standalone evidence recalculator that imports
+neither the AANCA package nor scikit-learn. This is software separation, not
+third-party validation.
 
 ## D017 — Canonical external-evidence files use LF bytes
 
@@ -168,7 +169,7 @@ Write the published NuCLS `canonical_manifest.csv` files with an explicit LF lin
 terminator. The repository already declares `eol=lf`; generation must therefore
 produce the same bytes that Git checks out on every platform. Pin the normalized
 files and their enclosing artifact manifests by byte count and SHA-256 in the
-independent verifier. This is a serialization correction only: sample identities,
+standalone recalculator. This is a serialization correction only: sample identities,
 arrays, metrics, intervals and the negative primary conclusion remain unchanged.
 
 ## D018 — Improve the current model without rewriting the frozen result
@@ -477,11 +478,12 @@ Findings remain in normal document flow and receive only a subtle per-answer ent
 animation; mobile, reduced-motion and script-free readers receive the complete static
 content. Vertical rhythm uses one token scale for paragraph, text-to-media and section
 gaps; section separators are single hairlines, not stacked decorative rules. The hero
-is a typography-only masthead; the optional WebGL review-queue illustration sits in
-Method as a captioned figure with a simplified selection path (no particle spray or
-pointer parallax). Navigation chrome remains. No multi-screen empty scroll theatre is
-permitted. The pre-polish rollback was removed after the current generated package
-passed final verification.
+is a full-viewport typography masthead on a flat canvas with no decorative
+background layers. The Method figure is a
+static SVG schematic only; the previous WebGL review-queue animation was removed.
+Navigation chrome remains. No multi-screen empty scroll
+theatre is permitted. The pre-polish rollback was removed after the current generated
+package passed final verification.
 
 ## D034 — Generate the public article from every current evidence authority
 
@@ -510,10 +512,15 @@ rebuilds the official manifest, checks group and neighbour exclusions, and
 recalculates decisions from saved predictions, but imports maintained PUMA helpers
 and does not rerun the 44 trainings from source images.
 
-Describe PUMA as a frozen controlled new-source confirmation. Do not call its public
-history independently time-stamped or publicly preregistered, because protocol and
-result entered GitHub together. This terminology correction does not alter any
-metric, artifact identity or controlled conclusion.
+In public-facing prose, explicitly state that this independence describes a software
+boundary and is not third-party validation, external peer review or a second
+laboratory replication.
+
+Describe PUMA as an **internally frozen controlled new-source confirmation** whose
+success gates were **internally pre-specified**. Do not call its public history
+independently time-stamped or publicly preregistered, because protocol and result
+entered GitHub together. This terminology correction does not alter any metric,
+artifact identity or controlled conclusion.
 
 ## D036 — Fail visibly and accessibly at publication boundaries
 
@@ -521,8 +528,24 @@ Status: implemented
 
 GitHub Actions must materialise Git LFS objects during checkout before any verifier
 or test reads the PUMA NPZ archives. A repository test guards the checkout contract.
-The optional WebGL Method figure must retain the same layout and caption when WebGL,
-Three.js or the rendering context is unavailable; an inline static schematic is the
-required fallback. The scientific article, evidence tables and “What the study
-actually learned” section remain ordinary document content and never depend on
-WebGL.
+The Method figure is a static accessible SVG, so it has no WebGL or Three.js failure
+mode. The soft masthead atmosphere is CSS-only and must stop under reduced motion.
+The scientific article, evidence tables and “What the study actually learned”
+section remain ordinary document content and never depend on animation.
+
+## D037 — Freeze AANCA v1 scientifically; improve only public clarity and reproducibility
+
+Status: implemented
+
+Do not alter the frozen AANCA v1 candidate, PUMA split, parameters, metrics or gates
+after outcome inspection. Publicly state that the 144/62 partition is an
+AANCA-defined split of the 206 public PUMA ROIs rather than the hidden challenge test,
+and that `flag_exclude` omitted the highest-ranked 5% of controlled training rows
+without expert review or relabelling.
+
+Use “internally pre-specified” and “internally frozen” for PUMA, together with the
+public-history limitation. Add a concise professor-facing brief, a 90-second article
+summary, author/AI contribution disclosure, type checking in CI, SRI for external JS,
+machine-readable citation metadata and an explicit code-rights boundary. A custom
+domain and archival DOI remain owner-controlled publication actions; do not claim
+either before it exists.

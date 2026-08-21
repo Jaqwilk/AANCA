@@ -23,7 +23,8 @@ The following material remains authoritative and was not removed:
 - accepted recovered primary run
   `20260727T133947.089370Z_pannuke_primary_orphan_recovery`;
 - reusable PanNuke, MoNuSAC, PUMA and expanded-development embeddings;
-- released NuCLS, MoNuSAC and PUMA evidence needed by independent verifiers;
+- released NuCLS and MoNuSAC evidence needed by standalone recalculators, plus PUMA
+  evidence needed by the project-coupled saved-evidence readback;
 - the five-file static demo and its one deliberately retained README hero under
   `docs/assets/`.
 
@@ -71,10 +72,10 @@ are not recoverable; all authoritative evidence listed above remains in the acti
 repository.
 
 The last `mvp_demo_before_author_section/` rollback contained exactly five files and
-3,402,366 bytes. After the current package passed both independent verifiers and the
-desktop, mobile and reduced-motion browser audit, that obsolete copy and the now-empty
-quarantine root were permanently removed. No cleanup quarantine remains; the deleted
-material is not recoverable.
+3,402,366 bytes. After the current package passed both package verifiers and the
+desktop, mobile and reduced-motion browser audit, that obsolete copy and the
+now-empty quarantine root were permanently removed. No cleanup quarantine remains;
+the deleted material is not recoverable.
 
 The active `artifacts/` tree fell from about 92.1 GiB to 48.5 GiB. The remaining
 43.3 GiB run footprint is the accepted primary result plus the accepted pilot; the
@@ -115,9 +116,9 @@ compression of frozen scientific contracts.
 ## GitHub storage policy
 
 The three 41–78 MB PUMA numeric-evidence archives remain versioned because the
-independent verifiers consume them. They are stored with Git LFS instead of ordinary
-Git objects. Small JSON authorities, reports, protocols and checksums remain normal
-Git files and can be reviewed directly.
+project-coupled saved-evidence readback consumes them. They are stored with Git LFS
+instead of ordinary Git objects. Small JSON authorities, reports, protocols and
+checksums remain normal Git files and can be reviewed directly.
 
 ## Validation
 
@@ -141,8 +142,9 @@ Final gates:
   `20260821T111042.663068Z_synthetic_smoke_4d457ebe70`;
 - isolated demo verification: `DEMO_COMPLETE`, five files, manifest root
   `1e4e403e08aefc8e9d2e4b18a1b44d24c30c4ab4df106fba45addfd598ca2b4b`;
-- independent PUMA verification: all seven frozen gates and all 44 convergence
-  checks passed;
+- project-coupled PUMA evidence readback: all seven internally pre-specified gates
+  and all 44 saved convergence checks passed; it did not retrain those models and is
+  not third-party validation;
 - independent NuCLS feasibility verification: the paired pre/post endpoint remains
   correctly unavailable and the action remains `retain_uncorrected`;
 - selected-candidate reconstruction: exact metrics reproduced, `220/220` fits

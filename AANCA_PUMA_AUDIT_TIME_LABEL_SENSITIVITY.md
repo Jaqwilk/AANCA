@@ -7,7 +7,7 @@ realism stress were opened; it cannot select, rescue or change the candidate
 
 ## Reason
 
-The prospective PUMA benchmark stratified development OOF groups using the
+The internally frozen PUMA benchmark stratified development OOF groups using the
 pre-corruption reference labels. This remained group-safe and never exposed final
 groups, but natural use has no known pre-corruption truth. The relevant deployment
 sensitivity is therefore to allocate every OOF fold using only the observed label

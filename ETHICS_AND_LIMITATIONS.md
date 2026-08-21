@@ -23,7 +23,7 @@ pathologist was wrong, clinical validation or real-use improvement.
 The frozen MoNuSAC controlled external benchmark retrieved injected changes more
 efficiently than matched random review, but its downstream interval crossed zero and
 its important-class safety rule failed. The frozen PUMA new-source controlled
-confirmation later passed all seven registered retrieval, downstream, direction,
+confirmation later passed all seven internally pre-specified retrieval, downstream, direction,
 convergence and every-class gates. This is stronger evidence that the current system
 transfers under controlled label noise; it is still not a natural-error experiment.
 PUMA publishes final expert-checked labels rather than paired natural pre/post review

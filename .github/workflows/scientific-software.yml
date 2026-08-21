@@ -43,6 +43,8 @@ jobs:
         run: uv run ruff check .
       - name: Check formatting
         run: uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy src
       - name: Run the complete test suite
         run: uv run pytest
       - name: Run the public synthetic workflow in an isolated registry

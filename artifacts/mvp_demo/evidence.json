@@ -941,8 +941,13 @@
   },
   "primary_study_status": "PRIMARY_STUDY_COMPLETE",
   "publication_limits": {
+    "puma_downstream_intervention": "flag_exclude_top_5_percent_training_rows",
     "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
+    "puma_flagged_rows_expert_reviewed_or_relabelled": false,
+    "puma_official_hidden_challenge_test_used": false,
+    "puma_partition": "aanca_defined_144_development_62_final_of_206_public_rois",
     "puma_public_preoutcome_timestamp_available": false,
+    "puma_verifier_is_third_party_validation": false,
     "puma_verifier_retrains_models_from_images": false,
     "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers"
   },

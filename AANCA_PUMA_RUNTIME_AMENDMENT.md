@@ -5,7 +5,7 @@
 candidate scoring, queue construction, downstream fit or outcome metric  
 **Scientific candidate change:** none
 
-The prospective PUMA protocol fixed the candidate, split salt, seeds for controlled
+The internally frozen PUMA protocol fixed the candidate, split salt, seeds for controlled
 corruption, endpoints and success gates, but omitted deterministic implementation
 seeds for the group-fold planner, matched comparators and bootstrap. It also did not
 state how exact fold-safe k-nearest-neighbour search would be executed at PUMA scale.
@@ -26,4 +26,3 @@ Aggregate class counts and file schema were inspected only to implement the alre
 frozen official mapping. No AANCA score, selected queue, corrupted-label retrieval,
 downstream prediction or final-fold metric existed when this amendment was frozen.
 The amendment may not change the candidate or rescue a failed result.
-

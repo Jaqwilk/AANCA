@@ -32,7 +32,8 @@ official release contains final expert-checked labels but not paired pre/post na
 reviews. The frozen execution used 144 development and 62 final ROI/case groups.
 AANCA exceeded unchanged corrupted training by `+0.006426` macro F1 with interval
 `[+0.003657, +0.009365]` and exceeded exact matched-random exclusion by `+0.008067`
-with interval `[+0.004093, +0.011947]`. The independent verifier passed. Exact
+with interval `[+0.004093, +0.011947]`. The project-coupled PUMA evidence readback
+passed; this was not third-party validation. Exact
 results are in `reports/puma_new_data_confirmation_results.md`.
 
 CoNIC/Lizard remains a possible future compatibility source, but it is not needed to

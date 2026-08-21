@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import html
@@ -54,6 +55,39 @@ _SELECTED_RUN_FILES = (
     "status.json",
 )
 _OUTPUT_FILES = ("README.md", "evidence.json", "index.html", "pannuke_mask_qc_overlays.png")
+_BENCHMARK_ICON_DIR = Path(__file__).resolve().parent / "assets" / "benchmark"
+_BENCHMARK_FACTS: tuple[tuple[str, str, str, str], ...] = (
+    (
+        "Data",
+        "pannuke.png",
+        "PanNuke",
+        "Verified official release; five positive nucleus classes across 19 tissue types.",
+    ),
+    (
+        "Unit",
+        "segmented-nuclei.png",
+        "Already segmented nuclei",
+        "Class-label consistency only. Segmentation quality and diagnosis are outside scope.",
+    ),
+    (
+        "Primary model",
+        "resnet-model.png",
+        "Frozen ResNet-18 + logistic regression",
+        "ImageNet context embeddings with balanced multinomial fitting.",
+    ),
+    (
+        "Prediction design",
+        "five-fold-oof.png",
+        "Five-fold group-safe OOF",
+        "A scored nucleus and its whole source patch are absent from its training fold.",
+    ),
+    (
+        "Review budget",
+        "review-budget.png",
+        "5% primary queue",
+        "Guided and random review receive the same integer budget.",
+    ),
+)
 _H4_COMPARISON_ID = "audit_guided_minus_random_macro_f1"
 _INSTANCE_DEPENDENT_SEEDS = (404, 405, 406)
 _PRESENTATION_HEADERS = (
@@ -1241,9 +1275,12 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
           <code>retain_uncorrected</code>.</p>
         </article>
         <article class="rule">
-          <b>PUMA frozen new-source controlled confirmation</b>
-          <p>The unchanged candidate was frozen before PUMA outcomes and evaluated on
-          {puma["final_case_groups"]} held-out case/ROI groups. Queue precision was
+          <b>PUMA internally frozen new-source controlled confirmation</b>
+          <p>The candidate was recorded internally as frozen before PUMA outcomes;
+          public Git history does not independently verify that timing. It was evaluated on
+          {puma["final_case_groups"]} held-out case/ROI groups from an AANCA-defined
+          144/62 split of the 206 public ROIs, not the official hidden PUMA challenge
+          test set. Queue precision was
           {puma["retrieval"]["candidate_precision"]:.6f} versus
           {puma["retrieval"]["mean_matched_random_precision"]:.6f}; the difference was
           {puma["retrieval"]["difference"]:+.6f}
@@ -1252,8 +1289,11 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
           labels by {puma["downstream"]["minus_uncorrected"]:+.6f}
           [{puma_baseline_ci[0]:+.6f}, {puma_baseline_ci[1]:+.6f}] and matched random by
           {puma["downstream"]["minus_matched_random"]:+.6f}
-          [{puma_random_ci[0]:+.6f}, {puma_random_ci[1]:+.6f}]. All seven frozen gates
-          passed. This supports controlled-noise transfer only.</p>
+          [{puma_random_ci[0]:+.6f}, {puma_random_ci[1]:+.6f}]. All seven internally
+          pre-specified gates passed. The <code>flag_exclude</code> arm omitted the
+          highest-ranked 5% of controlled training rows; they were not reviewed,
+          corrected or automatically relabelled by an expert. This supports
+          controlled-noise transfer only.</p>
         </article>
         <article class="rule">
           <b>Robustness and the remaining safety boundary</b>
@@ -1272,7 +1312,44 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
     """.lstrip("\n").rstrip()
 
 
-def _render_html(evidence: dict[str, Any]) -> str:
+def _benchmark_icon_data_uri(filename: str) -> str:
+    """Return a data URI for one sealed benchmark fact icon."""
+
+    path = _BENCHMARK_ICON_DIR / filename
+    if path.parent.resolve() != _BENCHMARK_ICON_DIR.resolve() or not path.is_file():
+        raise ValueError(f"benchmark icon is missing: {filename}")
+    raw = path.read_bytes()
+    if raw.startswith(b"\x89PNG\r\n\x1a\n"):
+        mime = "image/png"
+    elif raw.startswith(b"\xff\xd8\xff"):
+        mime = "image/jpeg"
+    else:
+        raise ValueError(f"benchmark icon format is unsupported: {filename}")
+    encoded = base64.standard_b64encode(raw).decode("ascii")
+    return f"data:{mime};base64,{encoded}"
+
+
+def _render_study_specs() -> str:
+    """Render the five exact-benchmark facts with decorative icons."""
+
+    cards: list[str] = []
+    for label, icon_name, title, description in _BENCHMARK_FACTS:
+        src = html.escape(_benchmark_icon_data_uri(icon_name), quote=True)
+        cards.append(
+            '<article class="spec-card">'
+            f"<span>{html.escape(label)}</span>"
+            '<div class="spec-copy">'
+            f'<img class="spec-icon" src="{src}" alt="" aria-hidden="true" '
+            'width="72" height="72" decoding="async">'
+            f"<strong>{html.escape(title)}</strong>"
+            f"<small>{html.escape(description)}</small>"
+            "</div>"
+            "</article>"
+        )
+    return '<div class="study-specs reveal">\n      ' + "\n      ".join(cards) + "\n    </div>"
+
+
+def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     primary = evidence["primary"]
     qc = evidence["pannuke_qc"]
     hypotheses = primary["hypothesis_comparisons"]
@@ -1286,6 +1363,8 @@ def _render_html(evidence: dict[str, Any]) -> str:
     h2_chart = _render_h2_chart(h2)
     hypothesis_ledger = _render_hypothesis_ledger(hypotheses, h2, h4)
     current_evidence = _render_current_evidence(evidence)
+    puma = evidence["new_source_confirmation"]
+    publication_limits = evidence["publication_limits"]
 
     seed_rows: list[str] = []
     for record in seed_audit["records"]:
@@ -1344,6 +1423,15 @@ def _render_html(evidence: dict[str, Any]) -> str:
 </section>
 
 <main id="main">
+  <section class="executive-summary" id="summary" aria-labelledby="summary-title">
+    <div class="article-copy summary-box reveal">
+      <p class="summary-label">90-second summary</p>
+      <h2 id="summary-title">AANCA ranks existing nucleus annotations for human review and never automatically relabels them.</h2>
+      <p class="summary-statement">On an AANCA-defined 62-ROI holdout from the 206 public PUMA ROIs, after 10% controlled corruption, its 5% review queue achieved precision <strong>__PUMA_PRECISION_4__</strong> versus <strong>__PUMA_RANDOM_PRECISION_4__</strong> for matched random selection. Excluding the flagged examples improved downstream macro-F1 by <strong>__PUMA_DELTA_F1_4__</strong> over unchanged corrupted training. This is controlled-noise evidence, not natural pathologist-error or clinical validation.</p>
+      <p class="summary-detail"><strong>Exact design boundary.</strong> The 144/62 development/final partition is an AANCA-defined split of the 206 public PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream intervention was <code>flag_exclude</code>: the highest-ranked 5% of training instances were omitted from downstream training. They were not reviewed, corrected or automatically relabelled by an expert.</p>
+    </div>
+  </section>
+
   <section class="narrative" id="overview">
     <div class="article-copy reveal">
       <p class="lede">Annotation auditing is a way to decide what a human should inspect first. It is not a way to replace the human decision.</p>
@@ -1356,13 +1444,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
 
   <section class="study-at-a-glance" id="study-facts" aria-labelledby="study-title">
     <div class="section-heading reveal"><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define both what the results measure and what they do not measure.</p></div>
-    <div class="study-specs reveal">
-      <article class="spec-card"><span>Data</span><strong>PanNuke</strong><small>Verified official release; five positive nucleus classes across 19 tissue types.</small></article>
-      <article class="spec-card"><span>Unit</span><strong>Already segmented nuclei</strong><small>Class-label consistency only. Segmentation quality and diagnosis are outside scope.</small></article>
-      <article class="spec-card"><span>Primary model</span><strong>Frozen ResNet-18 + logistic regression</strong><small>ImageNet context embeddings with balanced multinomial fitting.</small></article>
-      <article class="spec-card"><span>Prediction design</span><strong>Five-fold group-safe OOF</strong><small>A scored nucleus and its whole source patch are absent from its training fold.</small></article>
-      <article class="spec-card"><span>Review budget</span><strong>5% primary queue</strong><small>Guided and random review receive the same integer budget.</small></article>
-    </div>
+    __STUDY_SPECS__
   </section>
 
   <div class="research-question reveal" id="research-question">
@@ -1379,27 +1461,37 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p>Finally, guided and random review receive the same integer budget. The benchmark measures whether injected changes appear earlier in the guided queue and then asks a separate question: whether restoring only the reviewed injected changes improves a downstream classifier on the untouched final reference fold.</p>
     </div>
     <figure class="method-queue-figure rail-figure reveal">
-      <div class="method-queue-stage" aria-hidden="true">
-        <svg id="hero-fallback" class="method-queue-fallback" viewBox="0 0 960 300" preserveAspectRatio="xMidYMid meet" focusable="false">
+      <div class="method-queue-stage">
+        <svg class="method-queue-diagram" viewBox="0 0 960 300" role="img" aria-labelledby="queue-figure-title queue-figure-desc" preserveAspectRatio="xMidYMid meet" focusable="false">
+          <title id="queue-figure-title">Conceptual review-queue field</title>
+          <desc id="queue-figure-desc">A source patch of nucleus instances feeds a ranked review queue of three slots. Illustration only, not benchmark data.</desc>
           <defs>
-            <linearGradient id="fallback-flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7884df" stop-opacity=".08"/><stop offset=".55" stop-color="#8d98f4" stop-opacity=".72"/><stop offset="1" stop-color="#7884df" stop-opacity=".18"/></linearGradient>
+            <linearGradient id="queue-flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7884df" stop-opacity=".12"/><stop offset="1" stop-color="#8d98f4" stop-opacity=".78"/></linearGradient>
           </defs>
           <rect class="fallback-panel" x="42" y="43" width="525" height="214" rx="10"/>
           <rect class="fallback-panel" x="647" y="43" width="270" height="214" rx="10"/>
           <text class="fallback-label" x="66" y="72">SOURCE PATCH</text>
           <text class="fallback-label" x="671" y="72">REVIEW QUEUE</text>
           <g class="fallback-nuclei">
-            <ellipse cx="115" cy="119" rx="22" ry="17"/><ellipse cx="184" cy="104" rx="17" ry="22"/><ellipse cx="250" cy="137" rx="25" ry="18"/><ellipse cx="328" cy="103" rx="19" ry="16"/><ellipse cx="405" cy="131" rx="23" ry="25"/><ellipse cx="493" cy="105" rx="18" ry="20"/>
-            <ellipse cx="132" cy="198" rx="18" ry="23"/><ellipse cx="211" cy="209" rx="25" ry="17"/><ellipse cx="300" cy="190" rx="17" ry="21"/><ellipse cx="380" cy="210" rx="24" ry="18"/><ellipse cx="474" cy="196" rx="20" ry="24"/>
+            <g class="cell"><path class="cell-membrane" d="M88 128 C90 108 102 96 118 94 C136 92 150 104 152 120 C154 136 144 150 128 154 C112 158 98 150 92 138 C88 132 87 130 88 128 Z"/><ellipse class="cell-nucleus" cx="118" cy="122" rx="7.5" ry="6.2"/></g>
+            <g class="cell"><path class="cell-membrane" d="M158 108 C162 88 178 78 196 82 C214 86 226 100 222 118 C218 136 202 146 184 142 C166 138 154 126 158 108 Z"/><ellipse class="cell-nucleus" cx="190" cy="110" rx="6.8" ry="8"/></g>
+            <g class="cell"><path class="cell-membrane" d="M220 156 C224 134 242 122 262 128 C280 134 290 152 282 170 C274 186 254 192 236 184 C220 177 216 166 220 156 Z"/><ellipse class="cell-nucleus" cx="250" cy="154" rx="8" ry="6.5"/></g>
+            <g class="cell"><path class="cell-membrane" d="M298 118 C300 98 314 88 332 90 C350 92 360 106 356 122 C352 138 338 148 320 144 C304 140 296 130 298 118 Z"/><ellipse class="cell-nucleus" cx="328" cy="116" rx="7" ry="7.2"/></g>
+            <g class="cell is-focus"><path class="cell-membrane" d="M388 100 C390 84 404 76 418 80 C432 84 440 98 436 112 C432 126 416 132 402 128 C388 124 384 112 388 100 Z"/><ellipse class="cell-nucleus" cx="408" cy="102" rx="7.5" ry="6.5"/></g>
+            <g class="cell"><path class="cell-membrane" d="M458 124 C460 104 474 94 492 98 C510 102 520 118 514 134 C508 150 492 156 474 150 C458 144 456 134 458 124 Z"/><ellipse class="cell-nucleus" cx="486" cy="124" rx="6.5" ry="7.5"/></g>
+            <g class="cell"><path class="cell-membrane" d="M100 214 C102 194 116 184 134 188 C152 192 162 208 156 224 C150 240 134 246 116 240 C100 234 98 224 100 214 Z"/><ellipse class="cell-nucleus" cx="128" cy="214" rx="7.2" ry="6.4"/></g>
+            <g class="cell"><path class="cell-membrane" d="M172 226 C176 206 194 196 214 202 C232 208 242 224 234 240 C226 254 206 258 188 250 C172 243 168 234 172 226 Z"/><ellipse class="cell-nucleus" cx="204" cy="226" rx="7.8" ry="6.8"/></g>
+            <g class="cell"><path class="cell-membrane" d="M262 208 C264 188 278 178 296 182 C314 186 324 200 318 216 C312 232 296 238 278 232 C262 226 260 216 262 208 Z"/><ellipse class="cell-nucleus" cx="290" cy="208" rx="6.6" ry="7.4"/></g>
+            <g class="cell"><path class="cell-membrane" d="M330 228 C334 208 350 198 368 204 C386 210 394 226 386 242 C378 256 358 260 342 252 C328 245 326 236 330 228 Z"/><ellipse class="cell-nucleus" cx="360" cy="228" rx="7.4" ry="6.2"/></g>
+            <g class="cell"><path class="cell-membrane" d="M430 216 C434 196 450 186 468 192 C486 198 494 214 486 230 C478 244 458 248 442 240 C428 233 426 224 430 216 Z"/><ellipse class="cell-nucleus" cx="460" cy="216" rx="7" ry="7.6"/></g>
           </g>
-          <ellipse class="fallback-selected" cx="405" cy="131" rx="31" ry="33"/>
-          <path class="fallback-path" d="M438 131 C528 131 564 95 653 95"/>
+          <circle class="fallback-selected" cx="408" cy="102" r="34" pathLength="100"/>
+          <path class="fallback-path" d="M442 102 H674"/>
           <g class="fallback-queue"><rect x="674" y="87" width="205" height="30" rx="6"/><rect x="674" y="130" width="205" height="30" rx="6"/><rect x="674" y="173" width="205" height="30" rx="6"/></g>
           <g class="fallback-ranks"><text x="687" y="107">01</text><text x="687" y="150">02</text><text x="687" y="193">03</text></g>
         </svg>
-        <canvas id="hero-canvas"></canvas>
       </div>
-      <figcaption>Figure. Conceptual review-queue field. Illustration only, not benchmark data; a static schematic remains available without WebGL.</figcaption>
+      <figcaption>Figure. Review-queue sketch (not study data).</figcaption>
     </figure>
     <div class="journey-sticky"><div class="journey-grid">
       <div class="journey-visual">
@@ -1477,7 +1569,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
   </section>
 
   <section class="section" id="results">
-    <div class="section-heading reveal"><h2>Better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
+    <div class="section-heading reveal"><h2>On the original PanNuke benchmark, better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative PanNuke result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
     <div class="chapter-copy reveal"><p>The H4 experiment restored exactly the same 5% review budget under audit-guided and random selection, then trained the same downstream model and evaluated it on the untouched final reference fold. Audit-guided restoration was not favoured.</p></div>
     <div class="figure-width reveal result-layout">
       <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span></div><span class="result-number">__H4_POINT__</span><p>Audit-guided restoration produced macro-F1 <strong>__H4_AUDIT__</strong>, below the random-review mean of <strong>__H4_RANDOM__</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>__H4_POINT_PP__ percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
@@ -1525,7 +1617,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
 
   <section class="section" id="evidence">
     <div class="section-heading reveal"><h2>Every displayed result remains inspectable.</h2><p class="section-deck">Machine-readable summaries, exact identifiers and the complete 36-entry table remain available for audit. Package verification checks the published files; it does not recompute the primary study.</p></div>
-    <div class="chapter-copy reveal"><p>Every value in the article is read from the accepted sealed run and carried into <code>evidence.json</code>. The table below traces each statement to its hypothesis, raw identifier, seed, point difference, confidence interval, adjusted p-value and bootstrap count.</p><p>The timestamped July freeze records a null commit, a dirty tree and untracked files; the first public Git commit followed on 19 August 2026. Internal hashes preserve file identity, but the later public history is not independent evidence that outcomes were unseen.</p><p>The public <a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">primary evidence release</a> now contains all completed-cell OOF predictions and rankings, the full group bootstrap, subgroup table and H4 restoration arrays. Its independent verifier recalculates the saved H1-H7 comparison statistics. Fold checkpoints were not retained, and a second image-to-result execution still requires a lawful PanNuke copy.</p></div>
+    <div class="chapter-copy reveal"><p>Every value in the article is read from the accepted sealed run and carried into <code>evidence.json</code>. The table below traces each statement to its hypothesis, raw identifier, seed, point difference, confidence interval, adjusted p-value and bootstrap count.</p><p>The timestamped July freeze records a null commit, a dirty tree and untracked files; the first public Git commit followed on 19 August 2026. Internal hashes preserve file identity, but the later public history is not independent evidence that outcomes were unseen.</p><p>The public <a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">primary evidence release</a> contains all completed-cell OOF predictions and rankings, the full group bootstrap, subgroup table and H4 restoration arrays. A standalone evidence recalculator that does not import the primary analysis package recomputes the saved H1-H7 comparison statistics; this is not third-party validation. Fold checkpoints were not retained, and a second image-to-result execution still requires a lawful PanNuke copy.</p></div>
     <div class="wide-width reveal">
       <details class="evidence-details comparison-details"><summary>Inspect the complete H1 / H3 / H5 / H6 / H7 table <span>__REPORTED__ reported · __UNAVAILABLE__ unavailable</span></summary>
         <div class="table-tools"><label>Hypothesis<select id="filter-hypothesis"><option value="ALL">All hypotheses</option><option>H1</option><option>H3</option><option>H5</option><option>H6</option><option>H7</option></select></label><label>Status<select id="filter-status"><option value="ALL">All statuses</option><option value="reported">Reported</option><option value="not_available_frozen_optional_cell">Unavailable</option></select></label><label>Search<input id="filter-search" type="search" placeholder="Name, seed or comparison ID"></label><span class="table-count" id="table-count">__COMPARISONS__ / __COMPARISONS__ rows</span></div>
@@ -1541,7 +1633,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
 
   <section class="section" id="external-validation">
     <div class="section-heading reveal"><h2>The same system transferred under controlled noise, but natural-case proof is still missing.</h2><p class="section-deck">Later evidence changes the overall assessment without rewriting the adverse PanNuke H4 result. Each study answers a different question and keeps its own frozen boundary.</p></div>
-    <div class="chapter-copy reveal"><p>NuCLS is the closest completed test of genuine multi-rater disagreement. Its five-patient result did not satisfy the frozen ranking gate and the guided intervention made downstream macro-F1 worse. MoNuSAC then showed strong controlled retrieval but no statistically supported downstream gain or complete class safety.</p><p>The unchanged selected AANCA candidate was next frozen before PUMA evaluation. On a previously unused histopathology source it passed all seven registered retrieval, downstream, direction, convergence and class-safety gates under controlled corruption. That is meaningful evidence of controlled-noise transfer, but PUMA does not provide paired natural pre/post expert decisions and therefore cannot prove pathologist-error detection.</p><p><strong>Public-history limit.</strong> The PUMA protocol, configuration and result first appeared together in public commit <code>c5bd44193b2abd67bc7e7f1bd9384aa87435d500</code>. Internal authorities record the intended freeze-before-metrics ordering, but GitHub does not independently timestamp that sequence. The PUMA evidence-readback script rebuilds the manifest and recomputes decisions from saved arrays; it imports maintained project helpers and does not retrain all 44 models from source images.</p></div>
+    <div class="chapter-copy reveal"><p>NuCLS is the closest completed test of genuine multi-rater disagreement. Its five-patient result did not satisfy the frozen ranking gate and the guided intervention made downstream macro-F1 worse. MoNuSAC then showed strong controlled retrieval but no statistically supported downstream gain or complete class safety.</p><p>The selected AANCA candidate was next recorded internally as frozen before PUMA outcomes. On a previously unused histopathology source it passed all seven internally pre-specified retrieval, downstream, direction, convergence and class-safety gates under controlled corruption. The 144/62 development/final partition was created by AANCA from the 206 public PUMA ROIs; it was not the official hidden PUMA challenge test. The downstream <code>flag_exclude</code> arm omitted the highest-ranked 5% of training rows without expert review or relabelling. This is meaningful controlled-noise transfer evidence, but PUMA does not provide paired natural pre/post expert decisions and therefore cannot prove pathologist-error detection.</p><p><strong>Public-history limit.</strong> The PUMA protocol, configuration and result first appeared together in public commit <code>c5bd44193b2abd67bc7e7f1bd9384aa87435d500</code>, so public Git history does not independently verify the intended pre-outcome timing. The PUMA verifier is a project-coupled evidence-readback script that recomputes metrics from saved predictions but does not retrain all 44 models. It is not third-party validation or a second image-to-result replication.</p></div>
 __CURRENT_EVIDENCE__
   </section>
 
@@ -1649,14 +1741,14 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
     <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
-    <div class="footer-column"><h3>Inspect</h3><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+    <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Natan Smogór. This repository has no standalone general-purpose open-source licence; dataset files and pretrained weights retain their own terms.</span><span>Local PanNuke evidence applies CC BY-NC-SA 4.0 specifically to the release <code>masks/</code> directory. Project use is restricted to non-commercial research.</span></div>
+  <div class="footer-evidence"><span>PUMA public evidence commit <a href="https://github.com/Jaqwilk/AANCA/commit/__PUMA_PUBLIC_COMMIT__" target="_blank" rel="noopener"><code>__PUMA_PUBLIC_COMMIT_SHORT__</code></a></span><span><code>evidence.json</code> SHA-256 <code>__EVIDENCE_SHA256__</code></span></div>
+  <div class="footer-bottom"><span>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</span><span>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms. No diagnostic or clinical use is established.</span></div>
 </div></footer>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
 <script>__SCRIPT__</script>
-<script type="module">__THREE_SCRIPT__</script>
 </body>
 </html>
 """
@@ -1664,12 +1756,24 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
     replacements = {
         "__CSS__": _MVP_CSS,
         "__SCRIPT__": _MVP_SCRIPT,
-        "__THREE_SCRIPT__": _MVP_THREE_SCRIPT,
+        "__STUDY_SPECS__": _render_study_specs(),
         "__H4_POINT__": html.escape(_format_metric(point_difference)),
         "__H4_POINT_PP__": html.escape(f"{abs(point_difference) * 100:.3f}"),
         "__H4_AUDIT__": html.escape(_format_metric(h4["audit_guided_macro_f1"])),
         "__H4_RANDOM__": html.escape(_format_metric(h4["random_review_macro_f1_mean"])),
         "__H4_CHART__": h4_chart,
+        "__PUMA_PRECISION_4__": f"{puma['retrieval']['candidate_precision']:.4f}",
+        "__PUMA_RANDOM_PRECISION_4__": (
+            f"{puma['retrieval']['mean_matched_random_precision']:.4f}"
+        ),
+        "__PUMA_DELTA_F1_4__": f"{puma['downstream']['minus_uncorrected']:+.4f}",
+        "__PUMA_PUBLIC_COMMIT__": html.escape(
+            str(publication_limits["puma_first_public_combined_commit"])
+        ),
+        "__PUMA_PUBLIC_COMMIT_SHORT__": html.escape(
+            str(publication_limits["puma_first_public_combined_commit"])[:12]
+        ),
+        "__EVIDENCE_SHA256__": html.escape(evidence_sha256),
         "__HYPOTHESIS_LEDGER__": hypothesis_ledger,
         "__CURRENT_EVIDENCE__": current_evidence,
         "__FOREST_PLOT__": forest_plot,
@@ -2084,457 +2188,6 @@ def _render_hypothesis_ledger(
     return "".join(slides)
 
 
-_MVP_THREE_SCRIPT = r"""
-const canvas = document.getElementById('hero-canvas');
-const fallback = document.getElementById('hero-fallback');
-const stage = canvas ? canvas.closest('.method-queue-stage') : null;
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const disableCanvas = (reason = 'unavailable') => {
-  if (canvas) {
-    canvas.hidden = true;
-    canvas.dataset.renderer = 'unavailable';
-    canvas.dataset.animationState = 'unavailable';
-  }
-  if (fallback) fallback.hidden = false;
-  if (stage) {
-    stage.dataset.renderer = 'static-fallback';
-    stage.dataset.fallbackReason = reason;
-  }
-};
-const supportsWebGL = () => {
-  if (!window.WebGLRenderingContext) return false;
-  const probe = document.createElement('canvas');
-  try {
-    return Boolean(
-      probe.getContext('webgl2')
-      || probe.getContext('webgl')
-      || probe.getContext('experimental-webgl')
-    );
-  } catch (_error) {
-    return false;
-  }
-};
-
-if (!canvas || !fallback || !supportsWebGL()) {
-  disableCanvas('webgl-unavailable');
-} else {
-import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js').then(THREE => {
-try {
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: 'low-power',
-  });
-  renderer.setClearColor(0x010102, 0);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
-  camera.position.set(0, 0, 7.2);
-
-  let randomSeed = 314159265;
-  const random = () => {
-    randomSeed = (randomSeed * 1664525 + 1013904223) >>> 0;
-    return randomSeed / 4294967296;
-  };
-
-  const clamp = value => Math.max(0, Math.min(1, value));
-  const smooth = value => {
-    const limited = clamp(value);
-    return limited * limited * (3 - 2 * limited);
-  };
-
-  const auditField = new THREE.Group();
-  scene.add(auditField);
-
-  const makeLabelSprite = (text, width = .72, height = .16) => {
-    const labelCanvas = document.createElement('canvas');
-    labelCanvas.width = 512;
-    labelCanvas.height = 128;
-    const context = labelCanvas.getContext('2d');
-    context.clearRect(0, 0, labelCanvas.width, labelCanvas.height);
-    context.fillStyle = '#7e828d';
-    context.font = '500 34px "JetBrains Mono", monospace';
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillText(text, labelCanvas.width / 2, labelCanvas.height / 2);
-    const texture = new THREE.CanvasTexture(labelCanvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.minFilter = THREE.LinearFilter;
-    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: texture,
-      transparent: true,
-      opacity: .72,
-      depthWrite: false,
-    }));
-    sprite.scale.set(width, height, 1);
-    return sprite;
-  };
-
-  const blobVariants = Array.from({length: 9}, (_, variant) => {
-    const outlinePoints = [];
-    const shapePoints = [];
-    const segments = 32;
-    for (let pointIndex = 0; pointIndex < segments; pointIndex += 1) {
-      const angle = pointIndex / segments * Math.PI * 2;
-      const firstWave = 3 + variant % 3;
-      const secondWave = 5 + variant % 4;
-      const radius = 1
-        + Math.sin(angle * firstWave + variant * .71) * (.075 + (variant % 2) * .018)
-        + Math.cos(angle * secondWave - variant * .43) * .045;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-      shapePoints.push(new THREE.Vector2(x, y));
-      outlinePoints.push(new THREE.Vector3(x, y, .012));
-    }
-    return {
-      fill: new THREE.ShapeGeometry(new THREE.Shape(shapePoints)),
-      outline: new THREE.BufferGeometry().setFromPoints(outlinePoints),
-    };
-  });
-
-  const makeNucleus = (variant, {queueCopy = false} = {}) => {
-    const group = new THREE.Group();
-    const fillMaterial = new THREE.MeshBasicMaterial({
-      color: queueCopy ? 0x5e6ad2 : 0x323641,
-      transparent: true,
-      opacity: queueCopy ? .58 : .22,
-      depthWrite: false,
-    });
-    const outlineMaterial = new THREE.LineBasicMaterial({
-      color: queueCopy ? 0x97a2ff : 0x707786,
-      transparent: true,
-      opacity: queueCopy ? .92 : .42,
-      depthWrite: false,
-    });
-    group.add(new THREE.Mesh(blobVariants[variant].fill, fillMaterial));
-    group.add(new THREE.LineLoop(blobVariants[variant].outline, outlineMaterial));
-    group.userData.fillMaterial = fillMaterial;
-    group.userData.outlineMaterial = outlineMaterial;
-    return group;
-  };
-
-  const patchFramePoints = [
-    new THREE.Vector3(-1.91, -1.62, -.18),
-    new THREE.Vector3(.51, -1.62, -.18),
-    new THREE.Vector3(.51, 1.62, -.18),
-    new THREE.Vector3(-1.91, 1.62, -.18),
-  ];
-  const patchFrame = new THREE.LineLoop(
-    new THREE.BufferGeometry().setFromPoints(patchFramePoints),
-    new THREE.LineBasicMaterial({
-      color: 0x707580,
-      transparent: true,
-      opacity: .18,
-      depthWrite: false,
-    }),
-  );
-  auditField.add(patchFrame);
-  const sourceLabel = makeLabelSprite('SOURCE PATCH', .82, .15);
-  sourceLabel.position.set(-1.50, 1.78, 0);
-  auditField.add(sourceLabel);
-
-  const nucleusCount = 36;
-  const sourceNuclei = [];
-  const sourcePositions = [];
-  for (let index = 0; index < nucleusCount; index += 1) {
-    const angle = random() * Math.PI * 2;
-    const radius = Math.sqrt(random());
-    const position = new THREE.Vector3(
-      -.70 + Math.cos(angle) * radius * 1.02,
-      Math.sin(angle) * radius * 1.28,
-      -.04 + (random() - .5) * .08,
-    );
-    const nucleus = makeNucleus(index % blobVariants.length, {queueCopy: false});
-    const baseScale = .078 + random() * .042;
-    const stretch = .84 + random() * .42;
-    nucleus.position.copy(position);
-    nucleus.rotation.z = random() * Math.PI;
-    nucleus.userData.baseScale = baseScale;
-    nucleus.userData.stretch = stretch;
-    nucleus.userData.phase = random() * Math.PI * 2;
-    nucleus.scale.set(baseScale * stretch, baseScale, baseScale);
-    sourceNuclei.push(nucleus);
-    sourcePositions.push(position);
-    auditField.add(nucleus);
-  }
-
-  const selectedIndices = [7, 19, 28];
-  const queuePositions = selectedIndices.map((_, index) => new THREE.Vector3(
-    1.55,
-    .92 - index * .58,
-    .08,
-  ));
-
-  const queueLabel = makeLabelSprite('REVIEW QUEUE', .92, .15);
-  queueLabel.position.set(1.47, 1.78, 0);
-  auditField.add(queueLabel);
-  const queueCopies = [];
-  const queueSlotMaterial = new THREE.LineBasicMaterial({
-    color: 0x666b75,
-    transparent: true,
-    opacity: .28,
-    depthWrite: false,
-  });
-  selectedIndices.forEach((sourceIndex, index) => {
-    const y = queuePositions[index].y;
-    const slot = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(1.08, y - .17, -.12),
-        new THREE.Vector3(2.03, y - .17, -.12),
-      ]),
-      queueSlotMaterial,
-    );
-    auditField.add(slot);
-    const number = makeLabelSprite(String(index + 1).padStart(2, '0'), .24, .12);
-    number.position.set(.91, y, 0);
-    auditField.add(number);
-
-    const copy = makeNucleus(sourceIndex % blobVariants.length, {queueCopy: true});
-    copy.rotation.z = sourceNuclei[sourceIndex].rotation.z;
-    copy.scale.setScalar(.11);
-    copy.visible = false;
-    queueCopies.push(copy);
-    auditField.add(copy);
-  });
-
-  const selectRingMaterial = new THREE.MeshBasicMaterial({
-    color: 0xb4bbff,
-    transparent: true,
-    opacity: 0,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-  });
-  const selectRing = new THREE.Mesh(new THREE.RingGeometry(.19, .205, 48), selectRingMaterial);
-  selectRing.visible = false;
-  auditField.add(selectRing);
-
-  const trailMaterial = new THREE.LineBasicMaterial({
-    color: 0x8290f5,
-    transparent: true,
-    opacity: 0,
-    depthWrite: false,
-  });
-  const trailGeometry = new THREE.BufferGeometry();
-  const trail = new THREE.Line(trailGeometry, trailMaterial);
-  trail.visible = false;
-  auditField.add(trail);
-
-  const reviewRingMaterial = new THREE.MeshBasicMaterial({
-    color: 0xb9c0ff,
-    transparent: true,
-    opacity: 0,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-  });
-  const reviewRing = new THREE.Mesh(new THREE.RingGeometry(.145, .158, 48), reviewRingMaterial);
-  reviewRing.position.copy(queuePositions[0]);
-  auditField.add(reviewRing);
-
-  const backgroundGeometry = new THREE.BufferGeometry();
-  const backgroundPositions = [];
-  for (let index = 0; index < 48; index += 1) {
-    backgroundPositions.push(
-      (random() - .5) * 10,
-      (random() - .5) * 5.5,
-      -1.6 - random() * 1.4,
-    );
-  }
-  backgroundGeometry.setAttribute(
-    'position',
-    new THREE.Float32BufferAttribute(backgroundPositions, 3),
-  );
-  const background = new THREE.Points(
-    backgroundGeometry,
-    new THREE.PointsMaterial({color: 0x4f5359, size: .012, transparent: true, opacity: .22}),
-  );
-  scene.add(background);
-
-  const itemDuration = 1.9;
-  const activeDuration = selectedIndices.length * itemDuration;
-  const holdDuration = 1.8;
-  const fadeDuration = 1.0;
-  const cycleDuration = activeDuration + holdDuration + fadeDuration;
-  const sourcePoint = new THREE.Vector3();
-  const targetPoint = new THREE.Vector3();
-  const controlPoint = new THREE.Vector3();
-  const animatedPoint = new THREE.Vector3();
-
-  const queueCurve = (source, target) => {
-    controlPoint.set(
-      (source.x + target.x) / 2,
-      (source.y + target.y) / 2 + .22,
-      .28,
-    );
-    return new THREE.QuadraticBezierCurve3(source, controlPoint.clone(), target);
-  };
-
-  const updateScene = elapsed => {
-    const cycle = reduced ? activeDuration + .4 : elapsed % cycleDuration;
-    const fadeStart = activeDuration + holdDuration;
-    const cycleFade = cycle <= fadeStart ? 1 : 1 - smooth((cycle - fadeStart) / fadeDuration);
-    const activeIndex = cycle < activeDuration
-      ? Math.min(selectedIndices.length - 1, Math.floor(cycle / itemDuration))
-      : -1;
-    const activePhase = activeIndex >= 0
-      ? (cycle - activeIndex * itemDuration) / itemDuration
-      : 1;
-
-    sourceNuclei.forEach((nucleus, index) => {
-      const breath = reduced ? 1 : 1 + Math.sin(elapsed * .55 + nucleus.userData.phase) * .02;
-      const selectedPosition = selectedIndices.indexOf(index);
-      const alreadyQueued = selectedPosition >= 0 && cycle >= selectedPosition * itemDuration + 1.35;
-      const isActive = activeIndex >= 0 && selectedIndices[activeIndex] === index;
-      const baseScale = nucleus.userData.baseScale * breath;
-      nucleus.scale.set(
-        baseScale * nucleus.userData.stretch,
-        baseScale,
-        baseScale,
-      );
-      nucleus.userData.fillMaterial.color.setHex(isActive ? 0x5662c2 : 0x323641);
-      nucleus.userData.fillMaterial.opacity = isActive ? .48 : alreadyQueued ? .22 : .18;
-      nucleus.userData.outlineMaterial.color.setHex(
-        isActive ? 0xaab2ff : alreadyQueued ? 0x7985df : 0x707786,
-      );
-      nucleus.userData.outlineMaterial.opacity = isActive ? .95 : alreadyQueued ? .5 : .36;
-    });
-
-    queueCopies.forEach((copy, index) => {
-      const local = cycle - index * itemDuration;
-      if (local < .5 || cycleFade <= 0) {
-        copy.visible = false;
-        return;
-      }
-      const movement = smooth((local - .55) / .75);
-      sourcePoint.copy(sourcePositions[selectedIndices[index]]);
-      targetPoint.copy(queuePositions[index]);
-      const curve = queueCurve(sourcePoint, targetPoint);
-      curve.getPoint(movement, animatedPoint);
-      copy.position.copy(animatedPoint);
-      copy.visible = true;
-      const appearing = smooth((local - .5) / .16);
-      copy.userData.fillMaterial.opacity = .58 * appearing * cycleFade;
-      copy.userData.outlineMaterial.opacity = .94 * appearing * cycleFade;
-      const scale = .11 + .016 * smooth((local - .6) / .5);
-      copy.scale.setScalar(scale);
-    });
-
-    if (activeIndex >= 0) {
-      const activeSource = sourcePositions[selectedIndices[activeIndex]];
-      selectRing.position.copy(activeSource);
-      selectRing.position.z = .18;
-      selectRing.visible = activePhase < .88;
-      selectRingMaterial.opacity = (.55 + Math.sin(activePhase * Math.PI) * .35) * cycleFade;
-
-      if (activePhase > .28 && activePhase < .92) {
-        const movement = smooth((activePhase - .28) / .52);
-        const curve = queueCurve(activeSource, queuePositions[activeIndex]);
-        const trailPoints = [];
-        for (let pointIndex = 0; pointIndex <= 18; pointIndex += 1) {
-          trailPoints.push(curve.getPoint(movement * pointIndex / 18));
-        }
-        trailGeometry.setFromPoints(trailPoints);
-        trailMaterial.opacity = .72 * (1 - movement * .35) * cycleFade;
-        trail.visible = true;
-      } else {
-        trail.visible = false;
-      }
-    } else {
-      selectRing.visible = false;
-      trail.visible = false;
-    }
-
-    const firstArrived = cycle >= 1.35;
-    reviewRing.visible = firstArrived && cycleFade > 0;
-    reviewRingMaterial.opacity = firstArrived
-      ? (.22 + (reduced ? .12 : Math.sin(elapsed * 1.4) * .06)) * cycleFade
-      : 0;
-    reviewRing.scale.setScalar(reduced ? 1 : 1 + Math.sin(elapsed * 1.4) * .03);
-  };
-
-  const resize = () => {
-    const rect = canvas.getBoundingClientRect();
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const saveData = Boolean(connection && connection.saveData);
-    const ratioCap = saveData ? 1 : rect.width < 720 ? 1.25 : 1.5;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, ratioCap));
-    canvas.dataset.pixelRatioCap = String(ratioCap);
-    renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
-    camera.aspect = Math.max(.1, rect.width / Math.max(1, rect.height));
-    camera.updateProjectionMatrix();
-    const mobile = rect.width < 560;
-    auditField.position.set(mobile ? .05 : .12, mobile ? -.08 : 0, 0);
-    auditField.scale.setScalar(mobile ? .52 : rect.height < 260 ? .58 : .68);
-  };
-  resize();
-  window.addEventListener('resize', resize, {passive: true});
-
-  let heroVisible = true;
-
-  const timer = new THREE.Timer();
-  timer.connect(document);
-  const render = () => {
-    timer.update();
-    const elapsed = timer.getElapsed();
-    updateScene(elapsed);
-    if (!reduced) {
-      auditField.rotation.z = Math.sin(elapsed * .12) * .008;
-      background.rotation.z = elapsed * .002;
-    }
-    renderer.render(scene, camera);
-  };
-  let frameRequest = 0;
-  const shouldAnimate = () => !reduced && heroVisible && !document.hidden;
-  const frame = () => {
-    frameRequest = 0;
-    if (!shouldAnimate()) {
-      canvas.dataset.animationState = 'paused';
-      return;
-    }
-    render();
-    frameRequest = window.requestAnimationFrame(frame);
-  };
-  const syncRenderLoop = () => {
-    if (shouldAnimate()) {
-      canvas.dataset.animationState = 'running';
-      if (!frameRequest) frameRequest = window.requestAnimationFrame(frame);
-      return;
-    }
-    if (frameRequest) window.cancelAnimationFrame(frameRequest);
-    frameRequest = 0;
-    canvas.dataset.animationState = reduced ? 'static' : 'paused';
-    if (reduced) render();
-  };
-  if ('IntersectionObserver' in window) {
-    const visibilityObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.target === canvas) heroVisible = entry.isIntersecting;
-      });
-      syncRenderLoop();
-    }, {rootMargin: '160px 0px'});
-    visibilityObserver.observe(canvas);
-  }
-  canvas.addEventListener('webglcontextlost', event => {
-    event.preventDefault();
-    if (frameRequest) window.cancelAnimationFrame(frameRequest);
-    frameRequest = 0;
-    disableCanvas('webgl-context-lost');
-  }, {passive: false});
-  document.addEventListener('visibilitychange', syncRenderLoop);
-  if (reduced) window.addEventListener('resize', render, {passive: true});
-  render();
-  fallback.hidden = true;
-  stage.dataset.renderer = 'threejs-review-queue';
-  syncRenderLoop();
-  canvas.dataset.renderer = 'threejs-review-queue';
-  canvas.dataset.story = 'immutable-source-ranked-review';
-} catch (_error) {
-  disableCanvas('renderer-unavailable');
-}
-}).catch(() => disableCanvas('module-unavailable'));
-}
-"""
-
-
 _MVP_CSS = (Path(__file__).resolve().parent / "assets" / "mvp_presentation.css").read_text(
     encoding="utf-8"
 )
@@ -2751,8 +2404,9 @@ With the project environment installed, `uv run histo-audit demo serve` and
 - External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
   claims were not supported; MoNuSAC controlled retrieval passed but downstream and
   class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
-  registered gates. Its protocol and result entered public history together, so the
-  public repository does not independently prove the pre-outcome timing.
+  internally pre-specified gates. Its protocol and result entered public history
+  together, so the public repository does not independently prove the pre-outcome
+  timing.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
@@ -2762,6 +2416,16 @@ show that AANCA detects pathologist errors, discovers biological truth, improves
 real laboratory workflow or is clinically useful. The software never modifies
 source annotations automatically; it ranks potentially inconsistent annotations
 for qualified expert review.
+
+The 144/62 development/final partition is an AANCA-defined split of the 206 public
+PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream
+intervention was `flag_exclude`: the highest-ranked 5% of controlled training
+instances were omitted from downstream training. They were not reviewed, corrected
+or automatically relabelled by an expert.
+
+The PUMA verifier is a project-coupled evidence-readback script that recomputes
+metrics from saved predictions but does not retrain all 44 models. It is not
+third-party validation.
 
 ## Package contents
 
@@ -2935,9 +2599,16 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         and publication_limits.get("puma_public_preoutcome_timestamp_available") is False
         and publication_limits.get("puma_first_public_combined_commit")
         == "c5bd44193b2abd67bc7e7f1bd9384aa87435d500"
+        and publication_limits.get("puma_partition")
+        == "aanca_defined_144_development_62_final_of_206_public_rois"
+        and publication_limits.get("puma_official_hidden_challenge_test_used") is False
+        and publication_limits.get("puma_downstream_intervention")
+        == "flag_exclude_top_5_percent_training_rows"
+        and publication_limits.get("puma_flagged_rows_expert_reviewed_or_relabelled") is False
         and publication_limits.get("puma_verifier_retrains_models_from_images") is False
         and publication_limits.get("puma_verifier_scope")
         == "saved_evidence_readback_with_maintained_helpers"
+        and publication_limits.get("puma_verifier_is_third_party_validation") is False
     )
     if (
         evidence.get("schema_version") != 3
@@ -3025,8 +2696,13 @@ def build_mvp_presentation(
         "publication_limits": {
             "puma_public_preoutcome_timestamp_available": False,
             "puma_first_public_combined_commit": ("c5bd44193b2abd67bc7e7f1bd9384aa87435d500"),
+            "puma_partition": "aanca_defined_144_development_62_final_of_206_public_rois",
+            "puma_official_hidden_challenge_test_used": False,
+            "puma_downstream_intervention": "flag_exclude_top_5_percent_training_rows",
+            "puma_flagged_rows_expert_reviewed_or_relabelled": False,
             "puma_verifier_retrains_models_from_images": False,
             "puma_verifier_scope": "saved_evidence_readback_with_maintained_helpers",
+            "puma_verifier_is_third_party_validation": False,
         },
         "next_phase": {
             "stage": "INITIALISED",
@@ -3056,7 +2732,10 @@ def build_mvp_presentation(
     staging = Path(tempfile.mkdtemp(prefix=f".{output.name}.", dir=output.parent))
     try:
         atomic_write_json(staging / "evidence.json", evidence)
-        atomic_write_text(staging / "index.html", _render_html(evidence))
+        atomic_write_text(
+            staging / "index.html",
+            _render_html(evidence, evidence_sha256=sha256_file(staging / "evidence.json")),
+        )
         atomic_write_text(staging / "README.md", _render_readme(evidence))
         atomic_write_bytes(staging / "pannuke_mask_qc_overlays.png", overlay_source.read_bytes())
         manifest = _build_output_manifest(staging)

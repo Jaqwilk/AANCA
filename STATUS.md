@@ -6,10 +6,11 @@ Updated: 21 August 2026
 
 The checked-in `artifacts/mvp_demo` package was polished into a single long-form
 article layout: one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`),
-shared section hairlines instead of stacked pseudo-rules, typography-only hero
-masthead, Method WebGL figure with a quieter review-queue animation, aligned footer
-and current-evidence chapters from NuCLS, MoNuSAC and PUMA authorities. The
-five-file package verifies cleanly. No cleanup quarantine remains.
+shared section hairlines, a full-viewport hero masthead on a flat canvas (no decorative background layers),
+benchmark fact icons embedded from `src/histo_audit/assets/benchmark/`,
+a static SVG Method schematic (WebGL animation removed),
+aligned footer and current-evidence chapters from NuCLS, MoNuSAC and PUMA
+authorities. The five-file package verifies cleanly. No cleanup quarantine remains.
 
 ## Current scientific stage
 
@@ -22,7 +23,7 @@ five-file package verifies cleanly. No cleanup quarantine remains.
   completed; its retrieval gate passed, but the registered combined success rule
   was **not supported**.
 - The frozen autoresearch-selected candidate completed a genuinely new-source PUMA
-  controlled external confirmation. All seven registered gates passed and the scoped
+  controlled external confirmation. All seven internally pre-specified gates passed and the scoped
   PUMA evidence-readback verifier accepted the saved result. This supports
   controlled-noise transfer, not natural/pathologist-error detection or a second
   image-to-result replication.
@@ -50,6 +51,12 @@ lymphocyte/plasma-cell and other primary classes. A deterministic stratified spl
 placed 144 ROI/case groups (67,032 nuclei) in development and 62 groups (30,397
 nuclei) in the final partition with no overlap.
 
+The 144/62 development/final partition is an AANCA-defined split of the 206 public
+PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream
+intervention was `flag_exclude`: the highest-ranked 5% of training instances were
+omitted from downstream training. They were not reviewed, corrected or automatically
+relabelled by an expert, and source annotations remained unchanged.
+
 Frozen controlled-corruption retrieval:
 
 - 10% symmetric development corruption under four seeds;
@@ -72,10 +79,13 @@ Frozen downstream result on untouched final groups:
 - all seed directions were positive, every primary class-recall lower bound was at
   least `-0.01`, all 44 fits converged and all seven gates passed.
 
-Independent verification rebuilt the official manifest and group split, confirmed
+The project-coupled evidence readback rebuilt the official manifest and group split, confirmed
 source labels unchanged, checked every corruption field, OOF group allocation,
 complete-group neighbour exclusion and exact matched controls, and recomputed every
 metric and 3,000-draw bootstrap decision. Evidence identities:
+
+This readback recomputes metrics from saved predictions but does not retrain all 44
+models. It is not third-party validation or a second image-to-result replication.
 
 | Artifact | SHA-256 |
 | --- | --- |
@@ -257,7 +267,8 @@ Public release:
 - asset: `aanca-nucls-external-validation-v1.zip`, 4,001,323 bytes;
 - GitHub digest:
   `sha256:e7384e2e8ff6eeab97485dfa3196ddbd261bbe335ebfa572d9f275de402a4d08`;
-- a fresh extraction passed the independent verifier before upload.
+- a fresh extraction passed the standalone evidence recalculator before upload; this
+  is a software-independence check, not third-party validation.
 
 ## Engineering and publication status
 
@@ -678,10 +689,12 @@ Executed on 2026-08-21 after all code, policy and evidence changes:
   skip is the documented Windows/POSIX open-file rename difference;
 - `ruff check .`: passed;
 - `ruff format --check .`: all 216 maintained Python files formatted;
-- independent PUMA verifier: official manifest rebuilt, zero development/final
-  overlap, source labels unchanged, corruption fields exact, every query group
-  excluded from its neighbours, exact matched controls, retrieval/downstream metrics
-  and 3,000-draw bootstrap recalculated; all seven gates passed;
+- project-coupled PUMA evidence readback: official manifest rebuilt, zero
+  development/final overlap, source labels unchanged, corruption fields exact,
+  every query group excluded from its neighbours, exact matched controls,
+  retrieval/downstream metrics and 3,000-draw bootstrap recalculated; all seven
+  internally pre-specified gates passed. The readback did not retrain all 44 models
+  and is not third-party validation;
 - NuCLS supervised-QC feasibility verifier: official 27,648,000-byte SQLite source
   re-read, 0 stable element IDs with multiple class labels, paired pre/post endpoint
   unavailable and fail-closed action `retain_uncorrected`;
@@ -798,15 +811,16 @@ Final gates:
 - synthetic smoke: completed run
   `20260821T131337.066103Z_synthetic_smoke_9479d2b84a`; its generated dataset, run
   and build products were removed after validation;
-- primary independent verifier: 33 reported comparisons and 3 explicitly
+- primary standalone evidence recalculator: 33 reported comparisons and 3 explicitly
   unavailable comparisons recalculated, including adverse H4
   `-0.0021560596665870235`;
 - frozen NuCLS verifier: both subsets recalculated, primary natural and downstream
   claims not supported;
 - MoNuSAC verifier: four ranking candidates and 2,000 whole-patient bootstrap draws
   verified, combined success rule not supported;
-- PUMA verifier: official manifest rebuilt, all 44 fits converged and all seven
-  frozen controlled-new-source gates passed;
+- PUMA saved-evidence readback: official manifest rebuilt, all 44 stored fits were
+  marked converged and all seven internally pre-specified controlled-new-source gates
+  passed; this is project-coupled readback, not third-party validation or retraining;
 - selected-candidate verifier: exact development metrics reproduced with `220/220`
   converged fits and no final-test use;
 - NuCLS supervised-QC feasibility: official database re-read, no paired natural
@@ -902,3 +916,62 @@ Hostinger publication:
   disclosure and complete findings section;
 - production `index.html`, `evidence.json`, `README.md` and `manifest.json` matched
   the local SHA-256 identities byte for byte.
+
+## AANCA v1 public-claim and reproducibility clarification — 2026-08-21
+
+This release pass changed no frozen AANCA v1 candidate, parameter, partition,
+intervention, metric, confidence interval, success gate or source annotation. It
+corrected how the existing evidence is described and made the professor-facing
+release easier to inspect.
+
+Public clarifications:
+
+- PUMA is now consistently described as an internally frozen controlled new-source
+  confirmation with internally pre-specified gates. The protocol, configuration and
+  result first entered public Git history together, so GitHub does not independently
+  verify the intended pre-outcome ordering;
+- the 144/62 development/final partition is explicitly identified as an AANCA-defined
+  split of the 206 public PUMA ROIs, not the official hidden challenge test set;
+- `flag_exclude` is defined exactly: the highest-ranked 5% of controlled training
+  instances were omitted from downstream fitting. They were not expert-reviewed,
+  corrected or automatically relabelled;
+- the primary verifier is a standalone software recalculator, not third-party
+  validation. The PUMA verifier is a project-coupled saved-evidence readback that did
+  not retrain all 44 models;
+- the adverse downstream statement is scoped to the original PanNuke benchmark;
+- the demo now includes a 90-second evidence summary, exact footer evidence identity,
+  SRI-bound external animation scripts and an accessible static Method schematic;
+- `PROFESSOR_BRIEF.md`, `CONTRIBUTIONS.md`, `CITATION.cff` and `LICENSE` record the
+  one-page assessment, author/AI roles, citation metadata and code/data rights
+  boundary. No custom domain or archival DOI is claimed before the owner creates it;
+- GitHub Actions now runs `mypy` on both supported operating systems before the full
+  suite.
+
+Final local evidence:
+
+- complete suite: `1150 passed, 1 skipped` in 754.70 seconds; the single skip is the
+  documented Windows/POSIX open-file rename difference;
+- final demo/CI regression after source and stylesheet stabilisation: `11 passed` in
+  0.85 seconds;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 216 maintained Python files formatted;
+- `uv run mypy src`: no issues in 103 source files;
+- `uv build --wheel`: passed, including the presentation stylesheet and five sealed
+  benchmark-icon assets;
+- standalone launcher verification: valid five-file package, scientific status
+  `EXTERNAL_VALIDATION_COMPLETE`, manifest root
+  `d112c3953401d319822711dc933f7578d364964c3f3a6da1118086d7fb95f8b6`;
+- final Playwright desktop and 390 px mobile readback: no horizontal overflow,
+  console error or warning; all five benchmark icons and the static Method SVG
+  rendered, lazy images loaded after traversal, every reveal became visible, and the
+  mobile menu opened, closed on Escape and restored its ARIA state.
+
+Hostinger publication:
+
+- connectivity and the local five-file seal were verified before upload;
+- the preceding live release was backed up under ID `20260821-215253`;
+- the package was deployed in replace mode to
+  `mediumaquamarine-wombat-125861.hostingersite.com`;
+- the page, evidence and external animation assets returned HTTP 200;
+- cache readback for `index.html`, `evidence.json`, `README.md` and `manifest.json`
+  matched the local SHA-256 identities byte for byte.
