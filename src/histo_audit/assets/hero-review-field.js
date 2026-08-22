@@ -54,15 +54,15 @@
       zoomToStudy: 2.45,
       logoDisplay: 1.8,
       returnSpinDive: 1.35,
-      returnFadeToBlack: 0.22,
-      returnBlackHold: 0.195,
+      returnFadeToBlack: 0.34,
+      returnBlackHold: 0.32,
       returnRevealField: 0.46,
       returnFieldHold: 0.14,
     }),
     fieldReveal: Object.freeze({
       groupCount: 8,
       staggerSpan: 0.455,
-      blackReleaseEnd: 0.24,
+      blackReleaseEnd: 0.42,
     }),
     morph: Object.freeze({
       cameraEnd: 0.72,
@@ -73,7 +73,7 @@
       colorStart: 0.52,
       colorEnd: 1,
     }),
-    dive: Object.freeze({ endScale: 120, fadeScale: 150 }),
+    dive: Object.freeze({ endScale: 120, fadeScale: 150, blackOpaqueAt: 0.78 }),
     renderProfiles: Object.freeze({
       constrained: Object.freeze({ dprCap: 1.25, pixelBudget: 2200000, cacheSize: 384 }),
       balanced: Object.freeze({ dprCap: 1.5, pixelBudget: 3200000, cacheSize: 448 }),
@@ -111,16 +111,16 @@
     }),
     mobile: Object.freeze({
       nucleusCount: 30,
-      auditCount: 3,
-      selectCount: 3,
-      selectedScanPositions: Object.freeze([0, 1, 2]),
-      patchScale: 0.92,
+      auditCount: 2,
+      selectCount: 2,
+      selectedScanPositions: Object.freeze([0, 1]),
+      patchScale: 0.78,
       patchScreenX: 0.5,
-      patchScreenY: 0.68,
+      patchScreenY: 0.8,
       studyScreenX: 0.5,
-      studyScreenY: 0.74,
+      studyScreenY: 0.8,
       logoScreenX: 0.5,
-      logoScreenY: 0.74,
+      logoScreenY: 0.8,
       studyPatchFraction: 0.13,
       studyPatchMin: 42,
       studyPatchMax: 52,
@@ -972,12 +972,17 @@
       const toX = nucleusWorldX(nucleus);
       const toY = nucleusWorldY(nucleus);
       const toSize = nucleusFrameSize(nucleus);
+      const firstMobileScan = isMobile && !auditFrame.visible;
       const fromX = auditFrame.visible
         ? auditFrame.x
-        : currentPatchWorldX() - patchSize * 0.38;
+        : firstMobileScan
+          ? toX - patchSize * 0.08
+          : currentPatchWorldX() - patchSize * 0.38;
       const fromY = auditFrame.visible
         ? auditFrame.y
-        : currentPatchWorldY() - patchSize * 0.04;
+        : firstMobileScan
+          ? toY + patchSize * 0.06
+          : currentPatchWorldY() - patchSize * 0.04;
       const fromSize = auditFrame.visible ? auditFrame.size : toSize * 0.88;
       const deltaX = toX - fromX;
       const deltaY = toY - fromY;
@@ -1002,7 +1007,7 @@
       auditFrame.previousY = fromY;
       auditFrame.size = fromSize;
       auditFrame.previousSize = fromSize;
-      auditFrame.alpha = scanIndex === 0 ? 0 : 1;
+      auditFrame.alpha = firstMobileScan ? 0.35 : scanIndex === 0 ? 0 : 1;
       auditFrame.previousAlpha = auditFrame.alpha;
       auditFrame.settleAmount = 0;
       activeNucleusId = plan.nucleusId;
@@ -1397,9 +1402,8 @@
         }
 
         if (stateElapsed < fadeComplete) {
-          const fadeProgress = easeInOutCubic(
-            clamp((stateElapsed - spinDive) / fadeToBlack, 0, 1)
-          );
+          const rawFadeProgress = clamp((stateElapsed - spinDive) / fadeToBlack, 0, 1);
+          const fadeProgress = easeInOutCubic(rawFadeProgress);
           logoRotation = Math.PI / 4 + Math.PI * (4.5 + fadeProgress * 0.75);
           logoColorProgress = 1;
           logoDetailAlpha = 0;
@@ -1408,7 +1412,12 @@
             CONFIG.dive.fadeScale,
             fadeProgress
           );
-          loopBlackAlpha = fadeProgress;
+          const blackProgress = clamp(
+            rawFadeProgress / CONFIG.dive.blackOpaqueAt,
+            0,
+            1
+          );
+          loopBlackAlpha = easeOutCubic(blackProgress);
           return;
         }
 

@@ -15,12 +15,17 @@ a short review queue of copies while source marks stay in place, then a nucleus 
 patch → AANCA-mark transformation. The split into four non-overlapping patches,
 camera move, 45° rotation and transition to the mark colour overlap on one continuous
 timeline rather than pausing at an intermediate grid. The completed mark holds for
-1.8 seconds, then spins and dives fully through the camera before a 0.195-second black
-pause. Eight small stagger groups bring the cell field back for the next cycle. The
+1.8 seconds, then spins and dives fully through the camera before a 0.32-second fully
+opaque black pause. Eight small stagger groups bring the cell field back for the next cycle. The
 return is not a hard canvas cut. It does not claim
 automatic diagnosis or label correction. Runtime rendering is capped at 60 frames per
 second and uses hardware-aware pixel and cache budgets rather than scaling work with a
 120–240 Hz display or an unnecessarily high device-pixel ratio.
+On mobile, the audit now makes exactly two visible selections, keeps the initial field,
+patch zoom, study view and mark below the hero copy, and reaches full black before the
+field returns. A 390 x 844 Playwright capture sampled the complete loop every 275 ms;
+the two selected nuclei and two queued copies remained visible and no mark fragment
+survived the full-black frames.
 The benchmark overview is implemented natively as a narrow, centred article-style
 HTML/CSS section with five restrained text rows; it has no screenshot, decorative
 panel or generated-image dependency. The Method workflow graphic has been removed;
@@ -59,6 +64,11 @@ The package now contains thirteen checksum-bound files. Current validation:
   and reverse return to H1; 390 x 844 mobile had no sticky enhancement or horizontal
   overflow; reduced motion exposed all seven answers and both static evidence views;
   all three variants reported zero console errors and warnings.
+
+After the mobile hero correction, `node --check`, the nine focused presentation tests,
+the relevant Ruff checks and standalone package verification passed. The regenerated package has manifest root
+`4ac9cb1b4dfe09581343832d3ec89957cf79cea2fa0c3cab9b95326ca3e8035f`.
+The full suite has deliberately not been repeated during these small visual iterations.
 
 ## Current scientific stage
 
