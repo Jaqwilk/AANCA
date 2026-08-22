@@ -80,6 +80,8 @@ The package now contains thirteen checksum-bound files. Current validation:
 - NuCLS, MoNuSAC and PUMA evidence verification passed with their saved conclusions
   unchanged; the NuCLS paired pre/post feasibility endpoint remained unavailable and
   fail-closed;
+- GitHub Actions run `32576578389` passed on Ubuntu and Windows for publication
+  commit `6d6e90a5f0e6c7edfbb3a513c761cf95db1c23d9`;
 - Playwright at 1440 x 900 confirmed the H1-H7 row/node sequence, final atlas state
   and reverse return to H1; 390 x 844 mobile had no sticky enhancement or horizontal
   overflow; reduced motion exposed all seven answers and both static evidence views;
@@ -89,22 +91,19 @@ The complete maintained suite and all release gates were repeated after the visu
 corrections. Scientific evidence, accepted metrics and completion stages were
 unchanged.
 
-Hostinger deployment completed on 22 August 2026 for
-`mediumaquamarine-wombat-125861.hostingersite.com`. The deploy tool verified the
-thirteen-file package, connected over SSH/SFTP, and most recently created remote backup
-`20260822-125333` before replacing only that domain's `public_html`; HTTP verification returned 200
-for the page and followed assets. Independent SHA-256 readback confirmed that the live
-`index.html` was byte-identical to the then-current canonical package (manifest root
-`c9ef3956dbf9b60f5307d4683a428d0b78f7c18f59620a189c43815e5e4e73a3`), contained
-the unified footer and AI disclosure, and no longer contained either removed footer strip. All
-twelve manifest-listed public resources were reachable after the final full upload;
-the four text resources were byte-identical, while Hostinger's CDN recompressed the
-eight served PNG representations as expected.
-
-A later read-only deployment verification rebuilt and sealed the local package but
-could not authenticate the saved Hostinger credential profile. The production page
-remained healthy; the current `6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b`
-package has not yet replaced that live version.
+The release was deployed to
+`mediumaquamarine-wombat-125861.hostingersite.com` after the deploy tool rebuilt and
+verified the package, connected over SSH/SFTP and created rollback backup
+`20260822-161538`. Only that domain's `public_html` was replaced. The page and every
+followed asset returned HTTP 200. Independent cache-busted readback confirmed that
+production `index.html`, `evidence.json`, `README.md` and `manifest.json` are byte-for-byte
+identical to the checked-in package, and the GitHub `main` manifest is identical to the
+local manifest with root
+`6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b`.
+Production Playwright readback at 1440 x 900 and 390 x 844 reported no horizontal
+overflow, console error or warning after lazy assets loaded. The mobile hero made
+exactly two selections, queued two copies, loaded all six sprites without failure and
+reached fully opaque black before beginning its next cycle.
 
 ## Current scientific stage
 
