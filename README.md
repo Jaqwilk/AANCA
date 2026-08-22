@@ -19,8 +19,9 @@ and never modifies source annotations automatically.
 
 The presentation is a minimalist long-form article rather than a product dashboard.
 Its Canvas 2D hero uses local nucleus artwork to show immutable source instances,
-second-look selections and a review-only visual sequence. The scientific Findings
-section uses a slim white progress spine to move through the seven registered
+second-look selections and a review-only visual sequence. On mobile it makes two
+explicit selections and keeps every animation stage below the article copy. The
+scientific Findings section uses a slim white progress spine to move through the seven registered
 questions before the complete comparison atlas. The spine is navigation only, not a
 second quantitative chart. Neither visual changes a source label or implies that
 model disagreement establishes biological truth.
@@ -149,7 +150,7 @@ transparent PNG sprites. It keeps source instances in place, moves only visual c
 into the review queue and resolves the first patch into four separate patches while
 the pull-out, 45° rotation and colour transition continue on one uninterrupted
 timeline. The resulting AANCA mark then performs a deep spinning dive after a
-1.8-second hold. A 0.195-second full-black frame is followed by eight quick staggered
+1.8-second hold. A 0.32-second full-black pause is followed by eight quick staggered
 groups of cells, completing the continuous loop without a hard cut.
 Canvas rendering is capped at 60 frames per second and uses hardware-aware pixel and
 cache budgets so high-refresh and high-DPI screens do not multiply work unnecessarily.

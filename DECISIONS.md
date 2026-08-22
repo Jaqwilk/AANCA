@@ -585,7 +585,7 @@ sprites. Brightness adjustment is applied once while preparing each runtime spri
 cache so the supplied dark-cell artwork remains legible without changing the sealed
 source PNG files. The review story must keep marked source instances in place and move
 only identical visual copies into the expert-review queue. The audit frame visits only
-the four desktop or three mobile instances that are actually copied; decorative
+the four desktop or two mobile instances that are actually copied; decorative
 non-selection scans are excluded from the story.
 
 After the patch zoom, reveal four separate square patches in a 2 x 2 grid while the
@@ -597,10 +597,16 @@ into `#5e6ad2`. Do not add a Canvas wordmark. Hold the completed mark for 1.8
 seconds. Then drive it through more than two additional rotations with continuous
 in/out easing while scaling it into the camera: reach 120 times scale during the dive
 and continue to 150 times during the black fade so no logo fragment remains on screen.
-Keep the full-black frame for 0.195 seconds, reset the camera while it is hidden, then
-clear the black layer quickly and reveal the unchanged field in eight short staggered
+Keep the full-black frame for 0.32 seconds, reset the camera while it is hidden, then
+release the black layer smoothly and reveal the unchanged field in eight short staggered
 groups. Continue directly into the next audit cycle without clearing the canvas. Under
 reduced motion, render the completed static mark and do not run the loop.
+
+On mobile, keep the two inspected source nuclei, their two queued visual copies, the
+patch zoom, study arrangement and completed mark entirely below the hero copy. Start
+the first audit frame close to its target so both inspections read as deliberate scans.
+Reach fully opaque black before the dive ends and retain it long enough that no edge of
+the enlarged mark can survive into the field restart.
 
 Keep the scan phase brisk enough to match the later transformations while retaining
 continuous easing for frame travel, inspection, cloning and queue flight. Decouple

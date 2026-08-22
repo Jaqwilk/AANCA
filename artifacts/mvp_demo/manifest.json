@@ -52,8 +52,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "c652fd7f5dbb753a700b28001b2ead7c552969adf64a72ca0f5503e1c3c6b342",
-      "size_bytes": 221418
+      "sha256": "2a499b363998aa9e606a761c17ae179c333f71dede4dfafe75eca249c6034a3e",
+      "size_bytes": 221826
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -61,7 +61,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "4acfbc5b4fbea9cc3d829c26f82416393674c6f916bf2733cc3e4e09f3450bc7",
+  "manifest_root_sha256": "4ac9cb1b4dfe09581343832d3ec89957cf79cea2fa0c3cab9b95326ca3e8035f",
   "policy": "aanca_presentation_current_evidence_readback_v4",
   "schema_version": 4
 }

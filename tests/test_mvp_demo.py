@@ -692,17 +692,17 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "colorStart: 0.52" in html
     assert "camera.goalScale = cubicBezier" in html
     assert "returnSpinDive: 1.35" in html
-    assert "returnFadeToBlack: 0.22" in html
-    assert "returnBlackHold: 0.195" in html
+    assert "returnFadeToBlack: 0.34" in html
+    assert "returnBlackHold: 0.32" in html
     assert "returnRevealField: 0.46" in html
     assert "diveProgress * Math.PI * 4.5" in html
-    assert "dive: Object.freeze({ endScale: 120, fadeScale: 150 })" in html
+    assert "dive: Object.freeze({ endScale: 120, fadeScale: 150, blackOpaqueAt: 0.78 })" in html
     assert "loopDiveScale = lerp(1, CONFIG.dive.endScale, diveProgress)" in html
     assert "CONFIG.dive.fadeScale" in html
     assert "loopBlackAlpha" in html
     assert "groupCount: 8" in html
     assert "staggerSpan: 0.455" in html
-    assert "blackReleaseEnd: 0.24" in html
+    assert "blackReleaseEnd: 0.42" in html
     assert "introProgress = revealRawProgress" in html
     assert "loopFlashAlpha" not in html
     assert "context.fillStyle = COLORS.canvas" in html
@@ -722,9 +722,15 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "drawWordmark" not in html
     assert "fillTrackedText" not in html
     assert "auditCount: 4" in html
-    assert "auditCount: 3" in html
+    assert "auditCount: 2" in html
     assert "selectedScanPositions: Object.freeze([0, 1, 2, 3])" in html
-    assert "selectedScanPositions: Object.freeze([0, 1, 2])" in html
+    assert "selectedScanPositions: Object.freeze([0, 1])" in html
+    assert "patchScale: 0.78" in html
+    assert "patchScreenY: 0.8" in html
+    assert "studyScreenY: 0.8" in html
+    assert "logoScreenY: 0.8" in html
+    assert "firstMobileScan" in html
+    assert "rawFadeProgress / CONFIG.dive.blackOpaqueAt" in html
     assert '<p class="eyebrow hero-animate">' not in html
     assert (
         "A group-safe framework that ranks <em>potentially inconsistent annotations</em> "
