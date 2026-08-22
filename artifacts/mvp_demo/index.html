@@ -426,62 +426,25 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 .findings-story { position: relative; height: auto; padding: 0; }
 .findings-story__sticky { position: relative; }
 .findings-story__inner {
-  width: min(var(--wide), calc(100% - 2 * var(--page-pad)));
+  width: min(900px, calc(100% - 2 * var(--page-pad)));
   margin-inline: auto;
 }
 .findings-story__visual {
-  width: min(380px, 100%);
+  width: 80px;
   margin: 0 auto var(--space-xl);
-  color: var(--ink-tertiary);
 }
 .evidence-spine-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .evidence-spine-line,
-.evidence-spine-progress,
-.evidence-zero,
-.evidence-context-origin,
-.evidence-line,
-.evidence-merge,
-.evidence-unavailable,
-.atlas-zero,
-.atlas-ci,
-.atlas-group-rule,
-.atlas-unavailable,
-.evidence-summary-glyph path {
+.evidence-spine-progress {
   fill: none;
   vector-effect: non-scaling-stroke;
 }
-.evidence-spine-line { stroke: var(--line-strong); stroke-width: 1; }
-.evidence-spine-progress { stroke: var(--accent); stroke-width: 1.25; }
+.evidence-spine-line { stroke: #fff; stroke-width: 1; opacity: .22; }
+.evidence-spine-progress { stroke: #fff; stroke-width: 1.25; }
 .evidence-node {
-  fill: var(--canvas); stroke: var(--ink-tertiary); stroke-width: 1.25;
+  fill: var(--canvas); stroke: #fff; stroke-width: 1;
   vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center;
 }
-.evidence-stage { display: none; }
-.evidence-zero, .evidence-context-origin, .atlas-zero {
-  stroke: var(--line-strong); stroke-width: 1;
-}
-.evidence-line {
-  stroke: var(--accent-hover); stroke-width: 1.25;
-  stroke-dasharray: 1; stroke-dashoffset: 0;
-}
-.evidence-point { fill: var(--accent); stroke: var(--accent-hover); stroke-width: .8; }
-.evidence-context-range { stroke: var(--ink-tertiary); }
-.evidence-context-end { fill: var(--canvas); stroke: var(--accent-hover); stroke-width: 1; }
-.evidence-merge { stroke: var(--ink-tertiary); stroke-width: 1.25; }
-.evidence-unavailable, .atlas-unavailable {
-  stroke: var(--ink-tertiary); stroke-width: 1; stroke-dasharray: 3 4;
-}
-.evidence-unavailable-dot {
-  fill: var(--canvas); stroke: var(--ink-tertiary); stroke-width: 1; stroke-dasharray: 2 2;
-}
-.evidence-summary-rail { opacity: .58; }
-.evidence-summary-glyph path { stroke: var(--line-strong); stroke-width: 1; }
-.evidence-summary-glyph circle { fill: var(--accent); }
-.atlas-preview { opacity: 1; }
-.atlas-zero { opacity: .85; }
-.atlas-ci { stroke: var(--ink-tertiary); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
-.atlas-point { fill: var(--accent); }
-.atlas-group-rule { stroke: var(--line); stroke-width: 1; }
 .findings-story__content { position: relative; }
 .findings-story__eyebrow {
   max-width: var(--editorial); margin: 0 0 var(--space-xl);
@@ -505,9 +468,6 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 .article-findings .hypothesis-row .learned-answer {
   max-width: 640px; margin: var(--space-sm) 0 0; color: var(--ink-muted);
 }
-.findings-story__atlas-note {
-  margin: var(--space-lg) 0 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.5;
-}
 .findings-story--mobile-reveal:not(.findings-story--enhanced) .hypothesis-row {
   opacity: 0; transform: translateY(9px); transition: opacity .5s ease, transform .5s ease;
 }
@@ -516,20 +476,18 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 }
 
 @media (min-width: 901px) {
-  .findings-story--enhanced { height: 680svh; }
+  .findings-story--enhanced { height: 620svh; }
   .findings-story--enhanced .findings-story__sticky {
     position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h));
     display: flex; align-items: center; overflow: hidden;
   }
   .findings-story--enhanced .findings-story__inner {
-    display: grid; grid-template-columns: minmax(300px, .78fr) minmax(520px, 1.22fr);
-    align-items: center; gap: clamp(48px, 6vw, 92px);
+    display: grid; grid-template-columns: 72px minmax(0, 640px);
+    justify-content: center; align-items: center; gap: clamp(44px, 5vw, 72px);
   }
   .findings-story--enhanced .findings-story__visual {
-    width: 100%; margin: 0; will-change: transform;
+    width: 72px; margin: 0; will-change: transform;
   }
-  .findings-story--enhanced .evidence-stage { display: block; opacity: 0; }
-  .findings-story--enhanced .atlas-preview { opacity: 0; }
   .findings-story--enhanced .findings-story__eyebrow {
     margin-bottom: var(--space-lg); font-size: clamp(23px, 2.4vw, 32px);
   }
@@ -547,9 +505,6 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
     font-size: clamp(23px, 2.3vw, 30px); line-height: 1.35;
   }
   .findings-story--enhanced .learned-answer { font-size: 15px; line-height: 1.65; }
-  .findings-story--enhanced .findings-story__atlas-note {
-    position: absolute; left: 0; bottom: -3px; margin: 0; opacity: 0;
-  }
 }
 
 /* Results / charts */
@@ -972,7 +927,6 @@ html.motion-enhanced .reveal,
   }
   .hypothesis-row[data-evidence-step="5"]::before { background: transparent; border-top: 1px dashed var(--ink-tertiary); }
   .hypothesis-row[data-evidence-step="5"]::after { border-style: dashed; border-color: var(--ink-tertiary); }
-  .findings-story__atlas-note { display: none; }
   .footer-grid { grid-template-columns: 1.25fr 1fr; gap: var(--space-2xl); }
   .footer-column:last-child { grid-column: 2 / -1; }
   .forest-row { grid-template-columns: 1fr 78px; gap: 8px 12px; padding: 10px 0; }
@@ -1058,8 +1012,6 @@ html.motion-enhanced .reveal,
   .findings-story { height: auto !important; }
   .findings-story__sticky { position: relative !important; top: auto !important; height: auto !important; overflow: visible !important; }
   .findings-story .hypothesis-row { opacity: 1 !important; transform: none !important; }
-  .findings-story .evidence-stage { display: none !important; }
-  .findings-story .evidence-summary-rail, .findings-story .atlas-preview { opacity: 1 !important; transform: none !important; }
 }
 
 
@@ -1167,13 +1119,12 @@ html.motion-enhanced .reveal,
     <div class="findings-story learned-story article-findings" id="learned-story">
       <div class="findings-story__sticky">
         <div class="findings-story__inner">
-          <div class="findings-story__visual" aria-hidden="true"><svg class="evidence-spine-svg" viewBox="0 0 460 600" preserveAspectRatio="xMidYMid meet" focusable="false"><path class="evidence-spine-line" d="M34 70V520" pathLength="1"/><path class="evidence-spine-progress" d="M34 70V520" pathLength="1"/><circle class="evidence-node" data-evidence-node="0" cx="34" cy="70" r="3.5"/><circle class="evidence-node" data-evidence-node="1" cx="34" cy="145" r="3.5"/><circle class="evidence-node" data-evidence-node="2" cx="34" cy="220" r="3.5"/><circle class="evidence-node" data-evidence-node="3" cx="34" cy="295" r="3.5"/><circle class="evidence-node" data-evidence-node="4" cx="34" cy="370" r="3.5"/><circle class="evidence-node" data-evidence-node="5" cx="34" cy="445" r="3.5"/><circle class="evidence-node" data-evidence-node="6" cx="34" cy="520" r="3.5"/><g class="evidence-stage-layer"><g class="evidence-stage" data-evidence-stage="0"><path class="evidence-zero" d="M143.82 132V452" pathLength="1"/><path class="evidence-line evidence-interval" d="M370.62 172.00H392.17" pathLength="1"/><circle class="evidence-point" cx="381.90" cy="172.00" r="3.2"/><path class="evidence-line evidence-interval" d="M377.09 192.00H397.34" pathLength="1"/><circle class="evidence-point" cx="387.44" cy="192.00" r="3.2"/><path class="evidence-line evidence-interval" d="M376.39 212.00H397.63" pathLength="1"/><circle class="evidence-point" cx="387.20" cy="212.00" r="3.2"/><path class="evidence-line evidence-interval" d="M385.69 232.00H407.50" pathLength="1"/><circle class="evidence-point" cx="396.55" cy="232.00" r="3.2"/><path class="evidence-line evidence-interval" d="M380.78 252.00H402.00" pathLength="1"/><circle class="evidence-point" cx="391.33" cy="252.00" r="3.2"/><path class="evidence-line evidence-interval" d="M378.47 272.00H399.93" pathLength="1"/><circle class="evidence-point" cx="389.22" cy="272.00" r="3.2"/><path class="evidence-line evidence-interval" d="M169.84 292.00H178.61" pathLength="1"/><circle class="evidence-point" cx="174.13" cy="292.00" r="3.2"/><path class="evidence-line evidence-interval" d="M169.84 312.00H178.61" pathLength="1"/><circle class="evidence-point" cx="174.13" cy="312.00" r="3.2"/><path class="evidence-line evidence-interval" d="M169.84 332.00H178.61" pathLength="1"/><circle class="evidence-point" cx="174.13" cy="332.00" r="3.2"/><path class="evidence-line evidence-interval" d="M378.27 352.00H399.27" pathLength="1"/><circle class="evidence-point" cx="389.10" cy="352.00" r="3.2"/><path class="evidence-line evidence-interval" d="M382.86 372.00H403.60" pathLength="1"/><circle class="evidence-point" cx="393.36" cy="372.00" r="3.2"/><path class="evidence-line evidence-interval" d="M385.47 392.00H407.29" pathLength="1"/><circle class="evidence-point" cx="396.48" cy="392.00" r="3.2"/></g><g class="evidence-stage" data-evidence-stage="1"><path class="evidence-context-origin" d="M116 190V410" pathLength="1"/><path class="evidence-line evidence-context-range" d="M120.18 220H379.38" pathLength="1"/><circle class="evidence-context-end" cx="120.18" cy="220" r="2.4"/><circle class="evidence-context-end" cx="379.38" cy="220" r="2.4"/><path class="evidence-line evidence-context-range" d="M121.69 275H353.54" pathLength="1"/><circle class="evidence-context-end" cx="121.69" cy="275" r="2.4"/><circle class="evidence-context-end" cx="353.54" cy="275" r="2.4"/><path class="evidence-line evidence-context-range" d="M126.18 330H314.00" pathLength="1"/><circle class="evidence-context-end" cx="126.18" cy="330" r="2.4"/><circle class="evidence-context-end" cx="314.00" cy="330" r="2.4"/><path class="evidence-line evidence-context-range" d="M126.18 385H314.00" pathLength="1"/><circle class="evidence-context-end" cx="126.18" cy="385" r="2.4"/><circle class="evidence-context-end" cx="314.00" cy="385" r="2.4"/></g><g class="evidence-stage" data-evidence-stage="2"><path class="evidence-zero" d="M143.82 132V452" pathLength="1"/><path class="evidence-line evidence-interval" d="M143.90 220.00H157.79" pathLength="1"/><circle class="evidence-point" cx="151.01" cy="220.00" r="3.2"/><path class="evidence-line evidence-interval" d="M143.07 248.00H156.32" pathLength="1"/><circle class="evidence-point" cx="149.74" cy="248.00" r="3.2"/><path class="evidence-line evidence-interval" d="M146.18 276.00H160.21" pathLength="1"/><circle class="evidence-point" cx="153.10" cy="276.00" r="3.2"/><path class="evidence-line evidence-interval" d="M346.85 304.00H370.02" pathLength="1"/><circle class="evidence-point" cx="358.79" cy="304.00" r="3.2"/><path class="evidence-line evidence-interval" d="M351.62 332.00H374.06" pathLength="1"/><circle class="evidence-point" cx="362.98" cy="332.00" r="3.2"/><path class="evidence-line evidence-interval" d="M354.12 360.00H377.60" pathLength="1"/><circle class="evidence-point" cx="366.04" cy="360.00" r="3.2"/></g><g class="evidence-stage" data-evidence-stage="3"><path class="evidence-zero" d="M270.00 205V385" pathLength="1"/><path class="evidence-line evidence-interval" d="M233.31 295H252.13" pathLength="1"/><circle class="evidence-point" cx="242.33" cy="295" r="3.2"/></g><g class="evidence-stage" data-evidence-stage="4"><path class="evidence-merge" d="M116 270L148 292M116 314L148 292" pathLength="1"/><path class="evidence-zero" d="M143.82 132V452" pathLength="1"/><path class="evidence-line evidence-interval" d="M182.91 172.00H192.82" pathLength="1"/><circle class="evidence-point" cx="187.81" cy="172.00" r="3.2"/><path class="evidence-line evidence-interval" d="M184.41 192.00H194.94" pathLength="1"/><circle class="evidence-point" cx="189.54" cy="192.00" r="3.2"/><path class="evidence-line evidence-interval" d="M184.09 212.00H194.47" pathLength="1"/><circle class="evidence-point" cx="189.11" cy="212.00" r="3.2"/><path class="evidence-line evidence-interval" d="M188.87 232.00H199.70" pathLength="1"/><circle class="evidence-point" cx="194.27" cy="232.00" r="3.2"/><path class="evidence-line evidence-interval" d="M193.00 252.00H203.64" pathLength="1"/><circle class="evidence-point" cx="198.35" cy="252.00" r="3.2"/><path class="evidence-line evidence-interval" d="M193.21 272.00H203.99" pathLength="1"/><circle class="evidence-point" cx="198.66" cy="272.00" r="3.2"/><path class="evidence-line evidence-interval" d="M159.29 292.00H163.47" pathLength="1"/><circle class="evidence-point" cx="161.38" cy="292.00" r="3.2"/><path class="evidence-line evidence-interval" d="M159.29 312.00H163.47" pathLength="1"/><circle class="evidence-point" cx="161.38" cy="312.00" r="3.2"/><path class="evidence-line evidence-interval" d="M159.29 332.00H163.47" pathLength="1"/><circle class="evidence-point" cx="161.38" cy="332.00" r="3.2"/><path class="evidence-line evidence-interval" d="M191.08 352.00H201.55" pathLength="1"/><circle class="evidence-point" cx="196.22" cy="352.00" r="3.2"/><path class="evidence-line evidence-interval" d="M192.17 372.00H203.14" pathLength="1"/><circle class="evidence-point" cx="197.70" cy="372.00" r="3.2"/><path class="evidence-line evidence-interval" d="M192.68 392.00H203.44" pathLength="1"/><circle class="evidence-point" cx="197.95" cy="392.00" r="3.2"/></g><g class="evidence-stage is-unavailable" data-evidence-stage="5"><path class="evidence-unavailable" d="M184 240H362" pathLength="1"/><circle class="evidence-unavailable-dot" cx="273" cy="240" r="5"/><path class="evidence-unavailable" d="M184 295H362" pathLength="1"/><circle class="evidence-unavailable-dot" cx="273" cy="295" r="5"/><path class="evidence-unavailable" d="M184 350H362" pathLength="1"/><circle class="evidence-unavailable-dot" cx="273" cy="350" r="5"/></g><g class="evidence-stage" data-evidence-stage="6"><path class="evidence-zero" d="M143.82 132V452" pathLength="1"/><path class="evidence-line evidence-interval" d="M139.58 250.00H152.85" pathLength="1"/><circle class="evidence-point" cx="146.33" cy="250.00" r="3.2"/><path class="evidence-line evidence-interval" d="M136.97 298.00H150.74" pathLength="1"/><circle class="evidence-point" cx="143.81" cy="298.00" r="3.2"/><path class="evidence-line evidence-interval" d="M132.50 346.00H146.44" pathLength="1"/><circle class="evidence-point" cx="139.32" cy="346.00" r="3.2"/></g></g><g class="evidence-summary-rail"><g class="evidence-summary-glyph" data-summary-glyph="0" transform="translate(45 70)"><path d="M0 0H20" pathLength="1"/><circle cx="10" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="1" transform="translate(45 145)"><path d="M0 0H25" pathLength="1"/><circle cx="14" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="2" transform="translate(45 220)"><path d="M0 0H30" pathLength="1"/><circle cx="18" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="3" transform="translate(45 295)"><path d="M0 0H20" pathLength="1"/><circle cx="22" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="4" transform="translate(45 370)"><path d="M0 0H25" pathLength="1"/><circle cx="10" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="5" transform="translate(45 445)"><path d="M0 0H30" pathLength="1"/><circle cx="14" cy="0" r="2"/></g><g class="evidence-summary-glyph" data-summary-glyph="6" transform="translate(45 520)"><path d="M0 0H20" pathLength="1"/><circle cx="18" cy="0" r="2"/></g></g><g class="atlas-preview" data-atlas-preview><path class="atlas-zero" d="M143.82 58V530"/><path class="atlas-ci" d="M370.62 74.00H392.17"/><circle class="atlas-point" cx="381.90" cy="74.00" r="1.8"/><path class="atlas-ci" d="M377.09 86.60H397.34"/><circle class="atlas-point" cx="387.44" cy="86.60" r="1.8"/><path class="atlas-ci" d="M376.39 99.20H397.63"/><circle class="atlas-point" cx="387.20" cy="99.20" r="1.8"/><path class="atlas-ci" d="M385.69 111.80H407.50"/><circle class="atlas-point" cx="396.55" cy="111.80" r="1.8"/><path class="atlas-ci" d="M380.78 124.40H402.00"/><circle class="atlas-point" cx="391.33" cy="124.40" r="1.8"/><path class="atlas-ci" d="M378.47 137.00H399.93"/><circle class="atlas-point" cx="389.22" cy="137.00" r="1.8"/><path class="atlas-ci" d="M169.84 149.60H178.61"/><circle class="atlas-point" cx="174.13" cy="149.60" r="1.8"/><path class="atlas-ci" d="M169.84 162.20H178.61"/><circle class="atlas-point" cx="174.13" cy="162.20" r="1.8"/><path class="atlas-ci" d="M169.84 174.80H178.61"/><circle class="atlas-point" cx="174.13" cy="174.80" r="1.8"/><path class="atlas-ci" d="M378.27 187.40H399.27"/><circle class="atlas-point" cx="389.10" cy="187.40" r="1.8"/><path class="atlas-ci" d="M382.86 200.00H403.60"/><circle class="atlas-point" cx="393.36" cy="200.00" r="1.8"/><path class="atlas-ci" d="M385.47 212.60H407.29"/><circle class="atlas-point" cx="396.48" cy="212.60" r="1.8"/><path class="atlas-group-rule" d="M104 219.20H430"/><path class="atlas-ci" d="M143.90 225.20H157.79"/><circle class="atlas-point" cx="151.01" cy="225.20" r="1.8"/><path class="atlas-ci" d="M143.07 237.80H156.32"/><circle class="atlas-point" cx="149.74" cy="237.80" r="1.8"/><path class="atlas-ci" d="M146.18 250.40H160.21"/><circle class="atlas-point" cx="153.10" cy="250.40" r="1.8"/><path class="atlas-ci" d="M346.85 263.00H370.02"/><circle class="atlas-point" cx="358.79" cy="263.00" r="1.8"/><path class="atlas-ci" d="M351.62 275.60H374.06"/><circle class="atlas-point" cx="362.98" cy="275.60" r="1.8"/><path class="atlas-ci" d="M354.12 288.20H377.60"/><circle class="atlas-point" cx="366.04" cy="288.20" r="1.8"/><path class="atlas-group-rule" d="M104 294.80H430"/><path class="atlas-ci" d="M182.91 300.80H192.82"/><circle class="atlas-point" cx="187.81" cy="300.80" r="1.8"/><path class="atlas-ci" d="M184.41 313.40H194.94"/><circle class="atlas-point" cx="189.54" cy="313.40" r="1.8"/><path class="atlas-ci" d="M184.09 326.00H194.47"/><circle class="atlas-point" cx="189.11" cy="326.00" r="1.8"/><path class="atlas-ci" d="M188.87 338.60H199.70"/><circle class="atlas-point" cx="194.27" cy="338.60" r="1.8"/><path class="atlas-ci" d="M193.00 351.20H203.64"/><circle class="atlas-point" cx="198.35" cy="351.20" r="1.8"/><path class="atlas-ci" d="M193.21 363.80H203.99"/><circle class="atlas-point" cx="198.66" cy="363.80" r="1.8"/><path class="atlas-ci" d="M159.29 376.40H163.47"/><circle class="atlas-point" cx="161.38" cy="376.40" r="1.8"/><path class="atlas-ci" d="M159.29 389.00H163.47"/><circle class="atlas-point" cx="161.38" cy="389.00" r="1.8"/><path class="atlas-ci" d="M159.29 401.60H163.47"/><circle class="atlas-point" cx="161.38" cy="401.60" r="1.8"/><path class="atlas-ci" d="M191.08 414.20H201.55"/><circle class="atlas-point" cx="196.22" cy="414.20" r="1.8"/><path class="atlas-ci" d="M192.17 426.80H203.14"/><circle class="atlas-point" cx="197.70" cy="426.80" r="1.8"/><path class="atlas-ci" d="M192.68 439.40H203.44"/><circle class="atlas-point" cx="197.95" cy="439.40" r="1.8"/><path class="atlas-group-rule" d="M104 446.00H430"/><path class="atlas-unavailable" d="M190 452.00H350" pathLength="1"/><path class="atlas-unavailable" d="M190 464.60H350" pathLength="1"/><path class="atlas-unavailable" d="M190 477.20H350" pathLength="1"/><path class="atlas-group-rule" d="M104 483.80H430"/><path class="atlas-ci" d="M139.58 489.80H152.85"/><circle class="atlas-point" cx="146.33" cy="489.80" r="1.8"/><path class="atlas-ci" d="M136.97 502.40H150.74"/><circle class="atlas-point" cx="143.81" cy="502.40" r="1.8"/><path class="atlas-ci" d="M132.50 515.00H146.44"/><circle class="atlas-point" cx="139.32" cy="515.00" r="1.8"/></g></svg></div>
+          <div class="findings-story__visual" aria-hidden="true"><svg class="evidence-spine-svg" viewBox="0 0 80 600" preserveAspectRatio="xMidYMid meet" focusable="false"><path class="evidence-spine-line" d="M40 60V540" pathLength="1"/><path class="evidence-spine-progress" d="M40 60V540" pathLength="1"/><circle class="evidence-node" data-evidence-node="0" cx="40" cy="60" r="3"/><circle class="evidence-node" data-evidence-node="1" cx="40" cy="140" r="3"/><circle class="evidence-node" data-evidence-node="2" cx="40" cy="220" r="3"/><circle class="evidence-node" data-evidence-node="3" cx="40" cy="300" r="3"/><circle class="evidence-node" data-evidence-node="4" cx="40" cy="380" r="3"/><circle class="evidence-node" data-evidence-node="5" cx="40" cy="460" r="3"/><circle class="evidence-node" data-evidence-node="6" cx="40" cy="540" r="3"/></svg></div>
           <div class="findings-story__content">
             <h2 class="findings-story__eyebrow">What the study actually learned.</h2>
             <div class="findings-story__steps" role="region" aria-label="Seven preregistered research questions and their answers">
               <div class="hypothesis-ledger" aria-label="Preregistered findings"><article class="hypothesis-row" data-learned-slide data-evidence-step="0"><span class="findings-story__step-label" aria-hidden="true">H1 · 01/07</span><h3 class="hypothesis-title">Can the audit score find injected label changes earlier than random review?</h3><p class="learned-answer">Yes, within this controlled benchmark. Self-confidence ranking beat random review in all 12 registered comparisons: average-precision gains ranged from 0.036206 to 0.301884, and every saved 95% bootstrap interval was above zero. This means injected changes were prioritised more efficiently; it does not prove that a natural annotation is wrong. Byte-identical instance-dependent seeds are not independent replications.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="1"><span class="findings-story__step-label" aria-hidden="true">H2 · 02/07</span><h3 class="hypothesis-title">Where did ranking performance vary?</h3><p class="learned-answer">Across 32,760 reportable subgroup estimates, ranking performance varied with nucleus class, tissue, corruption mechanism and corruption rate. The practical lesson is that audit difficulty depends on context. These are descriptive summaries only: the study did not register an omnibus test and cannot interpret the variation as a causal biological effect.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="2"><span class="findings-story__step-label" aria-hidden="true">H3 · 03/07</span><h3 class="hypothesis-title">Which injected changes were harder to retrieve?</h3><p class="learned-answer">Confusion-targeted and instance-dependent changes were harder to rank than symmetric changes, meaning their average precision was lower. All 6 registered point differences favoured symmetric corruption; five saved 95% intervals were above zero and one crossed zero. This describes the controlled benchmark and does not establish that one natural error type is universally harder.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="3"><span class="findings-story__step-label" aria-hidden="true">H4 · 04/07</span><h3 class="hypothesis-title">Did a better review queue improve the later classifier?</h3><p class="learned-answer">No. The main result above reports the complete comparison. At the same 5% review budget, audit-guided restoration was lower by -0.002156 macro-F1, so better retrieval did not translate into better downstream classification here.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="4"><span class="findings-story__step-label" aria-hidden="true">H5 · 05/07</span><h3 class="hypothesis-title">Did combining two ranking signals help?</h3><p class="learned-answer">Yes, for review prioritisation. The equal-weight combination of self-confidence and fold-safe nearest-neighbour disagreement outperformed self-confidence alone in all 12 registered comparisons. Average-precision gains ranged from 0.020983 to 0.065502, and every saved 95% bootstrap interval was above zero. This supports the fixed hybrid within this benchmark; it does not authorise automatic correction or diagnosis.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="5"><span class="findings-story__step-label" aria-hidden="true">H6 · 06/07</span><h3 class="hypothesis-title">Could a pathology-specific encoder be evaluated fairly?</h3><p class="learned-answer">No result is available. None of the candidate pathology encoders passed every frozen access, licence, reproducibility, hardware and smoke-test gate, so all 3 registered H6 entries remain unavailable. They are not zero or negative results, and no substitute was selected after the other outcomes became visible.</p></article><article class="hypothesis-row" data-learned-slide data-evidence-step="6"><span class="findings-story__step-label" aria-hidden="true">H7 · 07/07</span><h3 class="hypothesis-title">Did highlighting the target nucleus add useful signal?</h3><p class="learned-answer">No clear benefit was detected. Across three seeds, the average-precision differences ranged from -0.005371 to 0.002997; all 3 saved 95% intervals crossed zero, and no Holm-adjusted one-sided p-value was below 0.05. In this benchmark, explicit highlighting did not improve ranking over the context representation.</p></article></div>
             </div>
-            <p class="findings-story__atlas-note">Continue to the complete registered evidence atlas.</p>
           </div>
         </div>
       </div>
@@ -1384,7 +1335,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
     <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
   </div>
-  <div class="footer-evidence"><span>PUMA public evidence commit <a href="https://github.com/Jaqwilk/AANCA/commit/c5bd44193b2abd67bc7e7f1bd9384aa87435d500" target="_blank" rel="noopener"><code>c5bd44193b2a</code></a></span><span><code>evidence.json</code> SHA-256 <code>0e6011736a6597b6c2a235e6a4f6f5e091a053f6e11827efb32722c020320227</code></span></div>
+  <div class="footer-evidence"><span>PUMA public evidence commit <a href="https://github.com/Jaqwilk/AANCA/commit/c5bd44193b2abd67bc7e7f1bd9384aa87435d500" target="_blank" rel="noopener"><code>c5bd44193b2a</code></a></span><span><code>evidence.json</code> SHA-256 <code>aa1ed5ae22c8ece735382c8693ce34236dfe6f7b034d4c1ccc80f14b1522413c</code></span></div>
   <div class="footer-bottom"><span>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</span><span>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms. No diagnostic or clinical use is established.</span></div>
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>

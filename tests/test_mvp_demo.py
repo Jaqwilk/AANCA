@@ -765,9 +765,11 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Can ranking beat random review?" not in html
     assert 'class="findings-story learned-story article-findings" id="learned-story"' in html
     assert 'class="evidence-spine-svg"' in html
-    assert html.count('data-evidence-stage="') == 7
+    assert 'data-evidence-stage="' not in html
     assert html.count('data-evidence-node="') == 7
-    assert 'class="atlas-preview" data-atlas-preview' in html
+    assert 'class="atlas-preview" data-atlas-preview' not in html
+    assert ".evidence-spine-progress { stroke: #fff;" in html
+    assert "grid-template-columns: 72px minmax(0, 640px)" in html
     assert 'src="assets/findings-evidence-story.js"' in html
     assert 'aria-roledescription="carousel"' not in html
     assert 'aria-roledescription="slide"' not in html
@@ -783,8 +785,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "/* Findings Evidence Spine */" in html
     assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" not in html
     assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" not in html
-    assert ".findings-story--enhanced { height: 680svh; }" in html
-    assert "scrub: 1.1" in findings_script
+    assert ".findings-story--enhanced { height: 620svh; }" in html
+    assert "scrub: .65" in findings_script
     assert findings_script.count("scrollEngine.create({") == 1
     assert "animation: timeline" in findings_script
     assert "filter: 'blur(4px)'" not in html

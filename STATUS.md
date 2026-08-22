@@ -35,14 +35,15 @@ observed label, and restoration is limited to the PanNuke controlled experiment.
 `90-second summary` and redundant standalone research question have been removed, so
 the benchmark setup flows directly into Method.
 
-The Findings section now uses one desktop Evidence Spine: seven exact registered
-question-and-answer stages share one reversible GSAP timeline and one ScrollTrigger,
-then resolve into a preview of the complete registered evidence atlas. The spine and
-the full forest plot are generated from the same 36 comparison records. H2 uses only
-the four saved subgroup ranges, H4 retains the adverse `-0.002156` macro-F1 result,
-and H6 remains explicitly unavailable rather than being plotted at zero. Mobile uses
-the same seven answers in ordinary document flow with small static glyphs. Under
-`prefers-reduced-motion`, the page shows a static spine, atlas preview and all answers
+The Findings section uses one centred desktop sequence: seven exact registered
+question-and-answer stages share one reversible GSAP timeline and one ScrollTrigger.
+Its navigation is deliberately limited to a thin white line, seven white nodes and a
+white progress stroke; it contains no mini-chart, quantitative glyph or atlas preview.
+The complete 36-entry forest plot remains the separate quantitative view below. H2
+uses only the four saved subgroup ranges, H4 retains the adverse `-0.002156` macro-F1
+result, and H6 remains explicitly unavailable rather than being plotted at zero.
+Mobile uses the same seven answers in ordinary document flow with small static glyphs.
+Under `prefers-reduced-motion`, the page shows a static white spine and all answers
 without a tall sticky region. The hero and frozen scientific evidence were unchanged.
 
 The package now contains thirteen checksum-bound files. Current validation:

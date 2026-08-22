@@ -616,25 +616,21 @@ eyebrow, and use a shorter non-diagnostic explanation so the animation has a cle
 right-side field. These changes affect presentation only and do not alter annotations,
 evidence, metrics, scientific claims or completion stages.
 
-## D040 — Use one evidence-backed spine for the seven findings
+## D040 — Use one minimal progress spine for the seven findings
 
 Status: implemented presentation decision; no new scientific stage
 
-Present “What the study actually learned.” as a restrained desktop scrollytelling
-sequence with one sticky Evidence Spine, one active registered question and answer,
-and one reversible GSAP timeline controlled by one ScrollTrigger. Preserve the exact
-seven findings and their limitations. Previous and next stages may remain faintly
-visible, but the interface must not behave like a carousel or create an internal
-scroll container.
-
-Generate the compact spine marks and the final atlas preview from the same saved
-comparison records used by the complete forest plot. Show the H2 subgroup evidence
-only as its saved ranges, the H4 adverse downstream estimate on an appropriate
-macro-F1 scale, and the three unavailable H6 entries as unavailable marks rather than
-zeros. Do not infer missing point estimates or manufacture uncertainty intervals.
+Present “What the study actually learned.” as a restrained, centred desktop
+scrollytelling sequence with one thin white progress spine, one active registered
+question and answer, and one reversible GSAP timeline controlled by one ScrollTrigger.
+Preserve the exact seven findings and their limitations. Previous and next stages may
+remain faintly visible, but the interface must not behave like a carousel or create an
+internal scroll container. The spine is navigation only: do not place mini forest
+plots, quantitative glyphs, coloured evidence marks or an atlas preview beside it.
+Keep the complete 36-entry forest plot as the separate quantitative view below.
 
 At widths below 901 px, remove the tall sticky treatment and retain all seven answers
 in normal article flow with small static glyphs and no horizontal overflow. Under
-`prefers-reduced-motion`, expose a static spine and atlas preview followed by all
-answers. These changes affect only presentation; the hero, source annotations,
+`prefers-reduced-motion`, expose a static white spine followed by all answers. These
+changes affect only presentation; the hero, source annotations,
 frozen evidence, metrics and completion stages remain unchanged.

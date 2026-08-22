@@ -1367,7 +1367,7 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     h4_chart = _render_h4_chart(h4)
     h2_chart = _render_h2_chart(h2)
     hypothesis_ledger = _render_hypothesis_ledger(hypotheses, h2, h4)
-    evidence_spine = _render_evidence_spine(primary["comparisons"], h2, h4)
+    evidence_spine = _render_evidence_spine()
     current_evidence = _render_current_evidence(evidence)
     publication_limits = evidence["publication_limits"]
 
@@ -1494,7 +1494,6 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
             <div class="findings-story__steps" role="region" aria-label="Seven preregistered research questions and their answers">
               <div class="hypothesis-ledger" aria-label="Preregistered findings">__HYPOTHESIS_LEDGER__</div>
             </div>
-            <p class="findings-story__atlas-note">Continue to the complete registered evidence atlas.</p>
           </div>
         </div>
       </div>
@@ -1869,155 +1868,19 @@ def _render_forest_plot(comparisons: list[dict[str, Any]]) -> str:
     return "".join(output)
 
 
-def _story_x(
-    value: float, lower: float, upper: float, *, left: float = 116, right: float = 424
-) -> float:
-    """Map one saved value to the shared Evidence Spine coordinate system."""
+def _render_evidence_spine() -> str:
+    """Render one restrained white progress spine for the seven findings."""
 
-    if upper <= lower:
-        raise ValueError("Evidence Spine domain must have positive width")
-    return left + ((value - lower) / (upper - lower)) * (right - left)
-
-
-def _render_evidence_spine(
-    comparisons: list[dict[str, Any]], h2: dict[str, Any], h4: dict[str, Any]
-) -> str:
-    """Render the desktop story and atlas preview from the same saved comparison rows."""
-
-    reported = [item for item in comparisons if item.get("status") == "reported"]
-    bounds = [0.0]
-    for item in reported:
-        bounds.append(_require_real(item.get("point_difference"), role="story point difference"))
-        bounds.extend(_require_interval(item.get("interval_95"), role="story interval"))
-    padding = max((max(bounds) - min(bounds)) * 0.06, 0.001)
-    lower, upper = min(bounds) - padding, max(bounds) + padding
-    zero_x = _story_x(0.0, lower, upper)
-
-    by_hypothesis = {
-        hypothesis: [
-            item
-            for item in comparisons
-            if str(item.get("comparison_id", "")).startswith(f"{hypothesis}_")
-        ]
-        for hypothesis in ("h1", "h3", "h5", "h6", "h7")
-    }
-
-    def reported_stage(stage_index: int, hypothesis: str, start_y: float, gap: float) -> str:
-        rows = by_hypothesis[hypothesis]
-        marks = [f'<path class="evidence-zero" d="M{zero_x:.2f} 132V452" pathLength="1"/>']
-        for index, item in enumerate(rows):
-            if item.get("status") != "reported":
-                continue
-            point = _require_real(item.get("point_difference"), role=f"{hypothesis} story point")
-            interval = _require_interval(item.get("interval_95"), role=f"{hypothesis} story CI")
-            y = start_y + index * gap
-            low_x = _story_x(interval[0], lower, upper)
-            high_x = _story_x(interval[1], lower, upper)
-            point_x = _story_x(point, lower, upper)
-            marks.append(
-                f'<path class="evidence-line evidence-interval" d="M{low_x:.2f} {y:.2f}H{high_x:.2f}" pathLength="1"/>'
-                f'<circle class="evidence-point" cx="{point_x:.2f}" cy="{y:.2f}" r="3.2"/>'
-            )
-        return f'<g class="evidence-stage" data-evidence-stage="{stage_index}">{"".join(marks)}</g>'
-
-    stages = [reported_stage(0, "h1", 172, 20)]
-
-    h2_marks = ['<path class="evidence-context-origin" d="M116 190V410" pathLength="1"/>']
-    for index, dimension in enumerate(("class", "tissue", "mechanism", "rate")):
-        interval = _require_interval(
-            h2["dimensions"][dimension]["reported_average_precision_range"],
-            role=f"H2 {dimension} story range",
-        )
-        y = 220 + index * 55
-        low_x = _story_x(interval[0], 0.0, 1.0)
-        high_x = _story_x(interval[1], 0.0, 1.0)
-        h2_marks.append(
-            f'<path class="evidence-line evidence-context-range" d="M{low_x:.2f} {y}H{high_x:.2f}" pathLength="1"/>'
-            f'<circle class="evidence-context-end" cx="{low_x:.2f}" cy="{y}" r="2.4"/>'
-            f'<circle class="evidence-context-end" cx="{high_x:.2f}" cy="{y}" r="2.4"/>'
-        )
-    stages.append(f'<g class="evidence-stage" data-evidence-stage="1">{"".join(h2_marks)}</g>')
-    stages.append(reported_stage(2, "h3", 220, 28))
-
-    h4_point = _require_real(h4["point_difference"], role="H4 story point")
-    h4_interval = _require_interval(h4["interval_95"], role="H4 story interval")
-    h4_low, h4_high = -0.012, 0.012
-    h4_zero = _story_x(0.0, h4_low, h4_high)
-    stages.append(
-        '<g class="evidence-stage" data-evidence-stage="3">'
-        f'<path class="evidence-zero" d="M{h4_zero:.2f} 205V385" pathLength="1"/>'
-        f'<path class="evidence-line evidence-interval" d="M{_story_x(h4_interval[0], h4_low, h4_high):.2f} 295H{_story_x(h4_interval[1], h4_low, h4_high):.2f}" pathLength="1"/>'
-        f'<circle class="evidence-point" cx="{_story_x(h4_point, h4_low, h4_high):.2f}" cy="295" r="3.2"/>'
-        "</g>"
-    )
-
-    h5 = reported_stage(4, "h5", 172, 20)
-    h5 = h5.replace(
-        'data-evidence-stage="4">',
-        'data-evidence-stage="4"><path class="evidence-merge" d="M116 270L148 292M116 314L148 292" pathLength="1"/>',
-        1,
-    )
-    stages.append(h5)
-
-    unavailable_marks = []
-    for index in range(len(by_hypothesis["h6"])):
-        y = 240 + index * 55
-        unavailable_marks.append(
-            f'<path class="evidence-unavailable" d="M184 {y}H362" pathLength="1"/>'
-            f'<circle class="evidence-unavailable-dot" cx="273" cy="{y}" r="5"/>'
-        )
-    stages.append(
-        '<g class="evidence-stage is-unavailable" data-evidence-stage="5">'
-        + "".join(unavailable_marks)
-        + "</g>"
-    )
-    stages.append(reported_stage(6, "h7", 250, 48))
-
-    node_y = (70, 145, 220, 295, 370, 445, 520)
+    node_y = (60, 140, 220, 300, 380, 460, 540)
     nodes = "".join(
-        f'<circle class="evidence-node" data-evidence-node="{index}" cx="34" cy="{y}" r="3.5"/>'
+        f'<circle class="evidence-node" data-evidence-node="{index}" cx="40" cy="{y}" r="3"/>'
         for index, y in enumerate(node_y)
     )
-    summary_glyphs = "".join(
-        f'<g class="evidence-summary-glyph" data-summary-glyph="{index}" transform="translate(45 {y})">'
-        f'<path d="M0 0H{20 + (index % 3) * 5}" pathLength="1"/><circle cx="{10 + (index % 4) * 4}" cy="0" r="2"/></g>'
-        for index, y in enumerate(node_y)
-    )
-
-    atlas_rows: list[str] = []
-    previous_hypothesis = ""
-    for index, item in enumerate(comparisons):
-        y = 74 + index * 12.6
-        comparison_id = str(item["comparison_id"])
-        hypothesis = _comparison_hypothesis(comparison_id)
-        if previous_hypothesis and hypothesis != previous_hypothesis:
-            atlas_rows.append(f'<path class="atlas-group-rule" d="M104 {y - 6:.2f}H430"/>')
-        previous_hypothesis = hypothesis
-        if item.get("status") != "reported":
-            atlas_rows.append(
-                f'<path class="atlas-unavailable" d="M190 {y:.2f}H350" pathLength="1"/>'
-            )
-            continue
-        point = _require_real(item.get("point_difference"), role="atlas-preview point")
-        interval = _require_interval(item.get("interval_95"), role="atlas-preview interval")
-        atlas_rows.append(
-            f'<path class="atlas-ci" d="M{_story_x(interval[0], lower, upper):.2f} {y:.2f}H{_story_x(interval[1], lower, upper):.2f}"/>'
-            f'<circle class="atlas-point" cx="{_story_x(point, lower, upper):.2f}" cy="{y:.2f}" r="1.8"/>'
-        )
-    atlas = (
-        '<g class="atlas-preview" data-atlas-preview>'
-        f'<path class="atlas-zero" d="M{zero_x:.2f} 58V530"/>' + "".join(atlas_rows) + "</g>"
-    )
-
     return (
-        '<svg class="evidence-spine-svg" viewBox="0 0 460 600" preserveAspectRatio="xMidYMid meet" focusable="false">'
-        '<path class="evidence-spine-line" d="M34 70V520" pathLength="1"/>'
-        '<path class="evidence-spine-progress" d="M34 70V520" pathLength="1"/>'
-        + nodes
-        + f'<g class="evidence-stage-layer">{"".join(stages)}</g>'
-        + f'<g class="evidence-summary-rail">{summary_glyphs}</g>'
-        + atlas
-        + "</svg>"
+        '<svg class="evidence-spine-svg" viewBox="0 0 80 600" '
+        'preserveAspectRatio="xMidYMid meet" focusable="false">'
+        '<path class="evidence-spine-line" d="M40 60V540" pathLength="1"/>'
+        '<path class="evidence-spine-progress" d="M40 60V540" pathLength="1"/>' + nodes + "</svg>"
     )
 
 
