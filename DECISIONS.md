@@ -664,3 +664,16 @@ Do not display the PUMA commit identifier or `evidence.json` SHA-256 as footer c
 Those technical provenance records remain available in the machine-readable evidence,
 primary release and checksum-bound package manifest. This simplification changes no
 evidence, provenance record, legal term or scientific claim.
+
+## D042 — Use `aancastudy.org` as the official project website
+
+Status: implemented publication decision; no new scientific stage
+
+Use [`https://aancastudy.org`](https://aancastudy.org) as the canonical public
+website in current repository presentation and citation metadata. Keep the earlier
+Hostinger subdomain only in dated deployment records where it identifies the host
+that was actually verified at that time.
+
+The custom domain changes project discoverability and presentation only. It does not
+alter a frozen candidate, dataset split, annotation, metric, evidence authority,
+claim boundary or completion stage, and it does not constitute an archival DOI.

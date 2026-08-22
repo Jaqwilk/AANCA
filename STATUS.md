@@ -1187,3 +1187,25 @@ Local browser evidence for the final candidate:
   `b58c2919742fbc43135d091dbbf8f856fba24116c99615fbd28c3cfa24000a1b`.
 
 This local refresh has not been redeployed to Hostinger in this change set.
+
+## Official domain and repository presentation refresh — 2026-08-22
+
+The owner established [`aancastudy.org`](https://aancastudy.org) as the official
+project website. DNS resolution and direct HTTPS access returned successfully before
+the repository was updated. Historical Hostinger subdomain references remain in
+dated publication records because they identify the host verified during those
+specific releases.
+
+Repository presentation was refreshed without changing scientific code or evidence:
+
+- the README now opens with a centred project identity, concise navigation, a
+  domain badge and a linked presentation hero;
+- the official website replaces the temporary hosting address in current citation
+  metadata and current repository guidance;
+- the one-page professor brief exposes both the website and public repository;
+- GitHub repository metadata now includes the official homepage, a concise project
+  description and relevant discovery topics.
+
+At the owner's request, the complete test suite was not repeated for this
+documentation-only change. Validation was limited to Markdown link resolution,
+`CITATION.cff` parsing, whitespace inspection and review of the exact Git diff.

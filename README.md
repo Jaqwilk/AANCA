@@ -1,21 +1,40 @@
-# AANCA
+<h1 align="center">AANCA</h1>
 
 <p align="center">
+  <strong>Automated Auditing of Nucleus Class Annotations</strong><br>
+  A reproducible framework for prioritising potentially inconsistent annotations
+  for qualified expert review.
+</p>
+
+<p align="center">
+  <a href="https://aancastudy.org"><strong>Research article</strong></a>
+  ·
+  <a href="PROFESSOR_BRIEF.md">One-page brief</a>
+  ·
+  <a href="PUBLIC_EVIDENCE.md">Public evidence</a>
+  ·
+  <a href="#reproducibility-levels">Reproduce</a>
+  ·
+  <a href="CITATION.cff">Cite</a>
+</p>
+
+<p align="center">
+  <a href="https://aancastudy.org"><img alt="Official website: aancastudy.org" src="https://img.shields.io/badge/website-aancastudy.org-6D67E4"></a>
   <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Scientific software CI" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
   <img alt="Scientific stage: EXTERNAL_VALIDATION_COMPLETE" src="https://img.shields.io/badge/science-EXTERNAL__VALIDATION__COMPLETE-238636">
-  <img alt="Presentation stage: DEMO_COMPLETE" src="https://img.shields.io/badge/presentation-DEMO__COMPLETE-6D67E4">
-  <img alt="Natural-data action: retain uncorrected" src="https://img.shields.io/badge/natural%20action-retain__uncorrected-B45309">
   <img alt="Clinical use: not established" src="https://img.shields.io/badge/clinical%20use-not%20established-6B7280">
 </p>
 
-**Automated Auditing of Nucleus Class Annotations** is a reproducible research
-prototype that ranks potentially inconsistent nucleus class annotations for expert
-review. It is non-diagnostic, never treats model disagreement as biological truth
-and never modifies source annotations automatically.
+<p align="center">
+  <a href="https://aancastudy.org">
+    <img src="docs/assets/aanca-presentation-hero.png" alt="AANCA research article showing a source field, selected nuclei and second-look review frames">
+  </a>
+</p>
 
-![Current AANCA article hero with the source field, selected nuclei and second-look audit frames](docs/assets/aanca-presentation-hero.png)
-
-**[Open the live research article](https://mediumaquamarine-wombat-125861.hostingersite.com/)**
+AANCA is a non-diagnostic research prototype. It ranks annotations for review,
+never treats model disagreement as biological truth and never modifies source
+annotations automatically. The official project website is
+**[aancastudy.org](https://aancastudy.org)**.
 
 The presentation is a minimalist long-form article rather than a product dashboard.
 Its Canvas 2D hero uses local nucleus artwork to show immutable source instances,
@@ -353,8 +372,8 @@ The verified project bibliography is
 [`references/references.bib`](references/references.bib).
 Machine-readable citation metadata are available in [`CITATION.cff`](CITATION.cff).
 No DOI has been assigned yet; DOI publication requires an owner-controlled archival
-release, for example through Zenodo. The current public demo uses the configured
-Hostinger subdomain; a custom domain has not been claimed.
+release, for example through Zenodo. The official project website is
+[`aancastudy.org`](https://aancastudy.org).
 
 ## Author
 

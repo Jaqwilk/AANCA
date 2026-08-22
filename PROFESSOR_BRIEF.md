@@ -1,5 +1,8 @@
 # AANCA in one page
 
+**Project website:** [`aancastudy.org`](https://aancastudy.org)  
+**Public repository:** [`github.com/Jaqwilk/AANCA`](https://github.com/Jaqwilk/AANCA)
+
 ## Problem
 
 Large histopathology datasets contain many segmented nuclei with class annotations.
