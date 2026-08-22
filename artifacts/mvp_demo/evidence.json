@@ -977,8 +977,8 @@
   "source_files": {
     "findings_story_script_asset": {
       "path": "assets/findings-evidence-story.js",
-      "sha256": "b399e11ae240dcca764fef96415dd23ef65661ff1fa64651f8c97cbad0a92270",
-      "size_bytes": 6157
+      "sha256": "b466e585cf70a7a787ac7c5bb0adad51d684e8b52f17fef8aa93502bb02958c1",
+      "size_bytes": 3744
     },
     "hero_nucleus_assets": [
       {

@@ -20,9 +20,10 @@ and never modifies source annotations automatically.
 The presentation is a minimalist long-form article rather than a product dashboard.
 Its Canvas 2D hero uses local nucleus artwork to show immutable source instances,
 second-look selections and a review-only visual sequence. The scientific Findings
-section then converts the seven registered questions into a compact Evidence Spine
-before exposing the complete comparison atlas. Neither visual changes a source label
-or implies that model disagreement establishes biological truth.
+section uses a slim white progress spine to move through the seven registered
+questions before the complete comparison atlas. The spine is navigation only, not a
+second quantitative chart. Neither visual changes a source label or implies that
+model disagreement establishes biological truth.
 
 ## Current conclusion
 
@@ -133,11 +134,12 @@ the package without opening a browser:
 python scripts/present_demo.py --verify-only
 ~~~
 
-On desktop, “What the study actually learned.” is a reversible seven-stage Evidence
-Spine driven by one scroll timeline. Its compact marks and the complete forest plot
-below are rendered from the same exact comparison records. Mobile presents all seven
+On desktop, “What the study actually learned.” is a reversible seven-stage sequence
+driven by one smooth scroll timeline. A centred white line and seven white nodes show
+reading progress without encoding another set of results; the complete forest plot
+below remains the quantitative view. Mobile presents all seven
 answers in ordinary document flow with small static glyphs. Reduced-motion users
-receive a static spine and atlas preview followed by every answer, with no tall sticky
+receive a static white spine followed by every answer, with no tall sticky
 region. The Method uses four short article paragraphs to explain the controlled label
 intervention, source-group-safe out-of-fold scoring, equal review budgets and the
 separate downstream test. A checksum-bound minimalist workflow graphic mirrors those
