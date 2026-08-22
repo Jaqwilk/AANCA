@@ -87,7 +87,7 @@ Status: complete (`PRIMARY_STUDY_COMPLETE`)
 
 Status: complete (`DEMO_COMPLETE`)
 
-- English long-form article with checksum-verifiable five-file package;
+- English long-form article with checksum-verifiable thirteen-file package;
 - all H1-H7 findings, H4, QC, limitations and author section retained;
 - full saved statistics, H4, OOF and rankings published in
   `primary-evidence-v1`;

@@ -40,10 +40,24 @@ observed label, and restoration is limited to the PanNuke controlled experiment.
 `90-second summary` and redundant standalone research question have been removed, so
 the benchmark setup flows directly into Method.
 
+The author section now discloses that AI tools assisted throughout the project with
+planning, code drafting and iterative implementation. It also states that Natan Smogór
+directed the work, reviewed and revised AI-assisted outputs, made the final scientific
+and engineering decisions, and remains responsible for the code, analysis and claims.
+
+The footer is now one continuous four-column surface: AANCA, Study, Inspect and Terms.
+The copyright, repository licence, third-party asset terms and non-clinical boundary
+sit inside that grid without internal divider lines. The redundant visible PUMA commit
+and `evidence.json` digest were removed; provenance remains available through the
+machine-readable evidence, release and package manifest.
+
 The Findings section uses one centred desktop sequence: seven exact registered
 question-and-answer stages share one reversible GSAP timeline and one ScrollTrigger.
 Its navigation is deliberately limited to a thin white line, seven white nodes and a
 white progress stroke; it contains no mini-chart, quantitative glyph or atlas preview.
+The active node now changes fill without SVG scaling, so all seven node centres remain
+exactly on the shared one-pixel axis. Desktop finding rows use a 320 px transition
+offset, leaving a clear editorial gap between adjacent H1–H7 answers.
 The complete 36-entry forest plot remains the separate quantitative view below. H2
 uses only the four saved subgroup ranges, H4 retains the adverse `-0.002156` macro-F1
 result, and H6 remains explicitly unavailable rather than being plotted at zero.
@@ -54,21 +68,43 @@ without a tall sticky region. The hero and frozen scientific evidence were uncha
 The package now contains thirteen checksum-bound files. Current validation:
 
 - `uv run pytest tests/test_mvp_demo.py`: `9 passed`;
-- `uv run pytest`: `1151 passed, 1 skipped` in 629.04 seconds; the skip is the
+- `uv run pytest`: `1151 passed, 1 skipped` in 654.87 seconds; the skip is the
   documented Windows/POSIX open-file rename difference;
-- `uv run ruff check .`, `uv run ruff format --check .` and the Findings script
-  JavaScript syntax check: passed;
+- `uv run ruff check .`, `uv run ruff format --check .` and `uv run mypy src`:
+  passed; mypy reported no issues in 103 source files;
+- the hero and Findings JavaScript syntax checks passed;
 - standalone package verification: valid thirteen-file package, manifest root
-  `2fb3ebf7f73d657870ad459cc97d63d47cdbe8ab27d51d883964929af702ac98`;
+  `6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b`;
+- synthetic CLI smoke run `20260822T134341.259054Z_synthetic_smoke_501e16e69c`
+  completed successfully and its temporary output was removed after readback;
+- NuCLS, MoNuSAC and PUMA evidence verification passed with their saved conclusions
+  unchanged; the NuCLS paired pre/post feasibility endpoint remained unavailable and
+  fail-closed;
 - Playwright at 1440 x 900 confirmed the H1-H7 row/node sequence, final atlas state
   and reverse return to H1; 390 x 844 mobile had no sticky enhancement or horizontal
   overflow; reduced motion exposed all seven answers and both static evidence views;
   all three variants reported zero console errors and warnings.
 
-After the mobile hero correction, `node --check`, the nine focused presentation tests,
-the relevant Ruff checks and standalone package verification passed. The regenerated package has manifest root
-`4ac9cb1b4dfe09581343832d3ec89957cf79cea2fa0c3cab9b95326ca3e8035f`.
-The full suite has deliberately not been repeated during these small visual iterations.
+The complete maintained suite and all release gates were repeated after the visual
+corrections. Scientific evidence, accepted metrics and completion stages were
+unchanged.
+
+Hostinger deployment completed on 22 August 2026 for
+`mediumaquamarine-wombat-125861.hostingersite.com`. The deploy tool verified the
+thirteen-file package, connected over SSH/SFTP, and most recently created remote backup
+`20260822-125333` before replacing only that domain's `public_html`; HTTP verification returned 200
+for the page and followed assets. Independent SHA-256 readback confirmed that the live
+`index.html` was byte-identical to the then-current canonical package (manifest root
+`c9ef3956dbf9b60f5307d4683a428d0b78f7c18f59620a189c43815e5e4e73a3`), contained
+the unified footer and AI disclosure, and no longer contained either removed footer strip. All
+twelve manifest-listed public resources were reachable after the final full upload;
+the four text resources were byte-identical, while Hostinger's CDN recompressed the
+eight served PNG representations as expected.
+
+A later read-only deployment verification rebuilt and sealed the local package but
+could not authenticate the saved Hostinger credential profile. The production page
+remained healthy; the current `6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b`
+package has not yet replaced that live version.
 
 ## Current scientific stage
 

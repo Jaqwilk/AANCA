@@ -2,13 +2,13 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "7ddb2babba2fd51a3a6b044181474615721586be6debaf6e3665891697e90b09",
+      "sha256": "6e0a552ef1880e0c7e8a7ae9cd7107c47962cf183f15ffe32c614b8e2108b93a",
       "size_bytes": 4143
     },
     {
       "path": "assets/findings-evidence-story.js",
-      "sha256": "b466e585cf70a7a787ac7c5bb0adad51d684e8b52f17fef8aa93502bb02958c1",
-      "size_bytes": 3744
+      "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8",
+      "size_bytes": 3647
     },
     {
       "path": "assets/hero/nuclei/nucleus-bilobed.png",
@@ -47,13 +47,13 @@
     },
     {
       "path": "evidence.json",
-      "sha256": "aa1ed5ae22c8ece735382c8693ce34236dfe6f7b034d4c1ccc80f14b1522413c",
+      "sha256": "8f92884d775c5fb6059a604de47365ced217568401c6d130ea227bcf89672e67",
       "size_bytes": 38597
     },
     {
       "path": "index.html",
-      "sha256": "2a499b363998aa9e606a761c17ae179c333f71dede4dfafe75eca249c6034a3e",
-      "size_bytes": 221826
+      "sha256": "a619135539477f4cc60cd07daa80c64067b4496c1f630aa73c851ba14a9217a4",
+      "size_bytes": 221200
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -61,7 +61,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "4ac9cb1b4dfe09581343832d3ec89957cf79cea2fa0c3cab9b95326ca3e8035f",
+  "manifest_root_sha256": "6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b",
   "policy": "aanca_presentation_current_evidence_readback_v4",
   "schema_version": 4
 }

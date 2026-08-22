@@ -30,7 +30,7 @@
     if (rows.length !== 7 || nodes.length !== 7 || !progressLine) return;
 
     story.classList.add('findings-story--enhanced');
-    const rowOffset = 240;
+    const rowOffset = 320;
     const opacityFor = (index, active) => {
       const distance = index - active;
       if (distance === 0) return 1;
@@ -45,7 +45,6 @@
       autoAlpha: index => opacityFor(index, 0),
     });
     gsapEngine.set(nodes, {
-      scale: index => index === 0 ? 1.2 : 1,
       fill: index => index === 0 ? '#fff' : '#010102',
       stroke: '#fff',
       opacity: index => index === 0 ? 1 : .28,
@@ -60,7 +59,6 @@
         duration: .88,
       }, active);
       timeline.to(nodes, {
-        scale: index => index === active ? 1.2 : 1,
         fill: index => index === active ? '#fff' : '#010102',
         stroke: '#fff',
         opacity: index => index === active ? 1 : (index < active ? .46 : .24),

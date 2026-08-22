@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AANCA is a reproducible, non-diagnostic framework for ranking potentially inconsistent nucleus annotations for expert review.">
   <meta name="author" content="Natan Smogór">
-  <meta name="date" content="2026-08-21">
+  <meta name="date" content="2026-08-22">
   <meta name="theme-color" content="#010102">
   <meta name="referrer" content="no-referrer">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -433,17 +433,22 @@ main > [id] { scroll-margin-top: calc(var(--header-h) + 16px); }
   width: 80px;
   margin: 0 auto var(--space-xl);
 }
-.evidence-spine-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.evidence-spine-svg {
+  display: block; width: 100%; height: auto; overflow: visible;
+  shape-rendering: geometricPrecision;
+}
 .evidence-spine-line,
 .evidence-spine-progress {
   fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
-.evidence-spine-line { stroke: #fff; stroke-width: 1; opacity: .22; }
-.evidence-spine-progress { stroke: #fff; stroke-width: 1.25; }
+.evidence-spine-line { stroke: #fff; opacity: .22; }
+.evidence-spine-progress { stroke: #fff; }
 .evidence-node {
   fill: var(--canvas); stroke: #fff; stroke-width: 1;
-  vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center;
+  vector-effect: non-scaling-stroke;
 }
 .findings-story__content { position: relative; }
 .findings-story__eyebrow {
@@ -858,7 +863,10 @@ footer { position: relative; padding: 0 0 var(--space-2xl); border: 0; color: va
 .footer-divider {
   display: block; width: 100%; height: 1px; margin: 0 auto var(--space-2xl); background: var(--rule);
 }
-.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(2, 1fr); gap: var(--space-2xl); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.3fr .9fr 1fr 1.05fr;
+  gap: clamp(32px, 4vw, 64px); align-items: start;
+}
 .footer-brand { color: var(--ink); font-size: 15px; font-weight: 600; }
 .footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .footer-summary { max-width: 320px; margin: 0; color: var(--ink-subtle); font-size: 12px; line-height: 1.62; }
@@ -871,18 +879,8 @@ footer { position: relative; padding: 0 0 var(--space-2xl); border: 0; color: va
 }
 .footer-column a { min-height: 32px; display: flex; align-items: center; margin-bottom: 0; }
 .footer-column a:hover { color: var(--ink); }
-.footer-evidence {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 28px;
-  margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--line);
-  color: var(--ink-tertiary); font-size: 10px; line-height: 1.65;
-}
-.footer-evidence code { color: var(--ink-subtle); font-size: 10px; }
-.footer-bottom {
-  display: flex; justify-content: space-between; gap: 32px;
-  margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid var(--line);
-  color: var(--ink-subtle); font-size: 11px; line-height: 1.58;
-}
-.footer-bottom span { max-width: 560px; }
+.footer-terms p { margin-bottom: 13px; }
+.footer-terms a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 
 .sr-only {
   position: absolute !important; width: 1px !important; height: 1px !important;
@@ -927,8 +925,7 @@ html.motion-enhanced .reveal,
   }
   .hypothesis-row[data-evidence-step="5"]::before { background: transparent; border-top: 1px dashed var(--ink-tertiary); }
   .hypothesis-row[data-evidence-step="5"]::after { border-style: dashed; border-color: var(--ink-tertiary); }
-  .footer-grid { grid-template-columns: 1.25fr 1fr; gap: var(--space-2xl); }
-  .footer-column:last-child { grid-column: 2 / -1; }
+  .footer-grid { grid-template-columns: 1.2fr 1fr; gap: var(--space-2xl); }
   .forest-row { grid-template-columns: 1fr 78px; gap: 8px 12px; padding: 10px 0; }
   .forest-track { grid-column: 1 / -1; grid-row: 2; }
   .forest-value { grid-column: 2; grid-row: 1; }
@@ -996,10 +993,8 @@ html.motion-enhanced .reveal,
   .table-tools { grid-template-columns: 1fr; }
   .comparison-details > summary { flex-direction: column; gap: 6px; }
   .footer-grid { grid-template-columns: 1fr; gap: 34px; }
-  .footer-column:last-child { grid-column: auto; }
   .footer-column a { min-height: 44px; }
-  .footer-bottom { flex-direction: column; gap: 12px; }
-  .footer-evidence { flex-direction: column; gap: 6px; }
+  .footer-terms a { min-height: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1053,7 +1048,7 @@ html.motion-enhanced .reveal,
     <div class="hero-copy">
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A group-safe framework that ranks <em>potentially inconsistent annotations</em> for expert review without changing source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-21">21 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-22">22 August 2026</time></span></div>
     </div>
   </div>
 </section>
@@ -1302,6 +1297,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
         <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
         <p class="author-copy">The project combines a frozen scientific specification, controlled data interventions, group-safe evaluation, machine-readable provenance and an inspectable presentation layer. Its purpose is to demonstrate a reproducible research workflow while keeping the final interpretation with qualified experts.</p>
+        <p class="author-copy">AI tools assisted throughout the project with planning, code drafting and iterative implementation. Natan Smogór directed the work, reviewed and revised the AI-assisted outputs, made the final scientific and engineering decisions, and remains responsible for the code, analysis and claims.</p>
       </div>
 
       <aside class="author-credentials reveal" aria-label="Education and credentials">
@@ -1332,11 +1328,10 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 22 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+    <div class="footer-column footer-terms"><h3>Terms</h3><p>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p><p>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms.</p><p>No diagnostic or clinical use is established.</p></div>
   </div>
-  <div class="footer-evidence"><span>PUMA public evidence commit <a href="https://github.com/Jaqwilk/AANCA/commit/c5bd44193b2abd67bc7e7f1bd9384aa87435d500" target="_blank" rel="noopener"><code>c5bd44193b2a</code></a></span><span><code>evidence.json</code> SHA-256 <code>aa1ed5ae22c8ece735382c8693ce34236dfe6f7b034d4c1ccc80f14b1522413c</code></span></div>
-  <div class="footer-bottom"><span>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</span><span>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms. No diagnostic or clinical use is established.</span></div>
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>

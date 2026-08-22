@@ -1354,7 +1354,7 @@ def _render_study_specs() -> str:
     )
 
 
-def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
+def _render_html(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     qc = evidence["pannuke_qc"]
     hypotheses = primary["hypothesis_comparisons"]
@@ -1369,7 +1369,6 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     hypothesis_ledger = _render_hypothesis_ledger(hypotheses, h2, h4)
     evidence_spine = _render_evidence_spine()
     current_evidence = _render_current_evidence(evidence)
-    publication_limits = evidence["publication_limits"]
 
     seed_rows: list[str] = []
     for record in seed_audit["records"]:
@@ -1395,7 +1394,7 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AANCA is a reproducible, non-diagnostic framework for ranking potentially inconsistent nucleus annotations for expert review.">
   <meta name="author" content="Natan Smogór">
-  <meta name="date" content="2026-08-21">
+  <meta name="date" content="2026-08-22">
   <meta name="theme-color" content="#010102">
   <meta name="referrer" content="no-referrer">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -1422,7 +1421,7 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     <div class="hero-copy">
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A group-safe framework that ranks <em>potentially inconsistent annotations</em> for expert review without changing source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-21">21 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-22">22 August 2026</time></span></div>
     </div>
   </div>
 </section>
@@ -1612,6 +1611,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         <h2 id="author-title">Research and implementation by Natan Smogór.</h2>
         <p class="author-lede">Natan Smogór is the author and developer of AANCA, a non-diagnostic research prototype for prioritising potentially inconsistent nucleus annotations for expert review.</p>
         <p class="author-copy">The project combines a frozen scientific specification, controlled data interventions, group-safe evaluation, machine-readable provenance and an inspectable presentation layer. Its purpose is to demonstrate a reproducible research workflow while keeping the final interpretation with qualified experts.</p>
+        <p class="author-copy">AI tools assisted throughout the project with planning, code drafting and iterative implementation. Natan Smogór directed the work, reviewed and revised the AI-assisted outputs, made the final scientific and engineering decisions, and remains responsible for the code, analysis and claims.</p>
       </div>
 
       <aside class="author-credentials reveal" aria-label="Education and credentials">
@@ -1642,11 +1642,10 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 21 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 22 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer supported; natural-case confirmation and clinical utility not established.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
+    <div class="footer-column footer-terms"><h3>Terms</h3><p>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p><p>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms.</p><p>No diagnostic or clinical use is established.</p></div>
   </div>
-  <div class="footer-evidence"><span>PUMA public evidence commit <a href="https://github.com/Jaqwilk/AANCA/commit/__PUMA_PUBLIC_COMMIT__" target="_blank" rel="noopener"><code>__PUMA_PUBLIC_COMMIT_SHORT__</code></a></span><span><code>evidence.json</code> SHA-256 <code>__EVIDENCE_SHA256__</code></span></div>
-  <div class="footer-bottom"><span>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</span><span>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms. No diagnostic or clinical use is established.</span></div>
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
@@ -1667,13 +1666,6 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         "__H4_AUDIT__": html.escape(_format_metric(h4["audit_guided_macro_f1"])),
         "__H4_RANDOM__": html.escape(_format_metric(h4["random_review_macro_f1_mean"])),
         "__H4_CHART__": h4_chart,
-        "__PUMA_PUBLIC_COMMIT__": html.escape(
-            str(publication_limits["puma_first_public_combined_commit"])
-        ),
-        "__PUMA_PUBLIC_COMMIT_SHORT__": html.escape(
-            str(publication_limits["puma_first_public_combined_commit"])[:12]
-        ),
-        "__EVIDENCE_SHA256__": html.escape(evidence_sha256),
         "__HYPOTHESIS_LEDGER__": hypothesis_ledger,
         "__EVIDENCE_SPINE__": evidence_spine,
         "__CURRENT_EVIDENCE__": current_evidence,
@@ -2366,7 +2358,7 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 21 August 2026.
+Author: Natan Smogór. Updated: 22 August 2026.
 """
 
 
@@ -2685,7 +2677,7 @@ def build_mvp_presentation(
         atomic_write_json(staging / "evidence.json", evidence)
         atomic_write_text(
             staging / "index.html",
-            _render_html(evidence, evidence_sha256=sha256_file(staging / "evidence.json")),
+            _render_html(evidence),
         )
         atomic_write_text(staging / "README.md", _render_readme(evidence))
         atomic_write_bytes(staging / "pannuke_mask_qc_overlays.png", overlay_source.read_bytes())

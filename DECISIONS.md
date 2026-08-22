@@ -563,6 +563,11 @@ machine-readable citation metadata and an explicit code-rights boundary. A custo
 domain and archival DOI remain owner-controlled publication actions; do not claim
 either before it exists.
 
+The article-level disclosure must name AI assistance in project planning, code
+drafting and iterative implementation while preserving the human accountability
+boundary: Natan Smogór directed and reviewed the work, made the final scientific and
+engineering decisions, and remains responsible for the code, analysis and claims.
+
 ## D038 — Keep dense evidence controls visually legible
 
 Status: implemented presentation decision; no new scientific stage
@@ -635,8 +640,27 @@ internal scroll container. The spine is navigation only: do not place mini fores
 plots, quantitative glyphs, coloured evidence marks or an atlas preview beside it.
 Keep the complete 36-entry forest plot as the separate quantitative view below.
 
+Keep every node centred on the same one-pixel spine. Indicate the active stage with a
+solid white fill rather than scaling the SVG circle, because scaling can shift its
+rendered centre off the line. Separate consecutive desktop answers by a 320 px
+transition offset so neighbouring H1–H7 stages remain visibly distinct.
+
 At widths below 901 px, remove the tall sticky treatment and retain all seven answers
 in normal article flow with small static glyphs and no horizontal overflow. Under
 `prefers-reduced-motion`, expose a static white spine followed by all answers. These
 changes affect only presentation; the hero, source annotations,
 frozen evidence, metrics and completion stages remain unchanged.
+
+## D041 — Keep the footer as one editorial surface
+
+Status: implemented presentation decision; no new scientific stage
+
+Use one responsive footer grid for project identity, study status, inspection links
+and terms. Keep the copyright, repository licence, third-party asset boundary and
+non-clinical statement inside that grid. Do not separate them into bordered strips
+below the apparent footer.
+
+Do not display the PUMA commit identifier or `evidence.json` SHA-256 as footer chrome.
+Those technical provenance records remain available in the machine-readable evidence,
+primary release and checksum-bound package manifest. This simplification changes no
+evidence, provenance record, legal term or scientific claim.

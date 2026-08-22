@@ -200,7 +200,7 @@ summary. It does not recalculate a scientific result.
 ### Recalculate released evidence
 
 ~~~powershell
-uv run python scripts/verify_primary_evidence.py
+uv run python scripts/verify_primary_evidence.py PATH/TO/aanca-primary-evidence-v1
 uv run python scripts/verify_nucls_external_validation.py
 uv run python scripts/verify_monusac_external_validation.py
 uv run python scripts/verify_aanca_selected_candidate.py

@@ -643,6 +643,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'href="#author">Author</a>' in html
     assert 'id="author" aria-labelledby="author-title"' in html
     assert "Research and implementation by Natan Smogór" in html
+    assert "AI tools assisted throughout the project with planning, code drafting" in html
+    assert "remains responsible for the code, analysis and claims" in html
     assert "Management and Artificial Intelligence" in html
     assert "Kozminski University" in html
     assert "Current student" in html
@@ -651,7 +653,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "21 August 2026" in html
+    assert "22 August 2026" in html
     assert "gsap@3.15.0" in html
     assert (
         'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'
@@ -792,6 +794,9 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" not in html
     assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" not in html
     assert ".findings-story--enhanced { height: 620svh; }" in html
+    assert "const rowOffset = 320;" in findings_script
+    assert "scale: index => index === active ? 1.2 : 1" not in findings_script
+    assert "stroke-linecap: round" in html
     assert "scrub: .65" in findings_script
     assert findings_script.count("scrollEngine.create({") == 1
     assert "animation: timeline" in findings_script
@@ -848,8 +853,12 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'href="#evidence">Reproducibility boundary</a>' in html
     assert "One-page project brief" in html
     assert "Contributions and AI use" in html
-    assert "PUMA public evidence commit" in html
-    assert hashlib.sha256(artifacts.evidence_path.read_bytes()).hexdigest() in html
+    assert "PUMA public evidence commit" not in html
+    assert "evidence.json</code> SHA-256" not in html
+    assert 'class="footer-column footer-terms"' in html
+    assert 'class="footer-evidence"' not in html
+    assert 'class="footer-bottom"' not in html
+    assert "Dataset files, pretrained weights, dependencies" in html
     assert (
         html.index('id="evidence"')
         < html.index('id="external-validation"')

@@ -81,4 +81,4 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 21 August 2026.
+Author: Natan Smogór. Updated: 22 August 2026.
