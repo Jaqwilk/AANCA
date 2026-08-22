@@ -2,8 +2,13 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "160398058bd64c7a5961512567d7179545a15b3c6bd891ee31cdbb2e386f32cf",
-      "size_bytes": 3973
+      "sha256": "7ddb2babba2fd51a3a6b044181474615721586be6debaf6e3665891697e90b09",
+      "size_bytes": 4143
+    },
+    {
+      "path": "assets/findings-evidence-story.js",
+      "sha256": "b399e11ae240dcca764fef96415dd23ef65661ff1fa64651f8c97cbad0a92270",
+      "size_bytes": 6157
     },
     {
       "path": "assets/hero/nuclei/nucleus-bilobed.png",
@@ -36,14 +41,19 @@
       "size_bytes": 1444775
     },
     {
+      "path": "assets/method-audit-workflow.png",
+      "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37",
+      "size_bytes": 826713
+    },
+    {
       "path": "evidence.json",
-      "sha256": "26d8b042f43a01af08a1d97ae81929c113385f930c9c9bb0c875e9476f323748",
-      "size_bytes": 38194
+      "sha256": "0e6011736a6597b6c2a235e6a4f6f5e091a053f6e11827efb32722c020320227",
+      "size_bytes": 38597
     },
     {
       "path": "index.html",
-      "sha256": "77f982a13c8d63d3f233234f6049be8ecb79c3a243d66ee327606ae39842eb16",
-      "size_bytes": 661580
+      "sha256": "01a68c3da4699b67795bab4d0e3e9049c472e0ee4fbad34646af3fdd05ca1504",
+      "size_bytes": 236320
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -51,7 +61,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "3bf890c53a2d8fc08ad5c2335ed08801d23caadbf165074ed9019dbffb9575c4",
+  "manifest_root_sha256": "2fb3ebf7f73d657870ad459cc97d63d47cdbe8ab27d51d883964929af702ac98",
   "policy": "aanca_presentation_current_evidence_readback_v4",
   "schema_version": 4
 }

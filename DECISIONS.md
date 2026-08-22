@@ -487,9 +487,13 @@ remain in place while visual copies enter a short expert-review queue, then the 
 settles into a nucleus → patch → four-patch study composition and finally resolves
 into the AANCA mark. It must never imply automatic diagnosis, label
 correction or that a nucleus is a confirmed error. Reduced-motion users receive a
-static final frame. The Method figure remains a static SVG schematic only; the
-previous WebGL review-queue animation and the earlier square-grid Priority Review
-Scaffold stay removed. Navigation chrome remains.
+static final frame. The Method uses four concise article paragraphs covering the
+controlled intervention, source-group-safe out-of-fold scoring, equal review budgets
+and the separate downstream test. A checksum-bound minimalist workflow graphic mirrors
+those states and separates retrieval from downstream evaluation. Output remains only a
+ranking for expert review. The former workflow graphic, duplicate review-queue panel,
+WebGL animation and square-grid
+Priority Review Scaffold stay removed. Navigation chrome remains.
 No multi-screen empty scroll theatre is permitted. The pre-polish rollback was removed
 after the current generated package passed final verification.
 
@@ -536,8 +540,8 @@ Status: implemented
 
 GitHub Actions must materialise Git LFS objects during checkout before any verifier
 or test reads the PUMA NPZ archives. A repository test guards the checkout contract.
-The Method figure is a static accessible SVG, so it has no WebGL or Three.js failure
-mode. The decorative masthead Canvas 2D field must stop under reduced motion and
+The Method figure is a static checksum-bound PNG with an accessible caption, so it has
+no WebGL or Three.js failure mode. The decorative masthead Canvas 2D field must stop under reduced motion and
 render a static final frame instead. The scientific article, evidence tables and
 “What the study actually learned” section remain ordinary document content and never
 depend on animation.
@@ -584,14 +588,18 @@ only identical visual copies into the expert-review queue. The audit frame visit
 the four desktop or three mobile instances that are actually copied; decorative
 non-selection scans are excluded from the story.
 
-After the patch zoom, reveal four separate square patches in a 2 x 2 grid. Preserve
-the AANCA mark's 8:3 tile-to-gap proportion, rotate the complete group exactly 45
-degrees and fade the tissue detail into `#5e6ad2`. Do not add a Canvas wordmark.
-Hold the completed mark for about one second. Then drive it through more than two
-additional rotations with continuous in/out easing while scaling it into the camera.
-Fade to full black, keep that black frame briefly, reset the camera while it is hidden,
-then reveal the unchanged field and continue directly into the next audit cycle
-without clearing the canvas. Under
+After the patch zoom, reveal four separate square patches in a 2 x 2 grid while the
+camera is still moving. The sibling split, camera pull-out, group rotation and colour
+transition share one overlapping 2.45-second timeline; do not stop at the intermediate
+grid before starting the rotation. Preserve the AANCA mark's 8:3 tile-to-gap
+proportion, rotate the complete group exactly 45 degrees and fade the tissue detail
+into `#5e6ad2`. Do not add a Canvas wordmark. Hold the completed mark for 1.8
+seconds. Then drive it through more than two additional rotations with continuous
+in/out easing while scaling it into the camera: reach 120 times scale during the dive
+and continue to 150 times during the black fade so no logo fragment remains on screen.
+Keep the full-black frame for 0.195 seconds, reset the camera while it is hidden, then
+clear the black layer quickly and reveal the unchanged field in eight short staggered
+groups. Continue directly into the next audit cycle without clearing the canvas. Under
 reduced motion, render the completed static mark and do not run the loop.
 
 Keep the scan phase brisk enough to match the later transformations while retaining
@@ -607,3 +615,26 @@ Keep the hero copy left aligned in a wider 1320 px rail, remove its redundant vi
 eyebrow, and use a shorter non-diagnostic explanation so the animation has a clear
 right-side field. These changes affect presentation only and do not alter annotations,
 evidence, metrics, scientific claims or completion stages.
+
+## D040 — Use one evidence-backed spine for the seven findings
+
+Status: implemented presentation decision; no new scientific stage
+
+Present “What the study actually learned.” as a restrained desktop scrollytelling
+sequence with one sticky Evidence Spine, one active registered question and answer,
+and one reversible GSAP timeline controlled by one ScrollTrigger. Preserve the exact
+seven findings and their limitations. Previous and next stages may remain faintly
+visible, but the interface must not behave like a carousel or create an internal
+scroll container.
+
+Generate the compact spine marks and the final atlas preview from the same saved
+comparison records used by the complete forest plot. Show the H2 subgroup evidence
+only as its saved ranges, the H4 adverse downstream estimate on an appropriate
+macro-F1 scale, and the three unavailable H6 entries as unavailable marks rather than
+zeros. Do not infer missing point estimates or manufacture uncertainty intervals.
+
+At widths below 901 px, remove the tall sticky treatment and retain all seven answers
+in normal article flow with small static glyphs and no horizontal overflow. Under
+`prefers-reduced-motion`, expose a static spine and atlas preview followed by all
+answers. These changes affect only presentation; the hero, source annotations,
+frozen evidence, metrics and completion stages remain unchanged.

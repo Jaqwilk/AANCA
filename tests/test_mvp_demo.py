@@ -565,6 +565,9 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     evidence = json.loads(artifacts.evidence_path.read_text(encoding="utf-8"))
     html = artifacts.html_path.read_text(encoding="utf-8")
     readme = artifacts.readme_path.read_text(encoding="utf-8")
+    findings_script = (
+        artifacts.output_directory / "assets" / "findings-evidence-story.js"
+    ).read_text(encoding="utf-8")
     assert evidence["presentation_status"] == "DEMO_COMPLETE"
     assert evidence["scientific_status"] == "EXTERNAL_VALIDATION_COMPLETE"
     assert evidence["primary_study_status"] == "PRIMARY_STUDY_COMPLETE"
@@ -591,6 +594,19 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
         assert packaged_asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
         assert packaged_asset.stat().st_size == record["size_bytes"]
         assert hashlib.sha256(packaged_asset.read_bytes()).hexdigest() == record["sha256"]
+    method_asset = evidence["source_files"]["method_workflow_asset"]
+    assert method_asset["path"] == "assets/method-audit-workflow.png"
+    packaged_method_asset = artifacts.output_directory / method_asset["path"]
+    assert packaged_method_asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+    assert packaged_method_asset.stat().st_size == method_asset["size_bytes"]
+    assert hashlib.sha256(packaged_method_asset.read_bytes()).hexdigest() == method_asset["sha256"]
+    findings_asset = evidence["source_files"]["findings_story_script_asset"]
+    assert findings_asset["path"] == "assets/findings-evidence-story.js"
+    packaged_findings_asset = artifacts.output_directory / findings_asset["path"]
+    assert packaged_findings_asset.stat().st_size == findings_asset["size_bytes"]
+    assert (
+        hashlib.sha256(packaged_findings_asset.read_bytes()).hexdigest() == findings_asset["sha256"]
+    )
     assert evidence["publication_limits"] == {
         "puma_public_preoutcome_timestamp_available": False,
         "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
@@ -669,15 +685,25 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'RETURN_TO_FIELD: "RETURN_TO_FIELD"' in html
     assert "restartLoopCycle" in html
     assert "cycleCount" in html
-    assert "logoRotate: 1.05" in html
-    assert "logoDisplay: 1" in html
+    assert "zoomToStudy: 2.45" in html
+    assert "logoDisplay: 1.8" in html
+    assert "cameraEnd: 0.72" in html
+    assert "rotateStart: 0.26" in html
+    assert "colorStart: 0.52" in html
+    assert "camera.goalScale = cubicBezier" in html
     assert "returnSpinDive: 1.35" in html
     assert "returnFadeToBlack: 0.22" in html
-    assert "returnBlackHold: 0.58" in html
+    assert "returnBlackHold: 0.195" in html
     assert "returnRevealField: 0.46" in html
     assert "diveProgress * Math.PI * 4.5" in html
-    assert "loopDiveScale = lerp(1, 20, diveProgress)" in html
+    assert "dive: Object.freeze({ endScale: 120, fadeScale: 150 })" in html
+    assert "loopDiveScale = lerp(1, CONFIG.dive.endScale, diveProgress)" in html
+    assert "CONFIG.dive.fadeScale" in html
     assert "loopBlackAlpha" in html
+    assert "groupCount: 8" in html
+    assert "staggerSpan: 0.455" in html
+    assert "blackReleaseEnd: 0.24" in html
+    assert "introProgress = revealRawProgress" in html
     assert "loopFlashAlpha" not in html
     assert "context.fillStyle = COLORS.canvas" in html
     assert "easeOutBack" in html
@@ -688,7 +714,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "pixelBudget: 2200000" in html
     assert "Math.max(0.75, Math.min(deviceDpr, renderProfile.dprCap, budgetDpr))" in html
     assert "renderIntervalSeconds: 1 / 60" in html
-    assert "renderAccumulator %= CONFIG.renderIntervalSeconds" in html
+    assert "renderAccumulator - CONFIG.renderIntervalSeconds" in html
+    assert "renderAccumulator %= CONFIG.renderIntervalSeconds" not in html
     assert "qualityTier" in html
     assert "renderDpr" in html
     assert "renderedFrameCount" in html
@@ -707,29 +734,41 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "prefers-reduced-motion" in html
     assert "priority_review_scaffold" not in html
     assert "priorityRate" not in html
-    assert 'class="method-queue-diagram"' in html
-    assert "Figure. Review-queue sketch (not study data)." in html
+    assert 'class="journey-figure figure-width reveal"' not in html
+    assert 'class="journey-diagram"' not in html
+    assert 'class="method-workflow-figure figure-width reveal"' in html
+    assert 'src="assets/method-audit-workflow.png"' in html
+    assert "How the audit works." in html
+    assert "source annotations are never changed automatically" in html
+    assert "Both receive exactly the same integer review budget" in html
+    assert "The primary risk score rises" in html
+    assert "In the PanNuke controlled restoration experiment" in html
     assert "WebGL" not in html
     assert ">Findings</a>" in html
     assert ">Reproduce</a>" in html
     assert "Source annotations stay fixed" not in html
     assert "Conceptual workflow · not benchmark data" not in html
     assert "threejs-review-queue" not in html
-    assert "SOURCE PATCH" in html
-    assert "REVIEW QUEUE" in html
+    assert "SOURCE PATCH" not in html
+    assert "REVIEW QUEUE" not in html
     assert 'class="journey story"' in html
-    assert 'class="journey-connector"' in html
+    assert 'class="journey-connector"' not in html
     assert "One controlled question, unfolded step by step" not in html
-    assert '<p class="journey-intro" id="journey-title">' in html
+    assert '<h2 id="journey-title">' in html
     assert "Saved performance estimates varied across contexts" in html
     assert "What the study actually learned" in html
-    assert html.count('<article class="hypothesis-row" data-learned-slide>') == 7
+    assert html.count('data-learned-slide data-evidence-step="') == 7
     assert "Can the audit score find injected label changes earlier than random review?" in html
     assert "so better retrieval did not translate" in html
     assert "They are not zero or negative results" in html
     assert "all 3 saved 95% intervals crossed zero" in html
     assert "Can ranking beat random review?" not in html
-    assert 'class="learned-story article-findings" id="learned-story"' in html
+    assert 'class="findings-story learned-story article-findings" id="learned-story"' in html
+    assert 'class="evidence-spine-svg"' in html
+    assert html.count('data-evidence-stage="') == 7
+    assert html.count('data-evidence-node="') == 7
+    assert 'class="atlas-preview" data-atlas-preview' in html
+    assert 'src="assets/findings-evidence-story.js"' in html
     assert 'aria-roledescription="carousel"' not in html
     assert 'aria-roledescription="slide"' not in html
     assert "let learnedSlideThresholds = [0]" not in html
@@ -741,11 +780,13 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "const activationDistance = beforeFirstAnswer ? 60 : 360" not in html
     assert "learnedStory.addEventListener('wheel', onLearnedWheel, {passive: false})" not in html
     assert "height: 560vh" not in html
-    assert "/* Findings as static Q&A */" in html
-    assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" in html
-    assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" in html
-    assert ".learned-story {\n  height: auto !important; padding: 0 !important;" in html
-    assert "scrub: true" not in html
+    assert "/* Findings Evidence Spine */" in html
+    assert "const content = row.querySelectorAll('.hypothesis-title, .learned-answer')" not in html
+    assert "scrollTrigger: {trigger: row, start: 'top 84%', once: true}" not in html
+    assert ".findings-story--enhanced { height: 680svh; }" in html
+    assert "scrub: 1.1" in findings_script
+    assert findings_script.count("scrollEngine.create({") == 1
+    assert "animation: timeline" in findings_script
     assert "filter: 'blur(4px)'" not in html
     assert "Editorial surfaces: structure with rhythm and rules" not in html
     assert ".repo-card::before { display: none; }" in html
@@ -755,7 +796,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert 'comparisons" tabindex="0"' in html
     assert ".metric-axis, .range-axis, .forest-axis {" in html
     assert "#benchmarks .forest-plot {" in html
-    assert "html.motion-enhanced .learned-story" not in html
+    assert "findings-story--enhanced" in html
     assert "html.motion-enhanced .learned-word" not in html
     assert 'id="learned-current"' not in html
     assert 'class="learned-progress"' not in html
@@ -764,14 +805,9 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Move through one registered question at a time" not in html
     assert "12 / 12 positive differences" not in html
     assert "Automated Auditing of Nucleus Class Annotations" in html
-    assert "90-second summary" in html
-    assert "AANCA ranks existing nucleus annotations for human review" in html
-    assert "precision <strong>0.5377</strong> versus <strong>0.2144</strong>" in html
-    assert "improved downstream macro-F1 by <strong>+0.0064</strong>" in html
-    assert "The 144/62 development/final partition is an AANCA-defined split" in html
-    assert "It is not the official hidden PUMA challenge test set" in html
-    assert "The downstream intervention was <code>flag_exclude</code>" in html
-    assert "They were not reviewed, corrected or automatically relabelled by an expert" in html
+    assert "90-second summary" not in html
+    assert 'class="executive-summary"' not in html
+    assert 'class="summary-box"' not in html
     assert "Automated nucleus-annotation auditing" not in html
     assert "--prose: 640px" not in html
     assert "--editorial: 640px" in html
@@ -797,7 +833,10 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "Natural and operational validity still require" in html
     assert "compact evidence and this checksum-verifiable presentation" in html
     assert "primary evidence release" in html
-    assert "verifies the eleven-file presentation package" in html
+    assert "verifies the thirteen-file presentation package" in html
+    assert 'class="benchmark-article reveal"' in html
+    assert 'class="benchmark-list"' in html
+    assert "benchmark-overview.png" not in html
     assert 'href="#evidence">Reproducibility boundary</a>' in html
     assert "One-page project brief" in html
     assert "Contributions and AI use" in html
@@ -831,8 +870,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<meta name="viewport" content="width=device-width, initial-scale=1">' in html
     assert '<a class="skip" href="#main">Skip to content</a>' in html
     assert 'aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"' in html
-    assert '<title id="queue-figure-title">' in html
-    assert '<desc id="queue-figure-desc">' in html
+    assert '<title id="method-graphic-title">' not in html
+    assert '<desc id="method-graphic-desc">' not in html
     assert "@media (max-width: 720px)" in html
     assert "python scripts/present_demo.py" in html
     assert "PUMA controlled confirmation passed all seven" in readme
@@ -841,12 +880,14 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "not the official hidden PUMA challenge test set" in readme
     assert "not\nthird-party validation" in readme
     assert "Natural-data action: `retain_uncorrected`" in readme
-    assert ".journey-stage-group { opacity: 1 !important; transform: none !important; }" in html
+    assert 'class="journey-stage-group"' not in html
     assert ".journey { height: auto !important; }" in html
+    assert "#results { border-top: 0; }" in html
+    assert "#benchmarks { border-top: 0; }" in html
     assert "const journeyTrigger = scrollEngine.create" not in html
     assert "Math.min(1, journeyTrigger.progress)" not in html
     assert 'role="region" aria-label="Complete comparison results" tabindex="0"' in html
-    assert "stroke-dasharray: none; stroke-dashoffset: 0;" in html
+    assert "stroke-dasharray: none; stroke-dashoffset: 0;" not in html
     assert verify_mvp_presentation(artifacts.output_directory)["status"] == "valid"
     assert source_hashes == {
         path: hashlib.sha256(path.read_bytes()).hexdigest() for path in source_hashes
@@ -964,7 +1005,7 @@ def test_verified_mvp_http_server_serves_only_the_closed_package(tmp_path: Path)
             assert response.headers["X-Frame-Options"] == "DENY"
         assert payload.startswith(b"<!doctype html>")
         assert verification["status"] == "valid"
-        assert verification["file_count"] == 11
+        assert verification["file_count"] == 13
     finally:
         server.shutdown()
         server.server_close()

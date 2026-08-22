@@ -30,6 +30,8 @@ OUTPUT_FILES = (
     "index.html",
     "pannuke_mask_qc_overlays.png",
     *HERO_NUCLEUS_FILES,
+    "assets/method-audit-workflow.png",
+    "assets/findings-evidence-story.js",
 )
 
 _PRESENTATION_HEADERS = (

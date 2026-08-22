@@ -51,17 +51,29 @@
       copyFlightMax: 1,
       queueComplete: 0.68,
       zoomToPatch: 2,
-      zoomToStudy: 1.85,
-      logoHold: 0.38,
-      logoRotate: 1.05,
-      logoColor: 0.65,
-      logoDisplay: 1,
+      zoomToStudy: 2.45,
+      logoDisplay: 1.8,
       returnSpinDive: 1.35,
       returnFadeToBlack: 0.22,
-      returnBlackHold: 0.58,
+      returnBlackHold: 0.195,
       returnRevealField: 0.46,
       returnFieldHold: 0.14,
     }),
+    fieldReveal: Object.freeze({
+      groupCount: 8,
+      staggerSpan: 0.455,
+      blackReleaseEnd: 0.24,
+    }),
+    morph: Object.freeze({
+      cameraEnd: 0.72,
+      siblingStart: 0.02,
+      siblingEnd: 0.62,
+      rotateStart: 0.26,
+      rotateEnd: 0.9,
+      colorStart: 0.52,
+      colorEnd: 1,
+    }),
+    dive: Object.freeze({ endScale: 120, fadeScale: 150 }),
     renderProfiles: Object.freeze({
       constrained: Object.freeze({ dprCap: 1.25, pixelBudget: 2200000, cacheSize: 384 }),
       balanced: Object.freeze({ dprCap: 1.5, pixelBudget: 3200000, cacheSize: 448 }),
@@ -660,7 +672,10 @@
           stretchX,
           stretchY,
           baseAlpha: randomRange(random, 0.48, 0.62),
-          introDelay: randomRange(random, 0, 0.46),
+          introDelay:
+            (Math.floor(random() * CONFIG.fieldReveal.groupCount) /
+              (CONFIG.fieldReveal.groupCount - 1)) *
+            CONFIG.fieldReveal.staggerSpan,
           selectedPlanned: false,
           selected: false,
           queued: false,
@@ -684,7 +699,14 @@
       const plan = [];
       const selectedPositions = new Set(layout.selectedScanPositions);
       for (let index = 0; index < layout.auditCount; index += 1) {
-        const bucket = regionBuckets[index % regionBuckets.length];
+        let bucket = regionBuckets[index % regionBuckets.length];
+        if (bucket.length === 0) {
+          for (let bucketIndex = 0; bucketIndex < regionBuckets.length; bucketIndex += 1) {
+            if (regionBuckets[bucketIndex].length > bucket.length) {
+              bucket = regionBuckets[bucketIndex];
+            }
+          }
+        }
         const nucleusId = bucket.pop();
         if (typeof nucleusId !== "number") continue;
         const selected = selectedPositions.has(index);
@@ -1266,53 +1288,84 @@
 
       if (state === STATES.ZOOM_TO_STUDY) {
         const rawProgress = clamp(stateElapsed / CONFIG.timings.zoomToStudy, 0, 1);
-        const progress = easeInOutQuint(rawProgress);
+        const cameraProgress = easeInOutCubic(
+          clamp(rawProgress / CONFIG.morph.cameraEnd, 0, 1)
+        );
+        const siblingProgress = easeInOutCubic(
+          clamp(
+            (rawProgress - CONFIG.morph.siblingStart) /
+              (CONFIG.morph.siblingEnd - CONFIG.morph.siblingStart),
+            0,
+            1
+          )
+        );
+        const rotateProgress = easeInOutCubic(
+          clamp(
+            (rawProgress - CONFIG.morph.rotateStart) /
+              (CONFIG.morph.rotateEnd - CONFIG.morph.rotateStart),
+            0,
+            1
+          )
+        );
+        const colorProgress = easeInOutCubic(
+          clamp(
+            (rawProgress - CONFIG.morph.colorStart) /
+              (CONFIG.morph.colorEnd - CONFIG.morph.colorStart),
+            0,
+            1
+          )
+        );
         patchReveal = 1;
-        siblingReveal = easeOutCubic(clamp(rawProgress * 1.32 - 0.1, 0, 1));
-        fieldDim = lerp(0.82, 0.78, progress);
-        camera.goalScale = lerp(zoomStartCamera.scale, studyCamera.scale, progress);
-        camera.goalX = lerp(zoomStartCamera.x, studyCamera.x, progress);
-        camera.goalY = lerp(zoomStartCamera.y, studyCamera.y, progress);
+        siblingReveal = siblingProgress;
+        fieldDim = lerp(0.82, 0.78, cameraProgress);
+        camera.goalScale = cubicBezier(
+          zoomStartCamera.scale,
+          studyCamera.scale,
+          studyCamera.scale,
+          finalCamera.scale,
+          cameraProgress
+        );
+        camera.goalX = cubicBezier(
+          zoomStartCamera.x,
+          studyCamera.x,
+          studyCamera.x,
+          finalCamera.x,
+          cameraProgress
+        );
+        camera.goalY = cubicBezier(
+          zoomStartCamera.y,
+          studyCamera.y,
+          studyCamera.y,
+          finalCamera.y,
+          cameraProgress
+        );
+        logoRotation = (Math.PI / 4) * rotateProgress;
+        logoColorProgress = colorProgress;
+        logoDetailAlpha = 1 - colorProgress;
         if (rawProgress >= 1) {
-          camera.goalScale = studyCamera.scale;
-          camera.goalX = studyCamera.x;
-          camera.goalY = studyCamera.y;
+          camera.goalScale = finalCamera.scale;
+          camera.goalX = finalCamera.x;
+          camera.goalY = finalCamera.y;
+          siblingReveal = 1;
+          logoRotation = Math.PI / 4;
+          logoColorProgress = 1;
+          logoDetailAlpha = 0;
           setState(STATES.SETTLED);
         }
         return;
       }
 
       if (state === STATES.SETTLED) {
-        const rotateStart = CONFIG.timings.logoHold;
-        const rotateComplete = rotateStart + CONFIG.timings.logoRotate;
-        const colorStart = rotateStart + CONFIG.timings.logoRotate * 0.55;
-        const logoComplete = Math.max(
-          rotateComplete,
-          colorStart + CONFIG.timings.logoColor
-        );
-        const sequenceDuration = logoComplete + CONFIG.timings.logoDisplay;
-        const rotateRaw = clamp(
-          (stateElapsed - rotateStart) / CONFIG.timings.logoRotate,
-          0,
-          1
-        );
-        const colorRaw = clamp(
-          (stateElapsed - colorStart) / CONFIG.timings.logoColor,
-          0,
-          1
-        );
-        const cameraProgress = easeInOutQuint(
-          clamp(stateElapsed / (CONFIG.timings.logoHold + CONFIG.timings.logoRotate), 0, 1)
-        );
+        camera.goalScale = finalCamera.scale;
+        camera.goalX = finalCamera.x;
+        camera.goalY = finalCamera.y;
+        patchReveal = 1;
+        siblingReveal = 1;
+        logoRotation = Math.PI / 4;
+        logoColorProgress = 1;
+        logoDetailAlpha = 0;
 
-        camera.goalScale = lerp(studyCamera.scale, finalCamera.scale, cameraProgress);
-        camera.goalX = lerp(studyCamera.x, finalCamera.x, cameraProgress);
-        camera.goalY = lerp(studyCamera.y, finalCamera.y, cameraProgress);
-        logoRotation = (Math.PI / 4) * easeInOutCubic(rotateRaw);
-        logoColorProgress = easeInOutCubic(colorRaw);
-        logoDetailAlpha = 1 - easeInOutCubic(colorRaw);
-
-        if (stateElapsed >= sequenceDuration) beginReturnToField();
+        if (stateElapsed >= CONFIG.timings.logoDisplay) beginReturnToField();
         return;
       }
 
@@ -1335,7 +1388,7 @@
           logoRotation = Math.PI / 4 + diveProgress * Math.PI * 4.5;
           logoColorProgress = 1;
           logoDetailAlpha = 0;
-          loopDiveScale = lerp(1, 20, diveProgress);
+          loopDiveScale = lerp(1, CONFIG.dive.endScale, diveProgress);
           loopBlackAlpha = 0;
           patchReveal = 1;
           siblingReveal = 1;
@@ -1347,16 +1400,21 @@
           const fadeProgress = easeInOutCubic(
             clamp((stateElapsed - spinDive) / fadeToBlack, 0, 1)
           );
-          logoRotation = Math.PI / 4 + Math.PI * 4.5;
+          logoRotation = Math.PI / 4 + Math.PI * (4.5 + fadeProgress * 0.75);
           logoColorProgress = 1;
           logoDetailAlpha = 0;
-          loopDiveScale = 20;
+          loopDiveScale = lerp(
+            CONFIG.dive.endScale,
+            CONFIG.dive.fadeScale,
+            fadeProgress
+          );
           loopBlackAlpha = fadeProgress;
           return;
         }
 
         if (!loopFieldReset) {
           resetCamera(initialCamera);
+          introProgress = 0;
           loopFieldReset = true;
         }
         camera.goalScale = initialCamera.scale;
@@ -1375,8 +1433,14 @@
           return;
         }
 
+        const revealRawProgress = clamp(
+          (stateElapsed - revealStart) / revealField,
+          0,
+          1
+        );
+        introProgress = revealRawProgress;
         const revealProgress = easeInOutCubic(
-          clamp((stateElapsed - revealStart) / revealField, 0, 1)
+          clamp(revealRawProgress / CONFIG.fieldReveal.blackReleaseEnd, 0, 1)
         );
         loopBlackAlpha = 1 - revealProgress;
 
@@ -1725,7 +1789,10 @@
         animationFrame = window.requestAnimationFrame(frameLoop);
         return;
       }
-      renderAccumulator %= CONFIG.renderIntervalSeconds;
+      renderAccumulator = Math.max(
+        0,
+        renderAccumulator - CONFIG.renderIntervalSeconds
+      );
       renderScene(accumulator / CONFIG.fixedStepSeconds);
       if (completed) {
         stopLoop(false);
@@ -1830,6 +1897,7 @@
         reducedMotion,
         mobile: isMobile,
         storyElapsedSeconds: storyElapsed,
+        introProgress,
         nucleusCount: nuclei.length,
         selectedCount,
         queueCount: queue.length,

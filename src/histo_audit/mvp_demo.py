@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 import csv
 import hashlib
 import html
@@ -54,7 +53,6 @@ _SELECTED_RUN_FILES = (
     "restoration_index.json",
     "status.json",
 )
-_BENCHMARK_ICON_DIR = Path(__file__).resolve().parent / "assets" / "benchmark"
 _HERO_NUCLEUS_DIR = Path(__file__).resolve().parent / "assets" / "hero" / "nuclei"
 _HERO_NUCLEUS_FILENAMES = (
     "nucleus-compact.png",
@@ -67,41 +65,42 @@ _HERO_NUCLEUS_FILENAMES = (
 _HERO_NUCLEUS_OUTPUTS = tuple(
     f"assets/hero/nuclei/{filename}" for filename in _HERO_NUCLEUS_FILENAMES
 )
+_METHOD_WORKFLOW_SOURCE = Path(__file__).resolve().parent / "assets" / "method-audit-workflow.png"
+_METHOD_WORKFLOW_OUTPUT = "assets/method-audit-workflow.png"
+_FINDINGS_SCRIPT_SOURCE = Path(__file__).resolve().parent / "assets" / "findings-evidence-story.js"
+_FINDINGS_SCRIPT_OUTPUT = "assets/findings-evidence-story.js"
 _OUTPUT_FILES = (
     "README.md",
     "evidence.json",
     "index.html",
     "pannuke_mask_qc_overlays.png",
     *_HERO_NUCLEUS_OUTPUTS,
+    _METHOD_WORKFLOW_OUTPUT,
+    _FINDINGS_SCRIPT_OUTPUT,
 )
-_BENCHMARK_FACTS: tuple[tuple[str, str, str, str], ...] = (
+_BENCHMARK_FACTS: tuple[tuple[str, str, str], ...] = (
     (
         "Data",
-        "pannuke.png",
         "PanNuke",
         "Verified official release; five positive nucleus classes across 19 tissue types.",
     ),
     (
         "Unit",
-        "segmented-nuclei.png",
         "Already segmented nuclei",
         "Class-label consistency only. Segmentation quality and diagnosis are outside scope.",
     ),
     (
         "Primary model",
-        "resnet-model.png",
         "Frozen ResNet-18 + logistic regression",
         "ImageNet context embeddings with balanced multinomial fitting.",
     ),
     (
         "Prediction design",
-        "five-fold-oof.png",
         "Five-fold group-safe OOF",
         "A scored nucleus and its whole source patch are absent from its training fold.",
     ),
     (
         "Review budget",
-        "review-budget.png",
         "5% primary queue",
         "Guided and random review receive the same integer budget.",
     ),
@@ -1330,41 +1329,29 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
     """.lstrip("\n").rstrip()
 
 
-def _benchmark_icon_data_uri(filename: str) -> str:
-    """Return a data URI for one sealed benchmark fact icon."""
-
-    path = _BENCHMARK_ICON_DIR / filename
-    if path.parent.resolve() != _BENCHMARK_ICON_DIR.resolve() or not path.is_file():
-        raise ValueError(f"benchmark icon is missing: {filename}")
-    raw = path.read_bytes()
-    if raw.startswith(b"\x89PNG\r\n\x1a\n"):
-        mime = "image/png"
-    elif raw.startswith(b"\xff\xd8\xff"):
-        mime = "image/jpeg"
-    else:
-        raise ValueError(f"benchmark icon format is unsupported: {filename}")
-    encoded = base64.standard_b64encode(raw).decode("ascii")
-    return f"data:{mime};base64,{encoded}"
-
-
 def _render_study_specs() -> str:
-    """Render the five exact-benchmark facts with decorative icons."""
+    """Render the five benchmark constraints as a restrained article section."""
 
-    cards: list[str] = []
-    for label, icon_name, title, description in _BENCHMARK_FACTS:
-        src = html.escape(_benchmark_icon_data_uri(icon_name), quote=True)
-        cards.append(
-            '<article class="spec-card">'
-            f"<span>{html.escape(label)}</span>"
-            '<div class="spec-copy">'
-            f'<img class="spec-icon" src="{src}" alt="" aria-hidden="true" '
-            'width="60" height="60" decoding="async">'
+    facts: list[str] = []
+    for index, (label, title, description) in enumerate(_BENCHMARK_FACTS, start=1):
+        facts.append(
+            '<div class="benchmark-row">'
+            "<dt>"
+            f"<span>{index:02d}</span>{html.escape(label)}"
+            "</dt>"
+            "<dd>"
             f"<strong>{html.escape(title)}</strong>"
-            f"<small>{html.escape(description)}</small>"
+            f"<p>{html.escape(description)}</p>"
+            "</dd>"
             "</div>"
-            "</article>"
         )
-    return '<div class="study-specs reveal">\n      ' + "\n      ".join(cards) + "\n    </div>"
+    return (
+        '<div class="benchmark-article reveal">'
+        '<header class="benchmark-heading">'
+        '<h2 id="study-title">Benchmark setup</h2>'
+        "</header>"
+        '<dl class="benchmark-list">' + "".join(facts) + "</dl></div>"
+    )
 
 
 def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
@@ -1380,8 +1367,8 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
     h4_chart = _render_h4_chart(h4)
     h2_chart = _render_h2_chart(h2)
     hypothesis_ledger = _render_hypothesis_ledger(hypotheses, h2, h4)
+    evidence_spine = _render_evidence_spine(primary["comparisons"], h2, h4)
     current_evidence = _render_current_evidence(evidence)
-    puma = evidence["new_source_confirmation"]
     publication_limits = evidence["publication_limits"]
 
     seed_rows: list[str] = []
@@ -1441,15 +1428,6 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
 </section>
 
 <main id="main">
-  <section class="executive-summary" id="summary" aria-labelledby="summary-title">
-    <div class="article-copy summary-box reveal">
-      <p class="summary-label">90-second summary</p>
-      <h2 id="summary-title">AANCA ranks existing nucleus annotations for human review and never automatically relabels them.</h2>
-      <p class="summary-statement">On an AANCA-defined 62-ROI holdout from the 206 public PUMA ROIs, after 10% controlled corruption, its 5% review queue achieved precision <strong>__PUMA_PRECISION_4__</strong> versus <strong>__PUMA_RANDOM_PRECISION_4__</strong> for matched random selection. Excluding the flagged examples improved downstream macro-F1 by <strong>__PUMA_DELTA_F1_4__</strong> over unchanged corrupted training. This is controlled-noise evidence, not natural pathologist-error or clinical validation.</p>
-      <p class="summary-detail"><strong>Exact design boundary.</strong> The 144/62 development/final partition is an AANCA-defined split of the 206 public PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream intervention was <code>flag_exclude</code>: the highest-ranked 5% of training instances were omitted from downstream training. They were not reviewed, corrected or automatically relabelled by an expert.</p>
-    </div>
-  </section>
-
   <section class="narrative" id="overview">
     <div class="article-copy reveal">
       <p class="lede">Annotation auditing is a way to decide what a human should inspect first. It is not a way to replace the human decision.</p>
@@ -1461,120 +1439,21 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
   </section>
 
   <section class="study-at-a-glance" id="study-facts" aria-labelledby="study-title">
-    <div class="section-heading reveal"><h2 id="study-title">The exact benchmark, in five facts.</h2><p class="section-deck">These details define both what the results measure and what they do not measure.</p></div>
     __STUDY_SPECS__
   </section>
 
-  <div class="research-question reveal" id="research-question">
-    <p>Can source-group-safe out-of-fold models retrieve controlled label inconsistencies more efficiently than random review, and does restoring the highest-ranked injected corruptions improve downstream nucleus classification?</p>
-  </div>
-
   <section class="journey story" id="method" aria-labelledby="journey-title" data-active-stage="0">
     <div class="article-copy method-context reveal">
-      <p class="section-kicker">Method</p>
-      <h2>A controlled audit begins by preserving what the model is allowed to know.</h2>
-      <p>The benchmark does not ask a classifier to overwrite a pathologist's annotation. It creates a controlled setting in which a known subset of labels is changed intentionally, while the source record, reference label and corruption metadata remain separate and immutable.</p>
-      <p>All development splits are made by <code>group_id</code>, at least at source-patch level. A nucleus can be scored only by a model that was trained without that nucleus and without every other nucleus from the same source patch. This produces one group-safe out-of-fold probability vector for every audited instance.</p>
-      <p>Those probabilities are converted into review-priority scores. The primary self-confidence score asks how little probability the model assigns to the observed label; complementary methods add likelihood, margin, ambiguity and fold-safe neighbourhood evidence. Higher scores mean earlier review, never automatic correction.</p>
-      <p>Finally, guided and random review receive the same integer budget. The benchmark measures whether injected changes appear earlier in the guided queue and then asks a separate question: whether restoring only the reviewed injected changes improves a downstream classifier on the untouched final reference fold.</p>
+      <h2 id="journey-title">How the audit works.</h2>
+      <p>The first two states show three parts kept separate for every benchmark record: the pre-corruption reference label, the observed label exposed to the model and metadata describing the controlled intervention. When corruption is injected, the observed label may be replaced and the metadata records what changed; the reference label remains fixed. It defines the benchmark target, not guaranteed biological truth.</p>
+      <p>The centre shows one of five group-safe out-of-fold splits. Four neutral folds fit the model; the violet fold contains the source group being scored. Neither that nucleus nor any other nucleus from the same source patch appears in that model's training data. Cycling the held-out fold produces one probability vector for every audited instance. The primary risk score rises as the model assigns less probability to the observed label; a higher score means earlier review, not a confirmed error.</p>
+      <p>On the right, the guided queue orders instances by risk while the random queue provides a matched baseline. Both receive exactly the same integer review budget. The five squares are schematic: the primary queue contains 5% of eligible instances, not five nuclei. Retrieval is then compared against the injected changes known only to the evaluator.</p>
+      <p>The final fork separates retrieval from downstream utility. The magnifier represents how many injected changes the queue retrieves. In the PanNuke controlled restoration experiment, only reviewed injected changes are restored, all unreviewed observed labels remain unchanged and the downstream classifier is evaluated on the untouched, uncorrupted final reference fold. Natural-data auditing never performs this restoration: AANCA only recommends potentially inconsistent annotations for expert review and never changes source annotations automatically.</p>
     </div>
-    <figure class="method-queue-figure rail-figure reveal">
-      <div class="method-queue-stage">
-        <svg class="method-queue-diagram" viewBox="0 0 960 300" role="img" aria-labelledby="queue-figure-title queue-figure-desc" preserveAspectRatio="xMidYMid meet" focusable="false">
-          <title id="queue-figure-title">Conceptual review-queue field</title>
-          <desc id="queue-figure-desc">A source patch of nucleus instances feeds a ranked review queue of three slots. Illustration only, not benchmark data.</desc>
-          <defs>
-            <linearGradient id="queue-flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7884df" stop-opacity=".12"/><stop offset="1" stop-color="#8d98f4" stop-opacity=".78"/></linearGradient>
-          </defs>
-          <rect class="fallback-panel" x="42" y="43" width="525" height="214" rx="10"/>
-          <rect class="fallback-panel" x="647" y="43" width="270" height="214" rx="10"/>
-          <text class="fallback-label" x="66" y="72">SOURCE PATCH</text>
-          <text class="fallback-label" x="671" y="72">REVIEW QUEUE</text>
-          <g class="fallback-nuclei">
-            <g class="cell"><path class="cell-membrane" d="M88 128 C90 108 102 96 118 94 C136 92 150 104 152 120 C154 136 144 150 128 154 C112 158 98 150 92 138 C88 132 87 130 88 128 Z"/><ellipse class="cell-nucleus" cx="118" cy="122" rx="7.5" ry="6.2"/></g>
-            <g class="cell"><path class="cell-membrane" d="M158 108 C162 88 178 78 196 82 C214 86 226 100 222 118 C218 136 202 146 184 142 C166 138 154 126 158 108 Z"/><ellipse class="cell-nucleus" cx="190" cy="110" rx="6.8" ry="8"/></g>
-            <g class="cell"><path class="cell-membrane" d="M220 156 C224 134 242 122 262 128 C280 134 290 152 282 170 C274 186 254 192 236 184 C220 177 216 166 220 156 Z"/><ellipse class="cell-nucleus" cx="250" cy="154" rx="8" ry="6.5"/></g>
-            <g class="cell"><path class="cell-membrane" d="M298 118 C300 98 314 88 332 90 C350 92 360 106 356 122 C352 138 338 148 320 144 C304 140 296 130 298 118 Z"/><ellipse class="cell-nucleus" cx="328" cy="116" rx="7" ry="7.2"/></g>
-            <g class="cell is-focus"><path class="cell-membrane" d="M388 100 C390 84 404 76 418 80 C432 84 440 98 436 112 C432 126 416 132 402 128 C388 124 384 112 388 100 Z"/><ellipse class="cell-nucleus" cx="408" cy="102" rx="7.5" ry="6.5"/></g>
-            <g class="cell"><path class="cell-membrane" d="M458 124 C460 104 474 94 492 98 C510 102 520 118 514 134 C508 150 492 156 474 150 C458 144 456 134 458 124 Z"/><ellipse class="cell-nucleus" cx="486" cy="124" rx="6.5" ry="7.5"/></g>
-            <g class="cell"><path class="cell-membrane" d="M100 214 C102 194 116 184 134 188 C152 192 162 208 156 224 C150 240 134 246 116 240 C100 234 98 224 100 214 Z"/><ellipse class="cell-nucleus" cx="128" cy="214" rx="7.2" ry="6.4"/></g>
-            <g class="cell"><path class="cell-membrane" d="M172 226 C176 206 194 196 214 202 C232 208 242 224 234 240 C226 254 206 258 188 250 C172 243 168 234 172 226 Z"/><ellipse class="cell-nucleus" cx="204" cy="226" rx="7.8" ry="6.8"/></g>
-            <g class="cell"><path class="cell-membrane" d="M262 208 C264 188 278 178 296 182 C314 186 324 200 318 216 C312 232 296 238 278 232 C262 226 260 216 262 208 Z"/><ellipse class="cell-nucleus" cx="290" cy="208" rx="6.6" ry="7.4"/></g>
-            <g class="cell"><path class="cell-membrane" d="M330 228 C334 208 350 198 368 204 C386 210 394 226 386 242 C378 256 358 260 342 252 C328 245 326 236 330 228 Z"/><ellipse class="cell-nucleus" cx="360" cy="228" rx="7.4" ry="6.2"/></g>
-            <g class="cell"><path class="cell-membrane" d="M430 216 C434 196 450 186 468 192 C486 198 494 214 486 230 C478 244 458 248 442 240 C428 233 426 224 430 216 Z"/><ellipse class="cell-nucleus" cx="460" cy="216" rx="7" ry="7.6"/></g>
-          </g>
-          <circle class="fallback-selected" cx="408" cy="102" r="34" pathLength="100"/>
-          <path class="fallback-path" d="M442 102 H674"/>
-          <g class="fallback-queue"><rect x="674" y="87" width="205" height="30" rx="6"/><rect x="674" y="130" width="205" height="30" rx="6"/><rect x="674" y="173" width="205" height="30" rx="6"/></g>
-          <g class="fallback-ranks"><text x="687" y="107">01</text><text x="687" y="150">02</text><text x="687" y="193">03</text></g>
-        </svg>
-      </div>
-      <figcaption>Figure. Review-queue sketch (not study data).</figcaption>
+    <figure class="method-workflow-figure figure-width reveal">
+      <div class="method-workflow-crop"><img src="assets/method-audit-workflow.png" width="2128" height="739" loading="lazy" decoding="async" fetchpriority="low" alt="Conceptual workflow showing separate label states, four training folds scoring a held-out source group, equal guided and random review budgets, retrieval measurement and a separate downstream evaluation on an untouched final fold."></div>
+      <figcaption>Conceptual workflow. Violet denotes the controlled intervention, held-out scoring state and guided queue; it does not indicate biological truth or an automatic correction.</figcaption>
     </figure>
-    <div class="journey-sticky"><div class="journey-grid">
-      <div class="journey-visual">
-        <svg viewBox="0 0 760 680" role="img" aria-labelledby="method-graphic-title method-graphic-desc">
-          <title id="method-graphic-title">The five cumulative stages of the controlled AANCA benchmark</title>
-          <desc id="method-graphic-desc">Five horizontal lanes unfold along an alternating serpentine path from immutable source labels to an expert-review recommendation.</desc>
-
-          <path class="journey-connector" pathLength="1" d="M688 81H711Q732 81 732 102V188Q732 209 711 209H722"/>
-          <path class="journey-connector" pathLength="1" d="M72 209H49Q28 209 28 230V316Q28 337 49 337H38"/>
-          <path class="journey-connector" pathLength="1" d="M688 337H711Q732 337 732 358V444Q732 465 711 465H722"/>
-          <path class="journey-connector" pathLength="1" d="M72 465H49Q28 465 28 486V572Q28 593 49 593H38"/>
-
-          <g class="journey-stage-group" data-journey-stage="0">
-            <rect class="journey-lane-bg" x="38" y="34" width="650" height="94" rx="28"/>
-            <path class="journey-lane-edge" d="M66 35H660"/>
-            <text class="journey-stage-no" x="66" y="65">01</text>
-            <text class="journey-stage-title" x="111" y="66">Preserve the source evidence</text>
-            <text class="journey-stage-meta" x="111" y="91">LABEL + PATCH GROUP + ORIGINAL CLASS</text>
-            <path class="journey-rail" d="M430 82H590"/>
-            <path class="journey-rail" d="M583 76L590 82L583 88"/>
-            <g transform="translate(612 59)"><rect class="journey-node" width="16" height="16" rx="4"/><rect class="journey-node" x="21" y="7" width="16" height="16" rx="4" opacity=".7"/><rect class="journey-node" x="7" y="25" width="16" height="16" rx="4" opacity=".85"/></g>
-          </g>
-
-          <g class="journey-stage-group" data-journey-stage="1">
-            <rect class="journey-lane-bg" x="72" y="162" width="650" height="94" rx="28"/>
-            <path class="journey-lane-edge" d="M100 163H694"/>
-            <text class="journey-stage-no" x="100" y="193">02</text>
-            <text class="journey-stage-title" x="145" y="194">Create known inconsistencies</text>
-            <text class="journey-stage-meta" x="145" y="219">PRE-CORRUPTION ≠ OBSERVED · METADATA KEPT SEPARATE</text>
-            <g transform="translate(596 190)"><rect class="journey-node-muted" width="38" height="10" rx="5"/><path class="journey-rail-accent" d="M44 5H58"/><rect class="journey-node" x="64" width="38" height="10" rx="5"/></g>
-          </g>
-
-          <g class="journey-stage-group" data-journey-stage="2">
-            <rect class="journey-lane-bg" x="38" y="290" width="650" height="94" rx="28"/>
-            <path class="journey-lane-edge" d="M66 291H660"/>
-            <text class="journey-stage-no" x="66" y="321">03</text>
-            <text class="journey-stage-title" x="111" y="322">Predict without patch leakage</text>
-            <text class="journey-stage-meta" x="111" y="347">FIVE GROUP-SAFE OUT-OF-FOLD MODELS</text>
-            <g transform="translate(564 316)"><rect class="journey-node" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="31" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="62" width="24" height="24" rx="5"/><rect class="journey-node-muted" x="93" width="24" height="24" rx="5"/></g>
-          </g>
-
-          <g class="journey-stage-group" data-journey-stage="3">
-            <rect class="journey-lane-bg" x="72" y="418" width="650" height="94" rx="28"/>
-            <path class="journey-lane-edge" d="M100 419H694"/>
-            <text class="journey-stage-no" x="100" y="449">04</text>
-            <text class="journey-stage-title" x="145" y="450">Turn evidence into a fixed review queue</text>
-            <text class="journey-stage-meta" x="145" y="475">HIGHER SCORE = EARLIER REVIEW · PRIMARY BUDGET 5%</text>
-            <g transform="translate(594 442)"><rect class="journey-node" width="104" height="7" rx="3.5"/><rect class="journey-node-muted" y="15" width="73" height="7" rx="3.5"/><rect class="journey-node-muted" y="30" width="42" height="7" rx="3.5"/></g>
-          </g>
-
-          <g class="journey-stage-group" data-journey-stage="4">
-            <rect class="journey-lane-bg" x="38" y="546" width="650" height="94" rx="28"/>
-            <path class="journey-lane-edge" d="M66 547H660"/>
-            <text class="journey-stage-no" x="66" y="577">05</text>
-            <text class="journey-stage-title" x="111" y="578">Measure retrieval; leave judgement to an expert</text>
-            <text class="journey-stage-meta" x="111" y="603">RECOMMENDATION ONLY · SOURCE LABELS REMAIN UNCHANGED</text>
-            <g transform="translate(607 564)"><circle class="journey-icon-line" cx="24" cy="24" r="22"/><path class="journey-icon-line" d="M13 24L21 32L37 12" style="stroke:#828fff;stroke-width:3"/></g>
-          </g>
-        </svg>
-      </div>
-
-      <div class="journey-copy">
-        <p class="journey-intro" id="journey-title">The diagram shows the complete governed path: preserve the reference, create a known intervention, predict without source-patch leakage, rank an equal review budget and measure retrieval while leaving the final decision to an expert.</p>
-      </div>
-    </div></div>
   </section>
 
   <section class="section" id="reading">
@@ -1606,13 +1485,19 @@ def _render_html(evidence: dict[str, Any], *, evidence_sha256: str) -> str:
       <p>The pattern is mixed. H1 supports better-than-random prioritisation inside the controlled benchmark, H5 favours the fixed hybrid, and H3 indicates that some injected mechanisms were harder to retrieve. H4 is adverse, H7 is unresolved, and H6 is unavailable because no pathology encoder passed the frozen eligibility gates.</p>
       <p>Each answer below states the conclusion, the exact saved evidence and the interpretation boundary. None of the positive ranking results establishes that a naturally occurring annotation is wrong.</p>
     </div>
-    <div class="learned-story article-findings" id="learned-story">
-      <div class="learned-sticky"><div class="learned-shell">
-        <div class="section-heading learned-heading"><h2>What the study actually learned.</h2></div>
-        <div class="learned-stage" role="region" aria-label="Seven preregistered research questions and their answers">
-          <div class="hypothesis-ledger" aria-label="Preregistered findings">__HYPOTHESIS_LEDGER__</div>
+    <div class="findings-story learned-story article-findings" id="learned-story">
+      <div class="findings-story__sticky">
+        <div class="findings-story__inner">
+          <div class="findings-story__visual" aria-hidden="true">__EVIDENCE_SPINE__</div>
+          <div class="findings-story__content">
+            <h2 class="findings-story__eyebrow">What the study actually learned.</h2>
+            <div class="findings-story__steps" role="region" aria-label="Seven preregistered research questions and their answers">
+              <div class="hypothesis-ledger" aria-label="Preregistered findings">__HYPOTHESIS_LEDGER__</div>
+            </div>
+            <p class="findings-story__atlas-note">Continue to the complete registered evidence atlas.</p>
+          </div>
         </div>
-      </div></div>
+      </div>
     </div>
     <div class="section-heading reveal" style="margin-top:var(--section-space)"><h2>Every preregistered comparison entry.</h2><p class="section-deck">Each point is an average-precision difference; each line is its saved two-sided 95% percentile-bootstrap interval. Missing H6 points are shown as unavailable rather than as zero.</p></div>
     <div class="chapter-copy reveal"><p>The atlas is the transition from narrative findings to detailed evidence. Rows remain grouped by hypothesis so that effect direction, interval width, unavailable cells and repeated seed structure can be inspected together instead of reduced to a single headline number.</p><p>The plot is intentionally bounded inside the article. Scrolling within it reveals all 36 registered entries while keeping the surrounding explanation in view; the complete numeric record appears later in the evidence table.</p></div>
@@ -1697,7 +1582,7 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="use">
     <div class="repo-shell">
-      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the eleven-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, NuCLS and MoNuSAC scripts independently recalculate their stated saved evidence. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the thirteen-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, NuCLS and MoNuSAC scripts independently recalculate their stated saved evidence. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
@@ -1766,6 +1651,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+<script src="assets/findings-evidence-story.js"></script>
 <script>__HERO_SCRIPT__</script>
 <script>__SCRIPT__</script>
 </body>
@@ -1782,11 +1668,6 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         "__H4_AUDIT__": html.escape(_format_metric(h4["audit_guided_macro_f1"])),
         "__H4_RANDOM__": html.escape(_format_metric(h4["random_review_macro_f1_mean"])),
         "__H4_CHART__": h4_chart,
-        "__PUMA_PRECISION_4__": f"{puma['retrieval']['candidate_precision']:.4f}",
-        "__PUMA_RANDOM_PRECISION_4__": (
-            f"{puma['retrieval']['mean_matched_random_precision']:.4f}"
-        ),
-        "__PUMA_DELTA_F1_4__": f"{puma['downstream']['minus_uncorrected']:+.4f}",
         "__PUMA_PUBLIC_COMMIT__": html.escape(
             str(publication_limits["puma_first_public_combined_commit"])
         ),
@@ -1795,6 +1676,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         ),
         "__EVIDENCE_SHA256__": html.escape(evidence_sha256),
         "__HYPOTHESIS_LEDGER__": hypothesis_ledger,
+        "__EVIDENCE_SPINE__": evidence_spine,
         "__CURRENT_EVIDENCE__": current_evidence,
         "__FOREST_PLOT__": forest_plot,
         "__H2_CHART__": h2_chart,
@@ -1985,6 +1867,158 @@ def _render_forest_plot(comparisons: list[dict[str, Any]]) -> str:
             f'<span class="forest-value">{html.escape(_format_metric(point))}</span></div>'
         )
     return "".join(output)
+
+
+def _story_x(
+    value: float, lower: float, upper: float, *, left: float = 116, right: float = 424
+) -> float:
+    """Map one saved value to the shared Evidence Spine coordinate system."""
+
+    if upper <= lower:
+        raise ValueError("Evidence Spine domain must have positive width")
+    return left + ((value - lower) / (upper - lower)) * (right - left)
+
+
+def _render_evidence_spine(
+    comparisons: list[dict[str, Any]], h2: dict[str, Any], h4: dict[str, Any]
+) -> str:
+    """Render the desktop story and atlas preview from the same saved comparison rows."""
+
+    reported = [item for item in comparisons if item.get("status") == "reported"]
+    bounds = [0.0]
+    for item in reported:
+        bounds.append(_require_real(item.get("point_difference"), role="story point difference"))
+        bounds.extend(_require_interval(item.get("interval_95"), role="story interval"))
+    padding = max((max(bounds) - min(bounds)) * 0.06, 0.001)
+    lower, upper = min(bounds) - padding, max(bounds) + padding
+    zero_x = _story_x(0.0, lower, upper)
+
+    by_hypothesis = {
+        hypothesis: [
+            item
+            for item in comparisons
+            if str(item.get("comparison_id", "")).startswith(f"{hypothesis}_")
+        ]
+        for hypothesis in ("h1", "h3", "h5", "h6", "h7")
+    }
+
+    def reported_stage(stage_index: int, hypothesis: str, start_y: float, gap: float) -> str:
+        rows = by_hypothesis[hypothesis]
+        marks = [f'<path class="evidence-zero" d="M{zero_x:.2f} 132V452" pathLength="1"/>']
+        for index, item in enumerate(rows):
+            if item.get("status") != "reported":
+                continue
+            point = _require_real(item.get("point_difference"), role=f"{hypothesis} story point")
+            interval = _require_interval(item.get("interval_95"), role=f"{hypothesis} story CI")
+            y = start_y + index * gap
+            low_x = _story_x(interval[0], lower, upper)
+            high_x = _story_x(interval[1], lower, upper)
+            point_x = _story_x(point, lower, upper)
+            marks.append(
+                f'<path class="evidence-line evidence-interval" d="M{low_x:.2f} {y:.2f}H{high_x:.2f}" pathLength="1"/>'
+                f'<circle class="evidence-point" cx="{point_x:.2f}" cy="{y:.2f}" r="3.2"/>'
+            )
+        return f'<g class="evidence-stage" data-evidence-stage="{stage_index}">{"".join(marks)}</g>'
+
+    stages = [reported_stage(0, "h1", 172, 20)]
+
+    h2_marks = ['<path class="evidence-context-origin" d="M116 190V410" pathLength="1"/>']
+    for index, dimension in enumerate(("class", "tissue", "mechanism", "rate")):
+        interval = _require_interval(
+            h2["dimensions"][dimension]["reported_average_precision_range"],
+            role=f"H2 {dimension} story range",
+        )
+        y = 220 + index * 55
+        low_x = _story_x(interval[0], 0.0, 1.0)
+        high_x = _story_x(interval[1], 0.0, 1.0)
+        h2_marks.append(
+            f'<path class="evidence-line evidence-context-range" d="M{low_x:.2f} {y}H{high_x:.2f}" pathLength="1"/>'
+            f'<circle class="evidence-context-end" cx="{low_x:.2f}" cy="{y}" r="2.4"/>'
+            f'<circle class="evidence-context-end" cx="{high_x:.2f}" cy="{y}" r="2.4"/>'
+        )
+    stages.append(f'<g class="evidence-stage" data-evidence-stage="1">{"".join(h2_marks)}</g>')
+    stages.append(reported_stage(2, "h3", 220, 28))
+
+    h4_point = _require_real(h4["point_difference"], role="H4 story point")
+    h4_interval = _require_interval(h4["interval_95"], role="H4 story interval")
+    h4_low, h4_high = -0.012, 0.012
+    h4_zero = _story_x(0.0, h4_low, h4_high)
+    stages.append(
+        '<g class="evidence-stage" data-evidence-stage="3">'
+        f'<path class="evidence-zero" d="M{h4_zero:.2f} 205V385" pathLength="1"/>'
+        f'<path class="evidence-line evidence-interval" d="M{_story_x(h4_interval[0], h4_low, h4_high):.2f} 295H{_story_x(h4_interval[1], h4_low, h4_high):.2f}" pathLength="1"/>'
+        f'<circle class="evidence-point" cx="{_story_x(h4_point, h4_low, h4_high):.2f}" cy="295" r="3.2"/>'
+        "</g>"
+    )
+
+    h5 = reported_stage(4, "h5", 172, 20)
+    h5 = h5.replace(
+        'data-evidence-stage="4">',
+        'data-evidence-stage="4"><path class="evidence-merge" d="M116 270L148 292M116 314L148 292" pathLength="1"/>',
+        1,
+    )
+    stages.append(h5)
+
+    unavailable_marks = []
+    for index in range(len(by_hypothesis["h6"])):
+        y = 240 + index * 55
+        unavailable_marks.append(
+            f'<path class="evidence-unavailable" d="M184 {y}H362" pathLength="1"/>'
+            f'<circle class="evidence-unavailable-dot" cx="273" cy="{y}" r="5"/>'
+        )
+    stages.append(
+        '<g class="evidence-stage is-unavailable" data-evidence-stage="5">'
+        + "".join(unavailable_marks)
+        + "</g>"
+    )
+    stages.append(reported_stage(6, "h7", 250, 48))
+
+    node_y = (70, 145, 220, 295, 370, 445, 520)
+    nodes = "".join(
+        f'<circle class="evidence-node" data-evidence-node="{index}" cx="34" cy="{y}" r="3.5"/>'
+        for index, y in enumerate(node_y)
+    )
+    summary_glyphs = "".join(
+        f'<g class="evidence-summary-glyph" data-summary-glyph="{index}" transform="translate(45 {y})">'
+        f'<path d="M0 0H{20 + (index % 3) * 5}" pathLength="1"/><circle cx="{10 + (index % 4) * 4}" cy="0" r="2"/></g>'
+        for index, y in enumerate(node_y)
+    )
+
+    atlas_rows: list[str] = []
+    previous_hypothesis = ""
+    for index, item in enumerate(comparisons):
+        y = 74 + index * 12.6
+        comparison_id = str(item["comparison_id"])
+        hypothesis = _comparison_hypothesis(comparison_id)
+        if previous_hypothesis and hypothesis != previous_hypothesis:
+            atlas_rows.append(f'<path class="atlas-group-rule" d="M104 {y - 6:.2f}H430"/>')
+        previous_hypothesis = hypothesis
+        if item.get("status") != "reported":
+            atlas_rows.append(
+                f'<path class="atlas-unavailable" d="M190 {y:.2f}H350" pathLength="1"/>'
+            )
+            continue
+        point = _require_real(item.get("point_difference"), role="atlas-preview point")
+        interval = _require_interval(item.get("interval_95"), role="atlas-preview interval")
+        atlas_rows.append(
+            f'<path class="atlas-ci" d="M{_story_x(interval[0], lower, upper):.2f} {y:.2f}H{_story_x(interval[1], lower, upper):.2f}"/>'
+            f'<circle class="atlas-point" cx="{_story_x(point, lower, upper):.2f}" cy="{y:.2f}" r="1.8"/>'
+        )
+    atlas = (
+        '<g class="atlas-preview" data-atlas-preview>'
+        f'<path class="atlas-zero" d="M{zero_x:.2f} 58V530"/>' + "".join(atlas_rows) + "</g>"
+    )
+
+    return (
+        '<svg class="evidence-spine-svg" viewBox="0 0 460 600" preserveAspectRatio="xMidYMid meet" focusable="false">'
+        '<path class="evidence-spine-line" d="M34 70V520" pathLength="1"/>'
+        '<path class="evidence-spine-progress" d="M34 70V520" pathLength="1"/>'
+        + nodes
+        + f'<g class="evidence-stage-layer">{"".join(stages)}</g>'
+        + f'<g class="evidence-summary-rail">{summary_glyphs}</g>'
+        + atlas
+        + "</svg>"
+    )
 
 
 def _render_h4_chart(h4: dict[str, Any]) -> str:
@@ -2196,9 +2230,10 @@ def _render_hypothesis_ledger(
         ),
     )
     slides: list[str] = []
-    for _, title, detail in entries:
+    for index, (hypothesis, title, detail) in enumerate(entries):
         slides.append(
-            '<article class="hypothesis-row" data-learned-slide>'
+            f'<article class="hypothesis-row" data-learned-slide data-evidence-step="{index}">'
+            + f'<span class="findings-story__step-label" aria-hidden="true">{hypothesis.upper()} · {index + 1:02d}/07</span>'
             + '<h3 class="hypothesis-title">'
             + html.escape(title)
             + '</h3><p class="learned-answer">'
@@ -2227,7 +2262,7 @@ _MVP_SCRIPT = r"""
 
   const article = document.getElementById('main');
   const articleOrder = [
-    'overview', 'study-facts', 'research-question', 'method', 'reading', 'results',
+    'overview', 'study-facts', 'method', 'reading', 'results',
     'benchmarks', 'subgroups', 'seed-audit', 'evidence', 'external-validation',
     'new-data-test', 'quality', 'integrity', 'interpretation', 'current-stage', 'use', 'author',
   ];
@@ -2334,18 +2369,6 @@ _MVP_SCRIPT = r"""
         onComplete: () => item.classList.add('is-shown'),
       });
     });
-    document.querySelectorAll('[data-learned-slide]').forEach(row => {
-      const content = row.querySelectorAll('.hypothesis-title, .learned-answer');
-      gsapEngine.set(content, {autoAlpha: 0, y: 20});
-      gsapEngine.to(content, {
-        autoAlpha: 1,
-        y: 0,
-        duration: .62,
-        stagger: .08,
-        ease: 'power2.out',
-        scrollTrigger: {trigger: row, start: 'top 84%', once: true},
-      });
-    });
     gsapEngine.from('.hero-animate', {
       autoAlpha: 0,
       y: 18,
@@ -2399,7 +2422,7 @@ def _render_readme(evidence: dict[str, Any]) -> str:
     primary = evidence["primary"]
     return f"""# AANCA presentation MVP
 
-This eleven-file, read-only article package was generated from checksum-verified
+This thirteen-file, read-only article package was generated from checksum-verified
 PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
 authorities. The accepted PanNuke run is `{primary["run_id"]}`.
 
@@ -2459,6 +2482,8 @@ third-party validation.
 - `pannuke_mask_qc_overlays.png` — deterministic source-ingestion QC preview;
 - `assets/hero/nuclei/` — six checksum-bound transparent PNG sprites used by the
   decorative Canvas 2D hero;
+- `assets/method-audit-workflow.png` — minimalist conceptual Method workflow;
+- `assets/findings-evidence-story.js` — scroll-controlled Evidence Spine interaction;
 - `README.md` — this handoff;
 - `manifest.json` — SHA-256 allowlist binding every other package file.
 
@@ -2719,6 +2744,22 @@ def build_mvp_presentation(
                 "size_bytes": source.stat().st_size,
             }
         )
+    if not _METHOD_WORKFLOW_SOURCE.is_file() or _METHOD_WORKFLOW_SOURCE.is_symlink():
+        raise ValueError("Method workflow asset is missing or not regular")
+    if not _METHOD_WORKFLOW_SOURCE.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"):
+        raise ValueError("Method workflow asset is not a PNG")
+    method_workflow_asset = {
+        "path": _METHOD_WORKFLOW_OUTPUT,
+        "sha256": sha256_file(_METHOD_WORKFLOW_SOURCE),
+        "size_bytes": _METHOD_WORKFLOW_SOURCE.stat().st_size,
+    }
+    if not _FINDINGS_SCRIPT_SOURCE.is_file() or _FINDINGS_SCRIPT_SOURCE.is_symlink():
+        raise ValueError("Findings story script asset is missing or not regular")
+    findings_story_script_asset = {
+        "path": _FINDINGS_SCRIPT_OUTPUT,
+        "sha256": sha256_file(_FINDINGS_SCRIPT_SOURCE),
+        "size_bytes": _FINDINGS_SCRIPT_SOURCE.stat().st_size,
+    }
     evidence = {
         "schema_version": 3,
         "presentation_status": "DEMO_COMPLETE",
@@ -2770,6 +2811,8 @@ def build_mvp_presentation(
             "qc_bundle_manifest_sha256": sha256_file(qc_path / "artifact_manifest.json"),
             "qc_overlay_sha256": qc_manifest["overlay_sha256"],
             "hero_nucleus_assets": hero_nucleus_assets,
+            "method_workflow_asset": method_workflow_asset,
+            "findings_story_script_asset": findings_story_script_asset,
             "released_evidence": release_evidence["source_records"],
         },
     }
@@ -2785,6 +2828,8 @@ def build_mvp_presentation(
         atomic_write_bytes(staging / "pannuke_mask_qc_overlays.png", overlay_source.read_bytes())
         for filename, relative in zip(_HERO_NUCLEUS_FILENAMES, _HERO_NUCLEUS_OUTPUTS, strict=True):
             atomic_write_bytes(staging / relative, (_HERO_NUCLEUS_DIR / filename).read_bytes())
+        atomic_write_bytes(staging / _METHOD_WORKFLOW_OUTPUT, _METHOD_WORKFLOW_SOURCE.read_bytes())
+        atomic_write_bytes(staging / _FINDINGS_SCRIPT_OUTPUT, _FINDINGS_SCRIPT_SOURCE.read_bytes())
         manifest = _build_output_manifest(staging)
         atomic_write_json(staging / "manifest.json", manifest)
         os.replace(staging, output)

@@ -2,7 +2,7 @@
 
 Updated: 22 August 2026
 
-## Presentation UI note (21 August 2026)
+## Presentation UI note (22 August 2026)
 
 The checked-in `artifacts/mvp_demo` package remains a single long-form article:
 one CSS rhythm (`--para-gap` / `--block-gap` / `--section-space`), shared section
@@ -12,14 +12,52 @@ Second-Look Review Field animation (canonical source
 checksum-bound local transparent nucleus sprites under
 `src/histo_audit/assets/hero/nuclei/`. It shows many annotations, a paced audit pass,
 a short review queue of copies while source marks stay in place, then a nucleus →
-patch → four-patch study zoom. The four non-overlapping patches then rotate 45°,
-adopt the AANCA mark colour, hold, then spin and grow before a brief black pause and
-soft reveal of the cell field for the next cycle. The return is not a hard canvas cut. It does not claim
+patch → AANCA-mark transformation. The split into four non-overlapping patches,
+camera move, 45° rotation and transition to the mark colour overlap on one continuous
+timeline rather than pausing at an intermediate grid. The completed mark holds for
+1.8 seconds, then spins and dives fully through the camera before a 0.195-second black
+pause. Eight small stagger groups bring the cell field back for the next cycle. The
+return is not a hard canvas cut. It does not claim
 automatic diagnosis or label correction. Runtime rendering is capped at 60 frames per
 second and uses hardware-aware pixel and cache budgets rather than scaling work with a
 120–240 Hz display or an unnecessarily high device-pixel ratio.
-Benchmark fact icons still embed from `src/histo_audit/assets/benchmark/`. The Method
-schematic stays a static SVG (no WebGL). The eleven-file package verifies cleanly.
+The benchmark overview is implemented natively as a narrow, centred article-style
+HTML/CSS section with five restrained text rows; it has no screenshot, decorative
+panel or generated-image dependency. The Method workflow graphic has been removed;
+four short article paragraphs now explain the controlled label intervention,
+source-group-safe out-of-fold scoring, equal review budgets and the separate downstream
+test alongside a checksum-bound minimalist workflow graphic. The graphic uses the
+site's exact violet accent and distinguishes retrieval from downstream evaluation while
+retaining recommendation-only output. A source-level audit against `SPEC.md`,
+`PRE_REGISTRATION.md` and the grouped OOF implementation clarified that intervention
+metadata records the injected change, risk is computed from OOF support for the
+observed label, and restoration is limited to the PanNuke controlled experiment. The former bordered
+`90-second summary` and redundant standalone research question have been removed, so
+the benchmark setup flows directly into Method.
+
+The Findings section now uses one desktop Evidence Spine: seven exact registered
+question-and-answer stages share one reversible GSAP timeline and one ScrollTrigger,
+then resolve into a preview of the complete registered evidence atlas. The spine and
+the full forest plot are generated from the same 36 comparison records. H2 uses only
+the four saved subgroup ranges, H4 retains the adverse `-0.002156` macro-F1 result,
+and H6 remains explicitly unavailable rather than being plotted at zero. Mobile uses
+the same seven answers in ordinary document flow with small static glyphs. Under
+`prefers-reduced-motion`, the page shows a static spine, atlas preview and all answers
+without a tall sticky region. The hero and frozen scientific evidence were unchanged.
+
+The package now contains thirteen checksum-bound files. Current validation:
+
+- `uv run pytest tests/test_mvp_demo.py`: `9 passed`;
+- `uv run pytest`: `1151 passed, 1 skipped` in 629.04 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`, `uv run ruff format --check .` and the Findings script
+  JavaScript syntax check: passed;
+- standalone package verification: valid thirteen-file package, manifest root
+  `2fb3ebf7f73d657870ad459cc97d63d47cdbe8ab27d51d883964929af702ac98`;
+- Playwright at 1440 x 900 confirmed the H1-H7 row/node sequence, final atlas state
+  and reverse return to H1; 390 x 844 mobile had no sticky enhancement or horizontal
+  overflow; reduced motion exposed all seven answers and both static evidence views;
+  all three variants reported zero console errors and warnings.
 
 ## Current scientific stage
 
@@ -1026,22 +1064,22 @@ metaphor and the static reduced-motion state.
 
 Final validation:
 
-- `uv run pytest`: `1150 passed, 1 skipped` in 665.81 seconds; the skip is the
+- `uv run pytest`: `1151 passed, 1 skipped` in 642.85 seconds; the skip is the
   documented Windows/POSIX open-file rename difference;
 - `uv run ruff check .`: passed;
 - `uv run ruff format --check .`: all 216 maintained Python files formatted;
 - `uv run mypy src`: no issues in 103 source files;
 - `git diff --check`: passed;
 - `node --check src/histo_audit/assets/hero-review-field.js`: passed;
-- the final 60 Hz render-cadence and loop-timing follow-up passed `12` focused
-  demo/CI tests in 1.35 seconds; the browser readback exposed bounded frame counts,
+- the final 60 Hz render-cadence and loop-timing follow-up passed `9` focused
+  demonstrator tests in 1.32 seconds; the browser readback exposed bounded frame counts,
   all six sprites ready and no failed asset;
 - `uv build --wheel`: passed; the wheel contains the hero script, stylesheet and all
   six sprite assets;
 - standalone launcher verification: valid eleven-file package, scientific status
   `EXTERNAL_VALIDATION_COMPLETE`, manifest root
-  `3bf890c53a2d8fc08ad5c2335ed08801d23caadbf165074ed9019dbffb9575c4`;
-- local Playwright checks at 1280 x 720 and 390 x 844 found no horizontal overflow,
+  `b58c2919742fbc43135d091dbbf8f856fba24116c99615fbd28c3cfa24000a1b`;
+- local Playwright checks at 1440 x 900 and 393 x 727 found no horizontal overflow,
   console error or warning; the full-height canvas rendered and every sprite request
   returned HTTP 200.
 
@@ -1061,12 +1099,15 @@ Hostinger publication:
 
 The presentation-only hero timing was balanced without changing any scientific
 input, output, claim or completion stage. The four genuine desktop selections now
-complete their queue at about 12.6 seconds. The four-patch study then rotates and
-colours with continuous in/out easing; the completed mark holds visibly for about
-1.08 seconds. The final return performs more than two additional rotations over 1.35
-seconds, expands to 20 times its settled scale, fades to full black, holds black for
-about 0.64 seconds and softly reveals the reset field. The next loop begins after
-about 22.1 seconds.
+complete their queue at about 12.6 seconds. The following 2.45-second transformation
+uses a single shared timeline: the first patch keeps moving while three siblings
+separate, the camera pulls out, the group rotates and the tissue detail gives way to
+colour. There is no held 2 x 2 intermediate state. The completed mark holds visibly
+for 1.8 seconds. The final return performs more than two additional rotations
+over 1.35 seconds, grows to 120 times its settled scale, continues to 150 times during
+the fade, reaches an unbroken black frame and holds full black for 0.195 seconds.
+During the following 0.46-second reveal, the black layer clears in the first 24% and
+the cells enter in eight small deterministic groups rather than appearing together.
 
 The renderer now:
 
@@ -1081,15 +1122,22 @@ The renderer now:
 
 Local browser evidence for the final candidate:
 
-- 1440 x 900 normal-motion loop: about 22.1 seconds, a measured completed-logo hold
-  of 1.08 seconds and black hold of 0.64 seconds, with no overflow, console warning or
-  page error;
-- simulated constrained phone: 390 x 844 CSS pixels, DPR 3, two logical processors,
-  2 GB reported memory, data saver enabled and 4x CPU throttling; the constrained
-  profile selected DPR 1.25, completed its mobile loop in 19.671 seconds at 59.94
-  rendered frames per second, emitted no long tasks, errors or overflow;
+- 1440 x 900 normal motion: during the same frame sequence the camera remained in
+  motion while sibling reveal reached 0.856 and rotation had already begun; the dive
+  crossed 100 times scale with no visible logo fragment and no horizontal overflow,
+  console warning or page error. The completed logo remained settled for 1.809
+  measured seconds, the shortened black hold measured 0.183 seconds, and screenshots
+  at reveal progress 0.268 and 0.594 showed distinct cell groups;
+- simulated constrained Pixel 5 viewport: 393 x 727 CSS pixels, DPR 2.75, two logical
+  processors, 2 GB reported memory, data saver enabled and 4x CPU throttling; the
+  constrained profile selected DPR 1.25, kept all three genuine mobile selections,
+  completed the final synchronised repeat cycle in 18.033 seconds at 60.002 rendered
+  frames per second and emitted no in-loop long tasks,
+  errors or overflow;
+- reduced-motion desktop readback reached the static completed mark with four genuine
+  selections, all six sprites loaded and no overflow;
 - focused demonstrator tests: `9 passed`;
-- final closed-package manifest root before canonical promotion:
-  `3bf890c53a2d8fc08ad5c2335ed08801d23caadbf165074ed9019dbffb9575c4`.
+- final canonical closed-package manifest root:
+  `b58c2919742fbc43135d091dbbf8f856fba24116c99615fbd28c3cfa24000a1b`.
 
 This local refresh has not been redeployed to Hostinger in this change set.

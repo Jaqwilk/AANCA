@@ -975,6 +975,11 @@
   "schema_version": 3,
   "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
+    "findings_story_script_asset": {
+      "path": "assets/findings-evidence-story.js",
+      "sha256": "b399e11ae240dcca764fef96415dd23ef65661ff1fa64651f8c97cbad0a92270",
+      "size_bytes": 6157
+    },
     "hero_nucleus_assets": [
       {
         "path": "assets/hero/nuclei/nucleus-compact.png",
@@ -1007,6 +1012,11 @@
         "size_bytes": 1805225
       }
     ],
+    "method_workflow_asset": {
+      "path": "assets/method-audit-workflow.png",
+      "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37",
+      "size_bytes": 826713
+    },
     "primary_run": "artifacts/runs/20260727T133947.089370Z_pannuke_primary_orphan_recovery",
     "qc_bundle": "reports/pannuke_qc",
     "qc_bundle_manifest_sha256": "0b188ecc586ed772b29845e15e169fb492ed8d2ad0f5b1a6643531ccee10857f",

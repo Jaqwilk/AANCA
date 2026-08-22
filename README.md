@@ -13,7 +13,16 @@ prototype that ranks potentially inconsistent nucleus class annotations for expe
 review. It is non-diagnostic, never treats model disagreement as biological truth
 and never modifies source annotations automatically.
 
-![AANCA presentation showing immutable source annotations and a ranked expert-review queue](docs/assets/aanca-presentation-hero.png)
+![Current AANCA article hero with the source field, selected nuclei and second-look audit frames](docs/assets/aanca-presentation-hero.png)
+
+**[Open the live research article](https://mediumaquamarine-wombat-125861.hostingersite.com/)**
+
+The presentation is a minimalist long-form article rather than a product dashboard.
+Its Canvas 2D hero uses local nucleus artwork to show immutable source instances,
+second-look selections and a review-only visual sequence. The scientific Findings
+section then converts the seven registered questions into a compact Evidence Spine
+before exposing the complete comparison atlas. Neither visual changes a source label
+or implies that model disagreement establishes biological truth.
 
 ## Current conclusion
 
@@ -108,9 +117,10 @@ code and tests.
 
 ## Open the presentation
 
-The checked-in English article is a closed, eleven-file package: five document and
-evidence files plus six checksum-bound hero sprites. It needs no dataset, GPU or
-project dependency installation:
+The checked-in English article is a closed, thirteen-file package: five document and
+evidence files, six checksum-bound hero sprites, one Method workflow image and one
+Findings interaction script. It needs no dataset, GPU or project dependency
+installation:
 
 ~~~powershell
 python scripts/present_demo.py
@@ -123,13 +133,22 @@ the package without opening a browser:
 python scripts/present_demo.py --verify-only
 ~~~
 
-The article preserves the subtle “What the study actually learned.” reveal sequence,
-while mobile and reduced-motion users receive the same content in ordinary document
-flow. The Method review-queue figure is a static accessible SVG. The masthead uses a
-decorative Canvas 2D review-field animation built from six local transparent PNG
-sprites; it keeps source instances in place, forms a four-patch study, and resolves
-into the AANCA mark before a smooth spinning dive, brief black hold and soft field
-reveal complete the continuous loop.
+On desktop, “What the study actually learned.” is a reversible seven-stage Evidence
+Spine driven by one scroll timeline. Its compact marks and the complete forest plot
+below are rendered from the same exact comparison records. Mobile presents all seven
+answers in ordinary document flow with small static glyphs. Reduced-motion users
+receive a static spine and atlas preview followed by every answer, with no tall sticky
+region. The Method uses four short article paragraphs to explain the controlled label
+intervention, source-group-safe out-of-fold scoring, equal review budgets and the
+separate downstream test. A checksum-bound minimalist workflow graphic mirrors those
+four states without implying diagnosis or automatic correction.
+The masthead uses a decorative Canvas 2D review-field animation built from those
+transparent PNG sprites. It keeps source instances in place, moves only visual copies
+into the review queue and resolves the first patch into four separate patches while
+the pull-out, 45° rotation and colour transition continue on one uninterrupted
+timeline. The resulting AANCA mark then performs a deep spinning dive after a
+1.8-second hold. A 0.195-second full-black frame is followed by eight quick staggered
+groups of cells, completing the continuous loop without a hard cut.
 Canvas rendering is capped at 60 frames per second and uses hardware-aware pixel and
 cache budgets so high-refresh and high-DPI screens do not multiply work unnecessarily.
 Reduced-motion users receive the static mark immediately; neither surface depends on
@@ -339,4 +358,4 @@ Hostinger subdomain; a custom domain has not been claimed.
 Research direction, review and final scientific responsibility: **Natan Smogór**.
 AI-assisted tools supported implementation, testing, orchestration, documentation
 and presentation; they supplied no expert labels and are not independent validators.
-See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 21 August 2026.
+See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 22 August 2026.

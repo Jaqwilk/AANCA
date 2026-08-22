@@ -1,6 +1,6 @@
 # AANCA presentation MVP
 
-This eleven-file, read-only article package was generated from checksum-verified
+This thirteen-file, read-only article package was generated from checksum-verified
 PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
 authorities. The accepted PanNuke run is `20260727T133947.089370Z_pannuke_primary_orphan_recovery`.
 
@@ -60,6 +60,8 @@ third-party validation.
 - `pannuke_mask_qc_overlays.png` — deterministic source-ingestion QC preview;
 - `assets/hero/nuclei/` — six checksum-bound transparent PNG sprites used by the
   decorative Canvas 2D hero;
+- `assets/method-audit-workflow.png` — minimalist conceptual Method workflow;
+- `assets/findings-evidence-story.js` — scroll-controlled Evidence Spine interaction;
 - `README.md` — this handoff;
 - `manifest.json` — SHA-256 allowlist binding every other package file.
 
