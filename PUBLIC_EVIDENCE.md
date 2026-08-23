@@ -107,6 +107,45 @@ was adverse versus leaving labels unchanged. Inferred NuCLS pathologist consensu
 not guaranteed biological truth and disagreement is not proof that a pathologist
 made an error.
 
+### Independent-pathologist leave-one-out ranking
+
+A distinct frozen NuCLS `U-control` analysis uses the raw `JP.1` bbox and
+`raw_classification` as model input, removes `JP.1` from the reference, and derives a
+strict-majority outcome from at least two mappable votes by other individual
+pathologists. Aggregate P-truth fields are not used. Patient identity defines all five
+OOF folds and the 5,000-draw bootstrap clusters.
+
+At the primary 5% budget, 45 of 898 binary-reference-eligible nuclei were reviewed.
+The AANCA queue precision was `0.333333` versus `0.215111` across 100 disjoint,
+equal-budget random queues matched exactly on patient, observed class and proposed
+transition. The difference was `+0.118222`, with patient-bootstrap 95% interval
+`[+0.040000, +0.257143]`; the enrichment ratio was `1.549587`, interval
+`[1.073620, 10.000000]`. The frozen primary ranking gate passed.
+
+Only `JP.1` qualified for reporting. `JP.2` covered two patient groups and was
+excluded by the frozen minimum of five; public individual raw geometry was unavailable
+for `SP.1`--`SP.3` and `JP.3`--`JP.6`. The result is therefore one junior-pathologist
+rotation, not a pooled multi-pathologist estimate. It validates the global risk
+ranking rather than the five-patient-infeasible balanced deployment queue.
+
+The protocol, report and machine-readable evidence are available at
+[`NATURAL_PATHOLOGIST_VALIDATION_PROTOCOL.md`](NATURAL_PATHOLOGIST_VALIDATION_PROTOCOL.md),
+[`reports/nucls_independent_pathologist_validation_results.md`](reports/nucls_independent_pathologist_validation_results.md)
+and
+[`artifacts/nucls_independent_pathologist_validation/results.json`](artifacts/nucls_independent_pathologist_validation/results.json).
+Recalculate the saved metrics and verify source-annotation integrity with:
+
+```text
+uv run python scripts/verify_nucls_independent_pathologist_validation.py
+```
+
+This is project-coupled evidence readback, not third-party replication. Feasibility
+counts were inspected before the freeze, protocol and execution share one repository
+change without an independent timestamp, and only five patient clusters contribute.
+No source annotation was changed. A positive disagreement outcome does not establish
+which label is biologically correct, pathologist error, clinical utility or safe
+automatic correction.
+
 ## MoNuSAC and PUMA evidence
 
 The controlled MoNuSAC authority is

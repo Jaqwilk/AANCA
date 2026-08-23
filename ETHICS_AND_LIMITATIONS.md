@@ -20,6 +20,18 @@ pathologist consensus rather than guaranteed biological truth. The completed sta
 therefore cannot be described as detection of natural errors, proof that a
 pathologist was wrong, clinical validation or real-use improvement.
 
+A separate NuCLS `U-control` leave-one-pathologist-out ranking evaluation passed its
+primary disagreement-enrichment gate for `JP.1`: the 5% AANCA precision was
+`0.333333` versus `0.215111` exact matched random, with precision-difference 95%
+patient-bootstrap interval `[+0.040000, +0.257143]`. This analysis did not use
+aggregate P-truth and removed `JP.1` from the independent-vote reference. However,
+only this junior pathologist qualified, only five patient clusters were available,
+feasibility counts were inspected before freeze, and protocol and result lack an
+independent pre-outcome timestamp. Consensus disagreement is not adjudicated
+biological error. The result supports only review-queue enrichment in this eligible
+cohort; it does not override the earlier adverse downstream result, validate the
+deployment queue, or establish safe automatic correction.
+
 The frozen MoNuSAC controlled external benchmark retrieved injected changes more
 efficiently than matched random review, but its downstream interval crossed zero and
 its important-class safety rule failed. The frozen PUMA new-source controlled

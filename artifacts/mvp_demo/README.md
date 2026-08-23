@@ -25,21 +25,23 @@ With the project environment installed, `uv run histo-audit demo serve` and
 
 - Primary study: `PRIMARY_STUDY_COMPLETE`; its accepted PanNuke analysis remains
   permanently `amended_or_exploratory` and H4 was adverse.
-- External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. NuCLS natural multi-rater
-  claims were not supported; MoNuSAC controlled retrieval passed but downstream and
-  class-safety gates failed; the frozen PUMA controlled confirmation passed all seven
-  internally pre-specified gates. Its protocol and result entered public history
-  together, so the public repository does not independently prove the pre-outcome
-  timing.
+- External evaluation: `EXTERNAL_VALIDATION_COMPLETE`. The earlier NuCLS aggregate
+  ranking/downstream claims were not supported. The separate NuCLS `JP.1`
+  leave-one-pathologist-out ranking enriched independent-pathologist disagreement,
+  but it is one junior-pathologist rotation across five patients. MoNuSAC controlled
+  retrieval passed while downstream and class-safety gates failed; the frozen PUMA
+  controlled confirmation passed all seven internally pre-specified gates. The NuCLS
+  LOO and PUMA records do not have independent public pre-outcome timestamps.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
 
-The positive PUMA result supports transfer under controlled label noise. It does not
-show that AANCA detects pathologist errors, discovers biological truth, improves a
-real laboratory workflow or is clinically useful. The software never modifies
-source annotations automatically; it ranks potentially inconsistent annotations
-for qualified expert review.
+The positive PUMA result supports transfer under controlled label noise. The NuCLS
+LOO result supports disagreement enrichment for the eligible `JP.1` cohort only.
+Neither shows that AANCA detects pathologist errors, discovers biological truth,
+improves a real laboratory workflow or is clinically useful. The software never
+modifies source annotations automatically; it ranks potentially inconsistent
+annotations for qualified expert review.
 
 The 144/62 development/final partition is an AANCA-defined split of the 206 public
 PUMA ROIs. It is not the official hidden PUMA challenge test set. The downstream
@@ -81,4 +83,4 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 22 August 2026.
+Author: Natan Smogór. Updated: 23 August 2026.

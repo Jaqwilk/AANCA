@@ -677,3 +677,58 @@ that was actually verified at that time.
 The custom domain changes project discoverability and presentation only. It does not
 alter a frozen candidate, dataset split, annotation, metric, evidence authority,
 claim boundary or completion stage, and it does not constitute an archival DOI.
+
+## D043 — Validate one eligible NuCLS pathologist without consensus leakage
+
+Status: implemented; scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`
+
+Use the frozen current AANCA 64+128 px hybrid candidate to score raw individual
+`JP.1` nuclei from NuCLS `U-control`. Build all model inputs before opening the
+multi-rater reference: raw `JP.1` bbox, raw observed class and label-independent H&E
+pixels only. Split and bootstrap by TCGA patient. Keep score generation OOF and keep
+fold-neighbour calculations fold-safe.
+
+After scoring, remove `JP.1` from the reference and require a strict majority of at
+least two mappable votes from other individual pathologists. Treat absent annotation,
+unmappable vote, ambiguity and insufficient vote count as distinct outcomes. Never
+read aggregate P-truth as the reference and never replace the input bbox with a
+consensus anchor before scoring.
+
+Report only annotators with public raw individual geometry across at least five
+patient groups. Consequently, report `JP.1`; exclude `JP.2` for only two patient
+groups and `SP.1`--`SP.3`/`JP.3`--`JP.6` for unavailable individual raw geometry. Do
+not pool a one-rotation result.
+
+At the primary 5% budget, compare the global risk ranking with 100 disjoint
+equal-budget random queues exactly matched on patient, observed class and proposed
+transition. The selected queue must be exact-comparator-capable within every stratum.
+Because only five patient groups are available, the 10%-per-patient
+`balanced_relaxed` deployment cap cannot fill any non-empty queue; this experiment
+therefore validates the frozen global ranking, not that deployment queue.
+
+Freeze the primary gate as a strictly positive lower 95% patient-cluster-bootstrap
+bound for the precision difference. Retain the observed PASS (`+0.118222`, 95% CI
+`[+0.040000, +0.257143]`) without post-result tuning. Preserve the earlier adverse
+NuCLS aggregate/downstream authority unchanged. The allowed claim is enrichment of
+independent-pathologist disagreement for the eligible `JP.1` cohort; pathologist
+error, biological truth, multi-pathologist generalisation, clinical utility,
+automatic correction and downstream improvement remain unestablished.
+
+## D044 — Bind the public presentation to the frozen JP.1 authority
+
+Status: implemented; scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`
+
+Expose the independent-pathologist result on the public evidence page only through
+the checksum-bound
+`artifacts/nucls_independent_pathologist_validation/results.json` authority. The
+presentation builder and standalone verifier must fail closed if the input
+pathologist enters the reference, aggregate P-truth is used, patient-group OOF or
+fold-safe neighbour constraints are absent, matched queues are not exact and
+disjoint, the frozen primary gate is not PASS, or any prohibited claim is enabled.
+
+Present the positive `JP.1` ranking result beside, not instead of, the earlier
+adverse NuCLS aggregate/downstream result. State the one-rotation, five-patient,
+non-adjudicated and non-prospective boundary directly on the page. Bump the public
+evidence and package-manifest schemas so an older verifier cannot silently accept
+the expanded evidence contract. Publishing this result changes neither source
+annotations nor any completion stage.

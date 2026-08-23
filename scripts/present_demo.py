@@ -141,8 +141,8 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
 
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 4
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v4"
+        manifest.get("schema_version") != 5
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v5"
     ):
         raise ValueError("presentation manifest schema or policy differs")
     records = manifest.get("files")
@@ -179,6 +179,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     primary = evidence.get("primary")
     external_completed = evidence.get("external_validation_completed")
     external = evidence.get("external_validation")
+    independent = evidence.get("independent_pathologist_validation")
     controlled = evidence.get("controlled_external_benchmark")
     puma = evidence.get("new_source_confirmation")
     stress = evidence.get("realism_stress")
@@ -194,6 +195,32 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and external.get("primary_subset", {}).get("downstream_success_conditions_met") is False
         and isinstance(external.get("claim_boundary"), dict)
         and not any(external["claim_boundary"].values())
+    )
+    independent_scope_valid = (
+        isinstance(independent, dict)
+        and independent.get("study_id") == "nucls_independent_pathologist_validation_v1"
+        and independent.get("completion_stage") == "EXTERNAL_VALIDATION_COMPLETE"
+        and independent.get("decision")
+        == "disagreement_enrichment_supported_for_eligible_jp1_cohort"
+        and independent.get("input_pathologist") == "JP.1"
+        and independent.get("qualifying_rotation_count") == 1
+        and independent.get("patient_group_count") == 5
+        and independent.get("primary", {}).get("primary_gate_pass") is True
+        and independent.get("primary", {}).get("exact_equal_budget") is True
+        and independent.get("primary", {}).get("exact_strata_preserved") is True
+        and independent.get("primary", {}).get("aanca_random_disjoint") is True
+        and independent.get("reference", {}).get("input_pathologist_removed") is True
+        and independent.get("reference", {}).get("aggregate_p_truth_used") is False
+        and independent.get("validity", {}).get("patient_group_safe_oof") is True
+        and independent.get("validity", {}).get("balanced_deployment_queue_validated") is False
+        and independent.get("claim_boundary", {}).get(
+            "independent_pathologist_disagreement_enrichment_if_positive"
+        )
+        is True
+        and independent.get("claim_boundary", {}).get("pathologist_error_detection_proven") is False
+        and independent.get("claim_boundary", {}).get("downstream_or_clinical_utility_proven")
+        is False
+        and independent.get("claim_boundary", {}).get("source_annotations_modified") is False
     )
     controlled_scope_valid = (
         isinstance(controlled, dict)
@@ -267,12 +294,13 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and len(next_phase["required_gates"]) == 5
     )
     if (
-        evidence.get("schema_version") != 3
+        evidence.get("schema_version") != 4
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
         or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
         or not external_scope_valid
+        or not independent_scope_valid
         or not controlled_scope_valid
         or not puma_scope_valid
         or not stress_scope_valid

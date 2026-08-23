@@ -48,14 +48,17 @@ model disagreement establishes biological truth.
 ## Current conclusion
 
 AANCA now has positive evidence that the frozen current system transfers to a new
-histopathology source under **controlled label corruption**. It does not yet have the
-natural multi-rater and prospective workflow evidence required to claim that it
-detects real pathologist errors or improves clinical work.
+histopathology source under **controlled label corruption**. A separate frozen NuCLS
+leave-one-pathologist-out evaluation also found that the global risk ranking enriched
+independent-pathologist disagreement for the only qualifying input annotator,
+`JP.1`. This is limited natural multi-rater ranking evidence, not adjudication of
+pathologist error or prospective workflow benefit.
 
 | Evaluation | Result | Responsible interpretation |
 | --- | --- | --- |
 | PanNuke primary controlled benchmark | `PRIMARY_STUDY_COMPLETE`; ranking evidence was positive, H4 downstream restoration was adverse | The accepted analysis is permanently `amended_or_exploratory` because outcomes were exposed during recovery |
 | NuCLS genuine multi-rater disagreement | `EXTERNAL_VALIDATION_COMPLETE`; frozen ranking gate failed and guided correction changed macro-F1 by `-0.014633`, 95% CI `[-0.026683, -0.002415]` | Natural-error and downstream-improvement claims were not supported |
+| NuCLS independent-pathologist LOO ranking | At 5%, `JP.1` precision was `0.333333` versus `0.215111` exact matched random; difference `+0.118222`, patient-bootstrap 95% CI `[+0.040000, +0.257143]` | Supports disagreement enrichment only for one junior pathologist across five patients; no multi-pathologist pooling, adjudicated-error or downstream claim |
 | MoNuSAC controlled external benchmark | Retrieval precision `0.698852` versus `0.556009` matched random; downstream difference `+0.005526`, 95% CI `[-0.001506, +0.012833]` | Retrieval passed, but downstream and class-safety gates failed; action remained `retain_uncorrected` |
 | PUMA internally frozen new-source controlled confirmation | All seven internally pre-specified gates passed on 62 held-out case/ROI groups | Supports controlled-noise transfer, not natural/pathologist-error detection; public Git history does not independently timestamp the freeze before results |
 | PUMA post-confirmation realism stress | Positive aggregate downstream lower bounds in 9/9 scenarios; every class safeguard passed in only 1/9 | Useful robustness evidence and a binding class-safety warning; exploratory only |
@@ -101,6 +104,9 @@ Current evidence supports the following statements:
   than equal-budget matched random review;
 - the frozen selected candidate transferred to previously unused PUMA images under
   the registered controlled-noise experiment;
+- on the eligible NuCLS `JP.1` cohort, the frozen global risk ranking enriched
+  leave-one-pathologist-out consensus disagreement relative to exact matched random
+  review;
 - in that PUMA experiment the intervention improved downstream macro-F1 over both
   unchanged labels and matched-random intervention with positive whole-group 95%
   intervals;

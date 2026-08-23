@@ -357,6 +357,110 @@ def _make_release_sources(root: Path) -> None:
         },
     )
     _write_json(
+        root / "artifacts/nucls_independent_pathologist_validation/results.json",
+        {
+            "study_id": "nucls_independent_pathologist_validation_v1",
+            "execution_status": "EXTERNAL_VALIDATION_COMPLETE",
+            "input_annotator": "JP.1",
+            "qualified_input_annotators": ["JP.1"],
+            "excluded_annotators": {
+                "JP.2": "fewer_than_5_patient_groups",
+                "JP.3": "individual_raw_geometry_unavailable",
+                "JP.4": "individual_raw_geometry_unavailable",
+                "JP.5": "individual_raw_geometry_unavailable",
+                "JP.6": "individual_raw_geometry_unavailable",
+                "SP.1": "individual_raw_geometry_unavailable",
+                "SP.2": "individual_raw_geometry_unavailable",
+                "SP.3": "individual_raw_geometry_unavailable",
+            },
+            "prepared_input": {"patient_group_count": 5, "scorable_count": 1319},
+            "metrics": {
+                "average_precision": 0.2375844691,
+                "primary_gate_pass": True,
+                "primary": {
+                    "budget_fraction": 0.05,
+                    "reviewed_count": 45,
+                    "aanca_reference_positive_reviewed": 15,
+                    "aanca_precision": 0.3333333333,
+                    "aanca_recall": 0.1428571429,
+                    "matched_random_mean_precision": 0.2151111111,
+                    "precision_difference": 0.1182222222,
+                    "enrichment_ratio": 1.5495867769,
+                    "exact_equal_budget": True,
+                    "exact_strata_preserved": True,
+                    "aanca_random_disjoint": True,
+                    "bootstrap": {
+                        "requested_iterations": 5000,
+                        "precision_difference_interval_95": [0.04, 0.2571428571],
+                        "enrichment_ratio_interval_95": [1.0736196319, 10.0],
+                    },
+                },
+                "by_observed_class": {
+                    "tumor_any": {
+                        "eligible_count": 394,
+                        "aanca_reviewed_count": 8,
+                        "aanca_precision": 0.875,
+                        "matched_random_mean_precision": 0.815,
+                        "precision_difference": 0.06,
+                        "class_failure_flag": False,
+                    },
+                    "nonTIL_stromal": {
+                        "eligible_count": 201,
+                        "aanca_reviewed_count": 20,
+                        "aanca_precision": 0.15,
+                        "matched_random_mean_precision": 0.125,
+                        "precision_difference": 0.025,
+                        "class_failure_flag": False,
+                    },
+                    "sTIL": {
+                        "eligible_count": 303,
+                        "aanca_reviewed_count": 17,
+                        "aanca_precision": 0.2941176471,
+                        "matched_random_mean_precision": 0.0388235294,
+                        "precision_difference": 0.2552941176,
+                        "class_failure_flag": False,
+                    },
+                },
+            },
+            "reference": {
+                "input_annotator_removed_from_reference": True,
+                "aggregate_p_truth_fields_read": False,
+                "minimum_independent_mappable_votes": 2,
+                "consensus_rule": "strict_majority",
+                "binary_eligible_count": 898,
+                "reference_positive_count": 105,
+                "strict_consensus_rate_when_minimum_votes_met": 0.9442691903,
+                "observed_vs_strict_consensus_agreement_rate": 0.8830734967,
+                "outcome_counts": {
+                    "consensus_agree": 793,
+                    "consensus_disagree": 105,
+                    "ambiguous": 53,
+                    "insufficient_reference": 368,
+                },
+            },
+            "validity": {
+                "patient_group_safe_oof": True,
+                "fold_safe_neighbours": True,
+                "exact_equal_budget_comparators": True,
+                "input_annotator_absent_from_reference_votes": True,
+                "aggregate_p_truth_fields_used": False,
+                "source_annotations_modified": False,
+                "aanca_reference_association_inspected_at_freeze": False,
+                "reference_feasibility_counts_inspected_at_freeze": True,
+                "protocol_and_execution_same_change": True,
+            },
+            "claim_boundary": {
+                "independent_pathologist_disagreement_enrichment_if_positive": True,
+                "automatic_annotation_change_permitted": False,
+                "balanced_deployment_queue_validated": False,
+                "clinical_error_detection_proven": False,
+                "downstream_or_clinical_utility_proven": False,
+                "pathologist_error_detection_proven": False,
+                "source_annotations_modified": False,
+            },
+        },
+    )
+    _write_json(
         root / "artifacts/monusac_external_validation/results.json",
         {
             "study_id": "monusac_current_aanca_controlled_external_v1",
@@ -575,6 +679,19 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert evidence["confirmatory_completed"] is False
     assert evidence["external_validation_completed"] is True
     assert evidence["external_validation"]["overall_conclusion"] == "not_supported"
+    independent = evidence["independent_pathologist_validation"]
+    assert independent["input_pathologist"] == "JP.1"
+    assert independent["qualifying_rotation_count"] == 1
+    assert independent["primary"]["primary_gate_pass"] is True
+    assert independent["primary"]["reviewed_count"] == 45
+    assert independent["primary"]["aanca_precision"] == pytest.approx(0.3333333333)
+    assert independent["primary"]["mean_matched_random_precision"] == pytest.approx(0.2151111111)
+    assert independent["primary"]["precision_difference_interval_95"] == pytest.approx(
+        [0.04, 0.2571428571]
+    )
+    assert independent["reference"]["input_pathologist_removed"] is True
+    assert independent["reference"]["aggregate_p_truth_used"] is False
+    assert independent["validity"]["balanced_deployment_queue_validated"] is False
     assert evidence["controlled_external_benchmark"]["decision"] == "not_supported"
     assert evidence["new_source_confirmation"]["all_success_conditions_met"] is True
     assert evidence["realism_stress"]["all_class_safeguards_passed_count"] == 1
@@ -653,7 +770,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "22 August 2026" in html
+    assert "23 August 2026" in html
     assert "gsap@3.15.0" in html
     assert (
         'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'
@@ -827,14 +944,18 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EM DASH}" not in html
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
-    assert "The same system transferred under controlled noise" in html
+    assert "The frozen ranking enriched one natural disagreement cohort" in html
     assert "PUMA internally frozen new-source controlled confirmation" in html
+    assert "NuCLS independent-pathologist leave-one-out ranking" in html
+    assert "0.333333" in html
+    assert "0.215111" in html
+    assert "disagreement enrichment for one junior pathologist" in html
     assert "All seven internally" in html
     assert "passed all seven internally pre-specified retrieval" in html
     assert "Public-history limit" in html
     assert "c5bd44193b2abd67bc7e7f1bd9384aa87435d500" in html
     assert "does not retrain all 44 models" in html
-    assert "It is not third-party validation" in html
+    assert "neither is third-party validation" in html
     assert "every prospective retrieval" not in html
     assert "AANCA v2 research phase" not in html
     assert "provisionally named <strong>AANCA v2</strong>" in html
@@ -843,7 +964,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<details class="evidence-details comparison-details">' in html
     assert "Inspect the complete H1 / H3 / H5 / H6 / H7 table" in html
     assert '<div class="reading-grid reveal">' not in html
-    assert "Natural and operational validity still require" in html
+    assert "Broader natural and operational validity still requires" in html
     assert "compact evidence and this checksum-verifiable presentation" in html
     assert "primary evidence release" in html
     assert "verifies the thirteen-file presentation package" in html
@@ -891,12 +1012,14 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert '<desc id="method-graphic-desc">' not in html
     assert "@media (max-width: 720px)" in html
     assert "python scripts/present_demo.py" in html
-    assert "PUMA controlled confirmation passed all seven" in readme
+    assert "controlled confirmation passed all seven" in readme
     assert "internally pre-specified gates" in readme
     assert "AANCA-defined split of the 206 public" in readme
     assert "not the official hidden PUMA challenge test set" in readme
     assert "not\nthird-party validation" in readme
     assert "Natural-data action: `retain_uncorrected`" in readme
+    assert "NuCLS `JP.1`" in readme
+    assert "leave-one-pathologist-out ranking enriched" in readme
     assert 'class="journey-stage-group"' not in html
     assert ".journey { height: auto !important; }" in html
     assert "#results { border-top: 0; }" in html
@@ -940,6 +1063,22 @@ def test_build_rejects_changed_puma_confirmation_scope(tmp_path: Path) -> None:
     _write_json(path, payload)
 
     with pytest.raises(ValueError, match="PUMA confirmation evidence scope differs"):
+        build_mvp_presentation(
+            project_root=tmp_path,
+            run_directory=run,
+            qc_bundle_directory=qc,
+            output_directory=Path("artifacts/mvp_demo"),
+        )
+
+
+def test_build_rejects_changed_independent_pathologist_scope(tmp_path: Path) -> None:
+    run, qc = _make_sources(tmp_path)
+    path = tmp_path / "artifacts/nucls_independent_pathologist_validation/results.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["validity"]["input_annotator_absent_from_reference_votes"] = False
+    _write_json(path, payload)
+
+    with pytest.raises(ValueError, match="NuCLS independent-pathologist evidence scope differs"):
         build_mvp_presentation(
             project_root=tmp_path,
             run_directory=run,

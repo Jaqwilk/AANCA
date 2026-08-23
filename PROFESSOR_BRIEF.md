@@ -36,6 +36,20 @@ convergence and primary class-safety gates passed.
 received zero weight in downstream fitting. They were not reviewed, corrected or
 automatically relabelled by an expert, and the source annotations remained unchanged.
 
+## Limited natural multi-rater ranking evidence
+
+In a separate frozen NuCLS `U-control` leave-one-pathologist-out analysis, the only
+qualifying input annotator was junior pathologist `JP.1`. At the 5% review budget,
+AANCA selected 45 of 898 eligible nuclei and achieved disagreement precision
+`0.333333`, compared with `0.215111` for 100 exact matched-random queues. The
+difference was `+0.118222`; its five-patient cluster-bootstrap 95% interval was
+`[+0.040000, +0.257143]`. The input pathologist was excluded from the strict-majority
+reference and aggregate P-truth fields were not used.
+
+This is evidence that the frozen global ranking enriched independent-pathologist
+disagreement in one junior-pathologist cohort. It is not a pooled pathologist result,
+an adjudicated error study or validation of the deployment queue.
+
 ## Negative evidence retained
 
 On the original PanNuke benchmark, guided restoration was worse than matched random
@@ -47,12 +61,12 @@ outcomes are retained rather than explained away or used for post-result tuning.
 
 ## Interpretation and limitations
 
-PUMA provides controlled-noise transfer evidence, not proof of natural
-pathologist-error detection or clinical benefit. It does not contain paired natural
-labels before and after blinded review of the same nuclei. The PUMA protocol,
-configuration and result first appeared together in public Git history, so GitHub
-does not independently verify the intended pre-outcome timing. The scoped PUMA
-readback recomputes saved metrics but does not retrain all 44 models.
+PUMA provides controlled-noise transfer evidence. The separate NuCLS LOO result adds
+limited natural disagreement-enrichment evidence, but neither experiment proves
+pathologist error or clinical benefit and neither contains paired natural labels
+before and after blinded review of the same nuclei. Their protocol and result records
+do not have independent pre-outcome timestamps. The scoped readbacks recompute saved
+metrics but are not third-party replications.
 
 ## Next decisive experiment
 

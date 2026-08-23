@@ -1209,3 +1209,116 @@ Repository presentation was refreshed without changing scientific code or eviden
 At the owner's request, the complete test suite was not repeated for this
 documentation-only change. Validation was limited to Markdown link resolution,
 `CITATION.cff` parsing, whitespace inspection and review of the exact Git diff.
+
+## NuCLS independent-pathologist leave-one-out validation — 2026-08-23
+
+The frozen current AANCA 64+128 px hybrid candidate was evaluated once against
+natural independent-pathologist disagreement in NuCLS `U-control`. Raw `JP.1`
+geometry, raw class and H&E pixels were assembled before the hidden reference was
+opened. Patient identity defined five OOF folds and all bootstrap clusters. `JP.1`
+was removed from the reference; aggregate P-truth fields were not used. A strict
+majority of at least two mappable votes from other individual pathologists defined
+binary agree/disagree outcomes.
+
+The immutable authorities are candidate SHA-256
+`78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe`, config
+SHA-256 `3e2f3e269385a0225d6c58af263ea1706932fa98dbb19bd7f7599980a4f1d6cd`
+and protocol SHA-256
+`fcccdfbdc9cfe00b96d173f9cba1c299f0a83db696eb382c9958201862c88d30`.
+
+Only `JP.1` met the frozen public-geometry and five-patient requirements. `JP.2` was
+excluded for only two patient groups; `SP.1`--`SP.3` and `JP.3`--`JP.6` lacked public
+individual raw geometry. No pooled multi-pathologist estimate was produced.
+
+Primary 5% outcome:
+
+- 898 binary-reference-eligible nuclei, including 105 disagreements;
+- 45 reviewed nuclei; AANCA found 15 disagreements;
+- AANCA precision `0.333333`, recall `0.142857`;
+- mean precision across 100 disjoint exact matched-random queues `0.215111`;
+- precision difference `+0.118222`, patient-bootstrap 95% CI
+  `[+0.040000, +0.257143]`;
+- enrichment `1.549587`, 95% CI `[1.073620, 10.000000]`;
+- 4,946 valid of 5,000 patient-bootstrap draws; 54 were undefined after cluster
+  resampling;
+- frozen primary gate: PASS.
+
+Secondary AANCA versus matched-random precision differences were `+0.213333` at 1%,
+`+0.148889` at 2%, `+0.118222` at 5% and `+0.078556` at 10%. AUPRC was `0.237584`.
+At 5%, no observed-class point estimate was adverse: tumor `+0.060000`, stromal
+`+0.025000`, sTIL `+0.255294`. These class results are descriptive and based on small
+selected counts; they are not separate confirmatory gates.
+
+Outcome accounting retained 793 consensus agreements, 105 disagreements, 53
+ambiguous cases and 368 cases with insufficient reference. Strict consensus was
+available in `94.43%` of cases meeting the minimum vote count; `JP.1` agreed with it
+in `88.31%` of binary-reference-eligible cases.
+
+Execution and verification:
+
+- `uv run python scripts/run_nucls_independent_pathologist_validation.py`: completed
+  as `EXTERNAL_VALIDATION_COMPLETE`, primary gate PASS;
+- `uv run python scripts/verify_nucls_independent_pathologist_validation.py`: 11
+  artifacts verified, metrics recalculated without retraining, source annotations
+  unmodified;
+- the reporting-complete rerun preserved exact `metrics` JSON and byte-identical
+  `scored_samples.csv`, `matched_random_queues.json`, `numeric_evidence.npz` and
+  `enrichment_curve.csv`; the initial frozen run remains under the explicit
+  `*_initial_frozen_run` backup paths;
+- `uv run pytest`: `1164 passed, 1 skipped` in 602.77 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 220 maintained Python files formatted.
+
+The protocol and execution entered one repository change and feasibility
+prevalence/category counts had been inspected before freeze, although no AANCA
+score-reference association was inspected. There is no independent pre-outcome
+timestamp. Five patients, one junior pathologist and unavailable raw geometry for
+the remaining annotators sharply limit generalisation. The global ranking result
+does not validate the five-patient-infeasible `balanced_relaxed` deployment queue.
+It does not prove pathologist error, biological truth, clinical utility, downstream
+benefit or safe automatic correction. The scientific stage remains
+`EXTERNAL_VALIDATION_COMPLETE`; every flagged nucleus is recommended for expert
+review only.
+
+## Public presentation refresh — 2026-08-23
+
+The generated public presentation now reads the frozen
+`nucls_independent_pathologist_validation_v1` authority and displays its limited
+`JP.1` leave-one-out disagreement-enrichment result beside the retained adverse
+NuCLS aggregate/downstream evidence. The presentation evidence schema is `4`; the
+package manifest schema is `5` with policy
+`aanca_presentation_current_evidence_readback_v5`. The canonical package contains 13
+files and has manifest root SHA-256
+`3810912a69a96c759e2426b9556a7f86f04351eb392411b31d4b0add4b4b7597`.
+
+Release validation:
+
+- `uv run pytest`: `1165 passed, 1 skipped` in 590.52 seconds; the skip remains the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 220 maintained Python files formatted;
+- `python -I scripts/present_demo.py --verify-only`: valid, 13 files, exact manifest
+  root above;
+- `uv run python scripts/verify_nucls_independent_pathologist_validation.py`: 11
+  artifacts verified, metrics recalculated without retraining, source annotations
+  unmodified, primary gate PASS;
+- `git diff --check`: passed;
+- local browser QA at 1440 x 900 and 393 x 727: no horizontal overflow, no console
+  warnings or errors, and the checksum-bound `JP.1` figures and limitations were
+  visible.
+
+Hostinger deployment remains blocked before any remote write. Both `verify` attempts
+completed the local package build but SFTP authentication failed for the configured
+site profile because its required password environment variable is unavailable. The
+in-app browser reached the Hostinger login page without a session, and a connected
+Chrome session was unavailable. No remote file was changed and no backup ID was
+created. The next deployment command, after restoring the configured credential, is:
+
+```text
+python C:\Users\NATAN\.codex\skills\hostinger-deploy\scripts\run_hostinger_deploy.py deploy mediumaquamarine-wombat-125861.hostingersite.com
+```
+
+This presentation refresh does not change source annotations, scientific evidence
+authorities or the completion stage. Scientific status remains
+`EXTERNAL_VALIDATION_COMPLETE`; presentation status remains `DEMO_COMPLETE`.

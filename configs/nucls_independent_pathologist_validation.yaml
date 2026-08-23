@@ -1,0 +1,109 @@
+schema_version: 1
+study_id: nucls_independent_pathologist_validation_v1
+project: AANCA
+protocol: NATURAL_PATHOLOGIST_VALIDATION_PROTOCOL.md
+freeze_date: 2026-08-23
+protocol_and_execution_same_change: true
+reference_feasibility_counts_inspected_at_freeze: true
+aanca_reference_association_inspected_at_freeze: false
+replacement_project_or_v2: false
+
+data:
+  dataset: NuCLS
+  subset: U-control
+  raw_annotation_glob: data/raw/nucls/unbiased/raw/csv/{annotator}_*.csv
+  rgb_directory: data/raw/nucls/unbiased/np_truth/rgbs
+  hidden_reference_table: data/raw/nucls/unbiased/p_truth/v3.1_final_anchors_U-control_Ps_AreTruth.csv
+  input_annotators: [JP.1]
+  excluded_annotators:
+    JP.2: fewer_than_5_patient_groups
+    SP.1: individual_raw_geometry_unavailable
+    SP.2: individual_raw_geometry_unavailable
+    SP.3: individual_raw_geometry_unavailable
+    JP.3: individual_raw_geometry_unavailable
+    JP.4: individual_raw_geometry_unavailable
+    JP.5: individual_raw_geometry_unavailable
+    JP.6: individual_raw_geometry_unavailable
+  minimum_patient_groups: 5
+  group_unit: tcga_patient_id
+  anchor_iou_threshold: 0.25
+  require_input_superclass_identity_match: true
+
+labels:
+  class_order: [tumor_any, nonTIL_stromal, sTIL]
+  class_mapping:
+    tumor_any: [tumor, mitotic_figure]
+    nonTIL_stromal: [fibroblast, vascular_endothelium, macrophage]
+    sTIL: [lymphocyte, plasma_cell]
+  non_votes:
+    - DidNotAnnotateFOV
+    - undetected
+    - unlabeled
+    - ambiguous
+    - other_nucleus
+    - apoptotic_body
+    - neutrophil
+    - eosinophil
+    - myoepithelium
+    - ductal_epithelium
+  minimum_independent_mappable_votes: 2
+  consensus_rule: strict_majority
+  binary_outcomes: [consensus_agree, consensus_disagree]
+  excluded_binary_outcomes: [ambiguous, insufficient_reference]
+  aggregate_p_truth_fields_forbidden: true
+
+candidate:
+  record: configs/aanca_selected_development_candidate.yaml
+  sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  feature_view: resnet18_multiscale_64_128
+  crop_sizes: [64, 128]
+  resnet18_weights: IMAGENET1K_V1
+  audit_l2: 0.1
+  audit_class_weight_balanced: false
+  audit_max_iter: 400
+  oof_folds: 5
+  split_seed: 26082310
+  risk_method: fixed_hybrid
+  neighbour_k: 31
+  neighbour_metric: cosine
+  hybrid_self_confidence_weight: 0.6
+  hybrid_neighbour_weight: 0.4
+  score_population: all_scorable_mapped_input_annotations
+  endpoint_queue: global_risk_exact_comparator_capable
+  balanced_relaxed_deployment_queue_evaluated: false
+
+evaluation:
+  primary_budget: 0.05
+  secondary_budgets: [0.01, 0.02, 0.05, 0.10]
+  budget_rounding: ceil_minimum_1
+  matched_random_fields: [patient_id, observed_class, proposed_transition]
+  matched_random_repetitions: 100
+  matched_random_seed: 26082320
+  require_disjoint_comparator: true
+  require_exact_stratum_counts: true
+  bootstrap_unit: patient_id
+  bootstrap_iterations: 5000
+  bootstrap_seed: 26082330
+  interval: percentile_95
+  primary_success_rule: precision_difference_lower_95_gt_0
+  class_failure_rule: aanca_precision_point_estimate_lt_matched_random_mean
+
+outputs:
+  directory: artifacts/nucls_independent_pathologist_validation
+  results_json: results.json
+  scored_samples_csv: scored_samples.csv
+  matched_queues_json: matched_random_queues.json
+  enrichment_curve_csv: enrichment_curve.csv
+  source_inventory_json: source_inventory.json
+  numeric_evidence_npz: numeric_evidence.npz
+  artifact_manifest_json: artifact_manifest.json
+  report: reports/nucls_independent_pathologist_validation_results.md
+
+claim_boundary:
+  independent_pathologist_disagreement_enrichment_if_positive: true
+  pathologist_error_detection_proven: false
+  clinical_error_detection_proven: false
+  balanced_deployment_queue_validated: false
+  automatic_annotation_change_permitted: false
+  downstream_or_clinical_utility_proven: false
+  source_annotations_modified: false

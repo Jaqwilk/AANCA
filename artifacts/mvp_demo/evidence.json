@@ -121,6 +121,114 @@
     "study_id": "nucls_natural_label_external_validation_v1"
   },
   "external_validation_completed": true,
+  "independent_pathologist_validation": {
+    "average_precision": 0.23758446912997444,
+    "by_observed_class": {
+      "nonTIL_stromal": {
+        "aanca_precision": 0.15,
+        "aanca_reviewed_count": 20,
+        "class_failure_flag": false,
+        "eligible_count": 201,
+        "mean_matched_random_precision": 0.125,
+        "precision_difference": 0.024999999999999994
+      },
+      "sTIL": {
+        "aanca_precision": 0.29411764705882354,
+        "aanca_reviewed_count": 17,
+        "class_failure_flag": false,
+        "eligible_count": 303,
+        "mean_matched_random_precision": 0.0388235294117647,
+        "precision_difference": 0.25529411764705884
+      },
+      "tumor_any": {
+        "aanca_precision": 0.875,
+        "aanca_reviewed_count": 8,
+        "class_failure_flag": false,
+        "eligible_count": 394,
+        "mean_matched_random_precision": 0.815,
+        "precision_difference": 0.06000000000000005
+      }
+    },
+    "claim_boundary": {
+      "automatic_annotation_change_permitted": false,
+      "balanced_deployment_queue_validated": false,
+      "clinical_error_detection_proven": false,
+      "downstream_or_clinical_utility_proven": false,
+      "independent_pathologist_disagreement_enrichment_if_positive": true,
+      "pathologist_error_detection_proven": false,
+      "source_annotations_modified": false
+    },
+    "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+    "decision": "disagreement_enrichment_supported_for_eligible_jp1_cohort",
+    "excluded_annotators": {
+      "JP.2": "fewer_than_5_patient_groups",
+      "JP.3": "individual_raw_geometry_unavailable",
+      "JP.4": "individual_raw_geometry_unavailable",
+      "JP.5": "individual_raw_geometry_unavailable",
+      "JP.6": "individual_raw_geometry_unavailable",
+      "SP.1": "individual_raw_geometry_unavailable",
+      "SP.2": "individual_raw_geometry_unavailable",
+      "SP.3": "individual_raw_geometry_unavailable"
+    },
+    "input_pathologist": "JP.1",
+    "input_pathologist_role": "junior_pathologist",
+    "patient_group_count": 5,
+    "primary": {
+      "aanca_precision": 0.3333333333333333,
+      "aanca_random_disjoint": true,
+      "aanca_recall": 0.14285714285714285,
+      "bootstrap_iterations": 5000,
+      "budget_fraction": 0.05,
+      "disagreements_found": 15,
+      "enrichment_ratio": 1.5495867768595044,
+      "enrichment_ratio_interval_95": [
+        1.0736196319018405,
+        9.999999999999996
+      ],
+      "exact_equal_budget": true,
+      "exact_strata_preserved": true,
+      "mean_matched_random_precision": 0.21511111111111106,
+      "precision_difference": 0.11822222222222226,
+      "precision_difference_interval_95": [
+        0.040000000000000036,
+        0.2571428571428571
+      ],
+      "primary_gate_pass": true,
+      "reviewed_count": 45
+    },
+    "qualifying_rotation_count": 1,
+    "reference": {
+      "aggregate_p_truth_used": false,
+      "eligible_count": 898,
+      "input_pathologist_removed": true,
+      "observed_agreement_rate": 0.8830734966592427,
+      "outcome_counts": {
+        "ambiguous": 53,
+        "consensus_agree": 793,
+        "consensus_disagree": 105,
+        "insufficient_reference": 368
+      },
+      "positive_count": 105,
+      "strict_consensus_rate": 0.9442691903259727
+    },
+    "scorable_input_count": 1319,
+    "source": {
+      "path": "artifacts/nucls_independent_pathologist_validation/results.json",
+      "sha256": "d82df0665da85a4d4429c3e938796edd6f6d2f8c6154cbec01bfd424d4925a0d",
+      "size_bytes": 108000
+    },
+    "study_id": "nucls_independent_pathologist_validation_v1",
+    "validity": {
+      "aanca_reference_association_inspected_at_freeze": false,
+      "aggregate_p_truth_used": false,
+      "balanced_deployment_queue_validated": false,
+      "input_pathologist_absent_from_reference": true,
+      "patient_group_safe_oof": true,
+      "protocol_and_execution_same_change": true,
+      "reference_feasibility_counts_inspected_at_freeze": true,
+      "source_annotations_modified": false
+    }
+  },
   "natural_data_action": {
     "action": "retain_uncorrected",
     "reason": "official corrected and uncorrected single-rater releases are distinct FOV quality tiers and the raw database preserves no paired pre/post class label per nucleus",
@@ -972,7 +1080,7 @@
     },
     "study_id": "puma_realism_stress_v1"
   },
-  "schema_version": 3,
+  "schema_version": 4,
   "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
     "findings_story_script_asset": {
@@ -1031,6 +1139,11 @@
         "path": "artifacts/nucls_external_validation/unbiased-v1/results.json",
         "sha256": "a931100a57e8d4b2a34a0216f047de8aa9d21c7275bc1beafd3b361fd955e9f6",
         "size_bytes": 19653
+      },
+      "nucls_independent_pathologist": {
+        "path": "artifacts/nucls_independent_pathologist_validation/results.json",
+        "sha256": "d82df0665da85a4d4429c3e938796edd6f6d2f8c6154cbec01bfd424d4925a0d",
+        "size_bytes": 108000
       },
       "nucls_qc_feasibility": {
         "path": "artifacts/nucls_supervised_qc_feasibility/results.json",

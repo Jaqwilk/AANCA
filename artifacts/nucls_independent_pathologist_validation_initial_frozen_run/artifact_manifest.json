@@ -1,0 +1,62 @@
+{
+  "artifact_count": 11,
+  "artifact_root_sha256": "4423909d33c56bdd0079b41607e93e217a753f9ee531d365e154938c28651ace",
+  "artifacts": [
+    {
+      "path": "embeddings/jp1_resnet18_context_128.npz",
+      "sha256": "a33291de8c4adcaa7557d1daab1cef2286ae7d5e6a0a213919c4d1cc6b38dc3f",
+      "size_bytes": 1531537
+    },
+    {
+      "path": "embeddings/jp1_resnet18_context_128.npz.metadata.json",
+      "sha256": "4a51de6be2a23854e97ca80324be1d8af9a91b139e1b268cce38924cc7490b32",
+      "size_bytes": 6623
+    },
+    {
+      "path": "embeddings/jp1_resnet18_context_64.npz",
+      "sha256": "e85c3a2b7d819471f3cb2de55d763ec0c8e3292659064cf0a7fb223150d051ed",
+      "size_bytes": 1518105
+    },
+    {
+      "path": "embeddings/jp1_resnet18_context_64.npz.metadata.json",
+      "sha256": "a5ce172b5d304d0269adbf9f829bcfd33c262141dc2c300c6caa99950d35bafc",
+      "size_bytes": 6621
+    },
+    {
+      "path": "enrichment_curve.csv",
+      "sha256": "866ab5a907d856c7e443f183aa35b0b7771f8cbbb160033d94a8a096b086aaef",
+      "size_bytes": 105618
+    },
+    {
+      "path": "matched_random_queues.json",
+      "sha256": "7633c894c1fe174375421f4505b248fc12052cc0f6a5dcfcabd09069572e8999",
+      "size_bytes": 2056041
+    },
+    {
+      "path": "numeric_evidence.npz",
+      "sha256": "3de69538514dea10544bee3b990fcd1aa5488160c6900f2efb95217ec6d38f5d",
+      "size_bytes": 108919
+    },
+    {
+      "path": "report.md",
+      "sha256": "d21d82b17f7e6b0fb8a2f9f393d4df6a04eddcfd0cecfad0caf357db776aabf6",
+      "size_bytes": 3451
+    },
+    {
+      "path": "results.json",
+      "sha256": "e36380b2cf2404cc4e7e2167d221167779ae1ec6442d61a3d98f31c47b305ec8",
+      "size_bytes": 104269
+    },
+    {
+      "path": "scored_samples.csv",
+      "sha256": "c87f3134e3727deedbf59292ff36fdb49aea963d5f82ded8462a4ed338f71456",
+      "size_bytes": 4374574
+    },
+    {
+      "path": "source_inventory.json",
+      "sha256": "d2218d2983a519e980c4865be0a967515f4e7ba9689323acebea02c178d709bc",
+      "size_bytes": 44560
+    }
+  ],
+  "schema_version": 1
+}

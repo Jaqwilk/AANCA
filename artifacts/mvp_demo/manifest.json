@@ -2,8 +2,8 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "6e0a552ef1880e0c7e8a7ae9cd7107c47962cf183f15ffe32c614b8e2108b93a",
-      "size_bytes": 4143
+      "sha256": "9204ed4f9441238c94a19a97f679c384260d89f0b42cd4c27257739d52d12fbb",
+      "size_bytes": 4378
     },
     {
       "path": "assets/findings-evidence-story.js",
@@ -47,13 +47,13 @@
     },
     {
       "path": "evidence.json",
-      "sha256": "8f92884d775c5fb6059a604de47365ced217568401c6d130ea227bcf89672e67",
-      "size_bytes": 38597
+      "sha256": "9d306a7718d93cf9e0f6a44e5cf4ce3dc28d21ab20c74393676f5f9ad25d11c4",
+      "size_bytes": 42868
     },
     {
       "path": "index.html",
-      "sha256": "a619135539477f4cc60cd07daa80c64067b4496c1f630aa73c851ba14a9217a4",
-      "size_bytes": 221200
+      "sha256": "d97e8e77b200ee7c35a2b8266617ecf90c21aa923c0beb0e53d0c457295f1c38",
+      "size_bytes": 223085
     },
     {
       "path": "pannuke_mask_qc_overlays.png",
@@ -61,7 +61,7 @@
       "size_bytes": 3188071
     }
   ],
-  "manifest_root_sha256": "6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b",
-  "policy": "aanca_presentation_current_evidence_readback_v4",
-  "schema_version": 4
+  "manifest_root_sha256": "3810912a69a96c759e2426b9556a7f86f04351eb392411b31d4b0add4b4b7597",
+  "policy": "aanca_presentation_current_evidence_readback_v5",
+  "schema_version": 5
 }
