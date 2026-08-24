@@ -404,6 +404,7 @@ def prepare_pathologist_input(
                 )
         image = image_cache[image_authority.path]
         for source_row_index, row in frame.iterrows():
+            source_row_number = int(str(source_row_index))
             observed_label, observed_class = map_nucls_superclass(row["raw_classification"])
             if observed_label is None or observed_class is None:
                 raw = _normalise_label(row["raw_classification"]) or "missing"
@@ -442,7 +443,7 @@ def prepare_pathologist_input(
                 "study_id": config["study_id"],
                 "annotator": annotator,
                 "raw_file": relative_raw,
-                "source_row_index": int(source_row_index),
+                "source_row_index": source_row_number,
                 "raw_bbox": [float(value) for value in coordinates],
             }
             sample_id = (
@@ -458,7 +459,7 @@ def prepare_pathologist_input(
                     "anchor_fov_id": image_authority.anchor_fov_id,
                     "raw_fov_file": relative_raw,
                     "rgb_file": image_authority.path.relative_to(root).as_posix(),
-                    "source_row_index": int(source_row_index),
+                    "source_row_index": source_row_number,
                     "raw_classification": str(row["raw_classification"]),
                     "observed_label": int(observed_label),
                     "observed_class": observed_class,
@@ -881,12 +882,12 @@ def attach_hidden_reference(
             anchor_id = str(anchor["anchor_id"])
             output.at[output_index, "official_anchor_id"] = anchor_id
             master_input, _ = map_nucls_superclass(anchor[annotator])
-            if master_input != int(output.at[output_index, "observed_label"]):
+            if master_input != int(cast(Any, output.at[output_index, "observed_label"])):
                 output.at[output_index, "reference_reason"] = "master_input_identity_conflict"
                 continue
             identity_matches += 1
             outcome = construct_leave_one_out_consensus(
-                anchor.to_dict(),
+                cast(dict[str, Any], anchor.to_dict()),
                 input_annotator=annotator,
                 pathologist_columns=pathologists,
                 minimum_votes=minimum_votes,
@@ -1231,10 +1232,10 @@ def evaluate_scored_reference(
         random_class = tuple(indices[mask[indices]] for indices in primary_random)
         aanca_precision = _precision(events, selected_class) if len(selected_class) else None
         random_values = [_precision(events, indices) for indices in random_class if len(indices)]
-        random_mean = float(np.mean(random_values)) if random_values else None
+        class_random_mean: float | None = float(np.mean(random_values)) if random_values else None
         difference = (
-            aanca_precision - random_mean
-            if aanca_precision is not None and random_mean is not None
+            aanca_precision - class_random_mean
+            if aanca_precision is not None and class_random_mean is not None
             else None
         )
         class_results[class_name] = {
@@ -1242,11 +1243,13 @@ def evaluate_scored_reference(
             "reference_positive_count": int(events[mask].sum()),
             "aanca_reviewed_count": len(selected_class),
             "aanca_precision": aanca_precision,
-            "matched_random_mean_precision": random_mean,
+            "matched_random_mean_precision": class_random_mean,
             "precision_difference": difference,
             "enrichment_ratio": (
-                aanca_precision / random_mean
-                if aanca_precision is not None and random_mean is not None and random_mean > 0.0
+                aanca_precision / class_random_mean
+                if aanca_precision is not None
+                and class_random_mean is not None
+                and class_random_mean > 0.0
                 else None
             ),
             "class_failure_flag": bool(difference is not None and difference < 0.0),

@@ -1322,3 +1322,37 @@ python C:\Users\NATAN\.codex\skills\hostinger-deploy\scripts\run_hostinger_deplo
 This presentation refresh does not change source annotations, scientific evidence
 authorities or the completion stage. Scientific status remains
 `EXTERNAL_VALIDATION_COMPLETE`; presentation status remains `DEMO_COMPLETE`.
+
+## CI type-check correction and README simplification — 2026-08-24
+
+GitHub Actions run `32653195668` for commit `d1b65ce37caab3bc6ff139b03e9638ed66c34065`
+failed at the Windows `uv run mypy src` step with five static type errors in the new
+NuCLS independent-pathologist module. Runtime tests, scientific metrics and source
+annotations were not the cause. The correction makes the existing integer conversion
+and string-keyed DataFrame mapping types explicit and gives the optional class-level
+matched-random mean its own nullable variable. It does not change the calculation or
+any saved evidence authority.
+
+The repository README now exposes the project website through one direct
+`https://aancastudy.org` link only. The duplicate website badge, linked hero image,
+presentation description and local presentation walkthrough were removed. The
+package and its verification command remain documented under reproducibility.
+
+Local reproduction of the maintained CI gates after the correction:
+
+- `uv run mypy src`: no issues in 104 source files;
+- `uv run pytest`: `1165 passed, 1 skipped` in 590.22 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: all 220 maintained Python files formatted;
+- `python -I scripts/present_demo.py --verify-only`: valid 13-file package, manifest
+  root `3810912a69a96c759e2426b9556a7f86f04351eb392411b31d4b0add4b4b7597`;
+- independent JP1 evidence readback: 11 artifacts verified, primary gate PASS,
+  source annotations unmodified;
+- `uv run histo-audit experiment smoke --runs-root artifacts/ci-smoke-runs`:
+  completed successfully as
+  `20260824T192423.107036Z_synthetic_smoke_2b76b8eaa9`;
+- `git diff --check`: passed.
+
+Scientific and presentation completion stages remain `EXTERNAL_VALIDATION_COMPLETE`
+and `DEMO_COMPLETE`.

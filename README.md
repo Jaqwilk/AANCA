@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://aancastudy.org"><strong>Research article</strong></a>
+  <a href="https://aancastudy.org"><strong>Website</strong></a>
   ·
   <a href="PROFESSOR_BRIEF.md">One-page brief</a>
   ·
@@ -19,31 +19,14 @@
 </p>
 
 <p align="center">
-  <a href="https://aancastudy.org"><img alt="Official website: aancastudy.org" src="https://img.shields.io/badge/website-aancastudy.org-6D67E4"></a>
   <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Scientific software CI" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
   <img alt="Scientific stage: EXTERNAL_VALIDATION_COMPLETE" src="https://img.shields.io/badge/science-EXTERNAL__VALIDATION__COMPLETE-238636">
   <img alt="Clinical use: not established" src="https://img.shields.io/badge/clinical%20use-not%20established-6B7280">
 </p>
 
-<p align="center">
-  <a href="https://aancastudy.org">
-    <img src="docs/assets/aanca-presentation-hero.png" alt="AANCA research article showing a source field, selected nuclei and second-look review frames">
-  </a>
-</p>
-
 AANCA is a non-diagnostic research prototype. It ranks annotations for review,
 never treats model disagreement as biological truth and never modifies source
-annotations automatically. The official project website is
-**[aancastudy.org](https://aancastudy.org)**.
-
-The presentation is a minimalist long-form article rather than a product dashboard.
-Its Canvas 2D hero uses local nucleus artwork to show immutable source instances,
-second-look selections and a review-only visual sequence. On mobile it makes two
-explicit selections and keeps every animation stage below the article copy. The
-scientific Findings section uses a slim white progress spine to move through the seven registered
-questions before the complete comparison atlas. The spine is navigation only, not a
-second quantitative chart. Neither visual changes a source label or implies that
-model disagreement establishes biological truth.
+annotations automatically.
 
 ## Current conclusion
 
@@ -141,46 +124,6 @@ The binding action for unreviewed natural data is `retain_uncorrected`.
 
 The primary scientific invariants are frozen in [`SPEC.md`](SPEC.md) and enforced in
 code and tests.
-
-## Open the presentation
-
-The checked-in English article is a closed, thirteen-file package: five document and
-evidence files, six checksum-bound hero sprites, one Method workflow image and one
-Findings interaction script. It needs no dataset, GPU or project dependency
-installation:
-
-~~~powershell
-python scripts/present_demo.py
-~~~
-
-The launcher verifies every packaged file before serving only on loopback. To check
-the package without opening a browser:
-
-~~~powershell
-python scripts/present_demo.py --verify-only
-~~~
-
-On desktop, “What the study actually learned.” is a reversible seven-stage sequence
-driven by one smooth scroll timeline. A centred white line and seven white nodes show
-reading progress without encoding another set of results; the complete forest plot
-below remains the quantitative view. Mobile presents all seven
-answers in ordinary document flow with small static glyphs. Reduced-motion users
-receive a static white spine followed by every answer, with no tall sticky
-region. The Method uses four short article paragraphs to explain the controlled label
-intervention, source-group-safe out-of-fold scoring, equal review budgets and the
-separate downstream test. A checksum-bound minimalist workflow graphic mirrors those
-four states without implying diagnosis or automatic correction.
-The masthead uses a decorative Canvas 2D review-field animation built from those
-transparent PNG sprites. It keeps source instances in place, moves only visual copies
-into the review queue and resolves the first patch into four separate patches while
-the pull-out, 45° rotation and colour transition continue on one uninterrupted
-timeline. The resulting AANCA mark then performs a deep spinning dive after a
-1.8-second hold. A 0.32-second full-black pause is followed by eight quick staggered
-groups of cells, completing the continuous loop without a hard cut.
-Canvas rendering is capped at 60 frames per second and uses hardware-aware pixel and
-cache budgets so high-refresh and high-DPI screens do not multiply work unnecessarily.
-Reduced-motion users receive the static mark immediately; neither surface depends on
-WebGL or Three.js.
 
 ## Install and run the portable workflow
 
@@ -378,8 +321,7 @@ The verified project bibliography is
 [`references/references.bib`](references/references.bib).
 Machine-readable citation metadata are available in [`CITATION.cff`](CITATION.cff).
 No DOI has been assigned yet; DOI publication requires an owner-controlled archival
-release, for example through Zenodo. The official project website is
-[`aancastudy.org`](https://aancastudy.org).
+release, for example through Zenodo.
 
 ## Author
 
