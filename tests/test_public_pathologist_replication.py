@@ -112,6 +112,16 @@ def test_memory_bounded_crop_is_pixel_identical_to_frozen_crop() -> None:
             np.testing.assert_array_equal(actual, expected)
 
 
+def test_edge_object_centre_may_be_slightly_outside_but_crop_must_intersect() -> None:
+    image = np.arange(20 * 30 * 3, dtype=np.uint8).reshape(20, 30, 3)
+    assert module._crop_intersects_image(centre_x=15, centre_y=-5, size=64, width=30, height=20)
+    crop = module._memory_bounded_reflect_crop(image, centre_x=15, centre_y=-5, size=64)
+    assert crop.shape == (64, 64, 3)
+    assert not module._crop_intersects_image(
+        centre_x=15, centre_y=-32, size=64, width=30, height=20
+    )
+
+
 def test_dynamic_public_scoring_is_group_safe() -> None:
     rng = np.random.default_rng(11)
     rows: list[dict[str, object]] = []

@@ -267,6 +267,18 @@ def _memory_bounded_reflect_crop(
     return np.asarray(crop, dtype=np.uint8)
 
 
+def _crop_intersects_image(
+    *, centre_x: int, centre_y: int, size: int, width: int, height: int
+) -> bool:
+    half = size // 2
+    return (
+        centre_x + half > 0
+        and centre_y + half > 0
+        and centre_x - half < width
+        and centre_y - half < height
+    )
+
+
 def _persist_snapshot_set(
     destination: Path,
     *,
@@ -740,8 +752,19 @@ def prepare_snapshot_pixels(
         for _, row in local.iterrows():
             centre_x = int(row["centre_x"])
             centre_y = int(row["centre_y"])
-            if not (0 <= centre_x < image.shape[1] and 0 <= centre_y < image.shape[0]):
-                raise RuntimeError(f"{dataset}/{rotation} crop centre is outside source pixels")
+            if not all(
+                _crop_intersects_image(
+                    centre_x=centre_x,
+                    centre_y=centre_y,
+                    size=size,
+                    width=image.shape[1],
+                    height=image.shape[0],
+                )
+                for size in crop_sizes
+            ):
+                raise RuntimeError(
+                    f"{dataset}/{rotation} frozen crop does not intersect source pixels"
+                )
             records.append(cast(dict[str, Any], row.to_dict()))
             for size in crop_sizes:
                 crops[size].append(

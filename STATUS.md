@@ -1448,3 +1448,18 @@ pixels and every scientific rule are unchanged; the frozen config SHA-256 remain
 unchanged.
 Post-v3 validation passed: `1174 passed, 1 skipped` in 624.10 seconds, full Ruff
 lint/format passed and mypy reported no issues in 105 source files.
+
+### Pre-outcome MIDOG++ edge-geometry runtime amendment v4 — 2026-08-26
+
+The next MIDOG++ attempt stopped before crop extraction because one released bbox in
+`309.tiff` intersects the image while its centre is 5 px above the top edge. The
+outcome-blind audit found no other outside centre among 3,612 candidates. No MIDOG++
+embedding, score or reference artifact existed, and the RIVA reference remained
+closed.
+
+Runtime amendment v4 preserves the exact centre and permits periodic reflect pixels
+only when every frozen crop window intersects the image; a completely outside window
+still fails closed. It changes no data selection or scientific rule, and the frozen
+config SHA-256 remains unchanged.
+Post-v4 validation passed: `1175 passed, 1 skipped` in 603.52 seconds, full Ruff
+lint/format passed and mypy reported no issues in 105 source files.
