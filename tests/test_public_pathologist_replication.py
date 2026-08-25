@@ -12,7 +12,10 @@ import pandas as pd
 import pytest
 
 import histo_audit.external_validation.public_pathologist_replication as module
-from histo_audit.external_validation.nucls_independent_pathologist import InputPreparedData
+from histo_audit.external_validation.nucls_independent_pathologist import (
+    InputPreparedData,
+    _fixed_crop,
+)
 from histo_audit.external_validation.public_pathologist_replication import (
     attach_midogpp_hidden_reference,
     attach_riva_hidden_reference,
@@ -95,6 +98,18 @@ def test_figshare_json_fetch_retries_rate_limit(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
     assert module._fetch_json("https://example.test/data") == {"ok": True}
     assert calls == 2
+
+
+def test_memory_bounded_crop_is_pixel_identical_to_frozen_crop() -> None:
+    rng = np.random.default_rng(260826)
+    image = rng.integers(0, 256, size=(19, 23, 3), dtype=np.uint8)
+    for size in (4, 8):
+        for centre_x, centre_y in ((0, 0), (1, 1), (11, 9), (22, 18), (0, 18)):
+            expected = _fixed_crop(image, centre_x=centre_x, centre_y=centre_y, size=size)
+            actual = module._memory_bounded_reflect_crop(
+                image, centre_x=centre_x, centre_y=centre_y, size=size
+            )
+            np.testing.assert_array_equal(actual, expected)
 
 
 def test_dynamic_public_scoring_is_group_safe() -> None:

@@ -41,7 +41,6 @@ from histo_audit.external_validation.nucls_independent_pathologist import (
     ScoredInputData,
     _array_sha256,
     _canonical_frame_sha256,
-    _fixed_crop,
     _semantic_sha256,
     _source_inventory,
     select_exact_comparator_capable_queue,
@@ -239,6 +238,33 @@ def _authenticate_source(path: Path, *, sha256: str | None = None, md5: str | No
 
 def _snapshot_manifest_path(definition: DatasetDefinition, root: Path) -> Path:
     return root / str(definition.settings["input_snapshot_directory"]) / "snapshot_manifest.json"
+
+
+def _memory_bounded_reflect_crop(
+    image: NDArray[np.uint8], *, centre_x: int, centre_y: int, size: int
+) -> NDArray[np.uint8]:
+    """Return the frozen reflect crop without padding the complete source image."""
+
+    if image.ndim != 3 or image.shape[2] != 3 or image.dtype != np.uint8:
+        raise ValueError("public source image must be uint8 RGB")
+    if size <= 0 or size % 2:
+        raise ValueError("frozen crop size must be a positive even integer")
+    if image.shape[0] < 2 or image.shape[1] < 2:
+        raise ValueError("reflect crop requires source axes of at least two pixels")
+    half = size // 2
+
+    def reflect_indices(start: int, length: int) -> NDArray[np.int64]:
+        coordinates = np.arange(start, start + size, dtype=np.int64)
+        period = 2 * length - 2
+        wrapped = np.mod(coordinates, period)
+        return np.where(wrapped < length, wrapped, period - wrapped).astype(np.int64, copy=False)
+
+    y_indices = reflect_indices(centre_y - half, image.shape[0])
+    x_indices = reflect_indices(centre_x - half, image.shape[1])
+    crop = image[y_indices[:, None], x_indices[None, :], :]
+    if crop.shape != (size, size, 3):
+        raise RuntimeError("memory-bounded reflect crop produced an invalid shape")
+    return np.asarray(crop, dtype=np.uint8)
 
 
 def _persist_snapshot_set(
@@ -719,7 +745,9 @@ def prepare_snapshot_pixels(
             records.append(cast(dict[str, Any], row.to_dict()))
             for size in crop_sizes:
                 crops[size].append(
-                    _fixed_crop(image, centre_x=centre_x, centre_y=centre_y, size=size)
+                    _memory_bounded_reflect_crop(
+                        image, centre_x=centre_x, centre_y=centre_y, size=size
+                    )
                 )
     manifest = pd.DataFrame.from_records(records)
     order = np.argsort(manifest["sample_id"].astype(str).to_numpy(), kind="stable")

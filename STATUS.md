@@ -1433,3 +1433,18 @@ and transient HTTP responses. The frozen config, selection and all scientific ru
 remain unchanged; no AANCA score or reference association had been computed.
 Post-v2 validation passed: `1173 passed, 1 skipped` in 610.91 seconds, full Ruff
 lint/format passed and mypy reported no issues in 105 source files.
+
+### Pre-outcome MIDOG++ crop runtime amendment v3 — 2026-08-26
+
+All four RIVA input-only rotations completed their score seals with converged models
+and no reference access. The first MIDOG++ rotation then stopped before embeddings or
+scores because the inherited NuCLS helper reflect-padded an entire large TIFF for one
+small crop and could not allocate an extra 97.1 MiB array. No MIDOG++ score artifact
+was created, and no RIVA or MIDOG++ reference had been opened.
+
+Runtime amendment v3 replaces only that allocation strategy with an output-sized
+reflect-index crop. A byte-equality test covers centres, edges and corners. Crop geometry,
+pixels and every scientific rule are unchanged; the frozen config SHA-256 remains
+unchanged.
+Post-v3 validation passed: `1174 passed, 1 skipped` in 624.10 seconds, full Ruff
+lint/format passed and mypy reported no issues in 105 source files.
