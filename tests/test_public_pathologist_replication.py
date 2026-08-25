@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import io
 import json
+import urllib.error
 from pathlib import Path
 
 import numpy as np
@@ -71,6 +73,28 @@ def test_figshare_authority_deduplicates_identical_pages_and_rejects_conflicts()
     assert authorities["001.tiff"]["article_id"] == 1
     with pytest.raises(RuntimeError, match="conflicting MIDOG"):
         module._register_figshare_authority(authorities, {**duplicate, "size_bytes": 101})
+
+
+def test_figshare_json_fetch_retries_rate_limit(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = 0
+
+    def fake_urlopen(request, timeout):
+        nonlocal calls
+        calls += 1
+        assert timeout == 60
+        if calls == 1:
+            raise urllib.error.HTTPError(
+                request.full_url,
+                429,
+                "rate limited",
+                {"Retry-After": "0"},
+                None,
+            )
+        return io.BytesIO(b'{"ok": true}')
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+    assert module._fetch_json("https://example.test/data") == {"ok": True}
+    assert calls == 2
 
 
 def test_dynamic_public_scoring_is_group_safe() -> None:

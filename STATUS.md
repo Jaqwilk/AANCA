@@ -1419,3 +1419,17 @@ fails closed on size, MD5 or URL conflict. It changes no scientific input, selec
 label, group, model, endpoint or gate; the frozen config SHA-256 remains unchanged.
 Post-amendment validation passed: `1172 passed, 1 skipped` in 582.96 seconds, full
 Ruff lint/format passed and mypy reported no issues in 105 source files.
+
+### Pre-outcome MIDOG++ downloader runtime amendment v2 — 2026-08-26
+
+The next outcome-blind download attempt also stopped before downloading any TIFF:
+six separate Figshare pages omitted `372.tiff`, `472.tiff` and `476.tiff` under
+unstable collection ordering. The official OpenAPI authority allows 1,000 records per
+page, and one such request returned all 506 unique collection article IDs.
+
+Runtime amendment v2 removes pagination, fails on truncation/duplicate IDs, lowers
+article-detail concurrency from 20 to 8 and adds bounded retry handling for rate-limit
+and transient HTTP responses. The frozen config, selection and all scientific rules
+remain unchanged; no AANCA score or reference association had been computed.
+Post-v2 validation passed: `1173 passed, 1 skipped` in 610.91 seconds, full Ruff
+lint/format passed and mypy reported no issues in 105 source files.

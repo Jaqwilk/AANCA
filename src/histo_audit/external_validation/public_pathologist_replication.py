@@ -14,6 +14,8 @@ import json
 import math
 import os
 import shutil
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections import Counter, defaultdict
@@ -506,8 +508,21 @@ def materialize_midogpp_input_snapshots(repository_root: str | Path) -> dict[str
 
 
 def _fetch_json(url: str) -> Any:
-    with urllib.request.urlopen(url, timeout=60) as response:
-        return json.load(response)
+    for attempt in range(6):
+        request = urllib.request.Request(
+            url, headers={"User-Agent": "AANCA-public-replication/1.0"}
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as error:
+            retryable = error.code in {403, 429, 500, 502, 503, 504}
+            if not retryable or attempt == 5:
+                raise
+            retry_after = error.headers.get("Retry-After")
+            delay = float(retry_after) if retry_after and retry_after.isdigit() else 2**attempt
+            time.sleep(min(delay, 8.0))
+    raise RuntimeError("unreachable Figshare retry state")
 
 
 def _register_figshare_authority(
@@ -540,28 +555,21 @@ def download_midogpp_selected_images(repository_root: str | Path) -> dict[str, A
     _, selected = _load_midogpp_selection(root, settings)
     selected_names = {str(item["file_name"]): item for item in selected}
     collection = str(settings["figshare_collection"])
-    articles: list[Mapping[str, Any]] = []
-    for page in range(1, 20):
-        query = urllib.parse.urlencode({"page_size": 100, "page": page})
-        batch = cast(
-            list[Mapping[str, Any]],
-            _fetch_json(f"https://api.figshare.com/v2/collections/{collection}/articles?{query}"),
-        )
-        articles.extend(batch)
-        if len(batch) < 100:
-            break
-    articles = list(
-        {
-            int(article["id"]): article
-            for article in sorted(articles, key=lambda item: int(item["id"]))
-        }.values()
+    query = urllib.parse.urlencode({"page_size": 1000, "page": 1})
+    articles = cast(
+        list[Mapping[str, Any]],
+        _fetch_json(f"https://api.figshare.com/v2/collections/{collection}/articles?{query}"),
     )
+    article_ids = [int(article["id"]) for article in articles]
+    if len(articles) >= 1000 or len(article_ids) != len(set(article_ids)):
+        raise RuntimeError("single-page MIDOG++ collection authority is truncated or duplicated")
+    articles = sorted(articles, key=lambda item: int(item["id"]))
 
     def load_article(article: Mapping[str, Any]) -> Mapping[str, Any]:
         return cast(Mapping[str, Any], _fetch_json(str(article["url"])))
 
     authorities: dict[str, dict[str, Any]] = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         for article in executor.map(load_article, articles):
             for raw_file in cast(Sequence[Mapping[str, Any]], article.get("files", [])):
                 name = str(raw_file["name"])
