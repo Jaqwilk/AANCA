@@ -23,3 +23,4 @@ configs/puma_realism_stress.yaml whitespace=-blank-at-eof
 artifacts/puma_audit_time_label_sensitivity/evidence_arrays.npz filter=lfs diff=lfs merge=lfs -text
 artifacts/puma_new_data_confirmation/evidence_arrays.npz filter=lfs diff=lfs merge=lfs -text
 artifacts/puma_realism_stress/evidence_arrays.npz filter=lfs diff=lfs merge=lfs -text
+artifacts/public_independent_pathologist_replication/**/pre_reference_scores/**/*.npz filter=lfs diff=lfs merge=lfs -text

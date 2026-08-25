@@ -1,0 +1,2642 @@
+[
+  {
+    "path": "data/interim/public_independent_pathologist_replication/riva/annotator_4.csv",
+    "sha256": "5a037be34550a47e06379a730a05d83cc7d8ee6cac3c8dfb1af6771d22391dfa",
+    "size_bytes": 979060
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_1.png",
+    "sha256": "2dba770cb0c847d48280dcef5eeaee5645af373cb78e167690774d4522000008",
+    "size_bytes": 1823600
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_10.png",
+    "sha256": "3ceb259eeae16104c72e6c6d081e73dee37060516da111c153133ad35a32b396",
+    "size_bytes": 1396996
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_2.png",
+    "sha256": "d913de872a76e3a7b162a69518e003cc7397b360b13c8c156252329e7a7bf669",
+    "size_bytes": 1501130
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_3.png",
+    "sha256": "734cab28b1d4f8013f9823d683989be24714a80e1435243ebeb6a7dd0af91caa",
+    "size_bytes": 1431666
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_4.png",
+    "sha256": "ad72074ef13874d89252d278782ccbc310ccea7b4bab3e549b1e6f24df6dad6d",
+    "size_bytes": 1611626
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_5.png",
+    "sha256": "d9da54c1a12328857d3260edccdd5de5d8d4a2e0256b85ea40f40e063722a853",
+    "size_bytes": 1540665
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_6.png",
+    "sha256": "958538782d8e48586eb023441bbef76c30f9ed00783b37b4cda9fc0c78eea8c8",
+    "size_bytes": 1375545
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_7.png",
+    "sha256": "862ca5369db7b8e5ca4d6475a3035855b820ce38338cb4d788453cb76fd8fa6f",
+    "size_bytes": 1572203
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_8.png",
+    "sha256": "b889be6100f51870b2bb4168877bab0c60a9f3cd74531417dae49eb11cebca43",
+    "size_bytes": 1611223
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_1_9.png",
+    "sha256": "50ef441878e5db1057ea4d02f16a3fa29789e2b4fcb452d792ff816f07a7a31d",
+    "size_bytes": 1400296
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_1.png",
+    "sha256": "27988794b9331d7c701c991520d8e4bea37c93937c07d3295e54d0f6209cdeba",
+    "size_bytes": 1364859
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_10.png",
+    "sha256": "80a1c7840d44eb1c0d582a90346f29d904ce0e95fb2bd7296a96721b6640f746",
+    "size_bytes": 1388243
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_11.png",
+    "sha256": "c7feaf4a915cda9b2c9d80619b43e280f903ed92bd2909c95256e9fe5019a558",
+    "size_bytes": 1427844
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_12.png",
+    "sha256": "a6f98cd79fad2426766d8d2147faba724a699ee8794a7e1d621414570034d23f",
+    "size_bytes": 1473745
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_13.png",
+    "sha256": "d83275faa2d9584bd3f262bfd09eb47c0d4155c07c63ccff7f45e939ae3da527",
+    "size_bytes": 1493350
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_14.png",
+    "sha256": "6282b5570dbc919442c728b91077b1151aae898dc9d3cced481cce2452ce2dab",
+    "size_bytes": 1483301
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_15.png",
+    "sha256": "59962062ab5601768d8996090408c15f8f7f1eda106bc83261646ecb09d3ceb8",
+    "size_bytes": 1362080
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_16.png",
+    "sha256": "bff7447aa626706dbeff88c8a5cdd3b820684186da96856ac8b6c2ad9d6adb4e",
+    "size_bytes": 1348543
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_17.png",
+    "sha256": "313c2fef6c344539ddb0585025c515c891e70692f3b49de918a4d17cf4b96186",
+    "size_bytes": 1413128
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_18.png",
+    "sha256": "d471df2193319d88340338f51f0f3842596a8744fdac7b6a88a43fda9dd6c983",
+    "size_bytes": 1457891
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_19.png",
+    "sha256": "f696aee29da0f325c83a0a46c33b8cb7f62e0efebbe8b8f4ac371fa8b5fa5d2b",
+    "size_bytes": 1533253
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_2.png",
+    "sha256": "1d25c0c194a94da0405120cde4e7a2f542d6b845054d67e30489998c543e1331",
+    "size_bytes": 1408376
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_20.png",
+    "sha256": "5a2d642f92c1b5af062523017d029c6bafc9b5c0135ae29cf82995cbbf537644",
+    "size_bytes": 1402433
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_21.png",
+    "sha256": "d4a6cf32380e2e546ac40be995789175b86df774183dd28a885725a7b5254862",
+    "size_bytes": 1289080
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_22.png",
+    "sha256": "712994495e8d0f49498a266efff2ed15950d602e92e782a00d5701a52bd58f6e",
+    "size_bytes": 1422108
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_23.png",
+    "sha256": "c3e40a6ec489d912d2aac30a709c4bba601108b6aab04a6adadf962328358c86",
+    "size_bytes": 1613721
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_25.png",
+    "sha256": "6d74a5b92702d82a2abbdc4b9192f29d57c6ab9a9ffb40d9562fc3375f8eb2b9",
+    "size_bytes": 1324631
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_26.png",
+    "sha256": "866b06d6c54459a810c096e166d2e4246bf5c5fdea76bd86444a3851b7474b66",
+    "size_bytes": 1624527
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_27.png",
+    "sha256": "af79281693637803d781ad6107e4262081ae04d55901086eaae67975880f3848",
+    "size_bytes": 1633189
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_28.png",
+    "sha256": "1e1b349798226bc2778df398530408fea07726f55b7aa8f5bd95365d166f5bd9",
+    "size_bytes": 1464382
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_29.png",
+    "sha256": "7fb87a66a08329ecf72d87804d1dc58a5aa2b1496360170396a7c8c39ab59b23",
+    "size_bytes": 1398869
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_3.png",
+    "sha256": "a3752dc83a392b5f3d90d1da1262ff260bf2722980f3e27e0b6f07ce07343e01",
+    "size_bytes": 1378878
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_30.png",
+    "sha256": "7a9a17704b84633d60df93292a6ed32f7cab66f878d053e85fcb81fbad619719",
+    "size_bytes": 1385869
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_31.png",
+    "sha256": "4487271cb4fafde223e065fae91f5e54dbabbec38a0ac78c00fa07b1f152953e",
+    "size_bytes": 1518373
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_32.png",
+    "sha256": "de1bbd406f2ce668bd4065b9607a152c786ee2795d4e633c154d6732f4839e4a",
+    "size_bytes": 1361432
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_33.png",
+    "sha256": "96fbca9f3c47263c096e2768e93100ae685b1580a5cc563f804734490b4f14ec",
+    "size_bytes": 1430643
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_34.png",
+    "sha256": "64cf17d3bba0b1caeb18f8cbf7cbe5e9f4f4c5128724e8546a37c9b6e36a647c",
+    "size_bytes": 1402446
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_35.png",
+    "sha256": "919bb5648f4280ef38b847e16d60ab525d373e43055cf65cb73951c37783508f",
+    "size_bytes": 1447883
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_36.png",
+    "sha256": "922de885329b7f6328a2d5733e115e9794cc809cfe1fbcd222f2db05996e01fe",
+    "size_bytes": 1487179
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_37.png",
+    "sha256": "1b464fbe35ed1b05f93129faab1ca654c10cb9b039663259af352c6b32b4eb41",
+    "size_bytes": 1344495
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_4.png",
+    "sha256": "92d0bf6657e7118a8fd600390051380b7c7adae6bf27b102de6314c3b89f8e4b",
+    "size_bytes": 1447747
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_5.png",
+    "sha256": "48a4c3bb3433828127d16e991ec24382d8cca58393e3e268e0efd800575fd6b8",
+    "size_bytes": 1420375
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_6.png",
+    "sha256": "2314586e352644760180b5b838c098cdefcfb5a8f65bd1286f2c3d4b008aec9c",
+    "size_bytes": 1414265
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_7.png",
+    "sha256": "661943ff85b2b5faf062438bf2cc55e7d96b40a2c29fd61be5c5e9e510ff56f2",
+    "size_bytes": 1477980
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_8.png",
+    "sha256": "fc159a30afe6551017548ae3183d2000a21b71d53c648f502a17c109191922ac",
+    "size_bytes": 1406485
+  },
+  {
+    "path": "data/raw/riva/images/ASCH_2_9.png",
+    "sha256": "32b589610a43e3d5421a07db4c961c135262537782c69cc3b8687eeb3aa7ee52",
+    "size_bytes": 1266930
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_16.png",
+    "sha256": "07182aca0c142a50c5bf54053135d11134fe8855f2e5f92c98464846c8b982ee",
+    "size_bytes": 1441276
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_17.png",
+    "sha256": "b0ed2b21230cfcbc7565a3c762f75ddc97cb8bcd82775b091730b9b248cfb377",
+    "size_bytes": 1561394
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_18.png",
+    "sha256": "fb97930240c9491b34984146a76568eade7e0bc77640bd4aff8b96e2d483c3e9",
+    "size_bytes": 1460978
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_19.png",
+    "sha256": "acfc97b38a9d0fd86386d0e413fe88885c000cff06faaeccfd0c2f0d6ab8fadd",
+    "size_bytes": 1505681
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_20.png",
+    "sha256": "1f4c10bdad2c1153b609ef8a714ece934ac389252cb11da567a31a3e6ed10845",
+    "size_bytes": 1586566
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_21.png",
+    "sha256": "67758d766cfec1b00c4bb58fffa0b93b2683083b6081a6f073e13ef3301dbdff",
+    "size_bytes": 1774142
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_22.png",
+    "sha256": "e8b53b5a4b2f0701fa5fe7dcd46964ebbcbb54ba128fb5afc4000aa1e4f3cf1b",
+    "size_bytes": 1492573
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_23.png",
+    "sha256": "e83734f582ad0bd30ddbdfee1775877f8485935a5251fc895e37937f437d6a14",
+    "size_bytes": 1621665
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_24.png",
+    "sha256": "5d8a45a8770fca5803c7f60abc321d9c1bd002bac92a1890497fa89880cca802",
+    "size_bytes": 1605471
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_25.png",
+    "sha256": "428799e77c903255e8cf48f2674ff97a3aeb1743a09ab8a70b46414d392bd8c2",
+    "size_bytes": 1318379
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_26.png",
+    "sha256": "76d52ec74c93b3ecd31e92278b7ab8a62555eac128a600befe5f309dc49397e4",
+    "size_bytes": 1526503
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_1_27.png",
+    "sha256": "c8c88dc77c397d26981ed48bc82908effec139e8454cc6496a1f1fde5e207609",
+    "size_bytes": 1337929
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_2_1.png",
+    "sha256": "ab867e5a0c76210fd815eed6e45e9c4d8ee45735191467188189908dd5ade699",
+    "size_bytes": 1457120
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_2_2.png",
+    "sha256": "35650568122b96bd2ea16db10aac6afc55b1a92cddccfbaba04a5d9c96ec3fc3",
+    "size_bytes": 1442341
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_2_3.png",
+    "sha256": "121cc09b0bc31702bae59be64fdf52e680d9a554a2b8f112d30efbb20497cad3",
+    "size_bytes": 1369805
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_2_4.png",
+    "sha256": "76af1ee005fc7260071598515ee369ffef9a1545d839a5b31d547caa1d0310ac",
+    "size_bytes": 1494543
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_2_5.png",
+    "sha256": "5de10ab2ed45f5cb889ebde6bbcbab6cea6ea855c8bf2267b798576883b090ea",
+    "size_bytes": 1401790
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_1.png",
+    "sha256": "b987d22948964182c6affc571cbdac1516ed4b0fae05faf9646d93e007642c7f",
+    "size_bytes": 1817244
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_10.png",
+    "sha256": "7e86607a7550d57d93f70a953b2914f0ea9f41c95ef6938aab77a3b9e3abed4a",
+    "size_bytes": 1466326
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_11.png",
+    "sha256": "884303adbc3bbf2c0774638f8cad6071aafb0f8896054d7f7641fdc0ce091d5b",
+    "size_bytes": 1288255
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_2.png",
+    "sha256": "384619f7f351f5f5747d91d3fd4d552807917751707088803f4973782afeb080",
+    "size_bytes": 1634281
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_3.png",
+    "sha256": "ec6dbdfd99a6a0f654f6ba4111cd61208580fb5dcc05829e795562740e23b6b6",
+    "size_bytes": 1321709
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_4.png",
+    "sha256": "81fefd5e119a194a685b94e452dd5dcdb3ec658b91a29fb6153403556fd556b7",
+    "size_bytes": 1391117
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_5.png",
+    "sha256": "74220a75ddf08ca3daa227a703827e71e89aded2ce34be8663d704266bf55cbe",
+    "size_bytes": 1443108
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_6.png",
+    "sha256": "65342e5bcec7c9e1f47f6594fb0407dc45e672498cffaacd77e8d0623b5eed69",
+    "size_bytes": 1602813
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_7.png",
+    "sha256": "c2d5fd2cb866616d357df957a8befc57ce2fc5a82e710f3bb826e052050a96ca",
+    "size_bytes": 1338109
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_8.png",
+    "sha256": "e83393dd9fb714040b93faf6fc910c9be8dc280924d680561f7377e6fd095d48",
+    "size_bytes": 1409807
+  },
+  {
+    "path": "data/raw/riva/images/ASCUS_6_9.png",
+    "sha256": "40465eacc69efcdd40ae15f60a9665e4743d23a09fd4ab2f13239b9e5a1f84c7",
+    "size_bytes": 1452975
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_12_1.png",
+    "sha256": "f0141a1004f12930a0bd51670fb5ee185fc4e6fab52d84edf38ee219ade0f41f",
+    "size_bytes": 1649316
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_12_2.png",
+    "sha256": "40e40cda26232eddf19dd9fed46d6acb7b041ff2bb8f7c21d306c3ee2a2a879b",
+    "size_bytes": 1340546
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_12_3.png",
+    "sha256": "a287cedfa1df82bfb28a61fdf6745c4e203ee9ee8721c0702c98c64cc06f14a8",
+    "size_bytes": 1334965
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_12_4.png",
+    "sha256": "25821f13da52aaa1a36048b8353f45fc83e5aa9bd0913c7c2298c6b3b88b542a",
+    "size_bytes": 1345387
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_12_5.png",
+    "sha256": "16381d31fb3acbe7fe09bea8da3ef5c1ffb6a1ead74139555ed4fbe7437e55a1",
+    "size_bytes": 1424557
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_1.png",
+    "sha256": "c7cf3a5fe29ac4a7ff225ff0bd5dab4610e2b97b5d7ce786889eb661b994353f",
+    "size_bytes": 1382705
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_10.png",
+    "sha256": "232cb41e7c93600bef871c381576fc2b48e6f38cb0feca821aa1d80984f4f4dd",
+    "size_bytes": 1258148
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_11.png",
+    "sha256": "5338e726c4f6162b1635b0bcac912ed8d750b41e55d5a378585a7b21bdd22d63",
+    "size_bytes": 1245767
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_12.png",
+    "sha256": "e877b96fd10c87d9afaddf9d1dc1d5dd529995bc0cfa4e9ee055f1142ffb7d41",
+    "size_bytes": 1335720
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_13.png",
+    "sha256": "98db0ece6e8a2ef5d277318962e20fc6471cf0c183d5d3463f67e3ad5b16548f",
+    "size_bytes": 1501099
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_14.png",
+    "sha256": "3d0f6857dc2a62e1e997d4794ba771f423cbacbaa3f32fa6c56715df8d1529a7",
+    "size_bytes": 1339638
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_15.png",
+    "sha256": "86d74399aa38a12bcdaa44d8c0b0dcb3383312fa284e1113a0f98d2904e327e4",
+    "size_bytes": 1436385
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_16.png",
+    "sha256": "c1d0edc65e11f65daa2a85898a52493fc5c15a1a27c6a86e47df867926115393",
+    "size_bytes": 1425212
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_17.png",
+    "sha256": "1fe08ac40b1376a2f24205b976a349fb3608a2122cb730bd5e2cc1a206e3eb01",
+    "size_bytes": 1441143
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_18.png",
+    "sha256": "eebe1901b1eb4aa7d6fae6b87c8740511d93238ca8d6a103a520d704396637ce",
+    "size_bytes": 1321869
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_19.png",
+    "sha256": "7f52edb6f3c93fcaec03dfa95e23e0f7414da4d56d0852b58a856e0d4cda0bc3",
+    "size_bytes": 1403737
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_2.png",
+    "sha256": "eb099f5f46e0e0b80ccfa2dea681bd5e5bc53e1ee2b351c34f6c3767f078fd1d",
+    "size_bytes": 1398747
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_20.png",
+    "sha256": "88f5aad958d0b26c50106e286cca1c22735752c40aa7354c808727fd1b9eb999",
+    "size_bytes": 1325702
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_21.png",
+    "sha256": "5aac0739fa252771624ad1669befef992327cc8fcc777621e8471f9a55d5d8c8",
+    "size_bytes": 1397958
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_22.png",
+    "sha256": "d99f594b73fe1cfd453a2b9770aad0c688157cf7d476b26de6ee632f9a204f10",
+    "size_bytes": 1348611
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_23.png",
+    "sha256": "30e49f674239da831d83b9822a30251144557732281a67b58ac725789b94f6e7",
+    "size_bytes": 1385537
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_24.png",
+    "sha256": "38627ed0e3ded1c3dd629ca35af06c4d2a16662f3f3ae03f8d93865519d32575",
+    "size_bytes": 1342040
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_25.png",
+    "sha256": "63e12c33529344974b9686be7d34737fda7e5d33c41f8395801bfba2ca80ffcf",
+    "size_bytes": 1408248
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_26.png",
+    "sha256": "cce7965a7e4e75af4aedf009f2bd6f2040d062686283cc7b06b5cf1a1aaa4fd0",
+    "size_bytes": 1362513
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_3.png",
+    "sha256": "371b0468cd7efb4805971368568d2ddf9b62485235329e483c1533064e009583",
+    "size_bytes": 1480903
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_4.png",
+    "sha256": "6a48f6bdf524dfadd5c1d074d2ac8e01b40c27a443692c87539b7db5a58960ce",
+    "size_bytes": 1496992
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_5.png",
+    "sha256": "bb2af5ff43aee2298fce703e21eca0d2265ff0b47ce53d6b56d6d84a524b6a61",
+    "size_bytes": 1552231
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_6.png",
+    "sha256": "4332ec008643498805088f36c45c3bf60d6abb3af0bcd219d19c6b3044ac6edd",
+    "size_bytes": 1410465
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_7.png",
+    "sha256": "361eb6ef0c428dd17a34f34fe7d9418198dc4290b90c1db99a637ceeca873f9a",
+    "size_bytes": 1424219
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_8.png",
+    "sha256": "aaa31f7649463155dd7b217ddd1dd51c5e2f6365b9bc15284236b7e1d50e717b",
+    "size_bytes": 1664696
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_14_9.png",
+    "sha256": "7766113255fbfefa48b8ad234b6e752335504674cd30d80fd99612aaaac97cf8",
+    "size_bytes": 1713302
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_1.png",
+    "sha256": "5f9bb29ecce093b221954994f2b688a54ef6f05167443bc586c9efcc85442f49",
+    "size_bytes": 1572382
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_10.png",
+    "sha256": "5890e30c0efb8a6af77ad56787fe865d14aad3662f80dbe69c54d4ffff70234f",
+    "size_bytes": 1457833
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_11.png",
+    "sha256": "99d556cc23374d5cddd01a8c84386ed98c5d26a90bc453442798d97c2414d499",
+    "size_bytes": 1542133
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_12.png",
+    "sha256": "a3b1b4c205100c4d46af000f1ea31dd420e2af040352b409f1112763e46d3941",
+    "size_bytes": 1468155
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_13.png",
+    "sha256": "d10d9b772825de0bf3f672b3be5e9f94ba4fed082122be4e4a3f0cf31c6c0495",
+    "size_bytes": 1610471
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_14.png",
+    "sha256": "a459e61a4e2aa1596af53b23a26860d048f06a891477531325537c8d128be1cc",
+    "size_bytes": 1522230
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_15.png",
+    "sha256": "380212b9b294e8a4198e5629bd24b2f2241afa77b81516341d85ce34812f769d",
+    "size_bytes": 1805202
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_16.png",
+    "sha256": "2b7808dc4faa401f86845ff2d936e0d662c4832af9e0d0ada327a5cfbf9a4a29",
+    "size_bytes": 1507332
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_17.png",
+    "sha256": "ca8cbdf9c43b33e6ab811da1050d858bd83931e401c40828156313de2f8186a4",
+    "size_bytes": 1593715
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_18.png",
+    "sha256": "dfcbe01f084762ee7c818ab4cfacdf25f327b648c90b9f44bb9003af6dfb287c",
+    "size_bytes": 1427378
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_19.png",
+    "sha256": "6706d126b425f6063386e6ee59261182e6c3f007c854be7065a766ee9a6e139e",
+    "size_bytes": 1559658
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_2.png",
+    "sha256": "33797e863507330e693cd28cd59c3cd1f66589643d71279af1baec3e1f8997cb",
+    "size_bytes": 1634951
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_20.png",
+    "sha256": "6760c151075c4ee5b7363a00a11a0ed5a162711c029e0655ed03fc5117600430",
+    "size_bytes": 1672689
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_21.png",
+    "sha256": "f746f84a472dd228066446d3e4f209f71554811968e61d633c6718ad2c7ed9a6",
+    "size_bytes": 1741658
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_22.png",
+    "sha256": "efb9e30b00ddaedff7d4c74e617550dfbfb095845c87274df049bdd87d319820",
+    "size_bytes": 1662679
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_3.png",
+    "sha256": "813199db88b4188f2770386abbd5d4be8306214a6611f8a8d60a8c751083fa9e",
+    "size_bytes": 1645648
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_4.png",
+    "sha256": "13be4b2498f8e58da6240b2c3192bbbea219a5826c5eba36120ffd9069ae03c6",
+    "size_bytes": 1484966
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_5.png",
+    "sha256": "d73bff4fb81d729ceca2d65ffc09768bb7934eda60cdb82e764559b941575900",
+    "size_bytes": 1582408
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_6.png",
+    "sha256": "8abaa7676262196f3b3581f4a578c8ac8e3c8f5a2b343fb029fab90e15ca64ee",
+    "size_bytes": 1553675
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_15_8.png",
+    "sha256": "4ac12bb81d8b38dedbcbca8ab2fc35cbd44fe535ddd08109d85d45e6c4434f1d",
+    "size_bytes": 1622302
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_1.png",
+    "sha256": "96298f458dec7ae73392e3bf48bf7589d068fbf02db08fb1f5126a6a6259a35b",
+    "size_bytes": 1477686
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_10.png",
+    "sha256": "a964109794b1f16210d41a2eafa1ac6c12dfa4ef2e6684f0a87bd30938a05239",
+    "size_bytes": 1290903
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_13.png",
+    "sha256": "e3247ebb7845a80dae082c5c3f9304085a5710161620d789aeaaf9bb1fb0a970",
+    "size_bytes": 1663041
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_14.png",
+    "sha256": "4316f3c08bbe83d63f0fcdf5be8f91e08b4a73add51cd4ab2eca56fbaf336f77",
+    "size_bytes": 1708683
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_15.png",
+    "sha256": "809cd296901e40c07b138e5d0e3ba6560e5adf8bb69cb4c6ca56dd5858439d3d",
+    "size_bytes": 1856537
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_16.png",
+    "sha256": "2ba947f0217612a53ae859b281f48ac6e10a882a481495b7bfb6ef30a21fd661",
+    "size_bytes": 1445756
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_17.png",
+    "sha256": "318c8c30a04323e60f25370cdccdc414bc7b328e6d197df268bcfa2a7b98329a",
+    "size_bytes": 1274816
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_18.png",
+    "sha256": "7bdbfcb487f9036756cdc123f8909b8e7c7d256b9639030df347b4beda7aa33b",
+    "size_bytes": 1628613
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_19.png",
+    "sha256": "1c09ae792ebf63e939aabdda62e31b6058f5fbb58e1d29f9fc7ba524c1ce247b",
+    "size_bytes": 1670197
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_2.png",
+    "sha256": "00e136adeebea7a79399c70c4bf04015c98230f55a5542043ab7ae02014e7a55",
+    "size_bytes": 1546050
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_20.png",
+    "sha256": "e5cce999e9c27532d65eaeb54bfafb962b971caacb7062a32b5a6302646d998f",
+    "size_bytes": 1410176
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_21.png",
+    "sha256": "593d5b8e3d4fc617a470c2087f9b9487cf98ff2bd3856f20ac79b639824cc1f4",
+    "size_bytes": 1408793
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_22.png",
+    "sha256": "cbd6d6986853b010e710194e7ec56fbccbdb2d3c6ad71cfde81a5084efa076ae",
+    "size_bytes": 1297026
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_4.png",
+    "sha256": "259ff8c141a20ef91ae42ddb50b144b884506cefe62c97c5adcee78ced6ff04a",
+    "size_bytes": 1341421
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_5.png",
+    "sha256": "7a0fb84b9ed644676e5b4c5cfe7b3535da4f04e981ba899c2ad55f7810b856f2",
+    "size_bytes": 1671008
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_6.png",
+    "sha256": "d5b855d4ad35aa1ed25b5e7348d6eef229e642fb5f581bdca44e6e9686ce813a",
+    "size_bytes": 1509386
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_7.png",
+    "sha256": "3bda60b774ac0e33b58fb25bbc7dffdc6d8d36e606272eb966c93509edc3db26",
+    "size_bytes": 1632495
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_8.png",
+    "sha256": "13a4535f2554713caac0bd88829cf014a768ec64deb0b6ca218a673f6c65fd0f",
+    "size_bytes": 1441395
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_1_9.png",
+    "sha256": "80a7af2013664bd22bfd3cef2bb930aba177fcfbe996ac41ed0341f07b861d78",
+    "size_bytes": 1419995
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_21_1.png",
+    "sha256": "ac0b92e8174efef59a3b3329c49bc14134e502c6e6d060717e8346a655b1c956",
+    "size_bytes": 1676998
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_21_2.png",
+    "sha256": "cd16e4e2c54d07b6f1924b071a7c1f0329e26efc7abb9e5068c575ee7b2cf060",
+    "size_bytes": 1615960
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_21_3.png",
+    "sha256": "3c6acd7a9a990fa115df3ab0b15f8b692481d80d6b1015a00f9ae116e2e3844f",
+    "size_bytes": 1660875
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_21_4.png",
+    "sha256": "ffe4987155871b469db1b3cdcf75a6f50d1cab72ab8d807647bd1df195c1a4ba",
+    "size_bytes": 1544675
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_1.png",
+    "sha256": "8d3cfa8469d6e6aa2e500be9f94cc56891f7d88cba6fe211e98ced2bf396e67d",
+    "size_bytes": 1531810
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_2.png",
+    "sha256": "3416d67c77844625ad9d89b0957424fcd9b32a72ccfe7b0075d2fdd6ac119999",
+    "size_bytes": 1533449
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_3.png",
+    "sha256": "d38ee999d94c059a0c67bdcbbc5a6c8d44b12b08b50f093594b4c49497b305e0",
+    "size_bytes": 1591728
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_4.png",
+    "sha256": "0a1d487729fefca19a70adc336a74a5f8dc2404652f7aead50c822ab97e4170e",
+    "size_bytes": 1620306
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_5.png",
+    "sha256": "e69001dd1de3ad171450b2b56641e1785f7738e6852ef4899da5cfb6e7cc880c",
+    "size_bytes": 1702612
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_6.png",
+    "sha256": "69edc1503846ca014b5c934bf10fa72a7fbc7a83770884d8dab2352c5776ceb3",
+    "size_bytes": 1694104
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_22_7.png",
+    "sha256": "338403408a3b6c3001052625a738404bbbdb6f3cff739932bf845dd2f3ea1e31",
+    "size_bytes": 1823149
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_1.png",
+    "sha256": "847743f6e74253782e4ee259a1bc65cf3e179dbb50b86a6df340895155f9bdab",
+    "size_bytes": 1563779
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_2.png",
+    "sha256": "81b554b33da1a8289f9ae2a168c015515b8ee1394f58ef4bd2eb1ced2fb4cad8",
+    "size_bytes": 1509202
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_3.png",
+    "sha256": "c8af25d213e747ab4424f93e2c314ba0495f88c1696f2160b402d3de8cab852f",
+    "size_bytes": 1579322
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_4.png",
+    "sha256": "968854d827be303f354c0cc124ba4d0dad71ace2cafbe0a7cfe2abb957fe9994",
+    "size_bytes": 1585996
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_5.png",
+    "sha256": "94e641e1625d28eebc2a3b93c017f9f8d49ba1f813cd6343db3dc48be9cc83ff",
+    "size_bytes": 1654321
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_6.png",
+    "sha256": "ba4dac71c267ce722ed8f147297bea7868a62749af4be1f3c105c7fe22503c88",
+    "size_bytes": 1463945
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_24_7.png",
+    "sha256": "b0da4ff81238bad25c16e4d518d741f05620972f70a52091013d26730acb79d8",
+    "size_bytes": 1580104
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_25_1.png",
+    "sha256": "69c183d67e91907f7765f4acb6cc3ae62f24813bb0c842f4d4a686b8674da6fe",
+    "size_bytes": 1420871
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_25_4.png",
+    "sha256": "119b2ab837382bd9c724f9181fabd7e8f1d50d9f37f7d52a1738fd20cca3905b",
+    "size_bytes": 1279185
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_25_6.png",
+    "sha256": "d23390fd088ea9e418881a03945f192658dd0ad3e0c3179b3d51b8dce78e0a3d",
+    "size_bytes": 1469651
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_25_7.png",
+    "sha256": "ec69ac220b99c9cda83b9af0882f5fc13963242fc5abfcd049d670d8e4b89633",
+    "size_bytes": 1300830
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_26_1.png",
+    "sha256": "0489d7c9073b1423e19b47daa5fd8dd5fbf17f5400232790ae855b258a8ec52a",
+    "size_bytes": 1713736
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_26_2.png",
+    "sha256": "75bfc20fc526c89ea628dc3ba9c15046091c2fc4c46e594addb93f4cb027e4ed",
+    "size_bytes": 1798126
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_26_3.png",
+    "sha256": "08e44a7d45c518cd31abd24968860388a3dc1a33e719946cdd1a89bf76c892b6",
+    "size_bytes": 1814305
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_26_4.png",
+    "sha256": "2e06603bcecd1bd3cb21e624ba6f54e5df3cd43d97f68d1a3a290e6bf72fdd1f",
+    "size_bytes": 2058774
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_26_5.png",
+    "sha256": "cbb98e1379ecd59425bbe82983bc2ca0a8facd36e88cb183e08f7f8e4020a83b",
+    "size_bytes": 2238979
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_10.png",
+    "sha256": "1ff9c51ec053e07cfb0542981674de91e9563e1164e690e0027b98992a4ce3b0",
+    "size_bytes": 1656438
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_3.png",
+    "sha256": "feeac14f24d43c34076656391edf46b7407029e7a04d8dee7f303f0ab9621308",
+    "size_bytes": 1403505
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_4.png",
+    "sha256": "06612a9bf175bc24362a78beeb55e52e68bff53abfebc92e9baf975cbba42b6f",
+    "size_bytes": 1705552
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_5.png",
+    "sha256": "4823c178881b95fcb1c3af0e723b8bfd4edc03200dfa2f4e7e2eb79b5e79ecaa",
+    "size_bytes": 1869857
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_6.png",
+    "sha256": "f2d0ea1ed220c49cfbb470b8f0e8a9841da3646760b7214527f8fb788793a785",
+    "size_bytes": 1594065
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_7.png",
+    "sha256": "c203b6ef5bb55a8a43d5b5ad46517d82d7cbcf59499e2f48e089aacda7157256",
+    "size_bytes": 1408430
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_8.png",
+    "sha256": "8d54b1af2937a450b1a92f8519cb67fdb9f4e165db16ab956bff8f72c3a6b8b3",
+    "size_bytes": 1738506
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_27_9.png",
+    "sha256": "4f22705db1f696c097219a79fa6266cb60c9a68ec8cd990d91d786397751bd40",
+    "size_bytes": 1458498
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_1.png",
+    "sha256": "d012e8fb3b1f7d248588075c9220663eff2e27d9ce78f5c7a8c773ea2bb18df4",
+    "size_bytes": 1685096
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_2.png",
+    "sha256": "5bb4f7f29d4eb23595b300fd682ce1b2186b2e7cd5b5bd8f79e51564aad5c13d",
+    "size_bytes": 1825494
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_3.png",
+    "sha256": "1db70311a92f38ab2839ea4ff72a25288fdc5e3c8ca20f198d855cca882dda7d",
+    "size_bytes": 1776240
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_4.png",
+    "sha256": "efc98f0a299c7856b906a87293a544358ccaf56fb8b24f072bad502b5cc62734",
+    "size_bytes": 1617673
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_5.png",
+    "sha256": "9f308ab858e1563e42d875f841bba6b5673cfbd3303d623bd53362699e378cf0",
+    "size_bytes": 1593177
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_6.png",
+    "sha256": "c512c6827439b39aeb04c06e0993da953d9024799b7879d4874f0bd0cc9529f3",
+    "size_bytes": 1880178
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_28_7.png",
+    "sha256": "ad75239440e3d57147fb848b5a308d6f4be7888df2824437d2d40997e3667a2e",
+    "size_bytes": 1751198
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_1.png",
+    "sha256": "64a7563b011f636b23c2e6f0cb95389f6ea1b51d63235176d00e17596a128ab8",
+    "size_bytes": 1172070
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_10.png",
+    "sha256": "20d1ede609b6b3252f46b3a5733155631635d6c07e803e379fc306f58994298d",
+    "size_bytes": 1341729
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_11.png",
+    "sha256": "b264f04dff12af0e46f8b8ef7f7850ebb9b5def664cc5c536ca6bdbefd11098c",
+    "size_bytes": 1421914
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_12.png",
+    "sha256": "bde676f1254fbf655668217bcfbb1133fee0f013f4295c1122158874176adcb4",
+    "size_bytes": 1736374
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_13.png",
+    "sha256": "77fffdb6f99556c49f06a71d1807d82b4f7a7b262cf9d1463e41102dd950c31d",
+    "size_bytes": 1626609
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_2.png",
+    "sha256": "5646e65c959ba9cd23131bdaa7b3073d985563f70f7c0cfada0f3fedbc534e75",
+    "size_bytes": 1203765
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_3.png",
+    "sha256": "f6305613bfdefd88b8d23b8586d0757de161065afb337501ef82717ef002d50d",
+    "size_bytes": 1437318
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_4.png",
+    "sha256": "e317f25b981a5eda7c08b5221a7e07e75ce743f4982d2251d6107323bb504ee9",
+    "size_bytes": 1594784
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_5.png",
+    "sha256": "4f003ea9c1c5f671d8c1aa277b174f904b465d7d6b023c2f443175b0411cbc2c",
+    "size_bytes": 1547010
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_6.png",
+    "sha256": "7423d23ddcf9113152181b64f745e156875c63ba47bc701f5d696beb0addae58",
+    "size_bytes": 1573949
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_7.png",
+    "sha256": "b487ae5a6e38a3cd92c54b99f6469310e5757ae7c936cbfab68d2c698e4a4f5f",
+    "size_bytes": 1457888
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_8.png",
+    "sha256": "812d02ff898002289111308807df4ec65f497be8466be66be3903d58a61a3814",
+    "size_bytes": 1507846
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_29_9.png",
+    "sha256": "18474c9bf989576433bb9135305632487b5014408d2e358efd7332a31352e88b",
+    "size_bytes": 1559124
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_1.png",
+    "sha256": "a8a598089d2ca854e048cc1f3536a21e07721490fc39fa47976705210e18a85a",
+    "size_bytes": 1572211
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_10.png",
+    "sha256": "d64b72d4290b12c253a1d3a03928d75e173933343291e54ed8de09ba56a3bee9",
+    "size_bytes": 1562766
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_2.png",
+    "sha256": "43dc22857cb2d703ad16f486de501da35fb222b72f9035905b5099be3fed863e",
+    "size_bytes": 1512806
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_3.png",
+    "sha256": "e6b96a9d25972f866d24300a7bd5d77f808d541c0e69141a0222a1668ca667ff",
+    "size_bytes": 1573538
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_4.png",
+    "sha256": "fcae4a55a4359c4c19c68950dda24dc1e147e83a3d06d6fa59e63f24b3a72416",
+    "size_bytes": 1367891
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_5.png",
+    "sha256": "0ed8d83fdac0a53aa1bbb72bb42a424af2808575f2c28a39e15196baa676d459",
+    "size_bytes": 1410445
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_6.png",
+    "sha256": "8f4aae9e19b1279ed1d42d769a006c4935dbf4c2280f0a4e4a035f13ff5762a5",
+    "size_bytes": 1649398
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_7.png",
+    "sha256": "0fa1531af0b4968d1628485809de13e12db9e00d673066b7b5da602ab5d54296",
+    "size_bytes": 1592705
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_8.png",
+    "sha256": "f029d1ac2783d403309f05d495abe0b4ae7361a4ebb55701cb31d464e07f84db",
+    "size_bytes": 1716205
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_31_9.png",
+    "sha256": "a3eef45de22b7fcaf5fce1ab17429df26468a664eebfe061e8b36313ebbd7566",
+    "size_bytes": 1292946
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_1.png",
+    "sha256": "181c0dc3bdc6f2806af98297fd16706473a7881240693dd8ad236b8fac2349d4",
+    "size_bytes": 1247844
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_10.png",
+    "sha256": "2678bcf2ba7e0edd191986b5ab3d6a6b94482f62f9cdaee10f3b85145c23d660",
+    "size_bytes": 1482683
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_11.png",
+    "sha256": "9d13c0520de9973a9a90a71332be659068b6c2492b8a7f1576dd547979e13bf0",
+    "size_bytes": 1515585
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_12.png",
+    "sha256": "6eca9fce9226aaadbdb123001123f45794c2dd299e34734f7ae51e10132d4410",
+    "size_bytes": 1467759
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_13.png",
+    "sha256": "2257ac2ff160b799df586977478df30190e66c3f60f8d854a0859fbe02bee05b",
+    "size_bytes": 1318794
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_14.png",
+    "sha256": "848f76d43733f430bd54a27b0fec4168b171123b63f221611320c28ce28fe11f",
+    "size_bytes": 1639818
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_2.png",
+    "sha256": "815a00bdd612501555dd52429c0cd0adf82320e97afe9bd07def487542cb3245",
+    "size_bytes": 1615376
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_3.png",
+    "sha256": "bf00489ecb98387ba34f2ac4083f55bdef93154e03b7b5782422d12494031a59",
+    "size_bytes": 1425466
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_4.png",
+    "sha256": "a862a468fb6b7474f275cf2451e9c63a0dd1654d11f0e11764b1726e6de41331",
+    "size_bytes": 1488263
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_5.png",
+    "sha256": "c17066a0a2bfe637c71e797160e081c2437d752dc3b788f9f42e3a62b3720cad",
+    "size_bytes": 1411208
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_6.png",
+    "sha256": "33f515f11ee85c727bb0a2f2c6f4347d313aedcc69370c9c6185f1459ce36127",
+    "size_bytes": 1284944
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_7.png",
+    "sha256": "e4ad022d354ee94e2ee5c1315860bbb35ccf2584ce783d597fabea168c95f4fb",
+    "size_bytes": 1390283
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_8.png",
+    "sha256": "bd1003bb24f799da8caa11731a4e1672d504f168380c10613719dda145f591c7",
+    "size_bytes": 1417579
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_32_9.png",
+    "sha256": "352238b439366b8ca90b8c42802e3a2eeac8b41d107a7a7382e4aed96f8659c4",
+    "size_bytes": 1598107
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_1.png",
+    "sha256": "983dbb38e39d6dabb218c194aca4c635faf4e60141d2f0d2cfacbc83015be0d0",
+    "size_bytes": 1659839
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_2.png",
+    "sha256": "0d7f473b6190c1a90f584ff20c980dfa72152f9102c11d54fda6aa45acf6bc04",
+    "size_bytes": 1469102
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_3.png",
+    "sha256": "29b9a8fa1bff0b871b72e678bfa703af44be008783b0794ee0905a1f676a2c4e",
+    "size_bytes": 1499590
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_4.png",
+    "sha256": "eca05948b52c02d706f47fa5dd90f0e2d8efdfabfad208f0ae173fc288df9041",
+    "size_bytes": 1427622
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_5.png",
+    "sha256": "a6d7f73e2d1b394487bdc4867d1cc4117dce921c41ede6c1d5ffbd5f6fae58b3",
+    "size_bytes": 1551911
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_6.png",
+    "sha256": "1ab7baccf338f25c90628678a9239a9217e391cd1f70e425d1cceea0363e1987",
+    "size_bytes": 1384992
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_33_7.png",
+    "sha256": "7951a022d33c3c4bb625164ad5b91096381a39219681dc9482d230bf22854959",
+    "size_bytes": 1557759
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_1.png",
+    "sha256": "eebd4231a56f1bb4ecd6f346a7de3355eade1f0d2d619136bf4a0803ef0fb78b",
+    "size_bytes": 1613889
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_2.png",
+    "sha256": "889b05dcc929005967092ee4602ad86ef621f27cdc380298126ebeb9de571f59",
+    "size_bytes": 1632666
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_3.png",
+    "sha256": "f5b829bef71894833787c3827b1248408944470170e6baddcad24f5aad9a4dd3",
+    "size_bytes": 1816927
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_4.png",
+    "sha256": "96ee973b49e30b18f018c1005b87aae6d048a263829d514302dffe6154f0aadb",
+    "size_bytes": 1552195
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_5.png",
+    "sha256": "8e9b8ad9853268cd716c9773e6bb11698d94e46f2855eed3b476cf75c642f281",
+    "size_bytes": 1641910
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_34_6.png",
+    "sha256": "f6cf129ab2dc33bb9d83d853d04a21b52a043e994c8d246f7bb719a68b1dd44a",
+    "size_bytes": 1733098
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_4_1.png",
+    "sha256": "0dea3a9998f1b86c7778c3878341910e9bf50beae24c46dbc870d2c68bfa3568",
+    "size_bytes": 1421414
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_4_2.png",
+    "sha256": "a8019079cbbf56cbadfd791781114ffed85bd409bfc34479e0d99df4dac621ca",
+    "size_bytes": 1453866
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_4_3.png",
+    "sha256": "13d63099f111d384943f00c2782d3c1003c745458bfc10b0052f81fda4c59de2",
+    "size_bytes": 1561595
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_4_4.png",
+    "sha256": "aa28063001fa1e5e948a0dcc4baab80dfd4b5dff15d05aca796eb485a24adcc8",
+    "size_bytes": 1385361
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_4_5.png",
+    "sha256": "333d2f4e14916ea232fd6c3f29ff251eaf534609ef41d53a15eb2e5c46f206ac",
+    "size_bytes": 1770902
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_8_1.png",
+    "sha256": "626a764e52d9c1ba5ee3ab22501d4ac3ad1bda5d05949756356e7e88a4dd4ed3",
+    "size_bytes": 1591670
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_8_2.png",
+    "sha256": "13cf2cda75d04e7cde100175a874ed4b55451befc8f872c4ac18e50a132dced6",
+    "size_bytes": 1605475
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_8_3.png",
+    "sha256": "8bd4f68dee36db6278c82c1dff0857d2b6b2db81f67e987da47d4f38b4ba459d",
+    "size_bytes": 1550145
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_8_4.png",
+    "sha256": "30ebf7418775dde0b154bdf22e13bf7816a74e841b4a20655f49c0cbaa7d277a",
+    "size_bytes": 1438989
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_8_5.png",
+    "sha256": "bf873c57802d11a8665c1a04e56e0f5f1a62d43f94a961c774602d001c4a4a66",
+    "size_bytes": 1462427
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_1.png",
+    "sha256": "455b413509a33113f1cb56ed939d619c865a5d3c1f054032b4b1b2a2a4c0d453",
+    "size_bytes": 1552881
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_12.png",
+    "sha256": "de3e3f8b8916fc20fedf35757cda51a51c6968e1e6331f55167717cbc11c6140",
+    "size_bytes": 1562386
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_13.png",
+    "sha256": "07b133f545ccd615e6aeb445d6a072272cf0d27ef633691f1a4d4e8dac4f94c7",
+    "size_bytes": 1561282
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_14.png",
+    "sha256": "afb22e887b00d1b44ae8a5fea33e143e3f78a8fdcf3c43829d58bca2c356b524",
+    "size_bytes": 1735468
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_15.png",
+    "sha256": "63c7889b9df1e4cbc3ea1dc58431ab7afb0a7164893765a701052b0337eaed1d",
+    "size_bytes": 1600307
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_16.png",
+    "sha256": "3cdfb33ae1bee2a74417f28c0c174b9acfc09f42e3e8966ce00334ab267c016b",
+    "size_bytes": 1571206
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_17.png",
+    "sha256": "0a00af3af611edc86688ea098d305a29f248ff32a677fc3481c9cd421e6c810c",
+    "size_bytes": 1458906
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_18.png",
+    "sha256": "e6080b8509474478fbbba45fc2ab758a2f1e11dbd17f3d1002b83f07dacda95a",
+    "size_bytes": 1646205
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_19.png",
+    "sha256": "2936d5b9062af4b6cc020d1551d4de5d820af8b0ea0354a3f58f59604233c518",
+    "size_bytes": 1479288
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_2.png",
+    "sha256": "ee17006009ecc382c9a59148ae947b99e1078a48bc86d92627c42c8d5da29d52",
+    "size_bytes": 1694260
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_20.png",
+    "sha256": "731171b97a8590af0d76cce9fba1bf97900d8fbf29c61127243b25a4a64656f4",
+    "size_bytes": 1422795
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_21.png",
+    "sha256": "e7633835022510d033bafdea2982333696a0b50d66a2fb29766a95d3d2baeef4",
+    "size_bytes": 1351220
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_22.png",
+    "sha256": "7a26fd0ac671f6e9497283859db0ad92881e3a406e657850cd1f6436bd7fa544",
+    "size_bytes": 1365865
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_23.png",
+    "sha256": "ba14c70614cb86fcbaae021b114eedc8972c28fd0877ba9c970f86b611aaf1a6",
+    "size_bytes": 1355303
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_24.png",
+    "sha256": "4a5cfffc2b2e61e73a3f8f2e5a39095d34aaa306a283bc25346980ef19511320",
+    "size_bytes": 1318583
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_25.png",
+    "sha256": "a8ed65a0125ac98f3a6458a82dbf8d2486e54c21ad28164158ef270df63b2213",
+    "size_bytes": 1251231
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_3.png",
+    "sha256": "dc67bea41db6961c789213e43e7d0d6e997c3c66906a7cc961167f0dbd6ed2ba",
+    "size_bytes": 1533571
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_4.png",
+    "sha256": "41351fe2015bcda5105385ff23e519534b56cd049d249840a21b674c336d6489",
+    "size_bytes": 1608199
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_5.png",
+    "sha256": "c6a9c5d6248c400d2e4770fd1cfb834c0d9c3f8a3f7c673b7c2d85b7cc5df01f",
+    "size_bytes": 1568213
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_6.png",
+    "sha256": "80b54a0943dc4a26187a19c80d42d12099520410478d1b54d2bb16cb3083be54",
+    "size_bytes": 1482067
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_7.png",
+    "sha256": "248da84cd1d41afdb4f0fcf5ff6ac57f052e0561b881c313c10d81ecf2818a14",
+    "size_bytes": 1599959
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_8.png",
+    "sha256": "24140ab5c3bbab77dcfc7c7386b7f9fb8737876c4b88f34c94d0762c05dc6eda",
+    "size_bytes": 1489134
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_9_9.png",
+    "sha256": "e5a6ade024ea7b61597aade9b3417f362209f92d3aced23feb20ce5852185234",
+    "size_bytes": 1329436
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_1.png",
+    "sha256": "8725a6fc0c47ed253f2299e6dc38318786c6265e363e84deca6146e566015ce5",
+    "size_bytes": 1436117
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_10.png",
+    "sha256": "790b96d60de1e18332a90156aa65ee105681364005e844d386d0bcecd3c8aec8",
+    "size_bytes": 1667874
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_2.png",
+    "sha256": "29024497bddf834b1f4444193b373018cac8ab9f9412e02dc8dcfb96f5384bc3",
+    "size_bytes": 1245643
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_3.png",
+    "sha256": "756c25be3b5ceebb24869a5e773b2692412286581decccb93c3019c4d3b25e82",
+    "size_bytes": 1385173
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_4.png",
+    "sha256": "687b36c6fbe52491d54ecf2e06287a0b990098692aec6c01391fcdfbadf3f34a",
+    "size_bytes": 1388977
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_5.png",
+    "sha256": "5aaeb00b36617abf89819f065495fe8b969c53f528fc670a344f26ff48f87449",
+    "size_bytes": 1491711
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_6.png",
+    "sha256": "f0d2524a9ac582249c88bcfb19249a89622bf95bdd3a7bd0878dda6d38c38f9e",
+    "size_bytes": 1512122
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_7.png",
+    "sha256": "6b1a97e9669ec80da30a43ead0a8280b763e380fed5afed88ead7e3f58085de7",
+    "size_bytes": 1824654
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_8.png",
+    "sha256": "6ab519c4726e9f745f63b218a0315fc7f8e486811943d4d0c5c034a447fde4f7",
+    "size_bytes": 1554278
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_1_9.png",
+    "sha256": "6369600b17221befac78b9fd6432f32fd8755124cd434ddafbdcc811907018cf",
+    "size_bytes": 1366030
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_1.png",
+    "sha256": "2ecc6297b1c6e736e3492d3539033b1fc0accc5ef3a55f3ed026013a8597bd0e",
+    "size_bytes": 1570649
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_2.png",
+    "sha256": "2c886c267f99f0b68b5148ade8a1aceac24e252b2e2883467328988b128d15fd",
+    "size_bytes": 1532500
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_3.png",
+    "sha256": "bdf946f9a29f36ccd360c2f595fd078a2a6f6b2322655c203bec064bf68d1c57",
+    "size_bytes": 1461290
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_4.png",
+    "sha256": "e1fe56d5ca66fd123ba5f0a28d822461778dd50bc3c5afab781bd8e3159c6c95",
+    "size_bytes": 1386862
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_5.png",
+    "sha256": "44657b75fb9af18d8b5c58c9ef716aa7391097e520e6333c3094e257b7b2b034",
+    "size_bytes": 1426877
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_6.png",
+    "sha256": "15ffc9e9b7dd3db8d58f73a6caf538f5b1b59f2e10bb90ef268f907732a66a8b",
+    "size_bytes": 1706895
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_7.png",
+    "sha256": "9da973177d1e36e40f73912aa407f048bda5868409a92467415dc5c084d1b45c",
+    "size_bytes": 1272963
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_3_8.png",
+    "sha256": "190584c7d944bf93cb7262dcd84f688bfee3aa392f68e5d36293a2c577498ad6",
+    "size_bytes": 1529629
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_1.png",
+    "sha256": "92a171c60a59ab5ef0e346cd01b884d2179264fa9fbeeffaa8bb8d37e60056f6",
+    "size_bytes": 1244433
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_10.png",
+    "sha256": "f880521ffd1ab1999d6c51234d2c87f8ac563d86a30ed02adf6d6b295614dd14",
+    "size_bytes": 2060327
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_11.png",
+    "sha256": "7ad162e561969c96a00f6f1fb65629213f3661f9cb3f595556df96a61b30742f",
+    "size_bytes": 1725211
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_12.png",
+    "sha256": "154afffe1f7297bd8ed18b9b5b353a83d51deb37755779f4cdf0722fea9fff7b",
+    "size_bytes": 1583824
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_2.png",
+    "sha256": "9f5d62b18770ccdaaeff869d30feb7ed4e7f4fd607cc242ee940b9c61d533b43",
+    "size_bytes": 1445829
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_3.png",
+    "sha256": "b216415468b03b4a7813525df4de8320757c70b82cd5bef5431e84a792a6f782",
+    "size_bytes": 2159774
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_4.png",
+    "sha256": "3eb1e355cfa715c9c57e496498d2353c0a2f20b79f93807f344df9d9c1a91222",
+    "size_bytes": 2006361
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_5.png",
+    "sha256": "a8f039e99d3091c4a585f747fb4eed571012d9775ea65ce97f6a08d3a30bc5ac",
+    "size_bytes": 1862565
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_6.png",
+    "sha256": "7fc90c390b5ea8c5bab4b2c32ae77ae05372d70d8d95a895ceb4dae7ced63bda",
+    "size_bytes": 1569373
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_7.png",
+    "sha256": "32e45d62213bad3b190e2ecddf3d4e50cde03593845778aceab4726c15378d75",
+    "size_bytes": 2082704
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_8.png",
+    "sha256": "a06b84ac05c6282a2ac8e50ce9cdf5571c6a738a70fbe7fe9b01cbd14fa16189",
+    "size_bytes": 1894826
+  },
+  {
+    "path": "data/raw/riva/images/HSIL_LSIL_4_9.png",
+    "sha256": "b683dc306ce192d70a0c16ca35b2d5cc75dd6e9fbb45682276b1f8bbb6bc121c",
+    "size_bytes": 2194414
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_10.png",
+    "sha256": "6a9c32748ae14fceb26c52f9849444925c57d74c31de73dcaf7a531e77de58ec",
+    "size_bytes": 1522137
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_11.png",
+    "sha256": "9f1a890803769089d5b10ee1ebfb41b3ddf55c75a8c257d888c58fdce31fe308",
+    "size_bytes": 1425559
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_12.png",
+    "sha256": "6e0f18fd8c4c8230ca1baf0d334384df6bdd07e1e4697e8e61c1bcdc544003f4",
+    "size_bytes": 1347964
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_13.png",
+    "sha256": "290171a6452ecb2f78c11d4bd30cabad220fbe9a3b086d9723a10d6db25593bc",
+    "size_bytes": 1563393
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_14.png",
+    "sha256": "0d62b583043ead2c0e3b33d6f3c441987c0fa3e4f845a4aab26c62cc832cd457",
+    "size_bytes": 1528347
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_15.png",
+    "sha256": "027fb468b46332ab63b4cf1ce191a9147e045c0e17acfce65ac1b9f721b17014",
+    "size_bytes": 1648617
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_16.png",
+    "sha256": "fe823207e8d45f1de0902445c5f16e1c0b47aef71f291972911e400fc3b4bc80",
+    "size_bytes": 1273520
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_17.png",
+    "sha256": "279d669a71f7a73e2fe11c739b40dd1905bf098d56e12bb9d739d769a7b9cc03",
+    "size_bytes": 1373821
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_18.png",
+    "sha256": "62e71bfdd28065191d30b02c9852be83191e6bf9629667dc07771beb6435b7f0",
+    "size_bytes": 1474540
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_19.png",
+    "sha256": "80d380e149a4ce422e67dec47e05d900faf668966c3e8db65f029c652919acdb",
+    "size_bytes": 1498740
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_20.png",
+    "sha256": "062a6838b3e80cf4f3e06470585cf22f5bc61688f8254b7cc295186bbca940f0",
+    "size_bytes": 1598091
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_8.png",
+    "sha256": "c99884d72b83c10e0b4d335d80e4255bad221997f21a643fcce007fe9d922212",
+    "size_bytes": 1709573
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_10_9.png",
+    "sha256": "edaa07c25af85d228cbc47c8836c1ae426d0df5b3db733ff7d7e17107843b3c7",
+    "size_bytes": 1582176
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_11_1.png",
+    "sha256": "e400d934b8af5682497df2471a191cb45fdd330b8151f5893d6ae4fdaf17284a",
+    "size_bytes": 1234188
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_11_2.png",
+    "sha256": "95e69add18bf10188a7383f3ae37cdfd670c09f35c36ae45bf6eddf7bceb1c68",
+    "size_bytes": 1562974
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_11_3.png",
+    "sha256": "6b5a9a6297d021e83759e96b222823182e50e27275d66f95ce1082a1da1db0b1",
+    "size_bytes": 1301726
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_1.png",
+    "sha256": "a528f5e66e3e20662c883578ae35bbb460352029bb81db0d5813a167ede3aa5b",
+    "size_bytes": 1341696
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_2.png",
+    "sha256": "babd68313379cb6cdd1d0e8c631484037377b36f2e38d4de7208b8f14310d4e6",
+    "size_bytes": 1244207
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_3.png",
+    "sha256": "65615a4fbef846d5554a00f7c47bce80396d283443b70213cc4b537075a30d40",
+    "size_bytes": 1418539
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_4.png",
+    "sha256": "aff3ae8b2577c0b610169a028f768cfa8ee76789836a95bbc55be7359d997222",
+    "size_bytes": 1501933
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_5.png",
+    "sha256": "cc55b69472f5c57fe5e27eb51b7a13565d6278bedf4b6446ca7dd9145a37755e",
+    "size_bytes": 1455229
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_6.png",
+    "sha256": "1c142aa853dc0ca7b1733e374e59b53af673df657424e1e9a0d771ec673ad306",
+    "size_bytes": 1259198
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_12_7.png",
+    "sha256": "2c6b055b30e87cfd90d00498b2f5fd351cc8a0847da8c62e6e54af006d310d7b",
+    "size_bytes": 1252738
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_13_1.png",
+    "sha256": "b91b0a53c453f701fa99606bf8c74353918478777a77647ff7fbb0308d433ce4",
+    "size_bytes": 1384070
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_13_2.png",
+    "sha256": "58eef5b80374f197f22b2e3ba8c55143f0fc3723ced278db0fd75e36959d1379",
+    "size_bytes": 1559061
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_13_3.png",
+    "sha256": "96114ca932f8f406058747f076707d88d92e025c9fc03f42b4fe4d31b3204f3f",
+    "size_bytes": 1328685
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_13_4.png",
+    "sha256": "21c1f6de160ed68c5fd7c5856f20a2e78a9ff8f2fa3c2cc07013d740110e9293",
+    "size_bytes": 1261344
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_13_5.png",
+    "sha256": "df053e64d64ad999927d3fdeaee22cbedd36fbbdb310bcb67661c11ed79851c4",
+    "size_bytes": 1601430
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_14_1.png",
+    "sha256": "5c4b129af0e083c13a8de282e0fd7cd5f8ef823d53c8caa5906295306f4440d3",
+    "size_bytes": 1404846
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_14_2.png",
+    "sha256": "f469da6b1191e7960190e3ed88898516a31e7c05c65b5b3e5138035d7f2c5e12",
+    "size_bytes": 1613805
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_15_1.png",
+    "sha256": "70f71640c0191696dd61730e73b2a44fa4eaf224ab73633643cdc7a9791eaa77",
+    "size_bytes": 1723487
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_15_2.png",
+    "sha256": "8bbbf31e2f4e4e2b0966ace0e28a0cef63597237d4c7ecd19fc0adde4e9fbf11",
+    "size_bytes": 1236845
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_15_3.png",
+    "sha256": "4ce4072d8942c89d3f338a3962133d605d1da5742c5183bf7a88b9cef337e173",
+    "size_bytes": 1548319
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_15_4.png",
+    "sha256": "57907b405b41c0898d8a5fde124c8a7c2b3041d8def17a060a241c7977d21a70",
+    "size_bytes": 1799193
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_15_5.png",
+    "sha256": "ee655106ccb164c5a53c0a36743307c3698f4fc651f59c1ce78532278c0ad9ef",
+    "size_bytes": 1755408
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_1.png",
+    "sha256": "b4353cf1efcaeaed27b1f3b7d560eaa572df15b0c8e64ed25ed15e49606207a1",
+    "size_bytes": 1274270
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_10.png",
+    "sha256": "42f02ad14088643612114ec47d76d3555cf424e2768d888536f39fc4a3d79ff5",
+    "size_bytes": 1430318
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_2.png",
+    "sha256": "e64720fde5ae02d45758b9690ea549c63dd2efa9d2415489ef9282c862e798cc",
+    "size_bytes": 1214285
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_3.png",
+    "sha256": "13978284ac63420e735e00c512f9594a1b27c34bfc2f3e9ecd4c83c553e9ab28",
+    "size_bytes": 1254550
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_4.png",
+    "sha256": "022fdd438c2d0f573a2ab3f3c3dad43fc0aedf0fa5b4b0e4d6bb1c50995f7d70",
+    "size_bytes": 1492082
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_5.png",
+    "sha256": "e24c56df56d34625a668f32111c03021221533ec1336d4822cef8881afb04922",
+    "size_bytes": 1295564
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_6.png",
+    "sha256": "02557a687497fef4c90126b163dc68f43e1d3dabf7ae8c957077dfddcc88f451",
+    "size_bytes": 1373691
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_7.png",
+    "sha256": "ff2d694d9ae6469791666fa6eb34fb7d01bae85712602102a8478b76c82f8f99",
+    "size_bytes": 1385384
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_8.png",
+    "sha256": "926cd3d24a1534e1c6c911e633a40374b3b03e78a55fa6fd82f3584a23709e2e",
+    "size_bytes": 1229756
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_1_9.png",
+    "sha256": "34cb52eaff11ea03f24ab3aa57c45fbb4387bca26aba468bc3359eac49f921c8",
+    "size_bytes": 1600733
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_1.png",
+    "sha256": "81cd684bb41bbb307e9f3bbbbd9862373630e4d27ff500d18489c01a99cd6df9",
+    "size_bytes": 1439256
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_10.png",
+    "sha256": "24dc912e4d6ef9bd442da79dd7bb2f18827c8011aa5dd0bcdaa8b879592ba2e9",
+    "size_bytes": 1470855
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_11.png",
+    "sha256": "83a1ca5d7243623983c3cb94e5fef831275288e14c444f0f377cb4c5ea653c2c",
+    "size_bytes": 1386379
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_12.png",
+    "sha256": "816ce6efa1ac45438bfe188f1bd61fea21f77bf916b55676a982c6e9c0679f25",
+    "size_bytes": 1264425
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_13.png",
+    "sha256": "cf4d06ffc1192a1651bcec159d7ace7b30af24cb51882547e6cb24e80562aac8",
+    "size_bytes": 1626204
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_14.png",
+    "sha256": "e2a16d6061002310951492538769a59e524e20e57da49bfe48f7ace9a2276ff5",
+    "size_bytes": 1390244
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_15.png",
+    "sha256": "56aca895883a76f0ab2dee7690507895f32af20d8ab7233e9f60d6da72c35192",
+    "size_bytes": 1281221
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_16.png",
+    "sha256": "4ea87785a4a7d17f64ddda2ffb4ded656d7957eb4cb5e6564f2011640322fbe6",
+    "size_bytes": 1357422
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_17.png",
+    "sha256": "f0f276d5c3a11b58ccd5cad057d978336eb27f81c52bc749672f17f239841fe4",
+    "size_bytes": 1455044
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_18.png",
+    "sha256": "a4046d76e8fcfbe42267d52d7ff2b776a11c4ce01e326e937f7491a68c1ca992",
+    "size_bytes": 1475070
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_19.png",
+    "sha256": "50536e247b67470175679cc1f22d202683aea54aefe6169d66e10aebaf49006b",
+    "size_bytes": 1624095
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_2.png",
+    "sha256": "c95d6c5b9622a97c7641aa06d74dfebf6d7b350d1094835fe3265bb8d406cdf2",
+    "size_bytes": 1460380
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_20.png",
+    "sha256": "9972433560051e09bf79379429df8dd84c37fee62477e67c90f3082f20cd3a5f",
+    "size_bytes": 1571753
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_21.png",
+    "sha256": "e8fdf19711d97bb77151f4be1507d5c5ceac9004fc8e9383b036a9f06b4539ab",
+    "size_bytes": 1725285
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_22.png",
+    "sha256": "8489802e677d92b59ee0ef3c22f53b3fc070750a592433b2a2150b207e48cfce",
+    "size_bytes": 1751464
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_23.png",
+    "sha256": "cbf7000f76e507832dacb1f7d87cfffbcab4e58eaba07b6ef91643650a6f8c6f",
+    "size_bytes": 1480321
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_24.png",
+    "sha256": "7c9100d83fc7901253c22a76e2d719fc11528a4e2b9d7de09ef8898e76e2fcf0",
+    "size_bytes": 1390520
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_25.png",
+    "sha256": "35efcdafa288c6a17e85fec832c50403320477639d6f76352ebb95fabd75d015",
+    "size_bytes": 1483560
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_3.png",
+    "sha256": "8d92e8939765430cd93538710ab5189d4373de4f7228f768c2c9b13069a4a6ea",
+    "size_bytes": 1478007
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_4.png",
+    "sha256": "1880f61019bde1747afde73ce2721dc3764e4ab00d46441eb46efc7e884f7110",
+    "size_bytes": 1460499
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_5.png",
+    "sha256": "3cf36dafa7efca27b9293d7228f35f141ed88c0790f4a7184d2f3e872b74d4e8",
+    "size_bytes": 1409766
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_6.png",
+    "sha256": "c318b0551f5889a07b3ae8cdb9a76df4df337aac5838e164c8acd99718948e02",
+    "size_bytes": 1477621
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_7.png",
+    "sha256": "35cc647a92c4a75a8a5532ae4162739f6531d4728c6726c4c528999c8934ef46",
+    "size_bytes": 1457893
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_8.png",
+    "sha256": "32e3e8acddc654898c3335b7dfadd043fa4a9ac7c653932aac08b708a1a8a233",
+    "size_bytes": 1618869
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_28_9.png",
+    "sha256": "98aed36dff84fcb6245714409c4db7c3373ff8d72ec7b6cee2da1da673f7db21",
+    "size_bytes": 1526847
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_36_1.png",
+    "sha256": "f79579c7ebe5dfa599fbb7b31738656c0dffbb558b53560cb9cfbfe86445d554",
+    "size_bytes": 1359109
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_36_2.png",
+    "sha256": "c6c449e787073d308a3bb5b04ce8ad974f36febb4683fb4e26bb81fa96bddb9c",
+    "size_bytes": 1332379
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_36_3.png",
+    "sha256": "08f50cb2d63acb87f8b84125bd0b54095a4c4abc840eeef8fee22730c8687765",
+    "size_bytes": 1303737
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_36_4.png",
+    "sha256": "a526e0b5a6d8e8a804b60197ee672a46eb923da8dba694168367ac3840012c62",
+    "size_bytes": 1347012
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_1.png",
+    "sha256": "aab8c879233d3a648d85deed24227bb7f514c8d8dff096aa9ce6b8eef6f2483f",
+    "size_bytes": 1431829
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_10.png",
+    "sha256": "0ce7b5ff2755fea194665baa48dc7b711a7b180f2835dd697d05291507237cc4",
+    "size_bytes": 1346006
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_11.png",
+    "sha256": "2aa80ae6771e4e37579c8717e4a4f46063dfbb2b7566187481d05a160324c3f7",
+    "size_bytes": 1369453
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_12.png",
+    "sha256": "4c71805bb22ee5e7077c4de1e9f25d1a18a3b47e6bf1c5782037af76bb5d4d50",
+    "size_bytes": 1357151
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_13.png",
+    "sha256": "6b1bc66c6a77e72acc131f01e98c332c84a783f84b9451320bf675bd6bdb8828",
+    "size_bytes": 1540102
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_14.png",
+    "sha256": "be577489c1c8b248774743a1349eff884ce78d488fbf03d7c838857a660ac087",
+    "size_bytes": 1601828
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_15.png",
+    "sha256": "ad85af6961d8de3f193c39d40192c6540f4861fed2e709f901e2eed23833bdc3",
+    "size_bytes": 1488148
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_16.png",
+    "sha256": "855ef8234a318aebaf2817d883fbee0cb9460d972d0dce9ec50ea76394ee7c47",
+    "size_bytes": 1506836
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_2.png",
+    "sha256": "c2311789325d01aa0fe0a8b40b960f8bae56c7908e45edc65dd1c7c01ed96d68",
+    "size_bytes": 1470662
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_3.png",
+    "sha256": "89d6d0ce28ef60c7f8e66035e29c8fbe57129b7982e26de0a01eff7ee80e21a1",
+    "size_bytes": 1486534
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_4.png",
+    "sha256": "1e87e6fb79c284193bce701a7170868e91f34e32d9a2beb00dc1f8337f51026b",
+    "size_bytes": 1364929
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_5.png",
+    "sha256": "bc052c2807a6449ece1b64ceeb45d9cb238ef3b6cad8ad574307cb01872d7b94",
+    "size_bytes": 1464897
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_6.png",
+    "sha256": "a90e77c495ee4b846f517bc6469a5c38d99df09713d27b054f175764c42364c4",
+    "size_bytes": 1201917
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_7.png",
+    "sha256": "9304756b370de2c72c65a8b92fe6c4fcf8c95c2449ed8b97f47ea2c76144fa7b",
+    "size_bytes": 1325210
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_8.png",
+    "sha256": "4e036b171374889bc4a425b0ec8d4689f87e58d00fc3a3464b6c939821d329c4",
+    "size_bytes": 1363278
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_37_9.png",
+    "sha256": "9ea46abae6ac1b53b808d6c80cb1e1f6dc908795dfa04150077fcb3a2b731c07",
+    "size_bytes": 1394952
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_1.png",
+    "sha256": "ef91e97e48aaa665041f984fb3e0a013b694ec12128b1b34defa6379d23837c0",
+    "size_bytes": 1309783
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_10.png",
+    "sha256": "59cef99bf07a78a1fd3a24266ba4e9bbd58d762a2fd746f3e9d629929ff1bb44",
+    "size_bytes": 1479165
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_11.png",
+    "sha256": "5b807b36fb96f89c2ea6c73bd9d9a652a130ca5f6e4f07616fdc78a2f7f01a19",
+    "size_bytes": 1458937
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_2.png",
+    "sha256": "f6d6149543be549a666f64aab806b4a4ed969a88b49ef5c4bb861716c5e9f5f1",
+    "size_bytes": 1474249
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_3.png",
+    "sha256": "a420da47f02ece45643ccd1666a65672fc2ad325292917085ffd7e3506041dd9",
+    "size_bytes": 1452893
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_4.png",
+    "sha256": "e6c889fad4f2bf070c9dc7cc5946a8bb82ce0da608600cb75fd9a8f30ec1b7a6",
+    "size_bytes": 1149053
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_5.png",
+    "sha256": "e469bb27e4c299cc8ed8ec3ce03c03e051cdf170f94f5f41a48464d9b5aa7ffe",
+    "size_bytes": 1300575
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_6.png",
+    "sha256": "7ddaa6944293a387a1a6e67cc0b522abb84764e78d1e29c3fe26abfbf832ad4e",
+    "size_bytes": 1471850
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_7.png",
+    "sha256": "7e40508ae326b7675c5a53cad935a6c4689a792f679ffe423a0cb980c37119fa",
+    "size_bytes": 1258655
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_8.png",
+    "sha256": "4874e0ded1cebe9da186a834eb481d564a8337af81d47696236a9f0439047ef9",
+    "size_bytes": 1659539
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_38_9.png",
+    "sha256": "ed77ffad8512d56c5e24f4d4b27ee8eeb31bcebe1b8b4c674390612f825874b2",
+    "size_bytes": 1554611
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_3_1.png",
+    "sha256": "50d382776adc45d2462a495de4418a813d7a6c27c80ca1ee9749dbeb4b8b2819",
+    "size_bytes": 1718326
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_3_2.png",
+    "sha256": "95aea72c6196a22712b2843336163528271e88b03628708a59414205b7495777",
+    "size_bytes": 1475622
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_3_3.png",
+    "sha256": "3667d6ecf57e2f3fd89e4dc2a8dc08d8e446d4ff3ee9b6b59456c287ec73908e",
+    "size_bytes": 1178535
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_3_4.png",
+    "sha256": "2a465c4cc9521813a68c81541d17791d737b17ef06707427adb6a58e9a79ee7a",
+    "size_bytes": 1344625
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_3_5.png",
+    "sha256": "e8d0b24adae78260a9615e41e57e0804304088abd6c9ba1f19bcc434463f86b3",
+    "size_bytes": 1590289
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_1.png",
+    "sha256": "b1017366a983ab0d5a3f3a51fb6a1ee1ee6e6428a1a4bd7a099e5059d41f72f6",
+    "size_bytes": 1538654
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_2.png",
+    "sha256": "06141d305545aa858291c7e0a6509e72ade62b022abba45e31b07343d0cdab57",
+    "size_bytes": 1384439
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_3.png",
+    "sha256": "91491ad76c2779a96a7b7b6f567a9545697cc6164a4400d8191ca821285286c8",
+    "size_bytes": 1323844
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_4.png",
+    "sha256": "de92fb167ef5c7250bfbe06c38242bab0f1ee99ad3587dd50e916b9e44bb00f6",
+    "size_bytes": 1444810
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_5.png",
+    "sha256": "e02be15d2dd62ec013dd4e30fb59d6ad304935ec0308b18b8262c6478f02c1a6",
+    "size_bytes": 1406561
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_6.png",
+    "sha256": "7ff85052a0b3a2cecd8fa0cf35c7e8302e9ae9827cd46711050e1ad4b78e5fa8",
+    "size_bytes": 1356795
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_7.png",
+    "sha256": "70d8ead57a72c4d676facd835debb5246f22073a18c7b16048d6a8cb38f0b2a2",
+    "size_bytes": 1663953
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_41_8.png",
+    "sha256": "daa1f08e9bb6209219d38050c1b75ce1410033b66fa8e564f8d2c856a3537b9a",
+    "size_bytes": 1463039
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_42_1.png",
+    "sha256": "d8f7e379ae3bf9b8d3372e68e804fbb82d0a809eb4506bb4e56abf06e39ff8b8",
+    "size_bytes": 1422749
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_42_2.png",
+    "sha256": "05a5e2600f3fb2261720929b7a2983edbea6bf89765b3cafb9a83326bfb043ec",
+    "size_bytes": 1398213
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_42_3.png",
+    "sha256": "12508a1a6c7110eadb64b619d8a981125659063001a115ed7bcb6f07159e18cd",
+    "size_bytes": 1487008
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_42_4.png",
+    "sha256": "e24db953c39a749f341599d7e5cafcb4be5c9d62d6ff68e586071293bb8bf9fe",
+    "size_bytes": 1408602
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_42_5.png",
+    "sha256": "e1093462b979b8e0cecde11d8b3fd3278582af9ae7666fa7a778b8fc7f80f520",
+    "size_bytes": 1319249
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_1.png",
+    "sha256": "46cf89a5ae40c6d00545f912d8fadcc7e4c4d141ed75b83742b2551335098e4b",
+    "size_bytes": 1388460
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_2.png",
+    "sha256": "5f3e44611c17d1289eec9606e25c379d5bfe5a0c0ab5250e4299b26c68971571",
+    "size_bytes": 1472457
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_3.png",
+    "sha256": "4073520d13ea34dab350beffd9a08e2750c5e3374c4bbb5499928779f2fd8cd5",
+    "size_bytes": 1482176
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_4.png",
+    "sha256": "fb43e2e9bf25e57356bb7da0fbdfd5141af9530c4f6dc2516629d84e23c1d57d",
+    "size_bytes": 1901541
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_5.png",
+    "sha256": "d5e2c5c9fe650316d990291ef7c416afd59d80bd27a2916bc0548a34332db4f7",
+    "size_bytes": 1367138
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_6.png",
+    "sha256": "f0f737e6ec917df8e13c48ff64271fb3c76866ec55c37b53a9f0b4e03dbf0220",
+    "size_bytes": 1736263
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_7.png",
+    "sha256": "c1e739b32bc81efb644401f4d6ce5bafd790f76ebd8755734ebd752e5ead6047",
+    "size_bytes": 1700754
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_8.png",
+    "sha256": "959a9c56df2b88a5039359db3a9e047acf730468b131b6f8a453579577e66c01",
+    "size_bytes": 1664704
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_43_9.png",
+    "sha256": "a222ab25ebcb018b98dcca7bffc5acea40b9def0ddbecb618e0e830f5aff46f4",
+    "size_bytes": 1703817
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_49_1.png",
+    "sha256": "36a7e83d8eac19a080c22af4dc2fa9e8dc4e5b5c8d493305519cba577a095eeb",
+    "size_bytes": 1292976
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_49_2.png",
+    "sha256": "e2491536fe402add3c2d6b66e6353f8bdaeda3465c9c3f6b76233bcfc85fea82",
+    "size_bytes": 1403986
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_49_3.png",
+    "sha256": "af499c8fff3082e923fafa41648b3597c0e6952fdb7db66d2595dbfe590589b0",
+    "size_bytes": 1452837
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_49_4.png",
+    "sha256": "e0a737d2f369d1c974c6f328b9257c289d407478257bf0296484fef5d92f2bd5",
+    "size_bytes": 1290697
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_49_5.png",
+    "sha256": "2542191eb6d23b77733e5f377bfb593782f25c7d12ab08a203b96ca979c51248",
+    "size_bytes": 1269236
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_1.png",
+    "sha256": "19a807a8757f42730bcb15114dc202f20552843476f30d11c88ddcd8952f5fd4",
+    "size_bytes": 1641929
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_2.png",
+    "sha256": "5daa5df2eedfafc921075eb3891c1c976ad148d6d9ed994ce86e695a8efa02c7",
+    "size_bytes": 1251676
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_3.png",
+    "sha256": "60461879354e9d5becabd1d3eb8fa669588b4ae86d11ed4b0f2fb63302102f36",
+    "size_bytes": 1438437
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_4.png",
+    "sha256": "391c1cd7bc65a3c2f57073f23acd5ef3916e685aca61f1dfc1141791faff2241",
+    "size_bytes": 1508787
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_5.png",
+    "sha256": "8e0c5dd7290ba96b44ebc186c5d75997f429994d6dc555efbe2e7f4d96768784",
+    "size_bytes": 1551207
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_6.png",
+    "sha256": "a9a379ac8df8abaee5e119a1f65f80d4e79264766fed72423baba6b73c510e4d",
+    "size_bytes": 1498212
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_7.png",
+    "sha256": "b72f4fe296c6d81a29efad2325a9a0426051aaa76968800539ad4a41a3028f0e",
+    "size_bytes": 1281775
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_8.png",
+    "sha256": "15980425ffed0e4f93f72dca7eed5b9bb578d65003ec8f4e66fa085d9f0ce085",
+    "size_bytes": 1327010
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_50_9.png",
+    "sha256": "2b74424ad9469cc5fff485ac83671ffded13af494c30e089be4d068bb004e934",
+    "size_bytes": 1269151
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_51_1.png",
+    "sha256": "3ffb43171344b1cd7739391f8ccdb709fe7e841c9e5eea21569ae9a216edcd06",
+    "size_bytes": 1323840
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_51_2.png",
+    "sha256": "ce8ce7123e983bf35cf7803d5366245eae3418b36c848325adfb36531a74e83e",
+    "size_bytes": 1201527
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_51_3.png",
+    "sha256": "59a1b4cb6f9200c854e96d5b3b0c5bcfebfe546acd5cdbff1c28edd78d85e8f4",
+    "size_bytes": 1294779
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_51_4.png",
+    "sha256": "1d029f8e0cc83fe3f29a4ddcb5b3171ca4395b976b49d29b50d3a3e75adffbf7",
+    "size_bytes": 1288593
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_51_5.png",
+    "sha256": "274eece8ee7f993296dc56190fbe503e7b9d5e73ddd0638d83c1ec32bb0ec2e1",
+    "size_bytes": 1344297
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_55_1.png",
+    "sha256": "0be86cec2c0961fbd8c6675746f32fc070cda3d194ccc16e794508f1957a0514",
+    "size_bytes": 1340182
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_55_2.png",
+    "sha256": "7e9671e8a669db4b8e0d2f67b2b3cccd164b7ad260df46b9ce291cadfbcaf7d1",
+    "size_bytes": 1464317
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_1.png",
+    "sha256": "616f2f5c270f91203c65a284d7d3cf15272e9eac765785c37c4356595cb1dabd",
+    "size_bytes": 1998986
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_10.png",
+    "sha256": "8ae72b55b4c3870033ca04d4aa6e9e308587cac6b8859160c3743f4f209cf8be",
+    "size_bytes": 1400644
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_11.png",
+    "sha256": "0a4cde3ead3052079b836bacd1520fed5afd7338a78fdee11b8f28ca447727ea",
+    "size_bytes": 1542036
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_12.png",
+    "sha256": "4e16c3d7239536d752ecef23e2b93618d1f8cb5a19f6aee583b5cc940cab232a",
+    "size_bytes": 1483007
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_13.png",
+    "sha256": "9a10ed82a14a636004d997b04890c4aa5eec04fdd314fc616c450f10276f5e1b",
+    "size_bytes": 1292722
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_14.png",
+    "sha256": "6aa93e6929bdcbd0581721b657aef039769eea5c52c0760e73fb02f41891af7f",
+    "size_bytes": 1743875
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_15.png",
+    "sha256": "566185928d2220b687d41cf9c1f47f76dc14a7528721e158811a056e2247a3f5",
+    "size_bytes": 1805461
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_16.png",
+    "sha256": "e7ab90f7a4b44332be0a8907b480e7f632df2724291372547b7f0f3492b7d7c3",
+    "size_bytes": 1535706
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_2.png",
+    "sha256": "987a0b601c935d54ac998852b34d34b56c5e0ccfe8b622be8d85dc492b48d69c",
+    "size_bytes": 1923948
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_3.png",
+    "sha256": "170054760983698bf58deda79ace22b8b0bbd36fd42a74f4512c68ec706546fd",
+    "size_bytes": 2042610
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_4.png",
+    "sha256": "ef27474f7d02e0a825fc4254b1b4440f9c55573cae82f491d18d7e9446f2b21b",
+    "size_bytes": 1843449
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_5.png",
+    "sha256": "558b54b3b46badd8fe585ef8a026df0bbd5d58ceff39f66051c9f92335568676",
+    "size_bytes": 1549701
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_6.png",
+    "sha256": "75d76c3622979afe8d2c34e836c33ce963bfa2bdc80560f498ad31d3d2b439a5",
+    "size_bytes": 1466064
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_7.png",
+    "sha256": "7f38538413fb91fd21a0b424079ef7666f3c336e403d2874a0ff8abdef2c6cf1",
+    "size_bytes": 1743321
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_8.png",
+    "sha256": "114ead5f4ed54c774e19cc858b57b3897b04f46b55878220eb878e7adca94445",
+    "size_bytes": 1268749
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_7_9.png",
+    "sha256": "d6d1e0f98575d38a900dda73e736715ac92997cf4f7c0f002e1b17086ea28dca",
+    "size_bytes": 1420604
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_10.png",
+    "sha256": "ccdaabe498af6577210d146a231595d56daae765bfff3c2d4a3bf87536c68b96",
+    "size_bytes": 1390037
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_11.png",
+    "sha256": "62400ac4ac1838ab00a9b56b071d6fcd466908897c5632afbbe893cb46aa3961",
+    "size_bytes": 1449369
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_12.png",
+    "sha256": "ddacfc0a64f8758db5144332420f8f0e4c3c42ed5a15fcde07d9731961e7c87a",
+    "size_bytes": 1284264
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_13.png",
+    "sha256": "fe9e483b6f642deff455c0868160715c08f3182404e84bb09278b72b0c3e9960",
+    "size_bytes": 1285677
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_14.png",
+    "sha256": "b6f1a81432fcbf83facb6a112ea2a24ac5932d710f63bb9eec95543f659e6ee9",
+    "size_bytes": 1272138
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_15.png",
+    "sha256": "55ed6e2eb369ca39391ee21dd9aa68dafc1497026ffebfdb58c07788d16820e6",
+    "size_bytes": 1460486
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_16.png",
+    "sha256": "697a2e8d74b60120010d3cce9cd1fc87ed219234ae8ed88538566216ca828f71",
+    "size_bytes": 1371003
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_17.png",
+    "sha256": "8aec90315f6d319b3e639a910c8c5f9ca515e7a8825ddbb814da4ab7c833ae78",
+    "size_bytes": 1331827
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_5.png",
+    "sha256": "11f58bb0c502b97d0b295baae23567b97df40b39ac681bc2759dce99072bdea4",
+    "size_bytes": 1270526
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_6.png",
+    "sha256": "4193438acfc3f510b69583db6c9f1d5ac9507c65d9e6912c4da19219fdc1b26b",
+    "size_bytes": 1587078
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_7.png",
+    "sha256": "38ab76043283a6ac2767c9adcf72f1ff6adf4eb87ae7ad1ef753d6bce347eb71",
+    "size_bytes": 1434100
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_8.png",
+    "sha256": "febace6277080fa21d53411c1702907fcd22398ebfe3b5eece1db8de6bc9baa0",
+    "size_bytes": 1375418
+  },
+  {
+    "path": "data/raw/riva/images/LSIL_9_9.png",
+    "sha256": "e645291937234e381c03182a8ecfb9e49b8b2879473a66413281eed84197648e",
+    "size_bytes": 1415053
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_1.png",
+    "sha256": "beda467b9481ddecfafd2d4791c8575dd8e885c3bf5f87fa410b11f1f1b4bd6c",
+    "size_bytes": 1591970
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_2.png",
+    "sha256": "b45c054b0e1ffdecc0aa026f5da273832579492536e111320dad05a90078d623",
+    "size_bytes": 1568570
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_3.png",
+    "sha256": "1d2d50328ebd3f21d19e5ebf45b543ea5e8ded2e77ba9e6aa8c17916db4c5922",
+    "size_bytes": 1500985
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_4.png",
+    "sha256": "79ff32f8ac277dc3d77646d9de82a501b30c016d1179906af0e0d9eda9e133ac",
+    "size_bytes": 1564402
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_5.png",
+    "sha256": "dceb3e7018b0002f198d665cb37765537c3257eaf716083f85db79626b94f30c",
+    "size_bytes": 1344283
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_6.png",
+    "sha256": "e6ec1191bf7959f570fc001a08909602e71543c592d060f6185301d230d9ac9b",
+    "size_bytes": 1522890
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_7.png",
+    "sha256": "b59997cb95158f7c5e12c5b738bf5671b41605098ea79b3eb0a8394dae5363a4",
+    "size_bytes": 1443150
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_8.png",
+    "sha256": "5f7f68e7a512a996f63d578ac265576199c693d110b7248f08f14f323a9c85eb",
+    "size_bytes": 1531320
+  },
+  {
+    "path": "data/raw/riva/images/NILM_1_9.png",
+    "sha256": "64b934af329f0b26816b0f99bcbe9e888028483f8902805f406b361a84758792",
+    "size_bytes": 1345972
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_1.png",
+    "sha256": "fe48996fdc1ac2709cbbea1457517c862c2e57d0f77a8b180e60773797b6431e",
+    "size_bytes": 1820795
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_10.png",
+    "sha256": "87d694ef7896b6af40ab6e358f2fd8bad69418090feaa52a9e6886315cb400a1",
+    "size_bytes": 1870798
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_3.png",
+    "sha256": "11b2e31797ee75b7122c8fa779e9f63c049a458f450fe17feaa04c11e6cdae50",
+    "size_bytes": 1785972
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_4.png",
+    "sha256": "98b742b482af43398c6e818c21c2185a9f018f168072569d34c4136b7ecd5023",
+    "size_bytes": 1822178
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_5.png",
+    "sha256": "d7aab88c7cf176845706360ddabe740c0b97e45584f7efbaf7d41083d9d15893",
+    "size_bytes": 1977605
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_6.png",
+    "sha256": "73d2789776ed7e7ae424699054473aa36604c37feb00b0e79ca55aeec3c122c6",
+    "size_bytes": 1939278
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_7.png",
+    "sha256": "cf9fa2074d6d8963487f499d3aecc785161211ea410fc7e3a535a742fd4fd3df",
+    "size_bytes": 1936282
+  },
+  {
+    "path": "data/raw/riva/images/SCC_1_9.png",
+    "sha256": "d58ea40e7d9c1858f048bab8b21625023a5a8b97de983660e0630c329cdb165f",
+    "size_bytes": 1900064
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_1.png",
+    "sha256": "ffa4c7e9c6499c92fafa080fa60557d9a347b2bcef80c62bd900528775b0c201",
+    "size_bytes": 1901746
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_11.png",
+    "sha256": "161e47d150470be1f7ae34d164a74b17c742dd2598e4af119dfd1b95da7a3ddf",
+    "size_bytes": 1793523
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_12.png",
+    "sha256": "b41b143357da1f062ed93c4d26dbf44785803111718ffd43d39d0a1e3d88bcdc",
+    "size_bytes": 1938401
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_13.png",
+    "sha256": "2c408e9ed0fa2221355d57c0422fc4b995cb3c44ddddff35900d94df0058eaaf",
+    "size_bytes": 1602392
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_15.png",
+    "sha256": "ea6d4623910a16d13ece180f4ffddc7469dde50c1f959f5338421ee46a29b187",
+    "size_bytes": 1698667
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_16.png",
+    "sha256": "be3cc29c7d823d36a2d169734667ef54812e85fefff44e88d8f025a1cd66dd7a",
+    "size_bytes": 1494237
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_17.png",
+    "sha256": "fed7e6b39e12cae0c4ea80db3182367485439dba61eec18556bb0e96bc21391a",
+    "size_bytes": 1529313
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_2.png",
+    "sha256": "7f214d6bd0f728264c2f832d69acb2588e16af00afb57d8db4a1b59f939c3866",
+    "size_bytes": 1328400
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_20.png",
+    "sha256": "a1eaf6a4e5be2a9aa12d323417ceabad6d7253e050ef2fe3d5e27bfc21b13c9e",
+    "size_bytes": 1846984
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_21.png",
+    "sha256": "78358cdf33a29b46c4823a3daf7c155d7df4bdce982fd1a26519cf82c12dbf55",
+    "size_bytes": 1499662
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_22.png",
+    "sha256": "54214fa548d9616d6205d42fcc7ff21f06455953bba0a03cdca83506809992b8",
+    "size_bytes": 1879573
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_23.png",
+    "sha256": "cd9943fcd917770b91386b7d3885f172337b0bd4f22d9f06609ca99198c90ec6",
+    "size_bytes": 1825376
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_24.png",
+    "sha256": "7f86e68d6ba726c7ffff9214f3a6b2e93dbe9fc3b46b57b9bbf67b83e0d787d8",
+    "size_bytes": 1457574
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_25.png",
+    "sha256": "9012bd13233a8824b89a7a8a1bb9ec654be6f34ff0806103b66d89eed41b1b6c",
+    "size_bytes": 1595202
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_3.png",
+    "sha256": "01c211fc220c72dbb15bd693d61db267b27a54daf08275de4a0954afbe437757",
+    "size_bytes": 1268185
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_4.png",
+    "sha256": "a5c68c92f2fad231067ef0397c2e5afbd0a2da055dfb340ed8a75fd9b7a9fffa",
+    "size_bytes": 1312838
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_5.png",
+    "sha256": "75e8c468eebf7062de218a11a8f6f9b99c2fe840070e19f53b4d9614e33cad33",
+    "size_bytes": 1373546
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_6.png",
+    "sha256": "fe2d5413db73b67bc832d9b4fc07ffab666246456dc72361fab477230bddd94a",
+    "size_bytes": 1413724
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_7.png",
+    "sha256": "520557111ed32d0c60788dc4def7008f88da44b2bf5d1bd1cd3b0b426d887ee7",
+    "size_bytes": 1410839
+  },
+  {
+    "path": "data/raw/riva/images/SCC_3_9.png",
+    "sha256": "7e2c31188f9c98dcf5123da322a012b8668c060a7d3398330ef67ea53c0dd196",
+    "size_bytes": 1387408
+  },
+  {
+    "path": "data/raw/riva/images/SCC_4_1.png",
+    "sha256": "db23ed990b3d26e2e8d2915c340eddc7bd1a99fcf23d131b75d9dd22a1569a18",
+    "size_bytes": 1641779
+  },
+  {
+    "path": "data/raw/riva/images/SCC_4_2.png",
+    "sha256": "d497db4e47285239de811c4072378ad92f4b8b50631f5febd626c7cadd040f8d",
+    "size_bytes": 1578005
+  },
+  {
+    "path": "data/raw/riva/images/SCC_4_3.png",
+    "sha256": "c3cf247317fadcbbbe8a24df29edb3489164eaa8eeff336c0b6bd5da388a8713",
+    "size_bytes": 1900471
+  },
+  {
+    "path": "data/raw/riva/images/SCC_4_4.png",
+    "sha256": "63610aa1f2f59cb97ae042b23b653c974bb0ced1ed9f365edddadeb612a756ab",
+    "size_bytes": 1735366
+  },
+  {
+    "path": "data/raw/riva/images/SCC_4_5.png",
+    "sha256": "b90edb85998fec3f208592bd2a7ec681bc1b541f17485035dcedbf10ddee6bde",
+    "size_bytes": 1654059
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_1.png",
+    "sha256": "4bdfa7273deabe6c5323d67e6c2bf457dba3609a65d77e1a45b4ed043d3b79fa",
+    "size_bytes": 1530366
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_12.png",
+    "sha256": "f67cc0d429923ad55b1f452685dafcf4277d3b2b7ee07e71561d0423960c6cb8",
+    "size_bytes": 1488264
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_19.png",
+    "sha256": "1509e3062a096d6e64ca3e6fa1c8b5adffe21a3e5fea10de4a3f446242b0b2cc",
+    "size_bytes": 1856787
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_2.png",
+    "sha256": "56e99febb3cad44e622f205d2b916211a607b3187da353a4547d7f8ce83409f3",
+    "size_bytes": 1521705
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_22.png",
+    "sha256": "d7727815575f2233f67e778e1c7780ffe463917c56fb5b8f5d6e2925c6dd530a",
+    "size_bytes": 1613915
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_3.png",
+    "sha256": "ddf973b2064548c59f9c635428701d4e4dd4f6aeed1944f68937c9b76e5f28b4",
+    "size_bytes": 1711224
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_4.png",
+    "sha256": "e174ece96d284e217af9a0ee5af4c25fccf0a9b46442c8ffbc48f453fb3a0a57",
+    "size_bytes": 1610329
+  },
+  {
+    "path": "data/raw/riva/images/SCC_5_7.png",
+    "sha256": "7826f4f53ac93f8478e4b62c0e17180bef32075b4a03724616d3ea6cd306b4ed",
+    "size_bytes": 1444614
+  }
+]

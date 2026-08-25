@@ -1,0 +1,158 @@
+{
+  "amp_enabled": true,
+  "analysis_eligibility": {
+    "dataset": "riva",
+    "eligible": true,
+    "hidden_reference_loaded": false,
+    "input_rotation": "annotator_4",
+    "sample_count": 4781,
+    "source_context_px": 128,
+    "source_crops_sha256": "24bf2f68375cf535961609f7707c31ba2ac103b014b4aa31fbf6a8d0500c16f3",
+    "study_id": "public_independent_pathologist_replication_v1"
+  },
+  "batch_oom_backoffs": [],
+  "batch_size_final": 32,
+  "batch_size_initial_effective": 32,
+  "batch_size_requested": 64,
+  "batching_policy": "single-process batches with OOM halving",
+  "cache_array_sha256_by_name": {
+    "embeddings": "b42f1d407fcc2f58380a39cdf8873b444d7ff0027e24b267a15bbd5abbec2f13",
+    "metadata_json": "c258a27024f6bf6617c81797e74bf34cd427e460fccf72f5e630f06e5e03575d",
+    "sample_ids": "6a97096d0223d3665ea9d973a771565d65d74dc41977c793f00c2388ee7ddbd6"
+  },
+  "cache_content_sha256": "a9526a9254647916e222553b2dba342065ee2b9b0a622318e7077d07cb1b6155",
+  "cache_file_sha256": "89e39c4ed5c2b5cc0193c79b850cc419c98f2385d50d8334ca73261a5a2eb5a0",
+  "cache_npz_sha256": "89e39c4ed5c2b5cc0193c79b850cc419c98f2385d50d8334ca73261a5a2eb5a0",
+  "cache_recipe": {
+    "array_keys": [
+      "embeddings",
+      "metadata_json",
+      "sample_ids"
+    ],
+    "context_brightness": null,
+    "identifier": "torchvision_resnet18_frozen_embedding_npz_v2",
+    "input_variant": "context_rgb",
+    "output_dtype": "float32",
+    "pickle_allowed": false,
+    "preprocessing_sha256": "4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c"
+  },
+  "cache_recipe_sha256": "e9c2be965bd8226873b283d6a7fef3734c45659bb38498b31133cdbc141ee203",
+  "classification_head": "removed (fc=Identity)",
+  "configuration": {
+    "allow_weight_download": false,
+    "batch_size": 64,
+    "context_brightness": 0.45,
+    "device": "auto",
+    "download_progress": false,
+    "input_variant": "rgb",
+    "minimum_batch_size": 1,
+    "output_dtype": "float32",
+    "use_amp": true,
+    "weight_identifier": "IMAGENET1K_V1"
+  },
+  "context_brightness": null,
+  "contract_input_variant": "context_rgb",
+  "crop_manifest_sha256": "ae5cb28b9763abff04338d4e47c9be17546132265507d875eb8447c0c77feab5",
+  "cuda_name": "NVIDIA GeForce RTX 4070",
+  "data_loader_workers": 0,
+  "dataset_manifest_sha256": "ae5cb28b9763abff04338d4e47c9be17546132265507d875eb8447c0c77feab5",
+  "device": "cuda",
+  "dimension": 512,
+  "dtype": "float32",
+  "embeddings_sha256": "24539d3d676ed1eb6b2beb30e168807e4766c56af720dfc944c17f863c2d4c75",
+  "encoder_frozen": true,
+  "encoder_id": "resnet18_imagenet1k_v1",
+  "encoder_identifier": "resnet18_imagenet1k_v1",
+  "encoder_implementation": {
+    "entrypoint": "extract_resnet18_embeddings",
+    "module": "histo_audit.representations.imagenet",
+    "source_file_sha256": "57c05c34b0d4a90bdfd449a59b6cb9935703c99331b336ff2497a1d3e37ffd05",
+    "torchvision_architecture": "resnet18",
+    "torchvision_version": "0.27.1+cu126"
+  },
+  "encoder_implementation_sha256": "754ee3fce5a6ac75fd4afa7b01d3f90c440f8f6497fc03856c8109ce6b643659",
+  "encoder_metadata": {
+    "architecture": "torchvision.models.resnet18",
+    "classification_head": "removed (fc=Identity)",
+    "encoder_frozen": true,
+    "input_sha256": "a3f1ddc6eb4f9bd16986633c45bb4237907ffabc419dda642f7eb645ef8cdd63",
+    "output_dimension": 512,
+    "output_dtype": "float32",
+    "weight_identifier": "ResNet18_Weights.IMAGENET1K_V1"
+  },
+  "encoder_metadata_sha256": "1c6b74853240b99d6edc2e29c337e7f5a24aeba6b4ae48c56c790d1b46e5df10",
+  "encoder_name": "torchvision.resnet18",
+  "extracted_at_utc": "2026-08-25T22:52:03.510906Z",
+  "extraction_seconds": 1.9602826000191271,
+  "extraction_timestamp_utc": "2026-08-25T22:52:03.510906Z",
+  "feature_dimension": 512,
+  "input_sha256": "a3f1ddc6eb4f9bd16986633c45bb4237907ffabc419dda642f7eb645ef8cdd63",
+  "input_variant": "context_rgb",
+  "legacy_input_variant": "rgb",
+  "manifest_sha256": "ae5cb28b9763abff04338d4e47c9be17546132265507d875eb8447c0c77feab5",
+  "matrix_key": "embeddings",
+  "output_dimension": 512,
+  "package_versions": {
+    "numpy": "2.5.1",
+    "python": "3.12.3",
+    "torch": "2.12.1+cu126",
+    "torchvision": "0.27.1+cu126"
+  },
+  "preprocessing": {
+    "antialias": true,
+    "api": "torchvision weight_enum.transforms(antialias=True)",
+    "crop_size": [
+      224
+    ],
+    "interpolation": "InterpolationMode.BILINEAR",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "resize_size": [
+      256
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "preprocessing_identifier": "torchvision_resnet18_imagenet1k_v1_official",
+  "preprocessing_sha256": "4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c",
+  "primary_cache_provenance": {
+    "cache_file_sha256": "89e39c4ed5c2b5cc0193c79b850cc419c98f2385d50d8334ca73261a5a2eb5a0",
+    "cache_recipe_sha256": "e9c2be965bd8226873b283d6a7fef3734c45659bb38498b31133cdbc141ee203",
+    "dataset_manifest_sha256": "ae5cb28b9763abff04338d4e47c9be17546132265507d875eb8447c0c77feab5",
+    "encoder_id": "resnet18_imagenet1k_v1",
+    "encoder_implementation_sha256": "754ee3fce5a6ac75fd4afa7b01d3f90c440f8f6497fc03856c8109ce6b643659",
+    "preprocessing_sha256": "4510940ac32618cffad5483983962dd89eec02cd25b07c2f16f8a07366e0b77c",
+    "sample_order_sha256": "97d4c3cf934c785e3bdf26028704178d13071ba948a9db1238a98ff786a6338e",
+    "status": "available",
+    "weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+  },
+  "provenance_schema_version": 1,
+  "provenance_scope": "stage_eligible",
+  "raw_inventory_sha256": "c4e07f1cb3eb62cd2c1d2284dbcb725b7d0d4fa20a1f42f15d48283a942f4ed8",
+  "representation_id": "riva_annotator_4_resnet18_imagenet1k_v1_context_128px",
+  "sample_count": 4781,
+  "sample_ids_sha256": "b1aa6563cf364d73814a0b494abf5afdb9f33829421e1920fde455bc761ca077",
+  "sample_order_sha256": "97d4c3cf934c785e3bdf26028704178d13071ba948a9db1238a98ff786a6338e",
+  "schema_version": 1,
+  "sidecar_semantic_sha256": "eeaaa5f8ded2e823c4be4b5e3e1a77976ae7180a744d7e7b28f3868c037a46ea",
+  "status": "available",
+  "torch_inference_mode": true,
+  "versions": {
+    "numpy": "2.5.1",
+    "python": "3.12.3",
+    "torch": "2.12.1+cu126",
+    "torchvision": "0.27.1+cu126"
+  },
+  "weight_download_explicitly_allowed": false,
+  "weight_identifier": "ResNet18_Weights.IMAGENET1K_V1",
+  "weight_path": "C:\\Users\\NATAN\\.cache\\torch\\hub\\checkpoints\\resnet18-f37072fd.pth",
+  "weight_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "weight_url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+  "weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+}

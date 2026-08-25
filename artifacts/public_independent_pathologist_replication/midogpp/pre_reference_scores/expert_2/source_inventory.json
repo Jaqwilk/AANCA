@@ -1,0 +1,362 @@
+[
+  {
+    "path": "data/interim/public_independent_pathologist_replication/midogpp/expert_2.csv",
+    "sha256": "c8326c46e3680b7b351bff87d8ece027ef0d370a25dd952e22780417b7f1d47a",
+    "size_bytes": 648373
+  },
+  {
+    "path": "data/raw/midogpp/images/038.tiff",
+    "sha256": "5b66d2c843846243bfd4883f66319b4baa9235c10a9cfdda6dd4a3fb89d005c5",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/064.tiff",
+    "sha256": "02dd2b7754e1b2e60e9c4e3117bebe94e56471af3882313b2790f9dc05a0b947",
+    "size_bytes": 150609770
+  },
+  {
+    "path": "data/raw/midogpp/images/073.tiff",
+    "sha256": "d5194b9f18f90eba6cc33bfea159635f0e86755c14624e71adefdb1da1e707c2",
+    "size_bytes": 151263654
+  },
+  {
+    "path": "data/raw/midogpp/images/079.tiff",
+    "sha256": "185bd147d06054b4c1e4f0d55abac6fa36304f1a44a13fe0f32e35f0d8772d99",
+    "size_bytes": 152722358
+  },
+  {
+    "path": "data/raw/midogpp/images/081.tiff",
+    "sha256": "142bb79dd1e27d173b6640e49df53654dcea6cde18dc19775b3f87b8bb37e9fc",
+    "size_bytes": 151485326
+  },
+  {
+    "path": "data/raw/midogpp/images/091.tiff",
+    "sha256": "7658ae2e3ad8a2877dbddcd48a1f7b24df4eaa4ab919817dc6d742b1da48d0cb",
+    "size_bytes": 152916446
+  },
+  {
+    "path": "data/raw/midogpp/images/099.tiff",
+    "sha256": "1b6369ecf54e7b7e1032768f5663efa2e53ab2db6cc9c260e5f32092a7434a70",
+    "size_bytes": 151869878
+  },
+  {
+    "path": "data/raw/midogpp/images/119.tiff",
+    "sha256": "117379d950ed1d0748d127e68c3c76001c508c15dda2380192d83173938d4a56",
+    "size_bytes": 125395302
+  },
+  {
+    "path": "data/raw/midogpp/images/137.tiff",
+    "sha256": "d9c232326ab19b506af06587fdb91cbbf713dc3b87121519fa2f0b1132a01a73",
+    "size_bytes": 124820430
+  },
+  {
+    "path": "data/raw/midogpp/images/145.tiff",
+    "sha256": "5e062cd6c79e46958d6831a3063305ff4aaa99632dc9eb579582bd05a87addc9",
+    "size_bytes": 124469710
+  },
+  {
+    "path": "data/raw/midogpp/images/207.tiff",
+    "sha256": "7144aa776b621530a2d8454a7f46a93280fc7435eb607877b937065bc5a3bf1a",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/213.tiff",
+    "sha256": "5c5a42e697dc0f1f84418be6bead7ec3d0ae719a6f454db9f7299b454036a338",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/219.tiff",
+    "sha256": "1b1d2611149fadd97e0c685a1255396742854eb111c462dffdae340b5d76ed75",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/222.tiff",
+    "sha256": "eafc4a7259733df946af49e5230c9136ddd48463ba578fcc1d5922cf5aa7cb10",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/223.tiff",
+    "sha256": "9385b326f62c8e6a70d007a56285776049713ff4ff8eee9f27b1339b5da306e3",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/231.tiff",
+    "sha256": "071c0ff8464b2faae591d48e949a091f4b80ff9a8a4e9bd98129c84095639615",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/236.tiff",
+    "sha256": "97de3ef2186e08be96f75be3271895a0a63ae5e51e93a80f5da6c2ea35cbddcf",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/237.tiff",
+    "sha256": "eb42ef0dcbf17dca87b1fe3e722ee6c390415ca87915a5d0099d5f084f49ffb1",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/238.tiff",
+    "sha256": "79dfdfe7885863873eff1239bac148984eb42899d3dd315166bc901c578065b7",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/242.tiff",
+    "sha256": "3184d1bcd65062b5a857dd86168a3c687b542d2dcb4239ee45eab328de0865c7",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/245.tiff",
+    "sha256": "ccc6421d55ebca954117635fad7150d20bd170d8070e880fb1eeb5033d8abf0b",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/247.tiff",
+    "sha256": "c0f59e77b59bb2124a7d90d3858f89ca200dac1f92ddeecd1ba2e72fa2b35355",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/253.tiff",
+    "sha256": "22255a02b7fed05575d610541d06db1ab4f4fbdebd9245173db287450e622ece",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/258.tiff",
+    "sha256": "2a241f83b27fd036f73cdd5ffab5635419c64780e90a09277f4a37d6108d8083",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/264.tiff",
+    "sha256": "6da709d5824538d4eea138d994fb97847a72ab2084138ead1bac35adc6453687",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/265.tiff",
+    "sha256": "6ba4679c87e0f675ed3a17d0fe7a7f39ec2a8afbf57e31a0220226a78c16d5a4",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/277.tiff",
+    "sha256": "404d8793e98d8c8688532ef79eda07f536796b6591231676c7541ec3bd531242",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/283.tiff",
+    "sha256": "f2c701cf8bf3b1c26d943d233d6f3e6f4febcc093a420c9cba8db7408e006ebe",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/284.tiff",
+    "sha256": "77a7d344a4e6df587bebd56df17b0fe306d8425ab20023683e8735323e128c56",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/299.tiff",
+    "sha256": "f4af571aae420ad32c87f6bc93a4caf727f951c6e552cce207eab6698e6c2bc9",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/303.tiff",
+    "sha256": "d75487ba8ecd8b435b542b707ce177ab44d8536f239fff924ab7c6fd9f6d7797",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/308.tiff",
+    "sha256": "30662e5e5d9b31165b1303aca5eb78ecc617b23c830e391ad457776737fdaaba",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/309.tiff",
+    "sha256": "2835ecc4026351d7e6e0cac892e46c47a186b408cef79a52918ea5eafde89b81",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/311.tiff",
+    "sha256": "13720b4037a972110f5f77dd032744a186c79e0ef2ba263d4c54e73472452c09",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/315.tiff",
+    "sha256": "b416fc0a2a7c9c165c28101dfdedcb45d4d27cd1c4566bede064eccdfc918a40",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/321.tiff",
+    "sha256": "cf165f71e854b577dd6eae800845cc09cb93ac89403bbf58ba77790bd55eaa92",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/330.tiff",
+    "sha256": "061ae4fe907833f233053eaac3dac28378338324b1d329ca5becebb725de3e84",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/336.tiff",
+    "sha256": "1ba027be942ec9e22a01f27f36688b3cee37a7434efd881821c9513c4cfe0677",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/348.tiff",
+    "sha256": "96330ae92590266388ec5f3d905cf00f40dc9cd964a726830940408aa9e35857",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/349.tiff",
+    "sha256": "7e97aebc63ff98f5237438ee2e7e717bc7e1df3e5bd67ede297485bcd272f888",
+    "size_bytes": 124685186
+  },
+  {
+    "path": "data/raw/midogpp/images/351.tiff",
+    "sha256": "e38bd5c7b62f4f77b1e9b08e71a9a0a07c6e8919bbfa3054199b8c06923cc4ca",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/372.tiff",
+    "sha256": "6c1bbe2db85226cbab10cb6777d81bb4a416b0aacf32635542c7760ca6adda03",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/373.tiff",
+    "sha256": "eb44dfa3f3d042e413f164bc2a347da57f27bf6c8257d9def016fef9ca8f1e50",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/385.tiff",
+    "sha256": "825864d7ece82a27d19b9da4b8767a401ce32133cc920302f6217b69e7b0fea5",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/388.tiff",
+    "sha256": "b86eb09c4dc06b62a163ee5b716d3947cdff05762a38fea9256646ffc8bef699",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/389.tiff",
+    "sha256": "886a34872c5c1bea02fef6b846a928f7416f4ed9e34e9325737a1c222434c323",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/390.tiff",
+    "sha256": "854c9010ad47cf0189b3ef709d7e900d18685553018448375c9bac424884ae7c",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/392.tiff",
+    "sha256": "33e9e6768a13ab078a0e76ffd22ea88e0722c480834163f3da920e947f1d7d51",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/394.tiff",
+    "sha256": "6a1b432a14d23820d16ab0206145c92136a0aa31666503febe99b414ebd24170",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/403.tiff",
+    "sha256": "efe3943eed32e052c6318239a17ff98b9870c3e30f37965005993abfaa3a0f43",
+    "size_bytes": 156190526
+  },
+  {
+    "path": "data/raw/midogpp/images/416.tiff",
+    "sha256": "feb4093a179e42b7812b7b011af6e5a245f6db09897269ba7c345c35c8f1efc3",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/424.tiff",
+    "sha256": "395c1405534445f4e941df07a9e9e2f0217d8b0d795227a6b7f93655e6365999",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/432.tiff",
+    "sha256": "1d1814895fd8f3ddf193584e78d5dd4abefe0c17566670f2c8b49e6f9bd29e5c",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/442.tiff",
+    "sha256": "87ce1335b20a0970c4ca13a53cb9234392d4e875298e16906425f866fcca846b",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/456.tiff",
+    "sha256": "9cf857766afe1ebd187983a9019b426c72816c1fc687248c6162af0477c8941a",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/465.tiff",
+    "sha256": "141d3696270f818fed06abc5861fd8abe5b91d8ff9ac5a5c0ababf5e23ccdf38",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/469.tiff",
+    "sha256": "20c7f4bd202129b7b967b53b19b2038ae483db57ae4129439179c5507d34e25b",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/472.tiff",
+    "sha256": "5973c8c8f744dab5c5cf83ba885886bae42e81d7ca5058d9ed008089654bd02b",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/476.tiff",
+    "sha256": "4a97e9021286f8e0e005a0d1a1e7e43f6e8383c6003b997b9da606de161e5491",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/487.tiff",
+    "sha256": "7c8bf7aab5129547780e45b0049d3b8a4e0e95a153c553ce45a1f95c9f46ec4c",
+    "size_bytes": 129777570
+  },
+  {
+    "path": "data/raw/midogpp/images/509.tiff",
+    "sha256": "df01e29c63abb74a2ccc2649eb3faa24e5fa92c519ee15da401ff3bd093841a2",
+    "size_bytes": 143513966
+  },
+  {
+    "path": "data/raw/midogpp/images/511.tiff",
+    "sha256": "7eda11d2b28575ecf4709169626ac7d848800e5432d5196befcfffeb859e814b",
+    "size_bytes": 169205576
+  },
+  {
+    "path": "data/raw/midogpp/images/517.tiff",
+    "sha256": "38e4cb8a6dd17b6994e903af3fb52ed44b2e68ff5df63948c016e938a72bfe0b",
+    "size_bytes": 154258444
+  },
+  {
+    "path": "data/raw/midogpp/images/518.tiff",
+    "sha256": "eff17c97af47be7fca7530b30c10d8cba72cc9ee7c32119d2b8845d7130cc7cc",
+    "size_bytes": 140482464
+  },
+  {
+    "path": "data/raw/midogpp/images/524.tiff",
+    "sha256": "ebe6a4d240496d16ed9b3ffbab64d4f6013732a4b23205135f023e31622b3a47",
+    "size_bytes": 166605320
+  },
+  {
+    "path": "data/raw/midogpp/images/526.tiff",
+    "sha256": "1b9c76b349fd1bef9a1471c021c3eff7659cdd4388b4d970fc884bb44222cdf2",
+    "size_bytes": 171017680
+  },
+  {
+    "path": "data/raw/midogpp/images/543.tiff",
+    "sha256": "9555cc5825bb3dfdd28a29122693337317d7c5c3fc4560fe4f8ca1ad180071ef",
+    "size_bytes": 139375630
+  },
+  {
+    "path": "data/raw/midogpp/images/544.tiff",
+    "sha256": "8fb3a4973f0fd177dd2edf523662fb4f28eef1dfafbdd895f858db7a87585be0",
+    "size_bytes": 161464878
+  },
+  {
+    "path": "data/raw/midogpp/images/547.tiff",
+    "sha256": "6752f9e5cf1c4a04c36003f5a75fe53cb9aa9483decc1252fae7c84a1eca1f34",
+    "size_bytes": 138145400
+  },
+  {
+    "path": "data/raw/midogpp/images/549.tiff",
+    "sha256": "089d1f078956672eb6aa06abdb28b48bcc4aeacbe6d487254b65edd61c16b01a",
+    "size_bytes": 161439740
+  },
+  {
+    "path": "data/raw/midogpp/images/download_manifest.json",
+    "sha256": "c00d9ce58a73725b68002662755c4f395ab98b7f25bb5bc827a377e335c7bad3",
+    "size_bytes": 26011
+  }
+]

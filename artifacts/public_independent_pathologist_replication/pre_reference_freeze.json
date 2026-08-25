@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "study_id": "public_independent_pathologist_replication_v1",
+  "config_sha256": "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321",
+  "reference_opened": false,
+  "evaluation_run": false,
+  "all_models_converged": true,
+  "all_score_seals_report_hidden_reference_false": true,
+  "riva_execution_source_commit": "f9592ecf7a1f333e9244b9328eba963dfb017a98",
+  "midogpp_execution_source_commit": "81bd5b76680d02af786c1f4f8e39dbcb70cad6cb",
+  "runtime_amendments": [
+    "PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT.md",
+    "PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT_V2.md",
+    "PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT_V3.md",
+    "PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT_V4.md"
+  ],
+  "score_seals": [
+    {
+      "dataset": "midogpp",
+      "rotation": "expert_1",
+      "score_population_count": 3612,
+      "path": "artifacts/public_independent_pathologist_replication/midogpp/pre_reference_scores/expert_1/score_seal.json",
+      "seal_sha256": "7b4a7b67ea188d1c3b0273a0e2cb8d40b1c151a105c6a1652e504daa25af79ad",
+      "scored_input_sha256": "900581373983a581212fbd052550dad0da58795c7c47657d4a61a6a425ca04bf",
+      "fold_evidence_sha256": "3834a14fb385e25e49000426ddddadaefee2be06b21ec20f36ef642bc159a47c",
+      "source_inventory_sha256": "96b0103c0abf989de599894ec144c6360e1e7e62f8d735c0b44f98c0aae03a2b"
+    },
+    {
+      "dataset": "midogpp",
+      "rotation": "expert_2",
+      "score_population_count": 3612,
+      "path": "artifacts/public_independent_pathologist_replication/midogpp/pre_reference_scores/expert_2/score_seal.json",
+      "seal_sha256": "e6dd03a156966e7907cb3785cea7eb96af255a18fe5de6e2d11c79c711b70c5d",
+      "scored_input_sha256": "8c9671dc33e650306043c9b41f7afebf047a5093e61500bc9f84d029d9dbb76d",
+      "fold_evidence_sha256": "3d90f0829ea8dcbf87a1c051cb5e3fb38b34a43f4a1b5d35927525b3ac42bed7",
+      "source_inventory_sha256": "909f5a90cfbcb5816b35420c9c47e09f8b90ff6cce9a35109fa3dd6ef67576f4"
+    },
+    {
+      "dataset": "riva",
+      "rotation": "annotator_1",
+      "score_population_count": 8171,
+      "path": "artifacts/public_independent_pathologist_replication/riva/pre_reference_scores/annotator_1/score_seal.json",
+      "seal_sha256": "9a235b3fb0526ca7f27b55806d7e10e6379689e201213e3b45b14d3feae3cf3f",
+      "scored_input_sha256": "d36445df00c4e96169feb14d25eb5e471d9bb57edb5076b4e4ce1ed46a8cf49b",
+      "fold_evidence_sha256": "76d0b2622dfe8ad7f4940472f55690ed9fdbd2ef8686abb7e07d341fc99b152b",
+      "source_inventory_sha256": "a1750cd40333ba752ff8338a963ac1d93630d866739ba3b1ebcb12f99485abe5"
+    },
+    {
+      "dataset": "riva",
+      "rotation": "annotator_2",
+      "score_population_count": 7440,
+      "path": "artifacts/public_independent_pathologist_replication/riva/pre_reference_scores/annotator_2/score_seal.json",
+      "seal_sha256": "75cbf73696940061cdf9775aca2e07ebb75bbef1071a59ac0f825e408a424d16",
+      "scored_input_sha256": "5cf701edadaa9b57a54140ec681bf8f26146eeb2cf7eabbb7382a6506d28a3a5",
+      "fold_evidence_sha256": "15b4b31c27f01be467963c896a394ef5e54d61df88965bcd22d1dcdeecf285b3",
+      "source_inventory_sha256": "7f339092ee9a04a72b56a67b106e4b8cca6b1c2b467483d4f6492d25c949f4ed"
+    },
+    {
+      "dataset": "riva",
+      "rotation": "annotator_3",
+      "score_population_count": 5766,
+      "path": "artifacts/public_independent_pathologist_replication/riva/pre_reference_scores/annotator_3/score_seal.json",
+      "seal_sha256": "beb7b8a98fa5e1b4d526db589d497c8be63c41421b72dffccee88f571683ac0a",
+      "scored_input_sha256": "cceaaa1e2e358e5bed7c9af98dad3ab7af8fb78d211b32652f3d5f4515374f5b",
+      "fold_evidence_sha256": "8260941c33a85177b866cbee3515e5d65b34c923856239bf26b24e6aa0d24779",
+      "source_inventory_sha256": "455796d8ea100d23db0051e52f3aa68c9a6170143099fc8d29a111e4c6ab16b9"
+    },
+    {
+      "dataset": "riva",
+      "rotation": "annotator_4",
+      "score_population_count": 4781,
+      "path": "artifacts/public_independent_pathologist_replication/riva/pre_reference_scores/annotator_4/score_seal.json",
+      "seal_sha256": "9fe270a0cac02862ca67858402217b1252c158a84afe79c577400e71a6433458",
+      "scored_input_sha256": "109222af52f4a050d9612d6174dfdfa727ba74cb07926f473ae8bb890487e164",
+      "fold_evidence_sha256": "43281c7dd8248b7c001c5e988d37331c1d1e3a6c852927e03f4e2bae6ac04b1d",
+      "source_inventory_sha256": "c4e07f1cb3eb62cd2c1d2284dbcb725b7d0d4fa20a1f42f15d48283a942f4ed8"
+    }
+  ]
+}

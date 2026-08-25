@@ -1463,3 +1463,30 @@ still fails closed. It changes no data selection or scientific rule, and the fro
 config SHA-256 remains unchanged.
 Post-v4 validation passed: `1175 passed, 1 skipped` in 603.52 seconds, full Ruff
 lint/format passed and mypy reported no issues in 105 source files.
+
+### Public pre-reference score freeze — 2026-08-26
+
+All six process-isolated scoring rotations completed before either hidden reference
+was opened. Every five-fold model converged, all splitters used
+`StratifiedGroupKFold`, all neighbour lists excluded the query group and every score
+seal reports `hidden_reference_loaded: false`, `full_annotation_source_opened: false`
+and `reference_authority_opened: false`.
+
+Score populations and sealed CSV SHA-256 values:
+
+- RIVA `annotator_1`: 8,171,
+  `d36445df00c4e96169feb14d25eb5e471d9bb57edb5076b4e4ce1ed46a8cf49b`;
+- RIVA `annotator_2`: 7,440,
+  `5cf701edadaa9b57a54140ec681bf8f26146eeb2cf7eabbb7382a6506d28a3a5`;
+- RIVA `annotator_3`: 5,766,
+  `cceaaa1e2e358e5bed7c9af98dad3ab7af8fb78d211b32652f3d5f4515374f5b`;
+- RIVA `annotator_4`: 4,781,
+  `109222af52f4a050d9612d6174dfdfa727ba74cb07926f473ae8bb890487e164`;
+- MIDOG++ `expert_1`: 3,612,
+  `900581373983a581212fbd052550dad0da58795c7c47657d4a61a6a425ca04bf`;
+- MIDOG++ `expert_2`: 3,612,
+  `8c9671dc33e650306043c9b41f7afebf047a5093e61500bc9f84d029d9dbb76d`.
+
+The machine-readable authority is
+`artifacts/public_independent_pathologist_replication/pre_reference_freeze.json`.
+Evaluation has not run and no reference association is known at this checkpoint.
