@@ -367,6 +367,25 @@ Status: completed engineering maintenance; no new scientific completion stage cl
 The executed inventory and final deletion boundary are in
 [`reports/repository_maintenance_2026-08-21.md`](reports/repository_maintenance_2026-08-21.md).
 
+### M22 — Public independent-pathologist replication
+
+Status: protocol and implementation frozen; outcome execution not yet started
+
+- retain the selected development candidate without dataset-specific tuning;
+- run four leave-one-out RIVA rotations against strict independent-vote majorities;
+- run two pairwise MIDOG++ rotations on a label-independent 70-case hash sample;
+- terminate the process between input-only snapshot creation, reference-blind scoring
+  and hidden-reference evaluation;
+- use group-safe OOF predictions, fold-safe neighbours, exact disjoint matched-random
+  controls and group-cluster bootstrap intervals;
+- require both prospectively fixed dataset gates before claiming cross-dataset
+  disagreement-enrichment replication;
+- preserve every earlier positive and negative authority and keep the natural-data
+  action at `retain_uncorrected`.
+
+The frozen authority is
+[`PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md`](PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md).
+
 ## Open scientific milestones
 
 These require new evidence and cannot be completed by software refactoring.

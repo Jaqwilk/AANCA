@@ -732,3 +732,33 @@ non-adjudicated and non-prospective boundary directly on the page. Bump the publ
 evidence and package-manifest schemas so an older verifier cannot silently accept
 the expanded evidence contract. Publishing this result changes neither source
 annotations nor any completion stage.
+
+## D045 — Replicate natural disagreement enrichment on RIVA and MIDOG++
+
+Status: protocol and implementation frozen before AANCA/reference association inspection
+
+Retain the frozen 64+128 px AANCA candidate and add two public, additive validations.
+Use RIVA as the primary four-rotation multi-rater study in three prospectively mapped
+cytology audit classes. Remove the input pathologist and require a strict majority of
+at least two other official raw cluster votes. Never use RIVA's released majority label
+as the reference.
+
+Use MIDOG++ as a secondary two-rotation pairwise study. Select exactly ten available
+cases from each of seven tumor types by a label-independent SHA-256 filename rule.
+Alternate the first and second recorded expert labels as input and reference; do not
+use the adjudicator label or final category in the primary endpoint. This is pairwise
+replication rather than consensus validation.
+
+Enforce a process boundary between input-only snapshot creation, group-safe OOF
+scoring, and hidden-reference evaluation. At 5%, compare each rotation with 100
+disjoint equal-budget random queues exactly matched on group, observed class and OOF
+proposed transition. Bootstrap complete smear/case groups across all rotations. A
+dataset passes only if its aggregate precision-difference lower 95% bound is above
+zero and every rotation point estimate is non-negative. Cross-dataset replication
+requires both dataset gates.
+
+The protocol is additive to the immutable NuCLS study and the frozen base
+preregistration; it does not amend either. A positive outcome can support only
+enrichment for potentially inconsistent annotations recommended for expert review.
+It cannot establish pathologist error, clinical validity, downstream utility,
+prospective workflow superiority or permission to change annotations automatically.

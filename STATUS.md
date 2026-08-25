@@ -1356,3 +1356,50 @@ Local reproduction of the maintained CI gates after the correction:
 
 Scientific and presentation completion stages remain `EXTERNAL_VALIDATION_COMPLETE`
 and `DEMO_COMPLETE`.
+
+## Public independent-pathologist replication pre-outcome freeze — 2026-08-25
+
+An additive RIVA and MIDOG++ replication was defined without changing the frozen
+AANCA candidate or any earlier evidence. The controlling config SHA-256 is
+`1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321`.
+No AANCA score/reference association has been inspected at this checkpoint.
+
+Outcome-blind feasibility and source authentication completed:
+
+- RIVA v1.0 archive MD5 matched `89329be851bac81c7b13bde413ae6a6f`;
+  the release contains 959 images, 26,158 annotations and 111 derived smear groups;
+- the official RIVA cluster authority is pinned to upstream commit
+  `711dfc2c1180d409346f5f94d0cd0ceb485c4ca6` and contains 17,716 raw rows in
+  7,507 clusters from 386 shared fields;
+- MIDOG++ JSON MD5 matched `686c91bcabcc079a000a5be13cc2f542`, and the official
+  availability CSV MD5 matched `65a95814f30a9ebf8312906d2cd7f0ea`;
+- the frozen label-independent MIDOG++ rule selected 70 cases, ten from each of seven
+  tumor types, containing 3,612 candidates and requiring about 9.0 GiB of TIFF data.
+
+The process-isolated `prepare` commands completed and emitted only observed label,
+geometry, image and group fields:
+
+- RIVA rotations: 8,171 / 7,440 / 5,766 / 4,781 rows across 54 / 53 / 53 / 53
+  groups;
+- MIDOG++ rotations: 3,612 rows each across 70 case groups;
+- every snapshot has `hidden_reference_used: false` and passes the forbidden-field
+  control.
+
+Pre-outcome implementation checks completed:
+
+- focused public-replication tests: `6 passed`;
+- full `pytest`: `1171 passed, 1 skipped` in 582.08 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- full Ruff lint and format check: passed, 223 maintained Python files formatted;
+- full mypy: no issues in 105 source files;
+- RIVA and MIDOG++ input-only functional CLI stages: passed;
+- `git diff --check`: passed.
+
+The next command after publishing this freeze is:
+
+```text
+uv run python scripts/run_public_pathologist_replication.py download --dataset midogpp
+```
+
+The current scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`; this checkpoint
+does not add an efficacy result or change the natural-data action `retain_uncorrected`.

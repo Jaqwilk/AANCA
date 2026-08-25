@@ -1,0 +1,123 @@
+schema_version: 1
+study_id: public_independent_pathologist_replication_v1
+project: AANCA
+protocol: PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md
+freeze_date: 2026-08-25
+protocol_and_execution_same_change: true
+reference_feasibility_counts_inspected_at_freeze: true
+aanca_reference_association_inspected_at_freeze: false
+replacement_project_or_v2: false
+
+candidate:
+  record: configs/aanca_selected_development_candidate.yaml
+  sha256: 78547a73ef239dab11aee66e8b9b787e84508b82f6ace7bb81dc725f38803ffe
+  feature_view: resnet18_multiscale_64_128
+  crop_sizes: [64, 128]
+  resnet18_weights: IMAGENET1K_V1
+  audit_l2: 0.1
+  audit_class_weight_balanced: false
+  audit_max_iter: 400
+  oof_folds: 5
+  split_seed: 26082510
+  risk_method: fixed_hybrid
+  neighbour_k: 31
+  neighbour_metric: cosine
+  hybrid_self_confidence_weight: 0.6
+  hybrid_neighbour_weight: 0.4
+  score_population: all_mappable_input_annotations_in_frozen_dataset_scope
+  endpoint_queue: per_rotation_global_risk_exact_comparator_capable
+
+evaluation:
+  primary_budget: 0.05
+  secondary_budgets: [0.01, 0.02, 0.05, 0.10]
+  budget_rounding: ceil_minimum_1
+  matched_random_fields: [group_id, observed_class, proposed_transition]
+  matched_random_repetitions: 100
+  matched_random_seed: 26082520
+  require_disjoint_comparator: true
+  require_exact_stratum_counts: true
+  bootstrap_iterations: 5000
+  bootstrap_seed: 26082530
+  interval: percentile_95
+  dataset_success_rule: aggregate_precision_difference_lower_95_gt_0_and_all_rotation_points_nonnegative
+  cross_dataset_success_rule: riva_gate_and_midogpp_gate
+
+datasets:
+  riva:
+    role: primary_multi_rater_replication
+    release: RIVA_1.0
+    zenodo_record: "17288879"
+    archive: data/raw/riva/riva_1.0.zip
+    archive_md5: 89329be851bac81c7b13bde413ae6a6f
+    annotations: data/raw/riva/annotations/annotations.json
+    annotations_sha256: 5aa53cb0257a372388ea240d0da5ce1faf8fba155d211936dbf96b4783909292
+    images_directory: data/raw/riva/images
+    archive_license: data/raw/riva/annotations/license.txt
+    cluster_table: data/raw/riva/upstream/Raw annotations and clustering/processed_annotations/curated_clusters.csv
+    cluster_table_sha256: 91234d85992871cfc632fa03b3af7838496242761196d10fe5248605b27a3584
+    upstream_repository: https://github.com/LIA-DiTella/RIVA
+    upstream_commit: 711dfc2c1180d409346f5f94d0cd0ceb485c4ca6
+    input_snapshot_directory: data/interim/public_independent_pathologist_replication/riva
+    rotations: [annotator_1, annotator_2, annotator_3, annotator_4]
+    official_annotator_ids:
+      annotator_1: 13
+      annotator_2: 12
+      annotator_3: 11
+      annotator_4: 10
+    group_unit: smear_id_derived_from_image_stem
+    minimum_groups: 20
+    class_order: [non_lesion, low_grade_or_equivocal, high_grade_or_malignant]
+    class_mapping:
+      non_lesion: [NILM, INFL, ENDO]
+      low_grade_or_equivocal: [ASCUS, LSIL]
+      high_grade_or_malignant: [ASCH, HSIL, SCC]
+    minimum_independent_votes: 2
+    consensus_rule: strict_majority_after_leave_one_out
+    official_released_majority_label_forbidden: true
+    bootstrap_unit: smear_id
+
+  midogpp:
+    role: secondary_pairwise_replication
+    figshare_collection: "6615571"
+    json_article: "23531121"
+    annotations: data/raw/midogpp/MIDOG++.json
+    annotations_md5: 686c91bcabcc079a000a5be13cc2f542
+    annotations_sha256: 8c87ab4276eb11f6b6b5ac0d956b89dad7568a5474e0904b653d54dc68091f47
+    availability_article: "23559798"
+    availability_manifest: data/raw/midogpp/datasets_xvalidation.csv
+    availability_manifest_md5: 65a95814f30a9ebf8312906d2cd7f0ea
+    availability_manifest_sha256: 472c90213218112618d1361805d1389f5952439e527c7f6abd4ab8eae42d0633
+    images_directory: data/raw/midogpp/images
+    input_snapshot_directory: data/interim/public_independent_pathologist_replication/midogpp
+    selection_salt: public_independent_pathologist_replication_v1
+    images_per_tumor_type: 10
+    expected_tumor_type_count: 7
+    expected_selected_image_count: 70
+    rotations: [expert_1, expert_2]
+    label_positions:
+      expert_1: 0
+      expert_2: 1
+    group_unit: image_case_id
+    minimum_groups: 50
+    class_order: [mitotic_figure, not_mitotic_figure]
+    class_mapping:
+      mitotic_figure: 1
+      not_mitotic_figure: 2
+    final_category_forbidden: true
+    adjudicator_label_forbidden: true
+    bootstrap_unit: image_case_id
+
+outputs:
+  directory: artifacts/public_independent_pathologist_replication
+  riva_directory: riva
+  midogpp_directory: midogpp
+  report: reports/public_independent_pathologist_replication_results.md
+
+claim_boundary:
+  independent_pathologist_disagreement_enrichment_if_positive: true
+  pathologist_error_detection_proven: false
+  clinical_error_detection_proven: false
+  prospective_workflow_superiority_proven: false
+  downstream_utility_proven: false
+  automatic_annotation_change_permitted: false
+  source_annotations_modified: false
