@@ -1403,3 +1403,19 @@ uv run python scripts/run_public_pathologist_replication.py download --dataset m
 
 The current scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`; this checkpoint
 does not add an efficacy result or change the natural-data action `retain_uncorrected`.
+
+### Pre-outcome MIDOG++ downloader runtime amendment — 2026-08-25
+
+After public freeze commit `3a805ee46f96309642de9aa3d3af25cd9c881aed`, the first
+MIDOG++ download command stopped before downloading any TIFF because the unstable
+Figshare collection pagination repeated the same `472.tiff` authority. No AANCA score
+or AANCA/reference association existed. Direct readback authenticated the one genuine
+file authority and showed no content conflict.
+
+The additive runtime amendment
+[`PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT.md`](PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_RUNTIME_AMENDMENT.md)
+deduplicates article IDs, permits only byte-identical repeated file authorities and
+fails closed on size, MD5 or URL conflict. It changes no scientific input, selection,
+label, group, model, endpoint or gate; the frozen config SHA-256 remains unchanged.
+Post-amendment validation passed: `1172 passed, 1 skipped` in 582.96 seconds, full
+Ruff lint/format passed and mypy reported no issues in 105 source files.

@@ -510,6 +510,26 @@ def _fetch_json(url: str) -> Any:
         return json.load(response)
 
 
+def _register_figshare_authority(
+    authorities: dict[str, dict[str, Any]], candidate: Mapping[str, Any]
+) -> None:
+    """Deduplicate an identical paginated authority and fail on content conflict."""
+
+    name = str(candidate["file_name"])
+    normalized = dict(candidate)
+    existing = authorities.get(name)
+    if existing is None:
+        authorities[name] = normalized
+        return
+    immutable_fields = ("file_name", "size_bytes", "supplied_md5", "download_url")
+    if any(existing[field] != normalized[field] for field in immutable_fields):
+        raise RuntimeError(f"conflicting MIDOG++ Figshare file authorities: {name}")
+    existing_identity = (int(existing["article_id"]), int(existing["file_id"]))
+    candidate_identity = (int(normalized["article_id"]), int(normalized["file_id"]))
+    if candidate_identity < existing_identity:
+        authorities[name] = normalized
+
+
 def download_midogpp_selected_images(repository_root: str | Path) -> dict[str, Any]:
     """Download and checksum only the prospectively hash-selected 70 TIFF cases."""
 
@@ -530,6 +550,12 @@ def download_midogpp_selected_images(repository_root: str | Path) -> dict[str, A
         articles.extend(batch)
         if len(batch) < 100:
             break
+    articles = list(
+        {
+            int(article["id"]): article
+            for article in sorted(articles, key=lambda item: int(item["id"]))
+        }.values()
+    )
 
     def load_article(article: Mapping[str, Any]) -> Mapping[str, Any]:
         return cast(Mapping[str, Any], _fetch_json(str(article["url"])))
@@ -540,16 +566,17 @@ def download_midogpp_selected_images(repository_root: str | Path) -> dict[str, A
             for raw_file in cast(Sequence[Mapping[str, Any]], article.get("files", [])):
                 name = str(raw_file["name"])
                 if name in selected_names:
-                    if name in authorities:
-                        raise RuntimeError(f"duplicate MIDOG++ Figshare file authority: {name}")
-                    authorities[name] = {
-                        "article_id": int(article["id"]),
-                        "file_id": int(raw_file["id"]),
-                        "file_name": name,
-                        "size_bytes": int(raw_file["size"]),
-                        "download_url": str(raw_file["download_url"]),
-                        "supplied_md5": str(raw_file["supplied_md5"]).casefold(),
-                    }
+                    _register_figshare_authority(
+                        authorities,
+                        {
+                            "article_id": int(article["id"]),
+                            "file_id": int(raw_file["id"]),
+                            "file_name": name,
+                            "size_bytes": int(raw_file["size"]),
+                            "download_url": str(raw_file["download_url"]),
+                            "supplied_md5": str(raw_file["supplied_md5"]).casefold(),
+                        },
+                    )
     if set(authorities) != set(selected_names):
         missing = sorted(set(selected_names).difference(authorities))
         raise RuntimeError(f"Figshare did not expose every frozen MIDOG++ image: {missing}")

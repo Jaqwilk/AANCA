@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 import histo_audit.external_validation.public_pathologist_replication as module
 from histo_audit.external_validation.nucls_independent_pathologist import InputPreparedData
@@ -52,6 +53,24 @@ def test_midogpp_hash_selection_is_label_independent_and_deterministic() -> None
     assert len(first) == 6
     assert {item["tumor_type"] for item in first} == {"a", "b"}
     assert all("label" not in item and "category" not in item for item in first)
+
+
+def test_figshare_authority_deduplicates_identical_pages_and_rejects_conflicts() -> None:
+    authorities: dict[str, dict[str, object]] = {}
+    first = {
+        "article_id": 2,
+        "file_id": 20,
+        "file_name": "001.tiff",
+        "size_bytes": 100,
+        "download_url": "https://example.test/file/20",
+        "supplied_md5": "abc",
+    }
+    duplicate = {**first, "article_id": 1, "file_id": 10}
+    module._register_figshare_authority(authorities, first)
+    module._register_figshare_authority(authorities, duplicate)
+    assert authorities["001.tiff"]["article_id"] == 1
+    with pytest.raises(RuntimeError, match="conflicting MIDOG"):
+        module._register_figshare_authority(authorities, {**duplicate, "size_bytes": 101})
 
 
 def test_dynamic_public_scoring_is_group_safe() -> None:
