@@ -1,7 +1,7 @@
 # AANCA presentation MVP
 
 This thirteen-file, read-only article package was generated from checksum-verified
-PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
+PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++ result
 authorities. The accepted PanNuke run is `20260727T133947.089370Z_pannuke_primary_orphan_recovery`.
 
 From the repository root, verify the complete package and open it locally:
@@ -32,12 +32,17 @@ With the project environment installed, `uv run histo-audit demo serve` and
   retrieval passed while downstream and class-safety gates failed; the frozen PUMA
   controlled confirmation passed all seven internally pre-specified gates. The NuCLS
   LOO and PUMA records do not have independent public pre-outcome timestamps.
+- Public independent-expert replication: the pre-reference scores were published
+  first, then both frozen RIVA and MIDOG++ gates passed across six rotations in total.
+  This supports disagreement enrichment in those releases, not adjudicated error.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
 
 The positive PUMA result supports transfer under controlled label noise. The NuCLS
-LOO result supports disagreement enrichment for the eligible `JP.1` cohort only.
+LOO result supports disagreement enrichment for the eligible `JP.1` cohort only; the
+separate RIVA x MIDOG++ experiment replicated disagreement enrichment across two
+public datasets and six rotations.
 Neither shows that AANCA detects pathologist errors, discovers biological truth,
 improves a real laboratory workflow or is clinically useful. The software never
 modifies source annotations automatically; it ranks potentially inconsistent
@@ -83,4 +88,4 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 23 August 2026.
+Author: Natan Smogór. Updated: 26 August 2026.

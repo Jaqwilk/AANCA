@@ -32,6 +32,15 @@ biological error. The result supports only review-queue enrichment in this eligi
 cohort; it does not override the earlier adverse downstream result, validate the
 deployment queue, or establish safe automatic correction.
 
+A separate public RIVA and MIDOG++ replication preserved a public score-before-
+reference sequence and passed both frozen dataset gates across six rotations. The
+positive aggregate precision-difference intervals support cross-dataset enrichment
+for independent-expert disagreement. RIVA uses strict majorities of other raw votes;
+MIDOG++ uses the other expert's label without the adjudicator or final category.
+Neither reference identifies guaranteed biological truth. This result does not prove
+which pathologist is correct, validate automatic intervention, measure downstream
+utility or establish prospective clinical workflow benefit.
+
 The frozen MoNuSAC controlled external benchmark retrieved injected changes more
 efficiently than matched random review, but its downstream interval crossed zero and
 its important-class safety rule failed. The frozen PUMA new-source controlled

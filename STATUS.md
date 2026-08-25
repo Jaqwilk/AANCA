@@ -1490,3 +1490,64 @@ Score populations and sealed CSV SHA-256 values:
 The machine-readable authority is
 `artifacts/public_independent_pathologist_replication/pre_reference_freeze.json`.
 Evaluation has not run and no reference association is known at this checkpoint.
+
+## Public independent-pathologist cross-dataset result — 2026-08-26
+
+Commit `09aede5000c43406759a432b674f6db37db98b26` was confirmed identical on local
+`HEAD` and `origin/main` before either hidden reference was opened. Both evaluation
+commands authenticated every pre-reference score seal and did not recompute risks.
+
+The frozen primary outcomes are:
+
+- RIVA: 571 reviewed rotation-rows among 11,373 eligible; disagreement precision
+  `0.476357` versus `0.426900` across 100 exact matched-random queues; difference
+  `+0.049457`, enrichment `1.115852`, whole-group bootstrap 95% CI for the
+  difference `[+0.014037, +0.091632]` across 33 source-image groups;
+- MIDOG++: 362 reviewed rotation-rows among 7,224 eligible; disagreement precision
+  `0.325967` versus `0.249392`; difference `+0.076575`, enrichment `1.307045`,
+  whole-group bootstrap 95% CI `[+0.021352, +0.138159]` across 70 image groups;
+- every point difference was non-negative in all four RIVA rotations and both
+  MIDOG++ rotations;
+- the RIVA and MIDOG++ dataset gates both passed, so the frozen cross-dataset
+  replication rule passed;
+- `verify --dataset riva` and `verify --dataset midogpp` both returned
+  `verification_passed: true`.
+
+The completion stage remains `EXTERNAL_VALIDATION_COMPLETE`. The positive result
+supports enrichment for natural independent-expert disagreement in these two public
+releases. It does not prove that a pathologist was wrong, establish clinical or
+downstream utility, validate a prospective workflow or permit automatic annotation
+changes. Source annotations were not modified and the binding natural-data action
+remains `retain_uncorrected`.
+
+The human-readable authority is
+[`reports/public_independent_pathologist_replication_results.md`](reports/public_independent_pathologist_replication_results.md),
+and the machine authorities are under
+`artifacts/public_independent_pathologist_replication`. The presentation builder now
+fail-closes on both dataset gates, the six-rotation boundary and the pre-reference
+information barrier. Its updated 13-file package passed standalone checksum
+verification with manifest root
+`86bbcb32c515688c05e4f31567a73e0f234c157556daf26aa561223a899a2a08`.
+
+Final local validation for the result and publication update:
+
+- full `pytest`: `1175 passed, 1 skipped` in 593.53 seconds; the skip is the
+  documented Windows/POSIX open-file rename difference;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 223 maintained Python files formatted;
+- `mypy src`: no issues in 105 source files;
+- RIVA and MIDOG++ frozen evidence recalculation: both primary gates and both
+  `verification_passed` flags true;
+- combined report regeneration: `cross_dataset_replication_supported: true`;
+- standalone presentation verification: valid 13-file package with manifest root
+  `86bbcb32c515688c05e4f31567a73e0f234c157556daf26aa561223a899a2a08`;
+- Playwright local-browser readback: the RIVA x MIDOG++ card exposed both frozen
+  comparisons and the claim boundary; console reported zero errors and warnings;
+- `git diff --check`: passed.
+
+Hostinger publication was attempted through the configured
+`mediumaquamarine-wombat-125861.hostingersite.com` manifest. The prescribed local
+build/verification passed with the current manifest root, but SFTP authentication
+for the configured profile failed before backup or upload. No backup ID was created
+and no remote file changed. The checked-in and GitHub-published static package is the
+current deploy authority until that credential is restored.

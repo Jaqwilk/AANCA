@@ -141,8 +141,8 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
 
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 5
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v5"
+        manifest.get("schema_version") != 6
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v6"
     ):
         raise ValueError("presentation manifest schema or policy differs")
     records = manifest.get("files")
@@ -180,6 +180,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
     external_completed = evidence.get("external_validation_completed")
     external = evidence.get("external_validation")
     independent = evidence.get("independent_pathologist_validation")
+    public_replication = evidence.get("public_independent_pathologist_replication")
     controlled = evidence.get("controlled_external_benchmark")
     puma = evidence.get("new_source_confirmation")
     stress = evidence.get("realism_stress")
@@ -221,6 +222,51 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and independent.get("claim_boundary", {}).get("downstream_or_clinical_utility_proven")
         is False
         and independent.get("claim_boundary", {}).get("source_annotations_modified") is False
+    )
+    public_replication_scope_valid = (
+        isinstance(public_replication, dict)
+        and public_replication.get("study_id") == "public_independent_pathologist_replication_v1"
+        and public_replication.get("completion_stage") == "EXTERNAL_VALIDATION_COMPLETE"
+        and public_replication.get("decision") == "cross_dataset_disagreement_enrichment_supported"
+        and public_replication.get("cross_dataset_replication_supported") is True
+        and public_replication.get("information_barrier", {}).get(
+            "pre_reference_scores_published_before_reference_evaluation"
+        )
+        is True
+        and public_replication.get("information_barrier", {}).get(
+            "risks_recomputed_after_reference"
+        )
+        is False
+        and public_replication.get("datasets", {}).get("riva", {}).get("rotation_count") == 4
+        and public_replication.get("datasets", {}).get("midogpp", {}).get("rotation_count") == 2
+        and all(
+            public_replication.get("datasets", {}).get(dataset, {}).get("primary_gate_pass") is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("all_rotation_point_differences_nonnegative")
+            is True
+            and public_replication.get("datasets", {}).get(dataset, {}).get("exact_equal_budget")
+            is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("exact_strata_preserved")
+            is True
+            and public_replication.get("datasets", {}).get(dataset, {}).get("aanca_random_disjoint")
+            is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("precision_difference_interval_95", [0.0])[0]
+            > 0.0
+            for dataset in ("riva", "midogpp")
+        )
+        and public_replication.get("claim_boundary", {}).get(
+            "independent_pathologist_disagreement_enrichment_if_positive"
+        )
+        is True
+        and public_replication.get("claim_boundary", {}).get("pathologist_error_detection_proven")
+        is False
+        and public_replication.get("claim_boundary", {}).get("downstream_utility_proven") is False
+        and public_replication.get("claim_boundary", {}).get("source_annotations_modified") is False
     )
     controlled_scope_valid = (
         isinstance(controlled, dict)
@@ -294,13 +340,14 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and len(next_phase["required_gates"]) == 5
     )
     if (
-        evidence.get("schema_version") != 4
+        evidence.get("schema_version") != 5
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
         or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
         or not external_scope_valid
         or not independent_scope_valid
+        or not public_replication_scope_valid
         or not controlled_scope_valid
         or not puma_scope_valid
         or not stress_scope_valid

@@ -1048,6 +1048,101 @@
     "statistics_sha256": "c3685fe9863fd73b1298f0558212cb5267b07c3ce6e4e4f37018dec55c115ac0"
   },
   "primary_study_status": "PRIMARY_STUDY_COMPLETE",
+  "public_independent_pathologist_replication": {
+    "claim_boundary": {
+      "automatic_annotation_change_permitted": false,
+      "clinical_error_detection_proven": false,
+      "downstream_utility_proven": false,
+      "independent_pathologist_disagreement_enrichment_if_positive": true,
+      "pathologist_error_detection_proven": false,
+      "prospective_workflow_superiority_proven": false,
+      "source_annotations_modified": false
+    },
+    "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+    "config_sha256": "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321",
+    "cross_dataset_replication_supported": true,
+    "datasets": {
+      "midogpp": {
+        "aanca_precision": 0.3259668508287293,
+        "aanca_random_disjoint": true,
+        "all_rotation_point_differences_nonnegative": true,
+        "bootstrap_iterations": 5000,
+        "budget_fraction": 0.05,
+        "dataset": "midogpp",
+        "disagreements_found": 118,
+        "eligible_rotation_rows": 7224,
+        "enrichment_ratio": 1.3070447496677,
+        "enrichment_ratio_interval_95": [
+          1.0891635868101663,
+          1.5217439959518897
+        ],
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "group_count": 70,
+        "mean_matched_random_precision": 0.24939226519337024,
+        "precision_difference": 0.07657458563535904,
+        "precision_difference_interval_95": [
+          0.021351610360909327,
+          0.13815898534269191
+        ],
+        "primary_gate_pass": true,
+        "reference_type": "independent_pairwise_expert_label",
+        "reviewed_rotation_rows": 362,
+        "rotation_count": 2
+      },
+      "riva": {
+        "aanca_precision": 0.4763572679509632,
+        "aanca_random_disjoint": true,
+        "all_rotation_point_differences_nonnegative": true,
+        "bootstrap_iterations": 5000,
+        "budget_fraction": 0.05,
+        "dataset": "riva",
+        "disagreements_found": 272,
+        "eligible_rotation_rows": 11373,
+        "enrichment_ratio": 1.115851657367903,
+        "enrichment_ratio_interval_95": [
+          1.0293110038034157,
+          1.3004914258794666
+        ],
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "group_count": 33,
+        "mean_matched_random_precision": 0.4269001751313485,
+        "precision_difference": 0.049457092819614745,
+        "precision_difference_interval_95": [
+          0.014036501067775679,
+          0.09163226890687977
+        ],
+        "primary_gate_pass": true,
+        "reference_type": "strict_leave_one_out_majority",
+        "reviewed_rotation_rows": 571,
+        "rotation_count": 4
+      }
+    },
+    "decision": "cross_dataset_disagreement_enrichment_supported",
+    "information_barrier": {
+      "pre_reference_scores_published_before_reference_evaluation": true,
+      "risks_recomputed_after_reference": false
+    },
+    "sources": {
+      "midogpp": {
+        "path": "artifacts/public_independent_pathologist_replication/midogpp/results.json",
+        "sha256": "d259e63254930c206932c237e5993c368a82fbf212239f81d1a05b36f78c715d",
+        "size_bytes": 15415
+      },
+      "riva": {
+        "path": "artifacts/public_independent_pathologist_replication/riva/results.json",
+        "sha256": "2a234d438e3850faadcd20a11494f91e592a8dfa16c6bcb3487ae6604b7f2b1b",
+        "size_bytes": 25813
+      },
+      "summary": {
+        "path": "artifacts/public_independent_pathologist_replication/summary.json",
+        "sha256": "b6b438ee9ad956562efe8499d2e099682de6a335c2f0b1abbcbd7296c8904b80",
+        "size_bytes": 870
+      }
+    },
+    "study_id": "public_independent_pathologist_replication_v1"
+  },
   "publication_limits": {
     "puma_downstream_intervention": "flag_exclude_top_5_percent_training_rows",
     "puma_first_public_combined_commit": "c5bd44193b2abd67bc7e7f1bd9384aa87435d500",
@@ -1080,7 +1175,7 @@
     },
     "study_id": "puma_realism_stress_v1"
   },
-  "schema_version": 4,
+  "schema_version": 5,
   "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
     "findings_story_script_asset": {
@@ -1149,6 +1244,21 @@
         "path": "artifacts/nucls_supervised_qc_feasibility/results.json",
         "sha256": "e95dd1416ad2be08126aa710a4d00ff999a4cb25936fcf1f9fc1f71f62d36229",
         "size_bytes": 2949
+      },
+      "public_pathologist_replication_midogpp": {
+        "path": "artifacts/public_independent_pathologist_replication/midogpp/results.json",
+        "sha256": "d259e63254930c206932c237e5993c368a82fbf212239f81d1a05b36f78c715d",
+        "size_bytes": 15415
+      },
+      "public_pathologist_replication_riva": {
+        "path": "artifacts/public_independent_pathologist_replication/riva/results.json",
+        "sha256": "2a234d438e3850faadcd20a11494f91e592a8dfa16c6bcb3487ae6604b7f2b1b",
+        "size_bytes": 25813
+      },
+      "public_pathologist_replication_summary": {
+        "path": "artifacts/public_independent_pathologist_replication/summary.json",
+        "sha256": "b6b438ee9ad956562efe8499d2e099682de6a335c2f0b1abbcbd7296c8904b80",
+        "size_bytes": 870
       },
       "puma_confirmation": {
         "path": "artifacts/puma_new_data_confirmation/results.json",

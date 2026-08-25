@@ -1,0 +1,312 @@
+{
+  "artifact_count": 61,
+  "artifact_root_sha256": "db9a4249c04bb13dcec970ad05e32ad564229333a1db7843731b4c6878ec30aa",
+  "artifacts": [
+    {
+      "path": "midogpp/enrichment_curves.csv",
+      "sha256": "d5e21405a1a226bd48ab7621a3533c110b95944a04d03df453038faa0d48b624",
+      "size_bytes": 979011
+    },
+    {
+      "path": "midogpp/matched_random_queues.json",
+      "sha256": "5384a80dc1015b68f009991027775967318d09c6d7ff52a4b6afad34c3b07449",
+      "size_bytes": 19293680
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/embeddings/expert_1_resnet18_context_128.npz",
+      "sha256": "c6e0bc4028c66aedab0286f557eecca549ee1d03b43bcb9f097bab7f37a8b369",
+      "size_bytes": 4186748
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/embeddings/expert_1_resnet18_context_128.npz.metadata.json",
+      "sha256": "51eb8745badb60b6aec0098f5d0b916e25e61179756c3941670d57121e1df392",
+      "size_bytes": 6692
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/embeddings/expert_1_resnet18_context_64.npz",
+      "sha256": "f979fea402e7cade1cb67ae8a0517d6143440a78eabd6e121de05cc5c4c03a65",
+      "size_bytes": 4186223
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/embeddings/expert_1_resnet18_context_64.npz.metadata.json",
+      "sha256": "f238d51ef4428867e566cdc15c55d01f8fd87122383ca2e601a72c078d0b8fbd",
+      "size_bytes": 6690
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/fold_evidence.json",
+      "sha256": "3834a14fb385e25e49000426ddddadaefee2be06b21ec20f36ef642bc159a47c",
+      "size_bytes": 189760
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/score_seal.json",
+      "sha256": "7b4a7b67ea188d1c3b0273a0e2cb8d40b1c151a105c6a1652e504daa25af79ad",
+      "size_bytes": 16658
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/scored_input.csv",
+      "sha256": "900581373983a581212fbd052550dad0da58795c7c47657d4a61a6a425ca04bf",
+      "size_bytes": 9623520
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_1/source_inventory.json",
+      "sha256": "6a48d32ffc0db3daa308f278eb5f24365fa35baa0507672275a7bc6c4563b087",
+      "size_bytes": 12078
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/embeddings/expert_2_resnet18_context_128.npz",
+      "sha256": "0b581723e0908f798c5819337a7601aa7d868ff5e5fee73a3d0259c370a1f931",
+      "size_bytes": 4186807
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/embeddings/expert_2_resnet18_context_128.npz.metadata.json",
+      "sha256": "cc7ba5f5b3a826ce6e3d99307687dcbf311cb44fac7649919812a75300e53440",
+      "size_bytes": 6692
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/embeddings/expert_2_resnet18_context_64.npz",
+      "sha256": "65995e33d76ca5c3b51cfa8e55acb1ac6952d284f3e64ecee1c09d6f710ebf2c",
+      "size_bytes": 4186278
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/embeddings/expert_2_resnet18_context_64.npz.metadata.json",
+      "sha256": "662355ff4510f5091e226146d951211368a9769c102db2807f7f23e12170eb7b",
+      "size_bytes": 6690
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/fold_evidence.json",
+      "sha256": "3d90f0829ea8dcbf87a1c051cb5e3fb38b34a43f4a1b5d35927525b3ac42bed7",
+      "size_bytes": 189760
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/score_seal.json",
+      "sha256": "e6dd03a156966e7907cb3785cea7eb96af255a18fe5de6e2d11c79c711b70c5d",
+      "size_bytes": 16658
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/scored_input.csv",
+      "sha256": "8c9671dc33e650306043c9b41f7afebf047a5093e61500bc9f84d029d9dbb76d",
+      "size_bytes": 9622252
+    },
+    {
+      "path": "midogpp/pre_reference_scores/expert_2/source_inventory.json",
+      "sha256": "cf276b2ae36405e568dc489d96fc392a20468f1a5f94a0bd51bea1b20dd37419",
+      "size_bytes": 12078
+    },
+    {
+      "path": "midogpp/reference_attached.csv",
+      "sha256": "fc191be1e44a250ca234154be8d5d3a29dc8fa2e5cf640fcfdc2f563cff0b2a4",
+      "size_bytes": 20133288
+    },
+    {
+      "path": "midogpp/reference_source_inventory.json",
+      "sha256": "eaf618e089bb303dd284b1406f84f933fc9f3604313c4353e84b54998b4e6b84",
+      "size_bytes": 165
+    },
+    {
+      "path": "midogpp/results.json",
+      "sha256": "d259e63254930c206932c237e5993c368a82fbf212239f81d1a05b36f78c715d",
+      "size_bytes": 15415
+    },
+    {
+      "path": "pre_reference_freeze.json",
+      "sha256": "785a99def4af8e0478926b15945a2b2462dab2c05b86c1fe41d9ea088ecd2874",
+      "size_bytes": 4528
+    },
+    {
+      "path": "report.md",
+      "sha256": "b44a68fb571941317cb7d294a665fe0e2ef0296bf30f9b6ff15ded73665b1814",
+      "size_bytes": 2538
+    },
+    {
+      "path": "riva/enrichment_curves.csv",
+      "sha256": "c1ffab6d083ac75a8be5964ff6b0b49627bf9e145e3aab2da160b053e4914056",
+      "size_bytes": 1547386
+    },
+    {
+      "path": "riva/matched_random_queues.json",
+      "sha256": "484b52c38eb60cda7d03dae1ae04d321fd36d3c5f735cc2cd56d65d57bdb7b9f",
+      "size_bytes": 31482171
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/embeddings/annotator_1_resnet18_context_128.npz",
+      "sha256": "6337d55a29c43528645322e0c284d0e844452a2696883492fa33d53dc08c8bab",
+      "size_bytes": 9487609
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/embeddings/annotator_1_resnet18_context_128.npz.metadata.json",
+      "sha256": "e0588d1253a0df8622e87c357679702143ee2816c2aa4a509702ab301a415e3c",
+      "size_bytes": 6691
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/embeddings/annotator_1_resnet18_context_64.npz",
+      "sha256": "f4dec0a04b35d97c9e2c2669386225e8b0e6e879e7d1b9d40274420d2e0cb778",
+      "size_bytes": 9447121
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/embeddings/annotator_1_resnet18_context_64.npz.metadata.json",
+      "sha256": "876753f969fa4cf2ec4c4f534547c57fb2a29f4273ccf6f93441246721ea9728",
+      "size_bytes": 6690
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/fold_evidence.json",
+      "sha256": "76d0b2622dfe8ad7f4940472f55690ed9fdbd2ef8686abb7e07d341fc99b152b",
+      "size_bytes": 422339
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/score_seal.json",
+      "sha256": "9a235b3fb0526ca7f27b55806d7e10e6379689e201213e3b45b14d3feae3cf3f",
+      "size_bytes": 16688
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/scored_input.csv",
+      "sha256": "d36445df00c4e96169feb14d25eb5e471d9bb57edb5076b4e4ce1ed46a8cf49b",
+      "size_bytes": 23083275
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_1/source_inventory.json",
+      "sha256": "b1223bc05fd20c76f3dffab882c2b26eb313e9397786a0582fef41c8fd29248f",
+      "size_bytes": 88125
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/embeddings/annotator_2_resnet18_context_128.npz",
+      "sha256": "bce1464e7c572c8d7f07e24dbad607622352724d24854096cd9fab29f0341377",
+      "size_bytes": 8642057
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/embeddings/annotator_2_resnet18_context_128.npz.metadata.json",
+      "sha256": "0d4ef83da189cd7cd7915fae6498c320a378c81287f087069918ce792f15f2d8",
+      "size_bytes": 6692
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/embeddings/annotator_2_resnet18_context_64.npz",
+      "sha256": "88b6d10687f6fd1c8710590c6007237ce395b42241e3e9107e042b5d6d851788",
+      "size_bytes": 8611287
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/embeddings/annotator_2_resnet18_context_64.npz.metadata.json",
+      "sha256": "5a84583442e7635aede7acb17a1e2cd97319b94edfd04effd6627a5ff0ca59d1",
+      "size_bytes": 6689
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/fold_evidence.json",
+      "sha256": "15b4b31c27f01be467963c896a394ef5e54d61df88965bcd22d1dcdeecf285b3",
+      "size_bytes": 384943
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/score_seal.json",
+      "sha256": "75cbf73696940061cdf9775aca2e07ebb75bbef1071a59ac0f825e408a424d16",
+      "size_bytes": 16688
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/scored_input.csv",
+      "sha256": "5cf701edadaa9b57a54140ec681bf8f26146eeb2cf7eabbb7382a6506d28a3a5",
+      "size_bytes": 21080396
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_2/source_inventory.json",
+      "sha256": "56f47aba15780625a7ed4dd655c989402056e222b9ba69da76554c3ea0b5b0f0",
+      "size_bytes": 86906
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/embeddings/annotator_3_resnet18_context_128.npz",
+      "sha256": "2ef3988f560f7e97e7d14c780f76064dab6097874b36d4636d8fd5525a2d8eb6",
+      "size_bytes": 6696548
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/embeddings/annotator_3_resnet18_context_128.npz.metadata.json",
+      "sha256": "5277bacfcbb556daffc0ca2f584bc88830b939bb2a301dce70fed9b7bb723be6",
+      "size_bytes": 6691
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/embeddings/annotator_3_resnet18_context_64.npz",
+      "sha256": "f04d639972f7d53e3c0e10ae388cac9d8b324763e77b4b631f369fe0ced2f7d4",
+      "size_bytes": 6669702
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/embeddings/annotator_3_resnet18_context_64.npz.metadata.json",
+      "sha256": "7f6303f1e6f0d1436bdf4fae759bdb1862f92144c41debf93a73c4480568ba39",
+      "size_bytes": 6690
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/fold_evidence.json",
+      "sha256": "8260941c33a85177b866cbee3515e5d65b34c923856239bf26b24e6aa0d24779",
+      "size_bytes": 299569
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/score_seal.json",
+      "sha256": "beb7b8a98fa5e1b4d526db589d497c8be63c41421b72dffccee88f571683ac0a",
+      "size_bytes": 16688
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/scored_input.csv",
+      "sha256": "cceaaa1e2e358e5bed7c9af98dad3ab7af8fb78d211b32652f3d5f4515374f5b",
+      "size_bytes": 16217391
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_3/source_inventory.json",
+      "sha256": "1a6213bbc69cf6d7e80ae9c06bfc543c76b6628226b8298e22e29d57126a7090",
+      "size_bytes": 88615
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/embeddings/annotator_4_resnet18_context_128.npz",
+      "sha256": "89e39c4ed5c2b5cc0193c79b850cc419c98f2385d50d8334ca73261a5a2eb5a0",
+      "size_bytes": 5553020
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/embeddings/annotator_4_resnet18_context_128.npz.metadata.json",
+      "sha256": "5534aeec08d92474ab6de6ed9e3867135ab23e80d740e74122c9b55f21cdc571",
+      "size_bytes": 6692
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/embeddings/annotator_4_resnet18_context_64.npz",
+      "sha256": "c51f4d7476c9118cfbc86630d5c6f8297fbf7d886142524071e807a1ad710c97",
+      "size_bytes": 5537851
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/embeddings/annotator_4_resnet18_context_64.npz.metadata.json",
+      "sha256": "cb7641d40982434d8656d732ae715f4d5671bfdd175b27d43ac34e6ce80f5914",
+      "size_bytes": 6690
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/fold_evidence.json",
+      "sha256": "43281c7dd8248b7c001c5e988d37331c1d1e3a6c852927e03f4e2bae6ac04b1d",
+      "size_bytes": 249334
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/score_seal.json",
+      "sha256": "9fe270a0cac02862ca67858402217b1252c158a84afe79c577400e71a6433458",
+      "size_bytes": 16689
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/scored_input.csv",
+      "sha256": "109222af52f4a050d9612d6174dfdfa727ba74cb07926f473ae8bb890487e164",
+      "size_bytes": 13448181
+    },
+    {
+      "path": "riva/pre_reference_scores/annotator_4/source_inventory.json",
+      "sha256": "0733444580c59269f7289790af795f4f6ad471c5e085958052be8325c5ffafae",
+      "size_bytes": 88287
+    },
+    {
+      "path": "riva/reference_attached.csv",
+      "sha256": "034ee2ae35be32bbe62b38c9d092f8eb7fdcbcfa71ff9ee700bfc20c1d2b7866",
+      "size_bytes": 77323374
+    },
+    {
+      "path": "riva/reference_source_inventory.json",
+      "sha256": "a3e58f6193e729165ec72a52e42740dd2986efdcaa70986fcb8c3aaff493c890",
+      "size_bytes": 232
+    },
+    {
+      "path": "riva/results.json",
+      "sha256": "2a234d438e3850faadcd20a11494f91e592a8dfa16c6bcb3487ae6604b7f2b1b",
+      "size_bytes": 25813
+    },
+    {
+      "path": "summary.json",
+      "sha256": "b6b438ee9ad956562efe8499d2e099682de6a335c2f0b1abbcbd7296c8904b80",
+      "size_bytes": 870
+    }
+  ],
+  "schema_version": 1
+}

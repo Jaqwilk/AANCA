@@ -735,7 +735,7 @@ annotations nor any completion stage.
 
 ## D045 — Replicate natural disagreement enrichment on RIVA and MIDOG++
 
-Status: protocol and implementation frozen before AANCA/reference association inspection
+Status: executed; both frozen gates passed and evidence is published
 
 Retain the frozen 64+128 px AANCA candidate and add two public, additive validations.
 Use RIVA as the primary four-rotation multi-rater study in three prospectively mapped
@@ -762,3 +762,11 @@ preregistration; it does not amend either. A positive outcome can support only
 enrichment for potentially inconsistent annotations recommended for expert review.
 It cannot establish pathologist error, clinical validity, downstream utility,
 prospective workflow superiority or permission to change annotations automatically.
+
+Outcome: the score-only artifacts were committed and pushed as
+`09aede5000c43406759a432b674f6db37db98b26` before reference opening. RIVA passed
+with precision difference `+0.049457` and 95% CI `[+0.014037, +0.091632]`;
+MIDOG++ passed with `+0.076575` and `[+0.021352, +0.138159]`. Every one of the six
+rotation point differences was non-negative, so the frozen cross-dataset rule is
+satisfied. The result changes neither the candidate nor the natural-data action
+`retain_uncorrected` and does not permit automatic source-annotation changes.

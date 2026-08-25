@@ -35,6 +35,15 @@ _RELEASE_EVIDENCE_PATHS = {
     "nucls_independent_pathologist": Path(
         "artifacts/nucls_independent_pathologist_validation/results.json"
     ),
+    "public_pathologist_replication_summary": Path(
+        "artifacts/public_independent_pathologist_replication/summary.json"
+    ),
+    "public_pathologist_replication_riva": Path(
+        "artifacts/public_independent_pathologist_replication/riva/results.json"
+    ),
+    "public_pathologist_replication_midogpp": Path(
+        "artifacts/public_independent_pathologist_replication/midogpp/results.json"
+    ),
     "monusac_external": Path("artifacts/monusac_external_validation/results.json"),
     "puma_confirmation": Path("artifacts/puma_new_data_confirmation/results.json"),
     "puma_verification": Path("artifacts/puma_new_data_confirmation/verification.json"),
@@ -271,6 +280,157 @@ def _project_relative_path(root: Path, path: Path, *, role: str) -> str:
         return path.relative_to(root).as_posix()
     except ValueError as error:
         raise ValueError(f"{role} must remain inside the project root") from error
+
+
+def _summarise_public_replication_dataset(
+    payload: dict[str, Any],
+    *,
+    dataset: str,
+    expected_rotation_count: int,
+) -> dict[str, Any]:
+    """Validate and compact one frozen public independent-expert replication result."""
+
+    metrics = _require_mapping(payload.get("metrics"), role=f"{dataset} metrics")
+    primary = _require_mapping(metrics.get("primary"), role=f"{dataset} primary result")
+    bootstrap = _require_mapping(primary.get("bootstrap"), role=f"{dataset} bootstrap")
+    rotations = _require_mapping(metrics.get("rotations"), role=f"{dataset} rotations")
+    reference = _require_mapping(payload.get("reference"), role=f"{dataset} reference")
+    reference_rotations = _require_mapping(
+        reference.get("rotations"), role=f"{dataset} reference rotations"
+    )
+    barrier = _require_mapping(
+        payload.get("information_barrier"), role=f"{dataset} information barrier"
+    )
+    claims = _require_mapping(payload.get("claim_boundary"), role=f"{dataset} claims")
+    difference_interval = _require_interval(
+        bootstrap.get("precision_difference_interval_95"),
+        role=f"{dataset} precision-difference interval",
+    )
+    enrichment_interval = _require_interval(
+        bootstrap.get("enrichment_ratio_interval_95"),
+        role=f"{dataset} enrichment interval",
+    )
+    expected_reference_type = (
+        "strict_leave_one_out_majority"
+        if dataset == "riva"
+        else "independent_pairwise_expert_label"
+    )
+    input_removed_key = (
+        "input_annotator_removed_from_reference"
+        if dataset == "riva"
+        else "input_expert_removed_from_reference"
+    )
+    if (
+        payload.get("study_id") != "public_independent_pathologist_replication_v1"
+        or payload.get("dataset") != dataset
+        or payload.get("execution_complete") is not True
+        or metrics.get("dataset") != dataset
+        or metrics.get("primary_gate_pass") is not True
+        or metrics.get("all_rotation_point_differences_nonnegative") is not True
+        or len(rotations) != expected_rotation_count
+        or set(rotations) != set(reference_rotations)
+        or reference.get("reference_type") != expected_reference_type
+        or any(
+            _require_real(
+                _require_mapping(
+                    _require_mapping(value, role=f"{dataset} rotation {name}").get("primary"),
+                    role=f"{dataset} rotation {name} primary",
+                ).get("precision_difference"),
+                role=f"{dataset} rotation {name} precision difference",
+            )
+            < 0.0
+            for name, value in rotations.items()
+        )
+        or any(
+            _require_mapping(value, role=f"{dataset} reference rotation {name}").get(
+                input_removed_key
+            )
+            is not True
+            for name, value in reference_rotations.items()
+        )
+        or primary.get("exact_equal_budget") is not True
+        or primary.get("exact_strata_preserved") is not True
+        or primary.get("aanca_random_disjoint") is not True
+        or difference_interval[0] <= 0.0
+        or enrichment_interval[0] <= 1.0
+        or bootstrap.get("requested_iterations") != 5000
+        or bootstrap.get("unit") != "dataset_group_id"
+        or barrier.get("all_score_seals_authenticated_before_reference") is not True
+        or barrier.get("input_only_snapshots") is not True
+        or barrier.get("risks_recomputed_after_reference") is not False
+        or barrier.get("separate_prepare_score_evaluate_processes_required") is not True
+        or claims.get("independent_pathologist_disagreement_enrichment_if_positive") is not True
+        or any(
+            claims.get(key) is not False
+            for key in (
+                "automatic_annotation_change_permitted",
+                "clinical_error_detection_proven",
+                "downstream_utility_proven",
+                "pathologist_error_detection_proven",
+                "prospective_workflow_superiority_proven",
+                "source_annotations_modified",
+            )
+        )
+    ):
+        raise ValueError(f"{dataset} public replication evidence scope differs")
+    if dataset == "riva" and (
+        reference.get("official_released_majority_label_read") is not False
+        or any(
+            value.get("official_released_majority_label_read") is not False
+            for value in reference_rotations.values()
+        )
+    ):
+        raise ValueError("RIVA released-majority reference boundary differs")
+    if dataset == "midogpp" and (
+        reference.get("adjudicator_label_used") is not False
+        or reference.get("final_category_used") is not False
+        or any(
+            value.get("adjudicator_label_read") is not False
+            or value.get("final_category_read") is not False
+            for value in reference_rotations.values()
+        )
+    ):
+        raise ValueError("MIDOG++ pairwise-reference boundary differs")
+
+    return {
+        "dataset": dataset,
+        "reference_type": expected_reference_type,
+        "rotation_count": expected_rotation_count,
+        "group_count": _require_exact_int(
+            bootstrap["unique_group_count"], role=f"{dataset} group count"
+        ),
+        "eligible_rotation_rows": _require_exact_int(
+            primary["eligible_rotation_rows"], role=f"{dataset} eligible rows"
+        ),
+        "reviewed_rotation_rows": _require_exact_int(
+            primary["reviewed_rotation_rows"], role=f"{dataset} reviewed rows"
+        ),
+        "disagreements_found": _require_exact_int(
+            primary["aanca_reference_positive_reviewed"],
+            role=f"{dataset} disagreements found",
+        ),
+        "budget_fraction": _require_real(
+            primary["budget_fraction"], role=f"{dataset} review budget"
+        ),
+        "aanca_precision": _require_real(primary["aanca_precision"], role=f"{dataset} precision"),
+        "mean_matched_random_precision": _require_real(
+            primary["matched_random_mean_precision"], role=f"{dataset} random precision"
+        ),
+        "precision_difference": _require_real(
+            primary["precision_difference"], role=f"{dataset} precision difference"
+        ),
+        "precision_difference_interval_95": difference_interval,
+        "enrichment_ratio": _require_real(
+            primary["enrichment_ratio"], role=f"{dataset} enrichment ratio"
+        ),
+        "enrichment_ratio_interval_95": enrichment_interval,
+        "bootstrap_iterations": 5000,
+        "primary_gate_pass": True,
+        "all_rotation_point_differences_nonnegative": True,
+        "exact_equal_budget": True,
+        "exact_strata_preserved": True,
+        "aanca_random_disjoint": True,
+    }
 
 
 def _load_release_evidence(root: Path) -> dict[str, Any]:
@@ -585,6 +745,67 @@ def _load_release_evidence(root: Path) -> dict[str, Any]:
         },
         "claim_boundary": dict(independent_claims),
         "source": sources["nucls_independent_pathologist"],
+    }
+
+    public_summary = _load_json(paths["public_pathologist_replication_summary"])
+    public_riva_payload = _load_json(paths["public_pathologist_replication_riva"])
+    public_midogpp_payload = _load_json(paths["public_pathologist_replication_midogpp"])
+    public_claims = _require_mapping(
+        public_summary.get("claim_boundary"), role="public replication claim boundary"
+    )
+    if (
+        public_summary.get("study_id") != "public_independent_pathologist_replication_v1"
+        or public_summary.get("completion_stage") != "EXTERNAL_VALIDATION_COMPLETE"
+        or public_summary.get("cross_dataset_replication_supported") is not True
+        or public_summary.get("riva_gate_pass") is not True
+        or public_summary.get("midogpp_gate_pass") is not True
+        or public_summary.get("config_sha256")
+        != "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321"
+        or public_claims.get("independent_pathologist_disagreement_enrichment_if_positive")
+        is not True
+        or any(
+            public_claims.get(key) is not False
+            for key in (
+                "automatic_annotation_change_permitted",
+                "clinical_error_detection_proven",
+                "downstream_utility_proven",
+                "pathologist_error_detection_proven",
+                "prospective_workflow_superiority_proven",
+                "source_annotations_modified",
+            )
+        )
+    ):
+        raise ValueError("public independent-pathologist replication summary differs")
+    public_riva = _summarise_public_replication_dataset(
+        public_riva_payload,
+        dataset="riva",
+        expected_rotation_count=4,
+    )
+    public_midogpp = _summarise_public_replication_dataset(
+        public_midogpp_payload,
+        dataset="midogpp",
+        expected_rotation_count=2,
+    )
+    public_replication = {
+        "study_id": public_summary["study_id"],
+        "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+        "decision": "cross_dataset_disagreement_enrichment_supported",
+        "cross_dataset_replication_supported": True,
+        "config_sha256": public_summary["config_sha256"],
+        "datasets": {
+            "riva": public_riva,
+            "midogpp": public_midogpp,
+        },
+        "information_barrier": {
+            "pre_reference_scores_published_before_reference_evaluation": True,
+            "risks_recomputed_after_reference": False,
+        },
+        "claim_boundary": dict(public_claims),
+        "sources": {
+            "summary": sources["public_pathologist_replication_summary"],
+            "riva": sources["public_pathologist_replication_riva"],
+            "midogpp": sources["public_pathologist_replication_midogpp"],
+        },
     }
 
     monusac = _load_json(paths["monusac_external"])
@@ -936,6 +1157,7 @@ def _load_release_evidence(root: Path) -> dict[str, Any]:
     return {
         "external_validation": nucls_external,
         "independent_pathologist_validation": independent_pathologist,
+        "public_independent_pathologist_replication": public_replication,
         "controlled_external_benchmark": controlled_external,
         "new_source_confirmation": puma_confirmation,
         "realism_stress": realism_stress,
@@ -1479,6 +1701,7 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
 
     nucls = evidence["external_validation"]["primary_subset"]
     independent = evidence["independent_pathologist_validation"]
+    public_replication = evidence["public_independent_pathologist_replication"]
     monusac = evidence["controlled_external_benchmark"]
     puma = evidence["new_source_confirmation"]
     stress = evidence["realism_stress"]
@@ -1489,6 +1712,10 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
     independent_primary = independent["primary"]
     independent_difference_ci = independent_primary["precision_difference_interval_95"]
     independent_enrichment_ci = independent_primary["enrichment_ratio_interval_95"]
+    riva = public_replication["datasets"]["riva"]
+    midogpp = public_replication["datasets"]["midogpp"]
+    riva_difference_ci = riva["precision_difference_interval_95"]
+    midogpp_difference_ci = midogpp["precision_difference_interval_95"]
     monusac_retrieval_ci = monusac["primary_ranking"]["difference_interval_95"]
     monusac_downstream_ci = monusac["primary_downstream"]["minus_corrupted_uncorrected_interval_95"]
     puma_retrieval_ci = puma["retrieval"]["interval_95"]
@@ -1527,6 +1754,25 @@ def _render_current_evidence(evidence: dict[str, Any]) -> str:
           This supports disagreement enrichment for one junior pathologist across five
           patients, not adjudicated error, multi-pathologist generalisation, deployment
           queue validation or downstream utility.</p>
+        </article>
+        <article class="rule">
+          <b>RIVA x MIDOG++ public independent-expert replication</b>
+          <p>The frozen candidate was scored and published before either reference was
+          opened. At the 5% budget, RIVA precision was
+          {riva["aanca_precision"]:.6f} versus
+          {riva["mean_matched_random_precision"]:.6f} for 100 exact matched-random
+          queues: a {riva["precision_difference"]:+.6f} difference with a 95%
+          whole-group interval [{riva_difference_ci[0]:+.6f},
+          {riva_difference_ci[1]:+.6f}]. MIDOG++ precision was
+          {midogpp["aanca_precision"]:.6f} versus
+          {midogpp["mean_matched_random_precision"]:.6f}: a
+          {midogpp["precision_difference"]:+.6f} difference
+          [{midogpp_difference_ci[0]:+.6f}, {midogpp_difference_ci[1]:+.6f}]. All
+          four RIVA leave-one-annotator-out rotations and both MIDOG++ pairwise-expert
+          rotations were non-negative, so both frozen gates passed. This supports
+          cross-dataset enrichment for natural independent-expert disagreement in
+          these public releases; it does not establish adjudicated pathologist error,
+          downstream utility or clinical performance.</p>
         </article>
         <article class="rule">
           <b>MoNuSAC controlled external benchmark</b>
@@ -1644,7 +1890,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AANCA is a reproducible, non-diagnostic framework for ranking potentially inconsistent nucleus annotations for expert review.">
   <meta name="author" content="Natan Smogór">
-  <meta name="date" content="2026-08-23">
+  <meta name="date" content="2026-08-26">
   <meta name="theme-color" content="#010102">
   <meta name="referrer" content="no-referrer">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -1671,7 +1917,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
     <div class="hero-copy">
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A group-safe framework that ranks <em>potentially inconsistent annotations</em> for expert review without changing source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-23">23 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-26">26 August 2026</time></span></div>
     </div>
   </div>
 </section>
@@ -1683,7 +1929,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p>Large histopathology datasets contain many already segmented nucleus instances, each paired with a class label. Even careful annotation can include ambiguity, inconsistent conventions or ordinary data-entry noise. Reviewing every instance again is expensive, so the useful question is not “can a model declare a label wrong?” It is “can a model create a better review queue than random sampling?”</p>
       <p>AANCA evaluates that question under controlled conditions. It intentionally changes a known subset of class labels, hides that intervention from the auditor, and then measures whether the changed labels move toward the front of a fixed review queue. Because the benchmark records exactly what it changed, retrieval can be scored without pretending that model disagreement is biological truth.</p>
       <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>. It never means “confirmed error.”</p>
-      <div class="scope-note"><strong>Study boundary.</strong> The PanNuke primary benchmark, two distinct frozen NuCLS evaluations, a frozen MoNuSAC controlled benchmark and a new-source PUMA controlled confirmation have been completed. PUMA supports transfer under controlled label noise. The NuCLS leave-one-pathologist-out ranking supports independent-pathologist disagreement enrichment only for the eligible <code>JP.1</code> cohort; the earlier aggregate NuCLS ranking/downstream authority remains adverse. Neither result establishes pathologist error, automatic correction safety or prospective workflow benefit. The PanNuke primary analysis remains exploratory because outcomes were exposed during technical recovery.</div>
+      <div class="scope-note"><strong>Study boundary.</strong> The PanNuke primary benchmark, two distinct frozen NuCLS evaluations, MoNuSAC and PUMA controlled studies, and the public RIVA x MIDOG++ independent-expert replication have been completed. PUMA supports transfer under controlled label noise. The NuCLS <code>JP.1</code>, RIVA and MIDOG++ results support disagreement enrichment within their released cohorts; the earlier aggregate NuCLS ranking/downstream authority remains adverse. None establishes pathologist error, automatic correction safety or prospective workflow benefit. The PanNuke primary analysis remains exploratory because outcomes were exposed during technical recovery.</div>
     </div>
   </section>
 
@@ -1777,14 +2023,15 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p class="fine"><strong>Statistical note.</strong> Holm-adjusted p-values are the registered one-sided tests. The saved 95% confidence intervals are percentile-bootstrap summaries based on whole-group resampling.</p>
       <div class="provenance" style="margin-top:64px">
         <div><h3>Research sources</h3><ul><li><a href="https://link.springer.com/chapter/10.1007/978-3-030-23937-4_2">Gamper et al. (2019), PanNuke</a> · DOI 10.1007/978-3-030-23937-4_2.</li><li><a href="https://arxiv.org/abs/2003.10778">Gamper et al. (2020), PanNuke extension</a> · dataset insights and baselines.</li><li><a href="https://www.jair.org/index.php/jair/article/view/12125">Northcutt, Jiang &amp; Chuang (2021), Confident Learning</a> · DOI 10.1613/jair.1.12125.</li><li><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fc20ea8d104cab737a5561096f9bde9b-Abstract.html">Goswami et al. (2023), AQuA</a> · DOI 10.52202/075280-3494.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac037/6586817">Amgad et al. (2022), NuCLS</a> · DOI 10.1093/gigascience/giac037.</li><li><a href="https://monusac-2020.grand-challenge.org/">MoNuSAC 2020</a> · controlled external benchmark source.</li><li><a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giaf011/8024182">Schuiveling et al. (2025), PUMA</a> · DOI 10.1093/gigascience/giaf011.</li></ul><p>Grouping follows the strongest identifiers available per dataset. No result is promoted beyond the grouping and reference-label evidence that the source actually provides.</p></div>
+        <div><h3>New public replication sources</h3><ul><li><a href="https://www.nature.com/articles/s41597-025-06280-2">RIVA (2025)</a>: multi-annotator cervical cytology.</li><li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10368709/">MIDOG++ (2023)</a>: multi-expert mitosis annotations.</li></ul><p>Both sources were evaluated with the frozen candidate and a public pre-reference scoring record.</p></div>
         <div><h3>Reproducibility identities</h3><dl class="hash-list"><div><dt>Accepted run</dt><dd>__RUN_ID__</dd></div><div><dt>Artifact root SHA-256</dt><dd>__ARTIFACT_ROOT__</dd></div><div><dt>Stage attestation SHA-256</dt><dd>__STAGE_HASH__</dd></div><div><dt>QC overlay SHA-256</dt><dd>__QC_HASH__</dd></div></dl></div>
       </div>
     </div>
   </section>
 
   <section class="section" id="external-validation">
-    <div class="section-heading reveal"><h2>The frozen ranking enriched one natural disagreement cohort, while broader natural-case proof remains missing.</h2><p class="section-deck">Later evidence changes the overall assessment without rewriting adverse PanNuke H4 or the earlier negative NuCLS downstream result. Each study answers a different question and keeps its own frozen boundary.</p></div>
-    <div class="chapter-copy reveal"><p>The earlier NuCLS aggregate NP/P experiment did not satisfy its frozen ranking gate and guided intervention made downstream macro-F1 worse. A separate leave-one-pathologist-out analysis then used raw <code>JP.1</code> annotations as input, removed <code>JP.1</code> from the hidden reference and compared the frozen global risk ranking with exact matched random review. Its five-patient ranking gate passed. Only this junior pathologist had sufficient public raw geometry and patient groups, so the result is one rotation rather than a pooled pathologist estimate.</p><p>MoNuSAC showed strong controlled retrieval but no statistically supported downstream gain or complete class safety. The selected AANCA candidate was later recorded internally as frozen before PUMA outcomes. On a previously unused histopathology source it passed all seven internally pre-specified retrieval, downstream, direction, convergence and class-safety gates under controlled corruption. The 144/62 development/final partition was created by AANCA from the 206 public PUMA ROIs; it was not the official hidden PUMA challenge test. The downstream <code>flag_exclude</code> arm omitted the highest-ranked 5% of training rows without expert review or relabelling.</p><p><strong>Public-history limit.</strong> The PUMA protocol, configuration and result first appeared together in public commit <code>c5bd44193b2abd67bc7e7f1bd9384aa87435d500</code>. The NuCLS LOO protocol and execution likewise share one repository change, and feasibility counts were inspected before freeze, although no AANCA score-reference association was inspected. Neither has an independent public pre-outcome timestamp. The PUMA readback does not retrain all 44 models. Both readbacks are project-coupled verification; neither is third-party validation.</p></div>
+    <div class="section-heading reveal"><h2>The frozen ranking replicated natural disagreement enrichment, while broader natural-case proof remains missing.</h2><p class="section-deck">Later evidence changes the overall assessment without rewriting adverse PanNuke H4 or the earlier negative NuCLS downstream result. Each study answers a different question and keeps its own frozen boundary.</p></div>
+    <div class="chapter-copy reveal"><p>The earlier NuCLS aggregate NP/P experiment did not satisfy its frozen ranking gate and guided intervention made downstream macro-F1 worse. A separate leave-one-pathologist-out analysis then used raw <code>JP.1</code> annotations as input, removed <code>JP.1</code> from the hidden reference and compared the frozen global risk ranking with exact matched random review. Its five-patient ranking gate passed. Only this junior pathologist had sufficient public raw geometry and patient groups, so the result is one rotation rather than a pooled pathologist estimate.</p><p>The next public replication separated scoring from reference evaluation and published the sealed pre-reference scores first. It then passed both frozen gates on RIVA cervical cytology and MIDOG++ mitosis annotations, with positive aggregate whole-group intervals and non-negative point differences in all six rotations. MoNuSAC showed strong controlled retrieval but no statistically supported downstream gain or complete class safety. The selected AANCA candidate was later recorded internally as frozen before PUMA outcomes and passed all seven internally pre-specified gates under controlled corruption.</p><p><strong>Public-history limit.</strong> The RIVA x MIDOG++ pre-reference scores were committed and pushed before reference evaluation, providing a public ordering record for this replication. By contrast, the PUMA protocol, configuration and result first appeared together in public commit <code>c5bd44193b2abd67bc7e7f1bd9384aa87435d500</code>. The NuCLS LOO protocol and execution likewise share one repository change. The PUMA readback does not retrain all 44 models. These are project-maintained verification paths, not third-party validation.</p></div>
 __CURRENT_EVIDENCE__
   </section>
 
@@ -1808,16 +2055,16 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="interpretation">
     <div class="section-heading reveal"><h2>What this benchmark supports, and what it does not.</h2><p class="section-deck">A technically strong audit can still be limited in scope. The boundary below is part of the result, not a disclaimer added afterward.</p></div>
-    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency or biological truth. The separate NuCLS LOO positive event is strict-consensus disagreement after removing the input pathologist; it measures disagreement enrichment, not adjudicated error. The positive PUMA result is a new-source controlled transfer result, while its later stress and observed-label sensitivity analyses are exploratory because outcomes were already open.</p><p>Grouping strength differs by source: the primary PanNuke study guarantees source-patch separation, both NuCLS evaluations and MoNuSAC use patient groups, and PUMA uses one ROI per case. These safeguards reduce leakage but do not transform a consensus or final expert reference label into guaranteed biological truth.</p><p>Broader natural and operational validity still requires newly recruited blinded reviewers, ambiguity and abstention labels, a prospectively frozen policy evaluated on untouched patients or whole slides, and a multi-site comparison of work with and without AANCA.</p></div>
+    <div class="chapter-copy reveal"><p>The controlled positive event is an injected label change. Performance against it measures retrieval of that injected process, not naturally occurring annotation inconsistency or biological truth. The NuCLS and RIVA LOO positive events are strict-consensus disagreement after removing the input pathologist; MIDOG++ uses the other independent expert label. These references measure disagreement enrichment, not adjudicated error. The positive PUMA result is a new-source controlled transfer result, while its later stress and observed-label sensitivity analyses are exploratory because outcomes were already open.</p><p>Grouping strength differs by source: the primary PanNuke study guarantees source-patch separation, both NuCLS evaluations and MoNuSAC use patient groups, RIVA uses source-image groups, MIDOG++ uses image groups, and PUMA uses one ROI per case. These safeguards reduce leakage but do not transform a consensus or expert reference label into guaranteed biological truth.</p><p>Broader natural and operational validity still requires newly recruited blinded reviewers, ambiguity and abstention labels, a prospectively frozen policy evaluated on untouched patients or whole slides, and a multi-site comparison of work with and without AANCA.</p></div>
     <div class="figure-width reveal claim-grid">
-      <article class="claim-card"><h3>Supported by current evidence</h3><ul><li>Group-safe rankings retrieve injected class-label changes more efficiently than matched random review.</li><li>For the eligible NuCLS <code>JP.1</code> cohort, the frozen global risk ranking enriched independent-pathologist disagreement relative to exact matched random review.</li><li>The frozen current candidate transferred to new PUMA images and improved controlled-noise downstream macro-F1 with positive whole-group intervals.</li><li>Every displayed conclusion is read from checksum-bound machine-readable evidence.</li></ul></article>
+      <article class="claim-card"><h3>Supported by current evidence</h3><ul><li>Group-safe rankings retrieve injected class-label changes more efficiently than matched random review.</li><li>For the eligible NuCLS <code>JP.1</code> cohort, the frozen global risk ranking enriched independent-pathologist disagreement relative to exact matched random review.</li><li>The same frozen candidate replicated natural independent-expert disagreement enrichment across four RIVA and two MIDOG++ rotations.</li><li>The frozen current candidate transferred to new PUMA images and improved controlled-noise downstream macro-F1 with positive whole-group intervals.</li><li>Every displayed conclusion is read from checksum-bound machine-readable evidence.</li></ul></article>
       <article class="claim-card"><h3>Not established</h3><ul><li>That a naturally occurring annotation is wrong, that a pathologist made an error or that model disagreement is biological truth.</li><li>That the intervention is uniformly class-safe across realistic corruption patterns; only one of nine stress scenarios passed every class safeguard.</li><li>Prospective workflow benefit, multi-site generalisation, clinical utility or permission to alter natural source labels automatically.</li></ul></article>
     </div>
   </section>
 
   <section class="section" id="current-stage">
     <div class="section-heading reveal"><h2>AANCA is externally evaluated, but not yet confirmatory or ready for real-use claims.</h2><p class="section-deck">Completion labels describe which governed evaluations ran. They do not turn a mixed result into efficacy.</p></div>
-    <div class="chapter-copy reveal"><p>The current project has reached <code>PRIMARY_STUDY_COMPLETE</code>, <code>EXTERNAL_VALIDATION_COMPLETE</code> and <code>DEMO_COMPLETE</code>. It has not reached <code>CONFIRMATORY_COMPLETE</code>. The binding natural-data action is <code>retain_uncorrected</code>: AANCA may prioritise cases for qualified review, but it may not silently exclude, relabel or overwrite them.</p><p>The next research phase is provisionally named <strong>AANCA v2</strong>. This is a prospective evidence programme for the same core auditing system, not a retroactive rename of the existing results. Opened PanNuke, NuCLS, MoNuSAC and PUMA outcomes may inform diagnosis of weaknesses, but they cannot serve as the untouched final confirmation for the next claim.</p></div>
+    <div class="chapter-copy reveal"><p>The current project has reached <code>PRIMARY_STUDY_COMPLETE</code>, <code>EXTERNAL_VALIDATION_COMPLETE</code> and <code>DEMO_COMPLETE</code>. It has not reached <code>CONFIRMATORY_COMPLETE</code>. The binding natural-data action is <code>retain_uncorrected</code>: AANCA may prioritise cases for qualified review, but it may not silently exclude, relabel or overwrite them.</p><p>The next research phase is provisionally named <strong>AANCA v2</strong>. This is a prospective evidence programme for the same core auditing system, not a retroactive rename of the existing results. Opened PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++ outcomes may inform diagnosis of weaknesses, but they cannot serve as the untouched final confirmation for the next claim.</p></div>
     <div class="figure-width reveal rules phase-ledger">
       <article class="rule"><b>1 · Natural reference</b><p>Recruit independent blinded pathologists on new cases and preserve agreement, disagreement, ambiguity, abstention and insufficient-context outcomes instead of forcing one truth label.</p></article>
       <article class="rule"><b>2 · Measured utility</b><p>Develop the review queue inside nested patient- or WSI-group cross-fitting using both inconsistency probability and conservatively estimated downstream benefit.</p></article>
@@ -1830,7 +2077,7 @@ __CURRENT_EVIDENCE__
 
   <section class="section" id="use">
     <div class="repo-shell">
-      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the thirteen-file presentation package and its current PanNuke, NuCLS, MoNuSAC and PUMA summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The primary, both NuCLS analyses and MoNuSAC provide scoped metric recalculation or evidence-readback scripts. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
+      <div class="reproduction-intro reveal"><h2>Read the evidence first; run the software when a deeper check is needed.</h2><p>The checked-in article opens without a dataset, model run or GPU. <code>present_demo.py --verify-only</code> verifies the thirteen-file presentation package and its current PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++ summaries; it does not retrain a model or recalculate a scientific result. The separate synthetic path exercises the portable software workflow.</p><p>The public repository retains frozen protocols, configs, compact results and arrays for scoped evidence verification. The public RIVA x MIDOG++ replication preserves pre-reference score seals and deterministic post-reference recalculation. The primary, both NuCLS analyses and MoNuSAC provide scoped metric recalculation or evidence-readback scripts. The PUMA readback imports maintained helpers and checks stored predictions rather than independently retraining the 44 models. Full image-to-result replication still requires lawfully obtained source datasets and appropriate compute; the project never downloads protected data silently or relaxes scientific gates when an input is unavailable.</p></div>
       <article class="repo-card reveal">
         <div class="repo-top">
           <svg class="repo-icon" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path fill="currentColor" d="M12 .7A11.3 11.3 0 0 0 8.43 22.72c.56.1.77-.24.77-.54v-2.11c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.11 1.16A10.8 10.8 0 0 1 12 6.16c.96 0 1.92.13 2.82.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.55.23 2.7.12 2.99.72.79 1.16 1.8 1.16 3.03 0 4.34-2.64 5.29-5.15 5.57.4.35.77 1.04.77 2.1v3.11c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>
@@ -1892,7 +2139,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 23 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC and PUMA</p><p>External evaluation complete; controlled PUMA transfer and limited NuCLS <code>JP.1</code> disagreement enrichment supported; pathologist error and clinical utility not established.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 26 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++</p><p>External evaluation complete; public RIVA x MIDOG++ disagreement enrichment replicated; pathologist error and clinical utility not established.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
     <div class="footer-column footer-terms"><h3>Terms</h3><p>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p><p>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms.</p><p>No diagnostic or clinical use is established.</p></div>
   </div>
@@ -2528,7 +2775,7 @@ def _render_readme(evidence: dict[str, Any]) -> str:
     return f"""# AANCA presentation MVP
 
 This thirteen-file, read-only article package was generated from checksum-verified
-PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC and PUMA result
+PanNuke primary evidence plus the checked-in NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++ result
 authorities. The accepted PanNuke run is `{primary["run_id"]}`.
 
 From the repository root, verify the complete package and open it locally:
@@ -2559,12 +2806,17 @@ With the project environment installed, `uv run histo-audit demo serve` and
   retrieval passed while downstream and class-safety gates failed; the frozen PUMA
   controlled confirmation passed all seven internally pre-specified gates. The NuCLS
   LOO and PUMA records do not have independent public pre-outcome timestamps.
+- Public independent-expert replication: the pre-reference scores were published
+  first, then both frozen RIVA and MIDOG++ gates passed across six rotations in total.
+  This supports disagreement enrichment in those releases, not adjudicated error.
 - Presentation: `DEMO_COMPLETE`.
 - Confirmatory stage: not reached. `CONFIRMATORY_COMPLETE` is not claimed.
 - Natural-data action: `retain_uncorrected`.
 
 The positive PUMA result supports transfer under controlled label noise. The NuCLS
-LOO result supports disagreement enrichment for the eligible `JP.1` cohort only.
+LOO result supports disagreement enrichment for the eligible `JP.1` cohort only; the
+separate RIVA x MIDOG++ experiment replicated disagreement enrichment across two
+public datasets and six rotations.
 Neither shows that AANCA detects pathologist errors, discovers biological truth,
 improves a real laboratory workflow or is clinically useful. The software never
 modifies source annotations automatically; it ranks potentially inconsistent
@@ -2610,7 +2862,7 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 23 August 2026.
+Author: Natan Smogór. Updated: 26 August 2026.
 """
 
 
@@ -2624,8 +2876,8 @@ def _build_output_manifest(directory: Path) -> dict[str, Any]:
         for relative in sorted(_OUTPUT_FILES)
     ]
     return {
-        "schema_version": 5,
-        "policy": "aanca_presentation_current_evidence_readback_v5",
+        "schema_version": 6,
+        "policy": "aanca_presentation_current_evidence_readback_v6",
         "files": records,
         "manifest_root_sha256": _canonical_sha256(records),
     }
@@ -2648,8 +2900,8 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         raise ValueError("MVP output allowlist differs")
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 5
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v5"
+        manifest.get("schema_version") != 6
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v6"
     ):
         raise ValueError("MVP manifest schema or policy differs")
     records = manifest.get("files")
@@ -2669,6 +2921,7 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
     external_completed = evidence.get("external_validation_completed")
     external = evidence.get("external_validation")
     independent = evidence.get("independent_pathologist_validation")
+    public_replication = evidence.get("public_independent_pathologist_replication")
     controlled = evidence.get("controlled_external_benchmark")
     puma = evidence.get("new_source_confirmation")
     stress = evidence.get("realism_stress")
@@ -2711,6 +2964,51 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         and independent.get("claim_boundary", {}).get("downstream_or_clinical_utility_proven")
         is False
         and independent.get("claim_boundary", {}).get("source_annotations_modified") is False
+    )
+    public_replication_scope_valid = (
+        isinstance(public_replication, dict)
+        and public_replication.get("study_id") == "public_independent_pathologist_replication_v1"
+        and public_replication.get("completion_stage") == "EXTERNAL_VALIDATION_COMPLETE"
+        and public_replication.get("decision") == "cross_dataset_disagreement_enrichment_supported"
+        and public_replication.get("cross_dataset_replication_supported") is True
+        and public_replication.get("information_barrier", {}).get(
+            "pre_reference_scores_published_before_reference_evaluation"
+        )
+        is True
+        and public_replication.get("information_barrier", {}).get(
+            "risks_recomputed_after_reference"
+        )
+        is False
+        and public_replication.get("datasets", {}).get("riva", {}).get("rotation_count") == 4
+        and public_replication.get("datasets", {}).get("midogpp", {}).get("rotation_count") == 2
+        and all(
+            public_replication.get("datasets", {}).get(dataset, {}).get("primary_gate_pass") is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("all_rotation_point_differences_nonnegative")
+            is True
+            and public_replication.get("datasets", {}).get(dataset, {}).get("exact_equal_budget")
+            is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("exact_strata_preserved")
+            is True
+            and public_replication.get("datasets", {}).get(dataset, {}).get("aanca_random_disjoint")
+            is True
+            and public_replication.get("datasets", {})
+            .get(dataset, {})
+            .get("precision_difference_interval_95", [0.0])[0]
+            > 0.0
+            for dataset in ("riva", "midogpp")
+        )
+        and public_replication.get("claim_boundary", {}).get(
+            "independent_pathologist_disagreement_enrichment_if_positive"
+        )
+        is True
+        and public_replication.get("claim_boundary", {}).get("pathologist_error_detection_proven")
+        is False
+        and public_replication.get("claim_boundary", {}).get("downstream_utility_proven") is False
+        and public_replication.get("claim_boundary", {}).get("source_annotations_modified") is False
     )
     controlled_scope_valid = (
         isinstance(controlled, dict)
@@ -2800,13 +3098,14 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         and publication_limits.get("puma_verifier_is_third_party_validation") is False
     )
     if (
-        evidence.get("schema_version") != 4
+        evidence.get("schema_version") != 5
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
         or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
         or evidence.get("confirmatory_completed") is not False
         or not external_scope_valid
         or not independent_scope_valid
+        or not public_replication_scope_valid
         or not controlled_scope_valid
         or not puma_scope_valid
         or not stress_scope_valid
@@ -2896,7 +3195,7 @@ def build_mvp_presentation(
         "size_bytes": _FINDINGS_SCRIPT_SOURCE.stat().st_size,
     }
     evidence = {
-        "schema_version": 4,
+        "schema_version": 5,
         "presentation_status": "DEMO_COMPLETE",
         "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
         "primary_study_status": "PRIMARY_STUDY_COMPLETE",
@@ -2910,6 +3209,9 @@ def build_mvp_presentation(
         "external_validation": release_evidence["external_validation"],
         "independent_pathologist_validation": release_evidence[
             "independent_pathologist_validation"
+        ],
+        "public_independent_pathologist_replication": release_evidence[
+            "public_independent_pathologist_replication"
         ],
         "controlled_external_benchmark": release_evidence["controlled_external_benchmark"],
         "new_source_confirmation": release_evidence["new_source_confirmation"],

@@ -1,0 +1,19 @@
+{
+  "claim_boundary": {
+    "automatic_annotation_change_permitted": false,
+    "clinical_error_detection_proven": false,
+    "downstream_utility_proven": false,
+    "independent_pathologist_disagreement_enrichment_if_positive": true,
+    "pathologist_error_detection_proven": false,
+    "prospective_workflow_superiority_proven": false,
+    "source_annotations_modified": false
+  },
+  "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+  "conclusion": "Both frozen gates passed: the candidate replicated enrichment for natural independent-expert disagreements in these two public releases.",
+  "config_sha256": "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321",
+  "cross_dataset_replication_supported": true,
+  "midogpp_gate_pass": true,
+  "riva_gate_pass": true,
+  "schema_version": 1,
+  "study_id": "public_independent_pathologist_replication_v1"
+}

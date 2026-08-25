@@ -1,0 +1,372 @@
+{
+  "artifact_hashes": {
+    "enrichment_curves_csv": "d5e21405a1a226bd48ab7621a3533c110b95944a04d03df453038faa0d48b624",
+    "matched_random_queues_json": "5384a80dc1015b68f009991027775967318d09c6d7ff52a4b6afad34c3b07449",
+    "reference_attached_csv": "fc191be1e44a250ca234154be8d5d3a29dc8fa2e5cf640fcfdc2f563cff0b2a4",
+    "reference_source_inventory_json": "eaf618e089bb303dd284b1406f84f933fc9f3604313c4353e84b54998b4e6b84"
+  },
+  "claim_boundary": {
+    "automatic_annotation_change_permitted": false,
+    "clinical_error_detection_proven": false,
+    "downstream_utility_proven": false,
+    "independent_pathologist_disagreement_enrichment_if_positive": true,
+    "pathologist_error_detection_proven": false,
+    "prospective_workflow_superiority_proven": false,
+    "source_annotations_modified": false
+  },
+  "config_sha256": "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321",
+  "dataset": "midogpp",
+  "execution_complete": true,
+  "information_barrier": {
+    "all_score_seals_authenticated_before_reference": true,
+    "input_only_snapshots": true,
+    "risks_recomputed_after_reference": false,
+    "separate_prepare_score_evaluate_processes_required": true
+  },
+  "metrics": {
+    "all_rotation_point_differences_nonnegative": true,
+    "by_observed_class": {
+      "mitotic_figure": {
+        "aanca_precision": 0.28174603174603174,
+        "aanca_reviewed_rotation_rows": 252,
+        "eligible_rotation_rows": 3208,
+        "matched_random_mean_precision": 0.24186507936507937,
+        "precision_difference": 0.03988095238095238,
+        "reference_positive_rotation_rows": 756
+      },
+      "not_mitotic_figure": {
+        "aanca_precision": 0.42727272727272725,
+        "aanca_reviewed_rotation_rows": 110,
+        "eligible_rotation_rows": 4016,
+        "matched_random_mean_precision": 0.2666363636363636,
+        "precision_difference": 0.16063636363636363,
+        "reference_positive_rotation_rows": 756
+      }
+    },
+    "dataset": "midogpp",
+    "primary": {
+      "aanca_precision": 0.3259668508287293,
+      "aanca_random_disjoint": true,
+      "aanca_reference_positive_reviewed": 118,
+      "bootstrap": {
+        "enrichment_ratio_interval_95": [
+          1.0891635868101663,
+          1.5217439959518897
+        ],
+        "precision_difference_interval_95": [
+          0.021351610360909327,
+          0.13815898534269191
+        ],
+        "requested_iterations": 5000,
+        "seed": 26182530,
+        "undefined_difference_iterations": 0,
+        "undefined_enrichment_iterations": 0,
+        "unique_group_count": 70,
+        "unit": "dataset_group_id",
+        "valid_difference_iterations": 5000,
+        "valid_enrichment_iterations": 5000
+      },
+      "budget_fraction": 0.05,
+      "eligible_rotation_rows": 7224,
+      "enrichment_ratio": 1.3070447496677,
+      "exact_equal_budget": true,
+      "exact_strata_preserved": true,
+      "matched_random_mean_precision": 0.24939226519337024,
+      "matched_random_precision_max": 0.292817679558011,
+      "matched_random_precision_min": 0.21823204419889503,
+      "precision_difference": 0.07657458563535904,
+      "reference_positive_rotation_rows": 1512,
+      "reviewed_rotation_rows": 362
+    },
+    "primary_gate_pass": true,
+    "primary_gate_rule": "aggregate_precision_difference_lower_95_gt_0_and_all_rotation_points_nonnegative",
+    "rotations": {
+      "expert_1": {
+        "average_precision": 0.28361523035967634,
+        "eligible_count": 3612,
+        "primary": {
+          "aanca_precision": 0.34806629834254144,
+          "aanca_random_disjoint": true,
+          "aanca_reference_positive_reviewed": 63,
+          "budget_fraction": 0.05,
+          "eligible_count": 3612,
+          "enrichment_ratio": 1.412556053811659,
+          "exact_equal_budget": true,
+          "exact_strata_preserved": true,
+          "matched_random_mean_precision": 0.24640883977900555,
+          "matched_random_precision_max": 0.292817679558011,
+          "matched_random_precision_min": 0.20441988950276244,
+          "precision_difference": 0.10165745856353589,
+          "reference_positive_count": 756,
+          "reviewed_count": 181
+        },
+        "reference_positive_count": 756,
+        "reference_positive_prevalence": 0.20930232558139536,
+        "secondary_budgets": {
+          "0.01": {
+            "aanca_precision": 0.43243243243243246,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 16,
+            "budget_fraction": 0.01,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.7057569296375266,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.25351351351351353,
+            "matched_random_precision_max": 0.40540540540540543,
+            "matched_random_precision_min": 0.10810810810810811,
+            "precision_difference": 0.17891891891891892,
+            "reference_positive_count": 756,
+            "reviewed_count": 37
+          },
+          "0.02": {
+            "aanca_precision": 0.2876712328767123,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 21,
+            "budget_fraction": 0.02,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.1229946524064174,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.2561643835616438,
+            "matched_random_precision_max": 0.3424657534246575,
+            "matched_random_precision_min": 0.136986301369863,
+            "precision_difference": 0.03150684931506853,
+            "reference_positive_count": 756,
+            "reviewed_count": 73
+          },
+          "0.05": {
+            "aanca_precision": 0.34806629834254144,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 63,
+            "budget_fraction": 0.05,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.412556053811659,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.24640883977900555,
+            "matched_random_precision_max": 0.292817679558011,
+            "matched_random_precision_min": 0.20441988950276244,
+            "precision_difference": 0.10165745856353589,
+            "reference_positive_count": 756,
+            "reviewed_count": 181
+          },
+          "0.10": {
+            "aanca_precision": 0.32320441988950277,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 117,
+            "budget_fraction": 0.1,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.3380603842634948,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.2415469613259669,
+            "matched_random_precision_max": 0.27071823204419887,
+            "matched_random_precision_min": 0.21823204419889503,
+            "precision_difference": 0.08165745856353587,
+            "reference_positive_count": 756,
+            "reviewed_count": 362
+          }
+        }
+      },
+      "expert_2": {
+        "average_precision": 0.28161333819913087,
+        "eligible_count": 3612,
+        "primary": {
+          "aanca_precision": 0.30386740331491713,
+          "aanca_random_disjoint": true,
+          "aanca_reference_positive_reviewed": 55,
+          "budget_fraction": 0.05,
+          "eligible_count": 3612,
+          "enrichment_ratio": 1.204028021015762,
+          "exact_equal_budget": true,
+          "exact_strata_preserved": true,
+          "matched_random_mean_precision": 0.2523756906077348,
+          "matched_random_precision_max": 0.3149171270718232,
+          "matched_random_precision_min": 0.20994475138121546,
+          "precision_difference": 0.051491712707182336,
+          "reference_positive_count": 756,
+          "reviewed_count": 181
+        },
+        "reference_positive_count": 756,
+        "reference_positive_prevalence": 0.20930232558139536,
+        "secondary_budgets": {
+          "0.01": {
+            "aanca_precision": 0.21621621621621623,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 8,
+            "budget_fraction": 0.01,
+            "eligible_count": 3612,
+            "enrichment_ratio": 0.7897334649555774,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.2737837837837838,
+            "matched_random_precision_max": 0.43243243243243246,
+            "matched_random_precision_min": 0.10810810810810811,
+            "precision_difference": -0.05756756756756759,
+            "reference_positive_count": 756,
+            "reviewed_count": 37
+          },
+          "0.02": {
+            "aanca_precision": 0.3287671232876712,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 24,
+            "budget_fraction": 0.02,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.3785180930499712,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.23849315068493152,
+            "matched_random_precision_max": 0.3287671232876712,
+            "matched_random_precision_min": 0.1232876712328767,
+            "precision_difference": 0.0902739726027397,
+            "reference_positive_count": 756,
+            "reviewed_count": 73
+          },
+          "0.05": {
+            "aanca_precision": 0.30386740331491713,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 55,
+            "budget_fraction": 0.05,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.204028021015762,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.2523756906077348,
+            "matched_random_precision_max": 0.3149171270718232,
+            "matched_random_precision_min": 0.20994475138121546,
+            "precision_difference": 0.051491712707182336,
+            "reference_positive_count": 756,
+            "reviewed_count": 181
+          },
+          "0.10": {
+            "aanca_precision": 0.3149171270718232,
+            "aanca_random_disjoint": true,
+            "aanca_reference_positive_reviewed": 114,
+            "budget_fraction": 0.1,
+            "eligible_count": 3612,
+            "enrichment_ratio": 1.1433156152843245,
+            "exact_equal_budget": true,
+            "exact_strata_preserved": true,
+            "matched_random_mean_precision": 0.2754419889502762,
+            "matched_random_precision_max": 0.30662983425414364,
+            "matched_random_precision_min": 0.2513812154696133,
+            "precision_difference": 0.03947513812154696,
+            "reference_positive_count": 756,
+            "reviewed_count": 362
+          }
+        }
+      }
+    },
+    "secondary_budgets": {
+      "0.01": {
+        "aanca_precision": 0.32432432432432434,
+        "aanca_random_disjoint": true,
+        "aanca_reference_positive_reviewed": 24,
+        "budget_fraction": 0.01,
+        "eligible_rotation_rows": 7224,
+        "enrichment_ratio": 1.230138390568939,
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "matched_random_mean_precision": 0.2636486486486487,
+        "matched_random_precision_max": 0.3918918918918919,
+        "matched_random_precision_min": 0.12162162162162163,
+        "precision_difference": 0.06067567567567567,
+        "reference_positive_rotation_rows": 1512,
+        "reviewed_rotation_rows": 74
+      },
+      "0.02": {
+        "aanca_precision": 0.3082191780821918,
+        "aanca_random_disjoint": true,
+        "aanca_reference_positive_reviewed": 45,
+        "budget_fraction": 0.02,
+        "eligible_rotation_rows": 7224,
+        "enrichment_ratio": 1.2461921905289395,
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "matched_random_mean_precision": 0.24732876712328764,
+        "matched_random_precision_max": 0.3013698630136986,
+        "matched_random_precision_min": 0.1780821917808219,
+        "precision_difference": 0.060890410958904156,
+        "reference_positive_rotation_rows": 1512,
+        "reviewed_rotation_rows": 146
+      },
+      "0.05": {
+        "aanca_precision": 0.3259668508287293,
+        "aanca_random_disjoint": true,
+        "aanca_reference_positive_reviewed": 118,
+        "budget_fraction": 0.05,
+        "eligible_rotation_rows": 7224,
+        "enrichment_ratio": 1.3070447496677,
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "matched_random_mean_precision": 0.24939226519337024,
+        "matched_random_precision_max": 0.292817679558011,
+        "matched_random_precision_min": 0.21823204419889503,
+        "precision_difference": 0.07657458563535904,
+        "reference_positive_rotation_rows": 1512,
+        "reviewed_rotation_rows": 362
+      },
+      "0.10": {
+        "aanca_precision": 0.319060773480663,
+        "aanca_random_disjoint": true,
+        "aanca_reference_positive_reviewed": 231,
+        "budget_fraction": 0.1,
+        "eligible_rotation_rows": 7224,
+        "enrichment_ratio": 1.2343040341971678,
+        "exact_equal_budget": true,
+        "exact_strata_preserved": true,
+        "matched_random_mean_precision": 0.25849447513812157,
+        "matched_random_precision_max": 0.27348066298342544,
+        "matched_random_precision_min": 0.24033149171270718,
+        "precision_difference": 0.0605662983425414,
+        "reference_positive_rotation_rows": 1512,
+        "reviewed_rotation_rows": 724
+      }
+    }
+  },
+  "pre_reference_score_seals": {
+    "expert_1": {
+      "hidden_reference_loaded": false,
+      "scored_input_sha256": "900581373983a581212fbd052550dad0da58795c7c47657d4a61a6a425ca04bf",
+      "source_inventory_sha256": "96b0103c0abf989de599894ec144c6360e1e7e62f8d735c0b44f98c0aae03a2b"
+    },
+    "expert_2": {
+      "hidden_reference_loaded": false,
+      "scored_input_sha256": "8c9671dc33e650306043c9b41f7afebf047a5093e61500bc9f84d029d9dbb76d",
+      "source_inventory_sha256": "909f5a90cfbcb5816b35420c9c47e09f8b90ff6cce9a35109fa3dd6ef67576f4"
+    }
+  },
+  "protocol": "PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md",
+  "reference": {
+    "adjudicator_label_used": false,
+    "dataset": "midogpp",
+    "final_category_used": false,
+    "reference_type": "independent_pairwise_expert_label",
+    "rotations": {
+      "expert_1": {
+        "adjudicator_label_read": false,
+        "final_category_read": false,
+        "input_expert_removed_from_reference": true,
+        "outcome_counts": {
+          "consensus_agree": 2856,
+          "consensus_disagree": 756
+        },
+        "score_population_count": 3612
+      },
+      "expert_2": {
+        "adjudicator_label_read": false,
+        "final_category_read": false,
+        "input_expert_removed_from_reference": true,
+        "outcome_counts": {
+          "consensus_agree": 2856,
+          "consensus_disagree": 756
+        },
+        "score_population_count": 3612
+      }
+    },
+    "source_inventory_sha256": "c0113a7911a6a44265dfd3e90bbdcb7c20d19f7f6c4bed2b20d4875f303afe5f"
+  },
+  "schema_version": 1,
+  "study_id": "public_independent_pathologist_replication_v1"
+}

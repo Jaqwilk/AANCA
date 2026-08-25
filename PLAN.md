@@ -369,7 +369,7 @@ The executed inventory and final deletion boundary are in
 
 ### M22 — Public independent-pathologist replication
 
-Status: protocol and implementation frozen; outcome execution not yet started
+Status: `EXTERNAL_VALIDATION_COMPLETE`; both frozen dataset gates passed
 
 - retain the selected development candidate without dataset-specific tuning;
 - run four leave-one-out RIVA rotations against strict independent-vote majorities;
@@ -382,6 +382,17 @@ Status: protocol and implementation frozen; outcome execution not yet started
   disagreement-enrichment replication;
 - preserve every earlier positive and negative authority and keep the natural-data
   action at `retain_uncorrected`.
+
+Executed outcome:
+
+- RIVA 5% precision `0.476357` versus `0.426900` exact matched random;
+  difference `+0.049457`, group-bootstrap 95% CI `[+0.014037, +0.091632]`;
+- MIDOG++ 5% precision `0.325967` versus `0.249392` exact matched random;
+  difference `+0.076575`, group-bootstrap 95% CI `[+0.021352, +0.138159]`;
+- all four RIVA and both MIDOG++ rotation point differences were non-negative;
+- both dataset gates and the frozen cross-dataset replication rule passed;
+- pre-reference score commit `09aede5000c43406759a432b674f6db37db98b26`
+  was present on `origin/main` before either reference evaluation ran.
 
 The frozen authority is
 [`PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md`](PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md).

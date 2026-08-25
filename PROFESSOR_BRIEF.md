@@ -50,6 +50,20 @@ This is evidence that the frozen global ranking enriched independent-pathologist
 disagreement in one junior-pathologist cohort. It is not a pooled pathologist result,
 an adjudicated error study or validation of the deployment queue.
 
+## Public cross-dataset replication
+
+The same frozen candidate was then scored on RIVA and MIDOG++ before their reference
+labels were opened; the sealed score artifacts were published first. At 5% review,
+RIVA precision was `0.476357` versus `0.426900` exact matched random, difference
+`+0.049457`, 95% CI `[+0.014037, +0.091632]`. MIDOG++ precision was `0.325967`
+versus `0.249392`, difference `+0.076575`, CI `[+0.021352, +0.138159]`.
+
+All four RIVA leave-one-annotator-out rotations and both MIDOG++ pairwise-expert
+rotations were non-negative, so both frozen gates passed. This is stronger evidence
+that AANCA enriches review queues for natural independent-expert disagreement across
+different public domains. It still does not identify which expert is correct or
+establish downstream or clinical utility.
+
 ## Negative evidence retained
 
 On the original PanNuke benchmark, guided restoration was worse than matched random
@@ -61,12 +75,12 @@ outcomes are retained rather than explained away or used for post-result tuning.
 
 ## Interpretation and limitations
 
-PUMA provides controlled-noise transfer evidence. The separate NuCLS LOO result adds
-limited natural disagreement-enrichment evidence, but neither experiment proves
-pathologist error or clinical benefit and neither contains paired natural labels
-before and after blinded review of the same nuclei. Their protocol and result records
-do not have independent pre-outcome timestamps. The scoped readbacks recompute saved
-metrics but are not third-party replications.
+PUMA provides controlled-noise transfer evidence. NuCLS, RIVA and MIDOG++ add natural
+independent-expert disagreement-enrichment evidence with different reference designs.
+The RIVA x MIDOG++ scoring record was public before reference evaluation, but none of
+these studies proves pathologist error or clinical benefit, and none contains paired
+natural labels before and after blinded review of the same nuclei. The scoped
+readbacks are project-maintained verification, not third-party clinical validation.
 
 ## Next decisive experiment
 

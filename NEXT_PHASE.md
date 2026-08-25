@@ -14,7 +14,7 @@ history together, so the repository does not independently timestamp the pre-out
 order. It has not shown that it detects true natural
 annotation errors, improves qualified expert review or is safe across sites. The
 next phase is designed to answer those missing questions without tuning on opened
-PanNuke, NuCLS, MoNuSAC or PUMA final outcomes.
+PanNuke, NuCLS, MoNuSAC, PUMA, RIVA or MIDOG++ final outcomes.
 
 “AANCA v2” is a working name for this evidence programme. It does not replace,
 relabel or upgrade the status of the current results.
@@ -25,6 +25,9 @@ relabel or upgrade the status of the current results.
   primary analysis is exploratory and H4 is adverse.
 - NuCLS provides genuine multi-rater disagreement but only five patient groups; its
   frozen ranking claim failed and guided correction reduced downstream macro-F1.
+- The separate RIVA and MIDOG++ frozen study replicated independent-expert
+  disagreement enrichment across six rotations with positive group-bootstrap
+  intervals, but did not adjudicate error or test downstream utility.
 - MoNuSAC supports controlled retrieval, while its downstream and class-safety gates
   failed.
 - PUMA supports controlled-noise transfer on 62 held-out case/ROI groups; all seven

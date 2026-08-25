@@ -146,6 +146,37 @@ No source annotation was changed. A positive disagreement outcome does not estab
 which label is biologically correct, pathologist error, clinical utility or safe
 automatic correction.
 
+## Public RIVA and MIDOG++ independent-expert replication
+
+The additive frozen study is rooted at
+[`artifacts/public_independent_pathologist_replication`](artifacts/public_independent_pathologist_replication)
+and documented in
+[`reports/public_independent_pathologist_replication_results.md`](reports/public_independent_pathologist_replication_results.md).
+The score-only artifacts were committed and pushed as
+`09aede5000c43406759a432b674f6db37db98b26` before either reference was opened.
+
+At the 5% budget, RIVA disagreement precision was `0.476357` versus `0.426900`
+across 100 exact matched-random queues; the difference was `+0.049457`, with
+whole-group 95% CI `[+0.014037, +0.091632]`. MIDOG++ precision was `0.325967`
+versus `0.249392`; the difference was `+0.076575`, CI
+`[+0.021352, +0.138159]`. All four RIVA leave-one-annotator-out rotations and both
+MIDOG++ pairwise-expert rotations were non-negative, so both frozen dataset gates
+and the cross-dataset replication rule passed.
+
+Recalculate the saved reference association and metrics with:
+
+```text
+uv run python scripts/run_public_pathologist_replication.py verify --dataset riva
+uv run python scripts/run_public_pathologist_replication.py verify --dataset midogpp
+```
+
+RIVA uses strict majorities from at least two other raw annotator votes and never the
+released majority label. MIDOG++ alternates the two independent expert labels and
+does not use the adjudicator or final category in the primary endpoint. This is
+positive cross-dataset disagreement-enrichment evidence, not adjudication of which
+pathologist is correct, a downstream-utility result or a prospective workflow trial.
+Source annotations remained unchanged.
+
 ## MoNuSAC and PUMA evidence
 
 The controlled MoNuSAC authority is

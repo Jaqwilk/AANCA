@@ -460,6 +460,148 @@ def _make_release_sources(root: Path) -> None:
             },
         },
     )
+    replication_claims = {
+        "automatic_annotation_change_permitted": False,
+        "clinical_error_detection_proven": False,
+        "downstream_utility_proven": False,
+        "independent_pathologist_disagreement_enrichment_if_positive": True,
+        "pathologist_error_detection_proven": False,
+        "prospective_workflow_superiority_proven": False,
+        "source_annotations_modified": False,
+    }
+    replication_config_sha = "1f8e1fddf3ba8ce38cc73b8769f03de8f91aad2fb0743052e6751a00b20d6321"
+    _write_json(
+        root / "artifacts/public_independent_pathologist_replication/summary.json",
+        {
+            "study_id": "public_independent_pathologist_replication_v1",
+            "completion_stage": "EXTERNAL_VALIDATION_COMPLETE",
+            "cross_dataset_replication_supported": True,
+            "riva_gate_pass": True,
+            "midogpp_gate_pass": True,
+            "config_sha256": replication_config_sha,
+            "claim_boundary": replication_claims,
+        },
+    )
+
+    def replication_dataset(
+        *,
+        dataset: str,
+        rotation_names: tuple[str, ...],
+        reference_type: str,
+        group_count: int,
+        eligible_count: int,
+        reviewed_count: int,
+        found_count: int,
+        precision: float,
+        random_precision: float,
+        difference: float,
+        difference_interval: list[float],
+        enrichment: float,
+        enrichment_interval: list[float],
+    ) -> dict[str, Any]:
+        input_removed_key = (
+            "input_annotator_removed_from_reference"
+            if dataset == "riva"
+            else "input_expert_removed_from_reference"
+        )
+        reference_rotations = {
+            name: {
+                input_removed_key: True,
+                **(
+                    {"official_released_majority_label_read": False}
+                    if dataset == "riva"
+                    else {"adjudicator_label_read": False, "final_category_read": False}
+                ),
+            }
+            for name in rotation_names
+        }
+        return {
+            "study_id": "public_independent_pathologist_replication_v1",
+            "dataset": dataset,
+            "execution_complete": True,
+            "information_barrier": {
+                "all_score_seals_authenticated_before_reference": True,
+                "input_only_snapshots": True,
+                "risks_recomputed_after_reference": False,
+                "separate_prepare_score_evaluate_processes_required": True,
+            },
+            "metrics": {
+                "dataset": dataset,
+                "primary_gate_pass": True,
+                "all_rotation_point_differences_nonnegative": True,
+                "rotations": {
+                    name: {"primary": {"precision_difference": difference / len(rotation_names)}}
+                    for name in rotation_names
+                },
+                "primary": {
+                    "budget_fraction": 0.05,
+                    "eligible_rotation_rows": eligible_count,
+                    "reviewed_rotation_rows": reviewed_count,
+                    "aanca_reference_positive_reviewed": found_count,
+                    "aanca_precision": precision,
+                    "matched_random_mean_precision": random_precision,
+                    "precision_difference": difference,
+                    "enrichment_ratio": enrichment,
+                    "exact_equal_budget": True,
+                    "exact_strata_preserved": True,
+                    "aanca_random_disjoint": True,
+                    "bootstrap": {
+                        "requested_iterations": 5000,
+                        "unit": "dataset_group_id",
+                        "unique_group_count": group_count,
+                        "precision_difference_interval_95": difference_interval,
+                        "enrichment_ratio_interval_95": enrichment_interval,
+                    },
+                },
+            },
+            "reference": {
+                "reference_type": reference_type,
+                "rotations": reference_rotations,
+                **(
+                    {"official_released_majority_label_read": False}
+                    if dataset == "riva"
+                    else {"adjudicator_label_used": False, "final_category_used": False}
+                ),
+            },
+            "claim_boundary": replication_claims,
+        }
+
+    _write_json(
+        root / "artifacts/public_independent_pathologist_replication/riva/results.json",
+        replication_dataset(
+            dataset="riva",
+            rotation_names=("annotator_1", "annotator_2", "annotator_3", "annotator_4"),
+            reference_type="strict_leave_one_out_majority",
+            group_count=33,
+            eligible_count=11373,
+            reviewed_count=571,
+            found_count=272,
+            precision=0.4763572679,
+            random_precision=0.4269001751,
+            difference=0.0494570928,
+            difference_interval=[0.0140365011, 0.0916322689],
+            enrichment=1.1158516574,
+            enrichment_interval=[1.0293110038, 1.3004914259],
+        ),
+    )
+    _write_json(
+        root / "artifacts/public_independent_pathologist_replication/midogpp/results.json",
+        replication_dataset(
+            dataset="midogpp",
+            rotation_names=("expert_1", "expert_2"),
+            reference_type="independent_pairwise_expert_label",
+            group_count=70,
+            eligible_count=7224,
+            reviewed_count=362,
+            found_count=118,
+            precision=0.3259668508,
+            random_precision=0.2493922652,
+            difference=0.0765745856,
+            difference_interval=[0.0213516104, 0.1381589853],
+            enrichment=1.3070447497,
+            enrichment_interval=[1.0891635868, 1.5217439960],
+        ),
+    )
     _write_json(
         root / "artifacts/monusac_external_validation/results.json",
         {
@@ -692,6 +834,18 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert independent["reference"]["input_pathologist_removed"] is True
     assert independent["reference"]["aggregate_p_truth_used"] is False
     assert independent["validity"]["balanced_deployment_queue_validated"] is False
+    public_replication = evidence["public_independent_pathologist_replication"]
+    assert public_replication["cross_dataset_replication_supported"] is True
+    assert public_replication["datasets"]["riva"]["rotation_count"] == 4
+    assert public_replication["datasets"]["riva"]["primary_gate_pass"] is True
+    assert public_replication["datasets"]["midogpp"]["rotation_count"] == 2
+    assert public_replication["datasets"]["midogpp"]["primary_gate_pass"] is True
+    assert (
+        public_replication["information_barrier"][
+            "pre_reference_scores_published_before_reference_evaluation"
+        ]
+        is True
+    )
     assert evidence["controlled_external_benchmark"]["decision"] == "not_supported"
     assert evidence["new_source_confirmation"]["all_success_conditions_met"] is True
     assert evidence["realism_stress"]["all_class_safeguards_passed_count"] == 1
@@ -770,7 +924,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "23 August 2026" in html
+    assert "26 August 2026" in html
     assert "gsap@3.15.0" in html
     assert (
         'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'
@@ -944,18 +1098,24 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EM DASH}" not in html
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
-    assert "The frozen ranking enriched one natural disagreement cohort" in html
+    assert "The frozen ranking replicated natural disagreement enrichment" in html
     assert "PUMA internally frozen new-source controlled confirmation" in html
     assert "NuCLS independent-pathologist leave-one-out ranking" in html
+    assert "RIVA x MIDOG++ public independent-expert replication" in html
+    assert "0.476357" in html
+    assert "0.426900" in html
+    assert "0.325967" in html
+    assert "0.249392" in html
+    assert "four RIVA leave-one-annotator-out rotations" in html
     assert "0.333333" in html
     assert "0.215111" in html
     assert "disagreement enrichment for one junior pathologist" in html
     assert "All seven internally" in html
-    assert "passed all seven internally pre-specified retrieval" in html
+    assert "passed all seven internally pre-specified gates" in html
     assert "Public-history limit" in html
     assert "c5bd44193b2abd67bc7e7f1bd9384aa87435d500" in html
     assert "does not retrain all 44 models" in html
-    assert "neither is third-party validation" in html
+    assert "not third-party validation" in html
     assert "every prospective retrieval" not in html
     assert "AANCA v2 research phase" not in html
     assert "provisionally named <strong>AANCA v2</strong>" in html
