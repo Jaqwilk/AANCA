@@ -397,6 +397,27 @@ Executed outcome:
 The frozen authority is
 [`PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md`](PUBLIC_INDEPENDENT_PATHOLOGIST_REPLICATION_PROTOCOL.md).
 
+### M23 — Final professor-readiness audit and publication hardening
+
+Status: completed engineering and evidence-communication audit; no new scientific
+completion stage claimed
+
+- re-run every retained external evidence verifier and the selected-candidate
+  convergence readback without changing a frozen scientific choice;
+- audit code, dependencies, public claims, documentation, the sealed package and the
+  responsive site as one release surface;
+- add a CI-enforced verifier that binds professor-facing numbers and scope language to
+  the sealed evidence and upstream authorities;
+- expose a compact evidence-first summary while preserving the complete long-form
+  evidence and all adverse outcomes;
+- reduce redundant hero-asset transfer without changing the scientific content;
+- publish one final readiness report that separates supported results, technical
+  verification and work that still requires new pathologists or a prospective study.
+
+The authority is [`FINAL_READINESS_REPORT.md`](FINAL_READINESS_REPORT.md). Scientific
+stage remains `EXTERNAL_VALIDATION_COMPLETE`; presentation stage remains
+`DEMO_COMPLETE`; natural-data action remains `retain_uncorrected`.
+
 ## Open scientific milestones
 
 These require new evidence and cannot be completed by software refactoring.

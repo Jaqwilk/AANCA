@@ -1,6 +1,6 @@
 # AANCA status
 
-Updated: 22 August 2026
+Updated: 26 August 2026
 
 ## Presentation UI note (22 August 2026)
 
@@ -1551,3 +1551,69 @@ build/verification passed with the current manifest root, but SFTP authenticatio
 for the configured profile failed before backup or upload. No backup ID was created
 and no remote file changed. The checked-in and GitHub-published static package is the
 current deploy authority until that credential is restored.
+
+## Final professor-readiness audit — 2026-08-26
+
+The repository, retained evidence, documentation, professor brief and static website
+were re-audited as one release surface. The scientific stage remains
+`EXTERNAL_VALIDATION_COMPLETE`, the presentation stage remains `DEMO_COMPLETE`,
+`CONFIRMATORY_COMPLETE` remains unreached and natural-data action remains
+`retain_uncorrected`.
+
+Material changes:
+
+- added an evidence-first four-card website summary generated from sealed evidence,
+  while retaining the complete long-form article and every adverse result;
+- added `scripts/verify_professor_release.py` and a Linux CI step binding key public
+  numbers, source identities, dates, package scope and claim-boundary wording;
+- restricted public Figshare access to HTTPS canonical API/downloader hosts without
+  credentials or non-443 ports, with positive and negative URL tests;
+- reduced six hero sprites from 8.62 MiB to 1.24 MiB combined; the sealed 13-file
+  package fell from 12.72 MiB to 5.34 MiB and now has manifest root
+  `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`;
+- updated stale release dates, the historical five-file package description and the
+  evidence scope in citation, reproducibility and presentation-scope documentation;
+- marked the 21 August internal assessment as superseded and published
+  [`FINAL_READINESS_REPORT.md`](FINAL_READINESS_REPORT.md).
+
+Executed final-version evidence checks:
+
+- NuCLS aggregate/downstream readback: verified, complete claim `not_supported`;
+- NuCLS `JP.1` independent-pathologist readback: verified, primary gate passed;
+- RIVA and MIDOG++ reference-association readbacks: both
+  `verification_passed: true`, both primary gates passed;
+- MoNuSAC readback: verified, complete claim not supported;
+- selected-candidate refit: 220/220 fits converged and final external test unused;
+- PUMA readback: 44/44 convergence records, all seven frozen gates, exact controls,
+  group exclusions, manifest and unchanged-source-label checks passed;
+- NuCLS paired-QC feasibility: paired pre/post class labels unavailable, so no
+  natural-error result was invented.
+
+Executed final engineering gates:
+
+- `pytest`: `1182 passed, 1 skipped` in 604.46 seconds;
+- `ruff check .`: passed;
+- `ruff format --check .`: all 224 maintained Python files formatted;
+- `mypy src`: no issues in 105 source files;
+- `uv lock --check`, `uv pip check`: passed;
+- `pip-audit --local`: no known vulnerabilities;
+- synthetic data generation and isolated `histo-audit experiment smoke`: completed;
+- standalone 13-file presentation verification: valid;
+- professor-facing release consistency: valid, with 19 unique upstream authorities
+  authenticated;
+- Playwright at 1280 x 720 and 390 x 844: zero console errors/warnings, no horizontal
+  overflow or missing sprites, and no detected structural accessibility defect;
+- temporary build and smoke-output directories created for this audit were removed.
+
+Final Hostinger `verify` and `deploy` attempts both accepted the local package and
+then failed SFTP authentication before backup or upload. No backup ID was created and
+no remote file changed. Browser readback of `https://aancastudy.org/` confirmed that
+the live domain still serves the preceding version without the RIVA/MIDOG++ block or
+the new evidence snapshot. The Hostinger panel also required a fresh login and no
+connected authenticated Chrome session was available. Deployment therefore remains
+blocked only on restoring the configured hosting credential.
+
+The supported final headline is cross-dataset enrichment of independent-expert
+disagreement for review, together with controlled PUMA transfer. This does not prove
+which pathologist is correct, adjudicated natural-error detection, automatic
+correction safety, clinical utility or prospective workflow superiority.

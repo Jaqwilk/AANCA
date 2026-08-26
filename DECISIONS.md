@@ -770,3 +770,26 @@ MIDOG++ passed with `+0.076575` and `[+0.021352, +0.138159]`. Every one of the s
 rotation point differences was non-negative, so the frozen cross-dataset rule is
 satisfied. The result changes neither the candidate nor the natural-data action
 `retain_uncorrected` and does not permit automatic source-annotation changes.
+
+## D046 — Freeze an evidence-first, consistency-checked final release
+
+Status: implemented presentation and engineering decision; no new scientific stage
+
+Keep the complete long-form article because it exposes methods, negative results,
+provenance and limitations, but place one compact “Evidence at a glance” section
+before the detailed narrative. Populate it only from the checksum-verified evidence
+object. Report NuCLS `JP.1`, RIVA and MIDOG++ natural-disagreement results separately
+from PUMA controlled transfer; do not pool them or turn disagreement into an
+adjudicated-error claim.
+
+Add a standard-library release verifier that first invokes the closed-package
+verifier, then authenticates every embedded upstream source record and checks exact
+key metrics, dates and claim-boundary text across the website, professor brief,
+ethics, reproducibility and status documents. Run it in CI before installing project
+dependencies. Keep the root README as the single official website link.
+
+Reduce the six hero source sprites to a maximum 512 px because the runtime already
+uses a maximum 384 px sprite cache. Bind their new sizes and hashes into evidence and
+add a regression test for both dimensions and combined transfer. This performance
+change does not modify any annotation, model, metric, scientific authority or
+completion stage.

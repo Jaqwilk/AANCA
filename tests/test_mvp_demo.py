@@ -860,11 +860,20 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
         "assets/hero/nuclei/nucleus-irregular.png",
         "assets/hero/nuclei/nucleus-flattened.png",
     ]
+    assert sum(record["size_bytes"] for record in hero_assets) < 1_500_000
     for record in hero_assets:
         packaged_asset = artifacts.output_directory / record["path"]
-        assert packaged_asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+        packaged_bytes = packaged_asset.read_bytes()
+        assert packaged_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+        assert (
+            max(
+                int.from_bytes(packaged_bytes[16:20], "big"),
+                int.from_bytes(packaged_bytes[20:24], "big"),
+            )
+            <= 512
+        )
         assert packaged_asset.stat().st_size == record["size_bytes"]
-        assert hashlib.sha256(packaged_asset.read_bytes()).hexdigest() == record["sha256"]
+        assert hashlib.sha256(packaged_bytes).hexdigest() == record["sha256"]
     method_asset = evidence["source_files"]["method_workflow_asset"]
     assert method_asset["path"] == "assets/method-audit-workflow.png"
     packaged_method_asset = artifacts.output_directory / method_asset["path"]
@@ -1099,6 +1108,15 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "\N{EN DASH}" not in html
     assert "The design limits outcome-informed model selection" in html
     assert "The frozen ranking replicated natural disagreement enrichment" in html
+    assert "Evidence at a glance" in html
+    assert "One frozen ranking, three public independent-expert signals." in html
+    assert ">+11.82</strong> pp" in html
+    assert ">+4.95</strong> pp" in html
+    assert ">+7.66</strong> pp" in html
+    assert ">+32.34</strong> pp" in html
+    assert "[+0.37, +0.94]" in html
+    assert "evidence-snapshot__grid" in html
+    assert html.index('class="evidence-snapshot') < html.index('id="study-facts"')
     assert "PUMA internally frozen new-source controlled confirmation" in html
     assert "NuCLS independent-pathologist leave-one-out ranking" in html
     assert "RIVA x MIDOG++ public independent-expert replication" in html

@@ -67,7 +67,7 @@ def test_figshare_authority_deduplicates_identical_pages_and_rejects_conflicts()
         "file_id": 20,
         "file_name": "001.tiff",
         "size_bytes": 100,
-        "download_url": "https://example.test/file/20",
+        "download_url": "https://ndownloader.figshare.com/files/20",
         "supplied_md5": "abc",
     }
     duplicate = {**first, "article_id": 1, "file_id": 10}
@@ -96,8 +96,47 @@ def test_figshare_json_fetch_retries_rate_limit(monkeypatch: pytest.MonkeyPatch)
         return io.BytesIO(b'{"ok": true}')
 
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
-    assert module._fetch_json("https://example.test/data") == {"ok": True}
+    assert module._fetch_json("https://api.figshare.com/v2/data") == {"ok": True}
     assert calls == 2
+
+
+@pytest.mark.parametrize(
+    "url",
+    (
+        "http://api.figshare.com/v2/data",
+        "file:///tmp/data.json",
+        "https://example.test/v2/data",
+        "https://user:secret@api.figshare.com/v2/data",
+        "https://api.figshare.com:444/v2/data",
+        "https://[broken/v2/data",
+    ),
+)
+def test_figshare_network_boundary_rejects_untrusted_urls(url: str) -> None:
+    with pytest.raises(RuntimeError, match=r"allowed HTTPS Figshare host|malformed"):
+        module._require_https_url(
+            url,
+            allowed_hosts=frozenset({"api.figshare.com"}),
+            role="Figshare API",
+        )
+
+
+def test_figshare_network_boundary_accepts_only_canonical_https_hosts() -> None:
+    assert (
+        module._require_https_url(
+            "https://api.figshare.com/v2/articles/123?x=1",
+            allowed_hosts=frozenset({"api.figshare.com"}),
+            role="Figshare API",
+        )
+        == "https://api.figshare.com/v2/articles/123?x=1"
+    )
+    assert (
+        module._require_https_url(
+            "https://ndownloader.figshare.com/files/123",
+            allowed_hosts=frozenset({"ndownloader.figshare.com"}),
+            role="Figshare download",
+        )
+        == "https://ndownloader.figshare.com/files/123"
+    )
 
 
 def test_memory_bounded_crop_is_pixel_identical_to_frozen_crop() -> None:

@@ -1,5 +1,11 @@
 # Internal technical assessment of the current AANCA system
 
+> **Superseded for current project status.** This dated assessment predates the
+> positive NuCLS `JP.1`, RIVA and MIDOG++ independent-expert disagreement results.
+> Use [`../FINAL_READINESS_REPORT.md`](../FINAL_READINESS_REPORT.md) for the final
+> 26 August 2026 whole-project audit. This file remains unchanged below as historical
+> decision provenance.
+
 **Assessment date:** 2026-08-21  
 **System:** the existing AANCA implementation, not a replacement or V2  
 **Review status:** project-maintainer evidence review; not external peer review,

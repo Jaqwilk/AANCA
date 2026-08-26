@@ -210,6 +210,12 @@ PUMA gates passed. The related stress and observed-label sensitivity authorities
 tracked under `artifacts/`; they preserve their explicitly exploratory
 post-confirmation status.
 
+At the primary 5% budget, PUMA retrieval precision was `0.537739` versus
+`0.214379` exact matched random. The downstream `flag_exclude` arm improved by
+`+0.006426` macro-F1 over unchanged corrupted training, with whole-group 95% interval
+`[+0.003657, +0.009365]`. These are controlled-corruption results on the AANCA-defined
+held-out split, not natural-error or official hidden-challenge-test outcomes.
+
 The PUMA protocol, configuration and result first entered public Git history
 together in commit `c5bd44193b2abd67bc7e7f1bd9384aa87435d500`. Local authorities
 record the intended freeze-before-metrics sequence, but that commit is not an

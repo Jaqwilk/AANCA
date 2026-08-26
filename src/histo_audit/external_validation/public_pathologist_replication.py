@@ -545,7 +545,32 @@ def materialize_midogpp_input_snapshots(repository_root: str | Path) -> dict[str
     )
 
 
+def _require_https_url(url: str, *, allowed_hosts: frozenset[str], role: str) -> str:
+    """Return a canonical permitted HTTPS URL or fail before any network request."""
+
+    try:
+        parsed = urllib.parse.urlsplit(url)
+        port = parsed.port
+    except ValueError as error:
+        raise RuntimeError(f"{role} URL is malformed") from error
+    hostname = (parsed.hostname or "").casefold()
+    if (
+        parsed.scheme.casefold() != "https"
+        or hostname not in allowed_hosts
+        or parsed.username is not None
+        or parsed.password is not None
+        or port not in {None, 443}
+    ):
+        raise RuntimeError(f"{role} URL must use an allowed HTTPS Figshare host")
+    return urllib.parse.urlunsplit(parsed)
+
+
 def _fetch_json(url: str) -> Any:
+    url = _require_https_url(
+        url,
+        allowed_hosts=frozenset({"api.figshare.com"}),
+        role="Figshare API",
+    )
     for attempt in range(6):
         request = urllib.request.Request(
             url, headers={"User-Agent": "AANCA-public-replication/1.0"}
@@ -570,6 +595,11 @@ def _register_figshare_authority(
 
     name = str(candidate["file_name"])
     normalized = dict(candidate)
+    normalized["download_url"] = _require_https_url(
+        str(normalized["download_url"]),
+        allowed_hosts=frozenset({"ndownloader.figshare.com"}),
+        role="Figshare download",
+    )
     existing = authorities.get(name)
     if existing is None:
         authorities[name] = normalized
@@ -650,7 +680,14 @@ def download_midogpp_selected_images(repository_root: str | Path) -> dict[str, A
             temporary.unlink(missing_ok=True)
             try:
                 with (
-                    urllib.request.urlopen(authority["download_url"], timeout=120) as source,
+                    urllib.request.urlopen(
+                        _require_https_url(
+                            str(authority["download_url"]),
+                            allowed_hosts=frozenset({"ndownloader.figshare.com"}),
+                            role="Figshare download",
+                        ),
+                        timeout=120,
+                    ) as source,
                     temporary.open("wb") as target,
                 ):
                     shutil.copyfileobj(source, target, length=1024 * 1024)

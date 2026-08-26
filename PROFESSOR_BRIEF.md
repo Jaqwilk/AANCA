@@ -91,6 +91,14 @@ time and quality with and without AANCA across sites. Until those aggregate,
 every-class and workflow gates pass, the natural-data action remains
 `retain_uncorrected`.
 
+## Final audit handoff
+
+The repository-wide scientific, engineering, security, reproducibility and public-
+claim review is summarised in [`FINAL_READINESS_REPORT.md`](FINAL_READINESS_REPORT.md).
+It separates completed evidence, retained negative results, independently
+recalculable evidence, project-maintained verification and the experiments that still
+require new pathologists or a prospective workflow.
+
 ## Author contribution
 
 Natan Smogór defined and directed the project, reviewed the retained experiments and

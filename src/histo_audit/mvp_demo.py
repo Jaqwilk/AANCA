@@ -1696,6 +1696,68 @@ def _position_percent(value: float, lower: float, upper: float) -> float:
     return 100.0 * (value - lower) / (upper - lower)
 
 
+def _render_evidence_snapshot(evidence: dict[str, Any]) -> str:
+    """Render a short professor-facing overview from the verified evidence object."""
+
+    independent = evidence["independent_pathologist_validation"]
+    independent_primary = independent["primary"]
+    independent_ci = independent_primary["precision_difference_interval_95"]
+    public = evidence["public_independent_pathologist_replication"]["datasets"]
+    riva = public["riva"]
+    riva_ci = riva["precision_difference_interval_95"]
+    midogpp = public["midogpp"]
+    midogpp_ci = midogpp["precision_difference_interval_95"]
+    puma = evidence["new_source_confirmation"]
+    puma_retrieval_ci = puma["retrieval"]["interval_95"]
+    puma_downstream_ci = puma["downstream"]["minus_uncorrected_interval_95"]
+
+    return f"""
+    <div class="evidence-snapshot wide-width reveal" aria-labelledby="snapshot-title">
+      <header class="evidence-snapshot__heading">
+        <span>Evidence at a glance</span>
+        <h2 id="snapshot-title">One frozen ranking, three public independent-expert signals.</h2>
+        <p>Primary 5% review-queue advantages are shown separately for each natural-disagreement source. PUMA answers a different, controlled downstream question, so the four results are not pooled.</p>
+      </header>
+      <div class="evidence-snapshot__grid">
+        <article class="evidence-snapshot__card">
+          <span>NuCLS · natural disagreement</span>
+          <h3><strong>{100.0 * independent_primary["precision_difference"]:+.2f}</strong> pp</h3>
+          <p>versus exact matched random; 95% patient-group CI
+          [{100.0 * independent_ci[0]:+.2f}, {100.0 * independent_ci[1]:+.2f}] pp.</p>
+          <small>One eligible pathologist · {independent["patient_group_count"]} patient groups</small>
+        </article>
+        <article class="evidence-snapshot__card">
+          <span>RIVA · natural disagreement</span>
+          <h3><strong>{100.0 * riva["precision_difference"]:+.2f}</strong> pp</h3>
+          <p>versus exact matched random; 95% source-group CI
+          [{100.0 * riva_ci[0]:+.2f}, {100.0 * riva_ci[1]:+.2f}] pp.</p>
+          <small>{riva["rotation_count"]} leave-one-annotator-out rotations</small>
+        </article>
+        <article class="evidence-snapshot__card">
+          <span>MIDOG++ · natural disagreement</span>
+          <h3><strong>{100.0 * midogpp["precision_difference"]:+.2f}</strong> pp</h3>
+          <p>versus exact matched random; 95% image-group CI
+          [{100.0 * midogpp_ci[0]:+.2f}, {100.0 * midogpp_ci[1]:+.2f}] pp.</p>
+          <small>{midogpp["rotation_count"]} pairwise-expert rotations</small>
+        </article>
+        <article class="evidence-snapshot__card evidence-snapshot__card--controlled">
+          <span>PUMA · controlled transfer</span>
+          <h3><strong>{100.0 * puma["retrieval"]["difference"]:+.2f}</strong> pp</h3>
+          <p>retrieval advantage [{100.0 * puma_retrieval_ci[0]:+.2f},
+          {100.0 * puma_retrieval_ci[1]:+.2f}] pp; downstream macro-F1
+          {100.0 * puma["downstream"]["minus_uncorrected"]:+.2f} pp
+          [{100.0 * puma_downstream_ci[0]:+.2f}, {100.0 * puma_downstream_ci[1]:+.2f}].</p>
+          <small>{puma["final_case_groups"]} held-out case/ROI groups · all 7 gates passed</small>
+        </article>
+      </div>
+      <div class="evidence-snapshot__boundary">
+        <p><strong>Responsible conclusion.</strong> The natural-data results support earlier review of independent-expert disagreements, not adjudication of who is correct. The PUMA result supports controlled-noise transfer. Neither permits automatic label changes or establishes clinical utility.</p>
+        <a href="#external-validation">Inspect the complete external evidence and limitations ↓</a>
+      </div>
+    </div>
+    """.lstrip("\n").rstrip()
+
+
 def _render_current_evidence(evidence: dict[str, Any]) -> str:
     """Render the current external evidence as a compact article ledger."""
 
@@ -1931,6 +1993,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
       <p>The <strong>pre-corruption label is an experimental reference label, not guaranteed biological truth</strong>. It is used only to define the controlled benchmark, simulated restoration and final evaluation. In a real audit, a high score means <em>recommended for expert review</em>. It never means “confirmed error.”</p>
       <div class="scope-note"><strong>Study boundary.</strong> The PanNuke primary benchmark, two distinct frozen NuCLS evaluations, MoNuSAC and PUMA controlled studies, and the public RIVA x MIDOG++ independent-expert replication have been completed. PUMA supports transfer under controlled label noise. The NuCLS <code>JP.1</code>, RIVA and MIDOG++ results support disagreement enrichment within their released cohorts; the earlier aggregate NuCLS ranking/downstream authority remains adverse. None establishes pathologist error, automatic correction safety or prospective workflow benefit. The PanNuke primary analysis remains exploratory because outcomes were exposed during technical recovery.</div>
     </div>
+    __EVIDENCE_SNAPSHOT__
   </section>
 
   <section class="study-at-a-glance" id="study-facts" aria-labelledby="study-title">
@@ -2166,6 +2229,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
         "__HYPOTHESIS_LEDGER__": hypothesis_ledger,
         "__EVIDENCE_SPINE__": evidence_spine,
         "__CURRENT_EVIDENCE__": current_evidence,
+        "__EVIDENCE_SNAPSHOT__": _render_evidence_snapshot(evidence),
         "__FOREST_PLOT__": forest_plot,
         "__H2_CHART__": h2_chart,
         "__SEED_ROWS__": "".join(seed_rows),

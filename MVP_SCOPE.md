@@ -2,16 +2,18 @@
 
 Date: 2026-08-18
 
-## Current-status addendum — 21 August 2026
+## Current-status addendum — 26 August 2026
 
 This file preserves the original presentation-scope decision. It is not the current
-scientific roadmap. Since that decision, the NuCLS multi-rater evaluation, MoNuSAC
-controlled external benchmark and frozen PUMA new-source controlled confirmation
-were completed. The generated package now reads those authorities, the PUMA realism
-stress, the audit-time-label sensitivity and the NuCLS paired-QC feasibility result
-into `evidence.json` and the article. The current highest completed scientific stage
-is `EXTERNAL_VALIDATION_COMPLETE`; `CONFIRMATORY_COMPLETE` remains unreached. The
-current release date is 21 August 2026 and the next-phase contract is
+scientific roadmap. Since that decision, the NuCLS multi-rater evaluations, MoNuSAC
+controlled external benchmark, frozen PUMA new-source controlled confirmation and
+public RIVA x MIDOG++ independent-expert replication were completed. The generated
+package now reads those authorities, the PUMA realism stress, the audit-time-label
+sensitivity and the NuCLS paired-QC feasibility result into `evidence.json` and the
+article. The current thirteen-file package includes twelve manifest-bound payloads
+plus `manifest.json`. The highest completed scientific stage is
+`EXTERNAL_VALIDATION_COMPLETE`; `CONFIRMATORY_COMPLETE` remains unreached. The
+current release date is 26 August 2026 and the next-phase contract is
 [`NEXT_PHASE.md`](NEXT_PHASE.md).
 
 Statements below about external validation being deferred describe the state when

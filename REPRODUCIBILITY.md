@@ -34,13 +34,19 @@ test collection.
 
 ## What package verification proves
 
-`python scripts/present_demo.py --verify-only` checks a closed five-file allowlist,
+`python scripts/present_demo.py --verify-only` checks a closed thirteen-file allowlist,
 file sizes, SHA-256 identities and consistency of selected evidence fields. It can
 detect a changed or incomplete presentation package. It does not run a model,
 recompute a bootstrap, reload PanNuke or prove that the upstream analysis was
 scientifically correct. The current package also fail-closed validates its NuCLS,
 MoNuSAC, PUMA, stress, sensitivity and natural-action summaries against the tracked
 authorities used at build time.
+
+`python -I scripts/verify_professor_release.py` first performs that package check,
+then authenticates the upstream source records embedded in `evidence.json` and checks
+that the website, professor brief and core public documentation retain the same key
+numbers, dates and claim boundaries. CI executes both standard-library verifiers
+before installing project dependencies.
 
 ## Independently recalculating the saved primary results
 
@@ -77,22 +83,26 @@ by their scoped verification scripts. Run them in the locked project environment
 
 ```text
 uv run python scripts/verify_nucls_external_validation.py --json
+uv run python scripts/verify_nucls_independent_pathologist_validation.py
 uv run python scripts/verify_monusac_external_validation.py
 uv run python scripts/verify_aanca_selected_candidate.py
 uv run python scripts/verify_puma_new_data_confirmation.py
 uv run python scripts/verify_nucls_supervised_qc_feasibility.py
+uv run python scripts/run_public_pathologist_replication.py verify --dataset riva
+uv run python scripts/run_public_pathologist_replication.py verify --dataset midogpp
 ```
 
-The NuCLS and MoNuSAC executions did not support their complete frozen claims. Their
-verification scripts recalculate the released numeric evidence without importing
-the analysis package. The frozen PUMA candidate passed all seven new-source
+The earlier aggregate/downstream NuCLS authority and the complete MoNuSAC claim were
+not supported. A distinct NuCLS `JP.1` ranking and the public RIVA and MIDOG++
+replication did support enrichment for independent-expert disagreement within their
+released cohorts. The frozen PUMA candidate passed all seven new-source
 controlled-noise gates. Its verifier rebuilds the official manifest, checks group and
 neighbour exclusions, and recomputes saved-evidence metrics, bootstrap decisions and
 the 44 recorded convergence flags. It imports maintained PUMA helpers and consumes
 saved predictions; it does **not** independently retrain those 44 models from source
 images. Large PUMA arrays are tracked through Git LFS. These checks prove consistency
-of the released evidence within their stated scope; they do not constitute a second
-image-to-result replication, create natural labels or establish clinical validation.
+of released evidence within each stated scope; they do not constitute third-party
+validation, adjudicate which expert is correct or establish clinical utility.
 
 ## Public-history disclosure
 
@@ -125,14 +135,16 @@ wording or adding tests:
    passed all seven gates, but it was post-confirmation and does not rewrite the
    accepted PanNuke benchmark.
 5. Acquire a new natural-review cohort with stable paired multi-rater outcomes and
-   freeze one candidate before its outcomes are inspected. NuCLS was genuine but too
-   small and adverse; PUMA was new-source and positive but controlled.
+   freeze one reviewer-gated intervention before its outcomes are inspected. NuCLS,
+   RIVA and MIDOG++ support disagreement enrichment but do not contain adjudicated
+   pre/post review outcomes; PUMA was new-source and positive but controlled.
 6. Independently replicate the complete image-to-result run in a separate environment;
    the public release now supports result recalculation and OOF/ranking inspection,
    but not a second independent execution of model training.
 
 Until those steps are completed, AANCA is a functioning research prototype with
-completed external evaluation and positive controlled-noise transfer evidence. It is
-not confirmatory for natural errors, clinically validated, diagnostic or
-production-ready. The next evidence programme is specified in
+completed external evaluation, positive controlled-noise transfer evidence and
+positive natural independent-expert disagreement-enrichment results in three public
+datasets. It is not confirmatory for adjudicated natural errors, clinically validated,
+diagnostic or production-ready. The next evidence programme is specified in
 [`NEXT_PHASE.md`](NEXT_PHASE.md).

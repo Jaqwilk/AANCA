@@ -6,12 +6,13 @@ authors:
   - family-names: "Smogór"
     given-names: "Natan"
 version: 0.1.0
-date-released: 2026-08-21
+date-released: 2026-08-26
 repository-code: "https://github.com/Jaqwilk/AANCA"
 url: "https://aancastudy.org/"
 abstract: >-
   A reproducible, non-diagnostic research prototype for ranking potentially
   inconsistent nucleus class annotations for qualified expert review using
   group-safe out-of-fold evidence. Current positive evidence concerns controlled
-  label-noise transfer and does not establish natural pathologist-error detection
-  or clinical utility.
+  label-noise transfer and independent-expert disagreement enrichment across three
+  public datasets. It does not establish adjudicated pathologist-error detection,
+  automatic correction safety or clinical utility.
