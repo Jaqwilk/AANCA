@@ -1617,3 +1617,91 @@ The supported final headline is cross-dataset enrichment of independent-expert
 disagreement for review, together with controlled PUMA transfer. This does not prove
 which pathologist is correct, adjudicated natural-error detection, automatic
 correction safety, clinical utility or prospective workflow superiority.
+
+## AANCA v2 codebase boundary — 2026-08-26
+
+A read-only size audit of the current tracked repository counted 232 Python files and
+172,959 physical Python lines: 121,908 under `src`, 43,857 in tests, 6,199 in scripts
+and 995 in retained artifact helpers. The much larger 1,703,271-line tracked-text
+total is not a code-size measure because approximately 89% consists of generated
+artifacts and reports, principally JSON and CSV evidence.
+
+Decision D047 records that this size is historical technical debt, not a reason to
+rewrite the frozen v1 evidence paths before presentation. V1 remains the auditable
+reference and receives only justified correctness, security, compatibility or
+evidence-readback fixes. V2 will be isolated behind a read-only v1 compatibility
+adapter, with an approximately 15,000--30,000-line production-Python planning target,
+standard workflow tooling and external content-addressed artifact storage. The target
+is non-scientific and cannot weaken validation, safety or claim-boundary controls.
+
+This update changes planning documentation only. No source code, annotation, model,
+metric, evidence artifact, completion stage or natural-data action changed. The v2
+programme remains `INITIALISED`; v1 remains `EXTERNAL_VALIDATION_COMPLETE`,
+`CONFIRMATORY_COMPLETE` remains unreached and natural-data action remains
+`retain_uncorrected`.
+
+Post-update validation passed: `git diff --check`, the standalone professor-release
+verifier, `uv run ruff check .` and `uv run ruff format --check .`. The complete test
+suite passed `1182` tests with the one documented Windows/POSIX open-file skip in
+580.00 seconds. No scientific or functional command was rerun because the update
+changes planning and decision documentation only; the relevant release-consistency
+functional verifier accepted all 19 upstream authorities and the unchanged thirteen-
+file presentation manifest.
+
+## AANCA V2 pre-execution authority package and separation — 2026-08-28
+
+Created the additive V2 planning package before any V2 research execution, then moved
+it out of this working tree into the sibling `AANCA-V2` project with independent Git
+history. Its access-controlled preparation remote is
+[`Jaqwilk/AANCA-V2`](https://github.com/Jaqwilk/AANCA-V2). It contains a charter,
+binding V2 specification, glossary, frozen V1 evidence boundary, targeted literature
+rationale, gated plan, detailed preregistration draft, traceability matrix, change
+control, risk register, execution checklist, decision/status logs, seven scientific
+protocols, five engineering plans, machine-readable JSON authorities,
+dataset/candidate/reference-access/claim/freeze/amendment/execution templates, an
+opened-dataset registry and a standalone consistency validator.
+
+The package narrows the immediately executable question to review-signal enrichment
+on a genuinely new eligible public multi-rater source. It requires raw individual
+votes, exclusion of the input rater, at least two non-input qualified votes, raw
+input geometry, patient/WSI/case-safe grouping, one frozen 5% endpoint, exact
+matched-random controls, group bootstrap and a public score-only seal before
+reference attachment. All opened V1 sources remain development-only. A failed
+dataset search produces `NO_GO`, not a weakened “confirmation.”
+
+After separation, the package validator passed with 48 required paths and 48 local
+links. It verified valid JSON/CSV authorities, the complete opened-source registry,
+unique decision and traceability IDs, approved stage vocabulary, the immutable
+read-only V1 authority at commit
+`79d806582c0b618a8c9e3ec1d70313c40be1278e`, `DRAFT_NOT_FROZEN` preregistration and
+no enabled V2 result or claim. The standalone environment also passed `uv run
+pytest` (1 test), `uv run ruff check .` and `uv run ruff format --check .` (33
+files).
+
+Post-package gates passed: `git diff --check`, `uv run ruff check .`,
+`uv run ruff format --check .` (225 files), and the standalone professor-release
+verifier (19 authenticated upstream authorities and the unchanged 13-file
+presentation manifest). The complete suite collected 1183 tests and finished with
+1182 passed, the one documented Windows/POSIX open-file skip, and zero failures in
+713.73 seconds.
+
+This work created planning and validation files only. It did not approve a dataset,
+train a model, generate a score, open a new reference, change a source annotation,
+rerun a scientific analysis or alter any V1 artifact/result. V2 remains
+`INITIALISED`, V1 remains `EXTERNAL_VALIDATION_COMPLETE`, and the natural-data action
+remains `retain_uncorrected`.
+
+The independent V2 repository was first published at commit
+`548b9c22c43c1e0609afe14a39714f9f79a17ef4`; its publication record was then pushed
+at `8de62fec9ea8956f98e26503cc2e9434e35703a9`. Local V2 `HEAD` and
+`origin/main` matched after both pushes. Decision D049 records the physical and
+provenance boundary. The move did not alter the pinned V1 commit or any scientific
+evidence.
+
+After the physical move and V1 link updates, the current V1 tree passed `git diff
+--check`, `uv run ruff check .`, `uv run ruff format --check .` (224 files), and
+`uv run python -I scripts/verify_professor_release.py` (19 authenticated upstream
+authorities, unchanged 13-file presentation package, scientific status
+`EXTERNAL_VALIDATION_COMPLETE`, presentation status `DEMO_COMPLETE`). The complete
+current V1 suite collected 1183 tests and finished with 1182 passed, the same one
+documented Windows/POSIX open-file skip, and zero failures in 750.17 seconds.

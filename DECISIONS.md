@@ -793,3 +793,71 @@ uses a maximum 384 px sprite cache. Bind their new sizes and hashes into evidenc
 add a regression test for both dimensions and combined transfer. This performance
 change does not modify any annotation, model, metric, scientific authority or
 completion stage.
+
+## D047 — Preserve V1 and build V2 as a smaller isolated core
+
+Status: accepted engineering-planning decision; no scientific stage change
+
+Treat AANCA v1 as the frozen, auditable reference implementation. Do not refactor its
+historical preregistration, recovery, orchestration or verifier paths merely to reduce
+line count. A v1 change requires a demonstrated correctness, security,
+dependency-compatibility or evidence-readback need and must preserve all existing
+scientific and release gates.
+
+Implement AANCA v2 separately with a read-only adapter for frozen v1 evidence. Use an
+engineering planning target of approximately 15,000--30,000 physical lines of
+production Python, excluding tests and generated evidence. The target is not a
+scientific endpoint and cannot justify deleting validation, adverse results, claim
+boundaries or group/leakage safeguards. Exceeding it triggers architecture review.
+
+Prefer small single-purpose modules, a standard resumable workflow, independently
+timestamped public protocols and content-addressed external artifact storage. Do not
+copy the historical v1 capsule/authority/recovery machinery or extend the largest v1
+modules with new v2 functionality. V2 may read v1 evidence but may never overwrite,
+relabel or upgrade a v1 artifact, result, analysis disposition or completion stage.
+
+## D048 — Require one fail-closed V2 pre-execution authority package
+
+Status: implemented planning decision; no scientific stage change
+
+Use the standalone `Jaqwilk/AANCA-V2` repository as the governing pre-execution
+package for V2. Keep a strict authority hierarchy: repository safety and frozen V1
+rules, V2 `SPEC.md`, a future checksum-bound preregistration/config/manifest,
+procedural protocols, then plan, decision/status logs and reports. Conflicts stop
+execution; after freeze they require an amendment, and after reference access
+affected alternatives are exploratory.
+
+Make dataset eligibility the first research gate. The immediately executable track
+requires a previously unopened public multi-rater source with raw input geometry,
+raw individual votes, at least two non-input qualified votes, patient/WSI/case-safe
+groups, lawful access and a public score-before-reference seal. Previously opened
+PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++ evidence is development-only for V2.
+If no candidate passes, record `NO_GO`; do not weaken the gate or manufacture a new
+external claim.
+
+Freeze one primary natural endpoint: independent-review-signal precision in the
+top-5% queue versus exact equal-budget matched random. Preserve majority non-support,
+no-majority ambiguity and raw votes separately; do not call them error or biological
+truth. Natural source annotations remain unchanged and the action remains
+`retain_uncorrected`. Planning templates retain explicit `UNRESOLVED_BLOCKING`
+values until an outcome-blind authority resolves and freezes them.
+
+## D049 — Separate V2 physically and preserve an immutable V1 evidence boundary
+
+Status: implemented repository-boundary decision; no scientific stage change
+
+Move the complete V2 pre-execution package out of the V1 working tree into a sibling
+`AANCA-V2/` project directory and give it independent Git history in the private
+preparation repository
+[`Jaqwilk/AANCA-V2`](https://github.com/Jaqwilk/AANCA-V2). Do not copy V1 source,
+artifacts or generated evidence into V2, and do not retain parent-relative links.
+
+Bind V2's read-only V1 authority to public V1 commit
+`79d806582c0b618a8c9e3ec1d70313c40be1278e` with explicit Git blob OIDs, SHA-256
+digests and commit-pinned URLs. A future V1 baseline update requires an explicit V2
+decision and reviewed authority diff; it is never inherited silently.
+
+Repository separation, private visibility and remote backup are engineering and
+access-control actions only. They do not approve a dataset, freeze preregistration,
+open a new reference, train a model, create a metric or alter any V1/V2 completion
+stage or claim.

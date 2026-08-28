@@ -19,6 +19,52 @@ PanNuke, NuCLS, MoNuSAC, PUMA, RIVA or MIDOG++ final outcomes.
 “AANCA v2” is a working name for this evidence programme. It does not replace,
 relabel or upgrade the status of the current results.
 
+The detailed executable pre-study authority is now maintained in the access-controlled
+standalone [`AANCA-V2` preparation repository](https://github.com/Jaqwilk/AANCA-V2).
+The sections below remain the long-term promotion ladder, including future
+recruited-pathologist and workflow studies. They do not imply that those resources
+currently exist. The immediate executable V2 track is deliberately narrower: first
+audit whether a previously unopened public multi-rater dataset is eligible; if it is,
+evaluate frozen review-signal enrichment without source-label changes. If no such
+dataset passes, record `NO_GO` and do not claim new natural external confirmation.
+Conflicts in V2 execution fail closed under the authority hierarchy in the separate
+package.
+
+## V1 preservation and V2 implementation boundary
+
+AANCA v1 remains the frozen, auditable reference implementation for every retained
+result. Its large historical orchestration, preregistration, recovery and verifier
+modules must not be refactored merely to reduce line count. Change v1 only for a
+demonstrated correctness, security, dependency-compatibility or evidence-readback
+defect, and require the existing scientific and release gates to remain unchanged.
+No v2 implementation may rewrite a v1 artifact, authority, result or claim.
+
+Build v2 as a separate, substantially smaller core with a read-only compatibility
+adapter for the frozen v1 evidence formats. The engineering planning target is
+approximately 15,000--30,000 physical lines of production Python, excluding tests,
+generated evidence and vendored code. This is a maintainability target rather than
+a scientific success criterion: exceeding it requires an explicit architecture
+review, not deletion of necessary validation or safety controls.
+
+The v2 implementation must:
+
+- separate data access, group-safe OOF scoring, queue construction, statistical
+  evaluation, workflow execution and publication into small single-purpose modules;
+- use ordinary Git history plus an independently timestamped public protocol, a
+  standard resumable workflow and a content-addressed external artifact store rather
+  than rebuilding the historical v1 capsule/authority/recovery machinery;
+- keep large arrays, reference-attached tables and generated reports outside ordinary
+  Git objects while retaining hashes, manifests and durable release identities;
+- preserve one minimal end-to-end synthetic test, scientific invariant tests and
+  independent evidence readback without binding tests to irrelevant source bytes or
+  internal implementation layout;
+- prohibit new functionality from being added to the largest frozen v1 modules when
+  it can be implemented inside the isolated v2 package.
+
+Line-count reduction is not an authorised reason to alter a frozen scientific result.
+The purpose of the smaller v2 codebase is independent review, maintainability and safer
+prospective execution.
+
 ## Starting evidence
 
 - PanNuke demonstrates reproducible group-safe controlled ranking, but the accepted
@@ -40,7 +86,7 @@ relabel or upgrade the status of the current results.
 None of these opened outcomes may serve as the untouched final confirmation for a
 new natural-case claim.
 
-## Required programme
+## Required long-term promotion programme
 
 ### 1. Build a new natural-case reference
 
@@ -137,6 +183,11 @@ Passing a lower rung does not imply a higher one.
 - Source annotations are never overwritten automatically.
 
 ## Definition of completion
+
+This definition applies to the complete long-term promotion programme, not to the
+bounded public-data external-ranking study defined in the standalone AANCA V2
+repository. That bounded study may complete and report its frozen result without
+implying prospective workflow or clinical completion.
 
 The next phase is not complete when code exists. It is complete only when the new
 reference, prospective freeze, untouched confirmation, independent verification and

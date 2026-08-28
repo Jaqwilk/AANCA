@@ -490,6 +490,24 @@ candidate, untouched patient/WSI confirmation and a multi-site with/without-AANC
 workflow study. The current natural-data action remains `retain_uncorrected` until
 every required aggregate, class-safety and workflow gate passes.
 
+V1 remains the frozen auditable reference and is not refactored to satisfy a line-count
+goal. V2 is implemented as an isolated, smaller core with read-only v1 compatibility,
+standard resumable workflow tooling and external content-addressed artifact storage.
+Its non-binding engineering planning target is approximately 15,000--30,000 physical
+lines of production Python excluding tests and generated evidence. Any material
+departure requires architecture review; it never permits removal of scientific
+invariants, adverse evidence, verifiers or claim boundaries. The full implementation
+boundary is binding in [`NEXT_PHASE.md`](NEXT_PHASE.md).
+
+The complete pre-execution authority, including the dataset `GO`/`NO_GO` gate,
+preregistration draft, information barrier, statistics, traceability, change
+control, engineering architecture and machine-readable planning contract, is in the
+access-controlled standalone
+[`AANCA-V2` preparation repository](https://github.com/Jaqwilk/AANCA-V2). It keeps
+the immediately feasible public-data study separate from the future recruited-expert
+and prospective workflow claim ladder. No V2 execution is authorised while its
+preregistration remains `DRAFT_NOT_FROZEN`.
+
 ## Standard validation order
 
 ```text
