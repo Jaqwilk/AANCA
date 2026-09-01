@@ -146,9 +146,33 @@ def verify_professor_release() -> dict[str, Any]:
         role="sealed presentation",
     )
 
-    readme = _read("README.md").strip()
-    if readme != "[https://aancastudy.org](https://aancastudy.org)":
-        raise ValueError("README.md must remain the single public website link")
+    readme = _read("README.md")
+    _require(
+        readme,
+        [
+            '<h1 align="center">AANCA</h1>',
+            "https://aancastudy.org",
+            "potentially inconsistent annotations",
+            "recommended for expert review",
+            "never modifies source",
+            "## Current conclusion",
+            f"`{nucls_primary['aanca_precision']:.6f}`",
+            f"`{nucls_primary['mean_matched_random_precision']:.6f}`",
+            f"`{riva['aanca_precision']:.6f}`",
+            f"`{riva['mean_matched_random_precision']:.6f}`",
+            f"`{riva['precision_difference']:+.6f}`",
+            f"`{midogpp['aanca_precision']:.6f}`",
+            f"`{midogpp['mean_matched_random_precision']:.6f}`",
+            f"`{midogpp['precision_difference']:+.6f}`",
+            f"`{puma['retrieval']['candidate_precision']:.6f}`",
+            f"`{puma['retrieval']['mean_matched_random_precision']:.6f}`",
+            "`retain_uncorrected`",
+            "`CONFIRMATORY_COMPLETE` has not been reached",
+            "## Reproducibility levels",
+            "## Validation gates",
+        ],
+        role="README.md",
+    )
 
     _require(
         _read("CITATION.cff"),
@@ -167,7 +191,7 @@ def verify_professor_release() -> dict[str, Any]:
     )
     _require(
         _read("STATUS.md"),
-        ["Updated: 26 August 2026", "Final professor-readiness audit"],
+        ["Updated: 1 September 2026", "Final professor-readiness audit"],
         role="STATUS.md",
     )
     _require(

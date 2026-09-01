@@ -861,3 +861,21 @@ Repository separation, private visibility and remote backup are engineering and
 access-control actions only. They do not approve a dataset, freeze preregistration,
 open a new reference, train a model, create a metric or alter any V1/V2 completion
 stage or claim.
+
+## D050 — Restore a complete evidence-aware repository README
+
+Status: implemented documentation and release-verification decision; no scientific
+stage change
+
+Supersede only the D046 requirement that the root README contain a single website
+link. Restore the last complete README structure from the parent of commit `756cbee`
+and bring its evidence summary forward using only already sealed RIVA, MIDOG++,
+NuCLS and PUMA authorities. Preserve the official website as the primary navigation
+target and keep the separate AANCA V2 repository access-controlled.
+
+The professor-release verifier must fail closed on semantic README requirements:
+official site, terminology, immutable-source boundary, current evidence values,
+`retain_uncorrected`, completion-stage limits, reproducibility and validation. It
+must no longer require byte equality with a one-line README. This change restores
+repository usability without changing a model, annotation, metric, claim boundary,
+scientific authority or completion stage.

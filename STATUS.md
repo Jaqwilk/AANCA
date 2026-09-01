@@ -1,6 +1,6 @@
 # AANCA status
 
-Updated: 26 August 2026
+Updated: 1 September 2026
 
 ## Presentation UI note (22 August 2026)
 
@@ -1705,3 +1705,37 @@ authorities, unchanged 13-file presentation package, scientific status
 `EXTERNAL_VALIDATION_COMPLETE`, presentation status `DEMO_COMPLETE`). The complete
 current V1 suite collected 1183 tests and finished with 1182 passed, the same one
 documented Windows/POSIX open-file skip, and zero failures in 750.17 seconds.
+
+## Complete repository README restored — 2026-09-01
+
+Restored the full root README structure from commit
+`09aede5000c43406759a432b674f6db37db98b26`, the direct parent of the change that
+collapsed it to one website link. The restored narrative was brought forward only
+with already sealed RIVA, MIDOG++, NuCLS and PUMA evidence, the current
+score-before-reference claim boundary, and the separate access-controlled AANCA V2
+repository. All local README links resolve.
+
+Decision D050 supersedes only the D046 single-link README requirement. The
+professor-release verifier now checks the full README semantically against exact
+sealed evidence values, responsible terminology, immutable-source policy,
+`retain_uncorrected`, completion limits, reproducibility and validation sections.
+It no longer requires byte equality with a one-line file.
+
+Validation after the restoration passed:
+
+- `git diff --check`;
+- `uv run ruff check .`;
+- `uv run ruff format --check .` — 224 files already formatted;
+- `uv run mypy src` — no issues in 105 source files;
+- `python -I scripts/present_demo.py --verify-only` — valid unchanged 13-file
+  package, manifest root
+  `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`;
+- `uv run python -I scripts/verify_professor_release.py` — valid, 19 authenticated
+  upstream authorities, scientific status `EXTERNAL_VALIDATION_COMPLETE` and
+  presentation status `DEMO_COMPLETE`;
+- `uv run pytest` — 1182 passed, the same one documented Windows/POSIX open-file
+  skip, and zero failures in 771.50 seconds.
+
+This documentation and fail-closed verification repair changes no source annotation,
+dataset, model, split, score, metric, evidence artifact, scientific claim boundary,
+completion stage or natural-data action.
