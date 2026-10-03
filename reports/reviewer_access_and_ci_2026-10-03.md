@@ -108,7 +108,56 @@ accessibility certification. The static detector's inherited Inter warning is
 outside this extension's scope; the existing brand was preserved. Its print-hover
 contrast finding was fixed in the single accessibility correction batch.
 
-Publication, live-byte equality and fresh hosted Ubuntu/Windows timings remain
-pending until all mandatory gates pass.
+## Hosted result and publication
+
+Published implementation: `0c4321c5b4621cb1dc42fb8a8de0b546276196b8`.
+[Run 37146704546](https://github.com/Jaqwilk/AANCA/actions/runs/37146704546) passed
+all seven jobs, including complete-coverage aggregation. Each platform collected
+the same 1,260 test cases; Ubuntu had 1,229 passes/31 explicit skips and Windows
+1,256 passes/4 explicit skips. Source revision, collection digest, disjoint selection
+and actual outcomes were verified from all four downloaded full-suite receipts.
+
+| Platform | Previous full job | New full platform wall time | Reduction | Reviewer lane |
+| --- | ---: | ---: | ---: | ---: |
+| Ubuntu | 11 min 17 s | 6 min 25 s | 43.13% | 17 s |
+| Windows | 27 min 59 s | 16 min 32 s | 40.92% | 50 s |
+
+The new platform wall time spans first shard start through last shard completion,
+including setup/quality/smoke work; final workflow aggregation adds its own short
+job. These are two observed runs, not a guarantee for every future runner. Windows
+still exceeds the earlier 10–15-minute planning target. All test coverage and
+scientific guards were retained. Parallelism adds runner occupancy/setup; it does
+not demonstrate reduced total compute or faster source-model training. Exact sums
+and caveats are in the machine-readable receipt.
+
+The new [reviewer-kit-v1](https://github.com/Jaqwilk/AANCA/releases/tag/reviewer-kit-v1)
+release pins the tested implementation. The ZIP is 21,328,056 bytes with SHA-256
+`95fbd30be3126e7b987a5454f15a08e31141a645c4a00262efd88268aa33a0dc`.
+Ubuntu, Windows and local builds produced identical archives. All 65 non-generated
+inputs matched committed Git blobs. The publicly downloaded ZIP and checksum matched,
+and the fresh extraction passed default and optional numeric verification. Existing
+scientific release tags and assets were preserved. The kit is an immutable snapshot;
+later repository documentation can record its publication outcome.
+
+[The reviewer guide](https://aancastudy.org/review/) is live. The existing Hostinger
+tool ran both build gates, connected over SSH/SFTP, deployed by merge and retained
+backup `20261003-212745`. Health checks passed. The ordinary apex and www HTTP
+verifiers each accepted all thirteen article files and exact equality to the local
+release; the guide HTML and snapshot JSON also matched their build byte-for-byte.
+No query-based cache exemption was used. Article root:
+`299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52`.
+
+The detailed [execution evidence](reviewer_access_and_ci_2026-10-03_evidence.json)
+is also attached to the public reviewer release as `aanca-reviewer-verification.json`.
+It separates integrity, numeric readback, CI coverage and scientific claim limits.
+This report's completion concerns reviewer access and engineering checks; no new
+efficacy study, source-image retraining or clinical validation was performed.
+
+The deployment follow-up pins the public download identity in the tracked
+`deploy/hostinger/reviewer-snapshot.json`. Generated guide HTML and immutable
+release metadata use separate file mappings, so future documentation builds cannot
+silently advertise a new candidate checksum for the original download. Build,
+SSH/SFTP and health checks passed again with backup `20261003-213525`. Both the
+article and the guide retain the already-verified bytes.
 Scientific status remains `EXTERNAL_VALIDATION_COMPLETE`, presentation status
 `DEMO_COMPLETE`, and natural-data action `retain_uncorrected`.

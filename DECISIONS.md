@@ -1038,3 +1038,24 @@ preserve third-party terms; this does not make the project open source. Publish
 the reviewed access changes and a new reviewer-kit release without replacing old
 scientific release tags or evidence. Deploy through the existing backed-up hosting
 workflow and require live readback. D047 and all scientific invariants remain binding.
+
+### D056 execution outcome — 3 October 2026
+
+Implementation `0c4321c5b4621cb1dc42fb8a8de0b546276196b8` passed the complete local
+suite and [all seven hosted CI jobs](https://github.com/Jaqwilk/AANCA/actions/runs/37146704546).
+Coverage receipts accepted 1,260 cases per platform, with the native/CUDA/cache skips
+explicit. Full platform wall time improved from 677 to 385 seconds on Ubuntu and
+1,679 to 992 seconds on Windows; total runner occupancy increased with parallelism.
+
+The new `reviewer-kit-v1` release preserves that immutable tested source revision.
+Its 67-file archive is byte-identical across both hosted platforms and the local
+build; all 65 non-generated inputs equal committed Git blobs. Public download,
+extracted numeric verification and ordinary HTTP readback passed. The reviewer guide
+is live under `/review/`; hosting backup is `20261003-212745`. This follow-up records
+the outcome, without replacing any frozen scientific artifact or changing claims.
+
+Pin the hosted download reference separately from working-tree candidate builds.
+The tracked `deploy/hostinger/reviewer-snapshot.json` identifies the immutable
+published archive; rebuilding a guide after documentation changes must not replace
+that archive identity. The explicit file mappings passed their deployment follow-up
+with recoverable backup `20261003-213525`.

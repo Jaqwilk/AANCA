@@ -1,0 +1,10 @@
+{
+  "archive": "aanca-reviewer-kit-v1.zip",
+  "size_bytes": 21328056,
+  "sha256": "95fbd30be3126e7b987a5454f15a08e31141a645c4a00262efd88268aa33a0dc",
+  "source_revision": "0c4321c5b4621cb1dc42fb8a8de0b546276196b8",
+  "source_tree_dirty": false,
+  "file_count": 67,
+  "article_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+  "kit_manifest_root_sha256": "5534a2151368dba3355e01d89066b5647f541eeeb5acb0c347c909f1453ff538"
+}

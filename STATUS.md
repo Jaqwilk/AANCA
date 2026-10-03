@@ -44,9 +44,40 @@ Browser confirmation passed at both widths, with visible keyboard focus, 44-pixe
 standalone navigation, 13.65:1 body contrast and 4.70:1 primary-action contrast.
 The existing hosting wrapper's preflight built/verified the article and connected
 over SSH/SFTP successfully; no scientific dependency was added for deployment.
-Publication, final live readback and fresh hosted Ubuntu/Windows timing remain
-pending at this pre-publication entry. Next gate: publish the reviewed revision and
-read its complete-coverage CI result. Scientific status
+The reviewed implementation was published in
+`0c4321c5b4621cb1dc42fb8a8de0b546276196b8`. Its
+[hosted run 37146704546](https://github.com/Jaqwilk/AANCA/actions/runs/37146704546)
+passed all seven jobs. Both platforms collected the same 1,260 cases; complete
+coverage accepted Ubuntu's 1,229 passes/31 explicit skips and Windows' 1,256 passes/
+4 explicit skips. Full platform wall time was 385 seconds (Ubuntu) and 992 seconds
+(Windows), compared with 677/1,679 seconds before the change. Reviewer lanes took
+17/50 seconds. More isolated runners reduce waiting; total job elapsed time rises.
+
+The immutable [reviewer-kit-v1](https://github.com/Jaqwilk/AANCA/releases/tag/reviewer-kit-v1)
+snapshot binds that tested implementation revision. Its 21,328,056-byte ZIP has
+SHA-256 `95fbd30be3126e7b987a5454f15a08e31141a645c4a00262efd88268aa33a0dc`,
+identical across Ubuntu, Windows and the local build. All 65 non-generated inputs
+match committed Git blobs. The public download was extracted and passed integrity
+and optional numeric checks. Release assets include the checksum and scoped
+verification receipt; existing scientific tags/assets were preserved.
+
+The reviewer guide is live at `https://aancastudy.org/review/`. Hosting deployment
+ran both build gates, connected over SSH/SFTP, preserved backup `20261003-212745`
+and passed health checks. Ordinary apex and www HTTP verification passed all
+thirteen article files; both guide files equal their local build. The article root
+is `299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52`.
+Exact execution/readback evidence is in
+`reports/reviewer_access_and_ci_2026-10-03_evidence.json`.
+
+The final deployment follow-up pins `/review/snapshot.json` to the published
+archive through `deploy/hostinger/reviewer-snapshot.json`, separately from the
+generated guide HTML. A later documentation build therefore cannot advertise a
+different candidate digest for the immutable download. This mapping was redeployed
+with backup `20261003-213525`; build, connection and health gates passed again.
+
+This documentation follow-up records the tested release; it changes no runtime or
+frozen scientific input. Next verification command after any release change:
+`python -I scripts/review_project.py --numeric --online`. Scientific status
 remains `EXTERNAL_VALIDATION_COMPLETE`, presentation status `DEMO_COMPLETE`, and
 natural-data action `retain_uncorrected`.
 
