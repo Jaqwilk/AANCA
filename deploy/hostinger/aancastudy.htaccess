@@ -1,0 +1,6 @@
+# The public presentation's manifest binds exact HTTP entity bytes.
+# Revalidate stable URLs on each request and preserve bytes through image proxies.
+<IfModule mod_headers.c>
+    Header unset Cache-Control
+    Header always set Cache-Control "no-cache, no-transform"
+</IfModule>

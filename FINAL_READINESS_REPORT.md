@@ -154,6 +154,15 @@ publication operation, not a scientific or build failure.
 
 ## What still requires genuinely new evidence
 
+The operational record above is historical. The 2–3 October V1 repeat audit and
+remediation are recorded in
+[`reports/v1_remediation_2026-10-02.md`](reports/v1_remediation_2026-10-02.md).
+The corrected presentation has been deployed and the full suite now passes
+1233 tests, with one documented platform skip. H4's unchanged interval is explicitly
+described as the central 95% fixed-reference random-review range. All thirteen files
+pass public-byte verification on both apex and www after the stale cache entry
+refreshed. Scientific results, claim boundaries and stages are unchanged.
+
 The next decisive step is a preregistered, blinded, multi-pathologist study on new
 patient/WSI groups, with raw votes, ambiguity and abstention preserved, followed by
 one untouched external-group evaluation and a multi-site with/without-AANCA workflow

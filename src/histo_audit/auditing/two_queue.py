@@ -318,6 +318,8 @@ def build_two_review_queues(
         raise ValueError("quality-control ranking requires group-safe OOF evidence")
     if not np.isfinite(minimum_annotation_score) or not np.isfinite(minimum_downstream_gain):
         raise ValueError("queue thresholds must be finite")
+    if minimum_downstream_gain < 0.0:
+        raise ValueError("minimum_downstream_gain must be non-negative")
     transitions = (
         np.asarray(
             [

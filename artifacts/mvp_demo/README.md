@@ -58,6 +58,12 @@ The PUMA verifier is a project-coupled evidence-readback script that recomputes
 metrics from saved predictions but does not retrain all 44 models. It is not
 third-party validation.
 
+The H4 interval is the central 95% range of guided-minus-random differences across
+100 random-review repetitions evaluated on one fixed final reference set. It is
+not a confidence interval from resampling final-reference groups. The original
+numbers and adverse result are preserved; the presentation wording was corrected
+on 2 October 2026.
+
 ## Package contents
 
 - `index.html` — responsive English article, including the retained “What the study
@@ -88,4 +94,4 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 26 August 2026.
+Author: Natan Smogór. Updated: 2 October 2026.

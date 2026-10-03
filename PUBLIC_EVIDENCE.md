@@ -194,12 +194,11 @@ did not. The overall registered decision is `not_supported` and the action is
 The frozen PUMA new-source confirmation is rooted at
 [`artifacts/puma_new_data_confirmation/results.json`](artifacts/puma_new_data_confirmation/results.json).
 The three large numeric archives are Git LFS objects because the evidence-readback
-script uses their full arrays. After `git lfs pull`, run:
+script uses their full arrays. Its manifest reconstruction also requires the official
+raw PUMA inputs; `git lfs pull` alone is insufficient. With both available, run:
 
 ```text
-uv run python scripts/verify_aanca_selected_candidate.py
-uv run python scripts/verify_puma_new_data_confirmation.py
-uv run python scripts/verify_nucls_supervised_qc_feasibility.py
+uv run python scripts/verify_puma_new_data_confirmation.py --output artifacts/qa/puma-verification.json
 ```
 
 The PUMA verifier rebuilds the official manifest and confirms the retrieval,
@@ -209,6 +208,12 @@ it does not independently retrain 44 models from source images. All seven frozen
 PUMA gates passed. The related stress and observed-label sensitivity authorities are
 tracked under `artifacts/`; they preserve their explicitly exploratory
 post-confirmation status.
+
+The selected-candidate convergence script performs a full nested MoNuSAC
+development rerun and requires local selection lineage. The NuCLS QC feasibility
+script reads the official single-rater SQLite database. Their requirements and
+write destinations are listed separately in
+[`REPRODUCIBILITY.md`](REPRODUCIBILITY.md#verification-command-requirements).
 
 At the primary 5% budget, PUMA retrieval precision was `0.537739` versus
 `0.214379` exact matched random. The downstream `flag_exclude` arm improved by

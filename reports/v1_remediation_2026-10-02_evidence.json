@@ -1,0 +1,194 @@
+{
+  "audit_started": "2026-10-02",
+  "audit_completed": "2026-10-03",
+  "base_commit": "fa3311bf750c32b7f2bc0ac69097018620e77d71",
+  "pytest": {
+    "passed": 1233,
+    "skipped": 1,
+    "seconds": 631.11,
+    "skip_reason": "documented POSIX open-file rename case on Windows"
+  },
+  "ruff_check_passed": true,
+  "ruff_format_check_passed": true,
+  "mypy_passed": true,
+  "functional_smoke_passed": true,
+  "saved_evidence_readbacks_passed": true,
+  "scientific_values_and_source_identities_preserved": true,
+  "source_annotations_modified": false,
+  "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
+  "presentation_status": "DEMO_COMPLETE",
+  "natural_data_action": "retain_uncorrected",
+  "manifest_root_sha256": "8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca",
+  "deployment_backup_id": "20261002-235931",
+  "public_verification": [
+    {
+      "file_count": 13,
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "0f2e8d48e5f2b36ea8b3c04c980dab2bc1e0c2709905957313c1a588d153d2fa",
+          "size_bytes": 5106,
+          "valid": true
+        },
+        {
+          "path": "assets/findings-evidence-story.js",
+          "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8",
+          "size_bytes": 3647,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-bilobed.png",
+          "sha256": "03239510ec855de6b84d9c1c56c233ccfdb58efa4bc8ae2a6e59db22d4e5599e",
+          "size_bytes": 212645,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-compact.png",
+          "sha256": "ff1db296bedfb4f921273ef6939ce1742caefedcee84d7f0fff879655dda0f8d",
+          "size_bytes": 290592,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-elongated.png",
+          "sha256": "700a5eacba0adc4b8e10f46de2736e05b30ae9f31fd6d3096d7b2beced86946d",
+          "size_bytes": 145054,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-flattened.png",
+          "sha256": "c6efd07d2c6109b3bb695ebe1a9201d21aa756ce770f2948866b93c463521845",
+          "size_bytes": 157942,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-irregular.png",
+          "sha256": "e2ec8310d6073f873ffad28a816aa2b3898d49a73bad72ed72612ddda2de115d",
+          "size_bytes": 234525,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-kidney.png",
+          "sha256": "17c916ca649a0787f0016d8af2aa5f57847b2e881e84f1f8f5d3a7a101f8b24e",
+          "size_bytes": 258800,
+          "valid": true
+        },
+        {
+          "path": "assets/method-audit-workflow.png",
+          "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37",
+          "size_bytes": 826713,
+          "valid": true
+        },
+        {
+          "path": "evidence.json",
+          "sha256": "c995d86c9fd44e13b68bde22cb378dad69a4df7ce6d82a477adb7b754ac615de",
+          "size_bytes": 47666,
+          "valid": true
+        },
+        {
+          "path": "index.html",
+          "sha256": "7d1a105a9bde1f0bdd4037aff18da08813b19d5b5bd4177c141882b70f3d3218",
+          "size_bytes": 230821,
+          "valid": true
+        },
+        {
+          "path": "pannuke_mask_qc_overlays.png",
+          "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a",
+          "size_bytes": 3188071,
+          "valid": true
+        }
+      ],
+      "local_manifest_root_sha256": "8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca",
+      "matches_local_release": true,
+      "remote_manifest_root_sha256": "8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca",
+      "remote_package_integrity_valid": true,
+      "status": "valid",
+      "url": "https://aancastudy.org/",
+      "verification_scope": "served HTTP bytes and manifest identities; no model execution"
+    },
+    {
+      "file_count": 13,
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "0f2e8d48e5f2b36ea8b3c04c980dab2bc1e0c2709905957313c1a588d153d2fa",
+          "size_bytes": 5106,
+          "valid": true
+        },
+        {
+          "path": "assets/findings-evidence-story.js",
+          "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8",
+          "size_bytes": 3647,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-bilobed.png",
+          "sha256": "03239510ec855de6b84d9c1c56c233ccfdb58efa4bc8ae2a6e59db22d4e5599e",
+          "size_bytes": 212645,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-compact.png",
+          "sha256": "ff1db296bedfb4f921273ef6939ce1742caefedcee84d7f0fff879655dda0f8d",
+          "size_bytes": 290592,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-elongated.png",
+          "sha256": "700a5eacba0adc4b8e10f46de2736e05b30ae9f31fd6d3096d7b2beced86946d",
+          "size_bytes": 145054,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-flattened.png",
+          "sha256": "c6efd07d2c6109b3bb695ebe1a9201d21aa756ce770f2948866b93c463521845",
+          "size_bytes": 157942,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-irregular.png",
+          "sha256": "e2ec8310d6073f873ffad28a816aa2b3898d49a73bad72ed72612ddda2de115d",
+          "size_bytes": 234525,
+          "valid": true
+        },
+        {
+          "path": "assets/hero/nuclei/nucleus-kidney.png",
+          "sha256": "17c916ca649a0787f0016d8af2aa5f57847b2e881e84f1f8f5d3a7a101f8b24e",
+          "size_bytes": 258800,
+          "valid": true
+        },
+        {
+          "path": "assets/method-audit-workflow.png",
+          "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37",
+          "size_bytes": 826713,
+          "valid": true
+        },
+        {
+          "path": "evidence.json",
+          "sha256": "c995d86c9fd44e13b68bde22cb378dad69a4df7ce6d82a477adb7b754ac615de",
+          "size_bytes": 47666,
+          "valid": true
+        },
+        {
+          "path": "index.html",
+          "sha256": "7d1a105a9bde1f0bdd4037aff18da08813b19d5b5bd4177c141882b70f3d3218",
+          "size_bytes": 230821,
+          "valid": true
+        },
+        {
+          "path": "pannuke_mask_qc_overlays.png",
+          "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a",
+          "size_bytes": 3188071,
+          "valid": true
+        }
+      ],
+      "local_manifest_root_sha256": "8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca",
+      "matches_local_release": true,
+      "remote_manifest_root_sha256": "8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca",
+      "remote_package_integrity_valid": true,
+      "status": "valid",
+      "url": "https://www.aancastudy.org/",
+      "verification_scope": "served HTTP bytes and manifest identities; no model execution"
+    }
+  ],
+  "required_gate_pending": false
+}

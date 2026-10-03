@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import runpy
 import subprocess
 import sys
 from pathlib import Path
@@ -115,6 +116,7 @@ def _make_sources(root: Path) -> tuple[Path, Path]:
                 "interval_95": [-0.003, -0.001],
                 "probability_positive": 0.0,
                 "random_repetitions": 100,
+                "pairing": "same_final_reference_set_across_frozen_random_review_repetitions",
             }
         ],
         "evaluation": {
@@ -906,6 +908,15 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
         == "adverse_to_registered_hypothesis"
     )
     assert evidence["primary"]["h4_restoration"]["registered_hypothesis_supported"] is False
+    h4 = evidence["primary"]["h4_restoration"]
+    assert h4["interval_method"] == "central_quantiles_of_random_review_repetitions"
+    assert h4["resampling_unit"] == "random_review_repetition"
+    assert h4["reference_set_resampled"] is False
+    assert h4["interval_95"] == [-0.003, -0.001]
+    assert "Central 95% range [-0.003000, -0.001000]" in html
+    assert "central 95% random-review range" in html
+    assert "fixed final reference set" in html
+    assert "The displayed 95% intervals come from paired whole-group bootstrap" not in html
     assert (
         evidence["primary"]["instance_dependent_seed_audit"]["independent_corruption_realisations"]
         is False
@@ -933,7 +944,7 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "26 August 2026" in html
+    assert "2 October 2026" in html
     assert "gsap@3.15.0" in html
     assert (
         'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'
@@ -1304,6 +1315,43 @@ def test_verify_mvp_rejects_duplicate_manifest_paths(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="record allowlist differs"):
         verify_mvp_presentation(artifacts.output_directory)
+
+
+@pytest.mark.parametrize(
+    "field, value",
+    [
+        ("interval_method", "paired_group_bootstrap"),
+        ("reference_set_resampled", True),
+        ("resampling_unit", "patient"),
+        ("pairing", "independent_reference_sets"),
+    ],
+)
+def test_resealed_h4_interval_cannot_change_its_scientific_meaning(
+    tmp_path: Path, field: str, value: Any
+) -> None:
+    run, qc = _make_sources(tmp_path)
+    artifacts = build_mvp_presentation(
+        project_root=tmp_path,
+        run_directory=run,
+        qc_bundle_directory=qc,
+        output_directory=Path("artifacts/mvp_demo"),
+    )
+    evidence = json.loads(artifacts.evidence_path.read_text(encoding="utf-8"))
+    evidence["primary"]["h4_restoration"][field] = value
+    _write_json(artifacts.evidence_path, evidence)
+    manifest = json.loads(artifacts.manifest_path.read_text(encoding="utf-8"))
+    for index, record in enumerate(manifest["files"]):
+        if record["path"] == "evidence.json":
+            manifest["files"][index] = _file_record(artifacts.evidence_path, "evidence.json")
+            break
+    manifest["manifest_root_sha256"] = _canonical_sha256(manifest["files"])
+    _write_json(artifacts.manifest_path, manifest)
+    portable = runpy.run_path(
+        str(Path(__file__).resolve().parent.parent / "scripts/present_demo.py")
+    )["verify_presentation"]
+    for verifier in (verify_mvp_presentation, portable):
+        with pytest.raises(ValueError, match="evidence scope differs"):
+            verifier(artifacts.output_directory)
 
 
 def test_verified_mvp_http_server_serves_only_the_closed_package(tmp_path: Path) -> None:

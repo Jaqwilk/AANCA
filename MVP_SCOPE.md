@@ -2,6 +2,16 @@
 
 Date: 2026-08-18
 
+## V1 presentation correction — 2 October 2026
+
+The current presentation uses manifest schema 7 and evidence schema 6, with the
+same frozen scientific values and source identities. H4 is labelled as the central
+95% range across fixed-reference random-review repetitions; the ranking comparison
+intervals retain their paired whole-group bootstrap interpretation. The local and
+HTTP publication verifiers enforce these separate meanings. See
+[`reports/v1_remediation_2026-10-02.md`](reports/v1_remediation_2026-10-02.md).
+Scientific stages, the original release date and `retain_uncorrected` are unchanged.
+
 ## Current-status addendum — 26 August 2026
 
 This file preserves the original presentation-scope decision. It is not the current

@@ -48,6 +48,19 @@ that the website, professor brief and core public documentation retain the same 
 numbers, dates and claim boundaries. CI executes both standard-library verifiers
 before installing project dependencies.
 
+`python scripts/verify_deployed_presentation.py --url https://aancastudy.org/`
+performs the local package check and then compares the remote manifest and every
+served file with that release. It reports an internally inconsistent remote package
+separately from an internally valid but older release. HTTP 200 and visible images
+alone do not establish equality to the checksum-bound package. This command is
+read-only and uses only the standard library.
+
+H4's saved interval is the central 95% quantile range across 100 random-review
+repetitions evaluated on one fixed final reference set. It does not resample the
+final-reference groups. The ranking comparisons use their separately saved paired
+whole-group bootstrap intervals. The corrected presentation preserves every frozen
+numeric result and includes this distinction in its machine-readable metadata.
+
 ## Independently recalculating the saved primary results
 
 The public GitHub release
@@ -85,9 +98,6 @@ by their scoped verification scripts. Run them in the locked project environment
 uv run python scripts/verify_nucls_external_validation.py --json
 uv run python scripts/verify_nucls_independent_pathologist_validation.py
 uv run python scripts/verify_monusac_external_validation.py
-uv run python scripts/verify_aanca_selected_candidate.py
-uv run python scripts/verify_puma_new_data_confirmation.py
-uv run python scripts/verify_nucls_supervised_qc_feasibility.py
 uv run python scripts/run_public_pathologist_replication.py verify --dataset riva
 uv run python scripts/run_public_pathologist_replication.py verify --dataset midogpp
 ```
@@ -103,6 +113,65 @@ saved predictions; it does **not** independently retrain those 44 models from so
 images. Large PUMA arrays are tracked through Git LFS. These checks prove consistency
 of released evidence within each stated scope; they do not constitute third-party
 validation, adjudicate which expert is correct or establish clinical utility.
+
+### Verification command requirements
+
+All paths below are relative to the repository root. Cost categories describe the
+operation, not a guaranteed runtime. Raw datasets and local selection lineage are
+not part of an ordinary public checkout, even after `git lfs pull`.
+
+| Command | Required inputs beyond the environment | Fits models? | Writes by default? | Operation |
+|---|---|---|---|---|
+| `present_demo.py --verify-only` | Checked-in thirteen-file presentation | No | No | Hashes and scoped summary checks |
+| `verify_professor_release.py` | Presentation and tracked upstream authorities/docs | No | No | Hashes and publication consistency |
+| `verify_deployed_presentation.py` | Presentation plus HTTP access to the target domain | No | No | Manifest and all served file bytes |
+| `verify_primary_evidence.py` | Extracted `primary-evidence-v1` release or full accepted local run | No | No | Saved-array metrics and group-bootstrap recalculation |
+| `verify_nucls_external_validation.py` | Released NuCLS result/array package | No | No | Saved-array metric and bootstrap recalculation |
+| `verify_monusac_external_validation.py` | Released MoNuSAC result/array package | No | No | Saved-array metric and bootstrap recalculation |
+| `verify_nucls_independent_pathologist_validation.py` | Released eleven-file NuCLS JP.1 package | No | No | Scoped artifact and result recalculation |
+| `run_public_pathologist_replication.py verify --dataset riva` / `midogpp` | Released pre-reference seals and post-reference arrays | No | No | Deterministic saved-evidence verification |
+| `verify_puma_new_data_confirmation.py` | Released PUMA arrays **and official raw PUMA inputs** for `build_puma_manifest` | No | `verification.json` under the run root | Source-manifest reconstruction and saved-evidence readback |
+| `verify_nucls_supervised_qc_feasibility.py` | Official `SingleRater_2020-04-05.sqlite` | No | Feasibility result JSON and Markdown report | Raw-database inspection |
+| `verify_aanca_selected_candidate.py` | Official MoNuSAC training archive/images; selected config; local parent `run_authority.json` and `results.jsonl`; embeddings or inputs to build them | **Yes** | Embedding cache if needed; convergence output JSON | Full nested development re-execution |
+
+Use explicit scratch destinations when checking raw-dependent evidence:
+
+```text
+uv run python scripts/verify_puma_new_data_confirmation.py --output artifacts/qa/puma-verification.json
+uv run python scripts/verify_nucls_supervised_qc_feasibility.py --output artifacts/qa/nucls-qc-verification.json --report artifacts/qa/nucls-qc-verification.md
+```
+
+For the expensive selected-candidate rerun, use:
+
+```text
+uv run python scripts/verify_aanca_selected_candidate.py --output artifacts/qa/selected-candidate-reexecution.json
+```
+
+Its default parent lineage is
+`artifacts/autoresearch/monusac_aanca_expanded_development_v1_r1`. A reviewer without
+that separately preserved authority/ledger cannot perform this exact re-execution
+from the public repository alone. Missing inputs must remain an explicit limitation;
+do not reconstruct or substitute selection history from exposed outcomes.
+
+Current generic OOF execution rejects a model reporting `converged_=False` and saves
+optimizer status, iteration count and message per fold. Estimators that do not expose
+such a flag are recorded as `unknown`. This engineering diagnostic does not add a
+retrospective convergence claim to legacy evidence that did not record it.
+
+## Public hosting and the integrity contract
+
+The canonical public URL is `https://aancastudy.org/`. Hosting uploads use merge
+mode and a recoverable backup. The presentation keeps its thirteen-file package;
+the server configuration is maintained separately in
+[`deploy/hostinger/aancastudy.htaccess`](deploy/hostinger/aancastudy.htaccess).
+The configured Hostinger deployment maps that file to the domain's `.htaccess`.
+It requests `Cache-Control: no-cache, no-transform` so stable URLs revalidate and
+image proxies preserve the bytes bound by the manifest.
+
+Uploading correct origin files does not establish correct public delivery. Run
+`verify_deployed_presentation.py` after deployment. Any CDN transformation, stale
+release or HTTP failure must remain a failed publication check until resolved;
+do not replace source-asset hashes with transformed-response hashes to make it pass.
 
 ## Public-history disclosure
 

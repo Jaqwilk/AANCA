@@ -8,7 +8,8 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-from histo_audit.cross_validation.oof import MultinomialLogisticRegression
+from histo_audit.cross_validation.oof import MultinomialLogisticRegression, require_converged_fit
+from histo_audit.validation import fixed_class_order, integer_vector
 
 from .restoration import ClassificationMetrics, classification_metrics
 from .retraining_guard import (
@@ -104,6 +105,7 @@ def _fit_hard(
         class_weight_balanced=True,
     )
     model.fit(features, labels)
+    require_converged_fit(model, context="review strategy hard-label fit")
     return np.asarray(model.predict_proba(validation), dtype=np.float64)
 
 
@@ -124,6 +126,7 @@ def _fit_soft(
         class_weight_balanced=True,
     )
     model.fit_soft_targets(features, targets, sample_weight=weights)
+    require_converged_fit(model, context="review strategy soft-target fit")
     return np.asarray(model.predict_proba(validation), dtype=np.float64)
 
 
@@ -157,16 +160,16 @@ def compare_review_training_strategies(
     if evidence_role != INDEPENDENT_GROUP_VALIDATION:
         raise ValueError("strategy comparison requires independent group validation")
     train_x = np.asarray(training_features, dtype=np.float64)
-    train_y = np.asarray(observed_training_labels, dtype=np.int64)
+    train_y = integer_vector(observed_training_labels, name="observed_training_labels")
     validation_x = np.asarray(validation_features, dtype=np.float64)
-    validation_y = np.asarray(validation_reference_labels, dtype=np.int64)
+    validation_y = integer_vector(validation_reference_labels, name="validation_reference_labels")
     train_groups_array = np.asarray(
         tuple(str(value) for value in training_group_ids), dtype=np.str_
     )
     validation_groups_array = np.asarray(
         tuple(str(value) for value in validation_group_ids), dtype=np.str_
     )
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     if len(classes) < 2 or len(set(classes)) != len(classes):
         raise ValueError("class_order must contain at least two unique values")
     if (

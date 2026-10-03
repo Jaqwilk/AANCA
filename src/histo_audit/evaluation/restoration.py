@@ -10,8 +10,9 @@ import numpy as np
 from numpy.typing import NDArray
 
 from histo_audit.corruption.controlled import normalise_rate
-from histo_audit.cross_validation.oof import MultinomialLogisticRegression
+from histo_audit.cross_validation.oof import MultinomialLogisticRegression, require_converged_fit
 from histo_audit.statistics.review import budget_count, rank_indices
+from histo_audit.validation import fixed_class_order, integer_vector, probability_matrix
 
 
 class DownstreamEstimator(Protocol):
@@ -205,8 +206,8 @@ def restore_reviewed_labels(
 ) -> RestorationResult:
     """Restore only reviewed, known injected corruptions to their reference label."""
 
-    reference = np.asarray(pre_corruption_labels, dtype=np.int64)
-    observed = np.asarray(observed_labels, dtype=np.int64)
+    reference = integer_vector(pre_corruption_labels, name="pre_corruption_labels")
+    observed = integer_vector(observed_labels, name="observed_labels")
     injected = np.asarray(is_injected_corruption, dtype=bool)
     if (
         reference.ndim != 1
@@ -279,13 +280,14 @@ def classification_metrics(
 ) -> ClassificationMetrics:
     """Calculate deterministic multiclass classification and calibration metrics."""
 
-    reference = np.asarray(reference_labels, dtype=np.int64)
-    matrix = np.asarray(probabilities, dtype=np.float64)
-    classes = tuple(int(value) for value in class_order)
-    if matrix.shape != (len(reference), len(classes)) or not len(reference):
-        raise ValueError("probabilities must align with labels and class order")
-    if not np.isfinite(matrix).all() or not np.allclose(matrix.sum(axis=1), 1.0, atol=1e-7):
-        raise ValueError("probabilities must be finite and sum to one")
+    reference = integer_vector(reference_labels, name="reference_labels")
+    classes = fixed_class_order(class_order, minimum_classes=1)
+    matrix = probability_matrix(
+        probabilities,
+        n_samples=len(reference),
+        n_classes=len(classes),
+        minimum_classes=1,
+    )
     if calibration_bins <= 0:
         raise ValueError("calibration_bins must be positive")
     lookup = {label: column for column, label in enumerate(classes)}
@@ -364,6 +366,7 @@ def _fit_evaluate(
     fit_labels = np.array(train_labels, dtype=np.int64, copy=True)
     fit_labels.setflags(write=False)
     classifier.fit(fit_features, fit_labels)
+    require_converged_fit(classifier, context="downstream restoration fit")
     probabilities = np.asarray(
         classifier.predict_proba(np.array(test_features, dtype=np.float64, copy=True)),
         dtype=np.float64,
@@ -416,11 +419,11 @@ def evaluate_downstream_restoration(
     """
 
     train_matrix = np.asarray(development_features, dtype=np.float64)
-    reference = np.asarray(pre_corruption_labels, dtype=np.int64)
-    observed = np.asarray(observed_labels, dtype=np.int64)
+    reference = integer_vector(pre_corruption_labels, name="pre_corruption_labels")
+    observed = integer_vector(observed_labels, name="observed_labels")
     injected = np.asarray(is_injected_corruption, dtype=bool)
     test_matrix = np.asarray(final_test_features, dtype=np.float64)
-    test_reference = np.asarray(final_test_reference_labels, dtype=np.int64)
+    test_reference = integer_vector(final_test_reference_labels, name="final_test_reference_labels")
     reference_before = reference.copy()
     observed_before = observed.copy()
     test_reference_before = test_reference.copy()
@@ -475,7 +478,9 @@ def evaluate_downstream_restoration(
         assert reference_validation_group_ids is not None
         assert reference_validation_is_injected_corruption is not None
         validation_matrix = np.asarray(reference_validation_features, dtype=np.float64)
-        validation_labels = np.asarray(reference_validation_labels, dtype=np.int64)
+        validation_labels = integer_vector(
+            reference_validation_labels, name="reference_validation_labels"
+        )
         validation_injected = np.asarray(reference_validation_is_injected_corruption, dtype=bool)
         validation_group_values = tuple(str(value) for value in reference_validation_group_ids)
         if validation_matrix.ndim != 2 or not len(validation_matrix):
@@ -517,7 +522,7 @@ def evaluate_downstream_restoration(
     validation_labels_before = validation_labels.copy()
     if random_repeats <= 0:
         raise ValueError("random_repeats must be positive")
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     if len(classes) < 2 or len(set(classes)) != len(classes):
         raise ValueError("class_order must contain at least two unique values")
     if any(

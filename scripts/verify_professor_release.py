@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import runpy
 import sys
 from collections.abc import Iterator, Mapping
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -73,6 +75,19 @@ def _verify_source_record(record: Mapping[str, Any]) -> str:
     if path.stat().st_size != size or _sha256(path) != digest:
         raise ValueError(f"evidence source differs from its published identity: {relative}")
     return f"{root.name}:{relative}"
+
+
+def _verify_status_document(text: str) -> date:
+    """Validate a living status date independently of the frozen release date."""
+
+    _require(text, ["# AANCA status", "Final professor-readiness audit"], role="STATUS.md")
+    headers = re.findall(r"^Updated: (.+)$", text, flags=re.MULTILINE)
+    if len(headers) != 1:
+        raise ValueError("STATUS.md requires exactly one Updated date header")
+    try:
+        return datetime.strptime(headers[0].strip(), "%d %B %Y").date()
+    except ValueError as error:
+        raise ValueError("STATUS.md Updated date must be a valid day, month and year") from error
 
 
 def verify_professor_release() -> dict[str, Any]:
@@ -189,11 +204,7 @@ def verify_professor_release() -> dict[str, Any]:
         ["Current-status addendum — 26 August 2026", "current thirteen-file package"],
         role="MVP_SCOPE.md",
     )
-    _require(
-        _read("STATUS.md"),
-        ["Updated: 1 September 2026", "Final professor-readiness audit"],
-        role="STATUS.md",
-    )
+    _verify_status_document(_read("STATUS.md"))
     _require(
         professor_brief,
         ["FINAL_READINESS_REPORT.md", "not third-party clinical validation"],

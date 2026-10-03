@@ -8,6 +8,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from histo_audit.cross_validation.oof import MultinomialLogisticRegression
+from histo_audit.validation import probability_matrix
 
 from .review_interventions import ReviewInterventionResult
 
@@ -36,15 +37,17 @@ class SoftTargetMultinomialLogisticRegression(MultinomialLogisticRegression):
         expected_shape = (len(matrix), len(self.class_order))
         if matrix.ndim != 2 or not len(matrix) or targets.shape != expected_shape:
             raise ValueError("features and soft targets must be non-empty and aligned")
+        targets = probability_matrix(
+            targets,
+            n_samples=len(matrix),
+            n_classes=len(self.class_order),
+        )
         if weights.shape != (len(matrix),):
             raise ValueError("sample weights must align with features")
         if (
             not np.isfinite(matrix).all()
-            or not np.isfinite(targets).all()
             or not np.isfinite(weights).all()
-            or np.any(targets < 0.0)
             or np.any(weights < 0.0)
-            or not np.allclose(targets.sum(axis=1), 1.0, atol=1e-8)
             or float(weights.sum()) <= 0.0
         ):
             raise ValueError("soft targets and weights must be finite valid distributions")
@@ -100,6 +103,9 @@ class SoftTargetMultinomialLogisticRegression(MultinomialLogisticRegression):
             )
             flat_result = np.asarray(optimisation.x, dtype=np.float64)
             self.converged_ = bool(optimisation.success)
+            self.optimizer_ = "scipy_lbfgsb"
+            self.n_iter_ = int(optimisation.nit)
+            self.optimization_message_ = str(optimisation.message)
         except ImportError:
             flat_result = initial
             first_moment = np.zeros_like(flat_result)
@@ -111,7 +117,13 @@ class SoftTargetMultinomialLogisticRegression(MultinomialLogisticRegression):
                 corrected_first = first_moment / (1.0 - 0.9**iteration)
                 corrected_second = second_moment / (1.0 - 0.999**iteration)
                 flat_result -= 0.03 * corrected_first / (np.sqrt(corrected_second) + 1e-8)
-            self.converged_ = True
+            _, final_gradient = objective(flat_result)
+            self.converged_ = bool(
+                np.isfinite(final_gradient).all() and np.max(np.abs(final_gradient)) <= 1.0e-5
+            )
+            self.optimizer_ = "adam_fallback"
+            self.n_iter_ = self.max_iter
+            self.optimization_message_ = "final gradient infinity norm checked against 1e-5"
         self.coef_ = flat_result.reshape(shape)
         return self
 

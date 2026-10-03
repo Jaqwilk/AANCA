@@ -1,6 +1,6 @@
 # AANCA status
 
-Updated: 1 September 2026
+Updated: 3 October 2026
 
 ## Presentation UI note (22 August 2026)
 
@@ -1739,3 +1739,299 @@ Validation after the restoration passed:
 This documentation and fail-closed verification repair changes no source annotation,
 dataset, model, split, score, metric, evidence artifact, scientific claim boundary,
 completion stage or natural-data action.
+
+## Consolidated AANCA brand and design system — 2026-09-01
+
+Created [`AANCA_BRAND_SYSTEM.md`](AANCA_BRAND_SYSTEM.md) as the design authority for
+AANCA websites, presentations, reports, posters, figures and future interfaces. It
+consolidates the identity already present in the public article: the non-diagnostic
+Second-Look metaphor, canonical four-tile 8:3 mark, dark editorial palette, accessible
+violet roles, Inter/JetBrains Mono typography, layout rails, spacing, components,
+scientific data-visualisation rules, imagery, motion, responsive behaviour, print,
+reusable copy and a release checklist. It also includes canonical SVG and reusable CSS
+implementations.
+
+Decision D051 makes the four-tile mark and the separation between visual authority and
+scientific authority explicit. `SPEC.md`, frozen protocols and accepted evidence still
+override any brand treatment that could affect a method, result, completion stage or
+claim.
+
+Validation after the documentation change:
+
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: 224 files already formatted;
+- `uv run pytest`: 1182 passed, 1 skipped in 612.69 seconds; the skip is the same
+  documented Windows/POSIX open-file rename difference;
+- `python -I scripts/present_demo.py --verify-only`: valid unchanged 13-file package,
+  manifest root
+  `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`;
+- brand reference/content checks and `git diff --check`: passed before this status
+  append and are repeated at handoff.
+
+This design-documentation work changes no source annotation, dataset, model, split,
+score, metric, evidence artifact, scientific claim boundary, completion stage or
+natural-data action.
+
+## Repository, scientific-logic and deployed-site review — 2026-10-02
+
+Recorded the requested review in
+[`reports/project_audit_2026-10-02.md`](reports/project_audit_2026-10-02.md), with
+machine-readable observations in
+[`reports/project_audit_2026-10-02_evidence.json`](reports/project_audit_2026-10-02_evidence.json).
+The reviewed source commit is `fa3311bf750c32b7f2bc0ac69097018620e77d71`.
+Pre-existing brand-system work in this working tree was preserved.
+
+The review found a presentation/statistical-method mismatch: primary H4 stores the
+central quantile range of 100 guided-minus-random restoration differences on one
+fixed final reference set, whereas the article calls its displayed intervals paired
+whole-group bootstrap intervals and labels H4 as a 95% CI. The stored numbers
+recalculate correctly; their statistical interpretation needs correction. No
+favourable H4 result or replacement interval was generated.
+
+Small synthetic probes also reproduced acceptance of out-of-range probabilities,
+negative adoption/utility thresholds, fractional labels truncated to class integers,
+unreported non-convergence in generic OOF, and invalid neighbour fold provenance.
+These are interface-validation findings, not evidence that the released experiments
+used those invalid inputs. The report separates them from actual scientific outcomes.
+
+On 2 October the official domain and its www/HTTP variants returned HTTP 403 from
+this environment. The technical Hostinger URL returned HTTP 200 but served the
+22 August article and evidence schema 3, omitting the later NuCLS JP.1, RIVA and
+MIDOG++ evidence present in the local 26 August article and schema 5. Eight served
+PNG responses differed from the technical site's own manifest hashes; the cause
+was not established. No hosting write or deployment was performed.
+
+Executed validation:
+
+- `uv run pytest --durations=20`: 1182 passed, 1 skipped, 1237.58 seconds; the skip
+  is the documented Windows/POSIX open-file rename difference.
+- `uv run ruff check .`: passed.
+- `uv run ruff format --check .`: passed, 224 files.
+- `uv run mypy src`: passed, 105 source files.
+- `uv run histo-audit doctor`: passed; CUDA and RTX 4070 available.
+- `uv run histo-audit experiment smoke --runs-root artifacts/qa/review-20261002-smoke`:
+  passed; run `20261002T141629.514774Z_synthetic_smoke_6d88919266`.
+- `uv run python -I scripts/verify_professor_release.py`: passed, 19 upstream
+  authorities and the unchanged 13-file local presentation package.
+- `uv run python -I scripts/present_demo.py --verify-only`: passed; local manifest
+  root `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`.
+- Primary saved-evidence verification, including the recovered primary run and
+  `primary_0027_8531672acd3c` restoration: passed. The exact command is in the report.
+- NuCLS external, MoNuSAC, PUMA, NuCLS QC feasibility and NuCLS independent-pathologist
+  verifiers: passed within their documented scopes. The QC endpoint remains unavailable.
+- Public pathologist replication `verify --dataset riva` and
+  `verify --dataset midogpp`: passed.
+- Local Playwright checks: desktop/mobile layout, reduced-motion and no-JavaScript
+  article readability, H6 unavailable filtering and empty search results passed.
+  The technical Hostinger deployment was also inspected in the browser.
+
+The documented `verify_aanca_selected_candidate.py` command was started and then
+explicitly interrupted after confirming that it performs nested model re-execution
+using raw MoNuSAC inputs and ignored local selection lineage. It is not recorded as
+passed. Its canonical convergence output was not replaced. Reproduction instructions
+need to distinguish this command from saved-array verification and disclose the raw
+input requirements of the PUMA and NuCLS QC checks.
+
+Post-documentation verification initially failed because the professor-release
+verifier requires the exact text `Updated: 1 September 2026` in STATUS.md. The
+existing release-status header is therefore retained, with this audit dated
+separately above and in its own section. F11 records the brittle date dependency;
+the verifier itself was not relaxed or changed.
+After this repair both professor-release and presentation verification passed again:
+19 upstream authorities, 13 presentation files and the unchanged manifest root.
+
+Decision D052 records remediation priorities. No source code, frozen study authority,
+source annotation or scientific result was changed. Scientific stage remains
+`EXTERNAL_VALIDATION_COMPLETE`, presentation stage remains `DEMO_COMPLETE`, and the
+natural-data action remains `retain_uncorrected`.
+
+Next implementation action: correct the H4 interval description and carry its method
+metadata into the presentation, with a targeted semantic regression test. Next command
+after that change: `uv run pytest tests/test_mvp_demo.py`, followed by the required
+full validation and presentation/release verification before publishing.
+
+## Requested aancastudy.org deployment — 2026-10-02
+
+Added a local Hostinger manifest for `aancastudy.org`, using the existing AANCA
+credential profile and the unchanged `artifacts/mvp_demo` package. The proposed
+mapping is `domains/aancastudy.org/public_html` in merge mode; remote path ownership
+and domain routing remain unverified until authentication succeeds.
+
+Executed `python C:\Users\NATAN\.codex\skills\hostinger-deploy\scripts\run_hostinger_deploy.py verify aancastudy.org`.
+The configured build step (`scripts/present_demo.py --verify-only`) passed: 13 files,
+manifest root `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`.
+SSH/SFTP then failed with `Authentication failed`. No upload, remote backup or
+post-deployment HTTP verification occurred. No source code or website file changed;
+the full pytest/lint/format gates were not rerun for this blocked deployment attempt.
+
+Next action: restore the `hostinger-bisque-jay` credential locally in the deploy
+configuration, rerun the same verify command, verify the actual remote domain root,
+and complete required release gates before deployment. Scientific stages and
+natural-data action remain unchanged.
+
+## Official-domain deployment completed — 2026-10-02
+
+The owner supplied an updated SSH credential and explicitly authorized upload.
+Updated only the local deployment credential store; no secret is recorded here.
+The Hostinger skill wrapper `verify aancastudy.org` passed package verification and
+SSH/SFTP access. SFTP readback confirmed the actual target directory
+`/home/u786975226/domains/aancastudy.org/public_html`, initially containing only
+`default.php`.
+
+Pre-deployment gates passed:
+
+- `uv run pytest`: 1182 passed, 1 documented Windows/POSIX skip in 721.24 seconds;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: 224 files already formatted;
+- `uv run python -I scripts/verify_professor_release.py`: valid, 19 upstream authorities;
+- configured build step `scripts/present_demo.py --verify-only`: valid 13-file package,
+  root `395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514`.
+
+Executed `python C:\Users\NATAN\.codex\skills\hostinger-deploy\scripts\run_hostinger_deploy.py deploy aancastudy.org --skip-build`,
+reusing that successful unchanged package verification. Deployment completed with
+backup ID `20261002-170743` under
+`.codex-deploy-backups/aancastudy.org/20261002-170743`. Merge upload preserved the
+hosting placeholder file. The wrapper's page and followed-asset HTTP checks passed.
+Independent cache-busted HTTP checks confirmed both apex and www homepages match
+local `index.html`; text/JSON/JavaScript package files also match. SFTP SHA-256
+readback confirmed all 13 uploaded files match local originals.
+
+HTTP byte equality does not hold for CDN-delivered PNGs. Seven PNGs retained identical
+RGBA pixels; the workflow graphic is served at 1600 x 556 instead of its original
+2128 x 739. The origin graphic matches exactly. This delivery transformation is
+recorded rather than claimed as byte-identical public delivery. An initial optional
+pixel-check script could not import requests in the project environment; it was
+rerun using standard-library urllib without installing dependencies.
+
+The user was advised to rotate the password exposed in chat after deployment.
+No website source, scientific evidence, annotation, metric, claim or completion
+stage changed. Next action: rotate the exposed SSH password and update the local
+credential store for future deployments.
+
+## V1 remediation and repeat audit — 2–3 October 2026
+
+Implemented the bounded fixes in
+[`reports/v1_remediation_2026-10-02.md`](reports/v1_remediation_2026-10-02.md)
+under D054. Shared validation now rejects out-of-range/nonfinite probabilities,
+fractional or overflowing labels/classes, and negative global adoption thresholds.
+Generic OOF records real optimiser diagnostics and rejects reported failed fits;
+maintained downstream paths also reject them. Adam fallback no longer invents
+convergence. Neighbour provenance excludes the complete held-out group set before
+index fitting. Additional repeat-audit probes found and fixed invalid entropy
+epsilon and malformed soft-target acceptance.
+
+Corrected H4's presentation description to a central 95% range over random-review
+repetitions on the same fixed final reference set. Its point, interval and adverse
+finding remain unchanged. Added explicit interval metadata and resealed-tamper
+tests. The presentation is manifest schema 7 / evidence schema 6, with root
+`8719c185feb4ace95b242eedb60de063e3ccc4065df5590cfb331374814e93ca`.
+Recursive before/after comparison confirmed all 878 existing evidence values and
+source identities are unchanged. The previous presentation is preserved in
+`artifacts/qa/v1fix-previous-presentation-20261002`.
+
+README/reproducibility/evidence documentation now distinguishes actual uncalibrated
+ranking, optional calibration, original-audit defaults, the selected development
+candidate, saved-array verification, raw-data checks, output writes and full model
+re-execution. The professor-release verifier accepts one real living status date
+while still checking frozen release dates and upstream identities. Duplicate D052
+identifiers were reconciled: the hosting decision is D053.
+
+Final completed gates:
+
+- `uv run pytest -q`: **1233 passed, 1 documented Windows/POSIX skip in 631.11s**;
+  log `artifacts/qa/v1fix-pytest-accepted.log`;
+- `uv run ruff check .`: passed;
+- `uv run ruff format --check .`: 228 files already formatted;
+- `uv run mypy`: no issues in 111 source files;
+- `uv lock --check`, `uv pip check`, `git diff --check`: passed;
+- `uv run --with pip-audit pip-audit --local`: no known vulnerabilities found;
+- `uv run histo-audit experiment smoke --runs-root artifacts/qa/v1fix-smoke-accepted-20261002`:
+  completed successfully, run `20261002T215315.795421Z_synthetic_smoke_b85a24a0de`;
+- `scripts/present_demo.py --verify-only`: valid thirteen-file package;
+- `scripts/verify_professor_release.py`: valid with nineteen upstream authorities;
+- independent primary recalculation: all 33 numeric comparisons, three explicitly
+  unavailable comparisons and H4 passed;
+- NuCLS aggregate, MoNuSAC, NuCLS JP.1, RIVA, MIDOG++, PUMA and NuCLS paired-QC
+  verification passed. PUMA/QC writes were routed into `artifacts/qa`;
+- all nine frozen configuration files match their SHA-256 sidecars;
+- AST parsing passed for 112 source, 101 test and 21 script files;
+- Chromium desktop/mobile checks passed at 1280 x 720 and 390 x 844. Menu and
+  evidence-table filtering work; no page overflow or console errors/warnings were
+  observed. The live www page displays the corrected H4 caption.
+
+The preliminary full-suite attempt was interrupted and supplies no pass claim.
+The first completed run had `1 failed, 1230 passed, 1 skipped` in 619.57s: the new
+absolute `1e-7` probability row-sum check rejected legitimate float32 MLP round-off.
+Adjusted the absolute tolerance to `5e-7` with zero relative tolerance; real PyTorch
+softmax regression cases cover both float32 and unchanged float64 promotion, while
+rows differing by `1e-6` remain rejected. The previously failing integration fixture
+and 53 related cases passed before the complete accepted rerun. No probability was
+clipped or renormalised and no frozen fitting controls were changed. Initial new
+fixture/type-check errors and a missing `restorations/` input-path component were
+also repaired before final gates.
+
+Hosting preparation and deployment used the Hostinger skill. Its package/build
+verification and SSH/SFTP check passed. Reused the unchanged successful output with
+`deploy aancastudy.org --skip-build`; merge upload and HTTP health checks passed.
+Recoverable backup: `20261002-235931`. The separate tracked server configuration
+`deploy/hostinger/aancastudy.htaccess` requests `no-cache, no-transform` and is
+mapped to the domain's `.htaccess`, outside the thirteen-file presentation.
+
+Post-deployment SFTP readback verifies all thirteen origin files and `.htaccess`.
+The strict HTTP verifier passes all thirteen files on `https://www.aancastudy.org/`.
+Both domains serve the new manifest and scientific summary. The initial apex check
+failed solely for the cached `assets/hero/nuclei/nucleus-compact.png` response (CDN
+`HIT`; 291,149 rather than 290,592 bytes). Its release-query response carries
+`no-cache, no-transform` and matches the original exactly. An ordinary request
+`no-cache` header did not invalidate the old CDN entry. Do not exempt that URL
+from the strict check or overwrite the source hash with the transformed hash.
+
+The owner was asked to flush this domain's CDN cache in hPanel. Working
+SSH/SFTP credentials cannot control it; the available API account returns zero
+hosted websites and 404 for this domain's read endpoint. No unauthorised API cache
+mutation was attempted.
+
+Closing check on 3 October: the same ordinary apex HTTP verifier now passes all
+thirteen files and equality to the local release, with no query exemption. The
+stale cache entry refreshed during the closing checks; the actor/mechanism is not
+attributed. Both apex and www are now fully verified. No mandatory V1 remediation
+or publication gate remains pending.
+
+Next verification command after any future publication change:
+`uv run python -I scripts/verify_deployed_presentation.py --url https://aancastudy.org/`.
+Full source-model retraining and new study claims are not part of this remediation.
+Scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`, presentation stage remains
+`DEMO_COMPLETE`, and natural-data action remains `retain_uncorrected`. No source
+annotation, frozen scientific authority, final reference split or published result
+was modified.
+
+## GitHub V1 publication preflight — 3 October 2026
+
+The owner authorised publishing the audited workspace to the existing public
+repository `https://github.com/Jaqwilk/AANCA`. Before publication, fetched
+`origin/main` and verified that both it and local `main` were still
+`fa3311bf750c32b7f2bc0ac69097018620e77d71`, with zero ahead/behind commits and no
+pre-existing staged changes. The publication scope includes the D054 fixes,
+regression tests, verifiers, corrected presentation, audit reports and existing
+brand document. The README now links the current remediation report and distinguishes
+it from the historical initial findings. Decision D055 records the publication rules.
+
+Fresh pre-publication checks passed:
+
+- `uv run ruff check .`;
+- `uv run ruff format --check .`: 228 files already formatted;
+- `uv run mypy`: no issues in 111 source files;
+- `uv run python -I scripts/present_demo.py --verify-only`: valid thirteen-file package;
+- `uv run python -I scripts/verify_professor_release.py`: nineteen upstream authorities;
+- `uv run python -I scripts/verify_deployed_presentation.py --url https://aancastudy.org/`:
+  all thirteen public files match the current local release;
+- `git diff --check`.
+
+The accepted full-suite and functional evidence remains the D054 run: 1,233 passed,
+one documented platform skip, and successful deterministic synthetic smoke. No
+runtime code has changed since those accepted checks. The publication performs no
+source-model retraining or new outcome analysis. Check the new revision's Ubuntu
+and Windows CI at
+`https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml`.
+Scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`, presentation stage remains
+`DEMO_COMPLETE`, and natural-data action remains `retain_uncorrected`.

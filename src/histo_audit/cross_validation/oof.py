@@ -11,6 +11,8 @@ from typing import TYPE_CHECKING, Any, Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from histo_audit.validation import fixed_class_order, integer_vector
+
 if TYPE_CHECKING:
     from histo_audit.models.mlp import FrozenEmbeddingMLPConfig
 
@@ -75,6 +77,10 @@ class OOFFoldProvenance:
     training_groups: tuple[str, ...]
     held_out_groups: tuple[str, ...]
     held_out_sample_ids: tuple[str, ...]
+    fit_status: str = "unknown"
+    fit_optimizer: str | None = None
+    fit_iterations: int | None = None
+    fit_message: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -179,6 +185,8 @@ class OOFResult:
         seen_holdout_groups: set[str] = set()
         provenance_samples: set[str] = set()
         for fold in self.folds:
+            if fold.fit_status not in {"converged", "unknown"}:
+                raise ValueError(f"OOF fold {fold.fold_id} lacks an eligible fit status")
             overlap = set(fold.training_groups).intersection(fold.held_out_groups)
             if overlap:
                 raise ValueError(f"source-group leakage in fold {fold.fold_id}: {overlap}")
@@ -253,7 +261,7 @@ def _validate_inputs(
     group_ids: Sequence[str],
 ) -> tuple[NDArray[np.float64], NDArray[np.int64], NDArray[np.str_]]:
     matrix = np.asarray(features, dtype=np.float64)
-    target = np.asarray(labels, dtype=np.int64)
+    target = integer_vector(labels, name="labels")
     groups = np.asarray(group_ids, dtype=np.str_)
     if matrix.ndim != 2 or target.ndim != 1 or groups.ndim != 1:
         raise ValueError("features must be 2-D and labels/groups one-dimensional")
@@ -276,7 +284,7 @@ def make_group_stratified_fold_plan(
 ) -> GroupFoldPlan:
     """Use sklearn stratified-group folds or a documented deterministic fallback."""
 
-    target = np.asarray(labels, dtype=np.int64)
+    target = integer_vector(labels, name="labels")
     groups = np.asarray(group_ids, dtype=np.str_)
     if target.ndim != 1 or groups.shape != target.shape or not len(target):
         raise ValueError("labels and group IDs must be aligned vectors")
@@ -284,7 +292,7 @@ def make_group_stratified_fold_plan(
     if n_splits < 2 or n_splits > len(unique_groups):
         raise ValueError("n_splits must be between two and the number of unique groups")
     classes = (
-        np.asarray(tuple(class_order), dtype=np.int64)
+        np.asarray(fixed_class_order(class_order), dtype=np.int64)
         if class_order is not None
         else np.unique(target)
     )
@@ -421,7 +429,7 @@ class MultinomialLogisticRegression:
         max_iter: int = 400,
         class_weight_balanced: bool = True,
     ) -> None:
-        classes = tuple(int(value) for value in class_order)
+        classes = fixed_class_order(class_order)
         if len(classes) < 2 or len(set(classes)) != len(classes):
             raise ValueError("class_order must contain at least two unique values")
         if l2 < 0 or max_iter <= 0:
@@ -435,6 +443,9 @@ class MultinomialLogisticRegression:
         self.scale_: NDArray[np.float64] | None = None
         self.coef_: NDArray[np.float64] | None = None
         self.converged_: bool = False
+        self.optimizer_: str | None = None
+        self.n_iter_: int | None = None
+        self.optimization_message_: str | None = None
 
     @staticmethod
     def _softmax(logits: NDArray[np.float64]) -> NDArray[np.float64]:
@@ -446,7 +457,7 @@ class MultinomialLogisticRegression:
         self, features: NDArray[np.generic], labels: Sequence[int] | NDArray[np.integer]
     ) -> MultinomialLogisticRegression:
         matrix = np.asarray(features, dtype=np.float64)
-        target = np.asarray(labels, dtype=np.int64)
+        target = integer_vector(labels, name="training labels")
         if matrix.ndim != 2 or target.shape != (matrix.shape[0],) or not len(target):
             raise ValueError("features and labels must be non-empty and aligned")
         if not np.isfinite(matrix).all():
@@ -498,6 +509,9 @@ class MultinomialLogisticRegression:
             )
             flat_result = np.asarray(optimisation.x, dtype=np.float64)
             self.converged_ = bool(optimisation.success)
+            self.optimizer_ = "scipy_lbfgsb"
+            self.n_iter_ = int(optimisation.nit)
+            self.optimization_message_ = str(optimisation.message)
         except ImportError:
             flat_result = initial
             first_moment = np.zeros_like(flat_result)
@@ -509,7 +523,13 @@ class MultinomialLogisticRegression:
                 corrected_first = first_moment / (1.0 - 0.9**iteration)
                 corrected_second = second_moment / (1.0 - 0.999**iteration)
                 flat_result -= 0.03 * corrected_first / (np.sqrt(corrected_second) + 1e-8)
-            self.converged_ = True
+            _, final_gradient = objective(flat_result)
+            self.converged_ = bool(
+                np.isfinite(final_gradient).all() and np.max(np.abs(final_gradient)) <= 1.0e-5
+            )
+            self.optimizer_ = "adam_fallback"
+            self.n_iter_ = self.max_iter
+            self.optimization_message_ = "final gradient infinity norm checked against 1e-5"
         self.coef_ = flat_result.reshape(shape)
         return self
 
@@ -521,6 +541,20 @@ class MultinomialLogisticRegression:
             raise ValueError("prediction feature shape differs from fitted feature shape")
         design = np.column_stack([(matrix - self.mean_) / self.scale_, np.ones(len(matrix))])
         return self._softmax(design @ self.coef_)
+
+
+def require_converged_fit(estimator: Any, *, context: str) -> str:
+    """Reject a reported failed fit; preserve an unreported status as unknown."""
+
+    flag = getattr(estimator, "converged_", None)
+    if flag is None:
+        return "unknown"
+    if not isinstance(flag, (bool, np.bool_)):
+        raise ValueError(f"{context}: converged_ must be a boolean or absent")
+    if not flag:
+        message = getattr(estimator, "optimization_message_", None)
+        raise RuntimeError(f"{context}: estimator did not converge; {message or 'no diagnostics'}")
+    return "converged"
 
 
 def _estimator_class_order(estimator: ProbabilisticEstimator) -> tuple[int, ...]:
@@ -535,7 +569,7 @@ def _estimator_class_order(estimator: ProbabilisticEstimator) -> tuple[int, ...]
     if array.ndim != 1 or not len(array):
         raise ValueError("fitted estimator class order must be a non-empty vector")
     try:
-        classes = tuple(int(value) for value in array.tolist())
+        classes = fixed_class_order(array.tolist())
     except (TypeError, ValueError) as error:
         raise ValueError("fitted estimator class order must contain integer labels") from error
     if len(set(classes)) != len(classes):
@@ -615,7 +649,7 @@ def grouped_oof_predict(
     overlap = set(str(value) for value in groups).intersection(final_groups)
     if overlap:
         raise ValueError(f"final-reference groups present in audit pool: {sorted(overlap)}")
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     if len(classes) < 2 or len(set(classes)) != len(classes):
         raise ValueError("class_order must contain at least two unique values")
     observed_classes = set(int(value) for value in labels)
@@ -695,6 +729,7 @@ def grouped_oof_predict(
         if estimator is None:
             raise TypeError(f"estimator factory returned None for OOF fold {fold.fold_id}")
         estimator.fit(matrix[fold.train_indices], labels[fold.train_indices])
+        fit_status = require_converged_fit(estimator, context=f"OOF fold {fold.fold_id}")
         fold_probabilities = _map_fold_probabilities(
             estimator,
             estimator.predict_proba(matrix[fold.holdout_indices]),
@@ -704,12 +739,19 @@ def grouped_oof_predict(
         probabilities[fold.holdout_indices] = fold_probabilities
         fold_assignment[fold.holdout_indices] = fold.fold_id
         coverage[fold.holdout_indices] += 1
+        iterations = getattr(estimator, "n_iter_", None)
         provenance.append(
             OOFFoldProvenance(
                 fold_id=fold.fold_id,
                 training_groups=fold.training_groups,
                 held_out_groups=fold.held_out_groups,
                 held_out_sample_ids=tuple(identifiers[index] for index in fold.holdout_indices),
+                fit_status=fit_status,
+                fit_optimizer=getattr(estimator, "optimizer_", None),
+                fit_iterations=int(iterations)
+                if isinstance(iterations, (int, np.integer))
+                else None,
+                fit_message=getattr(estimator, "optimization_message_", None),
             )
         )
     predicted = np.asarray(classes, dtype=np.int64)[np.argmax(probabilities, axis=1)]
@@ -758,7 +800,7 @@ def grouped_oof_logistic(
     the untouched outer partition; an empty collection is rejected.
     """
 
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
 
     def estimator_factory(context: OOFFoldEstimatorContext) -> ProbabilisticEstimator:
         del context  # Convex zero-initialised fitting does not consume the recorded fold seed.

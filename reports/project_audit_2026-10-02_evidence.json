@@ -1,0 +1,351 @@
+{
+  "captured_at_utc": "2026-10-02T14:34:11.137220+00:00",
+  "source_commit": "fa3311bf750c32b7f2bc0ac69097018620e77d71",
+  "scope": "software review probes; not scientific study outcomes",
+  "source_annotations_modified": false,
+  "http_checks": [
+    {
+      "url": "https://aancastudy.org/",
+      "http_status": 403,
+      "server": "hcdn",
+      "platform": "hostinger",
+      "body_bytes": 787,
+      "body_sha256": "036bacf3bd34365006eac2a78e4520a953a6250e9550dcf9c9d4b0678c225b4c"
+    },
+    {
+      "url": "https://www.aancastudy.org/",
+      "http_status": 403,
+      "server": "hcdn",
+      "platform": "hostinger",
+      "body_bytes": 787,
+      "body_sha256": "036bacf3bd34365006eac2a78e4520a953a6250e9550dcf9c9d4b0678c225b4c"
+    },
+    {
+      "url": "http://aancastudy.org/",
+      "http_status": 403,
+      "server": "hcdn",
+      "platform": "hostinger",
+      "body_bytes": 787,
+      "body_sha256": "036bacf3bd34365006eac2a78e4520a953a6250e9550dcf9c9d4b0678c225b4c"
+    },
+    {
+      "url": "https://mediumaquamarine-wombat-125861.hostingersite.com/",
+      "http_status": 200,
+      "server": "hcdn",
+      "platform": "hostinger",
+      "body_bytes": 221200,
+      "body_sha256": "a619135539477f4cc60cd07daa80c64067b4496c1f630aa73c851ba14a9217a4"
+    }
+  ],
+  "out_of_range_probabilities": {
+    "row_examples": [
+      [
+        1.1,
+        -0.1
+      ],
+      [
+        -0.1,
+        1.1
+      ]
+    ],
+    "accepted": true,
+    "accuracy": 1.0,
+    "ece": 0.0
+  },
+  "negative_adoption_threshold": {
+    "apply_candidate": true,
+    "action": "apply_candidate",
+    "candidate_minus_uncorrected_macro_f1": -0.2666666666666666,
+    "interval_95": [
+      -0.2666666666666666,
+      -0.2666666666666666
+    ],
+    "minimum_effect": -1.0,
+    "group_count": 3,
+    "requested_iterations": 100,
+    "valid_iterations": 100,
+    "evidence_role": "independent_group_validation",
+    "reason": "lower 95% whole-group bootstrap bound exceeds the minimum effect"
+  },
+  "nonconverged_oof": {
+    "converged_flags": [
+      false,
+      false,
+      false
+    ],
+    "accepted": true,
+    "coverage_exactly_once": true
+  },
+  "negative_utility_queue": {
+    "available": true,
+    "selected_ids": [
+      "s1"
+    ],
+    "expected_gain": -0.1,
+    "lower_bound": -0.2,
+    "threshold": -0.3
+  },
+  "fractional_labels": {
+    "input": [
+      0.2,
+      1.9
+    ],
+    "accepted_output": [
+      0,
+      1
+    ]
+  },
+  "invalid_fold_neighbour_provenance": {
+    "accepted": true,
+    "fold_ids": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "neighbour_ids": [
+      [
+        "s1"
+      ],
+      [
+        "s0"
+      ],
+      [
+        "s3"
+      ],
+      [
+        "s2"
+      ]
+    ]
+  },
+  "h4_interval_readback": {
+    "saved_pairing": "same_final_reference_set_across_frozen_random_review_repetitions",
+    "sample_count": 100,
+    "unique_guided_values": 1,
+    "mean_difference": -0.0021560596665870235,
+    "quantiles_025_975": [
+      -0.0028586383107464695,
+      -0.0013925186647962915
+    ],
+    "saved_interval_95": [
+      -0.0028586383107464695,
+      -0.0013925186647962915
+    ],
+    "resamples_test_groups": false
+  },
+  "python_inventory": {
+    "src/": {
+      "file_count": 111,
+      "physical_lines": 121908
+    },
+    "tests/": {
+      "file_count": 99,
+      "physical_lines": 43857
+    },
+    "scripts/": {
+      "file_count": 20,
+      "physical_lines": 6223
+    }
+  },
+  "deployed_alternate_site_comparison": {
+    "captured_at_utc": "2026-10-02T14:39:00.139927+00:00",
+    "base_url": "https://mediumaquamarine-wombat-125861.hostingersite.com/",
+    "remote_manifest_root_sha256": "6df01908b0a1bb45ab4fadf314f95fed32340454bec8cb035d22ecf2ec80772b",
+    "local_manifest_root_sha256": "395cb4e4f2b057febbaea60f934b896380570a497d7b6435ca7accc22f23d514",
+    "files": [
+      {
+        "path": "README.md",
+        "http_status": 200,
+        "size_bytes": 4143,
+        "sha256": "6e0a552ef1880e0c7e8a7ae9cd7107c47962cf183f15ffe32c614b8e2108b93a",
+        "matches_remote_manifest": true,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/findings-evidence-story.js",
+        "http_status": 200,
+        "size_bytes": 3647,
+        "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8",
+        "matches_remote_manifest": true,
+        "matches_local_manifest": true
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-bilobed.png",
+        "http_status": 200,
+        "size_bytes": 1171699,
+        "sha256": "65b94806a1752f88924e484c7ed063e30191c86ed16dca6e712070a25ad858ad",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-compact.png",
+        "http_status": 200,
+        "size_bytes": 1538687,
+        "sha256": "90c2da22d4192c2cddebfbcc41e644f7dd0b65b2e87c50ad728e999c7c47bb37",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-elongated.png",
+        "http_status": 200,
+        "size_bytes": 1607465,
+        "sha256": "6a9eaf0b617ebac99f3c879bd93d78c00d555c1902dc6710bb2dfd7d08c6d14b",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-flattened.png",
+        "http_status": 200,
+        "size_bytes": 1699040,
+        "sha256": "dbd8d40360422de7293a8783dbca977683bb0a2285c269831335799962e13daf",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-irregular.png",
+        "http_status": 200,
+        "size_bytes": 1241181,
+        "sha256": "406f677a4ce11faab387f23e8bcc1143a1917c9fd9961b344a147c2dc4b3f6bb",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/hero/nuclei/nucleus-kidney.png",
+        "http_status": 200,
+        "size_bytes": 1398659,
+        "sha256": "965bf2154915365c3c3468beef2bd043f14f6fb7a61f39eba1c144eddc379a9a",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "assets/method-audit-workflow.png",
+        "http_status": 200,
+        "size_bytes": 534282,
+        "sha256": "630888298936a847108ed8a065dd15ba0c1d26de8dbff03e4c84592ddf34423c",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "evidence.json",
+        "http_status": 200,
+        "size_bytes": 38597,
+        "sha256": "8f92884d775c5fb6059a604de47365ced217568401c6d130ea227bcf89672e67",
+        "matches_remote_manifest": true,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "index.html",
+        "http_status": 200,
+        "size_bytes": 221200,
+        "sha256": "a619135539477f4cc60cd07daa80c64067b4496c1f630aa73c851ba14a9217a4",
+        "matches_remote_manifest": true,
+        "matches_local_manifest": false
+      },
+      {
+        "path": "pannuke_mask_qc_overlays.png",
+        "http_status": 200,
+        "size_bytes": 3189112,
+        "sha256": "f9364123828c72ac394f58ba6ec55ede9abea2616c480c1038628226df8103f5",
+        "matches_remote_manifest": false,
+        "matches_local_manifest": false
+      }
+    ],
+    "evidence_schema_version": {
+      "remote": 3,
+      "local": 5
+    },
+    "evidence_keys_changed": [
+      "independent_pathologist_validation",
+      "public_independent_pathologist_replication",
+      "schema_version",
+      "source_files"
+    ],
+    "missing_evidence_sections": [
+      "independent_pathologist_validation",
+      "public_independent_pathologist_replication"
+    ],
+    "example_asset_response": {
+      "remote_manifest_entry": {
+        "path": "assets/hero/nuclei/nucleus-compact.png",
+        "sha256": "fa5f3f61bba6d509fbb923efff7c160a04204a7d4b00d8ac712f8d505d9eec45",
+        "size_bytes": 1570355
+      },
+      "content_type": "image/png",
+      "content_encoding": null,
+      "server": "hcdn",
+      "first_bytes_hex": "89504e470d0a1a0a0000000d49484452000004e6000004e6080600000085fcae",
+      "served_size": 1538687
+    },
+    "remote_h4_bootstrap_claim_present": true,
+    "local_h4_bootstrap_claim_present": true,
+    "nucleus_sprite_payload_comparison": {
+      "remote_bytes": 8656731,
+      "local_bytes": 1299558,
+      "reduction_fraction": 0.8498788977039947
+    },
+    "manifest_mismatch_count": 8,
+    "article_dates": {
+      "remote": "22 August 2026",
+      "local": "26 August 2026"
+    }
+  },
+  "validation": {
+    "pytest": {
+      "passed": 1182,
+      "skipped": 1,
+      "duration_seconds": 1237.58,
+      "skip_reason": "POSIX open-file rename behavior is not supported on Windows"
+    },
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS; 224 files",
+    "mypy_src": "PASS; 105 source files",
+    "synthetic_smoke": "PASS",
+    "doctor": "PASS; CUDA available",
+    "selected_candidate_reexecution": "INTERRUPTED; not a passed verification; canonical result unchanged"
+  },
+  "browser_checks": {
+    "local_viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "horizontal_overflow_observed": false,
+    "broken_images_observed": false,
+    "console_errors_observed": false,
+    "reduced_motion_readability": "PASS",
+    "javascript_disabled_article_readability": "PASS",
+    "h6_filter_unavailable_rows": 3,
+    "unmatched_search_result_rows": 0,
+    "alternate_deployed_desktop": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "horizontal_overflow": false,
+      "broken_images": 0,
+      "riva_text_present": false,
+      "midog_text_present": false
+    },
+    "screenshots": [
+      "output/playwright/aanca-review-desktop.png",
+      "output/playwright/aanca-review-mobile.png",
+      "output/playwright/aanca-review-deployed-desktop.png"
+    ]
+  },
+  "release_verifier_date_dependency": {
+    "source": "scripts/verify_professor_release.py:194",
+    "required_literal": "Updated: 1 September 2026",
+    "trigger": "Updating the STATUS.md release-status date to 2 October 2026",
+    "observed_result": "verification failed: missing required evidence text",
+    "resolution": "Preserved original release-status header and dated the review as an explicit separate addendum; no verifier code change",
+    "final_professor_release_verification": "PASS",
+    "final_presentation_verification": "PASS",
+    "upstream_authority_count": 19,
+    "presentation_file_count": 13
+  }
+}

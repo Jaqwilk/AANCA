@@ -29,6 +29,7 @@ from histo_audit.utils.run_tracking import (
     atomic_write_text,
     sha256_file,
 )
+from histo_audit.validation import fixed_class_order, integer_vector
 
 ManifestInput = str | Path | pd.DataFrame
 REVIEW_RECOMMENDATION = "recommended for expert review as a potentially inconsistent annotation"
@@ -139,8 +140,8 @@ def _validate_manifest(frame: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("pre_corruption_label and observed_label must be numeric")
     if not bool((pre == observed).all()):
         raise ValueError("original-label audit requires observed_label == pre_corruption_label")
-    result["pre_corruption_label"] = pre.astype(np.int64)
-    result["observed_label"] = observed.astype(np.int64)
+    result["pre_corruption_label"] = integer_vector(pre.to_numpy(), name="pre_corruption_label")
+    result["observed_label"] = integer_vector(observed.to_numpy(), name="observed_label")
     return result
 
 
@@ -210,6 +211,10 @@ def _oof_provenance(result: OOFResult) -> dict[str, Any]:
                 "training_groups": list(fold.training_groups),
                 "held_out_groups": list(fold.held_out_groups),
                 "held_out_sample_ids": list(fold.held_out_sample_ids),
+                "fit_status": fold.fit_status,
+                "fit_optimizer": fold.fit_optimizer,
+                "fit_iterations": fold.fit_iterations,
+                "fit_message": fold.fit_message,
             }
             for fold in result.folds
         ],
@@ -318,7 +323,7 @@ def audit_original_labels(
         frame["sample_id"].tolist(),
         allow_extra_features=selected_sample_ids is not None,
     )
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     observed = frame["observed_label"].to_numpy(dtype=np.int64)
     if any(int(value) not in classes for value in observed):
         raise ValueError("observed label is outside the declared fixed class_order")

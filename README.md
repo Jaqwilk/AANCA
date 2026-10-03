@@ -123,7 +123,7 @@ The binding action for unreviewed natural data is `retain_uncorrected`.
    WSI or case identifiers where the source provides them.
 3. Produce model-based audit scores out of fold so a nucleus and its complete source
    group are absent from the model that scores it.
-4. Combine calibrated label confidence and fold-safe neighbourhood evidence into a
+4. Combine OOF support for the observed label and fold-safe neighbourhood evidence into a
    fixed expert-review queue.
 5. Compare the queue with exact equal-budget matched-random review.
 6. Evaluate retrieval and downstream utility separately; a favourable ranking never
@@ -131,6 +131,19 @@ The binding action for unreviewed natural data is `retain_uncorrected`.
 
 The primary scientific invariants are frozen in [`SPEC.md`](SPEC.md) and enforced in
 code and tests.
+
+The maintained rankings use uncalibrated OOF probabilities. Cross-fitted temperature
+calibration is an optional development capability requiring independent expert-review
+evidence; it was not applied to the released rankings. A risk percentile is a ranking
+factor, not a calibrated probability of annotation error.
+
+The original-label CLI defaults to the reference self-confidence workflow, balanced
+logistic fitting with `l2=0.01` and `k=7` neighbours. The selected later research
+candidate is separately frozen in
+[`configs/aanca_selected_development_candidate.yaml`](configs/aanca_selected_development_candidate.yaml):
+multiscale 64/128 ResNet-18 features, a 60/40 confidence/neighbourhood hybrid,
+`k=31`, unbalanced fitting and `l2=0.1`. Running the original-label CLI does not
+implicitly load that selected candidate.
 
 ## Install and run the portable workflow
 
@@ -167,10 +180,13 @@ The repository deliberately separates three different tasks.
 
 ~~~powershell
 python scripts/present_demo.py --verify-only
+python scripts/verify_deployed_presentation.py --url https://aancastudy.org/
 ~~~
 
 This verifies the closed article package and its machine-readable current-evidence
-summary. It does not recalculate a scientific result.
+summary. The second command additionally checks all thirteen served files and
+requires the deployed manifest to match the local release. Both are read-only.
+Neither command recalculates a scientific result.
 
 ### Recalculate released evidence
 
@@ -178,9 +194,6 @@ summary. It does not recalculate a scientific result.
 uv run python scripts/verify_primary_evidence.py PATH/TO/aanca-primary-evidence-v1
 uv run python scripts/verify_nucls_external_validation.py
 uv run python scripts/verify_monusac_external_validation.py
-uv run python scripts/verify_aanca_selected_candidate.py
-uv run python scripts/verify_puma_new_data_confirmation.py
-uv run python scripts/verify_nucls_supervised_qc_feasibility.py
 uv run python scripts/verify_nucls_independent_pathologist_validation.py
 uv run python scripts/run_public_pathologist_replication.py verify --dataset riva
 uv run python scripts/run_public_pathologist_replication.py verify --dataset midogpp
@@ -192,6 +205,19 @@ their saved numeric evidence. The PUMA script is deliberately described more nar
 as an evidence readback: it imports maintained AANCA helpers, consumes saved
 predictions and convergence flags, and does not independently retrain the 44 models.
 
+The requirements and write behaviour of every verifier are listed in
+[`REPRODUCIBILITY.md`](REPRODUCIBILITY.md#verification-command-requirements).
+The raw-dependent checks are separate from the released-array commands above:
+
+~~~powershell
+uv run python scripts/verify_puma_new_data_confirmation.py --output artifacts/qa/puma-verification.json
+uv run python scripts/verify_nucls_supervised_qc_feasibility.py --output artifacts/qa/nucls-qc-verification.json --report artifacts/qa/nucls-qc-verification.md
+~~~
+
+These require the lawfully obtained PUMA source archives and NuCLS single-rater
+SQLite database respectively. The PUMA check rebuilds the official source manifest
+before reading saved predictions; the NuCLS check reassesses reference feasibility.
+
 ### Re-execute from images
 
 Full image-to-result re-execution additionally requires the official dataset files,
@@ -199,6 +225,17 @@ their licences, sufficient compute and the governed acquisition checks in
 [`DATASET_SETUP.md`](DATASET_SETUP.md). Raw images are not redistributed by this
 repository. Some historical fold checkpoints were not retained, so reproduction is
 a governed re-execution, not reuse of every original byte.
+
+The selected-candidate convergence command performs the full nested development
+evaluation, including model fitting. It additionally requires the ignored local
+MoNuSAC selection authority and ledger; those inputs are not supplied by Git LFS:
+
+~~~powershell
+uv run python scripts/verify_aanca_selected_candidate.py --output artifacts/qa/selected-candidate-reexecution.json
+~~~
+
+It verifies an already frozen candidate and must not be used to tune on an opened
+final-reference dataset. This command is not a released-array-only check.
 
 ## Public repository boundary
 
@@ -287,6 +324,9 @@ claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Primary evidence release and independent recalculation |
 | [`PROFESSOR_BRIEF.md`](PROFESSOR_BRIEF.md) | One-page problem, method, strongest result, negative evidence and next experiment |
 | [`FINAL_READINESS_REPORT.md`](FINAL_READINESS_REPORT.md) | Final professor-facing evidence and release audit |
+| [`reports/v1_remediation_2026-10-02.md`](reports/v1_remediation_2026-10-02.md) | Completed V1 fixes, repeat audit and live-publication verification |
+| [`reports/project_audit_2026-10-02.md`](reports/project_audit_2026-10-02.md) | Historical findings before the V1 fixes |
+| [`AANCA_BRAND_SYSTEM.md`](AANCA_BRAND_SYSTEM.md) | Existing visual identity and scientific-language rules |
 | [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Author contribution and AI-assistance disclosure |
 | [`reports/aanca_internal_technical_assessment_2026-08-21.md`](reports/aanca_internal_technical_assessment_2026-08-21.md) | Internal evidence assessment; explicitly not external peer review |
 | [`reports/nucls_external_validation_results.md`](reports/nucls_external_validation_results.md) | Genuine multi-rater result and boundary |
@@ -344,4 +384,4 @@ release, for example through Zenodo.
 Research direction, review and final scientific responsibility: **Natan Smogór**.
 AI-assisted tools supported implementation, testing, orchestration, documentation
 and presentation; they supplied no expert labels and are not independent validators.
-See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 1 September 2026.
+See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 2 October 2026.

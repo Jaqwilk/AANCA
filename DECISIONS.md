@@ -879,3 +879,129 @@ official site, terminology, immutable-source boundary, current evidence values,
 must no longer require byte equality with a one-line README. This change restores
 repository usability without changing a model, annotation, metric, claim boundary,
 scientific authority or completion stage.
+
+## D051 — Consolidate the AANCA brand and design system
+
+Status: accepted design and documentation decision; no scientific stage change
+
+Use [`AANCA_BRAND_SYSTEM.md`](AANCA_BRAND_SYSTEM.md) as the design authority for
+future AANCA websites, presentations, reports, posters, figures and interfaces. It
+consolidates the existing dark editorial palette, Inter and JetBrains Mono typography,
+editorial/figure/wide rails, restrained component language, evidence-visualisation
+rules, Second-Look Review Field metaphor, accessibility behaviour and mandatory
+scientific claim boundaries.
+
+The canonical mark contains exactly four rounded square tiles in a 2 x 2 grid with an
+8:3 tile-to-gap ratio, rotated as one group by 45 degrees. New assets must not add a
+centre or fifth tile. Violet `#5e6ad2` is the primary non-text brand accent and
+`#828fff` is the accessible normal-text and focus accent on dark surfaces.
+
+The design system does not redefine methods, evidence or status. `SPEC.md`, frozen
+protocols and accepted evidence remain authoritative whenever a visual or verbal
+choice could affect a scientific claim. This decision changes no source annotation,
+dataset, model, split, score, metric, evidence artifact, completion stage or
+natural-data action.
+
+## D052 — Record review findings without rewriting frozen evidence
+
+Status: accepted audit and remediation-priority decision; no scientific stage change
+
+Use the 2 October 2026
+[`project audit`](reports/project_audit_2026-10-02.md) and its
+[`observations`](reports/project_audit_2026-10-02_evidence.json) as an actionable
+review record, not as replacement scientific evidence. Keep reproduced interface
+failures distinct from failures actually demonstrated in released study artifacts.
+
+Prioritise an accurate description of the primary H4 interval: its existing values
+are quantiles over fixed-test random-review repetitions, not whole-group bootstrap
+confidence bounds. Preserve those frozen values and their adverse point result.
+Any new statistical analysis must have a separate, explicit post-outcome disposition.
+
+Repair demonstrated validation gaps in probability ranges, class-label integer
+semantics, adoption thresholds, optimiser-status reporting and neighbour provenance
+with focused regression tests. Clarify which verification commands read released
+arrays, require raw data, retrain models or write outputs. These changes are justified
+correctness and evidence-readback work under D047; they do not justify a broad V1
+rewrite merely to reduce line count.
+
+Treat the local presentation and the deployed site as separate verification targets.
+The observed official-domain 403, older technical-domain evidence and served-image
+hash mismatches require deployment diagnosis and verification of the final served
+package. No deployment or production-code remediation was performed by this audit.
+
+Keep the existing release-status date required by the current verifier, and date the
+audit as a separate addendum. Record the hard-coded date dependency as a maintenance
+finding rather than silently weakening a release check during the review.
+
+Preserve V1's frozen authorities and the separate V2 boundary. This review changes
+no source annotation, model selection, scientific result, completion stage or
+`retain_uncorrected` policy.
+
+## D053 — Configure the official domain deployment without bypassing authentication
+
+On 2026-10-02 the owner requested deployment of the existing website to
+`aancastudy.org`. A local manifest now proposes that domain's `public_html` root,
+using merge mode to preserve unrelated hosting files. The existing configured
+credential failed SSH/SFTP authentication, so remote-path validation and deployment
+remain pending. Do not redirect the upload to the historical temporary-domain root
+without verifying its relationship to the requested domain. No scientific artifact,
+claim or completion stage changed.
+
+### D053 deployment outcome — 2026-10-02
+
+Authentication was restored with the owner's supplied credential. The requested
+apex-domain root was independently verified and the unchanged 13-file package was
+deployed there after all mandatory gates passed. Backup `20261002-170743` supports
+rollback. Origin files match local SHA-256 values; public CDN image transformations
+are documented in STATUS.md. No scientific-stage transition is implied.
+
+## D054 — Repair demonstrated V1 contracts and presentation readback
+
+Status: accepted engineering and publication correction; no scientific stage change
+
+Apply the bounded fixes recorded in
+[`reports/v1_remediation_2026-10-02.md`](reports/v1_remediation_2026-10-02.md).
+Shared numerical validation must reject invalid distributions, fractional/overflowing
+class identifiers and negative global adoption thresholds without silently changing
+the supplied data. Maintained OOF/downstream paths must reject a reported failed
+fit and retain real diagnostics; absent convergence information stays `unknown`.
+Neighbour provenance must exclude the entire holdout group set before any index fit.
+
+Describe H4's existing interval as quantiles across random-review repetitions on
+the same fixed final reference set. Preserve all frozen values, file identities and
+adverse findings. Presentation schemas may advance to encode that explanation;
+they do not amend the statistical analysis or introduce a new confidence interval.
+Reject resealed metadata that changes this interpretation.
+
+Living status dates may advance after material work, independently of immutable
+scientific release dates. This supersedes D052's temporary requirement to retain the
+old status header. Keep date validity, source integrity and claim-scope checks.
+Document the actual inputs, model execution and output writes of each verifier.
+
+The canonical website is `https://aancastudy.org/`. Check both origin and public
+HTTP delivery. Keep server configuration separate from the thirteen-file package;
+request untransformed delivery and require served bytes to match the local release.
+Preserve recoverable hosting backups. An origin-only match cannot close a public
+integrity failure, and transformed asset hashes must not replace source identities.
+
+These are correctness fixes under D047. Broad V1 redesign, outcome-based tuning and
+new confirmatory claims are outside this remediation. The scientific stage stays
+`EXTERNAL_VALIDATION_COMPLETE`, presentation stays `DEMO_COMPLETE`, and natural-data
+action stays `retain_uncorrected`.
+
+## D055 — Publish the audited V1 changes to the existing GitHub repository
+
+Status: accepted repository synchronisation; no scientific stage change
+
+On 3 October 2026 the owner explicitly authorised resolving the gap between the
+updated workspace and `https://github.com/Jaqwilk/AANCA`. Publish the reviewed V1
+code, regression tests, release verifiers, current documentation, audit reports,
+existing brand specification and corrected thirteen-file presentation on `main`.
+Keep deployment configuration limited to the public, credential-free `.htaccess`.
+
+Use a scoped commit and an ordinary fast-forward push. Preserve existing release
+tags, frozen evidence identities, source annotations and scientific claim limits.
+Check the remote commit, committed presentation bytes and the `Scientific software`
+workflow for the published revision. A previous revision's successful CI run does
+not establish that the new revision passed. This publication implements D054; it
+does not create a new study or alter the V1/V2 boundary established by D047.

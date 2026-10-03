@@ -8,6 +8,8 @@ from dataclasses import asdict, dataclass
 import numpy as np
 from numpy.typing import NDArray
 
+from histo_audit.validation import fixed_class_order, integer_vector
+
 from .restoration import (
     classification_metrics,
     macro_f1_from_confusion,
@@ -118,11 +120,11 @@ def evaluate_retraining_guard(
     clinical utility and never changes source annotations.
     """
 
-    reference = np.asarray(reference_labels, dtype=np.int64)
+    reference = integer_vector(reference_labels, name="reference_labels")
     baseline = np.asarray(uncorrected_probabilities, dtype=np.float64)
     candidate = np.asarray(candidate_probabilities, dtype=np.float64)
     groups = np.asarray(tuple(str(value) for value in group_ids), dtype=np.str_)
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     if len(classes) < 2 or len(set(classes)) != len(classes):
         raise ValueError("class_order must contain at least two unique values")
     expected_shape = (len(reference), len(classes))
@@ -132,8 +134,8 @@ def evaluate_retraining_guard(
         raise ValueError("group IDs must be non-empty and align with labels")
     if n_iterations <= 0:
         raise ValueError("n_iterations must be positive")
-    if not np.isfinite(minimum_effect):
-        raise ValueError("minimum_effect must be finite")
+    if not np.isfinite(minimum_effect) or minimum_effect < 0.0:
+        raise ValueError("minimum_effect must be finite and non-negative")
     baseline_metrics = classification_metrics(reference, baseline, class_order=classes)
     candidate_metrics = classification_metrics(reference, candidate, class_order=classes)
     estimate = float(candidate_metrics.macro_f1 - baseline_metrics.macro_f1)
@@ -211,9 +213,13 @@ def evaluate_multicriteria_retraining_guard(
     fails closed.  The final external test must not be used to choose these limits.
     """
 
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     selected_classes = (
-        classes if important_classes is None else tuple(int(value) for value in important_classes)
+        classes
+        if important_classes is None
+        else tuple(
+            int(value) for value in integer_vector(important_classes, name="important_classes")
+        )
     )
     if not selected_classes or len(set(selected_classes)) != len(selected_classes):
         raise ValueError("important_classes must contain unique class labels")

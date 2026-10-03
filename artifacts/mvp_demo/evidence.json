@@ -917,12 +917,17 @@
         -0.0028586383107464695,
         -0.0013925186647962915
       ],
+      "interval_level": 0.95,
+      "interval_method": "central_quantiles_of_random_review_repetitions",
       "metric": "macro_f1",
+      "pairing": "same_final_reference_set_across_frozen_random_review_repetitions",
       "point_difference": -0.0021560596665870513,
       "probability_positive": 0.0,
       "random_repetitions": 100,
       "random_review_macro_f1_mean": 0.5265870806000477,
+      "reference_set_resampled": false,
       "registered_hypothesis_supported": false,
+      "resampling_unit": "random_review_repetition",
       "source_path": "restorations/primary_0027_8531672acd3c/restoration.json",
       "source_sha256": "1dd6f9e105066d0ce0314839783d15d3d0a4f96ece7430216bc3c6733961a27e",
       "status": "reported",
@@ -1004,6 +1009,7 @@
     },
     "inference": {
       "interval_label": "95_percentile_bootstrap_interval",
+      "interval_scope": "ranking_comparisons_only",
       "multiple_comparison_method": "holm",
       "p_value_definition": "(1 + count(bootstrap_difference <= 0)) / (1 + valid_iterations)",
       "p_value_sidedness": "one_sided"
@@ -1175,7 +1181,7 @@
     },
     "study_id": "puma_realism_stress_v1"
   },
-  "schema_version": 5,
+  "schema_version": 6,
   "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
   "source_files": {
     "findings_story_script_asset": {

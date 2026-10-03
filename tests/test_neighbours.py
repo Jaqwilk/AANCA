@@ -169,12 +169,15 @@ def test_boundary_ties_use_sample_id_and_exclude_entire_query_group(
     metric: str, expected_distance: float
 ) -> None:
     group_ids = np.repeat(np.asarray([f"group_{index}" for index in range(6)]), 2)
-    fold_ids = np.asarray([index % 2 for index in range(len(group_ids))], dtype=np.int64)
+    fold_ids = np.repeat(np.arange(6, dtype=np.int64) % 2, 2)
     embeddings = np.zeros((len(group_ids), 4), dtype=np.float64)
     labels = np.asarray([index % 3 for index in range(len(group_ids))], dtype=np.int64)
     sample_ids = tuple(f"sample_{value:02d}" for value in range(len(group_ids), 0, -1))
     all_groups = tuple(sorted(set(str(value) for value in group_ids)))
-    training_groups = {0: all_groups, 1: all_groups}
+    training_groups = {
+        fold: tuple(group for index, group in enumerate(all_groups) if index % 2 != fold)
+        for fold in (0, 1)
+    }
     arguments = {
         "sample_ids": sample_ids,
         "class_order": (0, 1, 2),
@@ -312,7 +315,7 @@ def test_search_fits_one_index_per_fold_and_batches_queries(
 
 
 def test_no_eligible_reference_fails_closed() -> None:
-    with pytest.raises(ValueError, match="no fold-safe neighbours remain"):
+    with pytest.raises(ValueError, match="overlaps held-out groups"):
         fold_safe_neighbour_disagreement(
             np.zeros((2, 2), dtype=np.float64),
             np.asarray([0, 1], dtype=np.int64),

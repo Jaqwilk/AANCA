@@ -10,6 +10,8 @@ import numpy as np
 from numpy.typing import NDArray
 from sklearn.neighbors import NearestNeighbors  # type: ignore[import-untyped]
 
+from histo_audit.validation import fixed_class_order, integer_vector
+
 
 @dataclass(frozen=True, slots=True)
 class NeighbourDisagreementResult:
@@ -193,9 +195,9 @@ def fold_safe_neighbour_disagreement(
     """Score each held-out sample using only its fold's labelled training groups."""
 
     matrix = np.asarray(embeddings, dtype=np.float64)
-    labels = np.asarray(observed_labels, dtype=np.int64)
+    labels = integer_vector(observed_labels, name="observed_labels")
     groups = np.asarray(group_ids, dtype=np.str_)
-    folds = np.asarray(fold_ids, dtype=np.int64)
+    folds = integer_vector(fold_ids, name="fold_ids")
     if matrix.ndim != 2 or labels.shape != (len(matrix),) or groups.shape != labels.shape:
         raise ValueError("embeddings, labels, and groups must be aligned")
     if folds.shape != labels.shape or not np.isfinite(matrix).all():
@@ -211,12 +213,32 @@ def fold_safe_neighbour_disagreement(
     )
     if len(identifiers) != len(labels) or len(set(identifiers)) != len(labels):
         raise ValueError("sample IDs must be aligned and unique")
-    classes = tuple(int(value) for value in class_order)
+    classes = fixed_class_order(class_order)
     if len(classes) < 2 or len(set(classes)) != len(classes):
         raise ValueError("class_order must contain at least two unique values")
     lookup = {value: index for index, value in enumerate(classes)}
     if any(int(label) not in lookup for label in labels):
         raise ValueError("observed label absent from class_order")
+
+    if not len(labels) or np.any(folds < 0) or any(not group.strip() for group in groups):
+        raise ValueError("samples require non-empty groups and non-negative fold IDs")
+    group_folds: dict[str, int] = {}
+    for group, fold in zip(groups, folds, strict=True):
+        previous = group_folds.setdefault(str(group), int(fold))
+        if previous != int(fold):
+            raise ValueError("each source group must belong to exactly one held-out fold")
+    known_groups = set(group_folds)
+    for fold in np.unique(folds):
+        if int(fold) not in training_groups_by_fold:
+            raise ValueError(f"missing training-group provenance for fold {int(fold)}")
+        allowed = {str(value) for value in training_groups_by_fold[int(fold)]}
+        if not allowed or not allowed.issubset(known_groups):
+            raise ValueError(f"fold {int(fold)} has no valid reference samples or unknown groups")
+        held_out = {group for group, group_fold in group_folds.items() if group_fold == fold}
+        if allowed.intersection(held_out):
+            raise ValueError(
+                f"training-group provenance overlaps held-out groups in fold {int(fold)}"
+            )
 
     risks = np.empty(len(labels), dtype=np.float64)
     alternatives = np.empty(len(labels), dtype=np.float64)

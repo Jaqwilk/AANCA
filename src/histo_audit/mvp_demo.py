@@ -1303,6 +1303,9 @@ def _extract_h4_restoration(
     if len(matches) != 1:
         raise ValueError("accepted primary must contain exactly one registered H4 comparison")
     comparison = matches[0]
+    pairing = "same_final_reference_set_across_frozen_random_review_repetitions"
+    if comparison.get("pairing") != pairing:
+        raise ValueError("H4 interval requires fixed-reference random-review pairing provenance")
     difference = _require_real(comparison.get("point_difference"), role="H4 difference")
     interval = _require_interval(comparison.get("interval_95"), role="H4 interval")
     point_a = _require_real(comparison.get("point_metric_a"), role="H4 audit-guided macro F1")
@@ -1337,6 +1340,11 @@ def _extract_h4_restoration(
         "uncorrupted_reference_baseline_macro_f1": macro_f1("uncorrupted_reference_baseline"),
         "point_difference": difference,
         "interval_95": interval,
+        "interval_method": "central_quantiles_of_random_review_repetitions",
+        "interval_level": 0.95,
+        "resampling_unit": "random_review_repetition",
+        "reference_set_resampled": False,
+        "pairing": pairing,
         "probability_positive": probability,
         "random_repetitions": _require_exact_int(
             comparison.get("random_repetitions"), role="H4 random repetitions"
@@ -1624,6 +1632,7 @@ def _validate_primary_sources(run_path: Path) -> dict[str, Any]:
             "p_value_sidedness": "one_sided",
             "p_value_definition": correction["one_sided_p_value_definition"],
             "interval_label": "95_percentile_bootstrap_interval",
+            "interval_scope": "ranking_comparisons_only",
         },
         "comparisons": summary_comparisons,
         "hypothesis_comparisons": hypothesis_comparisons,
@@ -1979,7 +1988,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
     <div class="hero-copy">
       <h1 id="hero-title" class="hero-animate">Which annotations deserve a second look?</h1>
       <p class="hero-lead hero-animate">A group-safe framework that ranks <em>potentially inconsistent annotations</em> for expert review without changing source labels.</p>
-      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-08-26">26 August 2026</time></span></div>
+      <div class="hero-byline hero-animate"><span>Research prototype by <a class="author-jump" href="#author"><strong>Natan Smogór</strong></a></span><span>Updated <time datetime="2026-10-02">2 October 2026</time></span></div>
     </div>
   </div>
 </section>
@@ -2019,7 +2028,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
     <div class="chapter-copy reveal">
       <p>Average precision describes the complete ordering of the review queue. Recall at the primary 5% budget describes the operational slice an expert would actually inspect. The random-review baseline tells us whether that prioritisation is better than spending the same review effort without a model.</p>
       <p>Restoration utility is deliberately separate. It asks what happens after simulated review when found injected changes are restored and the downstream classifier is retrained. A ranking can retrieve controlled inconsistencies efficiently while still failing to improve the later classifier.</p>
-      <p>Intervals and adjusted tests also answer different questions. The displayed 95% intervals come from paired whole-group bootstrap resampling; registered Holm-adjusted values are one-sided. At 0% corruption, average precision is not applicable because the controlled positive event does not exist.</p>
+      <p>Intervals and adjusted tests also answer different questions. Ranking-comparison confidence intervals use paired whole-group bootstrap resampling; registered Holm-adjusted values are one-sided. The H4 range instead contains the central 95% of differences across 100 random-review repetitions evaluated on the same fixed final reference set. It does not resample the reference groups. At 0% corruption, average precision is not applicable because the controlled positive event does not exist.</p>
     </div>
   </section>
 
@@ -2027,7 +2036,7 @@ def _render_html(evidence: dict[str, Any]) -> str:
     <div class="section-heading reveal"><h2>On the original PanNuke benchmark, better triage did not improve the downstream model.</h2><p class="section-deck">This is the most important negative PanNuke result. Ranking injected inconsistencies and improving a later classifier are related, but they are not equivalent objectives.</p></div>
     <div class="chapter-copy reveal"><p>The H4 experiment restored exactly the same 5% review budget under audit-guided and random selection, then trained the same downstream model and evaluated it on the untouched final reference fold. Audit-guided restoration was not favoured.</p></div>
     <div class="figure-width reveal result-layout">
-      <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span></div><span class="result-number">__H4_POINT__</span><p>Audit-guided restoration produced macro-F1 <strong>__H4_AUDIT__</strong>, below the random-review mean of <strong>__H4_RANDOM__</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>__H4_POINT_PP__ percentage points lower</strong>. The saved 95% interval remained below zero, so this registered test did not support downstream benefit.</p></div></div>
+    <div class="result-lead"><div class="result-label"><span>Audit-guided minus random review</span></div><span class="result-number">__H4_POINT__</span><p>Audit-guided restoration produced macro-F1 <strong>__H4_AUDIT__</strong>, below the random-review mean of <strong>__H4_RANDOM__</strong>.</p><div class="result-interpretation"><b>Plain-language interpretation</b><p>The audit-guided result was <strong>__H4_POINT_PP__ percentage points lower</strong>. The central 95% range across random-review repetitions remained below zero on the fixed final reference set. This H4 comparison did not support downstream benefit; its range is not a group-bootstrap confidence interval.</p></div></div>
       __H4_CHART__
     </div>
     <div class="chapter-copy result-afterword reveal">
@@ -2202,7 +2211,7 @@ uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs</pre></arti
 <footer id="footer"><div class="footer-inner"><div class="footer-divider"></div>
   <div class="footer-grid">
     <div><div class="footer-brand-row"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="footer-brand">AANCA</span></div><p class="footer-summary">Automated auditing of nucleus class annotations: a university research prototype for prioritising potentially inconsistent annotations for expert review. Non-diagnostic research; source annotations are never changed automatically.</p></div>
-    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 26 August 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++</p><p>External evaluation complete; public RIVA x MIDOG++ disagreement enrichment replicated; pathologist error and clinical utility not established.</p></div>
+    <div class="footer-column"><h3>Study</h3><p>Author: Natan Smogór</p><p>Updated: 2 October 2026</p><p>Evidence: PanNuke, NuCLS, MoNuSAC, PUMA, RIVA and MIDOG++</p><p>External evaluation complete; public RIVA x MIDOG++ disagreement enrichment replicated; pathologist error and clinical utility not established.</p></div>
     <div class="footer-column"><h3>Inspect</h3><a href="https://github.com/Jaqwilk/AANCA/blob/main/PROFESSOR_BRIEF.md" target="_blank" rel="noopener">One-page project brief ↗</a><a href="evidence.json">Machine-readable evidence</a><a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1" target="_blank" rel="noopener">Primary evidence release ↗</a><a href="README.md">Presentation package notes</a><a href="#evidence">Reproducibility boundary</a><a href="https://github.com/Jaqwilk/AANCA" target="_blank" rel="noopener">GitHub repository ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener">Contributions and AI use ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/ETHICS_AND_LIMITATIONS.md" target="_blank" rel="noopener">Ethics and limitations ↗</a><a href="https://github.com/Jaqwilk/AANCA/blob/main/references/references.bib" target="_blank" rel="noopener">Bibliography ↗</a></div>
     <div class="footer-column footer-terms"><h3>Terms</h3><p>© 2026 Natan Smogór. Project code and original documentation are all rights reserved under the repository <a href="https://github.com/Jaqwilk/AANCA/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p><p>Dataset files, pretrained weights, dependencies and third-party assets retain their own terms.</p><p>No diagnostic or clinical use is established.</p></div>
   </div>
@@ -2506,13 +2515,14 @@ def _render_h4_chart(h4: dict[str, Any]) -> str:
         + f'<div class="difference-track" style="--zero:{zero_position:.4f}%;'
         + f"--low:{low_position:.4f}%;--high:{high_position:.4f}%;"
         + f'--point:{point_position:.4f}%" role="img" aria-label="Difference '
-        + f'{difference:.12g}; 95% CI {interval[0]:.12g} to {interval[1]:.12g}">'
+        + f"{difference:.12g}; central 95% random-review range "
+        + f'{interval[0]:.12g} to {interval[1]:.12g}; fixed final reference set">'
         + '<span class="difference-zero"></span><span class="difference-ci"></span>'
         + '<span class="difference-point"></span></div>'
         + f'<div class="difference-axis"><span>{diff_lower:.4f}</span><span>0</span>'
         + f"<span>{diff_upper:.4f}</span></div>"
-        + f"<p><strong>95% CI [{interval[0]:.6f}, {interval[1]:.6f}]</strong> · "
-        + f"{repetitions} random-review repetitions</p></div></div>"
+        + f"<p><strong>Central 95% range [{interval[0]:.6f}, {interval[1]:.6f}]</strong> · "
+        + f"{repetitions} random-review repetitions on a fixed final reference set</p></div></div>"
     )
 
 
@@ -2896,6 +2906,12 @@ The PUMA verifier is a project-coupled evidence-readback script that recomputes
 metrics from saved predictions but does not retrain all 44 models. It is not
 third-party validation.
 
+The H4 interval is the central 95% range of guided-minus-random differences across
+100 random-review repetitions evaluated on one fixed final reference set. It is
+not a confidence interval from resampling final-reference groups. The original
+numbers and adverse result are preserved; the presentation wording was corrected
+on 2 October 2026.
+
 ## Package contents
 
 - `index.html` — responsive English article, including the retained “What the study
@@ -2926,7 +2942,7 @@ confidence intervals, every-class safety and workflow utility to pass together.
 Source code, frozen protocols, configs, scoped verification scripts, evidence and the
 complete limitation statement are at <https://github.com/Jaqwilk/AANCA>.
 
-Author: Natan Smogór. Updated: 26 August 2026.
+Author: Natan Smogór. Updated: 2 October 2026.
 """
 
 
@@ -2940,8 +2956,8 @@ def _build_output_manifest(directory: Path) -> dict[str, Any]:
         for relative in sorted(_OUTPUT_FILES)
     ]
     return {
-        "schema_version": 6,
-        "policy": "aanca_presentation_current_evidence_readback_v6",
+        "schema_version": 7,
+        "policy": "aanca_presentation_current_evidence_readback_v7",
         "files": records,
         "manifest_root_sha256": _canonical_sha256(records),
     }
@@ -2964,8 +2980,8 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         raise ValueError("MVP output allowlist differs")
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 6
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v6"
+        manifest.get("schema_version") != 7
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v7"
     ):
         raise ValueError("MVP manifest schema or policy differs")
     records = manifest.get("files")
@@ -3162,7 +3178,7 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         and publication_limits.get("puma_verifier_is_third_party_validation") is False
     )
     if (
-        evidence.get("schema_version") != 5
+        evidence.get("schema_version") != 6
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
         or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
@@ -3181,6 +3197,13 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"
         or primary.get("h4_restoration", {}).get("registered_hypothesis_supported") is not False
+        or primary.get("h4_restoration", {}).get("interval_method")
+        != "central_quantiles_of_random_review_repetitions"
+        or primary.get("h4_restoration", {}).get("interval_level") != 0.95
+        or primary.get("h4_restoration", {}).get("resampling_unit") != "random_review_repetition"
+        or primary.get("h4_restoration", {}).get("reference_set_resampled") is not False
+        or primary.get("h4_restoration", {}).get("pairing")
+        != "same_final_reference_set_across_frozen_random_review_repetitions"
         or primary.get("h2_subgroups", {}).get("reported_count", 0) <= 0
         or primary.get("instance_dependent_seed_audit", {}).get(
             "independent_corruption_realisations"
@@ -3188,6 +3211,7 @@ def verify_mvp_presentation(output_directory: str | Path) -> dict[str, Any]:
         is not False
         or primary.get("instance_dependent_seed_audit", {}).get("disclosure_required") is not True
         or primary.get("inference", {}).get("p_value_sidedness") != "one_sided"
+        or primary.get("inference", {}).get("interval_scope") != "ranking_comparisons_only"
     ):
         raise ValueError("MVP evidence scope differs")
     return {
@@ -3259,7 +3283,7 @@ def build_mvp_presentation(
         "size_bytes": _FINDINGS_SCRIPT_SOURCE.stat().st_size,
     }
     evidence = {
-        "schema_version": 5,
+        "schema_version": 6,
         "presentation_status": "DEMO_COMPLETE",
         "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
         "primary_study_status": "PRIMARY_STUDY_COMPLETE",

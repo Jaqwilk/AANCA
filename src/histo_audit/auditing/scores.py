@@ -10,6 +10,8 @@ from types import MappingProxyType
 import numpy as np
 from numpy.typing import NDArray
 
+from histo_audit.validation import fixed_class_order, integer_vector, probability_matrix
+
 from .ensemble import (
     EnsembleDisagreementResult as EnsembleDisagreementResult,
 )
@@ -60,16 +62,7 @@ _METHOD_ALIASES = {
 
 
 def _validate_probabilities(probabilities: NDArray[np.generic]) -> NDArray[np.float64]:
-    matrix = np.asarray(probabilities, dtype=np.float64)
-    if matrix.ndim != 2 or matrix.shape[1] < 2 or not matrix.shape[0]:
-        raise ValueError("probabilities must have shape (n_samples, n_classes>=2)")
-    if not np.isfinite(matrix).all():
-        raise ValueError("probabilities contain non-finite values")
-    if np.any(matrix < -1e-12) or np.any(matrix > 1.0 + 1e-12):
-        raise ValueError("probabilities lie outside [0, 1]")
-    if not np.allclose(matrix.sum(axis=1), 1.0, atol=1e-7):
-        raise ValueError("probability rows must sum to one")
-    return matrix
+    return probability_matrix(probabilities)
 
 
 def _observed_columns(
@@ -78,14 +71,10 @@ def _observed_columns(
     n_classes: int,
     class_order: Sequence[int] | None,
 ) -> NDArray[np.int64]:
-    labels = np.asarray(observed_labels, dtype=np.int64)
+    labels = integer_vector(observed_labels, name="observed_labels")
     if labels.shape != (n_samples,):
         raise ValueError("observed labels must align with probabilities")
-    classes = (
-        tuple(int(value) for value in class_order)
-        if class_order is not None
-        else tuple(range(n_classes))
-    )
+    classes = fixed_class_order(class_order) if class_order is not None else tuple(range(n_classes))
     if len(classes) != n_classes or len(set(classes)) != n_classes:
         raise ValueError("class_order must align with unique probability columns")
     lookup = {label: column for column, label in enumerate(classes)}
@@ -109,12 +98,12 @@ def score_annotations(
     canonical = _METHOD_ALIASES.get(method)
     if canonical is None:
         raise ValueError(f"unsupported annotation-risk method: {method!r}")
+    if canonical in {"negative_log_likelihood", "predictive_entropy"} and not 0.0 < epsilon < 1.0:
+        raise ValueError("epsilon must lie in (0, 1)")
     observed_probability = matrix[np.arange(len(matrix)), columns]
     if canonical == "self_confidence":
         risk = 1.0 - observed_probability
     elif canonical == "negative_log_likelihood":
-        if not 0.0 < epsilon < 1.0:
-            raise ValueError("epsilon must lie in (0, 1)")
         risk = -np.log(np.clip(observed_probability, epsilon, 1.0))
     elif canonical == "prediction_margin":
         alternatives = matrix.copy()
@@ -253,7 +242,7 @@ def cleanlab_scores(
     """Use stable Cleanlab APIs when installed, otherwise return an explicit blocker."""
 
     matrix = _validate_probabilities(probabilities)
-    labels = np.asarray(observed_labels, dtype=np.int64)
+    labels = integer_vector(observed_labels, name="observed_labels")
     if labels.shape != (len(matrix),):
         raise ValueError("observed labels must align with probabilities")
     suggested = np.argmax(matrix, axis=1).astype(np.int64)

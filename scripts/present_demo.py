@@ -141,8 +141,8 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
 
     manifest = _load_json(directory / "manifest.json")
     if (
-        manifest.get("schema_version") != 6
-        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v6"
+        manifest.get("schema_version") != 7
+        or manifest.get("policy") != "aanca_presentation_current_evidence_readback_v7"
     ):
         raise ValueError("presentation manifest schema or policy differs")
     records = manifest.get("files")
@@ -340,7 +340,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         and len(next_phase["required_gates"]) == 5
     )
     if (
-        evidence.get("schema_version") != 5
+        evidence.get("schema_version") != 6
         or evidence.get("presentation_status") != "DEMO_COMPLETE"
         or evidence.get("scientific_status") != "EXTERNAL_VALIDATION_COMPLETE"
         or evidence.get("primary_study_status") != "PRIMARY_STUDY_COMPLETE"
@@ -358,6 +358,13 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         or primary.get("h4_restoration", {}).get("directional_result")
         != "adverse_to_registered_hypothesis"
         or primary.get("h4_restoration", {}).get("registered_hypothesis_supported") is not False
+        or primary.get("h4_restoration", {}).get("interval_method")
+        != "central_quantiles_of_random_review_repetitions"
+        or primary.get("h4_restoration", {}).get("interval_level") != 0.95
+        or primary.get("h4_restoration", {}).get("resampling_unit") != "random_review_repetition"
+        or primary.get("h4_restoration", {}).get("reference_set_resampled") is not False
+        or primary.get("h4_restoration", {}).get("pairing")
+        != "same_final_reference_set_across_frozen_random_review_repetitions"
         or primary.get("h2_subgroups", {}).get("reported_count", 0) <= 0
         or primary.get("instance_dependent_seed_audit", {}).get(
             "independent_corruption_realisations"
@@ -365,6 +372,7 @@ def verify_presentation(output_directory: str | Path) -> dict[str, Any]:
         is not False
         or primary.get("instance_dependent_seed_audit", {}).get("disclosure_required") is not True
         or primary.get("inference", {}).get("p_value_sidedness") != "one_sided"
+        or primary.get("inference", {}).get("interval_scope") != "ranking_comparisons_only"
     ):
         raise ValueError("presentation evidence scope differs")
 
