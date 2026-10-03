@@ -1,0 +1,20 @@
+[
+  {
+    "file": "inter-latin.woff2",
+    "font_url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+    "css_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400..600&display=swap",
+    "licence_file": "inter-latin-OFL.txt",
+    "licence_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt",
+    "size_bytes": 48256,
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+  },
+  {
+    "file": "jetbrains-mono-latin.woff2",
+    "font_url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+    "css_url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..500&display=swap",
+    "licence_file": "jetbrains-mono-latin-OFL.txt",
+    "licence_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt",
+    "size_bytes": 31432,
+    "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+  }
+]

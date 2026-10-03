@@ -6,9 +6,18 @@ the website and offline versions from the same template and sealed evidence.
 
 The visitor should find methods, chronology, adverse evidence and exact verification
 scope before running commands. The primary action downloads the small reviewer
-kit; the short brief is the reading alternative. Use one column, restrained table
-rows, thin rules and the existing dark/violet identity. No new illustrations,
-marketing metrics, institutional logos or external fonts are needed.
+kit; the short brief is the reading alternative. The owner requested that this
+subpage match the main article. Reuse its rotated four-tile mark, Inter/JetBrains
+Mono typography, navigation, exact dark/violet palette, wide rails and thin rules.
+Use a compact guide index beside the introduction, section headings beside a
+readable content column and semantic evidence rows that stack on small screens.
+The two licensed brand faces are embedded at build time for offline reading;
+their source files, identities and OFL notices are retained under `docs/assets`.
+No new illustrations, marketing metrics or institutional logos are needed.
+
+The live guide may receive presentation improvements. The published
+`reviewer-kit-v1` download and its pinned snapshot remain immutable; a fresh local
+build is a candidate, not a replacement of that released archive.
 
 Preserve a no-JavaScript reading path, keyboard focus, small-screen readability,
 print and reduced-motion behaviour. A manifest or passing test is not a scientific

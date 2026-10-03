@@ -2,6 +2,41 @@
 
 Updated: 3 October 2026
 
+## Reviewer page visual alignment — 3 October 2026
+
+D057 records the owner's requested alignment of `/review/` with the main article.
+The current template reuses the canonical mark, navigation, Inter/JetBrains Mono,
+exact palette, type scale and wide rails. Its guide index, evidence rows, command
+blocks and mobile disclosure retain all scientific qualifications and functions.
+Original OFL notices and source identities accompany the embedded brand fonts;
+the guide needs no font requests or JavaScript. The published `reviewer-kit-v1`
+archive and pinned download reference remain immutable.
+
+The first batched browser check passed at 1440, 768, 390 and 320 pixels: no overflow,
+missing anchors, contrast failures or browser exceptions. Both embedded fonts
+loaded; only the guide document was requested. The primary action measured 4.70:1
+normally and 5.52:1 on hover. Native menu/disclosure, keyboard focus, reduced motion
+and white print styling worked. One batch fixes the narrow provenance separator.
+The detector's line-zero warnings misinterpret inherited `em` tracking and the
+display heading's leading; actual browser values retain the brand's -.008em body,
+-.04em display and 1.74 body line height. The single offline desktop/mobile
+confirmation passed, including 47 local links and unobscured anchor destinations.
+
+`uv run pytest --durations=10 --junitxml=artifacts/qa/reviewer-design-tests.xml`
+passed: 1,259 cases, one native Windows skip, 605.12 seconds. Ruff check and format
+(233 files), `mypy src` (106 files), isolated kit extraction and
+`review_project.py --numeric --online` passed. The preflight built both outputs and
+connected over SSH/SFTP. Backed-up deployment `20261003-222525` passed both build
+and health gates. Ordinary apex/www HTTP readbacks match the current guide and
+pinned snapshot, and all thirteen unchanged article files match their manifest.
+The released reviewer archive's public checksum remains unchanged. Evidence is in
+`reports/reviewer_design_2026-10-03_evidence.json`.
+
+Next verification command: `python -I scripts/review_project.py --numeric --online`.
+Frozen scientific status and evidence identities are unchanged. The `main` revision
+before this refinement also passed all seven jobs in hosted run 37148633021; new
+pushes receive their own Ubuntu/Windows execution and complete-coverage gate.
+
 ## V1 reviewer access and CI optimisation — 3 October 2026
 
 The researched plan is in `reports/reviewer_access_and_ci_2026-10-03.md`; D056

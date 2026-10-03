@@ -17,6 +17,10 @@ configs/puma_realism_stress.yaml whitespace=-blank-at-eof
 *.parquet binary
 *.png binary
 *.zip binary
+*.woff2 binary
+
+# Preserve the distributed third-party licence notices verbatim.
+docs/assets/reviewer-fonts/*-OFL.txt whitespace=-trailing-space
 
 # Large independently verifiable PUMA evidence stays versioned without bloating
 # the ordinary Git object history.

@@ -1059,3 +1059,40 @@ The tracked `deploy/hostinger/reviewer-snapshot.json` identifies the immutable
 published archive; rebuilding a guide after documentation changes must not replace
 that archive identity. The explicit file mappings passed their deployment follow-up
 with recoverable backup `20261003-213525`.
+
+## D057 — Align the reviewer page with the published article
+
+Status: accepted presentation refinement; no scientific stage change
+
+On 3 October 2026 the owner requested that `/review/` match the main site's visual
+identity. Apply the existing brand authority: exact canvas/ink/violet tokens,
+Inter and JetBrains Mono, rotated four-tile mark, study navigation, wide rails,
+editorial type scale and thin section rules. Retain all evidence qualifications,
+commands and source links. Use semantic evidence rows that stack on small screens,
+a native disclosure menu and no JavaScript requirement.
+
+Bundle unmodified, licensed Latin WOFF2 faces with their original OFL notices and
+source identities. Embed both bytes and notices into generated HTML so reading
+makes no external requests, including a candidate kit opened directly from disk.
+The published `reviewer-kit-v1` archive/tag and pinned download identity remain
+immutable. Current-template builds are candidates; this change publishes the live
+guide's presentation without replacing historical release assets.
+
+Verify desktop/mobile/tablet layout, contrast in normal/hover states, keyboard
+access, native menu/disclosure, print, local links, scoped CLI and mandatory gates.
+Publish the scoped repository update and use backed-up hosting with exact HTTP
+readback. Scientific authorities, source annotations, analysis rules and the
+thirteen-file article remain unchanged. Scientific status remains
+`EXTERNAL_VALIDATION_COMPLETE`, presentation `DEMO_COMPLETE`, natural-data action
+`retain_uncorrected`.
+
+### D057 execution outcome — 3 October 2026
+
+The full local suite passed 1,259 cases with one native Windows skip in 605.12
+seconds. Ruff, formatting, source typing, isolated extraction and scoped numeric/
+live-article checks passed. Bounded browser inspection/confirmation passed on
+desktop and mobile; all 47 offline links resolve. Deployment built both outputs,
+connected over SSH/SFTP and retained backup `20261003-222525`. Ordinary apex/www
+HTTP readbacks match the guide, pinned snapshot and all thirteen article files.
+The published reviewer checksum is unchanged. Exact evidence is in
+`reports/reviewer_design_2026-10-03_evidence.json`.

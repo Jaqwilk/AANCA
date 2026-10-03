@@ -4,72 +4,257 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Review AANCA's methods, evidence, adverse findings and reproducibility limits, with a portable verification kit.">
+<meta name="theme-color" content="#010102">
 <title>Review AANCA v1</title>
 <link rel="icon" href="data:,">
 <style>
-:root{color-scheme:dark;--ink:#f7f8f8;--muted:#d0d6e0;--line:#35363c;--accent:#a7afff;--bg:#080909}
-*{box-sizing:border-box}html{scroll-padding-top:2rem}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;accent-color:var(--accent)}
-::selection{background:#5e6ad2;color:#fff}a{color:var(--accent);text-underline-offset:.24em;text-decoration-thickness:1px}a:hover{color:#d3d7ff}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
-.skip{position:absolute;left:1rem;top:-8rem;background:var(--bg);padding:.5rem}.skip:focus{top:1rem}header,main,footer{width:min(100% - 3rem,75ch);margin-inline:auto}header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}header a{font-size:.94rem;min-height:44px;display:inline-flex;align-items:center}.brand{font-weight:700;color:var(--ink);letter-spacing:.04em;text-decoration:none}
-main{padding:3.5rem 0 2rem}h1{font-size:clamp(2.3rem,6vw,3.8rem);line-height:1.12;letter-spacing:-.03em;max-width:18ch;margin:0 0 1.5rem;text-wrap:balance}h2{font-size:1.65rem;line-height:1.3;letter-spacing:-.02em;margin:0 0 1.2rem}h3{font-size:1.08rem;margin:1.8rem 0 .5rem}p{margin:.85rem 0 1.2rem;color:var(--muted)}strong{color:var(--ink)}nav{display:flex;gap:1rem 1.5rem;flex-wrap:wrap;margin:2rem 0 3rem}nav a{min-height:44px;display:inline-flex;align-items:center}section{padding:2.6rem 0;border-top:1px solid var(--line)}.action{display:inline-block;padding:.65rem 1.1rem;background:#5e6ad2;color:#fff;font-weight:600;text-decoration:none;border-radius:6px}.action:hover{background:#6c78de;color:#fff}.actions{display:flex;align-items:center;gap:1rem 1.5rem;flex-wrap:wrap;margin:1.5rem 0}
-ol,ul{padding-left:1.35rem;color:var(--muted)}li{margin:.6rem 0}pre{margin:1rem 0 1.5rem;padding:1rem 1.2rem;background:#151619;border:1px solid var(--line);border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}code{font: .88em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;font-size:.94rem;font-variant-numeric:tabular-nums}caption{text-align:left;color:var(--muted);margin:0 0 1rem}th,td{text-align:left;vertical-align:top;padding:.9rem .7rem;border-bottom:1px solid var(--line)}th{color:var(--ink);font-weight:600}td{color:var(--muted)}th:first-child,td:first-child{padding-left:0;width:29%}.table-scroll{overflow-x:auto}details{margin:1.5rem 0}summary{padding:.5rem 0;cursor:pointer;color:var(--ink);font-weight:600}summary:hover{color:var(--accent)}.identity{font-size:.86rem;color:var(--muted);overflow-wrap:anywhere}footer{border-top:1px solid var(--line);padding:1.5rem 0 3rem;font-size:.87rem}footer p{margin:.6rem 0}
-@media(max-width:560px){body{font-size:16px}header,main,footer{width:calc(100% - 2rem)}main{padding-top:2.5rem}nav{gap:.7rem 1.1rem}section{padding:2rem 0}th,td{padding:.8rem .45rem;font-size:.9rem}.action{width:100%;text-align:center}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media print{:root{color-scheme:light;--ink:#111;--muted:#333;--line:#ccc;--accent:#223588;--bg:#fff}body{font-size:11pt}header,main,footer{width:100%}main{padding-top:1.5rem}nav,.actions,.skip{display:none}section{padding:1.3rem 0}pre{background:#fff;break-inside:avoid}a,a:hover{color:#223588}h2,h3{break-after:avoid}}
+__FONT_CSS__
+:root {
+  color-scheme: dark;
+  --canvas: #010102;
+  --surface: #0f1011;
+  --ink: #f7f8f8;
+  --muted: #d0d6e0;
+  --subtle: #8a8f98;
+  --line: #23252a;
+  --line-strong: #34343a;
+  --accent: #5e6ad2;
+  --focus: #828fff;
+  --sans: Inter, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  --page-pad: clamp(22px, 4.5vw, 72px);
+  --section-space: clamp(52px, 5.5vw, 76px);
+  --header-height: 60px;
+}
+* { box-sizing: border-box; }
+html { background: var(--canvas); scroll-padding-top: calc(var(--header-height) + 24px); scrollbar-color: var(--line-strong) var(--canvas); }
+body { margin: 0; background: var(--canvas); color: var(--ink); font: 400 16px/1.74 var(--sans); letter-spacing: -.008em; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: #fff; }
+a { color: inherit; text-underline-offset: 4px; text-decoration-color: var(--subtle); text-decoration-thickness: 1px; }
+a:hover { color: var(--focus); text-decoration-color: currentColor; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 5px; }
+svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.skip { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 9px 13px; color: var(--canvas); background: var(--ink); border-radius: 8px; }
+.skip:focus { top: 14px; }
+.rail { width: min(1160px, calc(100% - 2 * var(--page-pad))); margin-inline: auto; }
+.site-header { position: fixed; inset: 0 0 auto; height: var(--header-height); z-index: 50; background: var(--canvas); border-bottom: 1px solid var(--line); }
+.nav-shell { height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; font-size: 14px; font-weight: 600; letter-spacing: -.02em; text-decoration: none; }
+.brand-mark { width: 19px; height: 19px; flex: 0 0 19px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; transform: rotate(45deg); }
+.brand-mark i { display: block; background: var(--accent); border-radius: 2px; }
+.nav-links { display: flex; align-items: center; gap: 25px; }
+.nav-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--subtle); font-size: 12px; font-weight: 500; letter-spacing: .01em; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--focus); }
+.mobile-nav { display: none; }
+.mobile-nav summary { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); cursor: pointer; list-style: none; }
+.mobile-nav summary::-webkit-details-marker { display: none; }
+.mobile-nav summary svg { width: 20px; height: 20px; }
+.mobile-nav[open] summary { color: var(--focus); }
+.mobile-nav nav { position: absolute; top: var(--header-height); right: var(--page-pad); width: min(300px, calc(100% - 2 * var(--page-pad))); padding: 12px 20px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px; }
+.mobile-nav nav a { display: flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: none; }
+.mobile-nav nav a[aria-current] { color: var(--focus); }
+main { padding-top: var(--header-height); }
+.review-hero { display: grid; grid-template-columns: minmax(0, 640px) minmax(240px, 1fr); gap: clamp(48px, 6vw, 100px); align-items: start; padding: clamp(70px, 8vw, 116px) 0 var(--section-space); }
+h1 { margin: 0 0 28px; font-size: clamp(34px, 5vw, 52px); font-weight: 600; line-height: 1.08; letter-spacing: -.04em; text-wrap: balance; }
+h2 { margin: 0; font-size: clamp(25px, 2.5vw, 30px); font-weight: 500; line-height: 1.2; letter-spacing: -.035em; text-wrap: balance; }
+h3 { margin: 32px 0 12px; font-size: 20px; font-weight: 500; line-height: 1.4; letter-spacing: -.025em; }
+p { margin: 0 0 1.35em; max-width: 70ch; color: var(--muted); }
+strong { color: var(--ink); font-weight: 600; }
+.hero-lead { font-size: clamp(16px, 1.35vw, 19px); line-height: 1.62; letter-spacing: -.01em; }
+.hero-lead strong { font-weight: 500; }
+.research-boundary { margin: 0; font-size: 14px; color: var(--subtle); }
+.actions { display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; margin: 28px 0 24px; }
+.action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 11px 17px; border: 1px solid transparent; border-radius: 8px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0; text-decoration: none; }
+.action:hover { background: #535fc4; color: #fff; }
+.text-action { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; font-weight: 500; }
+.review-index { padding-top: 8px; }
+.review-index h2 { margin: 0 0 16px; font-size: 14px; line-height: 1.6; letter-spacing: 0; }
+.review-index a { display: grid; grid-template-columns: 1fr auto; gap: 3px 16px; align-items: center; padding: 17px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.review-index a:last-child { border-bottom: 1px solid var(--line); }
+.review-index .index-title { font-size: 14px; font-weight: 500; }
+.review-index .index-description { grid-column: 1 / -1; color: var(--subtle); font-size: 12px; line-height: 1.6; }
+.review-section { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding: var(--section-space) 0; border-top: 1px solid var(--line); }
+.section-content { min-width: 0; }
+.section-content > :first-child { margin-top: 0; }
+.section-content > :last-child { margin-bottom: 0; }
+ol, ul { margin: 0 0 28px; padding-left: 22px; color: var(--muted); }
+li { padding-left: 6px; margin-bottom: 20px; max-width: 70ch; }
+li::marker { color: var(--subtle); font-variant-numeric: tabular-nums; }
+code { font-family: var(--mono); font-size: .88em; font-weight: 400; overflow-wrap: anywhere; }
+.evidence-intro { font-size: 14px; color: var(--subtle); }
+.evidence-list { margin: 28px 0; }
+.evidence-row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 28px; padding: 25px 0; border-top: 1px solid var(--line); }
+.evidence-row:last-child { border-bottom: 1px solid var(--line); }
+.evidence-row dt { font-size: 14px; font-weight: 500; line-height: 1.7; }
+.evidence-row dd { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.evidence-source { display: flex; align-items: center; gap: 5px; width: fit-content; min-height: 44px; margin-top: 5px; color: var(--subtle); font-size: 12px; }
+.evidence-source svg { width: 12px; height: 12px; }
+.evidence-note { font-size: 14px; }
+.document-links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 24px; }
+.document-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+.command { margin: 20px 0; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px; }
+.command-label { margin: 0; padding: 10px 18px; border-bottom: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+pre { margin: 0; padding: 16px 18px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.75; }
+pre code { font-size: 13px; }
+.digest-help { margin: 24px 0 32px; border-bottom: 1px solid var(--line); }
+.digest-help summary { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 0 14px; color: var(--muted); font-size: 14px; cursor: pointer; list-style: none; }
+.digest-help summary::-webkit-details-marker { display: none; }
+.digest-help summary svg { width: 14px; height: 14px; }
+.digest-help[open] summary svg { transform: rotate(90deg); }
+.digest-help summary:hover { color: var(--focus); }
+.digest-help > p { font-size: 14px; }
+.digest-help pre { margin: 0 0 20px; padding: 12px 16px; background: var(--surface); border-radius: 8px; }
+.scope-list { padding: 0; list-style: none; }
+.scope-list li { margin: 0; padding: 19px 0; border-bottom: 1px solid var(--line); }
+.scope-list li:first-child { padding-top: 0; }
+.scope-list strong { display: block; margin-bottom: 4px; font-size: 15px; font-weight: 500; }
+.identity { max-width: none; margin: 0; padding: 28px 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); }
+.site-footer { border-top: 1px solid var(--line); padding: 48px 0 24px; }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; }
+.footer-brand { margin: 0 0 14px; }
+.footer-summary, .footer-guidance { max-width: 60ch; font-size: 13px; color: var(--subtle); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-bottom: 12px; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; }
+.footer-bottom p { margin: 0; color: var(--subtle); }
+.footer-bottom a { min-height: 44px; display: inline-flex; align-items: center; }
+@media (max-width: 1040px) {
+  .review-hero { grid-template-columns: minmax(0, 1fr) 260px; gap: 44px; }
+  .review-section { grid-template-columns: 185px minmax(0, 1fr); gap: 36px; }
+  .evidence-row { grid-template-columns: 135px minmax(0, 1fr); gap: 22px; }
+}
+@media (max-width: 980px) {
+  .nav-links { display: none; }
+  .mobile-nav { display: block; }
+}
+@media (max-width: 760px) {
+  .review-hero { grid-template-columns: 1fr; gap: 40px; padding-top: 56px; }
+  .review-index { padding-top: 0; }
+  .review-index h2 { margin-bottom: 12px; }
+  .review-index a { padding: 14px 0; }
+  .review-section { grid-template-columns: 1fr; gap: 28px; }
+  .evidence-row { grid-template-columns: 145px minmax(0, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 560px) {
+  h1 { font-size: clamp(32px, 11vw, 42px); }
+  .actions { align-items: stretch; gap: 12px; }
+  .action { width: 100%; }
+  .text-action { width: fit-content; }
+  .evidence-row { grid-template-columns: 1fr; gap: 10px; padding: 23px 0; }
+  .evidence-row dt { font-size: 15px; }
+  .footer-bottom { flex-direction: column; gap: 4px; }
+  .document-links { gap: 0 20px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print {
+  :root { color-scheme: light; --canvas: #fff; --surface: #fff; --ink: #111; --muted: #333; --subtle: #555; --line: #ccc; --line-strong: #999; --focus: #4b56bb; }
+  html { scrollbar-color: auto; }
+  body { font-size: 10pt; }
+  .rail { width: 100%; }
+  main { padding-top: 0; }
+  .site-header, .skip, .actions, .review-index, .footer-links, .footer-bottom a { display: none; }
+  .review-hero { display: block; padding: 0 0 24px; }
+  h1 { font-size: 28pt; }
+  h2 { font-size: 18pt; break-after: avoid; }
+  h3, dt { break-after: avoid; }
+  .review-section { display: block; padding: 24px 0; }
+  .review-section h2 { margin-bottom: 18px; }
+  .evidence-row { grid-template-columns: 130px minmax(0, 1fr); gap: 20px; padding: 12px 0; break-inside: avoid; }
+  .evidence-source { min-height: 0; }
+  .command, pre { break-inside: avoid; }
+  a, a:hover { color: #4b56bb; }
+  .site-footer { padding-top: 24px; }
+  .footer-grid { display: block; }
+  .footer-bottom { margin-top: 12px; }
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to review guide</a>
-<header><a class="brand" href="__ARTICLE__">AANCA</a><a href="__REPO__">Source repository</a></header>
-<main id="main">
-<h1>Review the methods.<br>Check the evidence.</h1>
-<p>AANCA v1 ranks <strong>potentially inconsistent nucleus class annotations</strong> recommended for expert review. This guide connects the question, retained findings and executable checks.</p>
-<p>Non-diagnostic research. Source annotations remain unchanged. Independent-expert disagreement is a review signal; it does not establish pathologist error.</p>
-<div class="actions"><a class="action" href="__DOWNLOAD__">Download the reviewer kit</a><a href="__DOCS__PROFESSOR_BRIEF.md">Read the short project brief</a></div>
-<nav aria-label="Review guide"><a href="#methods">Methods &amp; chronology</a><a href="#evidence">Evidence &amp; limits</a><a href="#verify">Run the checks</a><a href="#scope">Verification scope</a></nav>
-<section id="methods">
-<h2>Methods &amp; chronology</h2>
-<ol>
-<li>Read the <a href="__DOCS__PROFESSOR_BRIEF.md">project brief</a>, then <a href="__DOCS__SPEC.md">scientific specification</a> for the question, fixed review budgets and terminology.</li>
-<li>Inspect <a href="__DOCS__PRE_REGISTRATION.md">preregistration</a>, <a href="__DOCS__DECISIONS.md">decisions</a> and <a href="__DOCS__STATUS.md">execution history</a>. PanNuke's accepted primary analysis remains amended or exploratory; public Git history does not independently timestamp the PUMA freeze before its outcomes.</li>
-<li>Check the separation of source groups and group-safe out-of-fold predictions. Patch separation alone does not establish patient/WSI independence. Final reference groups remain outside selection and tuning.</li>
-</ol>
-<p>The natural-data action remains <code>retain_uncorrected</code>. <code>CONFIRMATORY_COMPLETE</code> has not been reached. Prospective workflow benefit and clinical utility remain unestablished.</p>
-</section>
-<section id="evidence">
-<h2>Evidence &amp; limits</h2>
-<div class="table-scroll"><table><caption>Retained findings; follow the source links for designs, exact values and uncertainty.</caption><thead><tr><th scope="col">Evaluation</th><th scope="col">Finding and interpretation</th></tr></thead><tbody>__EVIDENCE_ROWS__</tbody></table></div>
-<p><strong>Interpret H4's interval correctly.</strong> It is the central 95% range across 100 random-review repetitions on a fixed reference set, not a group-bootstrap confidence interval. No adverse result has been removed.</p>
-<p><a href="__DOCS__PUBLIC_EVIDENCE.md">Public evidence and source identities</a> · <a href="__DOCS__ETHICS_AND_LIMITATIONS.md">Ethics and limitations</a> · <a href="__DOCS__FINAL_READINESS_REPORT.md">Readiness assessment</a></p>
-</section>
-<section id="verify">
-<h2>Run the checks</h2>
-<p>The reviewer ZIP contains the article, key documentation, source authorities, compact NuCLS/MoNuSAC arrays and scoped verifiers. It needs no account, GPU, PyTorch or raw dataset. Open its <code>index.html</code> locally to read this guide.</p>
-<h3>Check integrity with Python 3.12</h3>
-<p>Compare the ZIP's SHA-256 with the <a href="__CHECKSUM__">release checksum</a>, extract it, then run from its directory:</p>
-<pre><code>python -I scripts/review_project.py</code></pre>
-<p>This uses only the standard library. It checks the kit inventory, the thirteen-file article, upstream file identities and selected narrative contracts. It makes no network requests and performs no model training.</p>
-<details><summary>How to check the download digest</summary><p>Windows PowerShell:</p><pre><code>Get-FileHash aanca-reviewer-kit-v1.zip -Algorithm SHA256</code></pre><p>Ubuntu:</p><pre><code>sha256sum aanca-reviewer-kit-v1.zip</code></pre><p>Compare the output with the release sidecar. The internal manifest alone is not an independent authenticity signature.</p></details>
-<h3>Optionally recalculate saved numeric results</h3>
-<pre><code>python -m pip install -r requirements-reviewer.txt
-python -I scripts/review_project.py --numeric --report ../aanca-review.json</code></pre>
-<p>NumPy is the only additional library. This independently recalculates the saved NuCLS multi-rater and MoNuSAC evidence, including matched controls and group bootstraps. Their <code>not_supported</code> conclusions remain visible. A failed check returns a nonzero exit code; the JSON receipt records its scope.</p>
-<p>Use <code>--online</code> to explicitly compare the live article with the downloaded snapshot. An older snapshot can differ after an article update.</p>
-</section>
-<section id="scope">
-<h2>What verification establishes</h2>
-<ul>
-<li><strong>Integrity:</strong> saved files match their declared identities and selected public claims are consistent.</li>
-<li><strong>Numeric recalculation:</strong> the optional NumPy checks reconstruct selected results from saved arrays using project-maintained independent implementations.</li>
-<li><strong>Software execution:</strong> the full repository supports a deterministic synthetic smoke workflow and complete Ubuntu/Windows test coverage. The small reviewer kit does not contain that environment.</li>
-<li><strong>Source-image reproduction:</strong> requires lawful dataset access, frozen inputs and compute; it is not performed by the kit.</li>
-<li><strong>New-data replication and clinical utility:</strong> require additional independent evidence. Passing verification is not a clinical validation.</li>
-</ul>
-<p>For the larger PanNuke arrays, use the separate <a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1">primary evidence release</a>. Read <a href="__DOCS__REVIEWER_GUIDE.md">the complete reviewer guide</a> and <a href="__DOCS__REPRODUCIBILITY.md">reproducibility instructions</a> for every supported scope and command.</p>
-<p>Local copying and execution for non-clinical scientific evaluation are permitted under <a href="__DOCS__LICENSE">the limited evaluation licence</a>. Other rights are reserved; third-party terms remain separate. See <a href="__DOCS__CONTRIBUTIONS.md">contributions and AI assistance</a> and <a href="__DOCS__CITATION.cff">citation metadata</a>.</p>
-</section>
-<p class="identity">Article manifest root: <code>__ARTICLE_ROOT__</code>. Exact kit source revision and file identities are supplied in <code>reviewer-manifest.json</code>; the published ZIP checksum identifies its snapshot.</p>
+<header class="site-header">
+  <div class="nav-shell rail">
+    <a class="brand" href="__ARTICLE__" aria-label="AANCA: read the study"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>AANCA</span></a>
+    <nav class="nav-links" aria-label="Study navigation"><a href="__ARTICLE__#overview">Study</a><a href="__ARTICLE__#method">Method</a><a href="__ARTICLE__#results">Findings</a><a href="__ARTICLE__#evidence">Evidence</a><a href="__ARTICLE__#current-stage">Status</a><a href="__ARTICLE__#use">Reproduce</a><a href="__ARTICLE__#author">Author</a><a href="#main" aria-current="page">Review</a></nav>
+    <details class="mobile-nav"><summary aria-label="Toggle study navigation"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12M4 10h12M4 15h12"/></svg></summary><nav aria-label="Study navigation on small screens"><a href="__ARTICLE__#overview">Study</a><a href="__ARTICLE__#method">Method</a><a href="__ARTICLE__#results">Findings</a><a href="__ARTICLE__#evidence">Evidence</a><a href="__ARTICLE__#current-stage">Status</a><a href="__ARTICLE__#use">Reproduce</a><a href="__ARTICLE__#author">Author</a><a href="#main" aria-current="page">Review</a></nav></details>
+  </div>
+</header>
+<main id="main" class="rail">
+  <div class="review-hero">
+    <div>
+      <h1>Review the methods.<br>Check the evidence.</h1>
+      <p class="hero-lead">AANCA v1 ranks <strong>potentially inconsistent nucleus class annotations</strong> recommended for expert review. This guide connects the question, retained findings and executable checks.</p>
+      <div class="actions"><a class="action" href="__DOWNLOAD__">Download the reviewer kit<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4 7l4 4 4-4M3 12v2h10v-2"/></svg></a><a class="text-action" href="__DOCS__PROFESSOR_BRIEF.md">Read the short project brief<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <p class="research-boundary">Non-diagnostic research. Source annotations remain unchanged. Independent-expert disagreement is a review signal; it does not establish pathologist error.</p>
+    </div>
+    <nav class="review-index" aria-labelledby="index-title">
+      <h2 id="index-title">In this guide</h2>
+      <a href="#methods"><span class="index-title">Methods &amp; chronology</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span class="index-description">Protocols, splits and freeze history</span></a>
+      <a href="#evidence"><span class="index-title">Evidence &amp; limits</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span class="index-description">Retained findings and adverse results</span></a>
+      <a href="#verify"><span class="index-title">Run the checks</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span class="index-description">Integrity and optional recalculation</span></a>
+      <a href="#scope"><span class="index-title">Verification scope</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span class="index-description">What a passing check establishes</span></a>
+    </nav>
+  </div>
+  <section id="methods" class="review-section" aria-labelledby="methods-title">
+    <h2 id="methods-title">Methods &amp; chronology</h2>
+    <div class="section-content">
+      <ol>
+        <li>Read the <a href="__DOCS__PROFESSOR_BRIEF.md">project brief</a>, then <a href="__DOCS__SPEC.md">scientific specification</a> for the question, fixed review budgets and terminology.</li>
+        <li>Inspect <a href="__DOCS__PRE_REGISTRATION.md">preregistration</a>, <a href="__DOCS__DECISIONS.md">decisions</a> and <a href="__DOCS__STATUS.md">execution history</a>. PanNuke's accepted primary analysis remains amended or exploratory; public Git history does not independently timestamp the PUMA freeze before its outcomes.</li>
+        <li>Check the separation of source groups and group-safe out-of-fold predictions. Patch separation alone does not establish patient/WSI independence. Final reference groups remain outside selection and tuning.</li>
+      </ol>
+      <p>The natural-data action remains <code>retain_uncorrected</code>. <code>CONFIRMATORY_COMPLETE</code> has not been reached. Prospective workflow benefit and clinical utility remain unestablished.</p>
+    </div>
+  </section>
+  <section id="evidence" class="review-section" aria-labelledby="evidence-title">
+    <h2 id="evidence-title">Evidence &amp; limits</h2>
+    <div class="section-content">
+      <p class="evidence-intro">Retained findings; follow the source links for designs, exact values and uncertainty.</p>
+      <dl class="evidence-list">__EVIDENCE_ROWS__</dl>
+      <p class="evidence-note"><strong>Interpret H4's interval correctly.</strong> It is the central 95% range across 100 random-review repetitions on a fixed reference set, not a group-bootstrap confidence interval. No adverse result has been removed.</p>
+      <div class="document-links"><a href="__DOCS__PUBLIC_EVIDENCE.md">Public evidence and source identities</a><a href="__DOCS__ETHICS_AND_LIMITATIONS.md">Ethics and limitations</a><a href="__DOCS__FINAL_READINESS_REPORT.md">Readiness assessment</a></div>
+    </div>
+  </section>
+  <section id="verify" class="review-section" aria-labelledby="verify-title">
+    <h2 id="verify-title">Run the checks</h2>
+    <div class="section-content">
+      <p>The reviewer ZIP contains the article, key documentation, source authorities, compact NuCLS/MoNuSAC arrays and scoped verifiers. It needs no account, GPU, PyTorch or raw dataset. Open its <code>index.html</code> locally to read this guide.</p>
+      <h3>Check integrity with Python 3.12</h3>
+      <p>Compare the ZIP's SHA-256 with the <a href="__CHECKSUM__">release checksum</a>, extract it, then run from its directory:</p>
+      <div class="command"><p class="command-label">Python 3.12 · Standard library</p><pre><code>python -I scripts/review_project.py</code></pre></div>
+      <p>This uses only the standard library. It checks the kit inventory, the thirteen-file article, upstream file identities and selected narrative contracts. It makes no network requests and performs no model training.</p>
+      <details class="digest-help"><summary><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>How to check the download digest</summary><p>Windows PowerShell:</p><pre><code>Get-FileHash aanca-reviewer-kit-v1.zip -Algorithm SHA256</code></pre><p>Ubuntu:</p><pre><code>sha256sum aanca-reviewer-kit-v1.zip</code></pre><p>Compare the output with the release sidecar. The internal manifest alone is not an independent authenticity signature.</p></details>
+      <h3>Optionally recalculate saved numeric results</h3>
+      <div class="command"><p class="command-label">Python 3.12 · NumPy</p><pre><code>python -m pip install -r requirements-reviewer.txt
+python -I scripts/review_project.py --numeric --report ../aanca-review.json</code></pre></div>
+      <p>NumPy is the only additional library. This independently recalculates the saved NuCLS multi-rater and MoNuSAC evidence, including matched controls and group bootstraps. Their <code>not_supported</code> conclusions remain visible. A failed check returns a nonzero exit code; the JSON receipt records its scope.</p>
+      <p>Use <code>--online</code> to explicitly compare the live article with the downloaded snapshot. An older snapshot can differ after an article update.</p>
+    </div>
+  </section>
+  <section id="scope" class="review-section" aria-labelledby="scope-title">
+    <h2 id="scope-title">What verification establishes</h2>
+    <div class="section-content">
+      <ul class="scope-list">
+        <li><strong>Integrity</strong>Saved files match their declared identities and selected public claims are consistent.</li>
+        <li><strong>Numeric recalculation</strong>The optional NumPy checks reconstruct selected results from saved arrays using project-maintained independent implementations.</li>
+        <li><strong>Software execution</strong>The full repository supports a deterministic synthetic smoke workflow and complete Ubuntu/Windows test coverage. The small reviewer kit does not contain that environment.</li>
+        <li><strong>Source-image reproduction</strong>Requires lawful dataset access, frozen inputs and compute; it is not performed by the kit.</li>
+        <li><strong>New-data replication and clinical utility</strong>Require additional independent evidence. Passing verification is not a clinical validation.</li>
+      </ul>
+      <p>For the larger PanNuke arrays, use the separate <a href="https://github.com/Jaqwilk/AANCA/releases/tag/primary-evidence-v1">primary evidence release</a>. Read <a href="__DOCS__REVIEWER_GUIDE.md">the complete reviewer guide</a> and <a href="__DOCS__REPRODUCIBILITY.md">reproducibility instructions</a> for every supported scope and command.</p>
+      <p>Local copying and execution for non-clinical scientific evaluation are permitted under <a href="__DOCS__LICENSE">the limited evaluation licence</a>. Other rights are reserved; third-party terms remain separate. See <a href="__DOCS__CONTRIBUTIONS.md">contributions and AI assistance</a> and <a href="__DOCS__CITATION.cff">citation metadata</a>.</p>
+    </div>
+  </section>
+  <p class="identity">Article manifest root: <code>__ARTICLE_ROOT__</code>. Exact kit source revision and file identities are supplied in <code>reviewer-manifest.json</code>; the published ZIP checksum identifies its snapshot.</p>
 </main>
-<footer><p>© 2026 Natan Smogór. AANCA research prototype.</p><p>This review path was informed by <a href="https://datamanagement.hms.harvard.edu/collect-analyze/reproducibility">HMS reproducibility guidance</a> and <a href="https://datamanagement.hms.harvard.edu/access-reuse">access and reuse guidance</a>. This is not Harvard endorsement or third-party validation.</p></footer>
+<footer class="site-footer">
+  <div class="rail">
+    <div class="footer-grid">
+      <div><a class="brand footer-brand" href="__ARTICLE__"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>AANCA</span></a><p class="footer-summary">Automated auditing of nucleus class annotations. Non-diagnostic research; source annotations remain unchanged.</p></div>
+      <div><nav class="footer-links" aria-label="Research resources"><a href="__ARTICLE__">Read the study</a><a href="__REPO__">Source repository</a><a href="__DOCS__REVIEWER_GUIDE.md">Complete reviewer guide</a></nav><p class="footer-guidance">This review path was informed by <a href="https://datamanagement.hms.harvard.edu/collect-analyze/reproducibility">HMS reproducibility guidance</a> and <a href="https://datamanagement.hms.harvard.edu/access-reuse">access and reuse guidance</a>. This is not Harvard endorsement or third-party validation.</p></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Natan Smogór. AANCA research prototype.</p><a href="#main">Back to the guide</a></div>
+  </div>
+</footer>
 </body>
 </html>

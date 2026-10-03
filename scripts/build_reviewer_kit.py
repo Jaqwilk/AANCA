@@ -7,6 +7,7 @@ archive preserves the repository layout required by the existing scoped verifier
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import html
 import json
@@ -65,7 +66,11 @@ def render_guide(root: Path, *, offline: bool) -> str:
     def row(name, text, source):
         link = docs + source
         rows.append(
-            f'<tr><th scope="row">{html.escape(name)}</th><td>{text} <a href="{html.escape(link)}">Source</a>.</td></tr>'
+            f'<div class="evidence-row"><dt>{html.escape(name)}</dt><dd>{text}'
+            f'<a class="evidence-source" href="{html.escape(link)}" '
+            f'aria-label="View source for {html.escape(name)}">View source'
+            '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>'
+            "</a></dd></div>"
         )
 
     row(
@@ -103,7 +108,23 @@ def render_guide(root: Path, *, offline: bool) -> str:
         "artifacts/puma_new_data_confirmation/results.json",
     )
     template = (root / "docs/reviewer-guide.html").read_text(encoding="utf-8")
+    font_css = []
+    for filename, family, weights in (
+        ("inter-latin", "Inter", "400 600"),
+        ("jetbrains-mono-latin", "JetBrains Mono", "400 500"),
+    ):
+        directory = root / "docs/assets/reviewer-fonts"
+        licence = (directory / f"{filename}-OFL.txt").read_text(encoding="utf-8")
+        data = base64.b64encode((directory / f"{filename}.woff2").read_bytes()).decode("ascii")
+        # Embed both face and licence so the generated guide has no asset/network
+        # dependency, including when opened directly from a freshly extracted kit.
+        font_css.append(
+            f"/* {licence} */\n@font-face{{font-family:'{family}';font-style:normal;"
+            f"font-weight:{weights};font-display:swap;"
+            f"src:url(data:font/woff2;base64,{data}) format('woff2')}}"
+        )
     substitutions = {
+        "__FONT_CSS__": "\n".join(font_css),
         "__ARTICLE__": "artifacts/mvp_demo/index.html" if offline else "https://aancastudy.org/",
         "__REPO__": "https://github.com/Jaqwilk/AANCA",
         "__DOWNLOAD__": RELEASE + "/download/reviewer-kit-v1/" + ARCHIVE_NAME,

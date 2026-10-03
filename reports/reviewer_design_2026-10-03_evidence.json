@@ -1,0 +1,530 @@
+{
+  "task": "Align live reviewer guide with the existing article",
+  "scientific_stage": "EXTERNAL_VALIDATION_COMPLETE",
+  "presentation_stage": "DEMO_COMPLETE",
+  "scientific_authorities_changed": false,
+  "published_reviewer_archive_changed": false,
+  "offline_local_links_and_fragments_checked": 47,
+  "font_sources": [
+    {
+      "file": "inter-latin.woff2",
+      "font_url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "css_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400..600&display=swap",
+      "licence_file": "inter-latin-OFL.txt",
+      "licence_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt",
+      "size_bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "file": "jetbrains-mono-latin.woff2",
+      "font_url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+      "css_url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..500&display=swap",
+      "licence_file": "jetbrains-mono-latin-OFL.txt",
+      "licence_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt",
+      "size_bytes": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+    }
+  ],
+  "browser_confirmation": {
+    "reports": [
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "status": "loaded"
+          }
+        ],
+        "identityWidth": 1160,
+        "railWidth": 1160,
+        "headings": [
+          "Methods & chronology",
+          "Evidence & limits",
+          "Run the checks",
+          "What verification establishes"
+        ],
+        "rows": 7,
+        "sourceLinks": 7,
+        "scriptCount": 0,
+        "tracking": {
+          "body": "-0.128px",
+          "h1": "-2.08px"
+        },
+        "bodyLineHeight": "27.84px"
+      },
+      {
+        "width": 390,
+        "scrollWidth": 390,
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "status": "loaded"
+          }
+        ],
+        "identityWidth": 346,
+        "railWidth": 346,
+        "headings": [
+          "Methods & chronology",
+          "Evidence & limits",
+          "Run the checks",
+          "What verification establishes"
+        ],
+        "rows": 7,
+        "sourceLinks": 7,
+        "scriptCount": 0,
+        "tracking": {
+          "body": "-0.128px",
+          "h1": "-1.68px"
+        },
+        "bodyLineHeight": "27.84px"
+      }
+    ],
+    "keyboardMenu": true,
+    "menuFocus": {
+      "text": "Study",
+      "outline": "rgb(130, 143, 255) solid 2px"
+    },
+    "anchorTop": 83.796875,
+    "digest": true,
+    "print": {
+      "background": "rgb(255, 255, 255)",
+      "header": "none",
+      "link": "rgb(85, 85, 85)"
+    },
+    "externalRequests": []
+  },
+  "first_inspection": {
+    "widths": [
+      1440,
+      768,
+      390,
+      320
+    ],
+    "horizontal_overflow": false,
+    "contrast_failures": [],
+    "body_font_px": 16,
+    "body_line_height_px": 27.84,
+    "normal_button_contrast": 4.699901244313427,
+    "hover_button_contrast": 5.523716712746652,
+    "page_errors": [],
+    "script_count": 0
+  },
+  "scoped_numeric_and_served_article_verification": {
+    "schema_version": 1,
+    "status": "passed",
+    "checks": [
+      {
+        "name": "article_and_sources",
+        "status": "passed",
+        "scope": "13 presentation files, upstream source identities and selected narrative contracts",
+        "result": {
+          "status": "valid",
+          "package_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+          "package_file_count": 13,
+          "upstream_authority_count": 19,
+          "professor_brief_bytes": 5905,
+          "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
+          "presentation_status": "DEMO_COMPLETE"
+        },
+        "duration_seconds": 0.062
+      },
+      {
+        "name": "nucls_saved_arrays",
+        "status": "passed",
+        "scope": "NuCLS file identities, manifest, rankings, downstream metrics and group bootstraps",
+        "result": {
+          "study_id": "nucls_natural_label_external_validation_v1",
+          "file_identity_status": "passed",
+          "portable_manifest_status": "passed",
+          "independent_recalculation_status": "passed",
+          "subsets": [
+            {
+              "subset": "unbiased_control",
+              "sample_count": 811,
+              "patient_group_count": 5,
+              "natural_disagreement_count": 27,
+              "average_precision": 0.07348905384277785,
+              "precision_at_5_percent": 0.0975609756097561,
+              "ranking_success_conditions_met": false,
+              "guided_minus_uncorrected_macro_f1": -0.014633352536513322,
+              "downstream_success_conditions_met": false
+            },
+            {
+              "subset": "evaluation",
+              "sample_count": 908,
+              "patient_group_count": 5,
+              "natural_disagreement_count": 60,
+              "average_precision": 0.08385776787414528,
+              "precision_at_5_percent": 0.06521739130434782,
+              "ranking_success_conditions_met": false,
+              "guided_minus_uncorrected_macro_f1": -0.008363810600757304,
+              "downstream_success_conditions_met": false
+            }
+          ],
+          "primary_claim_conclusion": "not_supported",
+          "pathologist_error_proven": false,
+          "clinical_utility_proven": false
+        },
+        "duration_seconds": 1.875
+      },
+      {
+        "name": "monusac_saved_arrays",
+        "status": "passed",
+        "scope": "MoNuSAC file identities, matched controls, metrics and whole-patient bootstrap gates",
+        "result": {
+          "all_success_conditions_met": false,
+          "decision": "not supported; retain corrupted-baseline comparison and do not claim a better real-world model",
+          "files_verified": 4,
+          "ranking_candidates_verified": 4,
+          "status": "verified",
+          "study_id": "monusac_current_aanca_controlled_external_v1",
+          "whole_patient_bootstrap_iterations": 2000
+        },
+        "duration_seconds": 1.406
+      },
+      {
+        "name": "served_article",
+        "status": "passed",
+        "scope": "all served presentation bytes equal this local release",
+        "result": {
+          "status": "valid",
+          "url": "https://aancastudy.org/",
+          "remote_package_integrity_valid": true,
+          "matches_local_release": true,
+          "remote_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+          "local_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+          "file_count": 13,
+          "files": [
+            {
+              "path": "README.md",
+              "valid": true,
+              "size_bytes": 5106,
+              "sha256": "0f2e8d48e5f2b36ea8b3c04c980dab2bc1e0c2709905957313c1a588d153d2fa"
+            },
+            {
+              "path": "assets/findings-evidence-story.js",
+              "valid": true,
+              "size_bytes": 3647,
+              "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-bilobed.png",
+              "valid": true,
+              "size_bytes": 212645,
+              "sha256": "03239510ec855de6b84d9c1c56c233ccfdb58efa4bc8ae2a6e59db22d4e5599e"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-compact.png",
+              "valid": true,
+              "size_bytes": 290592,
+              "sha256": "ff1db296bedfb4f921273ef6939ce1742caefedcee84d7f0fff879655dda0f8d"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-elongated.png",
+              "valid": true,
+              "size_bytes": 145054,
+              "sha256": "700a5eacba0adc4b8e10f46de2736e05b30ae9f31fd6d3096d7b2beced86946d"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-flattened.png",
+              "valid": true,
+              "size_bytes": 157942,
+              "sha256": "c6efd07d2c6109b3bb695ebe1a9201d21aa756ce770f2948866b93c463521845"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-irregular.png",
+              "valid": true,
+              "size_bytes": 234525,
+              "sha256": "e2ec8310d6073f873ffad28a816aa2b3898d49a73bad72ed72612ddda2de115d"
+            },
+            {
+              "path": "assets/hero/nuclei/nucleus-kidney.png",
+              "valid": true,
+              "size_bytes": 258800,
+              "sha256": "17c916ca649a0787f0016d8af2aa5f57847b2e881e84f1f8f5d3a7a101f8b24e"
+            },
+            {
+              "path": "assets/method-audit-workflow.png",
+              "valid": true,
+              "size_bytes": 826713,
+              "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37"
+            },
+            {
+              "path": "evidence.json",
+              "valid": true,
+              "size_bytes": 47666,
+              "sha256": "c995d86c9fd44e13b68bde22cb378dad69a4df7ce6d82a477adb7b754ac615de"
+            },
+            {
+              "path": "index.html",
+              "valid": true,
+              "size_bytes": 231000,
+              "sha256": "843636f4970d6e9b8a70d9d1eb3abb1e8841be27be7046b5bb7667cc20c19202"
+            },
+            {
+              "path": "pannuke_mask_qc_overlays.png",
+              "valid": true,
+              "size_bytes": 3188071,
+              "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a"
+            }
+          ],
+          "verification_scope": "served HTTP bytes and manifest identities; no model execution"
+        },
+        "duration_seconds": 6.563
+      }
+    ],
+    "numeric_recalculation_requested": true,
+    "online_comparison_requested": true,
+    "models_trained": false,
+    "source_annotations_modified": false,
+    "not_verified": [
+      "source-image/model retraining",
+      "independent third-party replication",
+      "pathologist error, clinical utility or prospective workflow benefit",
+      "primary PanNuke arrays (separate primary-evidence-v1 release)"
+    ]
+  },
+  "article_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+  "local_quality_gates": {
+    "pytest": {
+      "tests": "1260",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "1",
+      "reported_elapsed_seconds": 605.12
+    },
+    "ruff_check": "passed",
+    "ruff_format": "passed; 233 files",
+    "mypy_src": "passed; 106 files"
+  },
+  "publication": {
+    "ordinary_http_article_readbacks": [
+      {
+        "status": "valid",
+        "url": "https://aancastudy.org/",
+        "remote_package_integrity_valid": true,
+        "matches_local_release": true,
+        "remote_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+        "local_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+        "file_count": 13,
+        "files": [
+          {
+            "path": "README.md",
+            "valid": true,
+            "size_bytes": 5106,
+            "sha256": "0f2e8d48e5f2b36ea8b3c04c980dab2bc1e0c2709905957313c1a588d153d2fa"
+          },
+          {
+            "path": "assets/findings-evidence-story.js",
+            "valid": true,
+            "size_bytes": 3647,
+            "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-bilobed.png",
+            "valid": true,
+            "size_bytes": 212645,
+            "sha256": "03239510ec855de6b84d9c1c56c233ccfdb58efa4bc8ae2a6e59db22d4e5599e"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-compact.png",
+            "valid": true,
+            "size_bytes": 290592,
+            "sha256": "ff1db296bedfb4f921273ef6939ce1742caefedcee84d7f0fff879655dda0f8d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-elongated.png",
+            "valid": true,
+            "size_bytes": 145054,
+            "sha256": "700a5eacba0adc4b8e10f46de2736e05b30ae9f31fd6d3096d7b2beced86946d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-flattened.png",
+            "valid": true,
+            "size_bytes": 157942,
+            "sha256": "c6efd07d2c6109b3bb695ebe1a9201d21aa756ce770f2948866b93c463521845"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-irregular.png",
+            "valid": true,
+            "size_bytes": 234525,
+            "sha256": "e2ec8310d6073f873ffad28a816aa2b3898d49a73bad72ed72612ddda2de115d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-kidney.png",
+            "valid": true,
+            "size_bytes": 258800,
+            "sha256": "17c916ca649a0787f0016d8af2aa5f57847b2e881e84f1f8f5d3a7a101f8b24e"
+          },
+          {
+            "path": "assets/method-audit-workflow.png",
+            "valid": true,
+            "size_bytes": 826713,
+            "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37"
+          },
+          {
+            "path": "evidence.json",
+            "valid": true,
+            "size_bytes": 47666,
+            "sha256": "c995d86c9fd44e13b68bde22cb378dad69a4df7ce6d82a477adb7b754ac615de"
+          },
+          {
+            "path": "index.html",
+            "valid": true,
+            "size_bytes": 231000,
+            "sha256": "843636f4970d6e9b8a70d9d1eb3abb1e8841be27be7046b5bb7667cc20c19202"
+          },
+          {
+            "path": "pannuke_mask_qc_overlays.png",
+            "valid": true,
+            "size_bytes": 3188071,
+            "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a"
+          }
+        ],
+        "verification_scope": "served HTTP bytes and manifest identities; no model execution"
+      },
+      {
+        "status": "valid",
+        "url": "https://www.aancastudy.org/",
+        "remote_package_integrity_valid": true,
+        "matches_local_release": true,
+        "remote_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+        "local_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+        "file_count": 13,
+        "files": [
+          {
+            "path": "README.md",
+            "valid": true,
+            "size_bytes": 5106,
+            "sha256": "0f2e8d48e5f2b36ea8b3c04c980dab2bc1e0c2709905957313c1a588d153d2fa"
+          },
+          {
+            "path": "assets/findings-evidence-story.js",
+            "valid": true,
+            "size_bytes": 3647,
+            "sha256": "e13625e9d4f34bc90f2ea97c3201dd246a5f40b97f475e6bc8b19c02e61878b8"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-bilobed.png",
+            "valid": true,
+            "size_bytes": 212645,
+            "sha256": "03239510ec855de6b84d9c1c56c233ccfdb58efa4bc8ae2a6e59db22d4e5599e"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-compact.png",
+            "valid": true,
+            "size_bytes": 290592,
+            "sha256": "ff1db296bedfb4f921273ef6939ce1742caefedcee84d7f0fff879655dda0f8d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-elongated.png",
+            "valid": true,
+            "size_bytes": 145054,
+            "sha256": "700a5eacba0adc4b8e10f46de2736e05b30ae9f31fd6d3096d7b2beced86946d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-flattened.png",
+            "valid": true,
+            "size_bytes": 157942,
+            "sha256": "c6efd07d2c6109b3bb695ebe1a9201d21aa756ce770f2948866b93c463521845"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-irregular.png",
+            "valid": true,
+            "size_bytes": 234525,
+            "sha256": "e2ec8310d6073f873ffad28a816aa2b3898d49a73bad72ed72612ddda2de115d"
+          },
+          {
+            "path": "assets/hero/nuclei/nucleus-kidney.png",
+            "valid": true,
+            "size_bytes": 258800,
+            "sha256": "17c916ca649a0787f0016d8af2aa5f57847b2e881e84f1f8f5d3a7a101f8b24e"
+          },
+          {
+            "path": "assets/method-audit-workflow.png",
+            "valid": true,
+            "size_bytes": 826713,
+            "sha256": "aaf64096acee49cdcdc0491c4a5aa3749c19912f18b96e3e4b7d88db2c43ad37"
+          },
+          {
+            "path": "evidence.json",
+            "valid": true,
+            "size_bytes": 47666,
+            "sha256": "c995d86c9fd44e13b68bde22cb378dad69a4df7ce6d82a477adb7b754ac615de"
+          },
+          {
+            "path": "index.html",
+            "valid": true,
+            "size_bytes": 231000,
+            "sha256": "843636f4970d6e9b8a70d9d1eb3abb1e8841be27be7046b5bb7667cc20c19202"
+          },
+          {
+            "path": "pannuke_mask_qc_overlays.png",
+            "valid": true,
+            "size_bytes": 3188071,
+            "sha256": "a1bd87dd397417d711d1d4937429eae5f5d972d3fa6ffa27a45129339587f10a"
+          }
+        ],
+        "verification_scope": "served HTTP bytes and manifest identities; no model execution"
+      }
+    ],
+    "ordinary_http_reviewer_readbacks": [
+      [
+        {
+          "url": "https://aancastudy.org/review/",
+          "size_bytes": 142205,
+          "sha256": "df8f8fdab6705050899a5a7e158f2d3dec928e24cce6c895c08c4e5e5fd350f1",
+          "matches_local": true
+        },
+        {
+          "url": "https://aancastudy.org/review/index.html",
+          "size_bytes": 142205,
+          "sha256": "df8f8fdab6705050899a5a7e158f2d3dec928e24cce6c895c08c4e5e5fd350f1",
+          "matches_local": true
+        },
+        {
+          "url": "https://aancastudy.org/review/snapshot.json",
+          "size_bytes": 466,
+          "sha256": "1f8ddfa252f64829ad8f4f7e200a62cd8a652313beff260186fb92c1be579b24",
+          "matches_local": true
+        }
+      ],
+      [
+        {
+          "url": "https://www.aancastudy.org/review/",
+          "size_bytes": 142205,
+          "sha256": "df8f8fdab6705050899a5a7e158f2d3dec928e24cce6c895c08c4e5e5fd350f1",
+          "matches_local": true
+        },
+        {
+          "url": "https://www.aancastudy.org/review/index.html",
+          "size_bytes": 142205,
+          "sha256": "df8f8fdab6705050899a5a7e158f2d3dec928e24cce6c895c08c4e5e5fd350f1",
+          "matches_local": true
+        },
+        {
+          "url": "https://www.aancastudy.org/review/snapshot.json",
+          "size_bytes": 466,
+          "sha256": "1f8ddfa252f64829ad8f4f7e200a62cd8a652313beff260186fb92c1be579b24",
+          "matches_local": true
+        }
+      ]
+    ],
+    "immutable_published_reviewer_checksum": "95fbd30be3126e7b987a5454f15a08e31141a645c4a00262efd88268aa33a0dc"
+  },
+  "hosting": {
+    "build": "passed",
+    "ssh_sftp": "connected",
+    "health_checks": "passed",
+    "backup_id": "20261003-222525"
+  }
+}
