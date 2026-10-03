@@ -2035,3 +2035,20 @@ and Windows CI at
 `https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml`.
 Scientific stage remains `EXTERNAL_VALIDATION_COMPLETE`, presentation stage remains
 `DEMO_COMPLETE`, and natural-data action remains `retain_uncorrected`.
+
+### GitHub publication outcome
+
+The scoped publication succeeded on the existing `main` branch in commit
+`1b64cfd1b0edf87e22d4b04244dfed0bc94fb846`
+(`fix: publish audited V1 contracts and corrected study presentation`). All 35
+reviewed files were committed and pushed. A subsequent `git ls-remote --heads
+origin main` returned exactly the local commit; `git status --short` was empty.
+All thirteen manifest-bound presentation files were also verified directly from
+the Git index before commit, so text normalisation did not change published bytes.
+No credential candidates or oversized files were found in the reviewed scope.
+
+This documentation follow-up records the successful upload. GitHub automatically
+starts the maintained Ubuntu/Windows workflow on each pushed `main` revision;
+consult the workflow for that exact revision for its cross-platform result. The
+full local suite result above is retained as local execution evidence rather than
+being presented as a GitHub CI result.

@@ -1005,3 +1005,12 @@ Check the remote commit, committed presentation bytes and the `Scientific softwa
 workflow for the published revision. A previous revision's successful CI run does
 not establish that the new revision passed. This publication implements D054; it
 does not create a new study or alter the V1/V2 boundary established by D047.
+
+### D055 publication outcome — 3 October 2026
+
+The scoped upload published all 35 reviewed files in
+`1b64cfd1b0edf87e22d4b04244dfed0bc94fb846` on `main`. Direct remote readback matched
+the local commit and the working tree was clean. The staged thirteen-file package
+retained the verified manifest-bound bytes. No release tag, frozen scientific
+authority or source annotation was changed. This follow-up records publication;
+the automatic Ubuntu/Windows workflow provides revision-specific CI evidence.
