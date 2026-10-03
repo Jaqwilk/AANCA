@@ -2,6 +2,43 @@
 
 Updated: 3 October 2026
 
+## GitHub README hierarchy and presentation — 3 October 2026
+
+D058 records the owner's requested README refinement. Primary-source research and
+the design rationale are in `reports/readme_design_2026-10-03.md`. The canonical
+mark, concise navigation and truthful badges introduce the project. Browser review
+and quick start precede detailed evidence. Native disclosures preserve the exact
+comparisons, specialist commands and document inventory; adverse outcomes,
+chronology qualifications and the natural-data action remain visible.
+
+Content readback retained all 42 original numeric code literals, seven original code
+blocks and 39 Markdown link targets. All 37 relative file references resolve, and
+all five images have alt text. The batched GitHub API/native-shell preflight passed
+at 1440 and 390 pixels in both themes: loaded images, valid anchors, keyboard
+disclosures and no page/article overflow. One fix batch replaces the narrow routing
+table with a list and retains legacy reproduction anchors. GitHub's actual published
+README is the final confirmation surface; its post-push readback belongs to the
+published commit's ignored QA outputs, rather than an earlier revision's CI record.
+
+`uv run pytest --durations=10 --junitxml=artifacts/qa/readme-design-tests.xml`
+passed: 1,259 cases, one native Windows skip, 625.64 seconds. Ruff check and format
+(233 files), `mypy src` (106 files), the professor release contract, the synthetic
+smoke CLI and `review_project.py --numeric` passed. The documented doctor and
+synthetic-generation commands ran successfully. Fresh kit extraction passes with
+68 files, including the relative README logo; it is a working-tree candidate,
+not a replacement of the immutable public 67-file `reviewer-kit-v1` archive.
+
+Compact pre-publication evidence is in
+`reports/readme_design_2026-10-03_evidence.json`. Scientific authorities and the
+thirteen-file article retain their identities. Scientific status remains
+`EXTERNAL_VALIDATION_COMPLETE`, presentation `DEMO_COMPLETE`, natural-data action
+`retain_uncorrected`. The prior reviewer-page revision
+`2c6f336bcab4f10a5ecb43ac6cc695be421eef22` passed all seven hosted jobs in
+[run 37151647700](https://github.com/Jaqwilk/AANCA/actions/runs/37151647700).
+The README publication receives its own Ubuntu/Windows run.
+
+Next verification command: `python -I scripts/review_project.py --numeric`.
+
 ## Reviewer page visual alignment — 3 October 2026
 
 D057 records the owner's requested alignment of `/review/` with the main article.

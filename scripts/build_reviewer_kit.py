@@ -25,6 +25,7 @@ ARCHIVE_NAME = "aanca-reviewer-kit-v1.zip"
 RELEASE = "https://github.com/Jaqwilk/AANCA/releases"
 DOCS = (
     "README.md",
+    "docs/assets/aanca-mark.svg",
     "REVIEWER_GUIDE.md",
     "PROFESSOR_BRIEF.md",
     "PUBLIC_EVIDENCE.md",

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">AANCA</title>
+  <desc id="desc">Four equal violet tiles in a two-by-two grid, rotated together by 45 degrees.</desc>
+  <g fill="#5E6AD2" transform="rotate(45 32 32)">
+    <rect x="13" y="13" width="16" height="16" rx="4"/>
+    <rect x="35" y="13" width="16" height="16" rx="4"/>
+    <rect x="13" y="35" width="16" height="16" rx="4"/>
+    <rect x="35" y="35" width="16" height="16" rx="4"/>
+  </g>
+</svg>

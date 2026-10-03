@@ -1096,3 +1096,36 @@ connected over SSH/SFTP and retained backup `20261003-222525`. Ordinary apex/www
 HTTP readbacks match the guide, pinned snapshot and all thirteen article files.
 The published reviewer checksum is unchanged. Exact evidence is in
 `reports/reviewer_design_2026-10-03_evidence.json`.
+
+## D058 — Refine GitHub README hierarchy using researched project references
+
+Status: accepted presentation refinement; no scientific stage change
+
+On 3 October 2026 the owner requested a more professional README inspired by large,
+highly starred GitHub projects across categories. Inspect FastAPI, Transformers,
+uv and VS Code as primary presentation references. Apply their clear entry routes
+and documentation hierarchy within GitHub's native Markdown surface, while keeping
+the existing AANCA identity and scientific authorities.
+
+Use the canonical four-tile mark and truthful environment/use/licence badges.
+Bring browser review and quick start forward; retain exact numbers, executable
+commands and specialist detail in native disclosures. Keep adverse findings,
+chronology limitations and `retain_uncorrected` visible. Preserve licence terms,
+source-data terms, legacy reproduction anchors and AI-assistance disclosure.
+
+Bundle the relative logo asset in fresh offline kit candidates. The published
+`reviewer-kit-v1` archive, tag and pinned identity remain immutable. Verify native
+GitHub rendering on desktop/mobile in both themes, links, image loading, keyboard
+disclosures, isolated extraction, the synthetic CLI and all mandatory gates.
+Publish only the scoped README, supporting asset/packaging entry and documentation.
+Scientific status remains `EXTERNAL_VALIDATION_COMPLETE`, presentation
+`DEMO_COMPLETE`, natural-data action `retain_uncorrected`.
+
+### D058 validation outcome — 3 October 2026
+
+The complete local suite passed 1,259 cases with one native Windows skip in 625.64
+seconds. Ruff, formatting, source typing, professor release verification, saved-array
+recalculation, the synthetic CLI and isolated kit extraction passed. Preflight
+rendering passed at both widths in both GitHub themes; one bounded fix batch
+improves the initial mobile routing and retains reproduction anchors. Exact content
+and validation evidence is in `reports/readme_design_2026-10-03_evidence.json`.

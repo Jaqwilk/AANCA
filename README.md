@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://aancastudy.org/"><img src="docs/assets/aanca-mark.svg" width="64" height="64" alt="AANCA four-tile mark"></a>
+</p>
+
 <h1 align="center">AANCA</h1>
 
 <p align="center">
@@ -7,23 +11,20 @@
 </p>
 
 <p align="center">
-  <a href="https://aancastudy.org"><strong>Website</strong></a>
-  ·
-  <a href="https://aancastudy.org/review/"><strong>Review this project</strong></a>
-  ·
-  <a href="PROFESSOR_BRIEF.md">One-page brief</a>
-  ·
-  <a href="PUBLIC_EVIDENCE.md">Public evidence</a>
-  ·
-  <a href="#reproducibility-levels">Reproduce</a>
-  ·
-  <a href="CITATION.cff">Cite</a>
+  <a href="https://aancastudy.org/"><strong>Website</strong></a>
+  · <a href="https://aancastudy.org/review/"><strong>Reviewer guide</strong></a>
+  · <a href="#quick-start">Quick start</a>
+  · <a href="#how-aanca-works">Method</a>
+  · <a href="#current-conclusion">Evidence</a>
+  · <a href="#reproducibility-levels">Reproduce</a>
+  · <a href="#key-documents">Documentation</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Scientific software CI" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
-  <img alt="Scientific stage: EXTERNAL_VALIDATION_COMPLETE" src="https://img.shields.io/badge/science-EXTERNAL__VALIDATION__COMPLETE-238636">
-  <img alt="Clinical use: not established" src="https://img.shields.io/badge/clinical%20use-not%20established-6B7280">
+  <a href="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml"><img alt="Scientific software CI on Ubuntu and Windows" src="https://github.com/Jaqwilk/AANCA/actions/workflows/scientific-software.yml/badge.svg?branch=main"></a>
+  <a href="pyproject.toml"><img alt="Reference Python version: 3.12" src="https://img.shields.io/badge/Python-3.12-5E6AD2"></a>
+  <a href="ETHICS_AND_LIMITATIONS.md"><img alt="Use: non-clinical research" src="https://img.shields.io/badge/Use-non--clinical%20research-626874"></a>
+  <a href="LICENSE"><img alt="Licence: limited evaluation permission" src="https://img.shields.io/badge/Licence-limited%20evaluation-626874"></a>
 </p>
 
 AANCA is a non-diagnostic research prototype. It ranks annotations for review,
@@ -42,6 +43,80 @@ needs no third-party libraries, network, GPU or research environment. Optional
 check is not clinical validation. See [REVIEWER_GUIDE.md](REVIEWER_GUIDE.md) for
 download checksums, exact commands and the larger primary-evidence route.
 
+- **Read the study:** [public article](https://aancastudy.org/) · [one-page brief](PROFESSOR_BRIEF.md). A browser is enough.
+- **Inspect and verify evidence:** [reviewer guide](https://aancastudy.org/review/) · [offline kit](https://github.com/Jaqwilk/AANCA/releases/tag/reviewer-kit-v1). Local checks need Python 3.12; numeric checks additionally need NumPy.
+- **Run the software:** [quick start](#quick-start) · [reproducibility instructions](REPRODUCIBILITY.md). Use Python 3.12, uv and the locked environment.
+
+From the extracted reviewer kit:
+
+~~~console
+python -I scripts/review_project.py
+~~~
+
+<a id="install-and-run-the-portable-workflow"></a>
+
+## Quick start
+
+Requirements:
+
+- Python `3.12`;
+- [uv](https://docs.astral.sh/uv/);
+- Git LFS for the released PUMA numeric evidence;
+- a lawful local copy of any dataset used for a real-data re-execution.
+
+~~~powershell
+git clone https://github.com/Jaqwilk/AANCA.git
+cd AANCA
+git lfs pull
+uv sync --frozen --dev
+
+uv run histo-audit doctor
+uv run histo-audit data generate-synthetic --config configs/smoke.yaml
+uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs
+~~~
+
+The synthetic path validates software behaviour only. It is not medical or natural
+annotation evidence.
+
+The lock file resolves the reference Windows/NVIDIA environment with PyTorch CUDA
+12.6 wheels. A different accelerator or CPU-only environment should use the official
+PyTorch selector while preserving the project versions and scientific configs.
+
+## How AANCA works
+
+1. Preserve `pre_corruption_label`, `observed_label`, corruption metadata and the
+   immutable source annotation as separate fields.
+2. Split only by `group_id`, at least the complete source patch and stronger patient,
+   WSI or case identifiers where the source provides them.
+3. Produce model-based audit scores out of fold so a nucleus and its complete source
+   group are absent from the model that scores it.
+4. Combine OOF support for the observed label and fold-safe neighbourhood evidence into a
+   fixed expert-review queue.
+5. Compare the queue with exact equal-budget matched-random review.
+6. Evaluate retrieval and downstream utility separately; a favourable ranking never
+   substitutes for a favourable downstream result.
+
+The primary scientific invariants are frozen in [`SPEC.md`](SPEC.md) and enforced in
+code and tests.
+
+<details>
+<summary><strong>Released rankings, calibration and the selected candidate</strong></summary>
+
+The maintained rankings use uncalibrated OOF probabilities. Cross-fitted temperature
+calibration is an optional development capability requiring independent expert-review
+evidence; it was not applied to the released rankings. A risk percentile is a ranking
+factor, not a calibrated probability of annotation error.
+
+The original-label CLI defaults to the reference self-confidence workflow, balanced
+logistic fitting with `l2=0.01` and `k=7` neighbours. The selected later research
+candidate is separately frozen in
+[`configs/aanca_selected_development_candidate.yaml`](configs/aanca_selected_development_candidate.yaml):
+multiscale 64/128 ResNet-18 features, a 60/40 confidence/neighbourhood hybrid,
+`k=31`, unbalanced fitting and `l2=0.1`. Running the original-label CLI does not
+implicitly load that selected candidate.
+
+</details>
+
 ## Current conclusion
 
 Under a score-before-reference public replication, the frozen AANCA ranking enriched
@@ -52,6 +127,24 @@ frozen current system also transferred to a new histopathology source under
 **controlled label corruption** in PUMA. These are review-prioritisation and
 controlled-transfer results, not adjudication of pathologist error or evidence of
 prospective workflow benefit.
+
+### Retained limits
+
+- **PanNuke:** ranking evidence was positive, H4 downstream restoration was adverse.
+  The accepted analysis is permanently `amended_or_exploratory` because outcomes
+  were exposed during recovery.
+- **NuCLS multi-rater:** the frozen ranking gate failed and guided correction was
+  adverse. Natural-error and downstream-improvement claims were not supported.
+- **MoNuSAC:** retrieval passed, but downstream and class-safety gates failed;
+  action remained `retain_uncorrected`.
+- **PUMA:** controlled-noise transfer does not establish natural/pathologist-error
+  detection. Public Git history does not independently timestamp the freeze before
+  results; every-class safeguards passed in only 1/9 post-confirmation stress scenarios.
+
+The binding action for unreviewed natural data is `retain_uncorrected`.
+
+<details>
+<summary><strong>All evaluated studies: exact results and interpretation</strong></summary>
 
 | Evaluation | Result | Responsible interpretation |
 | --- | --- | --- |
@@ -64,6 +157,11 @@ prospective workflow benefit.
 | PUMA post-confirmation realism stress | Positive aggregate downstream lower bounds in 9/9 scenarios; every class safeguard passed in only 1/9 | Useful robustness evidence and a binding class-safety warning; exploratory only |
 | PUMA observed-label fold sensitivity | All seven sensitivity gates passed with audit-time labels; candidate unchanged | Shows the controlled PUMA result did not depend on clean labels for fold allocation; not independent confirmation |
 | Prospective natural-case workflow | Not executed | `CONFIRMATORY_COMPLETE`, clinical utility and automatic natural-data intervention are not claimed |
+
+</details>
+
+<details>
+<summary><strong>PUMA: exact endpoint, intervention and freeze chronology</strong></summary>
 
 The exact frozen PUMA endpoint was:
 
@@ -95,6 +193,10 @@ The PUMA verifier is a project-coupled evidence-readback script that recomputes
 metrics from saved predictions but does not retrain all 44 models. It is not
 third-party validation. These are explicit reproducibility limits, not missing
 positive results.
+
+</details>
+
+See [PUBLIC_EVIDENCE.md](PUBLIC_EVIDENCE.md) for release identities and [ETHICS_AND_LIMITATIONS.md](ETHICS_AND_LIMITATIONS.md) for the complete claim boundary.
 
 ## What the project can claim
 
@@ -128,68 +230,14 @@ Current evidence does **not** support these statements:
 
 The binding action for unreviewed natural data is `retain_uncorrected`.
 
-## How AANCA works
-
-1. Preserve `pre_corruption_label`, `observed_label`, corruption metadata and the
-   immutable source annotation as separate fields.
-2. Split only by `group_id`, at least the complete source patch and stronger patient,
-   WSI or case identifiers where the source provides them.
-3. Produce model-based audit scores out of fold so a nucleus and its complete source
-   group are absent from the model that scores it.
-4. Combine OOF support for the observed label and fold-safe neighbourhood evidence into a
-   fixed expert-review queue.
-5. Compare the queue with exact equal-budget matched-random review.
-6. Evaluate retrieval and downstream utility separately; a favourable ranking never
-   substitutes for a favourable downstream result.
-
-The primary scientific invariants are frozen in [`SPEC.md`](SPEC.md) and enforced in
-code and tests.
-
-The maintained rankings use uncalibrated OOF probabilities. Cross-fitted temperature
-calibration is an optional development capability requiring independent expert-review
-evidence; it was not applied to the released rankings. A risk percentile is a ranking
-factor, not a calibrated probability of annotation error.
-
-The original-label CLI defaults to the reference self-confidence workflow, balanced
-logistic fitting with `l2=0.01` and `k=7` neighbours. The selected later research
-candidate is separately frozen in
-[`configs/aanca_selected_development_candidate.yaml`](configs/aanca_selected_development_candidate.yaml):
-multiscale 64/128 ResNet-18 features, a 60/40 confidence/neighbourhood hybrid,
-`k=31`, unbalanced fitting and `l2=0.1`. Running the original-label CLI does not
-implicitly load that selected candidate.
-
-## Install and run the portable workflow
-
-Requirements:
-
-- Python `3.12`;
-- [uv](https://docs.astral.sh/uv/);
-- Git LFS for the released PUMA numeric evidence;
-- a lawful local copy of any dataset used for a real-data re-execution.
-
-~~~powershell
-git clone https://github.com/Jaqwilk/AANCA.git
-cd AANCA
-git lfs pull
-uv sync --frozen --dev
-
-uv run histo-audit doctor
-uv run histo-audit data generate-synthetic --config configs/smoke.yaml
-uv run histo-audit experiment smoke --runs-root artifacts/smoke_runs
-~~~
-
-The synthetic path validates software behaviour only. It is not medical or natural
-annotation evidence.
-
-The lock file resolves the reference Windows/NVIDIA environment with PyTorch CUDA
-12.6 wheels. A different accelerator or CPU-only environment should use the official
-PyTorch selector while preserving the project versions and scientific configs.
-
 ## Reproducibility levels
 
 The repository deliberately separates three different tasks.
 
-### Verify the published presentation
+<a id="verify-the-published-presentation"></a>
+
+<details>
+<summary><strong>Verify the published presentation</strong></summary>
 
 ~~~powershell
 python scripts/present_demo.py --verify-only
@@ -201,7 +249,12 @@ summary. The second command additionally checks all thirteen served files and
 requires the deployed manifest to match the local release. Both are read-only.
 Neither command recalculates a scientific result.
 
-### Recalculate released evidence
+</details>
+
+<a id="recalculate-released-evidence"></a>
+
+<details>
+<summary><strong>Recalculate released evidence</strong></summary>
 
 ~~~powershell
 uv run python scripts/verify_primary_evidence.py PATH/TO/aanca-primary-evidence-v1
@@ -231,7 +284,12 @@ These require the lawfully obtained PUMA source archives and NuCLS single-rater
 SQLite database respectively. The PUMA check rebuilds the official source manifest
 before reading saved predictions; the NuCLS check reassesses reference feasibility.
 
-### Re-execute from images
+</details>
+
+<a id="re-execute-from-images"></a>
+
+<details>
+<summary><strong>Re-execute from images</strong></summary>
 
 Full image-to-result re-execution additionally requires the official dataset files,
 their licences, sufficient compute and the governed acquisition checks in
@@ -250,27 +308,12 @@ uv run python scripts/verify_aanca_selected_candidate.py --output artifacts/qa/s
 It verifies an already frozen candidate and must not be used to tune on an opened
 final-reference dataset. This command is not a released-array-only check.
 
-## Public repository boundary
-
-The current Git tree retains only material with an active scientific, engineering or
-presentation role:
-
-- maintained Python source, tests, dependency lock and CI;
-- frozen protocols, configs, decisions and status records;
-- compact reports, manifests and result authorities;
-- Git LFS numeric arrays required by the PUMA evidence readback;
-- the checksum-verifiable static presentation and its checksum-bound assets.
-
-It excludes raw/licensed datasets, local virtual environments, reusable embeddings,
-full run workspaces, model caches, superseded previews, browser-test output and
-temporary cleanup files. Empty artifact placeholders were replaced by
-[`data/README.md`](data/README.md); maintained commands create output directories as
-needed.
-
-Do not run `git clean -fdX` in a research workspace: ignored raw data and accepted
-local run lineage are not disposable caches.
+</details>
 
 ## Repository layout
+
+<details>
+<summary><strong>Package layout and public repository boundary</strong></summary>
 
 ~~~text
 AANCA/
@@ -292,7 +335,32 @@ AANCA/
 └── *.md                      # scientific governance and handoff documents
 ~~~
 
+### Public repository boundary
+
+The current Git tree retains only material with an active scientific, engineering or
+presentation role:
+
+- maintained Python source, tests, dependency lock and CI;
+- frozen protocols, configs, decisions and status records;
+- compact reports, manifests and result authorities;
+- Git LFS numeric arrays required by the PUMA evidence readback;
+- the checksum-verifiable static presentation and its checksum-bound assets.
+
+It excludes raw/licensed datasets, local virtual environments, reusable embeddings,
+full run workspaces, model caches, superseded previews, browser-test output and
+temporary cleanup files. Empty artifact placeholders were replaced by
+[`data/README.md`](data/README.md); maintained commands create output directories as
+needed.
+
+Do not run `git clean -fdX` in a research workspace: ignored raw data and accepted
+local run lineage are not disposable caches.
+
+</details>
+
 ## Current stage and next phase
+
+<details>
+<summary><strong>Execution stages and the separate AANCA V2 programme</strong></summary>
 
 Completed vocabulary stages:
 
@@ -325,6 +393,8 @@ Ranking, downstream confidence intervals, every-class safety, convergence and
 workflow utility must pass together before any realistic natural-case improvement
 claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 
+</details>
+
 ## Key documents
 
 | Document | Purpose |
@@ -334,6 +404,12 @@ claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 | [`STATUS.md`](STATUS.md) | Current evidence, commands and handoff |
 | [`DECISIONS.md`](DECISIONS.md) | Binding scientific and engineering rationale |
 | [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md) | Frozen primary and confirmatory analysis definitions |
+
+<details>
+<summary><strong>Evidence, methods and the next research phase</strong></summary>
+
+| Document | Purpose |
+| --- | --- |
 | [`PUBLIC_EVIDENCE.md`](PUBLIC_EVIDENCE.md) | Primary evidence release and independent recalculation |
 | [`PROFESSOR_BRIEF.md`](PROFESSOR_BRIEF.md) | One-page problem, method, strongest result, negative evidence and next experiment |
 | [`FINAL_READINESS_REPORT.md`](FINAL_READINESS_REPORT.md) | Final professor-facing evidence and release audit |
@@ -355,9 +431,14 @@ claim. The detailed promotion contract is in [`NEXT_PHASE.md`](NEXT_PHASE.md).
 | [`NEXT_PHASE.md`](NEXT_PHASE.md) | Presentation-ready AANCA v2 evidence programme |
 | [`ETHICS_AND_LIMITATIONS.md`](ETHICS_AND_LIMITATIONS.md) | Responsible-use and claim boundary |
 
+</details>
+
 Read the first five documents before changing scientific code or claims.
 
 ## Validation gates
+
+<details>
+<summary><strong>Run the complete software and evidence gates</strong></summary>
 
 Every material change must pass:
 
@@ -372,6 +453,8 @@ uv run python -I scripts/verify_professor_release.py
 
 The maintained GitHub workflow runs the locked checks on Ubuntu and Windows plus the
 deterministic synthetic workflow. A failed mandatory gate stops advancement.
+
+</details>
 
 ## Data terms, licence and citation
 
@@ -399,4 +482,4 @@ release, for example through Zenodo.
 Research direction, review and final scientific responsibility: **Natan Smogór**.
 AI-assisted tools supported implementation, testing, orchestration, documentation
 and presentation; they supplied no expert labels and are not independent validators.
-See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 2 October 2026.
+See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md). Updated 3 October 2026.

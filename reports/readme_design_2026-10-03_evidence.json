@@ -1,0 +1,185 @@
+{
+  "scope": "README design and access; pre-publication software checks",
+  "date": "2026-10-03",
+  "base_revision": "2c6f336bcab4f10a5ecb43ac6cc695be421eef22",
+  "input_sha256": {
+    "README.md": "a82be18fc303c1c1d4d1fa401df53e7f5207cad810932c31bcfb0d9c9d27a37b",
+    "docs/assets/aanca-mark.svg": "eb0c027badbd95a9a03d217f4e4d3900fdff4c3fb9452c231a957a8c996e5f0a",
+    "scripts/build_reviewer_kit.py": "c058742a1d9fd20b86a50046028faaeaaa5900f541cd41b5cf7e5bbff49315e5"
+  },
+  "preserved_content": {
+    "original_numeric_literals_retained": 42,
+    "original_code_blocks_retained": 7,
+    "original_markdown_link_targets_retained": 39,
+    "native_disclosures": 10
+  },
+  "relative_links_and_alt_text": {
+    "relative_file_count": 37,
+    "missing_files": [],
+    "image_count": 5,
+    "all_images_have_alt_text": true
+  },
+  "browser_preflight": {
+    "renderer": "GitHub Markdown REST API in the real GitHub README shell",
+    "unpublished_logo_only_fulfilled_from_local_source": true,
+    "viewport_widths": [
+      1440,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "five_images_loaded_in_each_variant": true,
+    "header_anchors_resolve": true,
+    "keyboard_disclosures_work": true,
+    "no_page_or_article_overflow": true,
+    "native_results_table_scrolls_on_mobile": true,
+    "bounded_fix_batch": [
+      "Replace narrow initial routing table with a wrapping list",
+      "Retain legacy reproduction anchors"
+    ],
+    "does_not_attest_remote_publication": true
+  },
+  "local_validation": {
+    "pytest": {
+      "passed": 1259,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 625.64,
+      "junit_sha256": "6cbe50f13300f1216421acf2f1151a0e4576b38e03ea363728f409558371285f",
+      "skip_reason": "POSIX permits renaming an open file; Windows denies delete sharing here"
+    },
+    "ruff_check": "passed",
+    "ruff_format": {
+      "status": "passed",
+      "files": 233
+    },
+    "mypy_src": {
+      "status": "passed",
+      "files": 106
+    },
+    "professor_release_contract": "valid",
+    "review_project_numeric": {
+      "schema_version": 1,
+      "status": "passed",
+      "checks": [
+        {
+          "name": "article_and_sources",
+          "status": "passed",
+          "scope": "13 presentation files, upstream source identities and selected narrative contracts",
+          "result": {
+            "status": "valid",
+            "package_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+            "package_file_count": 13,
+            "upstream_authority_count": 19,
+            "professor_brief_bytes": 5905,
+            "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
+            "presentation_status": "DEMO_COMPLETE"
+          },
+          "duration_seconds": 0.063
+        },
+        {
+          "name": "nucls_saved_arrays",
+          "status": "passed",
+          "scope": "NuCLS file identities, manifest, rankings, downstream metrics and group bootstraps",
+          "result": {
+            "study_id": "nucls_natural_label_external_validation_v1",
+            "file_identity_status": "passed",
+            "portable_manifest_status": "passed",
+            "independent_recalculation_status": "passed",
+            "subsets": [
+              {
+                "subset": "unbiased_control",
+                "sample_count": 811,
+                "patient_group_count": 5,
+                "natural_disagreement_count": 27,
+                "average_precision": 0.07348905384277785,
+                "precision_at_5_percent": 0.0975609756097561,
+                "ranking_success_conditions_met": false,
+                "guided_minus_uncorrected_macro_f1": -0.014633352536513322,
+                "downstream_success_conditions_met": false
+              },
+              {
+                "subset": "evaluation",
+                "sample_count": 908,
+                "patient_group_count": 5,
+                "natural_disagreement_count": 60,
+                "average_precision": 0.08385776787414528,
+                "precision_at_5_percent": 0.06521739130434782,
+                "ranking_success_conditions_met": false,
+                "guided_minus_uncorrected_macro_f1": -0.008363810600757304,
+                "downstream_success_conditions_met": false
+              }
+            ],
+            "primary_claim_conclusion": "not_supported",
+            "pathologist_error_proven": false,
+            "clinical_utility_proven": false
+          },
+          "duration_seconds": 1.89
+        },
+        {
+          "name": "monusac_saved_arrays",
+          "status": "passed",
+          "scope": "MoNuSAC file identities, matched controls, metrics and whole-patient bootstrap gates",
+          "result": {
+            "all_success_conditions_met": false,
+            "decision": "not supported; retain corrupted-baseline comparison and do not claim a better real-world model",
+            "files_verified": 4,
+            "ranking_candidates_verified": 4,
+            "status": "verified",
+            "study_id": "monusac_current_aanca_controlled_external_v1",
+            "whole_patient_bootstrap_iterations": 2000
+          },
+          "duration_seconds": 1.672
+        }
+      ],
+      "numeric_recalculation_requested": true,
+      "online_comparison_requested": false,
+      "models_trained": false,
+      "source_annotations_modified": false,
+      "not_verified": [
+        "source-image/model retraining",
+        "independent third-party replication",
+        "pathologist error, clinical utility or prospective workflow benefit",
+        "primary PanNuke arrays (separate primary-evidence-v1 release)"
+      ]
+    },
+    "synthetic_smoke": {
+      "status": "completed",
+      "run_id": "20261003T212035.285923Z_synthetic_smoke_86b0fe0b0d",
+      "software_validation_only": true
+    },
+    "documented_doctor": "executed successfully; local dataset presence is not source verification",
+    "documented_synthetic_generation": "verified_existing",
+    "bundled_design_detector": "README target returned exit code 0 without diagnostics; native browser inspection remains authoritative"
+  },
+  "kit_candidate": {
+    "archive": "artifacts\\qa\\readme-candidate\\aanca-reviewer-kit-v1.zip",
+    "size_bytes": 21473090,
+    "sha256": "6783c05f11cfa8b898b64286f5afcce5cbac36e63501746081874a93b08e7d41",
+    "source_revision": "2c6f336bcab4f10a5ecb43ac6cc695be421eef22",
+    "source_tree_dirty": true,
+    "file_count": 68,
+    "article_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+    "kit_manifest_root_sha256": "77afe89f7f8e6e571c220c82bf1bc10c24a26d07fda6b938113a8fe90dde86a9",
+    "isolated_extraction_check": "passed"
+  },
+  "invariants": {
+    "scientific_status": "EXTERNAL_VALIDATION_COMPLETE",
+    "presentation_status": "DEMO_COMPLETE",
+    "natural_data_action": "retain_uncorrected",
+    "article_manifest_root_sha256": "299efc58c18597e84ea62ea23ec84ed5802a6b61ebce63a53ca9fb3ec0c69a52",
+    "published_reviewer_archive_sha256": "95fbd30be3126e7b987a5454f15a08e31141a645c4a00262efd88268aa33a0dc",
+    "published_reviewer_archive_files": 67,
+    "historical_release_not_replaced": true
+  },
+  "prior_revision_ci": {
+    "revision": "2c6f336bcab4f10a5ecb43ac6cc695be421eef22",
+    "conclusion": "success",
+    "url": "https://github.com/Jaqwilk/AANCA/actions/runs/37151647700",
+    "does_not_attest_the_upcoming_commit": true
+  },
+  "local_logs_and_screenshots_are_ignored": true
+}
