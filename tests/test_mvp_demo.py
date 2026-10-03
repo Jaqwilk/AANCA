@@ -944,7 +944,8 @@ def test_build_and_verify_mvp_is_read_only_and_complete(tmp_path: Path) -> None:
     assert "2024/2025 academic year" in html
     assert "Completion diploma" in html
     assert "do not imply institutional endorsement of AANCA" in html
-    assert "2 October 2026" in html
+    assert "3 October 2026" in html
+    assert 'href="https://aancastudy.org/review/">Review</a>' in html
     assert "gsap@3.15.0" in html
     assert (
         'integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"'

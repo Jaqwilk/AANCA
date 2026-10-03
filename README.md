@@ -9,6 +9,8 @@
 <p align="center">
   <a href="https://aancastudy.org"><strong>Website</strong></a>
   ·
+  <a href="https://aancastudy.org/review/"><strong>Review this project</strong></a>
+  ·
   <a href="PROFESSOR_BRIEF.md">One-page brief</a>
   ·
   <a href="PUBLIC_EVIDENCE.md">Public evidence</a>
@@ -28,6 +30,17 @@ AANCA is a non-diagnostic research prototype. It ranks annotations for review,
 never treats model disagreement as biological truth and never modifies source
 annotations automatically. Outputs are described only as potentially inconsistent
 annotations recommended for expert review.
+
+## Start reviewing
+
+The **[reviewer guide](https://aancastudy.org/review/)** connects methods, retained
+negative results, provenance and verification scope. Download the small
+[offline reviewer kit](https://github.com/Jaqwilk/AANCA/releases/tag/reviewer-kit-v1)
+and, with Python 3.12, run `python -I scripts/review_project.py`. The default check
+needs no third-party libraries, network, GPU or research environment. Optional
+`--numeric` recalculates saved NuCLS/MoNuSAC evidence using NumPy only; a passing
+check is not clinical validation. See [REVIEWER_GUIDE.md](REVIEWER_GUIDE.md) for
+download checksums, exact commands and the larger primary-evidence route.
 
 ## Current conclusion
 
@@ -369,9 +382,11 @@ establish identical terms for every source file. PUMA is recorded under its offi
 CC0 authority. Review each source before use.
 
 The project code and original documentation are covered by the explicit
-all-rights-reserved [`LICENSE`](LICENSE). It grants no general reuse permission and
-does not apply to datasets, pretrained weights, dependencies, logos or other
-third-party materials. Their separate terms remain controlling.
+all-rights-reserved [`LICENSE`](LICENSE), with a limited grant for local copying and
+execution solely for non-clinical scientific evaluation, peer review and verification.
+Other rights are reserved; this is not an open-source licence. It does not apply to
+datasets, pretrained weights, dependencies, logos or other third-party materials.
+Their separate terms remain controlling.
 
 The verified project bibliography is
 [`references/references.bib`](references/references.bib).

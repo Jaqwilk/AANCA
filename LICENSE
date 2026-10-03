@@ -2,10 +2,20 @@ AANCA CODE RIGHTS NOTICE
 
 Copyright (c) 2026 Natan Smogór. All rights reserved.
 
-No licence to copy, modify, distribute, sublicense, sell or use the original AANCA
-source code, documentation or presentation assets is granted by publication of this
-repository. Permission must be obtained from the copyright holder unless an
-applicable law independently permits the intended use.
+Limited scientific-evaluation permission
+
+The copyright holder permits individuals and institutions to download and make
+local copies of the original AANCA source code, documentation and presentation
+assets, and to execute the code, solely for non-clinical scientific evaluation,
+peer review and verification of the reported research. Retain this notice and the
+author attribution with local copies. Reviewers may report their findings and cite
+the project. This permission does not grant redistribution, sublicensing, sale,
+commercial product use, or publication of modified versions of these materials.
+
+All other rights are reserved. Permission must be obtained from the copyright
+holder for uses outside this limited grant unless an applicable law independently
+permits the intended use. This is a limited evaluation permission, not an
+open-source licence.
 
 This notice does not cover third-party datasets, pretrained model weights,
 dependencies, publications, logos or other third-party materials. Those materials

@@ -2,6 +2,54 @@
 
 Updated: 3 October 2026
 
+## V1 reviewer access and CI optimisation — 3 October 2026
+
+The researched plan is in `reports/reviewer_access_and_ci_2026-10-03.md`; D056
+records the owner-authorised engineering scope and limited evaluation permission.
+Added the English browser/offline review guide, standard-library review entry point,
+optional NumPy-only NuCLS/MoNuSAC recalculation, deterministic 67-file reviewer kit
+and isolated CI partitions with mandatory complete-coverage aggregation. Frozen
+scientific authorities, source annotations and selection rules are unchanged.
+
+Executed local checks so far:
+
+- `uv run pytest tests/test_reviewer_kit.py tests/test_test_shards.py tests/test_mvp_demo.py -q --durations=5`:
+  39 passed. An initial missing test-file selector was corrected; the old 2 October
+  presentation-date expectation was updated after the new 3 October access change.
+- Both real 2-way partition invocations on the 25 new regression cases passed;
+  `verify_test_shards.py` confirmed 25 distinct executed cases with no missing coverage.
+- `uv run ruff check .` and `uv run ruff format --check .`: passed, 233 files formatted.
+- `uv run mypy src`: passed, 106 source files.
+- `uv run python -I scripts/review_project.py --numeric --report artifacts/qa/reviewer-numeric-20261003.json`:
+  passed in about 3 seconds, retaining the adverse/not-supported scientific decisions.
+- Fresh kit build and isolated extraction check: passed; approximately 21.3 MB,
+  67 files, default integrity/narrative checks about 0.1 seconds locally.
+- Browser first inspection at 1440 and 390 pixels: no horizontal overflow or missing
+  in-page anchors; all 22 local offline-guide links resolve inside the kit. The small
+  accessibility fix batch enlarged standalone navigation targets, fixed print-hover
+  contrast and removed a missing-favicon request. The bounded confirmation passed.
+- Synthetic smoke completed successfully under `artifacts/qa/reviewer-smoke-20261003`.
+
+The initial unpartitioned full suite completed in 586.53 seconds with 1,256 passes,
+one platform skip and two outdated CI-shape assertions. Those assertions now parse
+the relevant jobs, preserve full-environment LFS and the Windows type gate, and
+require exhaustive coverage. After repair, both full local partitions passed:
+619 cases in 319.04 seconds and 640 cases plus one skip in 330.52 seconds.
+`verify_test_shards.py` accepted all 1,260 collected cases, with 1,259 passes,
+one skip and no overlap or missing outcome. Logs, JUnit and receipts are retained
+under `artifacts/qa/reviewer-local-shard-*` and `reviewer-accepted-shards`.
+Fresh Ruff, format (233 files) and mypy (111 files) passed after repair.
+
+Browser confirmation passed at both widths, with visible keyboard focus, 44-pixel
+standalone navigation, 13.65:1 body contrast and 4.70:1 primary-action contrast.
+The existing hosting wrapper's preflight built/verified the article and connected
+over SSH/SFTP successfully; no scientific dependency was added for deployment.
+Publication, final live readback and fresh hosted Ubuntu/Windows timing remain
+pending at this pre-publication entry. Next gate: publish the reviewed revision and
+read its complete-coverage CI result. Scientific status
+remains `EXTERNAL_VALIDATION_COMPLETE`, presentation status `DEMO_COMPLETE`, and
+natural-data action `retain_uncorrected`.
+
 ## Presentation UI note (22 August 2026)
 
 The checked-in `artifacts/mvp_demo` package remains a single long-form article:

@@ -5,6 +5,24 @@ as equivalent: verifying the published article package, reproducing the syntheti
 software workflow, independently recomputing the PanNuke primary study, verifying
 external numeric evidence and re-executing a study from source images.
 
+## Portable reviewer entry point
+
+[`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md) and the
+[browser guide](https://aancastudy.org/review/) provide the shortest review route.
+`python -I scripts/review_project.py` wraps the existing standard-library article,
+source-identity and selected narrative checks. Its default uses no network or
+third-party libraries; it does not perform numeric recalculation or retraining.
+The offline kit additionally checks its closed inventory, source revision and
+build-tree state. Compare the downloaded ZIP against its release SHA-256 sidecar;
+the internal manifest alone cannot independently authenticate the publisher.
+
+After `python -m pip install -r requirements-reviewer.txt`, `--numeric` additionally
+invokes the independent NumPy-only NuCLS multi-rater and MoNuSAC recalculations.
+Their failed scientific gates remain failed. `--online` explicitly checks the live
+article against this snapshot; `--report ../review.json` saves a scoped JSON receipt
+outside the immutable kit. No model is trained and source annotations are unchanged.
+Other study readbacks and source-image reproduction remain separate operations below.
+
 ## What the public repository can reproduce
 
 After installing Python 3.12 and `uv`, a reviewer can run the complete deterministic
@@ -24,13 +42,18 @@ ranking, restoration, statistics and artifact plumbing; it is not PanNuke eviden
 The data-generation command is idempotent: an identical existing package is verified
 and reused, while any changed, partial or unexpected artifact fails closed.
 
-The `Scientific software` GitHub Actions workflow first verifies the sealed static
-package, then executes lint, formatting, the complete test suite and this synthetic
-workflow on both Ubuntu and Windows. Checkout materialises the tracked Git LFS
-objects before package verification and tests; the large PUMA archives must therefore
-be real NPZ data rather than pointer text. Tests that exercise Windows-native handle
-custody are explicitly skipped on non-Windows systems rather than failing during
-test collection.
+The `Scientific software` GitHub Actions workflow has a standard-library reviewer
+lane on both platforms, separate from the full scientific environment. The full
+Ubuntu/Windows lanes execute lint, formatting, all test cases and the synthetic
+workflow, using two isolated deterministic test partitions per platform. A required
+aggregation job checks full collection, disjoint execution, outcomes and revision
+identity; a successful subset alone is not a passing full suite. Default local
+`pytest` still executes the complete suite. Full-suite checkout materialises tracked
+Git LFS objects, so the large PUMA archives must be real NPZ data rather than pointer
+text. The lightweight reviewer lane does not need them. Windows-native handle
+custody tests are explicitly skipped on non-Windows systems; CUDA and uncached-weight
+skips are reported separately. JUnit, execution receipts and slow-test timing logs
+are retained as workflow artifacts.
 
 ## What package verification proves
 

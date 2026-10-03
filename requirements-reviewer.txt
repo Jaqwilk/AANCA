@@ -1,0 +1,3 @@
+# Optional saved-array recalculation only; default review needs no third-party packages.
+# Verified with Python 3.12. No AANCA, PyTorch, CUDA or scikit-learn installation.
+numpy==2.5.1

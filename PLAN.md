@@ -508,6 +508,19 @@ the immediately feasible public-data study separate from the future recruited-ex
 and prospective workflow claim ladder. No V2 execution is authorised while its
 preregistration remains `DRAFT_NOT_FROZEN`.
 
+## V1 reviewer access and CI optimisation — 3 October 2026
+
+Engineering scope: preserve frozen V1 science while improving reviewer discovery,
+portable checks and Ubuntu/Windows test wall time. The concrete researched plan is
+in [`reports/reviewer_access_and_ci_2026-10-03.md`](reports/reviewer_access_and_ci_2026-10-03.md).
+
+Acceptance requires a dependency-free reading/check path, a reproducible offline
+kit with exact source identities, optional scoped numeric recalculation, owner-approved
+evaluation permission, complete isolated test coverage on both platforms, the
+mandatory local gates, browser accessibility checks and public release readback.
+No source annotation, numeric scientific authority, final-reference membership,
+selection rule or scientific completion stage changes.
+
 ## Standard validation order
 
 ```text

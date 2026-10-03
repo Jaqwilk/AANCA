@@ -1014,3 +1014,27 @@ the local commit and the working tree was clean. The staged thirteen-file packag
 retained the verified manifest-bound bytes. No release tag, frozen scientific
 authority or source annotation was changed. This follow-up records publication;
 the automatic Ubuntu/Windows workflow provides revision-specific CI evidence.
+
+## D056 — Accessible V1 review without changing frozen scientific evidence
+
+Status: accepted engineering scope; no scientific stage change
+
+On 3 October 2026 the owner requested researched, professional reviewer access and
+Ubuntu/Windows optimisation. Use published HMS reproducibility/access guidance as
+design evidence, without implying a particular professor's process or endorsement.
+Add a browser guide, a small offline package, a standard-library verification entry
+point and optional independent numeric readbacks. Report integrity, recalculation,
+source-image reproduction and new-data replication as distinct operations.
+
+Parallel CI must partition all collected cases deterministically and require
+successful receipts for every shard on each platform. Preserve native platform
+skips, scientific gates and default complete `pytest`; never reduce coverage or
+alter frozen checkpoint verification just to lower wall time. Retain timing/JUnit
+evidence and distinguish waiting-time improvement from runner cost.
+
+The owner explicitly authorised a narrow permission to copy locally and execute
+the project for non-clinical scientific evaluation. Reserve other rights and
+preserve third-party terms; this does not make the project open source. Publish
+the reviewed access changes and a new reviewer-kit release without replacing old
+scientific release tags or evidence. Deploy through the existing backed-up hosting
+workflow and require live readback. D047 and all scientific invariants remain binding.
